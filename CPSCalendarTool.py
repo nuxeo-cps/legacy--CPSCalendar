@@ -384,7 +384,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         """Get info from others attendees of one event.
         attendees are other calendars.
 
-        Return a dictionnary with cn, id, usertype and status.
+        Return a dictionary with cn, id, usertype and status.
         """
         id = rpath.split('/')[-1]
         if rpath in self.getCalendarPaths():

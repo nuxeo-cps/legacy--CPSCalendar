@@ -765,7 +765,7 @@ class Calendar(CPSBaseFolder):
 
     security.declareProtected('Add portal content', 'getDeclinedCancelledEvents')
     def getDeclinedCancelledEvents(self):
-        """Return a dictionnary with cancelled events ids and declined 
+        """Return a dictionary with cancelled events ids and declined 
         events ids"""
         return {
             'cancelled': self._cancelled,

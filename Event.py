@@ -296,8 +296,7 @@ class Event(CPSBaseDocument):
 
     security.declareProtected('Add portal content', 'setAttendees')
     def setAttendees(self, attendees):
-        """ Set atendees of the event from a attendees dictionnary
-        """
+        """Set atendees of the event from a attendees dictionary"""
         self.attendees = deepcopy(attendees)
         all_ids = tuple([at['id'] for at in attendees])
         self.notified_attendees = tuple(
