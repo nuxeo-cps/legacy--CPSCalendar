@@ -228,7 +228,10 @@ def update(self):
         translation_service = portal.translation_service
 
         # how to test which domain is define in translation_service?
-        translation_service.manage_addDomainInfo(calendar_catalog_id,
+        try:
+            translation_service.cpscalendar
+        except AttributeError, cpscalendar:
+            translation_service.manage_addDomainInfo(calendar_catalog_id,
                                                      'Localizer/'+calendar_catalog_id)
         pr("   cpscalendar domain set to Localizer/cpscalendar")
 
