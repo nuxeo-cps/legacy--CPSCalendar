@@ -15,6 +15,7 @@ from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass
 from Acquisition import aq_inner, aq_parent
 
+from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.CMFCorePermissions import \
      View, ManageProperties
 
@@ -40,6 +41,7 @@ factory_type_information = (
                   'action': 'calendar_view',
                   'permissions': (View,),
                   'category': 'object',
+                  'visible': 0,
                   },
                  {'id': 'localroles',
                   'name': '_action_access_rights_',
@@ -49,7 +51,7 @@ factory_type_information = (
                   },
                  {'id': 'addevent',
                   'name': '_action_addevent_',
-                  'action': 'calendar_addevent_form',
+                  'action': 'calendar_addevent_form?all_day=1',
                   'permissions': ("Add portal content",),
                   'category': 'object'
                   },
@@ -127,6 +129,10 @@ class Calendar(Workgroup):
         """Add an event request
         """
         LOG('NGCal', DEBUG, 'add pending event %s for %s' % (event_dict, self.id))
+        if event_dict['request'] == 'status' and \
+                event_dict['id'] not in self.objectIds():
+            # status change lost because this event was once deleted
+            return
         base_dict = event_dict
         event_dict = deepcopy(event_dict)
         events = []
@@ -660,12 +666,34 @@ class Calendar(Workgroup):
             'declined': self._declined,
         }
 
+    security.declareProtected('Delete objects', 'manage_delObjects')
     def manage_delObjects(self, ids, *args, **kw):
-        declined = [id for id in self._declined if id in ids]
-        canceled = [id for id in self._canceled if id in ids]
+        """
+        """
+        declined = [id for id in self._declined if id not in ids]
+        canceled = [id for id in self._canceled if id not in ids]
         Workgroup.manage_delObjects(self, ids, *args, **kw)
         self._declined = tuple(declined)
         self._canceled = tuple(canceled)
+
+    security.declareProtected('View', 'title_or_id')
+    def title_or_id(self):
+        """
+        """
+        if self.usertype == 'member':
+            dirtool = getToolByName(self, 'portal_metadirectories')
+            mcat = getToolByName(self, 'portal_messages')
+            members = dirtool.members
+            title = None
+            entry = members.getEntry(self.id)
+            if entry is not None:
+                title = entry.get(members.display_prop)
+            if title is None:
+                return Workgroup.title_or_id(self)
+            title = mcat('_cal_Calendar_of_%s_') % (title, )
+            return title
+        else:
+            return Workgroup.title_or_id(self)
 
 InitializeClass(Calendar)
 
