@@ -1,4 +1,33 @@
 *******************************************
+** CPSCalendar V1.6.2 [R1 build 2004/05/06-13:04 by ben]
+
+Requires:
+~~~~~~~~~
+- You must run the cpscalendar_install to upgrade events.
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- A dollar had fallen away in an action.
+- The recurrence upgrade removed the new attribute as well as the old.
+- In french Locale, date and month got flipped when type was changed.
+- Mantis bug #896 and #940 fixed.
+- A button was not translated (#783).
+- with workgroups calendars, starting meetings always added the site
+  manager instead of the user as a default attendee.
+- Edit access now depends on the Modify Portal Content permission.
+- The id of attendees is now the user name.
+- Mail notifications are working now.
+- The "Other" category is now not included by default, and "work" is the
+  default category for new events.
+- Daily is now the default for period on recurring events.
+- Event positioning is improved, esecially in day view.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.6.1 [R1 build 2004/04/22-21:15 by regebro]
 
 Requires:
