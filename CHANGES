@@ -5,3 +5,5 @@ Bug fixes:
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - too many to mention here
+- compatibility with previous release is broken
+- there are still some untested or broken functionalities
