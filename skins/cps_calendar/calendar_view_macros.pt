@@ -480,17 +480,18 @@
 </metal:block>
 
 <metal:block define-macro="navigation_tabs">
-    <tr tal:condition="show_navigation|python:1">
+    <tr tal:condition="show_navigation|python:1"
+        tal:define="days python:here.calendar_getPrevNextPage(viewed_day, calendar_disp);
+                    prev_day python:days[0];
+                    next_day python:days[1];">
       <td align="right"><div class="contentTabs"><span class="opentab"> </span><a
                 class="default"
-                tal:define="prev_day python:int(viewed_day-page_size);"
                 tal:attributes="href string:${here_url}?viewed_day=${prev_day}">&lt;&lt;</a><a
                 class="default"
                 tal:define="today python:int(DateTime());"
                 tal:attributes="href string:${here_url}?viewed_day=${today}"
                 i18n:translate="cpscalendar_link_today">Today</a><a
                 class="default"
-                tal:define="next_day python:int(viewed_day+page_size);"
                 tal:attributes="href string:${here_url}?viewed_day=${next_day}">&gt;&gt;</a><span class="closetab"> </span></div></td>
     </tr>
 </metal:block>
