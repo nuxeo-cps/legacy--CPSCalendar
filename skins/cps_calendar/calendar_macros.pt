@@ -28,6 +28,7 @@
                      title event/title;
                      id event/id|nothing;
                      title python:title or id;
+                     description event/description;
                      from_date event/from_date;
                      to_date event/to_date;
                      all_day event/all_day;
@@ -167,13 +168,12 @@
         </metal:block>
         <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
-                       i18n:translate="_cal_prop_transparent_">
+                       i18n:translate="cpscalendar_description">
             Description
           </metal:block>
-          <metal:block fill-slot="content">
-            <p tal:condition="transparent" i18n:translate="_Yes_">Yes</p>
-            <p tal:condition="not:transparent" i18n:translate="_No_">No</p>
-          </metal:block>
+            <metal:block fill-slot="content"
+              tal:content="description">
+            </metal:block>
         </metal:block>
       </metal:block>
     </metal:block>

@@ -1,6 +1,6 @@
 <metal:block define-macro="day">
   <tal:block define="global non_local string:#777777;
-                     global my_id python:here.portal_membership.getAuthenticatedMember().getMemberId();
+                     global my_id member/getMemberId;
     "/>
   <tal:block
     condition="show_nav|python:1">
@@ -235,7 +235,7 @@
 
 <metal:block define-macro="week">
   <tal:block define="global non_local string:#777777;
-                     global my_id python:here.portal_membership.getAuthenticatedMember().getMemberId();
+                     global my_id member/getMemberId;
     "/>
   <tal:block
     condition="show_nav|python:1">
@@ -485,7 +485,7 @@
 
 <metal:block define-macro="month">
   <tal:block define="global non_local string:#777777;
-                     global my_id python:here.portal_membership.getAuthenticatedMember().getMemberId();
+                     global my_id member/getMemberId;
     "/>
   <span class="calTitle">
     <span tal:content="python:str('_cal_Month%s' % (viewed_day.month(), ))" 
