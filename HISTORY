@@ -1,4 +1,26 @@
 *******************************************
+** CPSCalendar V1.3.0 [R1 build 2004/03/09-10:11 by regebro]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Support for basic recurring events.
+Bug fixes:
+~~~~~~~~~~
+- Fixed the display of multiple calendars. (bugzilla #259)
+- Fixed the adding of events with end before start. (bugzilla #261)
+- Some events seemed to be displayed in incorrect dates (in fact it was the
+  adding that gave it weird start and end-dates). (bugzilla #334)
+- There was some bugs in the Meeting helper pages which prompted a
+  rewrite of this. It now uses the same display macro as a normal
+  calendar week display.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.2.3 [R1 build 2004/02/12-16:52 by regebro]
 
 Bug fixes:
