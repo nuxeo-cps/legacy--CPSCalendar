@@ -88,11 +88,14 @@ class TestCalendar(CPSCalendarTestCase):
         self.assertEquals(self.calendar.getPendingEventsCount(), 0)
         self.assertEquals(self.calendar.getPendingEvents(), ())
 
-    def testAddOneEvent(self):
+    def _addEvent(self):
         from_date = DateTime(2003, 1, 1, 12, 0)
         to_date = DateTime(2003, 1, 1, 14, 0)
         self.calendar.invokeFactory(
             'Event', 'event', from_date=from_date, to_date=to_date)
+
+    def testEventDesc(self):
+        self._addEvent()
         event = self.calendar.event
 
         start_time = DateTime(2003, 1, 1, 10, 0)
@@ -116,31 +119,43 @@ class TestCalendar(CPSCalendarTestCase):
             end_time=DateTime(2003, 1, 1, 16, 0), disp='month')
         # XXX: add some test for desc here
 
-        # Test low level methods
+    def testAccessors(self):
+        self._addEvent()
+        event = self.calendar.event
+
+        assert event.getOrganizerCalendar()
         self.assertEquals(event.getCalendar(), self.calendar)
         self.assertEquals(event.getCalendarUser(), 'root')
 
         assert event.getEventDict() # Too complex to test
         self.assertEquals(event.getAttendeesDict(), {})
 
+    def testViews(self):
+        self._addEvent()
+        event = self.calendar.event
+
         # Test event's view and forms
         self.portal.REQUEST.SESSION = {}
         assert event.calendar_event_view()
         assert event.calendar_editevent_form()
 
-        # XXX: Are these method really called ?
-        #assert event.getOrganizerCalendar()
-        #assert event.setMyStatus('decline')
+    def testDecline(self):
+        self._addEvent()
+        event = self.calendar.event
 
-        # Play with status
-        # XXX: move this to a ne test later
+        event.setMyStatus('decline')
+
+    def testCancel(self):
+        self._addEvent()
+        event = self.calendar.event
+
         event.setEventStatus('canceled')
         self.assertEquals(event.event_status, 'canceled')
         self.assert_(event.isdirty)
         self.assertEquals(self.calendar.getDeclinedCanceledEvents(),
                           {'canceled': ('event',), 'declined': ()})
 
-    def testView(self):
+    def testViews(self):
         self.portal.REQUEST.SESSION = {}
         assert self.calendar.calendar_view(disp="week")
         assert self.calendar.calendar_view(disp="month")
