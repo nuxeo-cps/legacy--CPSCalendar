@@ -30,7 +30,8 @@ de mettre à jour les anciennes instances.
 CPSCalendar requiert :
 - CPS3 (3.0 ou plus)
 - le produit CPSInstaller (non inclus dans CPS-3.0, mais inclus dans CPS-3.1)
-- le produit CPSNavigation
+- le produit CPSNavigation > 0.8.0 (non inclus dans CPS3). Celui-ci est
+  requis après la version 1.6.4 de CPSCalendar.
 
 Il a été testé avec Zope 2.6 et Zope 2.7.
 
