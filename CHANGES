@@ -13,6 +13,7 @@ Bug fixes:
 - Fixed Mantis bug #653: Searching for dates with start date after 
   end date caused an error message.
 - Changed the spelling of recurrance to recurrence.
+- Bugfixes in the handling of recurring events in meeting creation.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

@@ -470,20 +470,24 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 'Event from %s to %s; Mask from %s to %s' % \
                 (event.from_date, event.to_date, mask.from_date, mask.to_date))
 
-        def makevirtual(event, to_date, from_date):
+        def makevirtual(event, from_date, to_date):
             # Makes a virtual event out of recurring events.
             # Ordinary events are just passed through.
             if event.event_type != 'event_recurring':
                 return event
-            event_start, event_stop = event.from_date, event.to_date
+            # Handle recurring events
+            if from_date > event.to_date:
+                return None
             repeats = 0
-            while to_date.greaterThan(event_stop):
-                event_start, event_stop = event.getRecurrence(repeats)
+            event_start, event_stop = event.getRecurrence(repeats)
+            while from_date.greaterThan(event_stop):
                 repeats += 1
+                event_start, event_stop = event.getRecurrence(repeats)
 
-                if event_stop > to_date and event_start < from_date:
-                    return VirtualEvent(event_start, event_stop)
-                        
+            if event_stop < to_date and event_start > from_date:
+                return VirtualEvent(event_start, event_stop)
+                
+            return None      
             
         # normalize
         slot_start = DateTime(from_date.year(), from_date.month(),
