@@ -5,7 +5,7 @@
   <table cellspacing="0" cellpadding="0" border="0" tal:define="page_size python:1;">
      <metal:block use-macro="here/calendar_view_macros/macros/navigation_tabs" />
      <tr>
-      <td>
+      <td>;
         <table cellspacing="0" cellpadding="0" border="1"
                tal:define="cat_info here/calendar_categories;
                            categories cat_info/categories;
@@ -25,7 +25,7 @@
                   <th>
                     <span tal:content="string:cpscalendar_label_day_long${date/dow}"
                           i18n:translate="" />
-                    <span tal:replace="date/day"/> 
+                    <span tal:replace="date/day"/>
                     <span tal:content="string:cpscalendar_label_month_long${date/month}"
                           i18n:translate="" />
                     <span tal:replace="date/year"/>
@@ -313,72 +313,6 @@
   </table>
 </metal:block>
 
-<metal:block define-macro="standard_event">
-  <table cellspacing="0" cellpadding="0" border="0"
-         tal:define="
-           local_event python:member_id == event.getCalendarUser();
-           event_title event/title_or_id;
-           category event/category;
-           bgcolor categories/?category/color|def_color;"
-         tal:attributes="width width;">
-    <tr><td class="eventHeader">
-        <a tal:attributes="
-             title python:'%s (%s - %s)' % (event_title, event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
-             href event/absolute_url">
-          <img border="0"
-               tal:attributes="
-                  src string:${portal_url}/cal_event_${event/event_status}.png;
-                  height string:10;
-                  width string:10;" />
-          <img border="0"
-               tal:condition="event/attendees"
-               tal:define="status python:info['isdirty'] and 'dirty' or 'attendees'"
-               tal:attributes="
-                  src string:${portal_url}/cal_event_${status}.png;
-                  height string:10;
-                  width string:10;" />
-          <tal:block replace="event_title" />
-        </a>
-    </td></tr>
-    <tr tal:condition="python:height>14">
-      <td tal:attributes="bgcolor python:local_event and bgcolor or non_local;">
-         <img border="0"
-            tal:attributes="
-              height python:height-14;
-              src empty_src;
-              width width;" />
-      </td>
-     </tr>
-  </table>
-</metal:block>
-
-<metal:block define-macro="freetime_event">
-    <td valign="top"
-        tal:define="
-        base_class python:event.attendees and (info['isdirty'] and 'weekDirty' or 'weekAtt') or 'week';
-        local_event python:member_id == event.getCalendarUser();
-        category event/category;
-        bgcolor categories/?category/color|def_color;
-        tdclass string:${base_class}${event/event_status};"
-        tal:attributes="
-        width width;
-        height height;
-        bgcolor string:#00FF00;
-        ">
-        <a tal:define="time python:int(info['start'])"
-           tal:attributes="
-             title string:cpscalendar_create_the_meeting_here;
-             href string:create_meeting_form?time=${time}&window=${height};"
-             i18n:attributes="title">
-          <img border="0"
-               tal:attributes="
-               src empty_src;
-               width width;
-               height height;" />
-        </a>
-    </td>
-</metal:block>
-
 <metal:block define-macro="month">
   <tal:block define="global non_local string:#777777;
   "/>
@@ -559,4 +493,71 @@
                 tal:define="next_day python:int(viewed_day+page_size);"
                 tal:attributes="href string:${here_url}?viewed_day=${next_day}">&gt;&gt;</a><span class="closetab"> </span></div></td>
     </tr>
+</metal:block>
+
+
+<metal:block define-macro="standard_event">
+  <table cellspacing="0" cellpadding="0" border="0"
+         tal:define="
+           local_event python:member_id == event.getCalendarUser();
+           event_title event/title_or_id;
+           category event/category;
+           bgcolor categories/?category/color|def_color;"
+         tal:attributes="width width;">
+    <tr><td class="eventHeader">
+        <a tal:attributes="
+             title python:'%s (%s - %s)' % (event_title, event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
+             href event/absolute_url">
+          <img border="0"
+               tal:attributes="
+                  src string:${portal_url}/cal_event_${event/event_status}.png;
+                  height string:10;
+                  width string:10;" />
+          <img border="0"l
+               tal:condition="event/attendees"
+               tal:define="status python:info['isdirty'] and 'dirty' or 'attendees'"
+               tal:attributes="
+                  src string:${portal_url}/cal_event_${status}.png;
+                  height string:10;
+                  width string:10;" />
+          <tal:block replace="event_title" />
+        </a>
+    </td></tr>
+    <tr tal:condition="python:height>14">
+      <td tal:attributes="bgcolor python:local_event and bgcolor or non_local;">
+         <img border="0"
+            tal:attributes="
+              height python:height-14;
+              src empty_src;
+              width width;" />
+      </td>
+     </tr>
+  </table>
+</metal:block>
+
+<metal:block define-macro="freetime_event">
+    <td valign="top"
+        tal:define="
+        base_class python:event.attendees and (info['isdirty'] and 'weekDirty' or 'weekAtt') or 'week';
+        local_event python:member_id == event.getCalendarUser();
+        category event/category;
+        bgcolor categories/?category/color|def_color;
+        tdclass string:${base_class}${event/event_status};"
+        tal:attributes="
+        width width;
+        height height;
+        bgcolor string:#00FF00;
+        ">
+        <a tal:define="time python:int(info['start'])"
+           tal:attributes="
+             title string:cpscalendar_create_the_meeting_here;
+             href string:create_meeting_form?time=${time}&window=${height};"
+             i18n:attributes="title">
+          <img border="0"
+               tal:attributes="
+               src empty_src;
+               width width;
+               height height;" />
+        </a>
+    </td>
 </metal:block>
