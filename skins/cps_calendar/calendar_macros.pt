@@ -391,7 +391,7 @@
             <option value="nosearch"></option> 
             <tal:span repeat="widget widgets">
               <option tal:condition="python:'search' not in widget.hidden_layout_modes"
-                      tal:attributes="value python:widget.getWidgetId()">
+                      tal:attributes="value python:widget.fields[0]">
                 <span  tal:condition="widget/is_i18n"
                        i18n:domain="Default" i18n:translate=""
                        tal:content="widget/label">label</span

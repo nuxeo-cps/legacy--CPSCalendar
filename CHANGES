@@ -7,7 +7,9 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - CPSCalendarTool.stringToDateTime now also supports the 10 digit 
-  DateTime internal integer format.
+  DateTime internal integer format (#1376).
+- The search form now uses the first field in the "fields" property
+  of the widget, and not the widget id as the search field (#1378).
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
