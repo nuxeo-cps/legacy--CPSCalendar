@@ -5,7 +5,7 @@ New features:
 ~~~~~~~~~~~~~
 - The mail notification now also sends mail to unconfirmed attendees.
 - The notify mail is now translatable.
-- There is now a new function stringToDateTime() that parses date string
+- There is now a new function stringToDateTime() that parses date strings
   intelligently, both according to what is possible, and with regards to
   the locale you have (i.e, selected language). The utilisation of this
   solves Mantis bug #652.
@@ -17,11 +17,11 @@ Bug fixes:
 - February could be skippad completely when navigating in monthly view,
   in really unlucky cases. Rewrote that part, with a new skin method,
   calendar_getPrevNextPage.py.
-- Trying to get an email for orphaned members raises a key error. I now
-  trap this.
+- Trying to get an email for orphaned members raises a key error.
+  I now trap this.
 - Headers in the notification mails was calculated twice.
 - The attendees search box now uses the member_search laout widgets,
-  instead of the member layout, thus knly showing searchable fields.
+  instead of the member layout, thus only showing searchable fields.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
