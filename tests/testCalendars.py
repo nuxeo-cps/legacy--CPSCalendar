@@ -20,6 +20,7 @@ class TestCalendars(CPSCalendarTestCase):
     def testCalendars(self):
         calendars = self.portal.workspaces.calendars
         # XXX
+        self.assert_(calendars)
 
 
 class TestCalendar(CPSCalendarTestCase):
@@ -47,6 +48,12 @@ class TestCalendar(CPSCalendarTestCase):
         mdtool = self.portal.portal_memberdata
         del mdtool._v_temps
 
+    def testDC(self):
+        # XXX: the title should actually be more explicit than that.
+        self.assertEquals(self.calendar.Title(), "root")
+        # XXX: there should be a description there.
+        self.assertEquals(self.calendar.Description(), "")
+
     def testEmptyCalendar(self):
         self.assertEquals(self.calendar.getPendingEventsCount(), 0)
         self.assertEquals(self.calendar.getPendingEvents(), ())
@@ -69,14 +76,15 @@ class TestCalendar(CPSCalendarTestCase):
              'slots': [(start_time, end_time)], 
              'day_events': []})
 
-        xxx = self.calendar.getEventsDesc(
+        desc = self.calendar.getEventsDesc(
             start_time=DateTime(2003, 1, 1, 10, 0),
             end_time=DateTime(2003, 1, 1, 16, 0), disp='week')
+        # XXX: add some test for desc here
 
-        xxx = self.calendar.getEventsDesc(
+        desc = self.calendar.getEventsDesc(
             start_time=DateTime(2003, 1, 1, 10, 0),
             end_time=DateTime(2003, 1, 1, 16, 0), disp='month')
-
+        # XXX: add some test for desc here
 
 
 def test_suite():
