@@ -220,7 +220,7 @@
                   </span>
                   <span id="from_date_hour_s"
                         tal:content="from_date_hour">10</span>
-                    <span i18n:translate="_cal_hour_sep_">:</span>
+                    <span i18n:translate="cpscalendar_hour_sep">:</span>
                     <span id="from_date_minute_s"
                           tal:content="python:from_date_minute == 0 and '00' or from_date_minute">10</span>
                   <span i18n:translate="cpscalendar_label_to">
@@ -269,7 +269,7 @@
                 <option tal:repeat="status statuses"
                         tal:attributes="value status;
                                         selected python:status == event_status;"
-                  tal:content="python:str('_cal_eventstatus_%s_' % (status, ))"
+                  tal:content="python:str('cpscalendar_option_eventstatus_%s_' % (status, ))"
                   i18n:translate="">
                   status
                 </option>
@@ -316,7 +316,7 @@
             </metal:block>
             <metal:block fill-slot="content">
               <select name="transparent:int"
-                      tal:define="choices python:[{'id': 1, 'title': '_Yes_'}, {'id':0, 'title': '_No_'}]">
+                      tal:define="choices python:[{'id': 1, 'title': 'option_yes'}, {'id':0, 'title': 'option_no'}]">
                 <option tal:repeat="choice choices"
                         tal:attributes="value choice/id;
                                         selected python:transparent == choice['id']"

@@ -24,7 +24,7 @@
                          cat_info here/calendar_categories;
                          categories cat_info/categories;
                          cat_default cat_info/default;
-                         hour_sep python:str('_cal_hour_sep_');
+                         hour_sep python:str('cpscalendar_hour_sep');
                          cal_users meeting_infos/cal_users;
                          cal_ids meeting_infos/cal_ids;
                          my_id here/id;">

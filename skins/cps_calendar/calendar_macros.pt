@@ -82,7 +82,9 @@
               </span>
               <tal:block replace="python:from_date.strftime('%m/%d/%Y ')" />
               <tal:block condition="not:all_day">
-                <span i18n:translate="_cal_hour_To_" />
+                <span i18n:translate="cpscalendar_label_to">
+                To
+	        </span>
                 <tal:block replace="python:from_date.strftime(' %H:%M')" />
               </tal:block>
               <br>
@@ -91,7 +93,8 @@
               </span>
               <tal:block replace="python:to_date.strftime('%m/%d/%Y ')" />
               <tal:block condition="not:all_day">
-                <span i18n:translate="_cal_hour_To_" />
+                <span i18n:translate="cpscalendar_label_to">
+	        </span>
                 <tal:block replace="python:to_date.strftime(' %H:%M')" />
               </tal:block>
             </tal:block>
@@ -114,7 +117,7 @@
             Event status
           </metal:block>
           <metal:block fill-slot="content"
-                       tal:content="python:str('_cal_eventstatus_%s_' % (event_status, ))"
+                       tal:content="python:str('cpscalendar_option_eventstatus_%s_' % (event_status, ))"
                        i18n:translate="">
 		  status
           </metal:block>
@@ -129,7 +132,7 @@
               <ul tal:condition="attendees">
                 <li tal:repeat="att attendees">
                   <strong tal:content="att/cn|att/id">attendee</strong>
-                  (<tal:block content="python:str('_cal_status_%s_' % (att['status'], ))"
+                  (<tal:block content="python:str('cpscalendar_option_status_%s_' % (att['status'], ))"
                               i18n:translate="">
                     Confirmed
                   </tal:block>)
@@ -252,7 +255,7 @@
                 <option tal:repeat="status statuses"
                         tal:attributes="value status;
                                         selected python:status == selected"
-                        tal:content="python:str('_cal_pending_%s_' % (status, ))"
+                        tal:content="python:str('cpscalendar_pending_%s_' % (status, ))"
                         i18n:translate="">
                   Confirm
                 </option>
@@ -269,7 +272,7 @@
           <ul>
             <li tal:repeat="attendee pending/change">
               <strong tal:content="attendee/cn|attendee/id">Attendee</strong>
-              (<tal:block content="python:str('_cal_status_%s_' % (attendee['status'], ))"
+              (<tal:block content="python:str('cpscalendar_option_status_%s_' % (attendee['status'], ))"
                           i18n:translate="" />)
               <p tal:condition="attendee/comment|nothing">
                 <strong tal:content="attendee/sender_cn|attendee/sender|nothing">
