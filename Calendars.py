@@ -123,6 +123,7 @@ def slot_union(cal_slot, with_free=0):
             result.append({
               'busy': 0,
               'height': free_time,
+              'start': stop,
             })
     else:
         result.append({
