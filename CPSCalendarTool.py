@@ -21,6 +21,7 @@ from zLOG import LOG, DEBUG
 from Globals import InitializeClass
 from DateTime import DateTime
 from Products.CMFCore.PortalFolder import PortalFolder
+from AccessControl import ClassSecurityInfo
 from AccessControl.Permissions import manage_users as ManageUsers
 from Products.CMFCore.CMFCorePermissions import setDefaultRoles
 from Products.CMFCore.CMFCorePermissions import View
@@ -32,7 +33,7 @@ from Products.CMFCore.utils import UniqueObject, getToolByName, mergedLocalRoles
 from Products.CPSCore.utils import _allowedRolesAndUsers
 from Products.ZCatalog.ZCatalog import ZCatalog
 
-from AccessControl import ClassSecurityInfo
+from Event import VirtualEvent
 
 ManageWorkspaces = 'Manage Workspaces'
 setDefaultRoles(ManageWorkspaces, ('Manager',))
@@ -271,6 +272,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                    {'id':'description', 'type':'text'},
                    {'id':'search_fields', 'type':'multiple selection',
                     'mode': 'w', 'select_variable':'getSearchFields'},
+                   {'id':'restricted_user_search', 'type':'boolean', 'mode': 'w', 
+                    'label': "Restrict user search in personal calendars" },
                    {'id':'create_member_calendar', 'type':'boolean', 'mode': 'w',
                     'label': "Create a calendar when creating the user's home folder"},
                    {'id':'member_can_create_home_calendar', 'type':'boolean', 'mode': 'w',
@@ -280,6 +283,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                    )
 
     search_fields = ['id', 'sn', 'email', 'groups']
+    restricted_user_search = 0
     create_member_calendar = 1
     member_can_create_home_calendar = 1
     event_fulltext_index = 1
@@ -343,16 +347,31 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         if not search_param:
             return {}
         
-        users = directory.searchEntries(**{search_param: search_term})
-        
-        if self.getHomeCalendarObject().getRpath() != calendar.getRpath():
+        homecal = self.getHomeCalendarObject()
+        if calendar is None:
+            restrict_search = 0
+        elif homecal is None:
+            restrict_search = 1
+        elif self.restricted_user_search:
+            restrict_search = 1
+        elif homecal.getRpath() != calendar.getRpath():
+            restrict_search = 1
+        else:
+            restrict_search = 0
+            
+        if restrict_search:
             # Filter out users with view permission:
             local_users = []
             allowed = _allowedRolesAndUsers(calendar)
-            for user in users:
-                if 'user:'+user in allowed:
-                    local_users.append(user)
-            users = local_users
+            for each in allowed:
+                if each.startswith('user:'):
+                    local_users.append(each[5:])
+
+            idfield = directory.id_field
+            users = directory.searchEntries(**{search_param: search_term,
+                                               idfield: local_users})
+        else:
+            users = directory.searchEntries(**{search_param: search_term})
                     
         res = {}
         for user in users:

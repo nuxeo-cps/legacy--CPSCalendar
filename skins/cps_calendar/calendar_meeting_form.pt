@@ -44,8 +44,8 @@
                          cal_ids python:[c for c in cal_ids if not c in del_cal_ids];
                          session request/SESSION;
                          sm python: session.get('meeting') or {};
-                         foo python:session.update({'meeting': sm});
                          foo python:sm.update({'cal_ids': cal_ids});
+                         foo python:session.update({'meeting': sm});
                          current_list cal_ids;
                          user_types here/getUserTypes;
                          all_calendars here/portal_cpscalendar/getCalendarsDict;
