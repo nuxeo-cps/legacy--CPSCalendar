@@ -142,48 +142,9 @@ def cpscalendarinstall(self):
     wftool.setDefaultChain('')
 
     # check site and workspaces
-    workspace_id = 'calendars'
-    calendars_id = 'members'
+    workspace_id = 'workspaces'
+    calendars_id = 'calendars'
     pr("Verifying roots: %s and %s" % (calendars_id, workspace_id))
-    if not portalhas(workspace_id):
-        portal.portal_workflow.invokeFactoryFor(portal.this(), 'Workspace',
-                                                workspace_id)
-        portal[workspace_id].getContent().setTitle('Root of calendars workspace') # XXX L10N
-        portal[workspace_id].reindexObject()
-        pr("  Adding %s Folder" % workspace_id)
-    pr("Verifying roots: %s " % (calendars_id))
-
-    pr("Verifying permissions")
-    workspaces_perm = {
-        'Add portal content': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
-        'Add portal folders': ['Manager', 'WorkspaceManager'],
-        'Change permissions': ['Manager', 'WorkspaceManager'],
-        'Delete objects': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
-        'List folder contents': ['Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'],
-        'Modify portal content': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
-        'View': ['Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'],
-        'View management screens': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
-        }
-
-    pr("Calendar workspace")
-    for perm, roles in workspaces_perm.items():
-        portal[workspace_id].manage_permission(perm, roles, 0)
-        pr("  Permission %s" % perm)
-    portal[workspace_id].reindexObjectSecurity()
-    
-    pr("Verifying local workflow association")
-    if not '.cps_workflow_configuration' in portal[workspace_id].objectIds():
-        pr("  Adding workflow configuration to %s" % workspace_id)
-        portal[workspace_id].manage_addProduct['CPSCore'].addCPSWorkflowConfiguration()
-        wfc = getattr(portal[workspace_id], '.cps_workflow_configuration')
-        wfc.manage_addChain(portal_type='Workspace',
-                            chain='workspace_folder_wf')
-        wfc.manage_addChain(portal_type='Event',
-                            chain='workspace_content_wf')
-        wfc.manage_addChain(portal_type='Calendars',
-                            chain='workspace_folder_wf')
-        wfc.manage_addChain(portal_type='Calendar',
-                            chain='workspace_folder_wf')
 
     # init Tree Tool
     if workspace_id not in trtool.objectIds():
@@ -283,11 +244,10 @@ def cpscalendarinstall(self):
     if portalhas('translation_service'):
         translation_service = portal.translation_service
 
-        if not portal['translation_service'].cpscalendar:
-            # translation domains
-            translation_service.manage_addDomainInfo(calendar_catalog_id,
+        # how to test which domain is define in translation_service?
+        translation_service.manage_addDomainInfo(calendar_catalog_id,
                                                      'Localizer/'+calendar_catalog_id)
-            pr("   cpscalendar domain set to Localizer/cpscalendar")
+        pr("   cpscalendar domain set to Localizer/cpscalendar")
 
         pr(" Reindexing catalog")
         portal.portal_catalog.refreshCatalog(clear=1)
