@@ -27,6 +27,7 @@ Bug fixes:
 - Meeting creation now handles recurring events properly.
 - Screen reorganisations and fixes according to bugs #722 and #725.
 - Fixed bug #653, creating events with end before the start did not work.
+- Recurrance type was ignored when creating new events.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Add getHomeCalendarObject and getHomeCalendarUrl method in CalendarTool
