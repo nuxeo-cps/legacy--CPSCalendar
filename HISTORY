@@ -1,4 +1,20 @@
 *******************************************
+** CPSCalendar V1.3.3 [R1 build 2004/03/25-11:50 by ben]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- don't create personal calendar for homeless people
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- 
+
+*******************************************
 ** CPSCalendar V1.3.2 [R1 build 2004/03/19-10:35 by regebro]
 
 Requires:
