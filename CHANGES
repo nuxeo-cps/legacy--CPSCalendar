@@ -19,6 +19,7 @@ Bug fixes:
 - The "Other" category is now not included by default, and "work" is the
   default category for new events.
 - Daily is now the default for period on recurring events.
+- Event positioning is improved, esecially in day view.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
