@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2004-08-19 17:00default\n"
+"POT-Creation-Date: 2004-08-19 18:29default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -133,9 +133,10 @@ msgstr ""
 msgid "cpscalendar_button_add"
 msgstr ""
 
-#.   <input type="submit" name="javascript:history.go(-1)" value="cpscalendar_button_back" onclick="javascript:history.go(-1)" />
 #.   <input type="button" onclick="history.back()" value="cpscalendar_button_back" />
-#: from ../skins/cps_calendar/calendar_macros.pt
+#.   <input type="submit" name="javascript:history.go(-1)" value="cpscalendar_button_back" onclick="javascript:history.go(-1)" />
+#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
+#: ../skins/cps_calendar/calendar_macros.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
 #: ../skins/cps_calendar/calendar_meeting_error.pt
 #: ../skins/cps_calendar/calendar_meeting_expired.pt
@@ -146,7 +147,6 @@ msgstr ""
 #.   <input type="button" onclick="history.back()" value="cpscalendar_button_cancel" />
 #.   <input type="button" onclick="window.close()" value="cpscalendar_button_cancel" />
 #: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
-#: ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_meeting_form.pt
 #: ../skins/cps_calendar/create_meeting_form.pt
@@ -161,8 +161,12 @@ msgstr ""
 
 #.   <input type="submit" value="cpscalendar_button_delete" />
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
-#: ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_button_delete"
+msgstr ""
+
+#.   <input type="submit" value="cpscalendar_button_delete_event" />
+#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
+msgid "cpscalendar_button_delete_event"
 msgstr ""
 
 #.   <input type="submit" value="cpscalendar_button_delete_with_no_notification" condition="nothing" />

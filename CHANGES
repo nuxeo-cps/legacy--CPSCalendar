@@ -39,6 +39,10 @@ Bug fixes:
 - Default event status is now 'confirmed'.
 - You now can not delete canceled events.
 - You now get an email on changes even if you are confirmed.
+- The Event view screen, mainly used for debugging, is now removed from
+  the actions.
+- The buttons in the event delete screen have new, more descriptive names.
+
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

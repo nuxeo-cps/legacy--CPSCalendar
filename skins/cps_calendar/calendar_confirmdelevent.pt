@@ -42,14 +42,14 @@
       </metal:block>
     </metal:block>
     <input type="submit"
-           value="cpscalendar_button_delete"
+           value="cpscalendar_button_delete_event"
            i18n:attributes="value" />
     <input type="submit"
            value="cpscalendar_button_delete_with_no_notification"
            i18n:attributes="value"
            tal:condition="nothing" />
     <input type="button" onClick="history.back()"
-           value="cpscalendar_button_cancel"
+           value="cpscalendar_button_back"
            i18n:attributes="value" />
   </form>
 </metal:block>
