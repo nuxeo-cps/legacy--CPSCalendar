@@ -3,7 +3,7 @@
 here = context.this()
 
 mcat = context.Localizer.cpscalendar
-all_calendars = context.portal_adv_calendar.getCalendarObjects()
+all_calendars = context.portal_cpscalendar.getCalendarObjects()
 mtool = context.portal_membership
 
 calendars = { 'private': [], 'others': [], 'rooms': [], 'ressources': [],
