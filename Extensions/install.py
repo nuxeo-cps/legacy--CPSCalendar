@@ -5,6 +5,10 @@
 
 from Products.CPSInstaller.CPSInstaller import CPSInstaller
 from Products.CPSCore.CPSWorkflow import TRANSITION_INITIAL_CREATE
+from Products.CPSCore.CPSWorkflow import TRANSITION_ALLOWSUB_CREATE
+from Products.CPSCore.CPSWorkflow import TRANSITION_ALLOWSUB_DELETE
+from Products.CPSCore.CPSWorkflow import TRANSITION_ALLOWSUB_MOVE
+from Products.CPSCore.CPSWorkflow import TRANSITION_ALLOWSUB_COPY
 from Products.CMFCore.CMFCorePermissions import View, ModifyPortalContent
 
 WebDavLockItem = 'WebDAV Lock items'
@@ -50,7 +54,7 @@ class CalendarInstaller(CPSInstaller):
         self.setupTranslations(message_catalog='cpscalendar')
         self.addPortalCatalogIndex('uid', 'FieldIndex')
         self.upgradeEvents()
-        self.upgradePendingEvents()
+        self.upgradeCalendars()
         self.log("End of specific CPSCalendar install")
         self.finalize()
 
@@ -90,7 +94,7 @@ class CalendarInstaller(CPSInstaller):
         wfstates = {
             'work': {
                 'title': 'Work',
-                'transitions':(),
+                'transitions':('subobject_actions',),
                 'permissions': {View: ('Manager', 'WorkspaceManager',
                                        'WorkspaceMember', 'WorkspaceReader')},
             },
@@ -101,6 +105,20 @@ class CalendarInstaller(CPSInstaller):
                 'title': 'Initial creation',
                 'new_state_id': 'work',
                 'transition_behavior': (TRANSITION_INITIAL_CREATE,),
+                'clone_allowed_transitions': None,
+                'actbox_category': 'workflow',
+                'props': {'guard_permissions':'',
+                          'guard_roles':'Manager; WorkspaceManager; '
+                                        'WorkspaceMember',
+                          'guard_expr':''},
+            },
+            'subobject_actions': {
+                'title': 'Initial creation',
+                'new_state_id': 'work',
+                'transition_behavior': (TRANSITION_ALLOWSUB_CREATE, 
+                                        TRANSITION_ALLOWSUB_DELETE,
+                                        TRANSITION_ALLOWSUB_MOVE,
+                                        TRANSITION_ALLOWSUB_COPY,),
                 'clone_allowed_transitions': None,
                 'actbox_category': 'workflow',
                 'props': {'guard_permissions':'',
@@ -128,16 +146,24 @@ class CalendarInstaller(CPSInstaller):
                 self.log(res)
         self.log("  Done.")
 
-    def upgradePendingEvents(self):
-        # Get the events from the catalog:
-        self.log("Upgrading pending events")
-        events = self.portal.portal_catalog(portal_type='Calendar')
-        for event in events:
-            ob = event.getObject()
+    def upgradeCalendars(self):
+        # Get the calendars from the catalog:
+        self.log("Upgrading calendars")
+        calendars = self.portal.portal_catalog(portal_type='Calendar')
+        wftool = self.getTool('portal_workflow')
+        wf = wftool['null_wf']
+        tdef = wf.transitions.get('create', None)
+        for calendar in calendars:
+            ob = calendar.getObject()
+            self.log(ob.absolute_url())
             res = ob.upgradePendingEvents()
             if res:
                 self.log(res)
+            res = wf._changeStateOf(ob, tdef, {})
+            if res:
+                self.log(res)
         self.log("  Done.")
+
 
 def install(self):
     installer = CalendarInstaller(self)
