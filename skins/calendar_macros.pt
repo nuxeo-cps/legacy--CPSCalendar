@@ -79,19 +79,19 @@
               <span i18n:translate="_cal_date_From_">
                 From
               </span>
-              <tal:block replace="python:from_date.strftime('%m/%d/%Y ');" />
+              <tal:block replace="python:from_date.strftime('%m/%d/%Y ')" />
               <tal:block condition="not:all_day">
                 <span i18n:translate="_cal_hour_To_" />
-                <tal:block replace="python:from_date.strftime(' %H:%M');" />
+                <tal:block replace="python:from_date.strftime(' %H:%M')" />
               </tal:block>
               <br>
               <span i18n:translate="_cal_date_To_">
                 To
               </span>
-              <tal:block replace="python:to_date.strftime('%m/%d/%Y ');" />
+              <tal:block replace="python:to_date.strftime('%m/%d/%Y ')" />
               <tal:block condition="not:all_day">
                 <span i18n:translate="_cal_hour_To_" />
-                <tal:block replace="python:to_date.strftime(' %H:%M');" />
+                <tal:block replace="python:to_date.strftime(' %H:%M')" />
               </tal:block>
             </tal:block>
           </metal:block>
@@ -232,16 +232,17 @@
                 tal:define="
                   statuses python:['confirmed', 'tentative', 'decline', 'decline_and_delete', 'ignore'];
                   selected python:event['event_status'] == 'cancelled'
-                    and 'ignore' or 'confirmed'">
+                                   and 'ignore' or 'confirmed'">
                 <option tal:repeat="status statuses"
-                        tal:attributes="value status; selected python:status == selected"
+                        tal:attributes="value status;
+                                        selected python:status == selected"
                         tal:content="python:str('_cal_pending_%s_' % (status, ))"
                         i18n:translate="">
                   Confirm
                 </option>
               </select>
               <input type="submit" name="calendar_confirmPendingEvent:method"
-                tal:attributes="value python:str('_button_validate_')" />
+                     tal:attributes="value python:str('_button_validate_')" />
             </tal:block>
           </tal:block>
         </tal:block>
@@ -297,8 +298,8 @@
         <ul>
           <li tal:repeat="att here/attendees">
             <input type="checkbox" name="attendees:list"
-              tal:attributes="
-              value att/id; checked python:att['id'] not in notified_attendees" />
+              tal:attributes="value att/id;
+                              checked python:att['id'] not in notified_attendees" />
             <tal:block replace="att/cn|att/id" />
           </li>
         </ul>
