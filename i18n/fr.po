@@ -171,12 +171,12 @@ msgstr "Créer"
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 #: ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_button_delete"
-msgstr "Effacer"
+msgstr "Supprimer"
 
 #.   <input type="submit" value="cpscalendar_button_delete_with_no_notification" condition="nothing" />
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_button_delete_with_no_notification"
-msgstr "Effacer sans notification"
+msgstr "Supprimer sans notification"
 
 #.   <input type="submit" value="cpscalendar_button_modify" />
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
@@ -1210,10 +1210,10 @@ msgid "cpscalendar_no_attendee_of_type_events_show"
 msgstr "Aucun participant"
 
 msgid "cpscalendar_button_remove_canceled_events"
-msgstr "Effacer les événements annulés"
+msgstr "Supprimer les événements annulés"
 
 msgid "cpscalendar_button_remove_events_you_declined"
-msgstr "Effacer les événements déclinés"
+msgstr "Supprimer les événements déclinés"
 
 msgid "cpscalendar_from_incorrect_date"
 msgstr "date de début non valide"
