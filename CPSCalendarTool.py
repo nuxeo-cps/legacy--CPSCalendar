@@ -1,78 +1,49 @@
-# Copyright (c) 2002-2003 Nuxeo SARL <http://nuxeo.com>
-# Copyright (c) 2002 Préfecture du Bas-Rhin, France
-# Author: Florent Guillaume <mailto:fg@nuxeo.com>
-# See license info at the end of this file.
+# (C) Copyright 2003 Nuxeo SARL <http://nuxeo.com>
+# Author: Encolpe Degoute <edegoute@nuxeo.com>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2 as published
+# by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+#
 # $Id$
 
-"""
-  Calendars container
-  This container is not any more necessary with CPS3, it will be implemented
-  like a tool
-"""
 
-from zLOG import LOG, DEBUG
+from Products.CMFCore.PortalFolder import PortalFolder
 
-from Acquisition import aq_parent, aq_inner
-from DateTime import DateTime
+from Products.CMFCore.CMFCorePermissions import setDefaultRoles
+from Products.CMFCore.CMFCorePermissions import View
+from Products.CMFCore.CMFCorePermissions import ManagePortal
+from Products.CMFCore.CMFCorePermissions import ModifyPortalContent
+from Products.CMFCore.CMFCorePermissions import ViewManagementScreens
+from Products.CMFCore.utils import SimpleItemWithProperties
+from Products.CMFCore.utils import UniqueObject, getToolByName
+from Products.CMFCore.ActionProviderBase import ActionProviderBase
 
 from AccessControl import ClassSecurityInfo
 from AccessControl.SecurityManagement import getSecurityManager
 from AccessControl.SecurityManagement import newSecurityManager
-from Products.CPSCore.CPSMembershipTool import CPSUnrestrictedUser
-from Globals import InitializeClass
 
-from Products.CMFCore.CMFCorePermissions import setDefaultRoles, View
-from Products.CMFCore.utils import getToolByName
-
-from Products.CPSCore.CPSBase import CPSBaseFolder, CPSBase_adder
-#from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
-
-ManageWorkgroups = 'Manage Workspaces'
-setDefaultRoles(ManageWorkgroups, ('Manager',))
+ManageWorkspaces = 'Manage Workspaces'
+setDefaultRoles(ManageWorkspaces, ('Manager',))
 
 
-WorkgroupManager = 'WorkspaceManager'
-WorkgroupMember = 'WorkspaceMember'
-WorkgroupVisitor = 'WorkspaceVisitor'
-WorkgroupManagerRoles = (WorkgroupManager, WorkgroupMember, WorkgroupVisitor,)
-WorkgroupMemberRoles = (WorkgroupMember, WorkgroupVisitor,)
-WorkgroupVisitorRoles = (WorkgroupVisitor,)
+WorkspaceManager = 'WorkspaceManager'
+WorkspaceMember = 'WorkspaceMember'
+WorkspaceVisitor = 'WorkspaceVisitor'
+WorkspaceManagerRoles = (WorkspaceManager, WorkspaceMember, WorkspaceVisitor,)
+WorkspaceMemberRoles = (WorkspaceMember, WorkspaceVisitor,)
+WorkspaceVisitorRoles = (WorkspaceVisitor,)
 
-factory_type_information = (
-    {'id': 'Calendars',
-     'title': 'portal_type_Calendars',
-     'icon': 'calendars_icon.gif',
-     'product': 'CPSCalendar',
-     'meta_type': 'Calendars',
-     'factory': 'addCalendars',
-     'immediate_view': 'folder_edit_form',
-     'filter_content_types': 1,
-     'allowed_content_types': (
-                               'Calendar',
-                               ),
-     'actions': ({'id': 'view',
-                  'name': 'action_view',
-                  'action': 'string:calendars_contents',
-                  'condition': '',
-                  'permissions': (View,),
-                  'category': 'object',
-                  },
-                 {'id': 'localroles',
-                  'name': 'action_local_roles',
-                  'action': 'string:folder_localrole_form',
-                  'condition': '',
-                  'permissions': (ManageWorkgroups,),
-                  'category': 'object'
-                  },
-                 {'id': 'create',
-                  'name': 'action_create',
-                  'action': 'string:calendars_create_form',
-                  'condition': '',
-                  'visible': 0,
-                  'permissions': ()},
-                 ),
-     },
-    )
 
 def _cmpEv(a, b):
     return cmp(b['start'], a['start'])
@@ -150,20 +121,75 @@ def _slotUnion(cal_slot, with_free=0):
 
     return result
 
-class Calendars(CPSBaseFolder):
-    """
-    """
-    meta_type = 'Calendars'
 
-    portal_type = meta_type
+class CPSCalendarTool(UniqueObject, PortalFolder):
+    """
+    This tool give the access to the collaborative side of CPSCalendar.
+    
+    It contains all the methods needed by Calendars object to find the others
+    and process meeting or superpose calendars.
+    """
+
+    id = 'portal_adv_calendar'
+    meta_type = 'CPS Advanced Calendar Tool'
+    title = 'Advanced Calendar Tool'
 
     security = ClassSecurityInfo()
+
+    manage_options = (ActionProviderBase.manage_options +
+                      PortalFolder.manage_options[:1] +
+                      PortalFolder.manage_options[2:])
+
+    _actions = ()
 
     _properties = ({'id':'title', 'type':'string'},
                    {'id':'description', 'type':'text'},
                    )
 
-    isDocumentContainer = 0
+    def __init__(self):
+        PortalFolder.__init__(self, self.id)
+
+    security.declareProtected('View', 'getCalendarObjects')
+    def getCalendarObjects(self):
+        """ return all available Calendar objects in a list
+        """
+        brains = self.portal_catalog.searchResults(meta_type='Calendar')
+        result = []
+        if brains == None:
+            return result
+        for brain in brains:
+            result.append(brain.getObject())
+        return result
+
+    security.declareProtected('View', 'getCalendarIds')
+    def getCalendarIds(self):
+        """ return all available Calendar ids in a list
+        """
+        brains = self.portal_catalog.searchResults(meta_type='Calendar')
+        result = []
+        if brains == None:
+            return result
+        for brain in brains:
+            result.append(brain.getId())
+        return result
+
+    security.declareProtected(View, 'getCalendarsDict')
+    def getCalendarsDict(self, exclude=None):
+        """ Return a short summary of all calendars
+            It's used in meeting preparation to have all possibles attendees
+        """
+        calendars_dict = {}
+        for ob in self.getCalendarObjects():
+            entry = calendars_dict.setdefault(ob.usertype, [])
+            if exclude is None or exclude != ob.id:
+                entry.append({
+                  'id': ob.id,
+                  'cn': ob.title_or_id(),
+                  'usertype': ob.usertype,
+                  'path': ob.absolute_url(relative=1),
+                  'url': ob.absolute_url(),
+                })
+        return calendars_dict
 
     # XXX use a special permission here
     security.declareProtected('View', 'unionCals')
@@ -235,12 +261,12 @@ class Calendars(CPSBaseFolder):
                 })
             mask_cal.append(this_day)
 
-        ids = self.objectIds('Calendar')
+        calendars = self.getCalendarObjects()
         ids = [id for id in attendees if id in ids]
         cals_dict = {}
         cal_users = {}
-        for id in ids:
-            calendar = self.getCalendarForId(id)
+        for calendar in calendars:
+            id = calendar.id
             cal_users[id] = self.getAttendeeInfo(id)['cn']
             calendar_slots = []
             for i in range(len(slots)):
@@ -283,9 +309,9 @@ class Calendars(CPSBaseFolder):
             'slots': slots,
         }
 
-    security.declareProtected(View, 'getCalendarForId')
-    def getCalendarForId(self, id):
-        """Get calendar for id, create it if id is a user"""
+    security.declareProtected('ModifyPortalContent', 'createUserCalendar')
+    def createUserCalendar(self, id):
+        """Create an user calendar"""
         id = str(id)
         ids = self.objectIds('Calendar')
         if id in ids:
@@ -345,23 +371,14 @@ class Calendars(CPSBaseFolder):
         else:
             return None
 
-    security.declareProtected(View, 'getCalendarsDict')
-    def getCalendarsDict(self, exclude=None):
-        calendars_dict = {}
-        for ob in self.objectValues('Calendar'):
-            entry = calendars_dict.setdefault(ob.usertype, [])
-            if exclude is None or exclude != ob.id:
-                entry.append({
-                  'id': ob.id,
-                  'cn': ob.title_or_id(),
-                  'usertype': ob.usertype,
-                })
-        return calendars_dict
-
     security.declareProtected(View, 'getAttendeeInfo')
     def getAttendeeInfo(self, id, status=0):
-        if id in self.objectIds('Calendar'):
-            calendar = getattr(self, id)
+        """ get info from others attendees of one event.
+        attendees are other calendars.
+
+        return a dictionnary with cn, id, usertype and status.
+        """
+        if id in self.getCalendarIds():
             info = {
                 'id': id,
                 'usertype': calendar.usertype,
@@ -395,47 +412,11 @@ class Calendars(CPSBaseFolder):
 
     security.declareProtected('View', 'getVisibleCalendars')
     def getVisibleCalendars(self):
+        """ return the list of all Calendar objects visible by the user
+        """
         mtool = getToolByName(self, 'portal_membership')
         cals = []
-        for cal in self.objectValues('Calendar'):
-            # View permission is already use to make working aquisition
+        for cal in self.getCalendarObjects():
             if mtool.checkPermission('List folder contents', cal):
                 cals.append(cal)
         return cals
-
-    security.declareProtected('Access contents information', 'get')
-    def get(self, name, default=None):
-        """
-        """
-        try:
-            return self[name]
-        except KeyError:
-            return default
-
-    def __getitem__(self, name):
-        ob = self.getCalendarForId(name)
-        if ob is not None:
-            return ob
-        raise KeyError, name
-
-InitializeClass(Calendars)
-
-def addCalendars(dispatcher, id, title='', description='', REQUEST=None):
-    """Adds a Calendars container."""
-    ob = Calendars(id)#, title, description)
-    container = dispatcher.Destination()
-    return CPSBase_adder(container, ob, REQUEST=REQUEST)
-
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License version 2 as published
-# by the Free Software Foundation.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
-# 02111-1307, USA.

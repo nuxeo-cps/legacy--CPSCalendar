@@ -333,8 +333,8 @@
                   </td>
                   <tal:block repeat="col hour_block_cols">
                     <td width="59" height="360" valign="top"
-                      tal:define="even repeat/col/even"
-                      tal:attributes="
+                        tal:define="even repeat/col/even"
+                        tal:attributes="
                       background python:even and back_td2 or back_td1">
                       <table cellspacing="0" cellpadding="0" width="59" border="0">
                         <tr tal:repeat="block col">

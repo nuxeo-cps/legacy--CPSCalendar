@@ -264,7 +264,7 @@ class Calendar(CPSBaseFolder):
         assert disp in ('day', 'month', 'week')
 
         mtool = getToolByName(self, 'portal_membership')
-        show_dirty = mtool.checkPermission('Add portal content', self)
+        show = mtool.checkPermission('List folder contents', self)
 
         slots = []
         slot_list = []
@@ -303,7 +303,7 @@ class Calendar(CPSBaseFolder):
                           if id in self._additional_cals]
             for cal_id in cal_ids:
                 cal = getattr(calendars, cal_id)
-                if self.id != cal_id and mtool.checkPermission('View', cal):
+                if self.id != cal_id and mtool.checkPermission('List folder contents', cal):
                     add_events = [getattr(cal, id)
                         for id in cal.objectIds('Event')
                         if id not in events_ids]
@@ -327,13 +327,13 @@ class Calendar(CPSBaseFolder):
               'slots': slots,
               'day_events': slot_list[0]['day'],
               'hour_blocks':
-                  self._getHourBlockCols(hour_cols, show_dirty)[0],
+                  self._getHourBlockCols(hour_cols, show)[0],
             }
         elif disp == 'week':
             day_events_list = [slot['day'] for slot in slot_list]
             hour_cols = [slot['hour'] for slot in slot_list]
             day_lines = self._getDayLines(day_events_list, len(slots))
-            hour_block_cols = self._getHourBlockCols(hour_cols, show_dirty)
+            hour_block_cols = self._getHourBlockCols(hour_cols, show)
             return {
                 'slots': slots,
                 'day_lines': day_lines,
@@ -450,7 +450,7 @@ class Calendar(CPSBaseFolder):
 
         return day_lines
 
-    def _getHourBlockCols(self, hour_cols, show_dirty):
+    def _getHourBlockCols(self, hour_cols, show):
         hour_block_cols = []
         for col in hour_cols:
             blocks = []
@@ -481,7 +481,7 @@ class Calendar(CPSBaseFolder):
                               'event': the_event,
                               'height': conflict[0]['stop_min']
                                         - conflict[0]['start_min'],
-                              'isdirty': show_dirty and the_event.isDirty()
+                              'isdirty': show and the_event.isDirty()
                             }]])
                         else:
                             block_cols = []
@@ -515,7 +515,7 @@ class Calendar(CPSBaseFolder):
                                     'event': the_event,
                                     'height': conf_stop - conf_start,
                                     'isdirty': \
-                                        show_dirty and the_event.isDirty(),
+                                        show and the_event.isDirty(),
                                 })
                                 block_stops[i] = conf_stop
                             blocks.append(block_cols)
@@ -551,7 +551,7 @@ class Calendar(CPSBaseFolder):
                       'event': the_event,
                       'height': conflict[0]['stop_min']
                                 - conflict[0]['start_min'],
-                      'isdirty': show_dirty and the_event.isDirty(),
+                      'isdirty': show and the_event.isDirty(),
                     }]])
                 else:
                     block_cols = []
@@ -584,7 +584,7 @@ class Calendar(CPSBaseFolder):
                         correct_col.append({
                             'event': the_event,
                             'height': conf_stop - conf_start,
-                            'isdirty': show_dirty and the_event.isDirty(),
+                            'isdirty': show and the_event.isDirty(),
                         })
                         block_stops[i] = conf_stop
                     blocks.append(block_cols)
