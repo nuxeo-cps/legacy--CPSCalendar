@@ -173,8 +173,7 @@ class Calendar(CPSBaseFolder):
 
     security.declareProtected('Add portal content', 'getPendingEventsCount')
     def getPendingEventsCount(self):
-        """Get count of pending events
-        """
+        """Get count of pending events"""
         return len(self._pending_events)
 
     security.declareProtected('Add portal content', 'getPendingEvents')
@@ -189,8 +188,7 @@ class Calendar(CPSBaseFolder):
 
     security.declarePublic('addPendingEvent')
     def addPendingEvent(self, event_dict):
-        """ Add an event request
-        """
+        """Add an event request"""
         if event_dict['request'] == 'status' and \
                 event_dict['id'] not in self.objectIds('Event'):
             # status change lost because this event was once deleted
@@ -612,8 +610,7 @@ class Calendar(CPSBaseFolder):
 
     security.declarePrivate('getEmail')
     def getEmail(self, member, dir):
-        """ Get email from member's properties in dir
-        """
+        """Get email from member's properties in dir"""
         member_prop = dir.getEntry(member)
         if member_prop is None:
             return None
@@ -621,8 +618,7 @@ class Calendar(CPSBaseFolder):
 
     security.declarePrivate('notifyMembers')
     def notifyMembers(self, event_dict):
-        """ Notify members when a pending event arrives
-        """
+        """Notify members when a pending event arrives"""
 
         # get mailhost object
         mailhost = getattr(self, 'MailHost')
@@ -732,32 +728,28 @@ class Calendar(CPSBaseFolder):
 
     security.declareProtected('View', 'getEvents')
     def getEvents(self, from_date, to_date):
-        """ Return an all events with from_date and to_date in the interval
-        """
+        """Return an all events with from_date and to_date in the interval"""
         events = self.objectValues('Event')
-        return [event for event in events if event.from_date >= from_date and \
-                                             event.to_date <= to_date]
+        return [event for event in events 
+                if event.from_date >= from_date and event.to_date <= to_date]
 
     security.declarePrivate('addDeclinedEvent')
     def addDeclinedEvent(self, event):
-        """ Add the event id in the self._declined list
-        """
+        """Add the event id in the self._declined list"""
         event_id = event.id
         if event_id not in self._declined:
             self._declined = self._declined + (event_id, )
 
     security.declarePrivate('addCancelledEvent')
     def addCancelledEvent(self, event):
-        """ Add the event id in the self._cancelled list
-        """
+        """Add the event id in the self._cancelled list"""
         event_id = event.id
         if event_id not in self._cancelled:
             self._cancelled = self._cancelled + (event_id, )
 
     security.declarePrivate('removeDeclinedEvent')
     def removeDeclinedEvent(self, event):
-        """ Remove event from self._declined
-        """
+        """Remove event from declined events list"""
         event_id = event.id
         if event_id in self._declined:
             self._declined = tuple(
@@ -765,8 +757,7 @@ class Calendar(CPSBaseFolder):
 
     security.declarePrivate('removeCancelledEvent')
     def removeCancelledEvent(self, event):
-        """ Remove event from self._cancelled
-        """
+        """Remove event from cancelled events lists"""
         event_id = event.id
         if event_id in self._cancelled:
             self._cancelled = tuple(
@@ -774,8 +765,8 @@ class Calendar(CPSBaseFolder):
 
     security.declareProtected('Add portal content', 'getDeclinedCancelledEvents')
     def getDeclinedCancelledEvents(self):
-        """ Return a dictionnry with cancelled events'id and declined events'id
-        """
+        """Return a dictionnary with cancelled events ids and declined 
+        events ids"""
         return {
             'cancelled': self._cancelled,
             'declined': self._declined,

@@ -28,8 +28,6 @@ from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
 
 from AccessControl import ClassSecurityInfo
-from AccessControl.SecurityManagement import getSecurityManager
-from AccessControl.SecurityManagement import newSecurityManager
 
 ManageWorkspaces = 'Manage Workspaces'
 setDefaultRoles(ManageWorkspaces, ('Manager',))
