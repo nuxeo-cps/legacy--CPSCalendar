@@ -1,0 +1,118 @@
+Implémentation des fonctionnalités de calendrier.
+
+  $Id$
+
+  Les difficultés principales sont:
+
+  - l'implémentation des événements récurrents,
+
+  - les optimisations et caches pour avoir un fonctionnement rapide.
+
+Événements récurrents
+
+  Il est IMPÉRATIF de lire la spec iCalendar (rfc 2445)
+  (http://www.imc.org/ietf-calendar/index.html) pour comprendre
+  l'ampleur des fonctionnalités possibles, et les choix techniques faits
+  dans la spec afin d'avoir un modèle fonctionnel commun, pour pouvoir
+  interopérer avec d'autres calendriers, et aussi simplement pour tirer
+  partie de l'expérience de ceux qui ont écrit la spec.
+
+  Par ailleurs le meilleur programme implémentant iCalendar est Apple
+  iCal, et il est souhaitable de jouer avec pour comprendre comment
+  fonctionnent les événements récurrents.
+
+  Enfin il est important de noter que la principale difficulté
+  d'implémentation des événements récurrents vient du fait qu'on peut
+  autoriser une instance d'une récurrence à être changée (déplacée en
+  date/time, ou bien changée dans un ou plusieurs de ses champs). Ces
+  instances sont appelées instances "détachées".
+
+  L'implémentation des événements récurrents fonctionne ainsi:
+
+  - un événement a un UID, qui identifie à la fois l'événement
+    définissant la récurrence et toutes les récurrences de cet
+    événement (appelé le recurrence set),
+
+  - la règle de récurrence (RRULE) (spec 4.8.5.4) définit quelles sont
+    toutes les récurrences, et la date d'arrêt éventuel. Il faudra
+    commencer par implémenter des règles simples tout en se gardant des
+    possibilités d'évolution,
+
+  - dans la spec il y a aussi une EXRULE (spec 4.8.5.2) qui spécifie un
+    règle d'exceptions pour les récurrence, mais on ne l'implémentera
+    pas, de même on n'implémentera pas les RRULE multiples,
+
+  - une instance particulière d'une récurrence est identifiée par sa
+    RECURRENCE-ID (spec 4.8.4.4), qui est la date de début de
+    l'événement (date+time si l'événement n'est pas all-day),
+
+  - si une instance d'un récurrence est détachée (changée d'heure par
+    exemple), elle reste identifié par sa RECURRENCE-ID d'origine, en
+    revanche sa date de début change (spec 4.8.4.4),
+
+  - un événement récurrent possède des RDATE et des EXDATE. Les RDATE
+    sont les dates supplémentaires auxquelles un événement récurrent est
+    rajouté (cette notion ne nous sert pas a priori) (spec 4.8.5.3). Les
+    EXDATE sont les dates où un événement récurrent ne doit pas avoir
+    lieu (spec 4.8.5.1),
+
+  - quand une instance d'une récurrence est supprimée, sa RECURRENCE-ID
+    est rajoutée au EXDATE de l'événement de base,
+
+  - déplacement d'une instance: si l'utilisateur demande le déplacement
+    d'une instance d'un événement récurrent, il faut lui demander si il
+    veut dire:
+
+    - déplacer cette occurence seulement, auquel cas on fait un
+      détachement de l'instance,
+
+    - déplacer cette instance et toutes les suivantes, auquel cas il
+      faut faire un split de l'événement récurrent en deux événements
+      récurrents, le premier s'arrêtant avant l'instance choisie, et le
+      deuxième recommençant à la nouvelle version de l'instance choisie,
+
+  - modification d'une instance: si l'on demande la modification d'un
+    champ d'une instance d'un événement récurrent, il faut de même
+    demander à l'utilisateur si il veut dire:
+
+    - modifier cette occurence seulement, auquel cas on fait un
+      détachement de l'instance,
+
+    - modifier cette instance et toutes les suivantes, auquel cas on
+      splitte,
+
+Notes diverses par rapport à iCalendar
+
+  - on ne traitera pas les timezones, et on stockera toutes les dates en
+    UTC,
+
+  - le RFC n'est pas explicite sur beaucoup de points. Apple iCal reste
+    la meilleure référence et implémente souvent le consensus des
+    mailing-lists sur iCalendar.
+
+Optimisations et caches
+
+  Il est hors de question d'instancier une récurrence d'événement à
+  chaque fois qu'une récurrence doit être visualisée, pour des problèmes
+  de performance et de taille de stockage. Les événements ne sont donc
+  pas des objets de première classe qu'on visualise directement.
+  L'object Calendar doit avoir une méthode getEvent(...) qui retourne un
+  objet événement non persistent, qui lui-même a des méthodes
+  d'affichage.
+
+  Un algorithme de base à implémenter est celui qui calcule le
+  recurrence set en fonction de RRULE et de EXDATE.
+
+  Il faut pouvoir retrouver rapidement les événements instanciés
+  dans une plage de temps donnée (probablement utiliser un Catalog local
+  au calendrier pour cela, avec au moins des index pour UID, DTSTART,
+  DTEND, RECURRENCE-ID).
+
+  Le Calendar doit avoir, pour chaque UID, un cache sur certaines
+  périodes (le mois me semble une bonne granularité de base) du
+  recurrence set valable pour cette période (avec inclusion des
+  événements détachés). Le cache doit être invalidé dès qu'un événement
+  avec cette UID voit une des ses dates modifiées.
+
+  Il faudra implémenter des algorithmes efficace d'intersection de
+  périodes de temps multiples.
