@@ -3,12 +3,10 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
-- The restricted search setting now applies for all calendars, not only
-  member calendars.
+-
 Bug fixes:
 ~~~~~~~~~~
-- Used "Products.CMFCore.permissions" instead of deprecated
-  "Products.CMFCore.CMFCorePermissions".
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

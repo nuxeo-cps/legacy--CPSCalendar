@@ -1,4 +1,22 @@
 *******************************************
+** CPSCalendar V1.14.3 [R1 build 2005/03/07-16:06 by madarche]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- The restricted search setting now applies for all calendars, not only
+  member calendars.
+Bug fixes:
+~~~~~~~~~~
+- Used "Products.CMFCore.permissions" instead of deprecated
+  "Products.CMFCore.CMFCorePermissions".
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.14.2 [R1 build 2005/01/28-14:17 by madarche]
 
 Requires:
