@@ -1,4 +1,42 @@
 *******************************************
+** CPSCalendar V1.6.0 [R1 build 2004/04/19-15:47 by regebro]
+
+Requires:
+~~~~~~~~~
+- The install method must be rerun for upgrading of pending events.
+New features:
+~~~~~~~~~~~~~
+- create a property to control the creation of a calendar when creating an user
+  home folder
+- add a new view for the event of a calendar
+- add by_days option to Calendar.getEvents
+- Added back button in the search form
+Bug fixes:
+~~~~~~~~~~
+- The date display in the weekly view now always uses two lines, one for weekday
+  and date, one for month.
+- Some fixes for better french in the translations.
+- The end date didn't follow the start date on standard even creation.
+- Pending events also needed upgrade.
+- The upgrade of events and calendars now tell you if it upgraded anything.
+- Rewrite of the date and time handling in the add and edit event forms
+  removed several bugs.
+- Events that extended to the end of the search time would be ignored when
+  searching for free times in the meeting creation helper.
+- Events shorter than an hour could cause later events the same day to be
+  displayed slightly incorrectly.
+- When creating an event, any meeting data stored in the session is cleared
+  first, to prevent this data bleeding into the event creation.
+- Meeting creation now handles recurring events properly.
+- Screen reorganisations and fixes according to bugs #722 and #725.
+- Fixed bug #653, creating events with end before the start did not work.
+- Recurrance type was ignored when creating new events.
+- And several other minor bugs.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Add getHomeCalendarObject and getHomeCalendarUrl method in CalendarTool
+
+*******************************************
 ** CPSCalendar V1.5.1 [R1 build 2004/04/09-13:22 by ben]
 
 Requires:
