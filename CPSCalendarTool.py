@@ -21,10 +21,12 @@ from zLOG import LOG, DEBUG
 from Globals import InitializeClass
 from DateTime import DateTime
 from Products.CMFCore.PortalFolder import PortalFolder
+from AccessControl.Permissions import manage_users as ManageUsers
 from Products.CMFCore.CMFCorePermissions import setDefaultRoles
 from Products.CMFCore.CMFCorePermissions import View
-from Products.CMFCore.CMFCorePermissions import ManagePortal
+from Products.CMFCore.CMFCorePermissions import ManagePortal, AddPortalContent
 from Products.CMFCore.utils import UniqueObject, getToolByName
+from Products.CMFCore.utils import _getAuthenticatedUser, _checkPermission
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
 
 from AccessControl import ClassSecurityInfo
@@ -349,8 +351,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             'slots': slots,
         }
 
-    security.declareProtected(ManagePortal, 'createMemberCalendar')
-    def createMemberCalendar(self, member_id):
+    security.declarePublic('createMemberCalendar')
+    def createMemberCalendar(self, member_id=None):
         # XXX: is member_id really necessary here ?
         """Create a calendar in the home folder of a member
 
@@ -358,6 +360,23 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
         Precondition: member_id must be a valid user id
         """
+        user = _getAuthenticatedUser(self)
+        user_id = user.getUserName()
+        if not member_id:
+            member = user
+            member_id = user_id
+        elif user_id == member_id:
+            member = user
+        else:
+            if _checkPermission(ManageUsers, self):
+                member = self.acl_users.getUserById(member_id, None)
+                if member:
+                    member = member.__of__(self.acl_users)
+                else:
+                    raise ValueError("Member %s does not exist" % member_id)
+            else:
+                raise 'Unauthorized', ManageUsers
+                
         mtool = getToolByName(self, 'portal_membership')
         ttool = getToolByName(self, 'portal_types')
 
@@ -366,6 +385,10 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
         context = mtool.getHomeFolder(member_id)
 
+        # Check that the user has the permissions.
+        if not _checkPermission(AddPortalContent, context):
+                raise 'Unauthorized', CreatePortalContent
+        
         aclu = self.acl_users
         user = aclu.getUser(member_id)
         assert user
