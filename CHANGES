@@ -7,6 +7,9 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - CPS Proxy Folderish Documents are now browsable for documents.
+- In calendar_overview.pt "title" is now "title_or_id" to make sure
+  calendars that have no titles are still visible.
+
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
