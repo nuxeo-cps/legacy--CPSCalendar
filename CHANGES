@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- A bug in the Calednar upgrade of pending events was fixed. (#1383)
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
