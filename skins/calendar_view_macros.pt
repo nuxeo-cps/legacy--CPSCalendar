@@ -5,7 +5,7 @@
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
       target="_new"
-      tal:content="python:str('_cal_Printable_view_')">
+      i18n:translate="_cal_Printable_view_">
       Printable view
     </a>]
   </tal:block>
@@ -29,7 +29,7 @@
                   today python:int(DateTime());"
                 tal:attributes="
                   href string:${here_url}?viewed_day=${today}"
-                tal:content="python:str('_cal_Today_')">
+                i18n:translate="_cal_Today_">
                 Today
               </a>
             </td>
@@ -66,13 +66,14 @@
                 <tr>
                   <td>
                   </td>
-                  <th
-                    tal:define="
-                      dow python:str('_cal_Day_long%s' % date.dow());
-                      dom date/day;
-                      year date/year;
-                      month python:str('_cal_Month%s' % date.month());"
-                    tal:content="string:${dow} ${dom} ${month} ${year}" />
+                  <th>
+                    <span tal:content="python:str('_cal_Day_long%s' % date.dow())"
+                          i18n:translate="" />
+                    <span tal:replace="string:${date/day}"/> 
+                    <span tal:content="python:str('_cal_Month%s' % date.month())"
+                          i18n:translate="" />
+                    <span tal:replace="string:${date/year}"/>
+                  </th>
                 </tr>
                 <tr tal:repeat="day_event day_events">
                   <td>
@@ -238,7 +239,7 @@
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
       target="_new"
-      tal:content="python:str('_cal_Printable_view_')">
+      i18n:translate="_cal_Printable_view_">
       Printable view
     </a>]
   </tal:block>
@@ -260,7 +261,7 @@
                   today python:int(DateTime());"
                 tal:attributes="
                   href string:${here_url}?viewed_day=${today}"
-                tal:content="python:str('_cal_Today_')">
+                i18n:translate="_cal_Today_">
                 Today
               </a>
             </td>
@@ -304,15 +305,16 @@
                   <th width="59" tal:repeat="i python:range(0,7)">
                     <a
                       tal:define="
-                        dow python:str('_cal_Day%s' % i);
                         date python:slots[i][0];
-                        dom date/day;
-                        month python:str('_cal_Mo%s' % date.month());
-                        go_day python:int(date);
-                      "
+                        go_day python:int(date);"
                       tal:attributes="
-                        href string:${here_url}?disp=day&viewed_day=${go_day}"
-                      tal:content="string:${dow} ${dom} ${month}" />
+                        href string:${here_url}?disp=day&viewed_day=${go_day}">
+                        <span tal:content="python:str('_cal_Day%s' % i)"
+                              i18n:translate="" />
+                        <span tal:replace="string:${date/day}"/> 
+                        <span tal:content="python:str('_cal_Mo%s' % date.month());"
+                              i18n:translate="" />
+                      </a>
                   </th>
                 </tr>
                 <tr tal:repeat="line day_lines">
@@ -482,16 +484,16 @@
 <metal:block define-macro="month">
   <tal:block define="global non_local string:#777777;
                      global my_id here/id;" />
-  <h2
-    tal:define="
-      month python:str('_cal_Month%s' % (viewed_day.month(), ));
-      year viewed_day/year"
-    tal:content="string:${month} ${year}" />
+  <h2>
+    <span tal:content="python:str('_cal_Month%s' % (viewed_day.month(), ))" 
+          i18n:translate="" />
+    <span tal:replace="viewed_day/year"/>
+  </h2>
   <tal:block
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
       target="_new"
-      tal:content="python:str('_cal_Printable_view_')">
+      i18n:translate="_cal_Printable_view_">
       Printable view
     </a>]
   </tal:block>
@@ -515,7 +517,7 @@
                   today python:int(DateTime());"
                 tal:attributes="
                 href string:${here_url}?viewed_day=${today}"
-                tal:content="python:str('_cal_Today_')">
+                i18n:translate="_cal_Today_">
                 Today
               </a>
             </td>
@@ -545,9 +547,9 @@
               <table width="445" cellspacing="2" cellpadding="0" border="0">
                 <tr>
                   <th
-                    tal:repeat="i python:[1,2,3,4,5,6,0]"
-                    tal:content="python:str('_cal_Day_long%s' % (i, ))">
-                    Mon
+                    tal:repeat="i python:[1,2,3,4,5,6,0]">
+                    <span tal:content="python:str('_cal_Day_long%s' % (i, ))"
+                          i18n:translate="">week day</span>
                   </th>
                 </tr>
                 <tal:block repeat="line events_desc/lines">

@@ -41,8 +41,7 @@
   </metal:block>
 </head>
 
-<body bgcolor="white" onLoad="initAll()"
-  tal:define="button_value python:str('_button_cancel_');">
+<body bgcolor="white" onLoad="initAll()">
   <table cellspacing="0" border="1" cellpadding="5" width="100%">
     <tr>
       <td>
@@ -54,9 +53,11 @@
   </table>
   <input type="button" onClick="validateSelector()"
     tal:attributes="value python:str('_button_validate_')"
-    tal:condition="should_validate|nothing" />
+    tal:condition="should_validate|nothing"
+    i18n:attributes="value" />
   <input type="button" onClick="window.close()"
-    tal:attributes="value button_value" />
+    tal:attributes="value python:str('_button_cancel_');"
+    i18n:attributes="value" />
 </body>
 
 </html>
