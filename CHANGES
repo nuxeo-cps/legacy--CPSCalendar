@@ -13,6 +13,7 @@ Bug fixes:
 - A button was not translated (#783).
 - with workgroups calendars, starting meetings always added the site
   manager instead of the user as a default attendee.
+- Edit access now depends on the Modify Portal Content permission.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
