@@ -20,7 +20,8 @@
     «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
   </tal:block>
 </metal:block>
-
+    <!--                          all_day python:(create and [request.form.get('all_day')] or [here.all_day])[0];  -->
+    <!--                          all_day python:test(create, request.form.get('all_day'), here.all_day); -->
 <metal:block fill-slot="main"
              tal:define="portal_url here/portal_url;
                          disp_infos python:here.calendar_getDispInformations(request);
@@ -31,7 +32,8 @@
                          description python:create and str('') or here.description;
                          location python:(not create) and here.location or '';
                          event_status python:create and 'unconfirmed' or here.event_status;
-                         all_day python:(create and [request.form.get('all_day')] or [here.all_day])[0];
+                         here_all_day here/all_day|python:0;
+                         all_day python:test(create, request.form.get('all_day', 0), here_all_day);
                          from_date python:create and disp_infos['selected_day'] or here.from_date;
                          from_date_day from_date/day;
                          from_date_month from_date/month;
