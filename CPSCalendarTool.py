@@ -30,7 +30,7 @@ from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.utils import _getAuthenticatedUser, _checkPermission
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
 from Products.CMFCore.utils import UniqueObject, getToolByName, mergedLocalRoles
-from Products.CPSCore.utils import _allowedRolesAndUsers
+from Products.CPSCore.utils import getAllowedRolesAndUsersOfObject
 from Products.ZCatalog.ZCatalog import ZCatalog
 
 from Event import VirtualEvent
@@ -364,7 +364,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         if restrict_search and search_param != idfield:
             # Filter out users with view permission:
             local_users = []
-            allowed = _allowedRolesAndUsers(calendar)
+            allowed = getAllowedRolesAndUsersOfObject(calendar)
             for each in allowed:
                 if each.startswith('user:'):
                     local_users.append(each[5:])
