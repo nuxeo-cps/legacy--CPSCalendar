@@ -6,7 +6,7 @@
                          user_types here/getUserTypes;
                          attendees_dict here/getAttendeesDict|python:{};
                          caltool here/portal_cpscalendar;
-                         dtool here/portal_metadirectories/members;
+                         dtool here/portal_directories/members;
                          decline_attendees python:[att for att in here.attendees if att['status'] == 'decline'];
                          all_attendees caltool/getCalendarsDict|python:{};
                          can_edit python:here.canEditThisEvent();">
@@ -96,8 +96,8 @@
             <tal:block condition="searching">
               <tal:block define="search_param python: request.get('search_param', '');
                                  search_term  python: request.get('search_term', '');
-                                 found python:search_param and dtool.searchEntry(**{search_param: search_term});
-                                 found python:[member for member in found if member[dtool.entry_prop] != this_user]">
+                                 found python:search_param and dtool.searchEntries(**{search_param: search_term});
+                                 found python:[member for member in found if member[dtool.title_field] != this_user]">
                 <tal:block condition="found">
                   <form method="POST" action="calendar_addattendee">
                     <p>
@@ -108,8 +108,8 @@
                       <select name="ids:list" size="5" multiple>
                         <tal:block repeat="props found">
                         <option value="."
-                          tal:define="user_id python:props[dtool.display_prop];
-                                      path python:caltool.getCalendarPathForUser(props[dtool.entry_prop])"
+                          tal:define="user_id python:props[dtool.title_field];
+                                      path python:caltool.getCalendarPathForUser(props[dtool.title_field])"
                           tal:condition="path"
                           tal:attributes="value path"
                           tal:content="user_id">

@@ -22,7 +22,7 @@ class TestCalendarTool(CPSCalendarTestCase):
         m.setProperties(xxx='xxx')
 
         # If there is no entry for user, getCalendarForPath will return None
-        dtool = self.portal.portal_metadirectories
+        dtool = self.portal.portal_directories
         self.member = dtool.members.getEntry(self.user_id)
         assert self.member
         self.user_home = mtool.getHomeFolder(self.user_id)

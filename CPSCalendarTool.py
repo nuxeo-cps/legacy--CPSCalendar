@@ -415,18 +415,18 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 info['cn'] = calendar.title_or_id()
             else:
                 id = calendar.getOwnerId()
-                dirtool = getToolByName(self, 'portal_metadirectories')
-                members = dirtool.members
-                entry = members.getEntry(id)
+                dtool = getToolByName(self, 'portal_directories')
+                mdir = dtool.members
+                entry = mdir.getEntry(id)
                 if entry is None:
                     info['cn'] = id
                 else:
-                    info['cn'] = entry.get(members.display_prop, id)
+                    info['cn'] = entry.get(mdir.title_field, id)
         else:
             # Maybe a member with no created calendar
-            dirtool = getToolByName(self, 'portal_metadirectories')
-            members = dirtool.members
-            entry = members.getEntry(id)
+            dtool = getToolByName(self, 'portal_directories')
+            mdir = dtool.members
+            entry = mdir.getEntry(id)
             if entry is None:
                 return None
             else:
@@ -434,7 +434,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                     'id': id,
                     'rpath': rpath,
                     'usertype': 'member',
-                    'cn': entry.get(members.display_prop, id),
+                    'cn': entry.get(mdir.title_field, id),
                 }
         if status:
             info['status'] = 'unconfirmed'

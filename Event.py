@@ -446,11 +446,11 @@ class Event(CPSBaseDocument):
         """
         mtool = getToolByName(self, 'portal_membership')
         member = mtool.getAuthenticatedMember().getUserName()
-        dirtool = getToolByName(self, 'portal_metadirectories')
-        members = dirtool.members
-        entry = members.getEntry(member)
+        dtool = getToolByName(self, 'portal_directories')
+        mdir = dtool.members
+        entry = mdir.getEntry(member)
         if entry is not None:
-            member_cn = entry.get(members.display_prop, member)
+            member_cn = entry.get(mdir.title_field, member)
         else:
             member_cn = member
         dtstamp = DateTime()
