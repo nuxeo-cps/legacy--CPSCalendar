@@ -24,6 +24,7 @@ Bug fixes:
   instead of the member layout, thus only showing searchable fields.
 - There were two lingering references to the all_day attribute that
   had not been changed (Mantis #653).
+- The meeting helper form did not display leading zeroes on minutes.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
