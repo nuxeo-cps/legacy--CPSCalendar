@@ -16,6 +16,8 @@ Bug fixes:
 - Trying to get an email for orphaned members raises a key error. I now
   trap this.
 - Headers in the notification mails was calculated twice.
+- The attendees search box now uses the member_search laout widgets,
+  instead of the member layout, thus knly showing searchable fields.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

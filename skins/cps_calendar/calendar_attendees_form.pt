@@ -69,7 +69,7 @@
         <tal:block condition="python:type =='member'">
           <tal:block define="
             searching python:request.get('role_submit', None);
-            widgets python:here.portal_layouts.members.objectValues()">
+            widgets python:here.portal_layouts.members_search.objectValues()">
             <tal:block condition="python: not searching">
               <form method="POST" action="calendar_attendees_form">
                 <p>
