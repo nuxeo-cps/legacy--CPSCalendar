@@ -1145,3 +1145,6 @@ msgstr "you cannot select a time interval larger than a month"
 msgid "cpscalendar_create_the_meeting_here"
 msgstr "Create the meeting here"
 
+msgid "cpscalendar_attendees_management"
+msgstr "attendees management"
+

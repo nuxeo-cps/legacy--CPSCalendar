@@ -1,13 +1,6 @@
 <tal:block define="global current_action string:attendees" />
 <html metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="head_slot" i18n:domain="cpscalendar">
-  <span i18n:translate="cpscalendar_heading_event_attendees">
-    cpscalendar_attendees_for_event
-  </span>
-  «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
-</metal:block>
-
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="this_user here/getCalendarUser;
                          user_types here/getUserTypes;
@@ -16,6 +9,13 @@
                          decline_attendees python:[att for att in here.attendees if att['status'] == 'decline'];
                          all_attendees here/getCalendarsDict|python:{};
                          can_edit python:here.canEditThisEvent();">
+
+  <h1>
+    <span tal:replace="here/title_or_id">Title</span>:
+    <span i18n:translate="cpscalendar_attendees_management">Attendees 
+      management</span>
+  </h1>
+
   <tal:block condition="python:decline_attendees and can_edit">
     <form action="calendar_removeattendee" method="POST">
       <input type="hidden" name="ids:list"
@@ -26,10 +26,12 @@
              i18n:attributes="value" />
     </form>
   </tal:block>
+
   <metal:block use-macro="here/calendar_macros/macros/notifyattendees" />
+
   <tal:block repeat="user_type user_types">
-    <span class="calTitle" tal:content="python:str(user_type['plural_title'])"
-        i18n:translate="">cpscalendar_ressources</span>
+    <h2 class="label" tal:content="python:str(user_type['plural_title'])"
+        i18n:translate="">cpscalendar_ressources</h2>
     <tal:block define="type user_type/id;
                        attendees attendees_dict/?type|python:[]">
       <p tal:condition="not:attendees"
@@ -63,8 +65,8 @@
         </ul>
       </tal:block>
       <tal:block condition="can_edit">
-        <tal:block condition="python:type =='member'">
 
+        <tal:block condition="python:type =='member'">
           <tal:block define="searching python: request.get('role_submit', None);
                              searchable_keys dtool/getSearchableSchemaKeys;
                              schema_dict dtool/getSchemaDict;
@@ -126,6 +128,7 @@
             </tal:block>
           </tal:block>
         </tal:block>
+
         <tal:block condition="python:type != 'member'">
           <tal:block define="addable_attendees all_attendees/?type|python:[];
                              attendees_ids python:[att['id'] for att in attendees];

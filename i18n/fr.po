@@ -223,7 +223,7 @@ msgstr "Créer un événement"
 #.            </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_description_modify_event"
-msgstr "Modifier un événement"
+msgstr "Modifier l'événement"
 
 #.   <h3>
 #.       Calendar selection
@@ -1145,4 +1145,7 @@ msgstr "vous ne pouvez pas choisir un intervalle de temps supérieur à un mois"
 
 msgid "cpscalendar_create_the_meeting_here"
 msgstr "Créer la réunion ici"
+
+msgid "cpscalendar_attendees_management"
+msgstr "gestion des participants"
 

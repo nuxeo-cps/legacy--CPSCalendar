@@ -1,8 +1,6 @@
 <tal:block define="current_action string:view">
   <html metal:use-macro="here/main_template/macros/master">
 
-    <metal:block fill-slot="header_plus" />
-
     <metal:block fill-slot="main" i18n:domain="cpscalendar">
 
       <tal:block define="event nocall:here">
