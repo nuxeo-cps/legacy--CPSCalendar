@@ -558,7 +558,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
         aclu = self.acl_users
         user = aclu.getUser(member_id)
-        assert user
+        if not user:
+            return
         user = user.__of__(aclu)
 
         # create this calendar for this member
