@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2004-09-23 16:53default\n"
+"POT-Creation-Date: 2004-09-24 19:18default\n"
 "PO-Revision-Date: 2004-01-09 02:26+0100\n"
 "Last-Translator: Encolpe DEGOUTE <ed@nuxeo.com>\n"
 "Language-Team: French <cantact@nuxeo.com>\n"
@@ -99,6 +99,11 @@ msgstr ""
 #.   <h1>Export</h1>
 #: from ../skins/cps_calendar/calendar_export.pt
 msgid "action_export"
+msgstr ""
+
+#.   <h1>Calendar overview</h1>
+#: from ../skins/cps_calendar/calendar_overview.pt
+msgid "action_overview"
 msgstr ""
 
 #.   <input type="submit" value="button_cpscalendar_remove_all_attendees_who_declined" />
@@ -736,6 +741,14 @@ msgstr "Comment for attendees"
 msgid "cpscalendar_message_comment_for_organizer"
 msgstr "Comment for the organizer"
 
+#.   <span condition="editcals">
+#.         These are the calendars where you can create events
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+#, fuzzy
+msgid "cpscalendar_message_editable_calendars"
+msgstr "Create a calendar"
+
 #.   <span>
 #.         If you have an application that supports it, you can also
 #.       </span>
@@ -756,6 +769,14 @@ msgstr "No shared calendars found"
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_message_no_user_matching"
 msgstr "Sorry, there isn't any user matching your query."
+
+#.   <span>
+#.         You can not view any calendars
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+#, fuzzy
+msgid "cpscalendar_message_no_visible_calendars"
+msgstr "No shared calendars found"
 
 #.   <strong>
 #.       You have to notify other attendees of recent changes to this event.
@@ -843,6 +864,14 @@ msgstr ""
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
 msgid "cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees"
 msgstr "Unselect events you don't want to notify attendees"
+
+#.   <span condition="vcals">
+#.         These are the calendars you can only view:
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+#, fuzzy
+msgid "cpscalendar_message_visible_calendars"
+msgstr "subscribe to this calendar"
 
 #.   <span>
 #.         You can download

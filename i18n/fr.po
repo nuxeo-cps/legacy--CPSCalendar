@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2004-09-23 16:53default\n"
+"POT-Creation-Date: 2004-09-24 19:18default\n"
 "PO-Revision-Date: 2004-08-19 16:04+0200\n"
 "Last-Translator: Lennart Regebro <rgebro@nuxeo.com>\n"
 "Language-Team: \n"
@@ -103,6 +103,11 @@ msgstr ""
 #.   <h1>Export</h1>
 #: from ../skins/cps_calendar/calendar_export.pt
 msgid "action_export"
+msgstr ""
+
+#.   <h1>Calendar overview</h1>
+#: from ../skins/cps_calendar/calendar_overview.pt
+msgid "action_overview"
 msgstr ""
 
 #.   <input type="submit" value="button_cpscalendar_remove_all_attendees_who_declined" />
@@ -736,6 +741,14 @@ msgstr "Commentaire pour les participants"
 msgid "cpscalendar_message_comment_for_organizer"
 msgstr "Commentaire pour l'organisateur"
 
+#.   <span condition="editcals">
+#.         These are the calendars where you can create events
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+#, fuzzy
+msgid "cpscalendar_message_editable_calendars"
+msgstr "Créer un Agenda"
+
 #.   <span>
 #.         If you have an application that supports it, you can also
 #.       </span>
@@ -756,6 +769,14 @@ msgstr "Aucun agenda partagé trouvé"
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_message_no_user_matching"
 msgstr "Désolé, aucun utilisateur ne correspond à votre requête."
+
+#.   <span>
+#.         You can not view any calendars
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+#, fuzzy
+msgid "cpscalendar_message_no_visible_calendars"
+msgstr "Aucun agenda partagé trouvé"
 
 #.   <strong>
 #.       You have to notify other attendees of recent changes to this event.
@@ -849,6 +870,14 @@ msgid "cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees"
 msgstr ""
 "Déselectionner les événements pour lesquels vous ne voulez pas que les "
 "participants soient prévenus."
+
+#.   <span condition="vcals">
+#.         These are the calendars you can only view:
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+#, fuzzy
+msgid "cpscalendar_message_visible_calendars"
+msgstr "Vous inscrire à cet agenda"
 
 #.   <span>
 #.         You can download

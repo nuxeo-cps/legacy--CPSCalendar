@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2004-09-23 16:53default\n"
+"POT-Creation-Date: 2004-09-24 19:18default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -95,6 +95,11 @@ msgstr ""
 #.   <h1>Export</h1>
 #: from ../skins/cps_calendar/calendar_export.pt
 msgid "action_export"
+msgstr ""
+
+#.   <h1>Calendar overview</h1>
+#: from ../skins/cps_calendar/calendar_overview.pt
+msgid "action_overview"
 msgstr ""
 
 #.   <input type="submit" value="button_cpscalendar_remove_all_attendees_who_declined" />
@@ -720,6 +725,13 @@ msgstr ""
 msgid "cpscalendar_message_comment_for_organizer"
 msgstr ""
 
+#.   <span condition="editcals">
+#.         These are the calendars where you can create events
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+msgid "cpscalendar_message_editable_calendars"
+msgstr ""
+
 #.   <span>
 #.         If you have an application that supports it, you can also
 #.       </span>
@@ -739,6 +751,13 @@ msgstr ""
 #.             </p>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_message_no_user_matching"
+msgstr ""
+
+#.   <span>
+#.         You can not view any calendars
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+msgid "cpscalendar_message_no_visible_calendars"
 msgstr ""
 
 #.   <strong>
@@ -824,6 +843,13 @@ msgstr ""
 #.     </p>
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
 msgid "cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees"
+msgstr ""
+
+#.   <span condition="vcals">
+#.         These are the calendars you can only view:
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+msgid "cpscalendar_message_visible_calendars"
 msgstr ""
 
 #.   <span>

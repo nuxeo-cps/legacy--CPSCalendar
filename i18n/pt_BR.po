@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pt-BR\n"
-"POT-Creation-Date: 2004-09-23 16:53default\n"
+"POT-Creation-Date: 2004-09-24 19:18default\n"
 "PO-Revision-Date: 2004-09-01 11:46-0300\n"
 "Last-Translator: Mario Olimpio de Menezes <mario@curiango.ipen.br>\n"
 "Language-Team: Portugues do Brasil <pt@li.org>\n"
@@ -92,6 +92,12 @@ msgstr "Mostrar"
 #.   <h1>Export</h1>
 #: from ../skins/cps_calendar/calendar_export.pt
 msgid "action_export"
+msgstr "Exportar"
+
+#.   <h1>Calendar overview</h1>
+#: from ../skins/cps_calendar/calendar_overview.pt
+#, fuzzy
+msgid "action_overview"
 msgstr "Exportar"
 
 #.   <input type="submit" value="button_cpscalendar_remove_all_attendees_who_declined" />
@@ -721,6 +727,14 @@ msgstr "Comentário para participantes"
 msgid "cpscalendar_message_comment_for_organizer"
 msgstr "Comentário para o organizador"
 
+#.   <span condition="editcals">
+#.         These are the calendars where you can create events
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+#, fuzzy
+msgid "cpscalendar_message_editable_calendars"
+msgstr "Criar uma agenda"
+
 #.   <span>
 #.         If you have an application that supports it, you can also
 #.       </span>
@@ -741,6 +755,14 @@ msgstr "Nenhuma agenda compartilhada encontrada"
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_message_no_user_matching"
 msgstr "Desculpe, não há usuários que coincidam com sua consulta."
+
+#.   <span>
+#.         You can not view any calendars
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+#, fuzzy
+msgid "cpscalendar_message_no_visible_calendars"
+msgstr "Nenhuma agenda compartilhada encontrada"
 
 #.   <strong>
 #.       You have to notify other attendees of recent changes to this event.
@@ -833,6 +855,14 @@ msgstr ""
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
 msgid "cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees"
 msgstr "Deselecione os eventos que você não quer notificar os participantes."
+
+#.   <span condition="vcals">
+#.         These are the calendars you can only view:
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+#, fuzzy
+msgid "cpscalendar_message_visible_calendars"
+msgstr "Inscrever-se nesta agenda."
 
 #.   <span>
 #.         You can download
