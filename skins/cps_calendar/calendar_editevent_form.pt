@@ -59,12 +59,12 @@
 
       <tal:block tal:condition="nothing">
 	<!-- Debug block that doesn't appear in the output -->
-	<hr/>
+	<hr>
         <p>
-	here/all_day = <tal:block tal:condition="exists:here/all_day" tal:replace="here/all_day"/><br/>
-	form.get('all_day') = <tal:block tal:replace="python:request.form.get('all_day')"/><br/>
+	here/all_day = <tal:block tal:condition="exists:here/all_day" tal:replace="here/all_day"/><br>
+	form.get('all_day') = <tal:block tal:replace="python:request.form.get('all_day')"/><br>
         </p>
-	<hr/>
+	<hr>
       </tal:block>
 
   <tal:block condition="not:editevent" define="event nocall:here">
@@ -150,7 +150,7 @@
                    tal:attributes="href string:javascript:open_day_selector('${int_date}', '\'from_date\'', '\'from_date_string\'', '\'\'')">
                   <img border="0"
                        tal:attributes="src string:${portal_url}/day_selector_icon.png" /></a>
-                <br/>
+                <br>
                 <span i18n:translate="_cal_date_To_">
                   To
                 </span>
@@ -198,7 +198,7 @@
                     <img border="0"
                          tal:attributes="src string:${portal_url}/day_selector_icon.png" />
                   </a>
-		    <br/>
+		    <br>
                 <input type="hidden" name="from_date_hour" id="from_date_hour"
                        tal:attributes="value from_date_hour" />
                 <input type="hidden" name="from_date_minute" id="from_date_minute"
@@ -347,18 +347,18 @@
             </metal:block>
             <metal:block fill-slot="content">
               <input name="repeat:bool" type="checkbox" />
-              <br/>
+              <br>
               <span i18n:translate="cpscalendar_form_repeat_times">Number of times</span>
               &nbsp;&nbsp;
               <input type="string" name="cpscalendar_form_repeat_times:int"
                      size="2" maxlength="2" value="0"/>
-                <br/><input type="radio" name="repeat_frequency" value="daily">
+                <br><input type="radio" name="repeat_frequency" value="daily">
                 <span i18n:translate="cpscalendar_form_repeat_daily">Daily</span>
-                <br/><input type="radio" name="repeat_frequency" value="weekly">
+                <br><input type="radio" name="repeat_frequency" value="weekly">
                 <span i18n:translate="cpscalendar_form_repeat_weekly">Weekly</span>
-                <br/><input type="radio" name="repeat_frequency" value="monthly">
+                <br><input type="radio" name="repeat_frequency" value="monthly">
                 <span i18n:translate="cpscalendar_form_repeat_monthly">Monthly</span>
-                <br/><input type="radio" name="repeat_frequency" value="X_days">
+                <br><input type="radio" name="repeat_frequency" value="X_days">
                 <span i18n:translate="cpscalendar_form_repeat_every_X_days_begin">Every</span>
               &nbsp;
               <input type="string" name="cal_every_X_num:int"

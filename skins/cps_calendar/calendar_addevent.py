@@ -1,15 +1,22 @@
 ##parameters=REQUEST=None, **kw
 
+from random import randrange
+from zLOG import LOG, DEBUG
+
 if REQUEST is not None:
     kw.update(REQUEST.form)
-
-from random import randrange
 
 here = context.this()
 id = str(int(DateTime()))+str(randrange(1000,10000))+('-%s' % (here.id))
 
 all_day = kw.get('all_day')
 from_date_day = kw.get('from_date_day')
+
+LOG('CPSCAL', DEBUG, "addevent: all_day = %s"
+    % (all_day))
+LOG('CPSCAL', DEBUG, "addevent: from_date_day = %s"
+    % (from_date_day))
+
 if from_date_day is not None:
     # we are creating an event from a form
     from_date_day = int(from_date_day)
@@ -72,6 +79,8 @@ else:
 # from_date < to_date. For an all_day event, from_date and to_date
 # will be switched
 ok = REQUEST is None or all_day or from_date < to_date
+LOG('CPSCAL', DEBUG, "addevent: ok = %s"
+    % (ok))
 
 if ok:
     # TODO: add repeated event add manage

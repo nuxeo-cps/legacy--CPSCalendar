@@ -120,12 +120,14 @@ class Event(CPSBaseDocument):
 
     def __init__(self, id, organizer={}, attendees=(), 
                  from_date=None, to_date=None, **kw):
+        LOG('NGCal', DEBUG, "__init__ kw = ", kw)
         CPSBaseDocument.__init__(self, id, organizer=organizer, **kw)
         self.organizer = deepcopy(organizer)
         if attendees is not None:
             self.setAttendees(attendees)
         self.from_date = from_date 
         self.to_date = to_date
+        self.all_day = kw.get('all_day')
         self.location = kw.get('location')
         self.event_status = kw.get('event_status')
         self.category = kw.get('category')
@@ -457,8 +459,7 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
     """Add an Event."""
     calendar = dispatcher.Destination()
     if organizer is None:
-        # by default, organizer is the current calendar user
-
+        # By default, organizer is the current calendar user
         organizer = calendar.getAttendeeInfo(calendar.id)
     ob = Event(id, organizer=organizer, attendees=attendees, **kw)
     calendar._setObject(id, ob)
