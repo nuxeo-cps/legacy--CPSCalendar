@@ -56,40 +56,30 @@ factory_type_information = (
      },
     )
 
-def slot_union(base, new_slot):
-    start_new = new_slot['start']
-    stop_new = new_slot['stop']
-    start_pos = -1
-    stop_pos = -1
-    next_to = 0
-    prev_to = -1
-    i = 0
-    for start, stop in base:
-        if stop.lessThan(start_new):
-            next_to = i+1
-        elif stop.lessThanEqualTo(stop_new):
-            start_pos = i
-        elif start.lessThanEqualTo(stop_new):
-            prev_to = i+1
-            stop_pos = i
-            break
+def cmp_ev(a, b):
+    return cmp(b[0], a[0])
+
+def slot_union(cal_slot):
+    LOG('NGC', DEBUG, 'union %s' % (cal_slot, ))
+    result = []
+    if not cal_slot:
+        return []
+    cal_slot = cal_slot[:]
+    cal_slot.sort(cmp_ev)
+    ev = cal_slot.pop()
+    start = ev[0]
+    stop = ev[1]
+    while cal_slot:
+        ev = cal_slot.pop()
+        if stop.lessThan(ev[0]):
+            result.append((start, stop))
+            start = ev[0]
+            stop = ev[1]
         else:
-            prev_to = i
-            break
-        i += 1
-    part1 = base[:next_to]
-    if prev_to == -1: prev_to = i
-    print next_to, start_pos, stop_pos, prev_to
-    part2 = base[prev_to:]
-    center = (start_new, stop_new)
-    if start_pos > -1:
-        start_new = min(start_new, base[start_pos][0])
-        center = (start_new, stop_new)
-    if stop_pos > -1:
-        base_slot = base[stop_pos]
-        start_new = min(center[0], base_slot[0])
-        center = (start_new, base_slot[1])
-    return part1 + [center] + part2
+            stop = max(ev[1], stop)
+    result.append((start, stop))
+
+    return result
 
 class Calendars(Workgroup):
     """
@@ -106,12 +96,27 @@ class Calendars(Workgroup):
 
     isDocumentContainer = 0
 
-    security.declareProtected('Get FreeBusy', 'getFreeBusy')
+    # XXX use a special permission here
+    security.declareProtected('View', 'unionCals')
+    def unionCals(self, *cals):
+        if not cals:
+            return []
+        result = []
+        length = len(cals[0])
+        for i in range(length):
+            this_slot = []
+            for cal in cals:
+                this_slot.extend(cal[i])
+        result.append(slot_union(this_slot))
+        return result
+
+    security.declareProtected('View', 'getFreeBusy')
     def getFreeBusy(self, attendees, from_date, to_date):
         """Gets free/busy informations on attendees calendars"""
         # normalize
-        start_time = DateTime(from_date.year(), from_date.month, from_date.day())
-        end_time = DateTime(to_date.year(), to_date.month, to_date.day())
+        start_time = DateTime(from_date.year(), from_date.month(), from_date.day())
+        to_date = to_date + 1
+        end_time = DateTime(to_date.year(), to_date.month(), to_date.day())
         slot_start = start_time
         slots = []
         while slot_start.lessThan(end_time):
@@ -119,28 +124,56 @@ class Calendars(Workgroup):
             slot_start += 1
             slot_start = DateTime(slot_start.year(), slot_start.month(), slot_start.day())
 
+        length = len(slots)
+
         ids = self.objectIds('Calendar')
-        ids = [id for id in attendees if id not in ids]
-        allcal_slots = [[]] * len(slots)
+        ids = [id for id in attendees if id in ids]
+        cals_dict = {}
+        cal_users = {}
         for id in ids:
+            LOG('NGC', DEBUG, 'Calculating %s' % (id, ))
             calendar = self.getCalendarForId(id)
+            cal_users[id] = self.getAttendeeInfo(id)['cn']
             calendar_slots = [[]] * len(slots)
+            slots_done = [None] * length
             for event in calendar.objectValues('Event'):
-                if event.transparent:
-                    continue
+                ## transparence XXX
                 event_slots = event.getEventInSlots(
                     start_time, end_time, slots
                 )
+                if event_slots is None:
+                    continue
                 i = 0
                 for event_slot in event_slots:
-                    if event_slot != None:
-                        calendar_slot = calendar_slots[i]
-                        allcal_slots = all_cal_slots[i]
-
-                        calendar_slot[i] = slot_union(calendar_slot, event_slot)
-                        allcal_slot[i] = slot_union(allcal_slot, event_slot)
-
+                    LOG('NGC', DEBUG, 'event_slot %s' % (event_slot, ))
+                    LOG('NGC', DEBUG, 'done: %s' % (slots_done, ))
+                    if event_slot is not None and slots_done[i] is None:
+                        if event.all_day:
+                            LOG('NGC', DEBUG, 'all day')
+                            slots_done[i] = (event_slot['start'],
+                                event_slot['stop'])
+                        else:
+                            LOG('NGC', DEBUG, 'Appending event')
+                            calendar_slots[i].append((event_slot['start'], event_slot['stop']))
                     i += 1
+            cals_dict[id] = list = []
+            i = 0
+            LOG('NGC', DEBUG, 'calendar_slots=%s' % (calendar_slots, ))
+            for cal_slot in calendar_slots:
+                if slots_done[i] is not None:
+                    list.append([slots_done[i]])
+                else:
+                    list.append(slot_union(cal_slot))
+                i += 1
+            
+        allcals = self.unionCals(*cals_dict.values())
+        return """
+%s
+    ----
+%s
+    ----
+%s
+""" % (cal_users, allcals, cals_dict)
 
     security.declareProtected(View, 'getCalendarForId')
     def getCalendarForId(self, id):
