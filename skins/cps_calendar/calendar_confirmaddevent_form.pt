@@ -11,7 +11,7 @@
                                        'location': options['location'],
                                        'event_status': options['event_status'],
                                        'attendees': options.get('attendees', []),
-                                       'recurrance_period': options.get('recurrance_period', ''),
+                                       'recurrence_period': options.get('recurrence_period', ''),
                                        }">
   <p i18n:translate="cpscalendar_message_too_early_specified_hour">
     The start hour you specified was earlier than the end hour. Did you mean
@@ -38,8 +38,8 @@
            tal:attributes="value options/event_status" />
     <input type="hidden" name="event_type"
            tal:attributes="value options/event_type" />
-    <input type="hidden" name="recurrance_period"
-           tal:attributes="value event/recurrance_period" />
+    <input type="hidden" name="recurrence_period"
+           tal:attributes="value event/recurrence_period" />
     <input type="hidden" name="description"
            tal:attributes="value event/description" />
     <input type="hidden" name="from_date_string"

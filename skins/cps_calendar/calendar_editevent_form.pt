@@ -27,8 +27,8 @@
     description python:create and str('') or here.description;
     event_type python:create and 'event_tofrom' or here.event_type;
     event_type request/event_type|event_type;
-    recurrance_period request/recurrance_period|string:period_daily;
-    recurrance_period python:create and recurrance_period or here.recurrance_period;
+    recurrence_period request/recurrence_period|string:period_daily;
+    recurrence_period python:create and recurrence_period or here.recurrence_period;
     location python:(not create) and here.location or '';
     event_status python:create and 'unconfirmed' or here.event_status;
     dateinfo python:here.calendar_getFromToDate(create, here, request);
@@ -139,11 +139,11 @@
          <metal:block fill-slot="content">
             <strong>
               <tal:block condition="python:event_type == 'event_recurring'">
-                <select name="recurrance_period">
+                <select name="recurrence_period">
                   <option tal:repeat="period here/period_types"
                           tal:content="python:'cpscalendar_label_' + period"
                           tal:attributes="value period;
-                                          selected python:period == recurrance_period;"
+                                          selected python:period == recurrence_period;"
                           i18n:translate="" />
                 </select>
                 <br/>

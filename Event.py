@@ -99,8 +99,8 @@ class Event(CPSBaseDocument):
         {'id': 'category', 'type': 'text', 'mode': 'w', 'label': 'Category'},
         {'id': 'event_type', 'type': 'selection', 'mode': 'w',
          'label': 'Event Type', 'select_variable': 'event_types' },
-        {'id': 'recurrance_period', 'type': 'selection', 'mode': 'w',
-         'label': 'Recurrance Period', 'select_variable': 'period_types' },
+        {'id': 'recurrence_period', 'type': 'selection', 'mode': 'w',
+         'label': 'Recurrence Period', 'select_variable': 'period_types' },
     )
 
     #
@@ -117,7 +117,7 @@ class Event(CPSBaseDocument):
     transparent = 0
     # Marks that an upgrade from the older 'all_day' attribute is needed
     event_type = None
-    recurrance_period = 'period_daily'
+    recurrence_period = 'period_daily'
     event_types = [ 'event_tofrom',     # To a time from a time
                     'event_allday',     # From a date to a date
                     'event_recurring']  # Repeats
@@ -145,7 +145,7 @@ class Event(CPSBaseDocument):
         self.event_status = kw.get('event_status')
         self.category = kw.get('category')
         self.transparent = kw.get('transparent')
-        self.recurrance_period = kw.get('recurrance_period')
+        self.recurrence_period = kw.get('recurrence_period')
         self._normalize()
 
     security.declareProtected('Modify portal content', 'edit')
@@ -195,7 +195,12 @@ class Event(CPSBaseDocument):
                 self.event_type = 'event_tofrom'
                 # Return s string even if there is no request, for use in logging 
                 # when running the install.
-                return "%s upgraded to %s" % (self.absolute_url, self.event_type)
+                return "%s upgraded to %s" % (self.absolute_url(), self.event_type)
+        elif hasattr(self, 'recurrance_period'):
+            # Upgrade from earlier bad spelling
+            self.recurrence_period = self.recurrance_period
+            delattr(self, 'recurrance_period')
+            return "%s upgraded to 1.6.1" % self.absolute_url()
             
         if REQUEST is not None:
             return "No upgrade needed"
@@ -443,7 +448,7 @@ class Event(CPSBaseDocument):
             return self._standardMatch(start_time, end_time, slots,
                 self.from_date, self.to_date)
 
-    def getRecurrance(self, repeats):
+    def getRecurrence(self, repeats):
         rstart = self.from_date
         from_year = self.from_date.year()
         from_month = self.from_date.month()
@@ -451,14 +456,14 @@ class Event(CPSBaseDocument):
         to_hour = self.to_date.hour()
         to_minute = self.to_date.minute()
         rstop = DateTime(from_year, from_month, from_day, to_hour, to_minute)
-        if self.recurrance_period == 'period_weekly':
+        if self.recurrence_period == 'period_weekly':
             period = 'period_daily'
             repeats = repeats * 7
-        elif self.recurrance_period == 'period_quarterly':
+        elif self.recurrence_period == 'period_quarterly':
             period = 'period_monthly'
             repeats = repeats * 3
         else:
-            period = self.recurrance_period
+            period = self.recurrence_period
 
         if period == 'period_daily':
             return rstart + repeats, rstop + repeats
@@ -484,16 +489,16 @@ class Event(CPSBaseDocument):
             year = year + repeats
             todate = DateTime(year, month, day, hour, minute, second, tz)
             return fromdate, todate
-        raise ValueError('Unknown recurrance period ' + period)
+        raise ValueError('Unknown recurrence period ' + period)
 
     def _recurringMatch(self, start_time, end_time, slots):
         if start_time.greaterThan(self.to_date):
             return []
         
-        rstart, rstop = self.getRecurrance(0)
+        rstart, rstop = self.getRecurrence(0)
         repeats = 1
         while start_time.greaterThan(rstop):
-            rstart, rstop = self.getRecurrance(repeats)
+            rstart, rstop = self.getRecurrence(repeats)
             repeats += 1
 
         if rstop.greaterThan(self.to_date):
@@ -501,7 +506,7 @@ class Event(CPSBaseDocument):
         
         result = self._standardMatch(start_time, end_time, slots, rstart, rstop)
         while end_time.greaterThanEqualTo(rstart):
-            rstart, rstop = self.getRecurrance(repeats)
+            rstart, rstop = self.getRecurrence(repeats)
             if rstop.greaterThan(self.to_date):
                 break
             repeats += 1
@@ -545,7 +550,7 @@ class Event(CPSBaseDocument):
         repeats = 0
         if self.event_type == 'event_recurring':
             while start.greaterThan(event_stop):
-                event_start, event_stop = self.getRecurrance(repeats)
+                event_start, event_stop = self.getRecurrence(repeats)
                 repeats += 1
 
         if event_stop > start and event_start < stop:

@@ -1,6 +1,6 @@
 Requires:
 ~~~~~~~~~
--
+- You must run the install after upgrading from previous versions.
 New features:
 ~~~~~~~~~~~~~
 -
@@ -12,6 +12,7 @@ Bug fixes:
   This solves Mantis bug #805.
 - Fixed Mantis bug #653: Searching for dates with start date after 
   end date caused an error message.
+- Changed the spelling of recurrance to recurrence.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

@@ -46,7 +46,7 @@
              cat_default cat_infos/default;
              cat_def_title categories/?cat_default/title;
              category event/category|nothing;
-             recurrance_period event/recurrance_period|nothing;">
+             recurrence_period event/recurrence_period|nothing;">
     <metal:block use-macro="here/calendar_macros/macros/form">
       <metal:block fill-slot="content">
 
@@ -86,7 +86,7 @@
           <span tal:replace="to_date_string" />
         </tal:block>
         <tal:block condition="python:event_type == 'event_recurring'">
-          <span tal:content="string:cpscalendar_label_${recurrance_period}" i18n:translate="" />
+          <span tal:content="string:cpscalendar_label_${recurrence_period}" i18n:translate="" />
           <br>
           <span i18n:translate="cpscalendar_label_from_(day)">First time</span>
           <span tal:replace="from_date_string" />

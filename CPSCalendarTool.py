@@ -478,7 +478,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             event_start, event_stop = event.from_date, event.to_date
             repeats = 0
             while to_date.greaterThan(event_stop):
-                event_start, event_stop = event.getRecurrance(repeats)
+                event_start, event_stop = event.getRecurrence(repeats)
                 repeats += 1
 
                 if event_stop > to_date and event_start < from_date:
