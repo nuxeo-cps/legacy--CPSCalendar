@@ -426,7 +426,7 @@
             Sorry, there isn't any user matching your query
           </p>
           <input type="submit" onClick="javascript:history.go(-1)"
-            name="javascript:history.go(-1)" value="back"/>
+            name="javascript:history.go(-1)" value="cpscalendar_button_back" i18n:attributes="value" />
         </tal:block>
       </tal:block>
     </tal:block>
