@@ -14,6 +14,9 @@ Bug fixes:
 - Confirmation of events now is done directly on all
   attendees calendars, and not via the organizing calendar.
 - New events are not set to dirty.
+- A KeyError 'id' when running the installer was fixed.
+- The document link was lost when editing the document.
+- You can no longer remove the organizer from the attendees list.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

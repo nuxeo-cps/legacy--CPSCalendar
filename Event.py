@@ -158,7 +158,7 @@ class Event(CPSBaseDocument):
 
     security.declareProtected('Modify portal content', 'edit')
     def edit(self, attendees=None, from_date=None, to_date=None,
-             event_type=None, transparent=None, document='', **kw):
+             event_type=None, transparent=None, document=None, **kw):
         """Edit method"""
         setdirty = 0
         old_status = self.event_status
@@ -186,7 +186,7 @@ class Event(CPSBaseDocument):
         if to_date is not None and self.to_date != to_date:
             setdirty = 1
             self.to_date = to_date
-        if document != self.document:
+        if document is not None and document != self.document:
             setdirty = 1
             self.document = document
         self._normalize()
@@ -221,7 +221,7 @@ class Event(CPSBaseDocument):
         attendee_upgrade = 0
         new_attendees = []
         for attendee in self.attendees:
-            if attendee['id'] == 'calendar':
+            if attendee.get('id') == 'calendar':
                 attendee['id'] = attendee['rpath'].split('/')[-2]
                 attendee_upgrade = 1
             new_attendees.append(attendee)
