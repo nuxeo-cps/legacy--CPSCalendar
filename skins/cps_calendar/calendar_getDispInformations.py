@@ -1,5 +1,7 @@
 ##parameters=REQUEST
 
+from zLOG import LOG, DEBUG
+
 # determine current calendar view
 # first from REQUEST.form then from SESSION then default to week view
 old_disp = REQUEST.SESSION.get('calendar_disp')
@@ -32,8 +34,10 @@ else:
 selected_day = REQUEST.form.get('selected_day')
 if selected_day is not None:
     selected_day = DateTime(int(selected_day))
+    LOG('CPSCAL', DEBUG, "selected_day not None = %s" % selected_day)
 else:
     selected_day = viewed_day
+    LOG('CPSCAL', DEBUG, "selected_day defaulting to viewed_day = %s" % selected_day)
 
 time_since_daystart = viewed_day.hour()*3600+viewed_day.minute()*60+viewed_day.second()
 timeTime = viewed_day.timeTime()
