@@ -25,6 +25,7 @@ class TestCalendarTool(CPSCalendarTestCase):
         dtool = self.portal.portal_directories
         self.member = dtool.members.getEntry(self.user_id)
         assert self.member
+        mtool.createMemberArea(self.user_id)
         self.user_home = mtool.getHomeFolder(self.user_id)
         self.assertEquals(self.user_home, self.portal.workspaces.members.root)
         assert self.user_home.calendar
@@ -123,7 +124,7 @@ class TestCalendar(CPSCalendarTestCase):
         # This actually creates an entry for root in portal_memberdata
         mtool = self.portal.portal_membership
         self.member = mtool.getAuthenticatedMember()
-
+        mtool.createMemberArea(self.user_id)
         member_home = mtool.getHomeFolder(self.user_id)
         assert member_home
         self.calendar = member_home.calendar
