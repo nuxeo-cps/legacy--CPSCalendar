@@ -11,7 +11,7 @@ if comment is not None:
     elif notify == 'cancel':
         event.setEventStatus('canceled')
         event.updateAttendeesCalendars(comment=comment)
-    calendar.manage_delObjects([event.id])
+    #calendar.manage_delObjects([event.id])
 else:
     noconfirm_cancel = (not event.attendees) or \
         (not event.canEditThisEvent()) or \

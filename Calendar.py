@@ -303,7 +303,7 @@ class Calendar(CPSBaseFolder):
                 event = getattr(self, event_id)
             else:
                 kw = pending['event']
-                event.edit(**kw)
+                event._edit(**kw)
             if status is not None:
                 event.setMyStatus(status)
         elif request == 'status':

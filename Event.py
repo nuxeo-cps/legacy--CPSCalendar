@@ -160,6 +160,14 @@ class Event(CPSBaseDocument):
     def edit(self, attendees=None, from_date=None, to_date=None,
              event_type=None, transparent=None, document=None, **kw):
         """Edit method"""
+        if self._edit(attendees, from_date, to_date,
+             event_type, transparent, document, **kw):
+            self.isdirty = 1
+            self.notified_attendees = ()
+    
+    def _edit(self, attendees=None, from_date=None, to_date=None,
+             event_type=None, transparent=None, document=None, **kw):
+        """Edits an event and returns 1 if there was any changes"""
         setdirty = 0
         old_status = self.event_status
         CPSBaseDocument.edit(self, **kw)
@@ -190,10 +198,7 @@ class Event(CPSBaseDocument):
             setdirty = 1
             self.document = document
         self._normalize()
-
-        if setdirty:
-            self.isdirty = 1
-            self.notified_attendees = ()
+        return setdirty
 
     def upgradeEventType(self, REQUEST=None):
         """Upgrades properties"""
