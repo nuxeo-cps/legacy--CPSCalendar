@@ -384,13 +384,13 @@ class Event(CPSBaseDocument):
         all_attendees = []
         event_dict = self.getEventDict(comment=comment)
         calendar = self.getCalendar()
-        calendars = aq_parent(aq_inner(calendar))
+        caltool = getToolByName(self, 'portal_cpscalendar')
         for attendee in self.attendees:
             attendee_rpath = attendee['rpath']
             all_attendees.append(attendee_rpath)
             if attendees is not None and attendee_rpath not in attendees:
                 continue
-            attendee_calendar = calendars.getCalendarForPath(attendee_rpath)
+            attendee_calendar = caltool.getCalendarForPath(attendee_rpath)
             if attendee_calendar is None:
                 LOG('CPSCalendar', INFO, "Can't get calendar for %s" 
                     % (attendee_id, ))
