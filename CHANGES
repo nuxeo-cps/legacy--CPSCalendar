@@ -3,10 +3,10 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- stringToDateTime now supports dates with no separator.
 Bug fixes:
 ~~~~~~~~~~
--
+- stringToDateTime required python2.2 or higher, now it also supports python2.1.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
