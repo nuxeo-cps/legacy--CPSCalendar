@@ -1,0 +1,102 @@
+<tal:block define="cal_infos python:here.calendar_getSelectorInfos(**request.form);
+                   input_id request/form/input_id ;
+                   date_disp_id request/form/date_disp_id ;
+                   other_input request/form/other_input"
+           i18n:domain="cpscalendar">
+<html metal:use-macro="here/selector_template/macros/master">
+
+<metal:block fill-slot="css_slot">
+  <link rel="stylesheet" type="text/css"
+        tal:attributes="href string:${portal_url}/calendar_stylesheet.css" />
+</metal:block>
+
+<metal:block fill-slot="javascript_head_slot">
+  <script language="JavaScript" type="text/javascript" 
+          tal:content="python:str('var input_id = %s \n 
+                               var date_disp_id = %s \n 
+                               var other_input = %s ' % 
+                               (input_id,date_disp_id,other_input))"/> 
+
+<script language="JavaScript" type="text/javascript"><!--
+function initAll() {
+  return true
+}
+
+function set_input(element_id, value) {
+  a = opener.document.getElementById(element_id)
+  a.value = value
+}
+
+function set_form(element_id, day, month, year) {
+  set_input(element_id + '_day', day)  
+  set_input(element_id + '_month', month)  
+  set_input(element_id + '_year', year)  
+}
+
+function select_day(day, month, year, day_disp) {
+  set_form(input_id, day, month, year)
+  b = opener.document.getElementById(date_disp_id)
+  b.innerHTML = day_disp
+  if(other_input) {
+    set_form(other_input, day, month, year)
+  }
+  window.close()
+}
+-->
+</script>
+</metal:block>
+
+<metal:block fill-slot="main">
+  <h3 tal:content="cal_infos/base_disp" i18n:translate="">January 2003</h3>
+  <table cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tr>
+      <td>
+        <table height="15" align="right"
+          cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td width="30" class="calLeftTab">
+              <a class="calEvent"
+                tal:attributes="href cal_infos/prev_url">
+                <<
+              </a>
+            </td>
+            <td width="30" class="calRightTab">
+              <a class="calEvent"
+                tal:attributes="href cal_infos/next_url">
+                >>
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <table width="100%" cellspacing="0" cellpadding="0" border="1">
+          <tr>
+            <td>
+              <table width="100%" cellspacing="2" cellpadding="0">
+                <tr tal:repeat="line cal_infos/lines">
+                  <tal:block repeat="day line">
+                    <td width="14%" tal:condition="not:day">
+                    </td>
+                    <td tal:condition="day" width="14%" valign="middle" class="centered"
+                      tal:define="even repeat/day/even"
+                      tal:attributes="bgcolor python:even and '$DDDDFF' or '#EEEEFF'">
+                      <tal:block condition="day">
+                        <a tal:attributes="href day/js" tal:content="day/day" />
+                      </tal:block>
+                   </td>
+                  </tal:block>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</metal:block>
+
+</html>
+</tal:block>

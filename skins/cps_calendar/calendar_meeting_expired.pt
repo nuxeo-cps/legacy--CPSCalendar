@@ -1,0 +1,23 @@
+<tal:block define="global current_action string:meeting" />
+<html metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="head_slot"
+             i18n:translate="_Meeting creation helper_">
+  Meeting creation helper
+</metal:block>
+
+<metal:block fill-slot="header_plus" />
+
+<metal:block fill-slot="main">
+  <span class="calTitle" i18n:translate="_Your request has expired_">
+    Your request has expired.
+  </span>
+  <form method="POST"
+    tal:attributes="action here/absolute_url">
+    <input type="submit"
+           tal:attributes="value python:str('_button_back_')"
+           i18n:attributes="value" />
+  </form>
+</metal:block>
+
+</html>

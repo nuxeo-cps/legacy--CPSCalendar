@@ -1,0 +1,59 @@
+<tal:block define="global current_action string:delete" />
+<html metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cpscalendar">
+
+<metal:block fill-slot="head_slot"
+             i18n:translate="_cal_del_Confirmation_">
+</metal:block>
+
+<metal:block fill-slot="main"
+             tal:define="notify options/notify">
+  <h3 tal:condition="python:notify == 'cancel'"
+      i18n:translate="_You have to notify attendees that you will delete this event_">
+    You have to notify attendees that you will delete this event.
+  </h3>
+  <h3 tal:condition="python:notify == 'decline'"
+      i18n:translate="_You have to notify event-s organizer that you will delete this event_">
+      You have to notify event's organizer that you will delete this event.
+  </h3>
+  <form action="calendar_delevent" method="POST">
+    <input type="hidden" name="notify"
+           tal:attributes="value notify" />
+    <metal:block use-macro="here/calendar_macros/macros/form">
+      <metal:block fill-slot="content">
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
+          <metal:block fill-slot="title"
+                       i18n:translate="_prop_comment_">
+            Comment
+          </metal:block>
+          <metal:block fill-slot="content">
+            <textarea name="comment" cols="40" rows="4"></textarea>
+            <br />
+            <small tal:condition="python:notify == 'cancel'"
+                   i18n:translate="_This message will be sent to attendees with a cancel notification_">
+              This message will be sent to attendees with a cancel notification.
+            </small>
+            <small tal:condition="python:notify == 'decline'"
+                   i18n:translate="_This message will be sent to the event-s organizer_">
+              This message will be sent to the event's organizer.
+            </small>
+          </metal:block>
+        </metal:block>
+      </metal:block>
+    </metal:block>
+    <input type="submit"
+           tal:attributes="value python:str('_button_validate_')"
+           i18n:attributes="value" />
+  </form>
+  <form action="calendar_delevent" method="POST">
+    <input type="hidden" name="comment" value="" />
+    <input type="submit"
+           tal:attributes="value python:str('_button_delete_with_no_notification_')"
+           i18n:attributes="value" />
+    <input type="button" onClick="history.back()"
+           tal:attributes="value python:str('_button_cancel_')"
+           i18n:attributes="value" />
+  </form>
+</metal:block>
+
+</html>

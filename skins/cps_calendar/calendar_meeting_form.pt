@@ -1,0 +1,173 @@
+<tal:block define="global current_action string:meeting" />
+<html metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cpscalendar">
+
+<metal:block fill-slot="javascript_head_slot"
+             tal:content="structure here/day_selector_popup.js">
+  Day selector popup script
+</metal:block>
+
+<metal:block fill-slot="header"
+             i18n:translate="_Meeting creation helper_">
+  Meeting creation helper
+</metal:block>
+
+<metal:block fill-slot="header_plus" />
+
+<metal:block fill-slot="main"
+             tal:define="portal_url python:here.portal_url(relative=1);
+                         edit request/form/edit|nothing;
+                         disp_infos python:here.calendar_getDispInformations(request);
+                         selected_day disp_infos/selected_day;
+                         args python:edit and request.SESSION['meeting']['args'];
+                         from_date_year python:edit and int(args['from_date_year']) or selected_day.year();
+                         from_date_month python:edit and int(args['from_date_month']) or selected_day.month();
+                         from_date_day python:edit and int(args['from_date_day']) or selected_day.day();
+                         to_date_year python:edit and int(args['to_date_year']) or selected_day.year();
+                         to_date_month python:edit and int(args['to_date_month']) or selected_day.month();
+                         to_date_day python:edit and int(args['to_date_day']) or selected_day.day();
+                         from_date python:DateTime(from_date_year, from_date_month, from_date_day);
+                         to_date python:DateTime(to_date_year, to_date_month, to_date_day);
+                         from_date_hour python:(edit and [int(args['from_date_hour'])] or [9])[0];
+                         from_date_minute python:(edit and [int(args['from_date_minute'])] or [0])[0];
+                         to_date_hour python:(edit and [int(args['to_date_hour'])] or [17])[0];
+                         to_date_minute python:(edit and [int(args['to_date_minute'])] or [0])[0];
+                         my_id here/id;
+                         cal_ids python:edit and args['cal_ids'] or [my_id];
+                         user_types here/getUserTypes;
+                         all_calendars python:here.getCalendarsDict(exclude=my_id);"
+             tal:on-error="python:request.RESPONSE.redirect('%s/calendar_meeting_expired' % (here.absolute_url(), ))">
+
+  <form action="calendar_begin_meeting" method="POST">
+    <span clss="calTitle" i18n:translate="_Select the attendees you want for your meeting:">
+      Select the attendees you want for your meeting:
+    </span>
+    <tal:block repeat="user_type user_types">
+      <tal:block define="type_id user_type/id;
+                         calendars all_calendars/?type_id|nothing"
+                 condition="calendars">
+        <h3 tal:content="python:str(user_type['plural_title'])"
+            i18n:translate="">User type</h3>
+        <ul>
+          <li tal:repeat="cal calendars">
+            <input type="checkbox" name="cal_ids:list"
+                   tal:define="id cal/id;"
+                   tal:attributes="value id;
+                                   checked python:id in cal_ids;" />
+            <tal:block replace="cal/cn">
+              Calendar
+            </tal:block>
+          </li>
+        </ul>
+      </tal:block>
+    </tal:block>
+    <p>
+      <small>
+        <input type="checkbox" name="cal_ids:list"
+          tal:attributes="value my_id;
+                          checked python:my_id in cal_ids;" />
+        <span i18n:translate="_Include this calendar_">
+          Include this calendar
+        </span>
+      </small>
+    </p>
+    <span class="calTitle" i18n:translate="_Select the time interval you want for your meeting:">
+      Select the time interval you want for your meeting:
+    </span>
+    <input type="hidden" id="from_date_day" name="from_date_day"
+      tal:attributes="value from_date_day" />
+    <input type="hidden" id="from_date_month" name="from_date_month"
+      tal:attributes="value from_date_month" />
+    <input type="hidden" id="from_date_year" name="from_date_year"
+      tal:attributes="value from_date_year" />
+    <input type="hidden" id="to_date_day" name="to_date_day"
+      tal:attributes="value to_date_day" />
+    <input type="hidden" id="to_date_month" name="to_date_month"
+      tal:attributes="value to_date_month" />
+    <input type="hidden" id="to_date_year" name="to_date_year"
+      tal:attributes="value to_date_year" />
+    <h3>
+      <span i18n:translate="_cal_date_From_">
+        From
+      </span>
+      <span id="from_date_string">
+        <tal:block content="python:str('_cal_Day_long%s' % (from_date.dow(), ))"
+                   i18n:translate="" />
+        <tal:block replace="from_date_day" />
+        <tal:block content="python:str('_cal_Month%s' % (from_date_month, ))"
+                   i18n:translate="" />
+        <tal:block replace="from_date_year" />
+      </span>
+      <a tal:define="int_date python:int(from_date);"
+         tal:attributes="href string:javascript:open_day_selector('${int_date}', '\'from_date\'', '\'from_date_string\'', '\'\'')">
+        <img border="0"
+             tal:attributes="src string:${portal_url}/day_selector_icon.png" />
+      </a>
+    </h3>
+    <h3>
+      <span i18n:translate="_cal_date_To_">
+        To
+      </span>
+      <span id="to_date_string">
+        <tal:block content="python:str('_cal_Day_long%s' % (to_date.dow(), ))"
+                   i18n:translate="" />
+        <tal:block replace="to_date_day" />
+        <tal:block content="python:str('_cal_Month%s' % (to_date_month, ))"
+                   i18n:translate="" />
+        <tal:block replace="to_date_year" />
+      </span>
+      <a tal:define="int_date python:int(to_date);"
+         tal:attributes="href string:javascript:open_day_selector('${int_date}', '\'to_date\'', '\'to_date_string\'', '\'\'')">
+        <img border="0"
+             tal:attributes="src string:${portal_url}/day_selector_icon.png" />
+      </a>
+    </h3>
+    <input type="hidden" name="from_date_hour" id="from_date_hour"
+      tal:attributes="value from_date_hour" />
+    <input type="hidden" name="from_date_minute"
+      id="from_date_minute"
+      tal:attributes="value from_date_minute" />
+    <input type="hidden" name="to_date_hour" id="to_date_hour"
+      tal:attributes="value to_date_hour" />
+    <input type="hidden" name="to_date_minute"
+      id="to_date_minute"
+      tal:attributes="value to_date_minute" />
+    <h3>
+      <span i18n:translate="_cal_Between_">
+        Between
+      </span>
+      <span id="from_date_hour_s" tal:content="from_date_hour">10</span><span i18n:translate="_cal_hour_sep_">:</span><span id="from_date_minute_s" tal:content="python:from_date_minute == 0 and '00' or from_date_minute">10</span>
+      <span i18n:translate="_(Between date)_and_">
+        and
+      </span>
+      <span id="to_date_hour_s" tal:content="to_date_hour">10</span><span i18n:translate="_cal_hour_sep_">:</span><span id="to_date_minute_s" tal:content="python:to_date_minute == 0 and '00' or to_date_minute">10</span>
+      <a tal:define="a_start python:from_date_hour*4+from_date_minute/15;
+                     a_end python:to_date_hour*4+to_date_minute/15-1;"
+         tal:attributes="href string:javascript:open_interval_selector(${a_start}, ${a_end}, 0, 0, 96)">
+        <img border="0"
+             tal:attributes="src string:${portal_url}/interval_selector_icon.png" />
+      </a>
+    </h3>
+    <span class="calTitle" i18n:translate="_Select the desired duration of your meeting:">
+      Select the desired duration of your meeting:
+    </span>
+    <p>
+      <select name="duration_hour:int">
+        <option tal:repeat="hour python:range(0,24)"
+          tal:content="hour" tal:attributes="value hour;
+            selected python:hour == 1 or nothing" />
+      </select><span i18n:translate="_cal_hour_sep_">:</span><select name="duration_minute:int">
+        <option tal:repeat="minute python:range(0,60,15)"
+          tal:content="minute" tal:attributes="value minute;
+            selected python:minute == 0 or nothing" />
+      </select>
+    </p>
+    <input type="submit"
+           tal:attributes="value python:str('_button_search_')"
+           i18n:attributes="value" />
+    <input type="button" onClick="history.back()"
+           tal:attributes="value python:str('_button_cancel_')"
+           i18n:attributes="value" />
+  </form>
+</metal:block>
+</html>

@@ -1,0 +1,44 @@
+<html metal:define-macro="master"
+      tal:define="utool nocall:here/portal_url;
+                  mtool here/portal_membership;
+                  here_url python:'/'+here.absolute_url(relative=1);
+                  rportal_url python:utool(relative=1);
+                  portal_url python:rportal_url and '/'+rportal_url or '';"
+      i18n:domain="cpscalendar">
+<head>
+  <title tal:content="here/expanded_title"
+         i18n:translate=""> 
+    Nuxeo | Solutions web pour mieux collaborer</title>
+  <metal:block define-slot="base">
+    <!-- Additional head elements -->
+    <base tal:attributes="href string:${here/absolute_url}/">
+  </metal:block>
+  <link rel="stylesheet" type="text/css"
+        tal:attributes="href string:${portal_url}/main_stylesheet.css" />        
+  <metal:block define-slot="css_slot" tal:replace="nothing">
+    <!-- additional styles -->
+  </metal:block>
+  <metal:block define-slot="javascript_head_plus" tal:replace="nothing">
+    <!-- additional scripts -->
+  </metal:block>
+</head>
+
+<body bgcolor="white">
+  <input type="button" onClick="window.close()"
+         tal:attributes="value string:_button_close_this_window_"
+         i18n:attributes="value" />
+  <table cellspacing="0" border="1" cellpadding="5" width="465">
+    <tr>
+      <td>
+        <metal:block define-slot="main">
+          Main
+        </metal:block>
+      </td>
+    </tr>
+  </table>
+  <input type="button" onClick="window.close()"
+         tal:attributes="value string:_button_close_this_window_"
+         i18n:attributes="value" />
+</body>
+
+</html>

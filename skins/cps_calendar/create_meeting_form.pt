@@ -1,0 +1,188 @@
+<tal:block define="global current_action string:meeting" />
+<html metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cpscalendar">
+
+<metal:block fill-slot="javascript_head_slot"
+    tal:content="structure here/day_selector_popup.js">
+    Day selector popup script
+</metal:block>
+
+<metal:block fill-slot="head_slot">
+  <span i18n:translate="_Create_a_new_Event_">
+    Create a new event
+  </span>
+</metal:block>
+
+<metal:block fill-slot="main"
+             tal:define="portal_url python:here.portal_url(relative=1);
+                         meeting_infos python:here.meeting_infos(request);
+                         title python:str('_(document)_Untitled_');
+                         from_date meeting_infos/from_date;
+                         duration_hour meeting_infos/duration_hour;
+                         duration_minute meeting_infos/duration_minute;
+                         duration meeting_infos/duration;
+                         cat_info here/calendar_categories;
+                         categories cat_info/categories;
+                         cat_default cat_info/default;
+                         hour_sep python:str('_cal_hour_sep_');
+                         cal_users meeting_infos/cal_users;
+                         cal_ids meeting_infos/cal_ids;
+                         my_id here/id;">
+
+    <form action="create_meeting" method="POST">
+      <metal:block use-macro="here/calendar_macros/macros/form">
+        <metal:block fill-slot="content">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
+            <metal:block fill-slot="title"
+                         i18n:translate="_cal_prop_summary_">
+              Summary
+            </metal:block>
+            <metal:block fill-slot="content">
+              <input name="title" size="40"
+                     tal:attributes="value title" 
+                     i18n:attributes="value" />
+            </metal:block>
+          </metal:block>
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
+            <metal:block fill-slot="title"
+                         i18n:translate="_cal_prop_date_">
+              Date
+            </metal:block>
+            <metal:block fill-slot="content">
+              <h3>
+                <tal:block content="python:str('_cal_Day_long%s' % (from_date.dow(), ))"
+                           i18n:translate="" />
+                <tal:block replace="python:from_date.day()" />
+                <tal:block content="python:str('_cal_Month%s' % (from_date.month(), ))"
+                           i18n:translate="" />
+                <tal:block replace="python:from_date.year()" />
+              </h3>
+              <h3 tal:define="from_date meeting_infos/from_date;
+                              from_date_hour meeting_infos/from_date_hour;
+                              from_date_minute meeting_infos/from_date_minute;
+                              start python:from_date_hour*4 + from_date_minute/15;
+                              duration meeting_infos/duration;
+                              duration_q python:duration/15;
+                              end python:start+duration_q-1;
+                              window meeting_infos/window;
+                              first start;
+                              last python:start+(window/15);">
+                <input type="hidden" name="duration:int"
+                  tal:attributes="value duration" />
+                <input type="hidden" name="from_date:int"
+                  tal:attributes="value python:int(from_date)" />
+                <input type="hidden" id="from_date_hour"
+                  name="from_date_hour:int"
+                  tal:attributes="value from_date_hour" />
+                <input type="hidden" id="from_date_minute"
+                  name="from_date_minute:int"
+                  tal:attributes="value from_date_minute" />
+                <span i18n:translate="_cal_At_">
+                  At
+                </span>
+                <span id="from_date_hour_s" tal:content="from_date_hour">
+                  10
+                </span>
+                <span i18n:translate="_cal_hour_sep_" />
+                <span id="from_date_minute_s"
+                      tal:content="python:from_date_minute and from_date_minute or '00'">
+                  00
+                </span>
+                <span i18n:translate="_(Duration: ">(Duration: </span>
+                <tal:block replace="duration_hour" /><span i18n:translate="_aa_h_">h </span>
+                <tal:block replace="duration_minute" /><span i18n:translate="_aa_m)_"> minute)</span>
+                <a tal:attributes="href string:javascript:open_interval_selector(${start}, ${end}, ${duration_q}, ${first}, ${last})">
+                  <img border="0"
+                       tal:attributes="src string:${portal_url}/interval_selector_icon.png" />
+                </a>
+              </h3>
+            </metal:block>
+          </metal:block>
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
+            <metal:block fill-slot="title"
+                         i18n:translate="_cal_prop_location_">
+              Location
+            </metal:block>
+            <metal:block fill-slot="content">
+              <input name="location" size="40" value="" />
+            </metal:block>
+          </metal:block>
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
+            <metal:block fill-slot="title"
+                         i18n:translate="_cal_prop_eventstatus_">
+              Event status
+            </metal:block>
+            <metal:block fill-slot="content">
+              <select name="event_status"
+                      tal:define="statuses python:['confirmed', 'unconfirmed'];">
+                <option tal:repeat="status statuses"
+                        tal:attributes="value status;
+                                        selected python:status == 'unconfirmed';"
+                        tal:content="python:str('_cal_eventstatus_%s_' % (status, ))"
+                        i18n:translate="">
+                  status
+                </option>
+              </select>
+            </metal:block>
+          </metal:block>
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
+            <metal:block fill-slot="title"
+                         i18n:translate="_cal_prop_category_">
+            </metal:block>
+            <metal:block fill-slot="content">
+              <table width="100%" cellspacing="2" cellpadding="0" border="0">
+                <tr tal:repeat="cat categories/items">
+                  <td width="30" valign="middle">
+                    <input type="radio" name="category"
+                           tal:attributes="value python:cat[0];
+                           checked python:cat[0] == cat_default;" />
+                  </td>
+                  <td width="30" valign="middle">
+                    <table cellpadding="0" cellspacing="0" width="80%" height="10"
+                           border="0"
+                           tal:attributes="bgcolor python:cat[1]['color']">
+                      <tr>
+                        <td>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td valign="middle"
+                      tal:content="python:str(cat[1]['title'])"
+                      i18n:translate="">
+                    Category
+                  </td>
+                </tr>
+              </table>
+            </metal:block>
+          </metal:block>
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
+            <metal:block fill-slot="title"
+                         i18n:translate="_cal_prop_attendees_">
+              Attendees
+            </metal:block>
+            <metal:block fill-slot="content">
+              <ul>
+                <tal:block repeat="user cal_users/items">
+                  <li tal:condition="python:user[0] != my_id">
+                    <input type="checkbox" name="cal_ids:list"
+                           tal:attributes="value python:user[0];
+                                           checked python:user[0] in cal_ids;" />
+                    <tal:block replace="python:user[1]" />
+                  </li>
+                </tal:block>
+              </ul>
+            </metal:block>
+          </metal:block>
+        </metal:block>
+      </metal:block>
+      <input type="submit"
+             tal:attributes="value python:str('_button_create_')"
+             i18n:attributes="value" />
+      <input type="button" onClick="history.back()"
+             tal:attributes="value python:str('_button_cancel_')" 
+             i18n:attributes="value"/>
+    </form>
+</metal:block>
+
+</html>

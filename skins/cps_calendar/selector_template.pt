@@ -1,0 +1,40 @@
+<html metal:define-macro="master"
+      tal:define="utool nocall:here/portal_url;
+                  rportal_url python:utool(relative=1);
+                  portal_url python:rportal_url and '/'+rportal_url or '';">
+<head>
+  <title tal:content="here/expanded_title">Nuxeo | Solutions web pour mieux collaborer</title>
+  <metal:block define-slot="base">
+    <!-- Additional head elements -->
+    <base tal:attributes="href string:${here/absolute_url}/" />
+  </metal:block>
+  <link rel="stylesheet" type="text/css"
+    tal:attributes="href string:${portal_url}/main_stylesheet.css" />        
+  <metal:block define-slot="css_slot" tal:replace="nothing">
+    <!-- additional styles -->
+  </metal:block>
+  <metal:block define-slot="javascript_head_slot" tal:replace="nothing">
+    <!-- additional scripts -->
+  </metal:block>
+</head>
+
+<body bgcolor="white" onLoad="initAll()">
+  <table cellspacing="0" border="1" cellpadding="5" width="100%">
+    <tr>
+      <td>
+        <metal:block define-slot="main">
+          Main
+        </metal:block>
+      </td>
+    </tr>
+  </table>
+  <input type="button" onClick="validateSelector()"
+         tal:attributes="value python:str('_button_validate_')"
+         tal:condition="should_validate|nothing"
+         i18n:attributes="value" />
+  <input type="button" onClick="window.close()"
+         tal:attributes="value python:str('_button_cancel_');"
+         i18n:attributes="value" />
+</body>
+
+</html>
