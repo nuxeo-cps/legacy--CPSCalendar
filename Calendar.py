@@ -233,13 +233,13 @@ class Calendar(CPSBaseFolder):
     def getOwnerId(self):
         # getOwner() is part of the Zope API
         return self.getOwner(1)[1]
-    
+
     security.declarePublic('getCalendarUser')
     def getCalendarUser(self):
         """Return the id of the calendar instead of the user"""
         # XXX: we assume that calendar are directly stored on the
         # user's workspace
-        # In almost all cases this will return the same as getOwnerId, 
+        # In almost all cases this will return the same as getOwnerId,
         # so it's a bit of rendundancy, but some scripts use this one,
         return aq_parent(self).getOwner(1)[1]
 
@@ -746,9 +746,9 @@ class Calendar(CPSBaseFolder):
                 if callable(dict): dict = dict()
                 for k, v in dict.items():
                     if merged.has_key(k):
-                        merged[k] = merged[k] + v
+                        merged[k] = merged[k] + list(v)
                     else:
-                        merged[k] = v
+                        merged[k] = list(v)
             # groups
             if hasattr(object, '__acl_local_group_roles__'):
                 dict = object.__ac_local_group_roles__ or {}
@@ -756,9 +756,9 @@ class Calendar(CPSBaseFolder):
                 for k, v in dict.items():
                     k = 'group:'+k
                     if merged.has_key(k):
-                        merged[k] = merged[k] + v
+                        merged[k] = merged[k] + list(v)
                     else:
-                        merged[k] = v
+                        merged[k] = list(v)
             # end groups
             parent = aq_parent(object)
             if parent is not None:
@@ -818,7 +818,7 @@ class Calendar(CPSBaseFolder):
 
         caltool = getToolByName(self, 'portal_cpscalendar')
         calendar_title = self.title_or_id()
-        
+
         for id, mail in mails.items():
             calendar = caltool.getCalendarForUser(id)
             if calendar is None:
@@ -831,7 +831,7 @@ class Calendar(CPSBaseFolder):
                         subject="[CAL] %s" % event_title, encode='8bit')
             except:
                 import sys
-                LOG('CPSCalendar', INFO, 
+                LOG('CPSCalendar', INFO,
                     "Error while sending notification email",
                     error = sys.exc_info())
 
@@ -945,18 +945,18 @@ class Calendar(CPSBaseFolder):
                 else:
                     event['event_type'] = 'event_tofrom'
                 pending_events.append(each)
-                    
+
         if upgradecount:
             self._pending_events = pending_events
-            # Return a string even if there is no request, for use in logging 
+            # Return a string even if there is no request, for use in logging
             # when running the install.
-            return "Upgraded %s pending events for %s" % (str(upgradecount), 
+            return "Upgraded %s pending events for %s" % (str(upgradecount),
                 self.absolute_url())
         if REQUEST is not None:
             return "No upgrade needed"
         else:
             return 0
-        
+
 
 InitializeClass(Calendar)
 
