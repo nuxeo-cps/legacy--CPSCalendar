@@ -40,6 +40,8 @@ WorkspaceManagerRoles = (WorkspaceManager, WorkspaceMember, WorkspaceVisitor,)
 WorkspaceMemberRoles = (WorkspaceMember, WorkspaceVisitor,)
 WorkspaceVisitorRoles = (WorkspaceVisitor,)
 
+# id for default personal calendars
+CALENDAR_ID = 'calendar'
 
 def _cmpEv(a, b):
     """Compare cal_slot by start date"""
@@ -170,7 +172,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         """Return calendar (r)path for user"""
         mtool = getToolByName(self, 'portal_membership')
         utool = getToolByName(self, 'portal_url')
-        return mtool.getHomeUrl(user_id)[len(utool())+1:] + '/calendar'
+        return mtool.getHomeUrl(user_id)[len(utool())+1:] + '/' + CALENDAR_ID
 
     security.declareProtected('View', 'getCalendarForUser')
     def getCalendarForUser(self, user_id):
@@ -374,13 +376,13 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                                                                   'ignore')
         #raise str(title)
         wtool = getToolByName(self, 'portal_workflow')
-        wtool.invokeFactoryFor(context, 'Calendar', 'calendar',
+        wtool.invokeFactoryFor(context, 'Calendar', CALENDAR_ID,
                                title=title,
                                description='')
 
         calendar_type_info = ttool.getTypeInfo('Calendar')
 
-        ob = context._getOb('calendar')
+        ob = context._getOb(CALENDAR_ID)
         calendar_type_info._finishConstruction(ob)
  
         # XXX: is this necessay ?
