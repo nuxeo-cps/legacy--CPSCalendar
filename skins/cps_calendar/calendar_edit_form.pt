@@ -35,7 +35,7 @@
     <metal:block fill-slot="content">
       <metal:block tal:condition="create" use-macro="here/calendar_macros/macros/form_property">
         <metal:block fill-slot="title"
-                     i18n:translate="_prop_title_">
+                     i18n:translate="cpscalendar_label_title">
           Title
         </metal:block>
         <metal:block fill-slot="content">
