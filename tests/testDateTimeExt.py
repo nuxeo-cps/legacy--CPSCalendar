@@ -10,11 +10,7 @@ from Products.CPSCalendar.CPSCalendarTool import stringToDateTime
 
 class TestStringToDateTime(unittest.TestCase):
 
-    def testWithFormat(self):
-        date = stringToDateTime('01/02/03 05:06', format='%y/%m/%d %H:%M')
-        self.assertEquals(date, DateTime(2001,2,3,5,6))
-
-    def testWithNoFormat(self):
+    def testWithSeparators(self):
                                                     #Selection process
         date = stringToDateTime('01/02/03')
         self.assertEquals(date, DateTime(2003,1,2)) #Any: Defaults to US
@@ -38,8 +34,14 @@ class TestStringToDateTime(unittest.TestCase):
         self.assertEquals(date, DateTime(2013,1,13))#Intl or EU, EU default
         date = stringToDateTime('01/13/13')
         self.assertEquals(date, DateTime(2013,1,13))#Must be US
+        
+    def testWithoutSeparators(self):
+        date = stringToDateTime('330113')
+        self.assertEquals(date, DateTime(2033,1,13))#Must be Intl
+        date = stringToDateTime('20330113')
+        self.assertEquals(date, DateTime(2033,1,13))#Must be Intl
 
-        # And test all invalid dates too.
+    def testInvalidDates(self):
         self.assertRaises(ValueError, stringToDateTime,'01/33/01')
         self.assertRaises(ValueError, stringToDateTime,'13/33/01')
         self.assertRaises(ValueError, stringToDateTime,'33/13/01')
@@ -50,7 +52,8 @@ class TestStringToDateTime(unittest.TestCase):
         self.assertRaises(ValueError, stringToDateTime,'01/33/33')
         self.assertRaises(ValueError, stringToDateTime,'13/13/13')
         self.assertRaises(ValueError, stringToDateTime,'33/01/33')
-
+        self.assertRaises(ValueError, stringToDateTime,'03012005')
+ 
 
 def test_suite():
     suite = unittest.TestSuite()

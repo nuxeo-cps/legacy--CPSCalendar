@@ -18,7 +18,6 @@
 # $Id$
 
 from zLOG import LOG, DEBUG
-from time import strptime, mktime
 from Globals import InitializeClass
 from DateTime import DateTime
 from Products.CMFCore.PortalFolder import PortalFolder
@@ -47,28 +46,50 @@ WorkspaceVisitorRoles = (WorkspaceVisitor,)
 # id for default personal calendars
 CALENDAR_ID = 'calendar'
 
-def stringToDateTime(string, locale=None, format=None):
+def stringToDateTime(string, locale=None):
     """This method converts a string to a date
 
     It tries to be clever about it, which can be dangerous.
+    Does not support any time zone, just date and time.
+    Time must be in hh:mm format.
+    Date can be in ymd, dmy or mdy, with either slash, dot, dash or nothing
+    as separator, and with year being either two or four characters long.
+    If you have four character year and no separator, only ymd is supported.
     """
-    if format:
-        return DateTime(mktime(strptime(string, format)))
 
-    if string.find(' ') != -1:
+    if string.find(' ') != -1: 
+        # Hour and minute is included.
         date, rest = string.split(' ',1)
+        hour, minute = rest.split(':')
+        hour = int(hour)
+        minute = int(minute)
     else:
-        date, rest = string, None
-
+        date = string
+        hour = 0
+        minute = 0
+        
+    splitchar = None    
     if date.find('/') != -1:
         splitchar = '/'
     elif date.find('.') != -1:
         splitchar = '.'
     elif date.find('-') != -1:
         splitchar = '-'
+    
+    if splitchar:
+        parts = date.split(splitchar)
+    elif len(date) == 6:
+        parts = []
+        parts.append(date[0:2])
+        parts.append(date[2:4])
+        parts.append(date[4:6])
+    elif len(date) == 8:
+        parts = []
+        parts.append(date[0:4])
+        parts.append(date[4:6])
+        parts.append(date[6:8])
     else:
         raise ValueError('Could not parse datetime %s: No separator' % string)
-    parts = date.split(splitchar)
 
     # Which parts that are possible months and days
     p_month = [0,1]
@@ -95,6 +116,7 @@ def stringToDateTime(string, locale=None, format=None):
                 p_month.remove(index)
 
     # possible formats:
+    # The strpstr key is no longer used, but retained for some future day.
     all_formats = {'dmy': { #European
                      'format': (2, 1, 0), # Positions: (year, month, day)
                      'strpstr': '%d-%m-%Y',
@@ -112,6 +134,9 @@ def stringToDateTime(string, locale=None, format=None):
                     },
                   }
     # The preferred order of format selection when ambigous
+    # XXX: Implement different preferance ordering of formats, depending on
+    # which separator was used. Dots are mostly used in europe, and dashes
+    # in sweden, and the 6-char no separator is almost always international.
     format_order = ['mdy','dmy','ymd']
 
     p_formats = []
@@ -127,17 +152,13 @@ def stringToDateTime(string, locale=None, format=None):
 
     if not p_formats:
         raise ValueError('Could not parse datetime %s: No match' % string)
-    # We have matching formats, use the first one.
-    strpstr = all_formats[p_formats[0]]['strpstr']
-    strpstr = strpstr.replace('-', splitchar)
-    if p_year:
-        if parts[p_year[0]] < 1000: # Using two year dates
-            strpstr = strpstr.replace('Y','y')
-    if rest: # Using a time too.
-        strpstr += ' %H:%M'
-
-    t = strptime(string, strpstr)
-    return DateTime(t[0],t[1],t[2],t[3],t[4])
+    
+    format = p_formats[0]
+    ypos, mpos, dpos = all_formats[format]['format']
+    year = parts[ypos]
+    month = parts[mpos]
+    day = parts[dpos]
+    return DateTime(year, month, day, hour, minute)
 
 
 def _cmpEv(a, b):
