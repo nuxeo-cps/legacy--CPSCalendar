@@ -313,8 +313,7 @@ class Calendars(CPSBaseFolder):
 
             if not mtool.isAnonymousUser():
                 ob.manage_delLocalRoles(userids=[current_user])
-            ob.manage_setLocalRoles(id, 
-                ['WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'])
+            ob.manage_setLocalRoles(id, ['Owner', 'WorkspaceManager'])
             ob.reindexObject()
             return ob
         else:
