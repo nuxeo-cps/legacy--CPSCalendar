@@ -1,5 +1,6 @@
 ##parameters=redirect=0, REQUEST=None
 
+mcat = context.Localizer.cpscalendar
 if not int(redirect):
     if REQUEST is not None:
         REQUEST = context.REQUEST
