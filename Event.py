@@ -161,18 +161,13 @@ class Event(CPSBaseDocument):
     def edit(self, attendees=None, from_date=None, to_date=None,
              event_type=None, transparent=None, document=None, **kw):
         """Edit method"""
+        old_status = self.event_status
         if self._edit(attendees, from_date, to_date,
              event_type, transparent, document, **kw):
             self.isdirty = 1
             self.notified_attendees = ()
-    
-    def _edit(self, attendees=None, from_date=None, to_date=None,
-             event_type=None, transparent=None, document=None, **kw):
-        """Edits an event and returns 1 if there was any changes"""
-        setdirty = 0
-        old_status = self.event_status
-        CPSBaseDocument.edit(self, **kw)
         new_status = self.event_status
+        
         if new_status != old_status:
             if new_status == 'canceled':
                 calendar = self.getCalendar()
@@ -180,7 +175,14 @@ class Event(CPSBaseDocument):
             if old_status == 'canceled':
                 calendar = self.getCalendar()
                 calendar.unCancelEvent(self)
-            setdirty = 1
+            self.isdirty = 1
+            self.notified_attendees = ()
+    
+    def _edit(self, attendees=None, from_date=None, to_date=None,
+             event_type=None, transparent=None, document=None, **kw):
+        """Edits an event and returns 1 if there was any changes"""
+        setdirty = 0
+        CPSBaseDocument.edit(self, **kw)
 
         if event_type is not None and event_type != self.event_type:
             setdirty = 1

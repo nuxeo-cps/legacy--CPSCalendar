@@ -285,6 +285,7 @@ class Calendar(CPSBaseFolder):
     def confirmPendingEvent(self, event_id, REQUEST=None, **kw):
         """
         """
+        import pdb;pdb.set_trace()
         if REQUEST is not None:
             kw.update(REQUEST.form)
         pending = None
