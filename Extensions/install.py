@@ -43,6 +43,7 @@ class CalendarInstaller(CPSInstaller):
         self.setupTranslations(message_catalog='cpscalendar')
         self.addPortalCatalogIndex('uid', 'FieldIndex')
         self.upgradeEvents()
+        self.upgradePendingEvents()
         self.log("End of specific CPSCalendar install")
         self.finalize()
 
@@ -86,7 +87,20 @@ class CalendarInstaller(CPSInstaller):
         events = self.portal.portal_catalog(portal_type='Event')
         for event in events:
             ob = event.getObject()
-            ob.upgradeEventType()
+            res = ob.upgradeEventType()
+            if res:
+                self.log(res)
+        self.log("  Done.")
+
+    def upgradePendingEvents(self):
+        # Get the events from the catalog:
+        self.log("Upgrading pending events")
+        events = self.portal.portal_catalog(portal_type='Calendar')
+        for event in events:
+            ob = event.getObject()
+            res = ob.upgradePendingEvents()
+            if res:
+                self.log(res)
         self.log("  Done.")
 
 def install(self):

@@ -192,8 +192,10 @@ class Event(CPSBaseDocument):
                 self.event_type = 'event_allday'
             else:
                 self.event_type = 'event_tofrom'
-            if REQUEST is not None:
-                return "Upgraded to %s" % self.event_type
+                # Return s string even if there is no request, for use in logging 
+                # when running the install.
+                return "%s upgraded to %s" % (self.absolute_url, self.event_type)
+            
         if REQUEST is not None:
             return "No upgrade needed"
 

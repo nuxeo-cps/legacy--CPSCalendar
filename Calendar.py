@@ -893,6 +893,36 @@ class Calendar(CPSBaseFolder):
         self._declined = tuple(declined)
         self._canceled = tuple(canceled)
 
+    def upgradePendingEvents(self, REQUEST=None):
+        """Upgrades pending events"""
+        pending_events = []
+        upgradecount = 0
+        for each in self._pending_events:
+            if not each.has_key('event'):
+                continue
+            event = each['event']
+            if event.has_key('event_type'):
+                pending_events.append(each)
+            else:
+                upgradecount += 1
+                if event.get('all_day', 0):
+                    each['event_type'] = 'event_allday'
+                else:
+                    each['event_type'] = 'event_tofrom'
+                pending_events.append(each)
+                    
+        if upgradecount:
+            self._pending_events = pending_events
+            # Return s string even if there is no request, for use in logging 
+            # when running the install.
+            return "Upgraded %s pending events for %s" % (str(upgradecount), 
+                self.absolute_url())
+        if REQUEST is not None:
+            return "No upgrade needed"
+        else:
+            return 0
+        
+
 InitializeClass(Calendar)
 
 
