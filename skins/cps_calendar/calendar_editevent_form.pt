@@ -88,7 +88,7 @@
 
   <tal:block condition="editevent">
     <form action="calendar_addevent_form" id="eventTypeForm"
-      tal:condition="create">
+          tal:condition="create">
       <p>
       <input type="hidden" name="all_day:int"
              tal:attributes="value not:all_day">
@@ -225,7 +225,7 @@ range       : [2000, 2049]
               <span i18n:translate="cpscalendar_hour_sep">:</span>
               <select name="from_date_minute:int">
                 <option tal:repeat="minute python:range(0,60,5)"
-                        tal:content="minute"
+                        tal:content="python:'%02d' % minute"
                         tal:attributes="value minute;
                                         selected python:minute == from_date_minute;" />
               </select>
@@ -239,7 +239,7 @@ range       : [2000, 2049]
               <span i18n:translate="cpscalendar_hour_sep">:</span>
               <select name="to_date_minute:int">
                 <option tal:repeat="minute python:range(0,60,5)"
-                        tal:content="minute"
+                        tal:content="python:'%02d' % minute"
                         tal:attributes="value minute;
                                         selected python:minute == to_date_minute;" />
               </select>
