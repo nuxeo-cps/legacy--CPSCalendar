@@ -6,8 +6,8 @@
 
 - show today with a different color
 
-- makes the all_day lines in month and week view use alternate color
-  in cols with no event
+- makes the all_day lines in month and week view use alternate colors
+  in cols with no event (like hour events cols)
 
 - add an interface to filter what canceled and declined events we really
   want to delete
@@ -17,8 +17,14 @@
 - possibility to use a central calendar to specify (and display in some
   manner) hollydays or vacations.
 
-- add history to events
+- add history to events (even to deleted events...)
 
-- i18n of mail notifications messages
+- i18n of mail notifications messages (and more descriptive mails...)
 
 - add an interface to send freeform mails to attendees and/or organizer
+
+- add interface for export
+
+- add interface for import
+
+- add WebDav interface for global import
