@@ -1,4 +1,5 @@
 # translation of fr.po to 
+# translation of fr.po to
 # translation of fr.po to ben
 # translation of fr.po to French
 # Gettext Message File for default.
@@ -9,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2004-04-19 11:36default\n"
-"PO-Revision-Date: 2004-04-19 11:36+0200\n"
+"POT-Creation-Date: 2004-04-19 12:15default\n"
+"PO-Revision-Date: 2004-04-19 12:15+0200\n"
 "Last-Translator: Lennart Regebro <rgebro@nuxeo.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -334,12 +335,13 @@ msgid "cpscalendar_label_at"
 msgstr "à"
 
 #.   <span condition="python:event_type == 'event_tofrom'">
-#.                   From the
+#.                   At the
 #.                 </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_at_day"
 msgstr "Le"
 
+#.   <h2>participants</h2>
 #.   <th>Participants</th>
 #.   <metal:block fill-slot="title">
 #.               Attendees
@@ -347,7 +349,8 @@ msgstr "Le"
 #.   <block fill-slot="title">
 #.                 Attendees
 #.               </block>
-#: from ../skins/cps_calendar/calendar_event_viewer.pt
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_event_viewer.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 #: ../skins/cps_calendar/create_meeting_form.pt
 msgid "cpscalendar_label_attendees"
@@ -911,6 +914,9 @@ msgstr "Événements de la semaine"
 msgid "cpscalendar_event_viewer_month"
 msgstr "Événements du mois"
 
+msgid "cpscalendar_message_too_early_specified_hour"
+msgstr "L'heure de fin que vous avez spécifiée est antérieure à la date de début. "
+
 #~ msgid "cpscalendar_label_title"
 #~ msgstr "Intitulé"
 
@@ -985,11 +991,6 @@ msgstr "Événements du mois"
 
 #~ msgid "cpscalendar_message_the_iCalendar_version_of_this_calendar"
 #~ msgstr "la version iCalendar de cet agenda"
-
-#~ msgid "cpscalendar_message_too_early_specified_hour"
-#~ msgstr ""
-#~ "L'heure de fin que vous avez spécifiée est antérieure à la date de début. "
-#~ "Voulez-vous étendre l'événement jusqu'au jour suivant ?"
 
 #~ msgid "cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees"
 #~ msgstr ""

@@ -331,3 +331,5 @@ msgstr ""
 msgid "cpscalendar_event_viewer_month"
 msgstr ""
 
+msgid "cpscalendar_message_too_early_specified_hour"
+msgstr ""

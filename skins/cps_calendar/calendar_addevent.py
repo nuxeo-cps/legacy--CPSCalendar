@@ -54,10 +54,14 @@ if from_date <= to_date:
 else:
     # The date entries are incorrect (from_date > to_date)
     # Return to the confirm screen, but with times flipped.
-    kw['from_date'] = to_date
-    kw['to_date'] = from_date
-    kw['from_date_hour'] = to_date_hour
-    kw['from_date_minute'] = to_date_minute
-    kw['to_date_hour'] = from_date_hour
-    kw['to_date_minute'] = from_date_minute
+    kw['from_date'], kw['to_date'] = kw['to_date'], kw['from_date']
+    
+    if event_type == 'event_tofrom':
+        kw['from_date_hour'], kw['to_date_hour'] = \
+            kw['to_date_hour'], kw['from_date_hour']
+        kw['from_date_minute'], kw['to_date_minute'] = \
+            kw['to_date_minute'], kw['from_date_minute']
+    else:
+        kw['from_date_string'], kw['to_date_string'] = \
+            kw['to_date_string'], kw['from_date_string']
     return context.calendar_confirmaddevent_form(**kw)

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2004-04-19 11:36default\n"
+"POT-Creation-Date: 2004-04-19 12:15default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -330,12 +330,13 @@ msgid "cpscalendar_label_at"
 msgstr ""
 
 #.   <span condition="python:event_type == 'event_tofrom'">
-#.                   From the
+#.                   At the
 #.                 </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_at_day"
 msgstr ""
 
+#.   <h2>participants</h2>
 #.   <th>Participants</th>
 #.   <metal:block fill-slot="title">
 #.               Attendees
@@ -343,7 +344,8 @@ msgstr ""
 #.   <block fill-slot="title">
 #.                 Attendees
 #.               </block>
-#: from ../skins/cps_calendar/calendar_event_viewer.pt
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_event_viewer.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 #: ../skins/cps_calendar/create_meeting_form.pt
 msgid "cpscalendar_label_attendees"
@@ -905,4 +907,7 @@ msgid "cpscalendar_event_viewer_week"
 msgstr ""
 
 msgid "cpscalendar_event_viewer_month"
+msgstr ""
+
+msgid "cpscalendar_message_too_early_specified_hour"
 msgstr ""

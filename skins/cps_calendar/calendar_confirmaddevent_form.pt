@@ -42,6 +42,11 @@
            tal:attributes="value event/recurrance_period" />
     <input type="hidden" name="description"
            tal:attributes="value event/description" />
+    <input type="hidden" name="from_date_string"
+           tal:attributes="value options/from_date_string" />
+    <input type="hidden" name="to_date_string"
+           tal:attributes="value options/to_date_string"
+           tal:condition="options/to_date_string|nothing" />
     <metal:block use-macro="here/calendar_macros/macros/event_view">
       The event
     </metal:block>

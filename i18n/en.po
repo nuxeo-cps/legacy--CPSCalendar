@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2004-04-19 11:36default\n"
+"POT-Creation-Date: 2004-04-19 12:15default\n"
 "PO-Revision-Date: 2004-04-19 11:37+0200\n"
 "Last-Translator: Lennart Regebro <rgebro@nuxeo.com>\n"
 "Language-Team: \n"
@@ -338,12 +338,13 @@ msgid "cpscalendar_label_at"
 msgstr "at"
 
 #.   <span condition="python:event_type == 'event_tofrom'">
-#.                   From the
+#.                   At the
 #.                 </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_at_day"
 msgstr "At the"
 
+#.   <h2>participants</h2>
 #.   <th>Participants</th>
 #.   <metal:block fill-slot="title">
 #.               Attendees
@@ -351,7 +352,8 @@ msgstr "At the"
 #.   <block fill-slot="title">
 #.                 Attendees
 #.               </block>
-#: from ../skins/cps_calendar/calendar_event_viewer.pt
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_event_viewer.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 #: ../skins/cps_calendar/create_meeting_form.pt
 msgid "cpscalendar_label_attendees"
@@ -917,6 +919,11 @@ msgstr "Event for this week"
 msgid "cpscalendar_event_viewer_month"
 msgstr "Event for this month"
 
+msgid "cpscalendar_message_too_early_specified_hour"
+msgstr ""
+"The end hour you specified was earlier than the start hour. Did you meanto "
+"switch them? Press OK if you want to switch the start and end times."
+
 #~ msgid "cpscalendar_label_title"
 #~ msgstr "Title"
 
@@ -980,11 +987,6 @@ msgstr "Event for this month"
 
 #~ msgid "cpscalendar_message_the_iCalendar_version_of_this_calendar"
 #~ msgstr " the iCalendar version of this calendar."
-
-#~ msgid "cpscalendar_message_too_early_specified_hour"
-#~ msgstr ""
-#~ "The end hour you specified was earlier than the start hour. Do you want "
-#~ "to extend the event to the next day?"
 
 #~ msgid "cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees"
 #~ msgstr "Unselect events you don't want to notify attendees"
@@ -1054,4 +1056,3 @@ msgstr "Event for this month"
 
 #~ msgid "cpscalendar_option"
 #~ msgstr "option"
-
