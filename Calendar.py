@@ -193,13 +193,19 @@ class Calendar(Workgroup):
         events = [event for event in self._pending_events if event['id'] != event_id]
         self._pending_events = tuple(events)
         if REQUEST is not None:
-            REQUEST.RESPONSE.redirect("%s/%s" % (self.absolute_url(), event_id))
+            if request == 'status':
+                REQUEST.RESPONSE.redirect("%s/%s/calendar_attendees_form" % (self.absolute_url(), event_id))
+            else:
+                REQUEST.RESPONSE.redirect("%s/%s" % (self.absolute_url(), event_id))
 
     security.declareProtected('Add portal content', 'cleanPendingEvents')
-    def cleanPendingEvents(self, REQUEST=None):
+    def cleanPendingEvents(self, id=None, REQUEST=None):
         """
         """
-        self._pending_events = ()
+        if id is None:
+            self._pending_events = ()
+        else:
+            self._pending_events = tuple([ev for ev in self._pending_events if ev['id'] != id])
         if REQUEST is not None:
             REQUEST.RESPONSE.redirect(self.absolute_url())
 
