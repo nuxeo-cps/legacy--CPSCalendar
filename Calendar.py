@@ -67,6 +67,12 @@ factory_type_information = (
                   'permissions': ("Add portal content",),
                   'category': 'object'
                   },
+                 {'id': 'display',
+                  'name': '_action_display_',
+                  'action': 'calendar_display_form',
+                  'permissions': ("Add portal content",),
+                  'category': 'object'
+                  },
                  {'id': 'export',
                   'name': '_action_export_',
                   'action': 'calendar_export',
@@ -112,6 +118,8 @@ class Calendar(Workgroup):
     _pending_events = ()
     _declined = ()
     _cancelled = ()
+
+    _additional_cals = ()
 
     def __init__(self, id, title='', description='', usertype='member'):
         Workgroup.__init__(self, id, title, description)
@@ -210,7 +218,7 @@ class Calendar(Workgroup):
             REQUEST.RESPONSE.redirect(self.absolute_url())
 
     security.declareProtected('View', 'getEventsDesc')
-    def getEventsDesc(self, start_time, end_time, disp):
+    def getEventsDesc(self, start_time, end_time, disp, additional=1):
         """Returns events between start_time and end_time
         formatted according for a disp display type.
 
@@ -247,6 +255,16 @@ class Calendar(Workgroup):
                 slot_start += 1
                 slot_start = DateTime(slot_start.year(), slot_start.month(), slot_start.day())
         events = self.objectValues()
+        if additional and self._additional_cals:
+            mtool = getToolByName(self, 'portal_membership')
+            calendars = aq_parent(aq_inner(self))
+            cal_ids = [id for id in calendars.objectIds('Calendar') \
+                if id in self._additional_cals]
+            for cal_id in cal_ids:
+                cal = getattr(calendars, cal_id)
+                if self.id != cal_id and mtool.checkPermission('View', cal):
+                    events.extend(cal.objectValues())
+                
         for event in events:
             event_slots = event.getEventInSlots(start_time, end_time, slots)
             if event_slots is not None:
@@ -680,6 +698,14 @@ class Calendar(Workgroup):
             'cancelled': self._cancelled,
             'declined': self._declined,
         }
+
+    security.declareProtected('Add portal content', 'setAdditionalCalendars')
+    def setAdditionalCalendars(self, cals):
+        self._additional_cals = tuple(cals)
+
+    security.declareProtected('Add portal content', 'getAdditionalCalendars')
+    def getAdditionalCalendars(self):
+        return self._additional_cals
 
     security.declareProtected('Delete objects', 'manage_delObjects')
     def manage_delObjects(self, ids, *args, **kw):

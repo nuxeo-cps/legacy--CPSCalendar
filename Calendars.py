@@ -267,6 +267,15 @@ class Calendars(Workgroup):
             info['status'] = 'unconfirmed'
         return info
 
+    security.declareProtected('View', 'getVisibleCalendars')
+    def getVisibleCalendars(self):
+        mtool = getToolByName(self, 'portal_membership')
+        cals = []
+        for cal in self.objectValues('Calendar'):
+            if mtool.checkPermission('View', cal):
+                cals.append(cal)
+        return cals
+
     security.declareProtected('Access contents information', 'get')
     def get(self, name, default=None):
         """

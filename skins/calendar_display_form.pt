@@ -1,0 +1,31 @@
+<tal:block define="global current_action string:display" />
+<html
+  metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="header_plus" />
+
+<metal:block fill-slot="main"
+  tal:define="
+  cals here/getVisibleCalendars;
+  additionals here/getAdditionalCalendars;
+  cals python:[cal for cal in cals if cal.id != here.id]">
+  <p
+    tal:content="
+      python:mcat('_Select the calendars you want to display with this calendar:')">
+    Select the calendars you want to display with this calendar:
+  </p>
+  <form action="calendar_display">
+    <ul>
+      <li tal:repeat="cal cals">
+        <input type="checkbox" name="cal_ids:list"
+          tal:attributes="
+            value cal/id; checked python:cal.id in additionals" />
+        <tal:block replace="cal/title_or_id" />
+      </li>
+    </ul>
+    <input type="submit"
+      tal:attributes="value python:mcat('_button_validate_')" />
+  </form>
+</metal:block>
+
+</html>
