@@ -7,7 +7,8 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - Some skins used the old "head_slot" instead of standard H1 titles.
-- Added the missing file calendar_edit.py.
+- Added the missing file calendar_edit.py. (#1496)
+- cpscalendar_no_attendee_of_type_workspace was untranslated. (#1527)
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
