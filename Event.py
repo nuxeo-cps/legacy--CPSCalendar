@@ -611,12 +611,21 @@ InitializeClass(Event)
 def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
     """Add an Event."""
     calendar = dispatcher.Destination()
+    ctool = getToolByName(calendar, 'portal_cpscalendar')
     if organizer is None:
         # By default, organizer is the current calendar user
         try:
-            organizer = calendar.getAttendeeInfo(calendar.getRpath())
+            organizer = ctool.getAttendeeInfo(calendar.getRpath())
         except AttributeError:
             mtool = getToolByName(calendar, 'portal_membership')
+            dtool = getToolByName(calendar, 'portal_directories')
+            uid = mtool.getAuthenticatedMember().getId()
+            display_prop = mtool.members.title_field
+            entry = dtool.members.getEntry(uid)
+            if entry and entry.has_key(display_prop):
+                ucn = entry[display_prop]
+            else:
+                ucn = uid
             organizer = {
                 'id': mtool.getAuthenticatedMember().getId(),
                 'rpath': calendar.getRpath(),
