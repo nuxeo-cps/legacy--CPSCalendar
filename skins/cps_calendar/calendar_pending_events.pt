@@ -2,22 +2,21 @@
                    pendings python:here.getPendingEvents(event_id)">
 <html metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="head_slot" i18n:domain="cpscalendar">
+<metal:block fill-slot="main" i18n:domain="cpscalendar">
+  <h2>
   <span i18n:translate="cpscalendar_pending_events_for">
     Pending events for
   </span>
   «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
-</metal:block>
-
-<metal:block fill-slot="main" i18n:domain="cpscalendar">
+  </h2>
   <tal:block condition="not:pendings">
     <strong>
     <span tal:condition="event_id"
         i18n:translate="cpscalendar_no_pending_request_for_event">
-          There is no pending request for this event</span>.
+          There is no pending request for this event</span>
     <span tal:condition="not:event_id"
         i18n:translate="cpscalendar_no_pending_request">
-          There is no pending request</span>.
+          There is no pending request</span>
     </strong>
   </tal:block>
   <tal:block condition="pendings">
