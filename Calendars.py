@@ -63,11 +63,6 @@ factory_type_information = (
                   'action': 'calendars_create_form',
                   'visible': 0,
                   'permissions': ()},
-                 {'id': 'isproxytype',
-                  'name': 'isproxytype',
-                  'action': 'folder',
-                  'permissions': ('',),
-                  'visible': 0},
                  ),
      },
     )
