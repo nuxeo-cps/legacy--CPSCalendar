@@ -23,9 +23,10 @@ from DateTime import DateTime
 from Products.CMFCore.PortalFolder import PortalFolder
 from AccessControl import ClassSecurityInfo
 from AccessControl.Permissions import manage_users as ManageUsers
-from Products.CMFCore.permissions import setDefaultRoles
-from Products.CMFCore.permissions import View
-from Products.CMFCore.permissions import AddPortalContent
+from AccessControl.PermissionRole import rolesForPermissionOn
+from Products.CMFCore.CMFCorePermissions import setDefaultRoles
+from Products.CMFCore.CMFCorePermissions import View
+from Products.CMFCore.CMFCorePermissions import AddPortalContent
 from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.utils import _getAuthenticatedUser, _checkPermission
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
@@ -273,7 +274,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                    {'id':'search_fields', 'type':'multiple selection',
                     'mode': 'w', 'select_variable':'getSearchFields'},
                    {'id':'restricted_user_search', 'type':'boolean', 'mode': 'w', 
-                    'label': "Restrict user search in personal calendars" },
+                    'label': "Restricted calendar listing" },
                    {'id':'create_member_calendar', 'type':'boolean', 'mode': 'w',
                     'label': "Create a calendar when creating the user's home folder"},
                    {'id':'member_can_create_home_calendar', 'type':'boolean', 'mode': 'w',
@@ -421,26 +422,61 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             unrestricted=1)
 
     security.declareProtected(View, 'getCalendarsDict')
-    def getCalendarsDict(self, exclude=''):
+    def getCalendarsDict(self, exclude='', filter_type='default', filter=''):
         """Return a short summary of all calendars
 
         It's used in meeting preparation to have all possible attendees
 
         exclude: one calendar rpath to remove of the list
+        
+        filter_type: 
+            None: No filter.
+            'permission': includes only those calendars where the current user 
+                          has a permission. 
+            'local_permission': means the user must have the permission
+                                assigned directly on that object (via a role).
+            'default': means None unless restricted_user_search is set, in 
+                       which case it means 'local_permission' with the
+                       filter 'View'
+                    
+        filer: Specifies the filter parameter, that is, a permission, or a 
+               set or roles, depending on the filter_type.
         """
+        user = _getAuthenticatedUser(self)
+        if filter_type == 'default' and self.restricted_user_search:
+            filter_type = 'local_permission'
+            filter = 'View'
+        
         calendars_dict = {}
         for calendar in self.listCalendars():
             entry = calendars_dict.setdefault(calendar.usertype, [])
             rpath = calendar.getRpath()
-            if exclude != rpath:
-                entry.append({
-                  'id': '/'.join(calendar.getPhysicalPath()),
-                  'cn': calendar.title_or_id(),
-                  'usertype': calendar.usertype,
-                  'rpath': rpath,
-                  'owner': calendar.getOwnerId(),
-                  'path': calendar.absolute_url(),
-                })
+            if exclude == rpath:
+                continue
+            if (filter_type == 'permission' and 
+                not user.has_permission(filter, calendar)):
+                continue
+            if filter_type == 'local_permission':
+                found = 0
+                roles = rolesForPermissionOn(filter, calendar)
+                local_roles = getattr(calendar, '__ac_local_roles__', None)
+                if callable(local_roles):
+                    local_roles=local_roles()
+                dict=local_roles or {}
+                for r in dict.get(user.getId(), []):
+                    if r in roles:
+                        found = 1
+                        break
+                if not found:
+                    continue
+            entry.append({
+              'id': '/'.join(calendar.getPhysicalPath()),
+              'cn': calendar.title_or_id(),
+              'usertype': calendar.usertype,
+              'rpath': rpath,
+              'owner': calendar.getOwnerId(),
+              'path': calendar.absolute_url(),
+            })
         return calendars_dict
 
     security.declarePublic('getCalendarForPath')
