@@ -322,15 +322,16 @@ class Calendar(CPSBaseFolder):
         events_ids = self.objectIds('Event')
         if additional and self._additional_cals:
             mtool = getToolByName(self, 'portal_membership')
-            calendars = aq_parent(aq_inner(self))
-            cal_ids = [id for id in calendars.objectIds('Calendar')
-                          if id in self._additional_cals]
-            for cal_id in cal_ids:
-                cal = getattr(calendars, cal_id)
-                if self.id != cal_id and mtool.checkPermission('List folder contents', cal):
-                    add_events = [getattr(cal, id)
-                        for id in cal.objectIds('Event')
-                        if id not in events_ids]
+            caltool = getToolByName(self, 'portal_cpscalendar')
+            cal_rpaths = [rpath for rpath in caltool.listCalendarPaths()
+                          if rpath in self._additional_cals]
+            for cal_rpath in cal_rpaths:
+                cal = caltool.getCalendarFromPath(rpath)
+                if self.getRpath() != cal_rpath and \
+                  mtool.checkPermission('List folder contents', cal):
+                    add_events = [getattr(cal, event_id)
+                        for event_id in cal.objectIds('Event')
+                        if event_id not in events_ids]
                     events.extend(add_events)
 
         for event in events:
@@ -653,6 +654,7 @@ class Calendar(CPSBaseFolder):
         if m is not None:
             mail_from = m()
 
+        # XXX: all this is probably wrong
         # get local roles for members
         merged = {}
         object = aq_inner(self)
