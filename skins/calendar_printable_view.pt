@@ -8,7 +8,7 @@
                    events_desc python:here.getEventsDesc(start_time, end_time, calendar_disp)">
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      metal:use-macro="here/simple_template/macros/master">
+      metal:use-macro="here/printing_template/macros/master">
 <metal:block fill-slot="css_slot">
   <link rel="stylesheet" type="text/css"
         tal:attributes="href string:${portal_url}/calendar_stylesheet.css" />
