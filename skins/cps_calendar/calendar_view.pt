@@ -68,7 +68,7 @@
       </h3>
     </tal:block>
   </tal:block>
-  <tal:block>
+  <tal:block condition="nothing">
     [<a target="_blank"
       tal:attributes="href string:calendar_printable_view?viewed_day=${viewed_day_int}"
       i18n:translate="cpscalendar_link_printable_view">
