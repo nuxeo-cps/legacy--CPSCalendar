@@ -11,7 +11,6 @@ locale = context.Localizer.get_selected_language()
 if REQUEST.has_key('from_date_string'):
     #OK, we have a REQUEST that comes from a form
     #Build valid dates from this form
-    event_type = REQUEST['event_type']
     from_date_date = context.portal_cpscalendar.stringToDateTime(REQUEST['from_date_string'], locale)    
     if REQUEST.has_key('to_date_string'):
         to_date_date = context.portal_cpscalendar.stringToDateTime(REQUEST['to_date_string'], locale)    
@@ -25,12 +24,6 @@ if REQUEST.has_key('from_date_string'):
     to_date_month = to_date_date.month()
     to_date_day = to_date_date.day()
     
-    #if event_type == 'event_allday':
-    #    from_date_hour = 0
-    #    from_date_minute = 0
-    #    to_date_hour = 23
-    #    to_date_minute = 45
-    #else:
     from_date_hour = int(REQUEST['from_date_hour'])
     from_date_minute = int(REQUEST['from_date_minute'])
     to_date_hour = int(REQUEST['to_date_hour'])
