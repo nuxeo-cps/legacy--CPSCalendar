@@ -658,7 +658,6 @@ class Calendar(Workgroup):
             event_title = event.title_or_id()
 
         mailing = self.calendar_mailing_notify(event_dict, calendar_url, calendar_title, event_title, mail_from, mails, new_event=new_event)
-        LOG('NGCal', DEBUG, 'Notifying from %s to %s:\n%s' % (mail_from, mails, mailing, ))
         try:
             mailhost.send(mailing,
                 mto=mails,

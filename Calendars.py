@@ -60,7 +60,6 @@ def cmp_ev(a, b):
     return cmp(b['start'], a['start'])
 
 def slot_union(cal_slot, with_free=0):
-    LOG('NGC', DEBUG, 'union %s' % (cal_slot, ))
     result = []
     if not cal_slot:
         return []
@@ -217,7 +216,6 @@ class Calendars(Workgroup):
         cals_dict = {}
         cal_users = {}
         for id in ids:
-            LOG('NGC', DEBUG, 'Calculating %s' % (id, ))
             calendar = self.getCalendarForId(id)
             cal_users[id] = self.getAttendeeInfo(id)['cn']
             calendar_slots = []
@@ -225,7 +223,8 @@ class Calendars(Workgroup):
                 calendar_slots.append([])
             slots_done = [None] * length
             for event in calendar.objectValues('Event'):
-                ## transparence XXX
+                if event.transparent:
+                    continue
                 event_slots = event.getEventInSlots(
                     start_time, end_time, slots
                 )
@@ -233,18 +232,13 @@ class Calendars(Workgroup):
                     continue
                 i = 0
                 for event_slot in event_slots:
-                    LOG('NGC', DEBUG, 'event_slot %s' % (event_slot, ))
-                    LOG('NGC', DEBUG, 'done: %s' % (slots_done, ))
                     if event_slot is not None and slots_done[i] is None:
                         if event.all_day:
-                            LOG('NGC', DEBUG, 'all day %i' % (i, ))
                             slots_done[i] = {
                                 'start': event_slot['start'],
                                 'stop': event_slot['stop'],
                             }
                         else:
-                            LOG('NGC', DEBUG, 'calendar_slots=%s' % (calendar_slots, ))
-                            LOG('NGC', DEBUG, 'Appending event %s' % (i, ))
                             calendar_slots[i].append({
                                 'start': event_slot['start'], 
                                 'stop': event_slot['stop']
@@ -252,7 +246,6 @@ class Calendars(Workgroup):
                     i += 1
             cals_dict[id] = list = []
             i = 0
-            LOG('NGC', DEBUG, 'calendar_slots=%s' % (calendar_slots, ))
             for cal_slot in calendar_slots:
                 if slots_done[i] is not None:
                     list.append([slots_done[i]])
