@@ -377,7 +377,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         for user in users:
             if user:
                 path = self.getCalendarPathForUser(user)
-                if path:
+                cal = self.getCalendarForPath(path, unrestricted=1)
+                if cal is not None:
                     res[user] = path
             
         return res
