@@ -11,6 +11,7 @@ New features:
 - add a new view for the event of a calendar
 - add by_days option to Calendar.getEvents
 - Added back button in the search form
+- The upgrade of events and calendars now tell you if it upgraded anything.
 Bug fixes:
 ~~~~~~~~~~
 - The date display in the weekly view now always uses two lines, one for weekday
@@ -18,7 +19,6 @@ Bug fixes:
 - Some fixes for better french in the translations.
 - The end date didn't follow the start date on standard even creation.
 - Pending events also needed upgrade.
-- The upgrade of events and calendars now tell you if it upgraded anything.
 - Rewrite of the date and time handling in the add and edit event forms
   removed several bugs.
 - Events that extended to the end of the search time would be ignored when
