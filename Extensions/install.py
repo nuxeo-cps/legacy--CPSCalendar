@@ -6,11 +6,7 @@
 import os
 import sys
 from AccessControl import getSecurityManager
-from App.Extensions import getPath
 from zLOG import LOG, INFO, DEBUG
-from Products.CMFCore.ActionInformation import ActionInformation
-from Products.CMFCore.CMFCorePermissions import View, ModifyPortalContent, \
-     ReviewPortalContent, RequestReview
 
 import Products.CPSCalendar
 
@@ -205,7 +201,7 @@ def update(self):
 
     # i18n
     pr(" Adding i18n support")
-    calendar_catalog_id='cpscalendar'
+    calendar_catalog_id = 'cpscalendar'
 
     Localizer = portal['Localizer']
     # languages

@@ -23,10 +23,6 @@ from Products.CMFCore.PortalFolder import PortalFolder
 
 from Products.CMFCore.CMFCorePermissions import setDefaultRoles
 from Products.CMFCore.CMFCorePermissions import View
-from Products.CMFCore.CMFCorePermissions import ManagePortal
-from Products.CMFCore.CMFCorePermissions import ModifyPortalContent
-from Products.CMFCore.CMFCorePermissions import ViewManagementScreens
-from Products.CMFCore.utils import SimpleItemWithProperties
 from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
 
