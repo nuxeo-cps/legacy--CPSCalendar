@@ -217,7 +217,7 @@ class Calendar(CPSBaseFolder):
         # user's workspace
         return aq_parent(self).getOwner(1)[1]
 
-    security.declarePrivate('getRpath')
+    security.declarePublic('getRpath')
     def getRpath(self):
         return self.absolute_url()[len(self.portal_url())+1:]
 
