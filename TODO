@@ -4,9 +4,6 @@
 
 - show today with a different color
 
-- makes the all_day lines in month and week view use alternate colors
-  in cols with no event (like hour events cols)
-
 - add an interface to filter what canceled and declined events we really
   want to delete
 
