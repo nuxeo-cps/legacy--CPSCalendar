@@ -32,7 +32,6 @@ Bug fixes:
 - Some formatting errors in the pending events view was fixed.
 - Searching for calendars on the id field when restrictive user search was
   selected, returned all users with View-permission.
-- The "Delete" action now says "Cancel"
 - When removing attendees from an event, if you didn't select any attendees
   you got an error message.
 - Fixed some language bugs.

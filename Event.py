@@ -64,9 +64,11 @@ factory_type_information = (
                   'condition': 'python:object.getCalendar() == object.getOrganizerCalendar()',
                   'permissions': (ModifyPortalContent,)},
                  {'id': 'delete',
-                  'name': 'button_cancel',
+                  'name': 'action_delete',
                   'action': 'string:${object_url}/calendar_delevent',
-                  'condition': 'python:object.getCalendar() == object.getOrganizerCalendar()',
+                  'condition': 'python:object.getCalendar() == ' \
+                  'object.getOrganizerCalendar() and object.event_status ' \
+                  '!= "canceled"',
                   'permissions': (ModifyPortalContent,)},
                  {'id': 'calendar',
                   'name': 'action_calendar',
