@@ -90,6 +90,8 @@ class Event(CPSBaseDocument):
     security = ClassSecurityInfo()
 
     _properties = CPSBaseDocument._properties + (
+        # FIXME: organizer is now a dictionary, so it doesn't make
+        # sense to make it editable in a text field.
         {'id': 'organizer', 'type': 'text', 'mode': 'w', 'label': 'Organizer'},
         {'id': 'all_day', 'type': 'boolean', 'mode': 'w', 
          'label': 'All Day Event'},
@@ -212,7 +214,9 @@ class Event(CPSBaseDocument):
     security.declareProtected(View, 'getCalendarUser')
     def getCalendarUser(self):
         """Return the id of the calendar instead of the user"""
-        return self.getCalendar().id
+        # XXX: we assume that calendar are directly stored on the
+        # user's workspace
+        return aq_parent(self.getCalendar())._owner[1]
 
     security.declareProtected(View, 'getOrganizerCalendar')
     def getOrganizerCalendar(self):
@@ -447,9 +451,8 @@ class Event(CPSBaseDocument):
         return (member, member_cn, dtstamp)
 
     def manage_afterAdd(self, item, container):
-        """Check if the event is cancelled, then register it in 
-           calendar._cencelled
-        """
+        """Check if the event is cancelled, then register it as
+        cancelled event."""
         CPSBaseDocument.manage_afterAdd(self, item, container)
         if aq_base(item) is aq_base(self):
             if self.event_status == 'cancelled':

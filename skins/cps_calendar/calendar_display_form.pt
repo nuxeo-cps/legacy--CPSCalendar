@@ -2,7 +2,7 @@
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
-             tal:define="cals here/getVisibleCalendars;
+             tal:define="cals here/portal_cpscalendar/listVisibleCalendars;
                          additionals here/getAdditionalCalendars;">
   <p>
     <span i18n:translate="cpscalendar_message_select_calendars_to_display_with_this_calendar">

@@ -115,6 +115,12 @@ class TestCalendar(CPSCalendarTestCase):
             end_time=DateTime(2003, 1, 1, 16, 0), disp='month')
         # XXX: add some test for desc here
 
+        # Test low level methods
+        self.assertEquals(event.getCalendar(), self.calendar)
+        self.assertEquals(event.getCalendarUser(), 'root')
+
+        assert event.getOrganizerCalendar()
+
         # Test event's view and forms
         self.portal.REQUEST.SESSION = {}
         assert event.calendar_event_view()
@@ -126,7 +132,7 @@ class TestCalendar(CPSCalendarTestCase):
         assert self.calendar.calendar_view(disp="month")
         assert self.calendar.calendar_view(disp="day")
         assert self.calendar.calendar_addevent_form()
-        #assert self.calendar.calendar_display_form()
+        assert self.calendar.calendar_display_form()
         assert self.calendar.calendar_export()
         assert getattr(self.calendar, 'calendar.ics')()
 

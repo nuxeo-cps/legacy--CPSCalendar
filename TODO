@@ -1,5 +1,15 @@
+BUGS:
+
+- Fix bogus pages
+
+- make description field editable
+
+- suppress workflow links
+
+
 P1:
 - add a searching interface more improved for rendez-vous interface.
+
 
 P2: 
 - Suppress Calendars class and create portal_cpscalendar tool (10/12/2003)
@@ -26,6 +36,7 @@ P3:
 - add WebDav interface for global import
 
 - add 
+
 
 Cleanup / refactoring:
 

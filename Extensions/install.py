@@ -103,20 +103,20 @@ def update(self):
     pr("Verifying portal types")
     ttool = portal.portal_types
     workspaceACT = list(ttool['Workspace'].allowed_content_types)
-    for ptype in ('Calendars', 'Calendar'):
+    for ptype in ('Calendar',):
         if ptype not in  workspaceACT:
             workspaceACT.append(ptype)
 
     ptypes = {
         'CPSCalendar':(
-            'Calendars',
+            #'Calendars',
             'Calendar',
             'Event',
         ),
     }
 
     allowed_content_type = {
-        'Calendars' : ('Calendar',),
+        #'Calendars' : ('Calendar',),
         'Calendar' : ('Event',),
         'Event' : (),
         'Workspace' : workspaceACT
@@ -144,7 +144,7 @@ def update(self):
     pr("Setup workflow shemas")
     wftool = portal.portal_workflow
     wfs = {
-        'Calendars': 'workspace_folder_wf',
+        #'Calendars': 'workspace_folder_wf',
         'Calendar': 'workspace_folder_wf',
         'Event': 'workspace_content_wf',
     }
@@ -160,13 +160,13 @@ def update(self):
     pr(repr(trtool[workspaces_id].type_names))
     pr(repr(trtool[workspaces_id].meta_types))
     WTN = list(trtool[workspaces_id].type_names)
-    for type_name in ('Calendars', 'Calendar'):
+    for type_name in ('Calendar',):
         if type_name not in WTN:
             WTN.append(type_name)
     trtool[workspaces_id].type_names = WTN
     
     WMT = list(trtool[workspaces_id].meta_types)
-    for type_name in ('Calendars', 'Calendar'):
+    for type_name in ('Calendar',):
         if type_name not in WMT:
             WMT.append(type_name)
     trtool[workspaces_id].meta_types = WMT

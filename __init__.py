@@ -22,7 +22,7 @@ from Products.CMFCore import utils
 from Products.CMFCore.DirectoryView import registerDirectory
 from Products.CMFCore.CMFCorePermissions import AddPortalContent
 
-import Calendars
+#import Calendars
 import Calendar
 import Event
 import CPSCalendarTool
@@ -32,20 +32,20 @@ tools = (
 )
 
 contentClasses = (
-    Calendars.Calendars,
+    #Calendars.Calendars,
     Calendar.Calendar,
     Event.Event,
 )
 
 contentConstructors = (
-    Calendars.addCalendars,
+    #Calendars.addCalendars,
     Calendar.addCalendar,
     Event.addEvent,
     CPSCalendarTool.addCPSCalendarTool,
 )
 
 fti = (
-    Calendars.factory_type_information +
+    #Calendars.factory_type_information +
     Calendar.factory_type_information +
     Event.factory_type_information +
     ()
@@ -77,6 +77,6 @@ def initialize(registrar):
     ).initialize(registrar)
 
     # icon
-    utils.registerIcon(Calendars.Calendars, 'calendars_icon.gif', globals())
+    #utils.registerIcon(Calendars.Calendars, 'calendars_icon.gif', globals())
     utils.registerIcon(Calendar.Calendar, 'calendar_icon.gif', globals())
     utils.registerIcon(Event.Event, 'event_icon.gif', globals())
