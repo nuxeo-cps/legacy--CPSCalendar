@@ -8,7 +8,8 @@
 <head>
   <title tal:content="here/expanded_title"
          i18n:translate="">
-    Nuxeo | Solutions web pour mieux collaborer</title>
+	 Printing version of your calendar
+  </title>
   <metal:block define-slot="base">
     <!-- Additional head elements -->
     <base tal:attributes="href string:${here/absolute_url}/">

@@ -148,7 +148,7 @@
       </a>
     </h3>
     <span class="calTitle" i18n:translate="cpscalendar_message_select_the_desired_duration_of_your_meeting">
-      Select the desired duration of your meeting
+      Select the desired duration for your meeting
     </span>:
     <p>
       <select name="duration_hour:int">
