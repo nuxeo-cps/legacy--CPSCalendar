@@ -1,22 +1,21 @@
-<tal:block define="
-  cal_infos python:here.calendar_getSelectorInfos(**request.form);
-  input_id request/form/input_id ;
-  date_disp_id request/form/date_disp_id ;
-  other_input request/form/other_input">
+<tal:block define="cal_infos python:here.calendar_getSelectorInfos(**request.form);
+                   input_id request/form/input_id ;
+                   date_disp_id request/form/date_disp_id ;
+                   other_input request/form/other_input">
 <html metal:use-macro="here/selector_template/macros/master">
 
-<metal:block fill-slot="style_plus">
+<metal:block fill-slot="css_slot">
   <link rel="stylesheet" type="text/css"
-    tal:attributes="href string:${portal_url}/calendar_stylesheet.css" />
+        tal:attributes="href string:${portal_url}/calendar_stylesheet.css" />
 </metal:block>
 
-<metal:block fill-slot="script_plus">
+<metal:block fill-slot="javascript_head_slot">
   <script language="JavaScript" type="text/javascript" 
-    tal:content="python:'var input_id = %s \n 
-                         var date_disp_id = %s \n 
-                         var other_input = %s ' % 
-                         (input_id,date_disp_id,other_input) "/> 
- 
+          tal:content="python:str('var input_id = %s \n 
+                               var date_disp_id = %s \n 
+                               var other_input = %s ' % 
+                               (input_id,date_disp_id,other_input))"/> 
+
 <script language="JavaScript" type="text/javascript"><!--
 function initAll() {
   return true
@@ -47,7 +46,7 @@ function select_day(day, month, year, day_disp) {
 </metal:block>
 
 <metal:block fill-slot="main">
-  <h3 tal:content="cal_infos/base_disp">January 2003</h3>
+  <h3 tal:content="cal_infos/base_disp" i18n:translate="">January 2003</h3>
   <table cellspacing="0" cellpadding="0" border="0" width="100%">
     <tr>
       <td>
