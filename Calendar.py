@@ -505,7 +505,6 @@ class Calendar(CPSBaseFolder):
     def _getHourBlockCols(self, hour_cols, show):
         """
         """
-        import pdb;pdb.set_trace()
         hour_block_cols = []
         for col in hour_cols:
             blocks = []
