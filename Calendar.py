@@ -168,8 +168,20 @@ class Calendar(CPSBaseFolder):
         kw = {}
         kw['title'] = title
         kw['description'] = description
+        self.uid = self.genUid()
         CPSBaseFolder.__init__(self, id, **kw)
         self.usertype = usertype
+
+    security.declarePrivate('genUid')
+    def genUid(self):
+        """UID generator. To be improved (so that uids are truly unique) and
+        moved to a base class later."""
+        import time, random
+        return str(time.time()) + str(random.randint(0, 1000))
+
+    security.declarePrivate('getRpath')
+    def getRpath(self):
+        return self.absolute_url(relative=1)
 
     security.declareProtected('Add portal content', 'getPendingEventsCount')
     def getPendingEventsCount(self):

@@ -14,8 +14,11 @@ cals_dict = freebusy_infos['cals_dict']
 mask_cal = freebusy_infos['mask_cal']
 cals = [cals_dict[id] for id in cal_ids]
 
-meeting['busy_infos']  = context.unionCals(with_free=1, *(cals + [mask_cal]))
+meeting['busy_infos']  = context.listFreeSlots(
+    with_free=1, *(cals + [mask_cal]))
 
-REQUEST.SESSION['meeting'] = meeting
+if REQUEST is not None:
+    REQUEST.SESSION['meeting'] = meeting
+    REQUEST.RESPONSE.redirect(
+        '%s/calendar_freebusy' % (context.absolute_url(), ))
 
-REQUEST.RESPONSE.redirect('%s/calendar_freebusy' % (context.absolute_url(), ))

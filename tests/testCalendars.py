@@ -18,7 +18,8 @@ class TestCalendarTool(CPSCalendarTestCase):
         # This actually creates an entry for root in portal_memberdata
         mtool = self.portal.portal_membership
         m = mtool.getAuthenticatedMember()
-        m.setProperties(toto='toto')
+        # xxx = whatever here, what's important is to call setProperties()
+        m.setProperties(xxx='xxx')
 
         # If there is no entry for user, getCalendarForPath will return None
         dtool = self.portal.portal_metadirectories
@@ -38,19 +39,34 @@ class TestCalendarTool(CPSCalendarTestCase):
     def testCalendarTool(self):
         caltool = self.caltool
 
-        rpath = self.user_home.absolute_url(relative=1)
+        # rpath is the path to "someplace"
+        rpath = 'portal/workspaces/members/root'
         cal = caltool.getCalendarForPath(rpath)
         self.assertEquals(cal, self.user_home.calendar)
+        cal = caltool.getCalendarForPath(rpath + '/calendar')
+        self.assertEquals(cal, self.user_home.calendar)
 
-        #print caltool.listCalendars()
+        cal = caltool.getCalendarForUser('root')
+        self.assertEquals(cal, self.user_home.calendar)
+
         l = caltool.listCalendarPaths()
         l.sort()
         self.assertEquals(l, [
              'portal/workspaces/members/root/calendar',
              'portal/workspaces/members/test_user_1_/calendar'])
 
-        #print caltool.listCalendarsDict()
-        #print caltool.getFreeBusy(...)
+        l = caltool.listCalendars()
+        l = [cal.getRpath() for cal in l]
+        l.sort()
+        self.assertEquals(l, [
+             'portal/workspaces/members/root/calendar',
+             'portal/workspaces/members/test_user_1_/calendar'])
+
+        # XXX: test these later
+        assert caltool.listCalendarsDict()
+        self.assertEquals(caltool.listFreeSlots([]), [])
+        caltool.listFreeSlots(caltool.listCalendars())
+        #assert caltool.getFreeBusy(...)
 
 
 class TestCalendar(CPSCalendarTestCase):

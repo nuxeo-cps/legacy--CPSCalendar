@@ -60,7 +60,7 @@ display_ids = freebusy_infos['cal_users'].keys()
 meeting['display_ids'] = display_ids
 
 # calculate the whole freebusy
-busy_infos = context.unionCals(with_free=1,
+busy_infos = context.listFreeSlots(with_free=1,
     *(freebusy_infos['cals_dict'].values() + [freebusy_infos['mask_cal']]),
 )
 

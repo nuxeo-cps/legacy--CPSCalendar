@@ -270,6 +270,8 @@ class Event(CPSBaseDocument):
     security.declareProtected('View', 'canEditThisEvent')
     def canEditThisEvent(self):
         """Return True if we are in the organizer's calendar"""
+        # FIXME: must check that we are allowed to edit the calendar, that's
+        # all.
         return self.getCalendarUser() == self.organizer['id']
 
     security.declareProtected('Add portal content', 'isDirty')
@@ -329,6 +331,7 @@ class Event(CPSBaseDocument):
     def setMyStatus(self, status, comment='', REQUEST=None):
         """Set the status for the current calendar"""
         user_id = self.getCalendarUser()
+        calendar = self.getCalendar()
         (member, member_cn, dtstamp) = self._getRequestInformations()
         for attendee in self.attendees:
             if attendee['id'] == user_id:
@@ -336,10 +339,8 @@ class Event(CPSBaseDocument):
                 attendee['status'] = status
                 if status != old_status:
                     if status == 'decline':
-                        calendar = self.getCalendar()
                         calendar.addDeclinedEvent(self)
                     if old_status == 'decline':
-                        calendar = self.getCalendar()
                         calendar.removeDeclinedEvent(self)
                 self._p_changed = 1
         org_calendar = self.getOrganizerCalendar()
@@ -347,10 +348,11 @@ class Event(CPSBaseDocument):
             LOG('NGCal', INFO, "Can't get calendar for %s" 
                 % (self.organizer['id'], ))
             return
+
         my_id = self.getCalendarUser()
 
         try:
-            cn = self.getAttendeeInfo(my_id).get('cn', id)
+            cn = self.getAttendeeInfo(calendar.getRpath()).get('cn', id)
         except AttributeError:
             mtool = getToolByName(calendar, 'portal_membership')
             cn = mtool.getAuthenticatedMember().getUserName()
@@ -393,7 +395,7 @@ class Event(CPSBaseDocument):
                 LOG('CPSCalendar', INFO, "Can't get calendar for %s" 
                     % (attendee_id, ))
                 continue
-            attendee_calendar.addPendingEvent(event_dict=event_dict)
+            attendee_calendar.addPendingEvent(event_dict)
             notified_attendees.append(attendee_id)
 
         self.notified_attendees = [id for id in all_attendees 
@@ -469,11 +471,12 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
     if organizer is None:
         # By default, organizer is the current calendar user
         try:
-            organizer = calendar.getAttendeeInfo(calendar.rpath)
+            organizer = calendar.getAttendeeInfo(calendar.getRpath())
         except AttributeError:
             mtool = getToolByName(calendar, 'portal_membership')
             organizer = {
                 'id': mtool.getAuthenticatedMember().getId(),
+                'rpath': calendar.getRpath(),
                 'usertype': calendar.usertype,
                 'cn': mtool.getAuthenticatedMember().getUserName(),
             }
