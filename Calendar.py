@@ -866,7 +866,8 @@ class Calendar(CPSBaseFolder):
         """
         """
         ctool = getToolByName(self, 'portal_calendar')
-        return filter(None,[ctool.getCalendarFromPath(x) for x in self._additional_cals])
+        return filter(None,
+            [ctool.getCalendarFromPath(x) for x in self._additional_cals])
 
     security.declareProtected('Delete objects', 'manage_delObjects')
     def manage_delObjects(self, ids, *args, **kw):
