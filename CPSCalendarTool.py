@@ -271,12 +271,15 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                     'label': "Create a calendar when creating the user's home folder"},
                    {'id':'member_can_create_home_calendar', 'type':'boolean', 'mode': 'w',
                     'label': "Create a calendar when creating the user's home folder"},
+                   {'id':'event_fulltext_index', 'type':'boolean', 'mode': 'w',
+                    'label': "Index searchableText for events"},
                    )
 
     search_fields = ['id', 'sn', 'email', 'groups']
     create_member_calendar = 1
     member_can_create_home_calendar = 1
-
+    event_fulltext_index = 1
+    
     def __init__(self):
         PortalFolder.__init__(self, self.id)
 

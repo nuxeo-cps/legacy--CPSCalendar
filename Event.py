@@ -256,7 +256,10 @@ class Event(CPSBaseDocument):
     security.declareProtected(View, 'SearchableText')
     def SearchableText(self):
         """Used by the catalog for basic full text indexing."""
-        return '%s %s' % (self.title, self.description)
+        ctool = getToolByName(self, 'portal_cpscalendar')
+        if ctool.event_fulltext_index:
+            return '%s %s' % (self.title, self.description)
+        return ''
 
     security.declareProtected(View, 'getCalendar')
     def getCalendar(self):
