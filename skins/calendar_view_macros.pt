@@ -246,12 +246,13 @@
             <td>
             </td>
             <tal:block repeat="col line">
-              <td
-                tal:define="colspan col/colspan"
-                tal:attributes="
-                colspan python:colspan> 1 and colspan or nothing;
-                bgcolor python:col['event'] and '#DDDDDD'">
-                <tal:block condition="nocall:col/event">
+              <tal:block define="
+                colspan col/colspan;
+                event nocall:col/event;">
+                <td bgcolor="#CCCCCC"
+                  tal:condition="nocall:event"
+                  tal:attributes="
+                    colspan python:colspan> 1 and colspan or nothing;">
                   <a
                     tal:define="
                       event nocall:col/event;
@@ -263,8 +264,18 @@
                         href event/absolute_url;
                         title title;"
                         tal:content="disp_title" />
+                </td>
+                <tal:block condition="not:nocall:event">
+                  <tal:block
+                    repeat="i python:range(col['pos'], col['pos']+colspan)">
+                    <td
+                      tal:attributes="
+                        bgcolor python:i in [0,2,4,6] and '#DDDDEE' or nothing
+                      ">
+                    </td>
+                  </tal:block>
                 </tal:block>
-              </td>
+              </tal:block>
             </tal:block>
           </tr>
           <tr tal:condition="day_lines">
@@ -447,12 +458,31 @@
             </tr>
             <tr tal:repeat="day_line line/day_lines">
               <tal:block repeat="col day_line">
-                <td
-                  tal:define="colspan col/colspan"
-                  tal:attributes="
-                  colspan python:colspan > 1 and colspan or nothing;
-                  bgcolor python:col['event'] and '#DDDDDD'">
-                  <tal:block condition="nocall:col/event">
+                <tal:block define="
+                  colspan col/colspan;
+                  event nocall:col/event;">
+                  <tal:block condition="not:nocall:event">
+                    <tal:block
+                      repeat="i python:range(col['pos'], col['pos']+colspan)">
+                      <tal:block
+                        define="
+                        not_void python:line['hour_cols'][i]">
+                        <td
+                          tal:condition="not_void"
+                          tal:attributes="
+                            bgcolor python:i in [0,2,4,6] and '#DDDDFF' or '#EEEEFF'
+                          ">
+                        </td>
+                        <td
+                          tal:condition="not:not_void">
+                        </td>
+                      </tal:block>
+                    </tal:block>
+                  </tal:block>
+                  <td bgcolor="#CCCCCC"
+                    tal:condition="nocall:event"
+                    tal:attributes="
+                      colspan python:colspan > 1 and colspan or nothing;">
                     <a
                       tal:define="
                       event nocall:col/event;
@@ -464,8 +494,8 @@
                       href event/absolute_url;
                       title title"
                       tal:content="disp_title" />
-                  </tal:block>
-                </td>
+                  </td>
+                </tal:block>
               </tal:block>
             </tr>
             <tr tal:condition="line/day_lines">
@@ -483,7 +513,7 @@
                         day_height events/day_height;
                         even repeat/events/even"
                     tal:attributes="
-                      bgcolor python:even and '#DDDDFF' or nothing
+                      bgcolor python:even and '#DDDDFF' or '#EEEEFF'
                       ">
                     <li tal:repeat="hour_event events/hour">
                       <a

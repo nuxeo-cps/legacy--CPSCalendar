@@ -352,12 +352,14 @@ class Calendar(Workgroup):
                     day_occupation[line] = id
                     day_ids.append(id)
                     day_dict[id] = (line, i)
-                    empty_span = i - day_empty[line]
+                    pos = day_empty[line]
+                    empty_span = i - pos
                     if empty_span:
                         day_lines[line].append(
                             {
                                 'event': None,
                                 'colspan': empty_span,
+                                'pos': pos,
                             }
                         )
                     day_lines[line].append(
@@ -370,12 +372,14 @@ class Calendar(Workgroup):
         for day_line in day_lines:
             id = day_occupation[i]
             if id is None:
-                empty_span = len_slots - day_empty[i]
+                pos = day_empty[i]
+                empty_span = len_slots - pos
                 if empty_span > 0:
                     day_line.append(
                         {
                             'event': None,
                             'colspan': empty_span,
+                            'pos': pos,
                         }
                     )
             else:
