@@ -1,6 +1,6 @@
 Requires:
 ~~~~~~~~~
--
+- You must run the cpscalendar_install to upgrade events.
 New features:
 ~~~~~~~~~~~~~
 -
@@ -14,6 +14,8 @@ Bug fixes:
 - with workgroups calendars, starting meetings always added the site
   manager instead of the user as a default attendee.
 - Edit access now depends on the Modify Portal Content permission.
+- The id of attendees is now the user name.
+- Mail notifications are working now.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

@@ -271,7 +271,6 @@ class Calendar(CPSBaseFolder):
                     + event_dict['change']
         events.append(event_dict)
         self._pending_events = tuple(events)
-        self.notifyMembers(base_dict)
 
     security.declareProtected('Add portal content', 'confirmPendingEvent')
     def confirmPendingEvent(self, event_id, REQUEST=None, **kw):
@@ -695,10 +694,10 @@ class Calendar(CPSBaseFolder):
     def getEmail(self, member, directory):
         """Get email from member's properties in directory"""
         try:
-            member_prop = directory.getEntry(member)
-            if member_prop is None:
+            memberob = directory.getEntry(member)
+            if not memberob:
                 return None
-            return member_prop.get('email')
+            return memberob.get('email')
         except KeyError:
             # The user has an member data entry, but is not a member.
             return None
@@ -792,8 +791,8 @@ class Calendar(CPSBaseFolder):
 
         for attendee in event_dict['event']['attendees']:
             if attendee['status'] == 'unconfirmed':
-                email = self.getEmail(attendee['cn'], mdir)
-                if email is not None:
+                email = self.getEmail(attendee['id'], mdir)
+                if email:
                     mails[email] = None
 
         mails = mails.keys()

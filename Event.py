@@ -188,20 +188,37 @@ class Event(CPSBaseDocument):
 
     def upgradeEventType(self, REQUEST=None):
         """Upgrades properties"""
+        # Return a string if upgrading even if there is no request, 
+        # for use in logging when running the install.
+        msg = []
+               
         if self.event_type is None:
             if self.all_day:
                 self.event_type = 'event_allday'
             else:
                 self.event_type = 'event_tofrom'
-                # Return s string even if there is no request, for use in logging 
-                # when running the install.
-                return "%s upgraded to %s" % (self.absolute_url(), self.event_type)
+                msg.append("%s upgraded to %s" % (self.absolute_url(),
+                                                  self.event_type))
         elif hasattr(self, 'recurrance_period'):
             # Upgrade from earlier bad spelling
             self.recurrence_period = self.recurrance_period[:]
             delattr(self, 'recurrance_period')
-            return "%s upgraded to 1.6.1" % self.absolute_url()
-            
+            msg.append("%s upgraded to 1.6.1" % self.absolute_url())
+        
+        attendee_upgrade = 0
+        new_attendees = []
+        for attendee in self.attendees:
+            if attendee['id'] == 'calendar':
+                attendee['id'] = attendee['rpath'].split('/')[-2]
+                attendee_upgrade = 1
+            new_attendees.append(attendee)
+                
+        if attendee_upgrade:
+            self.attendees = new_attendees
+            msg.append("%s upgraded to 1.6.2" % self.absolute_url())
+    
+        if msg:
+            return '\n'.join(msg)
         if REQUEST is not None:
             return "No upgrade needed"
 
@@ -382,14 +399,15 @@ class Event(CPSBaseDocument):
                 % (self.organizer['rpath'], ))
             return
 
+        userid = mtool.getAuthenticatedMember().getUserName()
         try:
             cn = self.getAttendeeInfo(calendar.getRpath()).get('cn', id)
         except AttributeError:
             mtool = getToolByName(calendar, 'portal_membership')
-            cn = mtool.getAuthenticatedMember().getUserName()
+            cn = userid
 
-        org_calendar.addPendingEvent({
-            'id': self.id,
+        event_dict = {
+            'id': userid,
             'request': 'status',
             'change': ({
                 'attendee': calendar_rpath,
@@ -400,8 +418,10 @@ class Event(CPSBaseDocument):
                 'dtstamp': dtstamp,
                 'sender': member,
                 'sender_cn': member_cn,
-            },)
-        })
+             },)
+        }
+        org_calendar.addPendingEvent(event_dict)
+        org_calendar.notifyMembers(event_dict)
         
         if REQUEST is not None:
             REQUEST.RESPONSE.redirect(self.absolute_url())
@@ -430,6 +450,8 @@ class Event(CPSBaseDocument):
             attendee_calendar.addPendingEvent(event_dict)
             notified_attendees.append(attendee_rpath)
 
+        calendar = self.getCalendar()
+        calendar.notifyMembers(event_dict)
         self.notified_attendees = [rpath for rpath in all_attendees 
             if rpath in self.notified_attendees or rpath in notified_attendees]
         if all_attendees == self.notified_attendees:

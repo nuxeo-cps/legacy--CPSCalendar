@@ -798,11 +798,10 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
         Return a dictionary with cn, rpath, id, usertype and status.
         """       
-        id = rpath.split('/')[-1]
         calendar = self.getCalendarForPath(rpath, unrestricted=1)
         if calendar:
+            id = rpath.split('/')[-1]
             info = {
-                'id': id,
                 'rpath': rpath,
                 'usertype': calendar.usertype,
             }
@@ -810,6 +809,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 info['cn'] = calendar.title_or_id()
             else:
                 id = calendar.getOwnerId()
+                info['id'] = id
                 dtool = getToolByName(self, 'portal_directories')
                 mdir = dtool.members
                 entry = mdir.getEntry(id)
@@ -818,19 +818,10 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 else:
                     info['cn'] = entry.get(mdir.title_field, id)
         else:
-            # Maybe a member with no created calendar
-            dtool = getToolByName(self, 'portal_directories')
-            mdir = dtool.members
-            entry = mdir.getEntry(id)
-            if entry is None:
-                return None
-            else:
-                info = {
-                    'id': id,
-                    'rpath': rpath,
-                    'usertype': 'member',
-                    'cn': entry.get(mdir.title_field, id),
-                }
+            # The given rpath does not point to a calendar
+            # This may be a user with no calandar, or a deleted user
+            # or similar.
+            return None
         if status:
             info['status'] = 'unconfirmed'
         return info
