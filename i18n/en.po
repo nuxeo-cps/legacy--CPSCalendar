@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2003-10-15 10:18default\n"
-"PO-Revision-Date: 2003-10-14 11:32+0200\n"
+"POT-Creation-Date: 2003-10-15 10:38default\n"
+"PO-Revision-Date: 2003-10-15 10:46+0200\n"
 "Last-Translator: DARCHE <madarche@nuxeio.com>\n"
 "Language-Team: Francais <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -889,13 +889,11 @@ msgstr ""
 msgid "week day"
 msgstr ""
 
-#, fuzzy
 msgid "cpscalendar_create_all_day_event"
-msgstr "Create a calendar"
+msgstr "Create an event during many days"
 
-#, fuzzy
 msgid "cpscalendar_create_not_all_day_event"
-msgstr "Create a calendar"
+msgstr "Create a punctual event"
 
 msgid "cpscalendar_change_event_to_all_day"
 msgstr "Change for an event on many days"
@@ -903,9 +901,8 @@ msgstr "Change for an event on many days"
 msgid "cpscalendar_change_event_to_not_all_day"
 msgstr "Change for a punctual event"
 
-#, fuzzy
 msgid "cpscalendar_untitled_(document)"
-msgstr "Comment"
+msgstr "Untitled"
 
 #, fuzzy
 msgid "confirmed"
@@ -1088,3 +1085,4 @@ msgstr "Unconfirmed"
 
 #~ msgid "Calendar"
 #~ msgstr "Calendar"
+
