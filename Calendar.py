@@ -32,8 +32,8 @@ from Globals import InitializeClass
 from Acquisition import aq_inner, aq_parent
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.CMFCorePermissions import setDefaultRoles, View
-from Products.CMFCore.CMFCorePermissions import ChangePermissions
+from Products.CMFCore.permissions import setDefaultRoles, View
+from Products.CMFCore.permissions import ChangePermissions
 
 from Products.CPSCore.CPSBase import CPSBaseFolder#, CPSBase_adder
 #from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups

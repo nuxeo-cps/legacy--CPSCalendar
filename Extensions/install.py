@@ -9,7 +9,7 @@ from Products.CPSCore.CPSWorkflow import TRANSITION_ALLOWSUB_CREATE
 from Products.CPSCore.CPSWorkflow import TRANSITION_ALLOWSUB_DELETE
 from Products.CPSCore.CPSWorkflow import TRANSITION_ALLOWSUB_MOVE
 from Products.CPSCore.CPSWorkflow import TRANSITION_ALLOWSUB_COPY
-from Products.CMFCore.CMFCorePermissions import View, ModifyPortalContent
+from Products.CMFCore.permissions import View, ModifyPortalContent
 
 WebDavLockItem = 'WebDAV Lock items'
 WebDavUnlockItem = 'WebDAV Unlock items'
