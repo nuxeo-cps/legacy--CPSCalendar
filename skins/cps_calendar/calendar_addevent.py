@@ -8,7 +8,7 @@ if REQUEST is not None:
     kw.update(REQUEST.form)
 
 event_type = kw.get('event_type')
-cal_ids = kw.get('cal_ids', {})
+cal_ids = kw.get('cal_ids', [])
 attendees = [ctool.getAttendeeInfo(id, 1) for id in cal_ids]
 kw['attendees'] = attendees
 
