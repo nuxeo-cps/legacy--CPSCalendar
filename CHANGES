@@ -10,4 +10,5 @@ Bug fixes:
 - The default day was always today, even if you clicked on a specific day.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- Added a test for the mail notification.
+- The mail notification now skips out early if possible.
