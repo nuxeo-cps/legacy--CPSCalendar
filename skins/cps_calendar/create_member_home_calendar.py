@@ -8,6 +8,6 @@ portal.portal_cpscalendar.createMemberCalendar()
 
 if REQUEST is not None:
     REQUEST.RESPONSE.redirect(
-        '%s/calendar' % portal.portal_membership.getHomeUrl())
+        '%s/calendar' % portal.portal_cpscalendar.getHomeCalendarUrl())
 
 return

@@ -21,8 +21,8 @@ class CalendarInstaller(CPSInstaller):
                 'portal_actions',
                 id='my_calendar',
                 name='My calendar',
-                action='string:${portal/portal_membership/getHomeUrl}/calendar',
-                condition="python:getattr(portal.portal_membership.getHomeFolder(), 'calendar', None)",
+                action='string:{portal/portal_cpscalendar/getHomeCalendarUrl}',
+                condition="portal/portal_cpscalendar/getHomeCalendarObject",
                 permission=('View',),
                 category='user',
                 visible=1)
@@ -32,7 +32,9 @@ class CalendarInstaller(CPSInstaller):
                 name='Create my home calendar',
                 action='string:${portal_url}/create_member_home_calendar',
                 condition="python:portal.portal_membership.getHomeFolder() and \
-                           not getattr(portal.portal_membership.getHomeFolder(), 'calendar', None)",
+                           not portal.portal_cpscalendar.getHomeCalendarObject() and \
+                           getattr(portal.portal_cpscalendar, \
+                                   'member_can_create_home_calendar', 1)",
                 permission=('View',),
                 category='user',
                 visible=1)
