@@ -6,6 +6,8 @@
 
 """
   Calendars container
+  This container is not any more necessary with CPS3, it will be implemented
+  like a tool
 """
 
 from zLOG import LOG, DEBUG
@@ -17,7 +19,7 @@ from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass
 
 from Products.CMFCore.CMFCorePermissions import \
-     setDefaultRoles, View, ManageProperties
+     setDefaultRoles, View, ModifyPortalContent, ManageProperties
 from Products.CMFCore.utils import getToolByName
 
 from Products.CPSCore.CPSBase import CPSBaseFolder, CPSBase_adder
@@ -271,7 +273,7 @@ class Calendars(CPSBaseFolder):
             'slots': slots,
         }
 
-    security.declareProtected(View, 'getCalendarForId')
+    security.declareProtected(ModifyPortalContent, 'getCalendarForId')
     def getCalendarForId(self, id):
         """Gets calendar for id, creates it if id is a user"""
         id = str(id)
@@ -280,36 +282,43 @@ class Calendars(CPSBaseFolder):
             return getattr(self, id)
         context = aq_parent(aq_inner(self))
         dirtool = getToolByName(context, 'portal_metadirectories')
+        mtool = getToolByName(context, 'portal_membership')
+        mtool.checkPermission('Modify portal content', self)
+        current_user = mtool.getAuthenticatedMember().getUserName()
         members = dirtool.members
         entry_prop = members._getInternalEntryProp()
-        entry = members._getEntry(id) 
+        entry = members._getEntry(id)
         if entry:
             # create this calendar for this member
             ttool = getToolByName(context, 'portal_types')
-            ti = ttool.getTypeInfo('Calendar')
-            # do ti.constructInstance(self, id) without permission checks
-            p = self.manage_addProduct[ti.product]
-            m = getattr(p, ti.factory)
-            kw = {}
-            if getattr(m, 'isDocTemp', 0):
-                args = (m.aq_parent, self.REQUEST)
-                kw['id'] = id
-            else:
-                args = (id, )
+            wtool = getToolByName(context, 'portal_workflow')
+            LOG(' Calendar automatic: ', DEBUG, repr(wtool))
+            LOG(' Calendar automatic: ', DEBUG, repr(self))
+            LOG(' Calendar automatic: ', DEBUG, current_user)
+            wtool.invokeFactoryFor(self, 'Calendar', id)
+##            calendar_type_info = ttool.getTypeInfo('Calendar')
+##            # do ti.constructInstance(self, id) without permission checks
+##            product = self.manage_addProduct[calendar_type_info.product]
+##            method = getattr(product, calendar_type_info.factory)
+##            kw = {}
+##            if getattr(method, 'isDocTemp', 0):
+##                args = (method.aq_parent, self.REQUEST)
+##                kw['id'] = id
+##            else:
+##                args = (id, )
 
-            kw['title'] = 'Calendar of %s' % (id, )
+##            kw['title'] = 'Calendar of %s' % (id, )
             
-            m(*args, **kw)
-            ob = self._getOb(id)
-            ob._computedtitle = 1
-            ti._finishConstruction(ob)
+##            method(*args, **kw)
+##            ob = self._getOb(id)
+##            ob._computedtitle = 1
+##            calendar_type_info._finishConstruction(ob)
 
-            mtool = getToolByName(context, 'portal_membership')
             if not mtool.isAnonymousUser():
-                current_user = mtool.getAuthenticatedMember().getUserName()
                 ob.manage_delLocalRoles(userids=[current_user])
             ob.manage_setLocalRoles(id, ['WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'])
             ob.reindexObject()
+            #LOG(' Calendar automatic: ', DEBUG, )
             return ob
         return None
 
@@ -394,13 +403,13 @@ def addCalendars(dispatcher, id,
     """Adds a Calendars container."""
     ob = Calendars(id)#, title, description)
     container = dispatcher.Destination()
+    # useless
     #container._setObject(id, ob)
     #ob = container._getOb(id)
-    if REQUEST is not None:
-        url = dispatcher.DestinationURL()
-        REQUEST.RESPONSE.redirect('%s/manage_main' % url)
+    #if REQUEST is not None:
+    #    url = dispatcher.DestinationURL()
+    #    REQUEST.RESPONSE.redirect('%s/manage_main' % url)
     return CPSBase_adder(container, ob, REQUEST=REQUEST)
-
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 2 as published
