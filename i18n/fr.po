@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "POT-Creation-Date: 2004-01-08 16:32default\n"
-"PO-Revision-Date: 2004-01-09 02:26+0100\n"
+"PO-Revision-Date: 2004-02-11 16:06+0100\n"
 "Last-Translator: Encolpe DEGOUTE <ed@nuxeo.com>\n"
 "Language-Team: French <cantact@nuxeo.com>\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr "Confirmé"
 #.       </li>
 #: from ../skins/cps_calendar/calendar_meeting_error.pt
 msgid "Error"
-msgstr ""
+msgstr " "
 
 #.   <h3 content="cal_infos/base_disp">January 2003</h3>
 #: from ../skins/cps_calendar/day_selector.pt
@@ -64,7 +64,7 @@ msgstr "Statut"
 #.   <span content="python:type['title']" class="calTitle">Type title</span>
 #: from ../skins/cps_calendar/calendars_contents.pt
 msgid "Type title"
-msgstr ""
+msgstr " "
 
 #.   <p content="python:str(user_type['plural_title'])">User type</p>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
@@ -886,7 +886,7 @@ msgid "cpscalendar_user_calendar_name_beg"
 msgstr "Agenda de "
 
 msgid "cpscalendar_user_calendar_name_end"
-msgstr ""
+msgstr " "
 
 msgid "cpscalendar_create_all_day_event"
 msgstr "Créer un événement sur plusieurs jours"
