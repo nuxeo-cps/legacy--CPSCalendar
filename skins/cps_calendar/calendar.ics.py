@@ -7,11 +7,11 @@ if not int(redirect):
 
     mtool = context.portal_membership
     if not mtool.checkPermission('View', context):
-        # not authorized but we don't want to raise this error
+        # Not authorized but we don't want to raise this error
         # since CMF will redirect it to the login form
         # and we want basic HTTP auth here
         RESPONSE = REQUEST.RESPONSE
-        realm=RESPONSE.realm
+        realm = RESPONSE.realm
         RESPONSE.setStatus(401)
         RESPONSE.setHeader('WWW-Authenticate', 'basic realm="%s"' % realm, 1)
         RESPONSE.setBody("""<html>
@@ -28,7 +28,7 @@ ical_date_conv = '%Y%m%d'
 def icalvalue(s):
     return unicode('\\,'.join(s.split(',')), 'latin1').encode('UTF-8')
 
-header="""BEGIN:VCALENDAR
+header = """BEGIN:VCALENDAR
 CALSCALE:GREGORIAN
 X-WR-TIMEZONE;VALUE=TEXT:Europe/Paris
 PRODID:-//Nuxeo//CPSCalendar 0.1//EN

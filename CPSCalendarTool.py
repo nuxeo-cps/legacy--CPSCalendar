@@ -24,7 +24,7 @@ from Products.CMFCore.PortalFolder import PortalFolder
 from AccessControl.Permissions import manage_users as ManageUsers
 from Products.CMFCore.CMFCorePermissions import setDefaultRoles
 from Products.CMFCore.CMFCorePermissions import View
-from Products.CMFCore.CMFCorePermissions import ManagePortal, AddPortalContent
+from Products.CMFCore.CMFCorePermissions import AddPortalContent
 from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.utils import _getAuthenticatedUser, _checkPermission
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
@@ -554,7 +554,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
         # Check that the user has the permissions.
         if not _checkPermission(AddPortalContent, context):
-                raise 'Unauthorized', AddPortalContent
+            raise 'Unauthorized', AddPortalContent
 
         aclu = self.acl_users
         user = aclu.getUser(member_id)

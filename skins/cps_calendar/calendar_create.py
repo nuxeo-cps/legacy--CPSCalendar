@@ -3,7 +3,7 @@
 if REQUEST:
     kw.update(REQUEST.form)
 
-here=context.this()
+here = context.this()
 
 if kw.has_key('id'):
     id = kw['id']
