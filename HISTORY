@@ -1,4 +1,12 @@
 *******************************************
+** CPSCalendar V0.2.2 [R1 build 2003/11/18-17:08 by regebro]
+
+Bug fixes:
+~~~~~~~~~~
+- The labels of days and Months started with 0, while most usage
+  usage expected them to start with 1.
+
+*******************************************
 ** CPSCalendar V0.2.1 [R1 build 2003/11/17-14:53 by ben]
 
 ZODB Requires:
