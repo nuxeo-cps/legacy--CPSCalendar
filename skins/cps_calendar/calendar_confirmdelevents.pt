@@ -31,7 +31,8 @@
                        i18n:translate="cpscalendar_label_comment">
             Comment
           </metal:block>
-          <metal:block fill-slot="content">
+          <metal:block fill-slot="content"
+            tal:define="notify notify|string:cancel">
             <textarea name="comment" cols="40" rows="4"></textarea>
             <br />
             <small tal:condition="python:notify == 'cancel'"
