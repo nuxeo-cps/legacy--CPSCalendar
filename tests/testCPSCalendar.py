@@ -24,6 +24,7 @@ class TestBase(ZopeTestCase.ZopeTestCase):
 
     _setup_fixture = 0
 
+# XXX: tests are missing !!!
 # TODO: 
 
 
@@ -33,8 +34,5 @@ else:
     import unittest
     def test_suite():
         suite = unittest.TestSuite()
-        suite.addTest(unittest.makeSuite(TestUserFolder))
-        suite.addTest(unittest.makeSuite(TestAccess))
-        suite.addTest(unittest.makeSuite(TestValidate))
-        suite.addTest(unittest.makeSuite(TestPluginFolder))
+        # XXX something is missing here
         return suite
