@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2004-08-20 15:21default\n"
+"POT-Creation-Date: 2004-09-23 16:46default\n"
 "PO-Revision-Date: 2004-05-10 15:04+0100\n"
 "Last-Translator: Paolo Dina <paolo@php3.it>\n"
 "Language-Team: \n"
@@ -1252,6 +1252,15 @@ msgstr "non puoi selezionare un intervallo di tempo più esteso di un mese"
 #, fuzzy
 msgid "cpscalendar_ressources"
 msgstr "Risorse"
+
+#    <span>Number of times</span>
+#.   <p class="calTitle">
+#.         Search for free time:
+#.       </p>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+#, fuzzy
+msgid "cpscalendar_search_for_free_time"
+msgstr "volte"
 
 #    <block fill-slot="title">
 #                Status

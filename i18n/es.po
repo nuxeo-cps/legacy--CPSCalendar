@@ -879,6 +879,13 @@ msgstr ""
 msgid "cpscalendar_ressources"
 msgstr ""
 
+#.   <p class="calTitle">
+#.         Search for free time:
+#.       </p>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_search_for_free_time"
+msgstr ""
+
 #.   <span content="string:cpscalendar_option_${type}">cpscalendar_status</span>
 #.   <span content="string:cpscalendar_option_status_${status}">cpscalendar_status</span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
