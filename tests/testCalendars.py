@@ -51,13 +51,32 @@ class TestCalendar(CPSCalendarTestCase):
         self.assertEquals(self.calendar.getPendingEventsCount(), 0)
         self.assertEquals(self.calendar.getPendingEvents(), ())
 
-    def testAddEvent(self):
+    def testAddOneEvent(self):
+        from_date = DateTime(2003, 1, 1, 12, 0)
+        to_date = DateTime(2003, 1, 1, 14, 0)
         self.calendar.invokeFactory(
-            'Event', 'event', 
-            from_date=DateTime(2003, 1, 1, 12, 0),
-            to_date=DateTime(2003, 1, 1, 14, 0),
-        )
-        self.assert_(self.calendar.event)
+            'Event', 'event', from_date=from_date, to_date=to_date)
+        event = self.calendar.event
+
+        start_time = DateTime(2003, 1, 1, 10, 0)
+        end_time = DateTime(2003, 1, 1, 16, 0)
+        desc = self.calendar.getEventsDesc(
+            start_time=start_time, end_time=end_time, disp='day')
+        self.assertEquals(desc,
+            {'hour_blocks': 
+                [[[{'height': 720, 'event': None}]], 
+                    [[{'height': 120, 'event': event, 'isdirty': 0}]]],
+             'slots': [(start_time, end_time)], 
+             'day_events': []})
+
+        xxx = self.calendar.getEventsDesc(
+            start_time=DateTime(2003, 1, 1, 10, 0),
+            end_time=DateTime(2003, 1, 1, 16, 0), disp='week')
+
+        xxx = self.calendar.getEventsDesc(
+            start_time=DateTime(2003, 1, 1, 10, 0),
+            end_time=DateTime(2003, 1, 1, 16, 0), disp='month')
+
 
 
 def test_suite():
