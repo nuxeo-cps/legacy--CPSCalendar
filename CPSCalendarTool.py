@@ -17,7 +17,7 @@
 #
 # $Id$
 
-
+from zLOG import LOG, DEBUG
 from Globals import InitializeClass
 from Products.CMFCore.PortalFolder import PortalFolder
 
@@ -188,6 +188,12 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 })
         return calendars_dict
 
+    security.declareProtected('View', 'getCalendarIds')
+    def getCalendarForId(self, id):
+        """ return all available Calendar ids in a list
+        """
+        return None
+
     # XXX use a special permission here
     security.declareProtected('View', 'unionCals')
     def unionCals(self, *cals, **kw):
@@ -307,66 +313,50 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         }
 
     security.declareProtected('ModifyPortalContent', 'createUserCalendar')
-    def createUserCalendar(self, id):
+    def createUserCalendar(self, context, id):
         """Create an user calendar"""
-        id = str(id)
-        ids = self.objectIds('Calendar')
-        if id in ids:
-            return getattr(self, id)
-
-        context = aq_parent(aq_inner(self))
-        dirtool = getToolByName(context, 'portal_metadirectories')
-        mtool = getToolByName(context, 'portal_membership')
-        ttool = getToolByName(context, 'portal_types')
+        dirtool = getToolByName(self, 'portal_metadirectories')
+        mtool = getToolByName(self, 'portal_membership')
+        ttool = getToolByName(self, 'portal_types')
+        mcat = self.Localizer.cpscalendar
 
         members = dirtool.members
-        entry = members.getEntry(id)
 
         aclu = self.acl_users
-        user = aclu.getUser(id).__of__(aclu)
+        user = aclu.getUser(id)
+        if user is not None:
+            user = user.__of__(aclu)
 
-        if entry:
-            # create this calendar for this member
-            #ttool = getToolByName(context, 'portal_types')
-            wtool = getToolByName(context, 'portal_workflow')
+        # create this calendar for this member
+        title = mcat('cpscalendar_user_calendar_name_beg').encode('ISO-8859-15',
+                                                                  'ignore')\
+              + user.getUserName()\
+              + mcat('cpscalendar_user_calendar_name_end').encode('ISO-8859-15',
+                                                                  'ignore')
+        #raise str(title)
+        wtool = getToolByName(self, 'portal_workflow')
+        wtool.invokeFactoryFor(context, 'Calendar', 'calendar',
+                               title=title,
+                               description='')
 
-            # Setup a temporary security manager so that creation is not
-            # hampered by insufficient roles.
-            old_user = getSecurityManager().getUser()
-            # Use member_id so that the Owner role is set for it
-            tmp_user = CPSUnrestrictedUser(id, '',
-                                           ['Manager', 'Member'], '')
-            tmp_user = tmp_user.__of__(aclu)
-            newSecurityManager(None, tmp_user)
+        calendar_type_info = ttool.getTypeInfo('Calendar')
 
-            wtool.invokeFactoryFor(self, 'Calendar', id,
-                                   title=entry['fullname'],
-                                   description='')
-
-            calendar_type_info = ttool.getTypeInfo('Calendar')
-
-            ob = self._getOb(id)
-            ob._computedtitle = 1
-            calendar_type_info._finishConstruction(ob)
+        ob = context._getOb('calendar')
+        calendar_type_info._finishConstruction(ob)
  
-            # Grant ownership to Member
-            try:
-                ob.changeOwnership(user)
-                # XXX this method is defined in a testcase and just does a pass
-            except AttributeError:
-                pass  # Zope 2.1.x compatibility
+        # Grant ownership to Member
+        try:
+            ob.changeOwnership(user)
+            # XXX this method is defined in a testcase and just does a pass
+        except AttributeError:
+            pass  # Zope 2.1.x compatibility
 
-            ob.manage_setLocalRoles(id, ['Owner', 'WorkspaceManager'])
+        ob.manage_setLocalRoles(id, ['Owner', 'WorkspaceManager'])
 
-            # Rebuild the tree with corrected local roles.
-            # This needs a user that can View the object.
-            portal_eventservice = getToolByName(self, 'portal_eventservice')
-            portal_eventservice.notify('sys_modify_security', ob, {})
-
-            newSecurityManager(None, old_user)
-            return ob
-        else:
-            return None
+        # Rebuild the tree with corrected local roles.
+        # This needs a user that can View the object.
+        portal_eventservice = getToolByName(self, 'portal_eventservice')
+        portal_eventservice.notify('sys_modify_security', ob, {})
 
     security.declareProtected(View, 'getAttendeeInfo')
     def getAttendeeInfo(self, id, status=0):
