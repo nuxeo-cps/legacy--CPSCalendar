@@ -371,7 +371,7 @@
 </metal:block>
 
 <!-- ============================================================ -->
-<metal:block define-macro="searchform" i18n:domain="cpscalendar">
+<metal:block define-macro="searchwidgets" i18n:domain="cpscalendar">
   <tal:block define="
     search_param python:request.get('search_param', 'nosearch');
     searching python:search_param != 'nosearch';
@@ -380,8 +380,7 @@
     caltool here/portal_cpscalendar;
     this_user here/getCalendarUser;
     ">
-    <tal:block condition="python: not searching">
-      <form method="POST" tal:attributes="action here/REQUEST/URL1">
+      <tal:block condition="python: not searching">
         <p>
           <span i18n:translate="cpscalendar_label_add_a_user_whose">
             Add a user whose
@@ -408,7 +407,6 @@
                  i18n:attributes="value"
                  tal:attributes="name python:searchaction+':method'">
         </p>
-      </form>
     </tal:block>
     <tal:block condition="searching">
       <tal:block define="search_param python: request.get('search_param', '');
@@ -423,7 +421,6 @@
                 Add
               </span>
               <br>
-            <form method="POST" tal:attributes="action here/REQUEST/URL1">
               <tal:block repeat="user_id users">
                 <tal:block define="props python:dtool.getEntry(user_id);
                                    calpath calendars/?user_id;">
@@ -437,7 +434,6 @@
                      value="cpscalendar_button_add"
                      i18n:attributes="value"
                      tal:attributes="name python:addaction+':method'">
-              </form>
             </p>
         </tal:block>
         <tal:block condition="python:not users">
@@ -450,4 +446,11 @@
       </tal:block>
     </tal:block>
   </tal:block>
+</metal:block>
+
+<!-- ============================================================ -->
+<metal:block define-macro="searchform" i18n:domain="cpscalendar">
+  <form method="POST" tal:attributes="action here/REQUEST/URL1">
+    <metal:block use-macro="here/calendar_macros/macros/searchwidgets" />
+  </form>
 </metal:block>
