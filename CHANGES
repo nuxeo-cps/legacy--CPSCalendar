@@ -17,6 +17,9 @@ Bug fixes:
 - A KeyError 'id' when running the installer was fixed.
 - The document link was lost when editing the document.
 - You can no longer remove the organizer from the attendees list.
+- Deleting events now cancels them, even in the deleters calendar.
+- Verifying cancellations no longer sends new events to verify.
+- Removing an attendee now sends a cancel to the attendee.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

@@ -61,11 +61,12 @@ factory_type_information = (
                  {'id': 'attendees',
                   'name': 'action_attendees',
                   'action': 'string:${object_url}/calendar_attendees_form',
+                  'condition': 'python:object.getCalendar() == object.getOrganizerCalendar()',
                   'permissions': (ModifyPortalContent,)},
                  {'id': 'delete',
-                  'name': 'action_delete',
+                  'name': 'button_cancel',
                   'action': 'string:${object_url}/calendar_delevent',
-                  'condition': 'python:object.canEditThisEvent()',
+                  'condition': 'python:object.getCalendar() == object.getOrganizerCalendar()',
                   'permissions': (ModifyPortalContent,)},
                  {'id': 'calendar',
                   'name': 'action_calendar',
@@ -384,6 +385,17 @@ class Event(CPSBaseDocument):
                    if rpath in all_rpaths])
         self.isdirty = self.notified_attendees != all_rpaths
 
+    def removeAttendees(self, attendees):
+        """Removes attendees from attendee-list"""
+        event_dict = self.getEventDict()
+        event_dict['event']['event_status'] = 'canceled'
+        self.updateAttendeesCalendars(attendees=attendees,
+            event_dict=event_dict)
+        for attendee in self.attendees:
+            if attendee['rpath'] in attendees:
+                self.attendees.remove(attendee)
+        self._p_changed = 1
+        
     security.declareProtected('Add portal content', 'setAttendeeStatus')
     def setAttendeeStatus(self, changed_attendee, status):
         """Set the attendee's status"""
@@ -484,12 +496,13 @@ class Event(CPSBaseDocument):
 
     security.declareProtected('Add portal content', 'updateAttendeesCalendars')
     def updateAttendeesCalendars(self, comment='', attendees=None, 
-                                 REQUEST=None):
+                                 REQUEST=None, event_dict=None):
         """ 
         """
         notified_attendees = []
         all_attendees = []
-        event_dict = self.getEventDict(comment=comment)
+        if event_dict is None:
+            event_dict = self.getEventDict(comment=comment)
         caltool = getToolByName(self, 'portal_cpscalendar')
         this_rpath = self.getRpath()
         for attendee in self.attendees:
