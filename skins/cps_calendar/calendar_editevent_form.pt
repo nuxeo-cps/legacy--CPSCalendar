@@ -26,8 +26,8 @@
                                              'cpscalendar_untitled_(document)')
                         or here.title;
     description python:create and str('') or here.description;
-    event_type request/event_type|string:event_tofrom;
-    event_type python:create and event_type or here.event_type;
+    event_type python:create and 'event_tofrom' or here.event_type;
+    event_type request/event_type|event_type;
     recurrance_period request/recurrance_period|string:period_daily;
     recurrance_period python:create and recurrance_period or here.recurrance_period;
     location python:(not create) and here.location or '';

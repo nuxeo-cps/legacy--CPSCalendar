@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- It was impossible to change the event type after creation.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
