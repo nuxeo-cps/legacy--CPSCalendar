@@ -94,7 +94,7 @@
   </tal:block>
 
   <tal:block condition="editevent">
-    <form tal:attributes="action here/absolute_url" method="POST">
+    <form tal:attributes="action here/absolute_url" method="post">
       <input type="hidden" name="create" tal:attributes="value create" />
 
       <metal:block use-macro="here/calendar_macros/macros/form">
@@ -125,8 +125,8 @@
               <option tal:repeat="type here/event_types"
                       tal:attributes="value type;
                                       selected python:event_type == type;">
-                <span tal:content="string:cpscalendar_option_${type}"
-                      i18n:translate="">cpscalendar_status</span>
+                <tal:block content="string:cpscalendar_option_${type}"
+                      i18n:translate="">cpscalendar_status</tal:block>
               </option>
             </select>
           </metal:block>
@@ -289,18 +289,18 @@ range       : [2000, 2049]
               <option tal:repeat="status statuses"
                       tal:attributes="value status;
                                       selected python:status == event_status;">
-                <span tal:content="string:cpscalendar_option_status_${status}"
-                      i18n:translate="">cpscalendar_status</span>
+                <tal:block content="string:cpscalendar_option_status_${status}"
+                      i18n:translate="">cpscalendar_status</tal:block>
               </option>
             </select>
           </metal:block>
         </metal:block>
         <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title">
-            <label for="category"
+            <span>
                i18n:translate="cpscalendar_label_category">
               Category
-            </label>
+            </span>
           </metal:block>
           <metal:block fill-slot="content">
             <table width="100%" cellspacing="2" cellpadding="0" border="0">
@@ -351,12 +351,12 @@ range       : [2000, 2049]
                 i18n:translate="">
                 Yes
               </option>
+            </select>
               <p>
                 <small i18n:translate="cpscalendar_legend_transparent">
                   Transparent events mean that you're not busy during this event.
                 </small>
               </p>
-            </select>
           </metal:block>
        </metal:block>
 
@@ -370,7 +370,7 @@ range       : [2000, 2049]
           <metal:block fill-slot="content">
               <p>
               <input type="text" id="document_field" size=42 name="document"
-                tal:attributes="value document_link" >
+                tal:attributes="value document_link" />
               <a style="text-decoration:none;border:1px solid black;padding:0.2em 0.3em;"
                  onClick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')"
                  i18n:translate="cpscalendar_label_browse">
