@@ -42,7 +42,7 @@
                          del_cal_ids here/REQUEST/del_cal_ids|python:[];
                          cal_ids python:[c for c in cal_ids if not c in del_cal_ids];
                          session request/SESSION;
-                         sm python: session['meeting'] or {};
+                         sm python: session.get('meeting') or {};
                          foo python:session.update({'meeting': sm});
                          foo python:sm.update({'cal_ids': cal_ids});
                          current_list cal_ids;
