@@ -56,7 +56,6 @@ factory_type_information = (
      },
     )
 
-
 def slot_union(base, new_slot):
     start_new = new_slot['start']
     stop_new = new_slot['stop']
@@ -67,7 +66,7 @@ def slot_union(base, new_slot):
     i = 0
     for start, stop in base:
         if stop.lessThan(start_new):
-            next_to = i
+            next_to = i+1
         elif stop.lessThanEqualTo(stop_new):
             start_pos = i
         elif start.lessThanEqualTo(stop_new):
@@ -80,6 +79,7 @@ def slot_union(base, new_slot):
         i += 1
     part1 = base[:next_to]
     if prev_to == -1: prev_to = i
+    print next_to, start_pos, stop_pos, prev_to
     part2 = base[prev_to:]
     center = (start_new, stop_new)
     if start_pos > -1:
@@ -90,7 +90,6 @@ def slot_union(base, new_slot):
         start_new = min(center[0], base_slot[0])
         center = (start_new, base_slot[1])
     return part1 + [center] + part2
-
 
 class Calendars(Workgroup):
     """
