@@ -483,7 +483,7 @@
         tal:define="days python:here.calendar_getPrevNextPage(viewed_day, calendar_disp);
                     prev_day python:days[0];
                     next_day python:days[1];">
-      <td align="right"><div class="contentTabs"><span class="opentab"> </span><a
+      <td align="right"><div class="contentTabs"><span class="opentab">&#160;</span><a
                 class="default"
                 tal:attributes="href string:${here_url}?viewed_day=${prev_day}">&lt;&lt;</a><a
                 class="default"
@@ -491,7 +491,7 @@
                 tal:attributes="href string:${here_url}?viewed_day=${today}"
                 i18n:translate="cpscalendar_link_today">Today</a><a
                 class="default"
-                tal:attributes="href string:${here_url}?viewed_day=${next_day}">&gt;&gt;</a><span class="closetab"> </span></div></td>
+                tal:attributes="href string:${here_url}?viewed_day=${next_day}">&gt;&gt;</a><span class="closetab">&#160;</span></div></td>
     </tr>
 </metal:block>
 
