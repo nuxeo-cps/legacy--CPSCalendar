@@ -22,6 +22,7 @@ class CPSInstaller(BaseInstaller):
         self.installTool()
         self.log(oldUpdate(self.portal))
         self.addUidIndex()
+        self.upgradeEvents()
         self.log("End of specific CPSCalendar install")
 
     def installTool(self):
@@ -41,6 +42,15 @@ class CPSInstaller(BaseInstaller):
         ct.addIndex('uid', 'FieldIndex')
         # reindexing will be done by cpsdefault installer
         # ct.manage_reindexIndex(ids=['uid'])
+
+    def upgradeEvents(self):
+        # Get the events from the catalog:
+        self.log("Upgrading events")
+        events = self.portal.portal_catalog(portal_type='Event')
+        for event in events:
+            ob = event.getObject()
+            self.log(ob.upgradeEventType())
+        self.log("  Done.")
 
 
 def update(self):
