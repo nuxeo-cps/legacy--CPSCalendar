@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-10-13 17:19default\n"
+"POT-Creation-Date: 2003-10-13 17:59default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -882,4 +882,148 @@ msgstr ""
 #.   <span content="python:str('label_day_long%s' % (i, ))">week day</span>
 #: from ../skins/cps_calendar/calendar_view_macros.pt
 msgid "week day"
+msgstr ""
+
+msgid "cpscalendar_change_event_to_all_day"
+msgstr ""
+
+msgid "cpscalendar_change_event_to_not_all_day"
+msgstr ""
+
+msgid "confirmed"
+msgstr ""
+
+msgid "unconfirmed"
+msgstr ""
+
+msgid "cancelled"
+msgstr ""
+
+msgid "cpscalendar_category_private"
+msgstr ""
+
+msgid "cpscalendar_category_work"
+msgstr ""
+
+msgid "cpscalendar_category_other"
+msgstr ""
+
+msgid "option_no"
+msgstr ""
+
+msgid "option_yes"
+msgstr ""
+
+msgid "label_day0"
+msgstr ""
+
+msgid "label_day1"
+msgstr ""
+
+msgid "label_day2"
+msgstr ""
+
+msgid "label_day3"
+msgstr ""
+
+msgid "label_day4"
+msgstr ""
+
+msgid "label_day5"
+msgstr ""
+
+msgid "label_day6"
+msgstr ""
+
+msgid "label_day_long0"
+msgstr ""
+
+msgid "label_day_long1"
+msgstr ""
+
+msgid "label_day_long2"
+msgstr ""
+
+msgid "label_day_long3"
+msgstr ""
+
+msgid "label_day_long4"
+msgstr ""
+
+msgid "label_day_long5"
+msgstr ""
+
+msgid "label_day_long6"
+msgstr ""
+
+msgid "label_month0"
+msgstr ""
+
+msgid "label_month1"
+msgstr ""
+
+msgid "label_month2"
+msgstr ""
+
+msgid "label_month3"
+msgstr ""
+
+msgid "label_month4"
+msgstr ""
+
+msgid "label_month5"
+msgstr ""
+
+msgid "label_month6"
+msgstr ""
+
+msgid "label_month7"
+msgstr ""
+
+msgid "label_month8"
+msgstr ""
+
+msgid "label_month9"
+msgstr ""
+
+msgid "label_month10"
+msgstr ""
+
+msgid "label_month11"
+msgstr ""
+
+msgid "label_month_long0"
+msgstr ""
+
+msgid "label_month_long1"
+msgstr ""
+
+msgid "label_month_long2"
+msgstr ""
+
+msgid "label_month_long3"
+msgstr ""
+
+msgid "label_month_long4"
+msgstr ""
+
+msgid "label_month_long5"
+msgstr ""
+
+msgid "label_month_long6"
+msgstr ""
+
+msgid "label_month_long7"
+msgstr ""
+
+msgid "label_month_long8"
+msgstr ""
+
+msgid "label_month_long9"
+msgstr ""
+
+msgid "label_month_long10"
+msgstr ""
+
+msgid "label_month_long11"
 msgstr ""

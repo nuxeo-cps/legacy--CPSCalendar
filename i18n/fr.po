@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2003-10-13 17:19default\n"
+"POT-Creation-Date: 2003-10-13 17:59default\n"
 "PO-Revision-Date: 2003-10-13 17:19+0200\n"
 "Last-Translator: DARCHE <madarche@nuxeio.com>\n"
 "Language-Team: Francais <fr@li.org>\n"
@@ -897,6 +897,154 @@ msgstr ""
 msgid "week day"
 msgstr ""
 
+msgid "cpscalendar_change_event_to_all_day"
+msgstr "Changer pour un événement sur plusieurs jours"
+
+msgid "cpscalendar_change_event_to_not_all_day"
+msgstr "Changer pour un événement ponctuel"
+
+msgid "confirmed"
+msgstr "Confirmé"
+
+#, fuzzy
+msgid "unconfirmed"
+msgstr "Non confirmé"
+
+msgid "cancelled"
+msgstr "Annulé"
+
+msgid "cpscalendar_category_private"
+msgstr "Privée"
+
+msgid "cpscalendar_category_work"
+msgstr "Travail"
+
+msgid "cpscalendar_category_other"
+msgstr "Autre"
+
+#, fuzzy
+msgid "option_no"
+msgstr "Non"
+
+#, fuzzy
+msgid "option_yes"
+msgstr "Oui"
+
+msgid "label_day0"
+msgstr "Lu"
+
+msgid "label_day1"
+msgstr "Ma"
+
+msgid "label_day2"
+msgstr "Me"
+
+msgid "label_day3"
+msgstr "Je"
+
+msgid "label_day4"
+msgstr "Ve"
+
+msgid "label_day5"
+msgstr "Sa"
+
+msgid "label_day6"
+msgstr "Di"
+
+msgid "label_day_long0"
+msgstr "Lun"
+
+msgid "label_day_long1"
+msgstr "Mar"
+
+msgid "label_day_long2"
+msgstr "Mer"
+
+msgid "label_day_long3"
+msgstr "Jeu"
+
+msgid "label_day_long4"
+msgstr "Ven"
+
+msgid "label_day_long5"
+msgstr "Sam"
+
+msgid "label_day_long6"
+msgstr "Dim"
+
+msgid "label_month0"
+msgstr "Jan"
+
+msgid "label_month1"
+msgstr "Fev"
+
+msgid "label_month2"
+msgstr "Mar"
+
+msgid "label_month3"
+msgstr "Avr"
+
+msgid "label_month4"
+msgstr "Mai"
+
+msgid "label_month5"
+msgstr "Jui"
+
+msgid "label_month6"
+msgstr "Juil"
+
+msgid "label_month7"
+msgstr "Aou"
+
+msgid "label_month8"
+msgstr "Sep"
+
+msgid "label_month9"
+msgstr "Oct"
+
+msgid "label_month10"
+msgstr "Nov"
+
+msgid "label_month11"
+msgstr "Dec"
+
+msgid "label_month_long0"
+msgstr "Janvier"
+
+msgid "label_month_long1"
+msgstr "Février"
+
+msgid "label_month_long2"
+msgstr "Mars"
+
+msgid "label_month_long3"
+msgstr "Avril"
+
+#, fuzzy
+msgid "label_month_long4"
+msgstr "Mai"
+
+msgid "label_month_long5"
+msgstr "Juin"
+
+msgid "label_month_long6"
+msgstr "Juillet"
+
+msgid "label_month_long7"
+msgstr "Août"
+
+msgid "label_month_long8"
+msgstr "Septembre"
+
+msgid "label_month_long9"
+msgstr "Octobre"
+
+msgid "label_month_long10"
+msgstr "Novembre"
+
+msgid "label_month_long11"
+msgstr "Décembre"
+
 #~ msgid "button_close_this_window"
 #~ msgstr "Fermer cette fenêtre"
 
@@ -906,157 +1054,9 @@ msgstr ""
 #~ msgid "cpscalendar_create_not_all_day_event"
 #~ msgstr "Créer un événement ponctuel"
 
-#~ msgid "cpscalendar_change_event_to_not_all_day"
-#~ msgstr "Changer pour un événement ponctuel"
-
-#~ msgid "cpscalendar_change_event_to_all_day"
-#~ msgstr "Changer pour un événement sur plusieurs jours"
-
 #, fuzzy
 #~ msgid "cpscalendar_untitled_(document)"
 #~ msgstr "Sans titre"
-
-#~ msgid "confirmed"
-#~ msgstr "Confirmé"
-
-#, fuzzy
-#~ msgid "unconfirmed"
-#~ msgstr "Non confirmé"
-
-#~ msgid "cancelled"
-#~ msgstr "Annulé"
-
-#, fuzzy
-#~ msgid "option_yes"
-#~ msgstr "Oui"
-
-#, fuzzy
-#~ msgid "option_no"
-#~ msgstr "Non"
-
-#~ msgid "cpscalendar_category_private"
-#~ msgstr "Privée"
-
-#~ msgid "cpscalendar_category_work"
-#~ msgstr "Travail"
-
-#~ msgid "cpscalendar_category_other"
-#~ msgstr "Autre"
-
-#~ msgid "label_month0"
-#~ msgstr "Jan"
-
-#~ msgid "label_month1"
-#~ msgstr "Fev"
-
-#~ msgid "label_month2"
-#~ msgstr "Mar"
-
-#~ msgid "label_month3"
-#~ msgstr "Avr"
-
-#~ msgid "label_month4"
-#~ msgstr "Mai"
-
-#~ msgid "label_month5"
-#~ msgstr "Jui"
-
-#~ msgid "label_month6"
-#~ msgstr "Juil"
-
-#~ msgid "label_month7"
-#~ msgstr "Aou"
-
-#~ msgid "label_month8"
-#~ msgstr "Sep"
-
-#~ msgid "label_month9"
-#~ msgstr "Oct"
-
-#~ msgid "label_month10"
-#~ msgstr "Nov"
-
-#~ msgid "label_month11"
-#~ msgstr "Dec"
-
-#~ msgid "label_month_long0"
-#~ msgstr "Janvier"
-
-#~ msgid "label_month_long1"
-#~ msgstr "Février"
-
-#~ msgid "label_month_long2"
-#~ msgstr "Mars"
-
-#~ msgid "label_month_long3"
-#~ msgstr "Avril"
-
-#, fuzzy
-#~ msgid "label_month_long4"
-#~ msgstr "Mai"
-
-#~ msgid "label_month_long5"
-#~ msgstr "Juin"
-
-#~ msgid "label_month_long6"
-#~ msgstr "Juillet"
-
-#~ msgid "label_month_long7"
-#~ msgstr "Août"
-
-#~ msgid "label_month_long8"
-#~ msgstr "Septembre"
-
-#~ msgid "label_month_long9"
-#~ msgstr "Octobre"
-
-#~ msgid "label_month_long10"
-#~ msgstr "Novembre"
-
-#~ msgid "label_month_long11"
-#~ msgstr "Décembre"
-
-#~ msgid "label_day0"
-#~ msgstr "Lu"
-
-#~ msgid "label_day1"
-#~ msgstr "Ma"
-
-#~ msgid "label_day2"
-#~ msgstr "Me"
-
-#~ msgid "label_day3"
-#~ msgstr "Je"
-
-#~ msgid "label_day4"
-#~ msgstr "Ve"
-
-#~ msgid "label_day5"
-#~ msgstr "Sa"
-
-#~ msgid "label_day6"
-#~ msgstr "Di"
-
-#~ msgid "label_day_long0"
-#~ msgstr "Lun"
-
-#~ msgid "label_day_long1"
-#~ msgstr "Mar"
-
-#~ msgid "label_day_long2"
-#~ msgstr "Mer"
-
-#~ msgid "label_day_long3"
-#~ msgstr "Jeu"
-
-#~ msgid "label_day_long4"
-#~ msgstr "Ven"
-
-#~ msgid "label_day_long5"
-#~ msgstr "Sam"
-
-#~ msgid "label_day_long6"
-#~ msgstr "Dim"
 
 #, fuzzy
 #~ msgid "action_attendees"
