@@ -572,13 +572,13 @@ class Calendar(CPSBaseFolder):
         return hour_block_cols
     
     security.declarePrivate('getEmail')
-    def getEmail(self, member, mdtool):
+    def getEmail(self, member, dir):
         """
         """
-        member_id = mdtool.getMemberId(member)
-        entry = mdtool.searchMemberDataContents('id', member_id )
-        raise str(entry)
-        return entry['email']
+        member_prop = dir.getEntry(member)
+        if member_prop is None:
+            return None
+        return member_prop.get('email')
 
     security.declarePrivate('notifyMembers')
     def notifyMembers(self, event_dict):
@@ -593,9 +593,10 @@ class Calendar(CPSBaseFolder):
 
         # get current user email
         mtool = getToolByName(self, 'portal_membership')
-        mdtool = getToolByName(self, 'portal_memberdata')
+        mdtool = getToolByName(self, 'portal_metadirectories')
+        dir = mdtool.members
         member = mtool.getAuthenticatedMember().getUserName()
-        mail_from = self.getEmail(member, mdtool)
+        mail_from = self.getEmail(member, dir)
         if mail_from is None:
             LOG('NGCal', INFO, "Can't get email address for %s" % (mail_from, ))
             return
@@ -662,7 +663,7 @@ class Calendar(CPSBaseFolder):
         mails = {}
         for id in member_ids:
             if not done.has_key(id):
-                email = self.getEmail(id, mdtool)
+                email = self.getEmail(id, dir)
                 if email is not None:
                     mails[email] = None
                 done[id] = None
