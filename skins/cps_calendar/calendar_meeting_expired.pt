@@ -3,14 +3,13 @@
 
 <metal:block fill-slot="javascript_head_slot" />
 
-<metal:block fill-slot="head_slot" i18n:domain="cpscalendar"
-             i18n:translate="cpscalendar_heading_meeting_creation_helper">
-  Meeting creation helper
-</metal:block>
-
 <metal:block fill-slot="header_plus" />
 
 <metal:block fill-slot="main" i18n:domain="cpscalendar">
+<h1 i18n:domain="cpscalendar"
+             i18n:translate="cpscalendar_heading_meeting_creation_helper">
+  Meeting creation helper
+</h1>
   <span class="calTitle" i18n:translate="cpscalendar_message_your_request_has_expired">
     Your request has expired.
   </span>
