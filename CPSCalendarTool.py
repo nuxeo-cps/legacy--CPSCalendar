@@ -136,7 +136,8 @@ def stringToDateTime(string, locale=None, format=None):
     if rest: # Using a time too.
         strpstr += ' %H:%M'
 
-    return DateTime(mktime(strptime(string, strpstr)))
+    t = strptime(string, strpstr)
+    return DateTime(t[0],t[1],t[2],t[3],t[4])
 
 
 def _cmpEv(a, b):
