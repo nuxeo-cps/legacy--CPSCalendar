@@ -76,20 +76,16 @@ class Calendars(Workgroup):
     def getCalendarForId(self, id):
         """Gets calendar for id, creates it if id is a user"""
         id = str(id)
-        LOG('NGCal', DEBUG, "Searching for user's calendar %s (1)" % (id, ))
         ids = self.objectIds()
         if id in ids:
             return getattr(self, id)
         context = aq_parent(aq_inner(self))
-        LOG('NGCal', DEBUG, "Searching for user's calendar %s (2)" % (id, ))
         dirtool = getToolByName(context, 'portal_metadirectories')
         members = dirtool.members
-        LOG('NGCal', DEBUG, "Searching for user's calendar %s (3)" % (id, ))
         entry_prop = members._getInternalEntryProp()
         entry = members._getEntry(id) 
         if entry:
             # create this calendar for this member
-            LOG('NGCal', DEBUG, 'Creating calendar for %s' % (id, ))
             ttool = getToolByName(context, 'portal_types')
             ti = ttool.getTypeInfo('Calendar')
             # do ti.constructInstance(self, id) without permission checks
@@ -108,7 +104,6 @@ class Calendars(Workgroup):
             ob = self._getOb(id)
             ti._finishConstruction(ob)
 
-            LOG('NGCal', DEBUG, 'Setting roles')
             mtool = getToolByName(context, 'portal_membership')
             if not mtool.isAnonymousUser():
                 current_user = mtool.getAuthenticatedMember().getUserName()
@@ -168,12 +163,10 @@ class Calendars(Workgroup):
         return info
 
     def __getitem__(self, name):
-        LOG('NGCal', DEBUG, 'Calendars[%s]?' % (name, ))
         try:
             ob = Workgroup.__getitem__(self, name)
             return ob
         except KeyError:
-            LOG('NGCal', DEBUG, 'Calendars[%s]? (2)' % (name, ))
             ob = self.getCalendarForId(name)
             if ob is not None:
                 return ob

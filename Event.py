@@ -177,7 +177,7 @@ class Event(BaseDocument):
         """
         calendar = self.getCalendar()
         calendars = aq_parent(aq_inner(calendar))
-        org_calendar = getattr(calendars, self.organizer['id'], None)
+        org_calendar = calendars.get(self.organizer['id'])
         return org_calendar
 
     security.declareProtected(View, 'getAttendeesDict')
@@ -320,7 +320,6 @@ class Event(BaseDocument):
         if not self.isdirty:
             LOG('NGCal', INFO, 'Event %s does not need to be updated' % self.id)
             return
-        LOG('NGCal', DEBUG, 'Notifying event change for attendees')
         event_dict = self.getEventDict(comment=comment)
         calendar = self.getCalendar()
         calendars = aq_parent(aq_inner(calendar))

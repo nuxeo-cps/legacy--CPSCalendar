@@ -128,7 +128,6 @@ class Calendar(Workgroup):
     def addPendingEvent(self, event_dict):
         """Add an event request
         """
-        LOG('NGCal', DEBUG, 'add pending event %s for %s' % (event_dict, self.id))
         if event_dict['request'] == 'status' and \
                 event_dict['id'] not in self.objectIds():
             # status change lost because this event was once deleted
@@ -146,10 +145,7 @@ class Calendar(Workgroup):
         if event_dict['request'] == 'status':
             # append status change
             if this_event is not None:
-                LOG('NGCal', DEBUG, 'Appending to already pending event')
                 event_dict['change'] = this_event['change'] + event_dict['change']
-            else:
-                LOG('NGCal', DEBUG, 'Creating this pending event: %s' % (event_dict, ))
         events.append(event_dict)
         self._pending_events = tuple(events)
         self._notifyMembers(base_dict)
@@ -160,14 +156,12 @@ class Calendar(Workgroup):
         """
         if REQUEST is not None:
             kw.update(REQUEST.form)
-        LOG('NGCal', DEBUG, 'Confirming %s with %s' % (event_id, kw))
         pending = None
         for event in self._pending_events:
             if event['id'] == event_id:
                 pending = event
                 break
         if event is None:
-            LOG('NGCal', DEBUG, "Can't locate pending event %s" % (event_id, ))
             return
         request = pending['request']
         if request == 'request':
@@ -177,7 +171,6 @@ class Calendar(Workgroup):
                 self.invokeFactory('Event', **pending['event'])
                 event = getattr(self, event_id)
             else:
-                LOG('NGCal', DEBUG, 'edit event %s with: %s' % (event, pending['event'], ))
                 kw = pending['event']
                 event.edit(**kw)
             if status is not None:
@@ -185,10 +178,8 @@ class Calendar(Workgroup):
         elif request == 'status':
             event = getattr(self, event_id, None)
             if event is None:
-                LOG('NGCal', DEBUG, "Can't locate event %s" % (event_id, ))
                 return
             for change in pending['change']:
-                LOG('NGCal', DEBUG, "Changing %s" % (change, ))
                 event.setAttendeeStatus(change['attendee'], change['status'])
         events = [event for event in self._pending_events if event['id'] != event_id]
         self._pending_events = tuple(events)
@@ -322,7 +313,6 @@ class Calendar(Workgroup):
             }
 
     def _get_day_lines(self, day_events_list, len_slots):
-        LOG('NGC', DEBUG, 'd_e_l:\n%s\nlen_slots: %s' % (day_events_list, len_slots))
         day_lines = []
         day_ids = []
         day_dict = {}
@@ -676,6 +666,7 @@ class Calendar(Workgroup):
     def manage_delObjects(self, ids, *args, **kw):
         """
         """
+        self._pending_events = tuple([ev for ev in self._pending_events if ev['id'] not in ids])
         declined = [id for id in self._declined if id not in ids]
         canceled = [id for id in self._canceled if id not in ids]
         Workgroup.manage_delObjects(self, ids, *args, **kw)
