@@ -1,4 +1,25 @@
 *******************************************
+** CPSCalendar V0.2.1 [R1 build 2003/11/17-14:53 by ben]
+
+ZODB Requires:
+~~~~~~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- P2 #132: user cannot set local roles on its own calendar
+- P2 #135: in the Calendars Areas, calendars are listed twice
+- P2 #130 #198 #206 #207 #208: fix by mad during refactoring 
+- fix no shared calendars found for shared display
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- sf code cleaning
+- ed code cleaning debuging
+- sf more cleaning
+
+*******************************************
 ** CPSCalendar V0.2.0 [R1 build 2003-09/05-16:38 by ben]
 
 ZODB Requires:

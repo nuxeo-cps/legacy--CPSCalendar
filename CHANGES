@@ -8,13 +8,8 @@ New features:
 
 Bug fixes:
 ~~~~~~~~~~
-- P2 #132: user cannot set local roles on its own calendar
-- P2 #135: in the Calendars Areas, calendars are listed twice
-- P2 #130 #198 #206 #207 #208: fix by mad during refactoring 
-- fix no shared calendars found for shared display
+-
 
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
-- sf code cleaning
-- ed code cleaning debuging
-- sf more cleaning
+-
