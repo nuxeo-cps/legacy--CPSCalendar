@@ -4,6 +4,11 @@
 """
 
 from Products.CPSInstaller.CPSInstaller import CPSInstaller
+from Products.CPSCore.CPSWorkflow import TRANSITION_INITIAL_CREATE
+from Products.CMFCore.CMFCorePermissions import View, ModifyPortalContent
+
+WebDavLockItem = 'WebDAV Lock items'
+WebDavUnlockItem = 'WebDAV Unlock items'
 
 SKINS = {
    'cpscalendar_skins': 'Products/CPSCalendar/skins/cps_calendar',
@@ -23,7 +28,7 @@ class CalendarInstaller(CPSInstaller):
                 name='My calendar',
                 action='string:${portal/portal_cpscalendar/getHomeCalendarUrl}',
                 condition="portal/portal_cpscalendar/getHomeCalendarObject",
-                permission=('View',),
+                permission=(View,),
                 category='user',
                 visible=1)
         self.verifyAction(
@@ -35,7 +40,7 @@ class CalendarInstaller(CPSInstaller):
                            not portal.portal_cpscalendar.getHomeCalendarObject() and \
                            getattr(portal.portal_cpscalendar, \
                                    'member_can_create_home_calendar', 1)",
-                permission=('View',),
+                permission=(View,),
                 category='user',
                 visible=1)
         self.installPortalTypes()
@@ -77,9 +82,38 @@ class CalendarInstaller(CPSInstaller):
         self.allowContentTypes('Calendar', 'Workspace')
 
     def installWorkFlows(self):
+        wfdef = {'wfid': 'null_wf',
+                 'permissions': (View, ModifyPortalContent,
+                                 WebDavLockItem, WebDavUnlockItem,)
+                 }
+
+        wfstates = {
+            'work': {
+                'title': 'Work',
+                'transitions':(),
+                'permissions': {View: ('Manager', 'WorkspaceManager',
+                                       'WorkspaceMember', 'WorkspaceReader')},
+            },
+        }
+
+        wftransitions = {
+            'create': {
+                'title': 'Initial creation',
+                'new_state_id': 'work',
+                'transition_behavior': (TRANSITION_INITIAL_CREATE,),
+                'clone_allowed_transitions': None,
+                'actbox_category': 'workflow',
+                'props': {'guard_permissions':'',
+                          'guard_roles':'Manager; WorkspaceManager; '
+                                        'WorkspaceMember',
+                          'guard_expr':''},
+            },
+        }
+        self.verifyWorkflow(wfdef, wfstates, wftransitions, {}, {})
+        
         wfs = {
-            'Calendar': 'workspace_folder_wf',
-            'Event': 'workspace_content_wf',
+            'Calendar': 'null_wf',
+            'Event': 'null_wf',
         }
         self.verifyLocalWorkflowChains(self.portal['workspaces'], wfs)
 
