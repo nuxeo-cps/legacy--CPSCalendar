@@ -700,7 +700,8 @@ class Calendar(CPSBaseFolder):
     security.declarePrivate('notifyMembers')
     def notifyMembers(self, event_dict):
         """Notify members when a pending event arrives"""
-
+        if not event_dict.has_key('event'):
+            return
         # Get mailhost object through acquisition
         mailhost = self.MailHost
 
@@ -783,12 +784,11 @@ class Calendar(CPSBaseFolder):
                     mails[email] = None
                 done[id] = None
 
-        if event_dict.has_key('event'):
-            for attendee in event_dict['event']['attendees']:
-                if attendee['status'] == 'unconfirmed':
-                    email = self.getEmail(attendee['cn'], mdir)
-                    if email is not None:
-                        mails[email] = None
+        for attendee in event_dict['event']['attendees']:
+            if attendee['status'] == 'unconfirmed':
+                email = self.getEmail(attendee['cn'], mdir)
+                if email is not None:
+                    mails[email] = None
 
         mails = mails.keys()
 
@@ -805,12 +805,15 @@ class Calendar(CPSBaseFolder):
 
         mailing = self.calendar_mailing_notify(event_dict, calendar_url,
             calendar_title, event_title, new_event=new_event)
-        try:
-            mailhost.send(mailing, mto=mails, mfrom=mail_from,
-                subject="[CAL] %s" % event_title, encode='8bit')
-        except:
-            # XXX At least log WHAT error...
-            LOG('NGCal', INFO, "Error while sending notification email")
+        if mails:
+            try:
+                mailhost.send(mailing, mto=mails, mfrom=mail_from,
+                        subject="[CAL] %s" % event_title, encode='8bit')
+            except:
+                import sys
+                LOG('CPSCalendar', INFO, 
+                    "Error while sending notification email",
+                    error = sys.exc_info())
 
     security.declareProtected('View', 'getEvents')
     def getEvents(self, from_date, to_date):
