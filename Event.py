@@ -491,7 +491,7 @@ class Event(CPSBaseDocument):
         # Get the attendeelist from the organizers calendar, 
         # since new attendees may have been added or old removed.
         org_calendar = self.getOrganizerCalendar()
-        org_event = org_calendar._getOb(event_id)
+        org_event = org_calendar._getOb(event_id, None)
         if org_event is None:
             LOG('NGCal', INFO, "Can't find original event for %s/%s" 
                 % (calendar_rpath, event_id))
