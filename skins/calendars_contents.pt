@@ -26,6 +26,13 @@
       <ul>
         <li tal:repeat="cal cals">
           <a tal:attributes="href cal/url" tal:content="cal/title">Calendar</a>
+          <strong tal:condition="cal/pending">
+            <a
+              tal:attributes="href string:${cal/url}/calendar_pending_events"
+              tal:content="string:[${cal/pending}]">
+              [1]
+            </a>
+          </strong>
         </li>
       </ul>
     </tal:block>

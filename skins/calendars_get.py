@@ -14,11 +14,14 @@ has_private = 0
 
 for calid in all_calendars:
     ok = 0
+    ok_pend = 0
     type = 'ressources'
     try:
         cal = getattr(here, calid)
         if mtool.checkPermission('View', cal):
             ok = 1
+        if mtool.checkPermission('Add portal content', cal):
+            ok_pend = 1
     except:
         # Unauthorized
         continue
@@ -39,6 +42,7 @@ for calid in all_calendars:
         'id': calid,
         'title': mcat(cal.title_or_id()),
         'url': cal.absolute_url(),
+        'pending': ok_pend and cal.getPendingEventsCount(),
     })
 
 if not has_private and not isAnon:
@@ -46,6 +50,7 @@ if not has_private and not isAnon:
         'id': user_id,
         'title': 'Calendar of %s' % (user_id, ),
         'url': '%s/%s' % (here.absolute_url(), user_id),
+        'pending': 0,
     })
 
 return calendars
