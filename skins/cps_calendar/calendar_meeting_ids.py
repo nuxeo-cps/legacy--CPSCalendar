@@ -13,11 +13,8 @@ freebusy_infos = meeting['freebusy_infos']
 cals_dict = freebusy_infos['cals_dict']
 mask_cal = freebusy_infos['mask_cal']
 cals = [cals_dict[id] for id in cal_ids]
-busy_infos = context.unionCals(
-  *(cals + [mask_cal]),
-  **{'with_free': 1}
-)
-meeting['busy_infos'] = busy_infos
+
+meeting['busy_infos']  = context.unionCals(with_free=1, *(cals + [mask_cal]))
 
 REQUEST.SESSION['meeting'] = meeting
 
