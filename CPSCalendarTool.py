@@ -388,7 +388,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         brains = ZCatalog.searchResults(self.portal_catalog,
                  meta_type='Calendar')
         if brains:
-            calendars = [brain.getObject() for brain in brains]
+            calendars = [brain.aq_parent.unrestrictedTraverse(brain.getPath())
+                         for brain in brains]
             return [each for each in calendars if each] # Filter any empty entries.
         else:
             return []

@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- With Zope 2.7.1 and later selected attendees was lost when creating meetings.
+  (#1483)
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
