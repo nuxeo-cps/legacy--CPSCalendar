@@ -1,4 +1,23 @@
 *******************************************
+** CPSCalendar V0.2.3 [R1 build 2003/12/18-10:07 by edegoute]
+
+ZODB Requires:
+~~~~~~~~~~~~~~
+-
+
+New features:
+~~~~~~~~~~~~~
+- Calendar objects can be use outside Calendars object (#249)
+- Use new javascript calendar to edit event and meeting
+Bug fixes:
+~~~~~~~~~~
+- CPS3 tabs integration
+
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V0.2.2 [R1 build 2003/11/18-17:08 by regebro]
 
 Bug fixes:
