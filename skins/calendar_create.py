@@ -12,7 +12,7 @@ elif kw.has_key('default_id_from'):
 else:
     id = str(int(DateTime()))
     
-id = context.checkid(compute_from=id)
+id = context.computeId(compute_from=id)
 
 here.invokeFactory('Calendar', id, **kw)
 
