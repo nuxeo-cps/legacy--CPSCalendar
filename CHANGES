@@ -38,6 +38,7 @@ Bug fixes:
 - The Content-Type of the ics export is now text/calendar.
 - Default event status is now 'confirmed'.
 - You now can not delete canceled events.
+- You now get an email on changes even if you are confirmed.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

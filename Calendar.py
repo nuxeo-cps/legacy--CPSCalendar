@@ -797,10 +797,9 @@ class Calendar(CPSBaseFolder):
             id = attendee.get('id')
             if id is None:
                 continue
-            if attendee['status'] == 'unconfirmed':
-                email = self.getEmail(id, mdir)
-                if email:
-                    mails[id] = email
+            email = self.getEmail(id, mdir)
+            if email and email != mail_from:
+                mails[id] = email
 
         event = getattr(self, event_dict['id'], None)
         if event is None:
