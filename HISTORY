@@ -1,4 +1,40 @@
 *******************************************
+** CPSCalendar V1.2.0 [R1 build 2004/01/22-11:04 by fermigier]
+
+ZODB Requires:
+~~~~~~~~~~~~~~
+- Remove all your calendars and restart from start.
+
+New features:
+~~~~~~~~~~~~~
+- You can now have many calendars (but "your" calendar is the one with id
+  'calendar'.
+
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- calendars are now identified by their 'rpath' (relative path to the portal)
+  rather than id. So many method calls and datastructures use now 'rpath'
+  argument or field instead of 'id'.
+
+- new API:
+
+  For calendar tool:
+    - renamed getCalendarObjects -> listCalendars
+    - renamed getCalendarIds -> listCalendarPaths
+    - renamed getVisibleCalendars -> listVisibleCalendars
+    - renamed unionCals -> listFreeSlots
+    - renamed createUserCalendar -> createMemberCalendar
+    - new: getCalendarPathForUser, getCalendarForUser, getCalendarForPath
+
+  For Calendars:
+    - renamed: addDeclinedEvent -> declineEvent
+    - renamed: addCancelledEvent -> cancelEvent
+    - renamed: removeDeclinedEvent -> unDeclineEvent
+    - renamed: removeCancelledEvent -> unCancelEvent
+    - new: getOwnerId, getRpath
+
+
+*******************************************
 ** CPSCalendar V1.0.0 [R1 build 2004/01/21-10:55 by ben]
 
 ZODB Requires:
