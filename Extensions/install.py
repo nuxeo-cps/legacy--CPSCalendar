@@ -21,7 +21,7 @@ class CalendarInstaller(CPSInstaller):
                 'portal_actions',
                 id='my_calendar',
                 name='My calendar',
-                action='string:{portal/portal_cpscalendar/getHomeCalendarUrl}',
+                action='string:${portal/portal_cpscalendar/getHomeCalendarUrl}',
                 condition="portal/portal_cpscalendar/getHomeCalendarObject",
                 permission=('View',),
                 category='user',

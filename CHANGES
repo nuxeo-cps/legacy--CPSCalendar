@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- A dollar had fallen away in an action.
+- The recurrence upgrade removed the new attribute as well as the old.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
