@@ -1,6 +1,6 @@
 Requires:
 ~~~~~~~~~
--
+- The install method must be rerun for upgrading of pending events.
 New features:
 ~~~~~~~~~~~~~
 - create a property to control the creation of a calendar when creating an user
@@ -11,6 +11,8 @@ Bug fixes:
   and date, one for month.
 - Some fixes for better french in the translations.
 - The end date didn't follow the start date on standard even creation.
+- Pending events also needed upgrade.
+- The upgrade of events and calendars now tell you if it upgraded anything.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
