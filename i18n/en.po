@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2003-12-17 15:29default\n"
+"POT-Creation-Date: 2003-12-17 16:28default\n"
 "PO-Revision-Date: 2003-12-08 14:31+0100\n"
 "Last-Translator: Encolpe DEGOUTE <ed@nuxeo.com>\n"
 "Language-Team: French <cantact@nuxeo.com>\n"
@@ -270,16 +270,13 @@ msgstr "Event update"
 msgid "cpscalendar_heading_events_deletion_confirmation"
 msgstr "Events deletion confirmation"
 
-#.   <block fill-slot="head_slot">
+#.   <span>
 #.       Meeting creation helper
-#.   </block>
+#.     </span>
 #.   <block fill-slot="head_slot">
 #.     Meeting creation helper
 #.   </block>
 #.   <span />
-#.   <span>
-#.       Meeting creation helper
-#.     </span>
 #: from ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
 #: ../skins/cps_calendar/calendar_meeting_error.pt
@@ -932,10 +929,16 @@ msgstr "Untitled"
 msgid "cpscalendar_option_status_confirmed"
 msgstr "Confirmed"
 
+msgid "confirmed"
+msgstr "Confirmed"
+
 msgid "cpscalendar_option_status_decline"
 msgstr "Decline"
 
 msgid "cpscalendar_option_status_unconfirmed"
+msgstr "Unconfirmed"
+
+msgid "unconfirmed"
 msgstr "Unconfirmed"
 
 msgid "cpscalendar_option_status_cancelled"

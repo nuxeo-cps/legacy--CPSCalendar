@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-12-17 15:29default\n"
+"POT-Creation-Date: 2003-12-17 16:28default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -266,16 +266,13 @@ msgstr ""
 msgid "cpscalendar_heading_events_deletion_confirmation"
 msgstr ""
 
-#.   <block fill-slot="head_slot">
+#.   <span>
 #.       Meeting creation helper
-#.   </block>
+#.     </span>
 #.   <block fill-slot="head_slot">
 #.     Meeting creation helper
 #.   </block>
 #.   <span />
-#.   <span>
-#.       Meeting creation helper
-#.     </span>
 #: from ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
 #: ../skins/cps_calendar/calendar_meeting_error.pt
@@ -926,10 +923,16 @@ msgstr ""
 msgid "cpscalendar_option_status_confirmed"
 msgstr ""
 
+msgid "confirmed"
+msgstr ""
+
 msgid "cpscalendar_option_status_decline"
 msgstr ""
 
 msgid "cpscalendar_option_status_unconfirmed"
+msgstr ""
+
+msgid "unconfirmed"
 msgstr ""
 
 msgid "cpscalendar_option_status_cancelled"

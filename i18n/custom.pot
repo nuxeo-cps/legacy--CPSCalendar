@@ -34,10 +34,16 @@ msgstr ""
 msgid "cpscalendar_option_status_confirmed"
 msgstr ""
 
+msgid "confirmed"
+msgstr ""
+
 msgid "cpscalendar_option_status_decline"
 msgstr ""
 
 msgid "cpscalendar_option_status_unconfirmed"
+msgstr ""
+
+msgid "unconfirmed"
 msgstr ""
 
 msgid "cpscalendar_option_status_cancelled"
