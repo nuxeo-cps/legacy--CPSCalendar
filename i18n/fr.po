@@ -593,7 +593,7 @@ msgstr "Statut"
 #: ../skins/cps_calendar/calendar_macros.pt
 #: ../skins/cps_calendar/create_meeting_form.pt
 msgid "cpscalendar_label_title"
-msgstr "Initulé"
+msgstr "Intitulé"
 
 #.   <span>To the</span>
 #: from ../skins/cps_calendar/calendar_macros.pt
