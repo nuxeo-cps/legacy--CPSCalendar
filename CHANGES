@@ -3,7 +3,8 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- create a property to control the creation of a calendar when creating an user
+  home folder
 Bug fixes:
 ~~~~~~~~~~
 -
