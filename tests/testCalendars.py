@@ -34,6 +34,8 @@ class TestCalendarTool(CPSCalendarTestCase):
         assert self.caltool 
 
     def beforeTearDown(self):
+        mdtool = self.portal.portal_memberdata
+        del mdtool._v_temps
         self.logout()
 
     def testCalendarTool(self):
@@ -63,11 +65,48 @@ class TestCalendarTool(CPSCalendarTestCase):
              'portal/workspaces/members/test_user_1_/calendar'])
 
         # XXX: test these later
-        assert caltool.listCalendarsDict()
-        self.assertEquals(caltool.listFreeSlots([]), [])
-        caltool.listFreeSlots(caltool.listCalendars())
-        #assert caltool.getFreeBusy(...)
+        caltool.getCalendarsDict()
 
+    def testListFreeSlots(self):
+        self.assertEquals(self.caltool.listFreeSlots([]), [])
+        free_slots = self.caltool.listFreeSlots([[[
+            {'start': DateTime('2004/01/15'), 
+             'stop': DateTime('2004/01/15')}, 
+            {'start': DateTime('2004/01/15'), 
+             'stop': DateTime('2004/01/16')}]]])
+        self.assertEquals(free_slots, 
+            [[{'start': DateTime('2004/01/15'), 
+              'stop': DateTime('2004/01/16')}]])
+
+
+    def testFreeBusy(self):
+        freebusy_info = self.caltool.getFreeBusy([], 
+            DateTime('2004/01/15'), DateTime('2004/01/15'), 8, 0, 19, 0)
+        self.assertEquals(freebusy_info['cals_dict'], {})
+        self.assertEquals(freebusy_info['cal_users'], {})
+        self.assertEquals(freebusy_info['slots'], 
+            [(DateTime('2004/01/15'), DateTime('2004/01/16'))])
+        self.assertEquals(freebusy_info['mask_cal'], 
+            [[{'start': DateTime('2004/01/15'), 
+               'stop': DateTime('2004/01/15 08:00:00')},
+              {'start': DateTime('2004/01/15 19:00:00'), 
+               'stop': DateTime('2004/01/16')}]])
+
+        freebusy_info = self.caltool.getFreeBusy(
+            ['portal/workspaces/members/root/calendar'], 
+            DateTime('2004/01/15'), DateTime('2004/01/15'), 8, 0, 19, 0)
+        self.assertEquals(freebusy_info['cals_dict'], 
+            {'portal/workspaces/members/root/calendar': [[]]})
+        # XXX: don't think that that's the right result
+        self.assertEquals(freebusy_info['cal_users'],
+            {'portal/workspaces/members/root/calendar': 'calendar'})
+        self.assertEquals(freebusy_info['slots'], 
+            [(DateTime('2004/01/15'), DateTime('2004/01/16'))])
+        self.assertEquals(freebusy_info['mask_cal'], 
+            [[{'start': DateTime('2004/01/15'), 
+               'stop': DateTime('2004/01/15 08:00:00')},
+              {'start': DateTime('2004/01/15 19:00:00'), 
+               'stop': DateTime('2004/01/16')}]])
 
 class TestCalendar(CPSCalendarTestCase):
 
@@ -94,8 +133,8 @@ class TestCalendar(CPSCalendarTestCase):
     def testDC(self):
         # XXX: the title should actually be more explicit than that.
         self.assertEquals(self.calendar.Title(), 
-                          "cpscalendar_user_calendar_name_beg" \
-                          + self.user_id \
+                          "cpscalendar_user_calendar_name_beg"
+                          + self.user_id
                           + "cpscalendar_user_calendar_name_end")
         # XXX: there should be a description there.
         self.assertEquals(self.calendar.Description(), "")
@@ -180,27 +219,34 @@ class TestCalendar(CPSCalendarTestCase):
                           {'canceled': ('event',), 'declined': ()})
 
     def testViewsWithEmptyCalendar(self):
+        calendar = self.calendar
         self.portal.REQUEST.SESSION = {}
-        assert self.calendar.calendar_view(disp="week")
-        assert self.calendar.calendar_view(disp="month")
-        assert self.calendar.calendar_view(disp="day")
-        assert self.calendar.calendar_addevent_form()
-        assert self.calendar.calendar_display_form()
-        assert self.calendar.calendar_export()
-        assert getattr(self.calendar, 'calendar.ics')()
+        assert calendar.calendar_view(disp="week")
+        assert calendar.calendar_view(disp="month")
+        assert calendar.calendar_view(disp="day")
+        assert calendar.calendar_addevent_form()
+        assert calendar.calendar_display_form()
+        assert calendar.calendar_export()
+        assert getattr(calendar, 'calendar.ics')()
 
     def testViewsWithOneEvent(self):
         self._addEvent()
         event = self.calendar.event
+        calendar = self.calendar
 
         self.portal.REQUEST.SESSION = {}
-        assert self.calendar.calendar_view(disp="week").count("xxyyzz")
-        assert self.calendar.calendar_view(disp="month").count("xxyyzz")
-        assert self.calendar.calendar_view(disp="day").count("xxyyzz")
-        assert self.calendar.calendar_addevent_form()
-        assert self.calendar.calendar_display_form()
-        assert self.calendar.calendar_export()
-        assert getattr(self.calendar, 'calendar.ics')().count("xxyyzz")
+        assert calendar.calendar_view(disp="week").count("xxyyzz")
+        assert calendar.calendar_view(disp="month").count("xxyyzz")
+        assert calendar.calendar_view(disp="day").count("xxyyzz")
+        assert calendar.calendar_addevent_form()
+        assert calendar.calendar_display_form()
+        assert calendar.calendar_export()
+        assert getattr(calendar, 'calendar.ics')().count("xxyyzz")
+
+        assert event.calendar_event_view()
+        assert event.calendar_editevent_form()
+        assert event.calendar_attendees_form()
+
 
     def testMeeting(self):
         self._addEvent()
@@ -209,7 +255,7 @@ class TestCalendar(CPSCalendarTestCase):
         # No attendees so nothing should happen
         event.updateAttendeesCalendars()
 
-        # TODO: add some attendees
+        # TODO: add some real attendees
 
         
 

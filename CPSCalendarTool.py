@@ -19,8 +19,8 @@
 
 from zLOG import LOG, DEBUG
 from Globals import InitializeClass
+from DateTime import DateTime
 from Products.CMFCore.PortalFolder import PortalFolder
-
 from Products.CMFCore.CMFCorePermissions import setDefaultRoles
 from Products.CMFCore.CMFCorePermissions import View
 from Products.CMFCore.CMFCorePermissions import ManagePortal
@@ -168,8 +168,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         else:
             return []
 
-    security.declareProtected(View, 'listCalendarsDict')
-    def listCalendarsDict(self, exclude=''):
+    security.declareProtected(View, 'getCalendarsDict')
+    def getCalendarsDict(self, exclude=''):
         """Return a short summary of all calendars
 
         It's used in meeting preparation to have all possible attendees
@@ -217,20 +217,21 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
     # XXX use a special permission here
     security.declareProtected('View', 'listFreeSlots')
-    def listFreeSlots(self, with_free=0, *cals):
+    def listFreeSlots(self, slot_list_list, with_free=0):
         """Return the list of free slot for the list cals
 
-        *cals: list of calendar
+        slot_list_list: list of list of {'start': DateTime, 'stop': DateTime}
+        dictionaries
         with_free: binary, calculate free time slot
         """
-        if not cals:
+        if not slot_list_list:
             return []
         result = []
-        length = len(cals[0])
+        length = len(slot_list_list[0])
         for i in range(length):
             this_slot = []
-            for cal in cals:
-                this_slot.extend(cal[i])
+            for slot_list in slot_list_list:
+                this_slot.extend(slot_list[i])
             result.append(_slotUnion(this_slot, with_free=with_free))
         return result
 
@@ -289,14 +290,14 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 })
             mask_cal.append(this_day)
 
-        calendars = self.getCalendarsDict()
+        calendars = self.listCalendars()
         cals_dict = {}
         cal_users = {}
         for calendar in calendars:
-            if calendar['rpath'] not in attendees:
+            rpath = calendar.getRpath()
+            if rpath not in attendees:
                 continue
-            id = calendar.id
-            cal_users[id] = self.getAttendeeInfo(id)['cn']
+            cal_users[rpath] = self.getAttendeeInfo(rpath)['cn']
             calendar_slots = []
             for i in range(len(slots)):
                 calendar_slots.append([])
@@ -322,7 +323,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                                 'stop': event_slot['stop']
                             })
                     i += 1
-            cals_dict[id] = list = []
+            cals_dict[rpath] = list = []
             i = 0
             for cal_slot in calendar_slots:
                 if slots_done[i] is not None:
@@ -396,7 +397,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         Return a dictionary with cn, rpath, id, usertype and status.
         """
         id = rpath.split('/')[-1]
-        if rpath in self.getCalendarPaths():
+        if rpath in self.listCalendarPaths():
             calendar = self.getCalendarForPath(rpath)
             info = {
                 'id': id,
