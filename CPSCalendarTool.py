@@ -471,11 +471,10 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 (event.from_date, event.to_date, mask.from_date, mask.to_date))
 
         # normalize
-        start_time = DateTime(from_date.year(), from_date.month(),
+        slot_start = DateTime(from_date.year(), from_date.month(),
                               from_date.day())
         to_date = to_date + 1
         end_time = DateTime(to_date.year(), to_date.month(), to_date.day())
-        slot_start = start_time
 
         # Flip the times if they are wrong.
         if ((to_time_hour or to_time_minute) and
