@@ -19,7 +19,6 @@ from AccessControl import ClassSecurityInfo
 from AccessControl.SecurityManagement import getSecurityManager
 from AccessControl.SecurityManagement import newSecurityManager
 from Products.CPSCore.CPSMembershipTool import CPSUnrestrictedUser
-from AccessControl.User import UnrestrictedUser
 from Globals import InitializeClass
 
 from Products.CMFCore.CMFCorePermissions import setDefaultRoles, View
@@ -328,7 +327,7 @@ class Calendars(CPSBaseFolder):
             # Grant ownership to Member
             try:
                 ob.changeOwnership(user)
-                # XXX this method is define in a testcase and just does a pass
+                # XXX this method is defined in a testcase and just does a pass
             except AttributeError:
                 pass  # Zope 2.1.x compatibility
 

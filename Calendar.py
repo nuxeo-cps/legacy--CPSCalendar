@@ -512,7 +512,8 @@ class Calendar(CPSBaseFolder):
                                 correct_col.append({
                                     'event': the_event,
                                     'height': conf_stop - conf_start,
-                                    'isdirty': show_dirty and the_event.isDirty(),
+                                    'isdirty': \
+                                        show_dirty and the_event.isDirty(),
                                 })
                                 block_stops[i] = conf_stop
                             blocks.append(block_cols)
@@ -704,11 +705,8 @@ class Calendar(CPSBaseFolder):
             calendar_title, event_title, mail_from, reply_to, mails, 
             new_event=new_event)
         try:
-            mailhost.send(mailing,
-                mto=mails,
-                mfrom=mail_from,
-                subject="[CAL] %s" % (event_title, ),
-                encode='8bit')
+            mailhost.send(mailing, mto=mails, mfrom=mail_from,
+                subject="[CAL] %s" % event_title, encode='8bit')
         except:
             LOG('NGCal', INFO, "Error while sending notification email")
 
