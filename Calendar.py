@@ -750,7 +750,7 @@ class Calendar(CPSBaseFolder):
                     else:
                         merged[k] = list(v)
             # groups
-            if hasattr(object, '__acl_local_group_roles__'):
+            if hasattr(object, '__ac_local_group_roles__'):
                 dict = object.__ac_local_group_roles__ or {}
                 if callable(dict): dict = dict()
                 for k, v in dict.items():
