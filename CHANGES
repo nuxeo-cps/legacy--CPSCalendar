@@ -12,4 +12,6 @@ Bug fixes:
 - calendar_getPrevNext.py didn't handle year crossings.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- Meetings and events are now the same thing, greatly simplyfying things.
+- When searching for users to add as attendees, the calendar owner no longer
+  appears.
