@@ -1,0 +1,89 @@
+<tal:block define="global current_action string:attendees" />
+<html metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="header">
+  <tal:block
+    replace="python:mcat('_cal_Attendees_for_event_')">
+    Attendees for event
+  </tal:block>
+  «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
+</metal:block>
+
+<metal:block fill-slot="header_plus" />
+
+<metal:block fill-slot="main"
+  tal:define="
+    user_types here/getUserTypes;
+    attendees_dict here/getAttendeesDict;
+    decline_attendees python:[att for att in here.attendees if att['status'] == 'decline'];
+    all_attendees here/getCalendarsDict;
+    statuses here/getAttendeeStatuses;
+    can_edit python:here.canEditThisEvent();
+  ">
+  <tal:block condition="python:decline_attendees and can_edit">
+    <form action="calendar_removeattendee" method="POST">
+      <input type="hidden" name="ids:list"
+        tal:repeat="att decline_attendees"
+        tal:attributes="value att/id" />
+      <input type="submit"
+        tal:attributes="
+          value python:mcat('_button_Remove all attendees that declined this event_')" />
+    </form>
+  </tal:block>
+  <tal:block repeat="user_type user_types">
+    <h2 tal:content="python:mcat(user_type['plural_title'])">Ressources</h2>
+    <tal:block define="
+      type user_type/id;
+      attendees attendees_dict/?type|python:[]">
+      <p tal:condition="not:attendees"
+        tal:content="python:mcat('_cal_no_attendee_of_type_%s_' % type)">
+        No ressources selected
+      </p>
+      <tal:block condition="python:can_edit and attendees">
+        <form action="calendar_removeattendee" method="POST">
+          <ul>
+            <li tal:repeat="attendee attendees">
+              <input type="checkbox" name="ids:list"
+                tal:attributes="value string:${attendee/id}" />
+              <tal:block replace="attendee/cn|attendee/id" />
+            </li>
+          </ul>
+          <input type="submit"
+            tal:attributes="value python:mcat('_button_delete_')" />
+        </form>
+      </tal:block>
+      <tal:block condition="python:(not can_edit) and attendees">
+        <ul>
+          <li tal:repeat="attendee attendees">
+            <tal:block replace="attendee/cn|attendee/id" />
+          </li>
+        </ul>
+      </tal:block>
+      <tal:block condition="can_edit">
+        <tal:block condition="python:type != 'member'">
+          <tal:block define="
+            addable_attendees all_attendees/?type|python:[];
+            attendees_ids python:[att['id'] for att in attendees];
+            addable_attendees python:[att for att in addable_attendees if att['id'] not in attendees_ids]">
+            <form action="calendar_addattendee"
+              tal:condition="addable_attendees">
+              <tal:block replace="python:mcat('_cal_Add_attendee:')">
+                Add
+              </tal:block>
+              <select name="id">
+                <option tal:repeat="attendee addable_attendees"
+                  tal:attributes="value attendee/id"
+                  tal:content="attendee/cn">Ressource</option>
+              </select>
+              <input type="submit"
+                tal:attributes="value python:mcat('_button_add_')" />
+            </form>
+          </tal:block>
+        </tal:block>
+      </tal:block>
+    </tal:block>
+  </tal:block>
+  <metal:block use-macro="here/calendar_macros/macros/notifyattendees" />
+</metal:block>
+
+</html>
