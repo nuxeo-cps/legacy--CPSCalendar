@@ -73,7 +73,13 @@ def update(self):
         npath = ', '.join(path)
         portal.portal_skins.addSkinSelection(skin_name, npath)
         pr(" Fixup of skin %s" % skin_name)
-        
+
+
+    pr("Verifying CPS Advanced Calendar tool")
+    if not portalhas('portal_cpscalendar'):
+        pr(" Creating CPS Advanced Calendar tool")
+        portal.manage_addProduct['CPSCalendar'].addCPSCalendarTool()
+
     pr("Setup workflow shemas")
     wftool = portal.portal_workflow
     
