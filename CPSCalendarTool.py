@@ -125,7 +125,7 @@ def stringToDateTime(string, locale=None):
     all_formats = {'dmy': { #European
                      'format': (2, 1, 0), # Positions: (year, month, day)
                      'strpstr': '%d-%m-%Y',
-                     'locales': ('fr', 'be', 'nl'),
+                     'locales': ('fr', 'be', 'nl', 'it', 'es', 'pt', 'pt_BR'),
                     },
                    'mdy': { # US
                      'format': (2, 0, 1),
