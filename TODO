@@ -1,5 +1,7 @@
 - move hour events interface
 
+- smarter notifications
+
 - add global actions (in NuxCPS.cpsinstall) for "My calendar" and "Calendars"
 
 - show today with a different color

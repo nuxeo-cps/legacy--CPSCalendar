@@ -236,6 +236,7 @@ class Event(BaseDocument):
                 'description': self.description,
                 'location': self.location,
                 'event_status': self.event_status,
+                'transparent': self.transparent,
                 'comment': comment,
                 'dtstamp': dtstamp,
                 'sender': member,

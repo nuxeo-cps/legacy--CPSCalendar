@@ -128,9 +128,16 @@
             tal:content="python:mcat('_cal_prop_transparent_')">
             Transparent
           </metal:block>
-          <metal:block fill-slot="content"
-            tal:content="python:transparent and mcat('_Yes_') or mcat('_No_')">
-            Yes
+          <metal:block fill-slot="content">
+            <p
+              tal:content="python:transparent and mcat('_Yes_') or mcat('_No_')">
+              Yes
+            </p>
+            <p>
+              <small
+                tal:content="python:mcat('_Transparent events mean that you-re not busy during this event_')">
+                Transparent events mean that you're not busy during this event.
+              </small>
           </metal:block>
         </metal:block>
       </metal:block>

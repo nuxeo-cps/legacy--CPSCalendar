@@ -274,6 +274,12 @@
                   tal:content="python:mcat(choice['title'])">
                   Yes
                 </option>
+                <p>
+                  <small
+                    tal:content="python:mcat('_Transparent events mean that you-re not busy during this event_')">
+                    Transparent events mean that you're not busy during this event.
+                  </small>
+                </p>
               </select>
             </metal:block>
           </metal:block>
