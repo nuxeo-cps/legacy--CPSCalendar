@@ -9,8 +9,8 @@ Bug fixes:
 - A dollar had fallen away in an action.
 - The recurrence upgrade removed the new attribute as well as the old.
 - In french Locale, date and month got flipped when type was changed.
-- Mantis bug 896 fixed.
-- A button was not translated (#783)
+- Mantis bug #896 and #940 fixed.
+- A button was not translated (#783).
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
