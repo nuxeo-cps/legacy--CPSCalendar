@@ -1,3 +1,4 @@
+# -*- coding: iso-8859-15 -*-
 # Copyright (c) 2002-2003 Nuxeo SARL <http://nuxeo.com>
 # Copyright (c) 2002 Préfecture du Bas-Rhin, France
 # Author: Florent Guillaume <mailto:fg@nuxeo.com>
@@ -216,7 +217,7 @@ class Calendar(CPSBaseFolder):
     security.declarePrivate('getOwnerId')
     def getOwnerId(self):
         # getOwner() is part of the Zope API
-        return self.getOwner(1)[1]
+        return self.getOwnerTuple()[1]
     
     security.declarePublic('getCalendarUser')
     def getCalendarUser(self):
@@ -790,10 +791,13 @@ class Calendar(CPSBaseFolder):
                 done[id] = None
 
         for attendee in event_dict['event']['attendees']:
+            id = attendee.get('id')
+            if id is None:
+                continue
             if attendee['status'] == 'unconfirmed':
-                email = self.getEmail(attendee['id'], mdir)
+                email = self.getEmail(id, mdir)
                 if email:
-                    mails[attendee['id']] = email
+                    mails[id] = email
 
         event = getattr(self, event_dict['id'], None)
         if event is None:

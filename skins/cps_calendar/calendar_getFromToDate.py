@@ -6,7 +6,7 @@
 #
 # Also makes sure everything is of the correct type
 
-locale = context.Localizer.default.get_selected_language()
+locale = context.Localizer.get_selected_language()
 
 if REQUEST.has_key('from_date_string'):
     #OK, we have a REQUEST that comes from a form
