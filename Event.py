@@ -147,10 +147,10 @@ class Event(CPSBaseDocument):
         if new_status != old_status:
             if new_status == 'cancelled':
                 calendar = self.getCalendar()
-                calendar.addCancelledEvent(self)
+                calendar.cancellEvent(self)
             if old_status == 'cancelled':
                 calendar = self.getCalendar()
-                calendar.removeCancelledEvent(self)
+                calendar.unCancellEvent(self)
             setdirty = 1
 
         if all_day is not None and (not self.all_day) != (not all_day):
@@ -282,14 +282,17 @@ class Event(CPSBaseDocument):
     def setEventStatus(self, status):
         """ 
         """
+
+        # Only called with status = 'cancelled', it seems -> refactor later
+        assert status == 'cancelled'
         old_status = self.event_status
         if status != old_status:
             if status == 'cancelled':
                 calendar = self.getCalendar()
-                calendar.addCancelledEvent(self)
+                calendar.cancellEvent(self)
             if old_status == 'cancelled':
                 calendar = self.getCalendar()
-                calendar.removeCancelledEvent(self)
+                calendar.unCancellEvent(self)
             self.notified_attendees = ()
             self.isdirty = 1
         self.event_status = status
@@ -456,7 +459,7 @@ class Event(CPSBaseDocument):
         if aq_base(item) is aq_base(self):
             if self.event_status == 'cancelled':
                 calendar = self.getCalendar()
-                calendar.addCancelledEvent(self)
+                calendar.cancellEvent(self)
 
 InitializeClass(Event)
 

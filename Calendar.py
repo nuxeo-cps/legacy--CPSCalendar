@@ -189,9 +189,10 @@ class Calendar(CPSBaseFolder):
     security.declarePublic('addPendingEvent')
     def addPendingEvent(self, event_dict):
         """Add an event request"""
+        # print event_dict
         if event_dict['request'] == 'status' and \
                 event_dict['id'] not in self.objectIds('Event'):
-            # status change lost because this event was once deleted
+            # Status change lost because this event was once deleted
             return
         base_dict = event_dict
         event_dict = deepcopy(event_dict)
@@ -204,7 +205,7 @@ class Calendar(CPSBaseFolder):
                 events.append(event)
 
         if event_dict['request'] == 'status':
-            # append status change
+            # Append status change
             if this_event is not None:
                 event_dict['change'] = this_event['change'] \
                     + event_dict['change']
@@ -740,8 +741,8 @@ class Calendar(CPSBaseFolder):
         if event_id not in self._declined:
             self._declined = self._declined + (event_id, )
 
-    security.declarePrivate('addCancelledEvent')
-    def addCancelledEvent(self, event):
+    security.declarePrivate('cancellEvent')
+    def cancellEvent(self, event):
         """Add the event id in the self._cancelled list"""
         event_id = event.id
         if event_id not in self._cancelled:
@@ -755,8 +756,8 @@ class Calendar(CPSBaseFolder):
             self._declined = tuple(
                 [id for id in self._declined if id != event_id])
 
-    security.declarePrivate('removeCancelledEvent')
-    def removeCancelledEvent(self, event):
+    security.declarePrivate('unCancellEvent')
+    def unCancellEvent(self, event):
         """Remove event from cancelled events lists"""
         event_id = event.id
         if event_id in self._cancelled:
