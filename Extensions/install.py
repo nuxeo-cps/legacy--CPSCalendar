@@ -43,7 +43,7 @@ def update(self):
     skins = ('cpscalendar_skins', 'cpscalendar_images',)
     paths = {
         'cpscalendar_skins': 'Products/CPSCalendar/skins/cps_calendar',
-        'cpscalendar_images': 'Products/CPSCalendar/skins/images',
+        'cpscalendar_images': 'Products/CPSCalendar/skins/cps_calendar_images',
     }
     for skin in skins:
         path = paths[skin]
