@@ -126,7 +126,7 @@
                     int_date python:int(from_date);
                   "
                   tal:attributes="
-                    href string:javascript:open_day_selector('${int_date}', 'from_date', 'from_date_string', '')
+                    href string:javascript:open_day_selector('${int_date}', '\'from_date\'', '\'from_date_string', '\'')
                     ">
                   <img border="0" tal:attributes="src string:${portal_url}/day_selector_icon.png" />
                 </a>
@@ -145,7 +145,7 @@
                     int_date python:int(to_date);
                   "
                   tal:attributes="
-                    href string:javascript:open_day_selector('${int_date}', 'to_date', 'to_date_string', '')
+                    href string:javascript:open_day_selector('${int_date}', '\'to_date\'', '\'to_date_string\'', '\'\'')
                     ">
                   <img border="0" tal:attributes="src string:${portal_url}/day_selector_icon.png" />
                 </a>
