@@ -9,16 +9,22 @@
 
 <metal:block fill-slot="main"
   tal:define="
+    edit request/form/edit|nothing;
     disp_infos python:here.calendar_getDispInformations(request);
     selected_day disp_infos/selected_day;
-    from_date_year selected_day/year;
-    from_date_month selected_day/month;
-    from_date_day selected_day/day;
-    from_date_hour python:9;
-    from_date_minute python:0;
-    to_date_hour python:17;
-    to_date_minute python:0;
+    args python:edit and request.SESSION['meeting']['args'];
+    from_date_year python:edit and int(args['from_date_year']) or selected_day.year();
+    from_date_month python:edit and int(args['from_date_month']) or selected_day.month();
+    from_date_day python:edit and int(args['from_date_day']) or selected_day.day();
+    to_date_year python:edit and int(args['to_date_year']) or selected_day.year();
+    to_date_month python:edit and int(args['to_date_month']) or selected_day.month();
+    to_date_day python:edit and int(args['to_date_day']) or selected_day.day();
+    from_date_hour python:(edit and [int(args['from_date_hour'])] or [9])[0];
+    from_date_minute python:(edit and [int(args['from_date_minute'])] or [0])[0];
+    to_date_hour python:(edit and [int(args['to_date_hour'])] or [17])[0];
+    to_date_minute python:(edit and [int(args['to_date_minute'])] or [0])[0];
     my_id here/id;
+    cal_ids python:edit and args['cal_ids'] or [my_id];
     user_types here/getUserTypes;
     all_calendars python:here.getCalendarsDict(exclude=my_id);">
   <form action="calendar_begin_meeting" method="POST">
@@ -35,7 +41,13 @@
         <ul>
           <li tal:repeat="cal calendars">
             <input type="checkbox" name="cal_ids:list"
-              tal:attributes="value cal/id" />
+              tal:define="
+                id cal/id;
+              "
+              tal:attributes="
+                value id;
+                checked python:id in cal_ids;
+              " />
             <tal:block replace="cal/cn">
               Calendar
             </tal:block>
@@ -45,8 +57,10 @@
     </tal:block>
     <p>
       <small>
-        <input type="checkbox" checked="checked" name="cal_ids:list"
-          tal:attributes="value my_id" />
+        <input type="checkbox" name="cal_ids:list"
+          tal:attributes="
+            value my_id;
+            checked python:my_id in cal_ids;" />
         Include this calendar
       </small>
     </p>
@@ -78,7 +92,7 @@
       <select name="to_date_day">
         <option tal:repeat="day python:range(1,32)"
           tal:content="day" tal:attributes="value day;
-            selected python:day == from_date_day or nothing" />
+            selected python:day == to_date_day or nothing" />
       </select>
       <select name="to_date_month">
         <option tal:repeat="month python:range(1,13)"
@@ -86,10 +100,10 @@
             python:mcat('_cal_Month%s' % (month, ));"
           tal:attributes="
             value month;
-            selected python:month == from_date_month or nothing"/>
+            selected python:month == to_date_month or nothing"/>
       </select>
       <input name="to_date_year" size="4"
-        tal:attributes="value from_date_year" />
+        tal:attributes="value to_date_year" />
     </p>
     <p>
       Between
@@ -129,6 +143,8 @@
     </p>
     <input type="submit"
       tal:attributes="value python:mcat('_button_search_')" />
+    <input type="button" onClick="history.back()"
+      tal:attributes="value python:mcat('_button_cancel_')" />
   </form>
 </metal:block>
 </html>

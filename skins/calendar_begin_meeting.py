@@ -1,5 +1,9 @@
 ##parameters=cal_ids=[], REQUEST=None, **kw
 
+errors = []
+
+pr = errors.append
+
 if REQUEST is not None:
     kw.update(REQUEST.form)
 
@@ -9,27 +13,45 @@ if not cal_ids:
 meeting = {}
 meeting['args'] = kw
 
-from_date_year = int(kw['from_date_year'])
+try:
+    from_date_year = int(kw['from_date_year'])
+except ValueError:
+    pr('_From_date_is_incorrect_')
+
 from_date_month = int(kw['from_date_month'])
 from_date_day = int(kw['from_date_day'])
 ok = 0
-while not ok:
-    try:
-        from_date = DateTime(from_date_year, from_date_month, from_date_day)
-        ok = 1
-    except 'DateTimeError':
-        from_date_day -= 1
+if not errors:
+    while not ok:
+        try:
+            from_date = DateTime(from_date_year, from_date_month, from_date_day)
+            ok = 1
+        except 'DateTimeError':
+            from_date_day -= 1
 
-to_date_year = int(kw['to_date_year'])
+try:
+    to_date_year = int(kw['to_date_year'])
+except ValueError:
+    pr("_To_date_is_incorrect_")
+
 to_date_month = int(kw['to_date_month'])
 to_date_day = int(kw['to_date_day'])
 ok = 0
-while not ok:
-    try:
-        to_date = DateTime(to_date_year, to_date_month, to_date_day)
-        ok = 1
-    except 'DateTimeError':
-        to_date_day -= 1
+if not errors:
+    while not ok:
+        try:
+            to_date = DateTime(to_date_year, to_date_month, to_date_day)
+            ok = 1
+        except 'DateTimeError':
+            to_date_day -= 1
+
+if not errors:
+    days = from_date - to_date
+    if abs(days) > 32:
+        pr("_You can't select a time interval larger than a month_")
+
+if errors:
+    return context.calendar_meeting_error(errors=errors)
 
 from_date_hour = int(kw['from_date_hour'])
 from_date_minute = int(kw['from_date_minute'])
@@ -53,6 +75,7 @@ busy_infos = context.unionCals(
 
 meeting['busy_infos'] = busy_infos
 
+REQUEST.SESSION['freebusy_start'] = 0
 
 if REQUEST is not None:
     REQUEST.SESSION['meeting'] = meeting

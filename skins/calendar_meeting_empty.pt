@@ -1,0 +1,18 @@
+<tal:block define="global current_action string:meeting" />
+<html metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="header">
+  Meeting creation helper
+</metal:block>
+
+<metal:block fill-slot="header_plus" />
+
+<metal:block fill-slot="main">
+  <h2>
+    Select at least one attendee
+  </h2>
+  <input type="button" onClick="history.back()"
+    tal:attributes="value python:mcat('_button_back_')" />
+</metal:block>
+
+</html>

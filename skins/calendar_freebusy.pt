@@ -1,6 +1,11 @@
 <tal:block define="global current_action string:meeting" />
 <html metal:use-macro="here/main_template/macros/master">
 
+<metal:block fill-slot="style_plus">
+  <link rel="stylesheet" type="text/css"
+    tal:attributes="href string:${portal_url}/calendar_stylesheet.css" />
+</metal:block>
+
 <metal:block fill-slot="header">
     Meeting creation helper
 </metal:block>
@@ -12,6 +17,15 @@
     meeting request/SESSION/meeting;
     freebusy_infos meeting/freebusy_infos;
     slots freebusy_infos/slots;
+    len_slots python:len(slots);
+    slot_start request/SESSION/freebusy_start;
+    first_day python:slots[slot_start][0];
+    first_dow first_day/dow;
+    first_dow python:first_dow == 0 and 7 or first_dow;
+    disp_start python:slot_start - (first_dow - 1);
+    slot_end python:slot_start + 7 > len_slots and len_slots or slot_start + 7;
+    slot_end python:slot_end > disp_start + 7 and disp_start + 7 or slot_end;
+    disp_end python:disp_start+7;
     busy_infos meeting/busy_infos;
     hour meeting/args/duration_hour;
     minute meeting/args/duration_minute;
@@ -20,91 +34,139 @@
     back_td2 string:${portal_url}/cal_line2.png;
     empty_src string:${portal_url}/cal_empty.gif;
     ">
-  <table cellspacing="2" cellpadding="0">
+  <table cellspacing="0" cellpadding="0" border="0" width="100%">
     <tr>
-      <td bgcolor="#00FF00" width="40">
-      </td>
       <td>
-        Period of free time you can use to create your meeting
+        <table align="right" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td width="30" class="cal_left_tab">
+              <tal:block condition="python:disp_start > 0">
+                <a class="cal_event"
+                  tal:define="
+                    prev python:disp_start - 7;
+                  "
+                  tal:attributes="href string:calendar_go_freebusy?start=${prev}">
+                  <<
+                </a>
+              </tal:block>
+            </td>
+            <td width="30" class="cal_right_tab">
+              <tal:block condition="python:disp_end < len_slots">
+                <a class="cal_event"
+                  tal:define="
+                    next python:disp_start + 7;
+                  "
+                  tal:attributes="href string:calendar_go_freebusy?start=${next}">
+                  >>
+                </a>
+              </tal:block>
+            </td>
+          </tr>
+        </table>
       </td>
     </tr>
     <tr>
-      <td bgcolor="#AAAAAA" width="40">
-      </td>
       <td>
-        Busy time
-      </td>
-    </tr>
-  </table>
-  <table width="445" cellspacing="0" cellpadding="0" border="1">
-
-    <tr>
-      <td>
-        <table width="445" cellspacing="2" cellpadding="0" border="0">
+        <table width="452" cellspacing="0" cellpadding="0" border="1">
           <tr>
             <td>
-            </td>
-            <th width="59" tal:repeat="i python:range(0,7)">
-              <tal:block
-                define="
-                  dow python:mcat('_cal_Day%s' % i);
-                  date python:slots[i][0];
-                  dom date/day;
-                  month python:mcat('_cal_Mo%s' % date.month());
-                "
-                tal:content="string:${dow} ${dom} ${month}" />
-            </th>
-          </tr>
-          <tr>
-            <td width="25" valign="top" bgcolor="#DDDDDD">
-              <table cellspacing="0" cellpadding="0" border="0">
+              <table width="452" cellspacing="2" cellpadding="0" border="0">
                 <tr>
-                  <td height="5">
+                  <td>
+                  </td>
+                  <td width="59" bgcolor="#DDDDDD"
+                    tal:repeat="i python:range(disp_start, slot_start)">
+                  </td>
+                  <th width="59"
+                    tal:repeat="i python:range(slot_start, slot_end)">
+                    <tal:block
+                      define="
+                        dow python:mcat('_cal_Day%s' % (i - slot_start + first_dow - 1));
+                        date python:slots[i][0];
+                        dom date/day;
+                        month python:mcat('_cal_Mo%s' % date.month());
+                      "
+                      tal:content="string:${dow} ${dom} ${month}" />
+                  </th>
+                  <td width="59" bgcolor="#DDDDDD"
+                    tal:repeat="i python:range(slot_end, disp_end)">
                   </td>
                 </tr>
-                <tr tal:repeat="i python:range(1,25)">
-                  <td height="15" valign="bottom"
-                    tal:define="h python:i<24 and i or '00'"
-                    tal:content="string:${h}:00">
+                <tr>
+                  <td width="25" valign="top" bgcolor="#DDDDDD">
+                    <table cellspacing="0" cellpadding="0" border="0">
+                      <tr>
+                        <td height="5">
+                        </td>
+                      </tr>
+                      <tr tal:repeat="i python:range(1,25)">
+                        <td height="15" valign="bottom"
+                          tal:define="h python:i<24 and i or '00'"
+                          tal:content="string:${h}:00">
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td width="59" bgcolor="#DDDDDD"
+                    tal:repeat="i python:range(disp_start, slot_start)">
+                  </td>
+                  <tal:block
+                    repeat="busy_day python:busy_infos[slot_start:slot_end]">
+                    <td with="59" height="365" valign="top"
+                      tal:define="even repeat/busy_day/even"
+                      tal:attributes="
+                        background python:even and back_td2 or back_td1">
+                      <table cellspacing="0" cellpadding="0" width="59" border="0">
+                        <tr tal:repeat="block busy_day">
+                          <td width="59"
+                            tal:define="
+                              height block/height;
+                              busy block/busy;
+                              ok python:not busy and height >= desired_height;
+                              disp_height python:height/4;"
+                            tal:attributes="
+                              height disp_height;
+                              bgcolor python:(busy and '#AAAAAA') or (ok and '#00FF00') or nothing">
+                            <tal:block condition="ok">
+                              <a
+                                title="Create the meeting here"
+                                tal:define="
+                                  time python:int(block['start']);"
+                                tal:attributes="
+                                  href string:create_meeting?time=${time}">
+                                <img width="59" border="0"
+                                  tal:attributes="
+                                    height disp_height;
+                                    src empty_src;" />
+                              </a>
+                            </tal:block>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tal:block>
+                  <td width="59" bgcolor="#DDDDDD"
+                    tal:repeat="i python:range(slot_end, disp_end)">
                   </td>
                 </tr>
               </table>
             </td>
-            <tal:block
-              repeat="busy_day busy_infos">
-              <td with="59" height="365" valign="top"
-                tal:define="even repeat/busy_day/even"
-                tal:attributes="
-                  background python:even and back_td2 or back_td1">
-                <table cellspacing="0" cellpadding="0" width="59" border="0">
-                  <tr tal:repeat="block busy_day">
-                    <td width="59"
-                      tal:define="
-                        height block/height;
-                        busy block/busy;
-                        ok python:not busy and height >= desired_height;
-                        disp_height python:height/4;"
-                      tal:attributes="
-                        height disp_height;
-                        bgcolor python:(busy and '#AAAAAA') or (ok and '#00FF00') or nothing">
-                      <tal:block condition="ok">
-                        <a
-                          title="Create the meeting here"
-                          tal:define="
-                            time python:int(block['start']);"
-                          tal:attributes="
-                            href string:create_meeting?time=${time}">
-                          <img width="59"
-                            tal:attributes="
-                              height disp_height;
-                              src empty_src;" />
-                        </a>
-                      </tal:block>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tal:block>
+          </tr>
+        </table>
+        <table cellspacing="2" cellpadding="0">
+          <tr>
+            <td bgcolor="#00FF00" width="40">
+            </td>
+            <td>
+              Period of free time you can use to create your meeting
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#AAAAAA" width="40">
+            </td>
+            <td>
+              Busy time
+            </td>
           </tr>
         </table>
       </td>
@@ -130,6 +192,13 @@
     </ul>
     <input type="submit"
       tal:attributes="value python:mcat('_button_validate_')" />
+  </form>
+  <form action="" method="POST">
+    <input type="hidden" name="edit" value="1" />
+    <input type="submit" name="calendar_meeting_form:method"
+      value="Modify your request" />
+    <input type="submit" name="calendar_meeting_cancel:method"
+      value="Cancel your request" />
   </form>
 </metal:block>
 

@@ -67,6 +67,12 @@ factory_type_information = (
                   'permissions': ("Add portal content",),
                   'category': 'object'
                   },
+                 {'id': 'meeting',
+                  'name': '_action_meeting_',
+                  'action': 'calendar_meeting_form',
+                  'permissions': ("Add portal content",),
+                  'category': 'object'
+                  },
                  {'id': 'display',
                   'name': '_action_display_',
                   'action': 'calendar_display_form',
