@@ -3,15 +3,15 @@
 return {
     'categories': {
         'private': {
-            'title': '_cal_cat_Private_',
+            'title': 'cpscalendar_category_private',
             'color': '#000077',
         },
         'work': {
-            'title': '_cal_cat_Work_',
+            'title': 'cpscalendar_category_work',
             'color': '#770000',
         },
         'other': {
-            'title': '_cal_cat_Other_',
+            'title': 'cpscalendar_category_other',
             'color': '#007700',
         },
     },
