@@ -342,20 +342,16 @@ class Calendar(CPSBaseFolder):
                                       slot_start.day())
 
         events = self.objectValues('Event')
-        events_ids = self.objectIds('Event')
         if additional and self._additional_cals:
             mtool = getToolByName(self, 'portal_membership')
             caltool = getToolByName(self, 'portal_cpscalendar')
             cal_rpaths = [rpath for rpath in caltool.listCalendarPaths()
                           if rpath in self._additional_cals]
             for cal_rpath in cal_rpaths:
-                cal = caltool.getCalendarFromPath(rpath)
+                cal = caltool.getCalendarFromPath(cal_rpath)
                 if self.getRpath() != cal_rpath and \
-                  mtool.checkPermission('List folder contents', cal):
-                    add_events = [getattr(cal, event_id)
-                        for event_id in cal.objectIds('Event')
-                        if event_id not in events_ids]
-                    events.extend(add_events)
+                   mtool.checkPermission('List folder contents', cal):
+                    events.extend(cal.objectValues('Event'))
 
         for event in events:
             event_slots = event.getEventInSlots(start_time, end_time, slots)
@@ -833,7 +829,8 @@ class Calendar(CPSBaseFolder):
     def getAdditionalCalendarObjs(self):
         """
         """
-        return [ self.restrictedTraverse(x) for x in self._additional_cals]
+        ctool = getToolByName(self, 'portal_calendar')
+        return filter(None,[ctool.getCalendarFromPath(x) for x in self._additional_cals])
 
     security.declareProtected('Delete objects', 'manage_delObjects')
     def manage_delObjects(self, ids, *args, **kw):

@@ -476,6 +476,10 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 cals.append(cal)
         return cals
 
+    def getCalendarFromPath(self, path):
+        portalurl = getToolByName(self, 'portal_url').getPortalPath()
+        return self.restrictedTraverse(portalurl + '/' + path)
+
 InitializeClass(CPSCalendarTool)
 
 def addCPSCalendarTool(container, REQUEST=None):
