@@ -1,4 +1,23 @@
 *******************************************
+** CPSCalendar V1.7.6 [R1 build 2004/08/10-14:53 by regebro]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- When browsing for a new document when creating, and error occured. (#1443)
+- Two properties had the same label. (#1445)
+- listCalendars now filter the search results to remove any empty entries. (#1442)
+- The document link was dropped when creating an event. (#1447)
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.7.5 [R1 build 2004/08/10-10:32 by regebro]
 
 Requires:
