@@ -15,6 +15,7 @@
 
 <metal:block fill-slot="main"
   tal:define="
+    portal_url python:here.portal_url(relative=1);
     edit request/form/edit|nothing;
     disp_infos python:here.calendar_getDispInformations(request);
     selected_day disp_infos/selected_day;

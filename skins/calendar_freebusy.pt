@@ -15,6 +15,7 @@
 
 <metal:block fill-slot="main"
   tal:define="
+    portal_url python:here.portal_url(relative=1);
     meeting request/SESSION/meeting;
     freebusy_infos meeting/freebusy_infos;
     slots freebusy_infos/slots;
@@ -33,8 +34,7 @@
     desired_height python:hour*60+minute;
     back_td1 string:${portal_url}/cal_line1.png;
     back_td2 string:${portal_url}/cal_line2.png;
-    empty_src string:${portal_url}/cal_empty.gif;
-    "
+    empty_src string:${portal_url}/cal_empty.gif;"
     tal:on-error="python:request.RESPONSE.redirect('%s/calendar_meeting_expired' % (here.absolute_url(), ))">
   <table cellspacing="0" cellpadding="0" border="0" width="100%">
     <tr>
