@@ -30,11 +30,11 @@ class TestCalendarTool(CPSCalendarTestCase):
         self.assertEquals(self.user_home, self.portal.workspaces.members.root)
         assert self.user_home.calendar
         self.user_home_url = mtool.getHomeUrl(self.user_id)
-        self.assertEquals(self.user_home_url, 
+        self.assertEquals(self.user_home_url,
                           "http://nohost/portal/workspaces/members/root")
 
         self.caltool = self.portal.portal_cpscalendar
-        assert self.caltool 
+        assert self.caltool
 
     def beforeTearDown(self):
         mdtool = self.portal.portal_memberdata
@@ -59,14 +59,14 @@ class TestCalendarTool(CPSCalendarTestCase):
         l.sort()
         self.assertEquals(l, [
              'workspaces/members/root/calendar',
-             'workspaces/members/test_user_1_/calendar'])
+             'workspaces/members/test_user_1/calendar'])
 
         l = caltool.listCalendars()
         l = [calendar.getRpath() for calendar in l]
         l.sort()
         self.assertEquals(l, [
              'workspaces/members/root/calendar',
-             'workspaces/members/test_user_1_/calendar'])
+             'workspaces/members/test_user_1/calendar'])
 
         # XXX: test these later
         caltool.getCalendarsDict()
