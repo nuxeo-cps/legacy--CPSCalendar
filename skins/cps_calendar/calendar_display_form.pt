@@ -4,9 +4,11 @@
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="cals here/getVisibleCalendars|nothing;
                          additionals here/getAdditionalCalendars;">
-  <p i18n:translate="cpscalendar_message_select_calendars_to_display_with_this_calendar">
-    Select the calendars you want to display along with this calendar
-  </p>:
+  <p>
+    <span i18n:translate="cpscalendar_message_select_calendars_to_display_with_this_calendar">
+      Select the calendars you want to display along with this calendar
+    </span> :
+  </p>
   <form action="calendar_display"
         tal:condition="cals">
     <ul tal:define="calendars python:[cal for cal in cals if cal.id != here.id]">
