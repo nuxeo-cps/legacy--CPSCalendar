@@ -261,6 +261,7 @@ class Calendar(Workgroup):
                 slot_start += 1
                 slot_start = DateTime(slot_start.year(), slot_start.month(), slot_start.day())
         events = self.objectValues('Event')
+        events_ids = self.objectIds('Event')
         if additional and self._additional_cals:
             mtool = getToolByName(self, 'portal_membership')
             calendars = aq_parent(aq_inner(self))
@@ -269,7 +270,10 @@ class Calendar(Workgroup):
             for cal_id in cal_ids:
                 cal = getattr(calendars, cal_id)
                 if self.id != cal_id and mtool.checkPermission('View', cal):
-                    events.extend(cal.objectValues('Event'))
+                    add_events = [getattr(cal, id)
+                        for id in cal.objectIds('Event')
+                        if id not in events_ids]
+                    events.extend(add_events)
                 
         for event in events:
             event_slots = event.getEventInSlots(start_time, end_time, slots)
