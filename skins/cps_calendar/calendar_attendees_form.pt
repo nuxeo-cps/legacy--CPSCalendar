@@ -9,7 +9,7 @@
                          decline_attendees python:[att for att in here.attendees if att['status'] == 'decline'];
                          all_attendees caltool/getCalendarsDict|python:{};
                          can_edit python:here.canEditThisEvent();
-                         current_list python:[a['cn'] for a in here.attendees];">
+                         current_list python:[a['rpath'] for a in here.attendees];">
 
   <h1>
     <span tal:replace="here/title_or_id">Title</span>:

@@ -389,7 +389,7 @@
       <tal:block define="search_param python: request.get('search_param', '');
                          search_term  python: request.get('search_term', '');
                          found python:search_param and dtool.searchEntries(**{search_param: search_term});
-                         found python:[member for member in found if member not in current_list]">
+                         found python:[member for member in found if member]">
         <tal:block condition="found">
           <form method="POST" tal:attributes="action addaction">
             <p>
@@ -402,7 +402,7 @@
                   <tal:block define="props python:dtool.getEntry(user_id)">
                     <option
                       tal:define="path python:caltool.getCalendarPathForUser(user_id)"
-                      tal:condition="path"
+                      tal:condition="python:path and path not in current_list"
                       tal:attributes="value path"
                       tal:content="python:props['fullname']">
                         Username
