@@ -1155,13 +1155,11 @@ msgstr "Novembre"
 msgid "cpscalendar_label_month_long12"
 msgstr "Décembre"
 
-#, fuzzy
 msgid "cpscalendar_workspace"
-msgstr ":"
+msgstr "Agenda de l'espace de travail"
 
-#, fuzzy
 msgid "cpscalendar_workspaces"
-msgstr "Ressources"
+msgstr "Agendas de l'espace de travail"
 
 msgid "cpscalendar_member"
 msgstr "Membre"
