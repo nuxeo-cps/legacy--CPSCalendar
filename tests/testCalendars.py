@@ -20,17 +20,14 @@ class TestCalendarTool(CPSCalendarTestCase):
     def testCalendars(self):
         caltool = self.portal.portal_cpscalendar
         assert(caltool)
-
-        calendars_home = self.portal.workspaces.calendars
-        assert(calendars_home)
-
         #XXX
 
 
 class TestCalendar(CPSCalendarTestCase):
 
     def afterSetUp(self):
-        self.login('root')
+        self.user_id = 'root'
+        self.login(self.user_id)
 
         # This actually creates an entry for root in portal_memberdata
         mtool = self.portal.portal_membership
@@ -39,12 +36,15 @@ class TestCalendar(CPSCalendarTestCase):
 
         # If there is no entry for user, getCalendarForId will return None
         dtool = self.portal.portal_metadirectories
-        members = dtool.members
-        assert members.getEntry('root')
+        member = dtool.members.getEntry(self.user_id)
+        assert member
+        member_home = mtool.getHomeFolder(self.user_id)
+        assert member_home
 
-        calendars = self.portal.workspaces.calendars
-        self.calendar = calendars.getCalendarForId('root')
+        caltool = self.portal.portal_cpscalendar
+        self.calendar = getattr(member_home, 'calendar')
         assert self.calendar
+
 
     def beforeTearDown(self):
         # portal_memberdata caches entries in a volatile variable that's
@@ -54,7 +54,10 @@ class TestCalendar(CPSCalendarTestCase):
 
     def testDC(self):
         # XXX: the title should actually be more explicit than that.
-        self.assertEquals(self.calendar.Title(), "root")
+        self.assertEquals(self.calendar.Title(), 
+                          "cpscalendar_user_calendar_name_beg" \
+                          + self.user_id \
+                          + "cpscalendar_user_calendar_name_end")
         # XXX: there should be a description there.
         self.assertEquals(self.calendar.Description(), "")
 
