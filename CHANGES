@@ -8,6 +8,9 @@ Bug fixes:
 ~~~~~~~~~~
 - With Zope 2.7.1 and later selected attendees was lost when creating meetings.
   (#1483)
+- Made the creator of an event automatically confirmed.
+- Made notification on event creation automatic.
+- The organizer doesn't need to approve his own meeting request.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
