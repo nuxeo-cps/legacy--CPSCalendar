@@ -23,13 +23,13 @@ from Products.CMFCore.utils import getToolByName
 from Products.CPSCore.CPSBase import CPSBaseFolder, CPSBase_adder
 #from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
 
-ManageWorkgroups = 'Manage Workgroups'
-setDefaultRoles(ManageWorkgroups, ('Manager',))
+ManageWorkgroups = 'Manage Workspaces'
+setDefaultRoles(ManageWorkspaces, ('Manager',))
 
 
-WorkgroupManager = 'WorkgroupManager'
-WorkgroupMember = 'WorkgroupMember'
-WorkgroupVisitor = 'WorkgroupVisitor'
+WorkgroupManager = 'WorkspaceManager'
+WorkgroupMember = 'WorkspaceMember'
+WorkgroupVisitor = 'WorkspaceVisitor'
 WorkgroupManagerRoles = (WorkgroupManager, WorkgroupMember, WorkgroupVisitor,)
 WorkgroupMemberRoles = (WorkgroupMember, WorkgroupVisitor,)
 WorkgroupVisitorRoles = (WorkgroupVisitor,)
@@ -308,7 +308,7 @@ class Calendars(CPSBaseFolder):
             if not mtool.isAnonymousUser():
                 current_user = mtool.getAuthenticatedMember().getUserName()
                 ob.manage_delLocalRoles(userids=[current_user])
-            ob.manage_setLocalRoles(id, ['WorkgroupManager', 'WorkgroupMember', 'WorkgroupVisitor'])
+            ob.manage_setLocalRoles(id, ['WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'])
             ob.reindexObject()
             return ob
         return None

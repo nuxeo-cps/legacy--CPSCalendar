@@ -22,13 +22,13 @@ from Products.CMFCore.CMFCorePermissions import \
 from Products.CPSCore.CPSBase import CPSBaseFolder, CPSBase_adder
 #from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
 
-ManageWorkgroups = 'Manage Workgroups'
+ManageWorkgroups = 'Manage Workspaces'
 setDefaultRoles(ManageWorkgroups, ('Manager',))
 
 
-WorkgroupManager = 'WorkgroupManager'
-WorkgroupMember = 'WorkgroupMember'
-WorkgroupVisitor = 'WorkgroupVisitor'
+WorkgroupManager = 'WorkspaceManager'
+WorkgroupMember = 'WorkspaceMember'
+WorkgroupVisitor = 'WorkspaceReader'
 WorkgroupManagerRoles = (WorkgroupManager, WorkgroupMember, WorkgroupVisitor,)
 WorkgroupMemberRoles = (WorkgroupMember, WorkgroupVisitor,)
 WorkgroupVisitorRoles = (WorkgroupVisitor,)
@@ -640,7 +640,7 @@ class Calendar(CPSBaseFolder):
         # get ids for members
         ids = {}
         for id, roles in merged.items():
-            if 'WorkgroupMember' in roles:
+            if 'WorkspaceMember' in roles:
                 ids[id] = None
 
         # extend groups
@@ -763,19 +763,19 @@ def addCalendar(dispatcher, id,
     # sets correct permissions on ob
     ob.manage_permission(
         permission_to_manage='Access contents information',
-        roles=['Manager', 'WorkgroupManager', 'WorkgroupMember', 'WorkgroupVisitor'],
+        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'],
         acquire=0)
     ob.manage_permission(
         permission_to_manage='View',
-        roles=['Manager', 'WorkgroupManager', 'WorkgroupMember', 'WorkgroupVisitor'],
+        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'],
         acquire=0)
     ob.manage_permission(
         permission_to_manage='Add portal content',
-        roles=['Manager', 'WorkgroupManager', 'WorkgroupMember'],
+        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember'],
         acquire=0)
     ob.manage_permission(
         permission_to_manage='Modify portal content',
-        roles=['Manager', 'WorkgroupManager', 'WorkgroupMember'],
+        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember'],
         acquire=0)
 
     if REQUEST is not None:
