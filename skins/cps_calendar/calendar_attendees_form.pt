@@ -67,10 +67,9 @@
       </tal:block>
       <tal:block condition="can_edit">
         <tal:block condition="python:type =='member'">
-          <tal:block define="searching python: request.get('role_submit', None);
-                             searchable_keys dtool/getSearchableSchemaKeys;
-                             schema_dict dtool/getSchemaDict;
-                             searchable_keys python:[key for key in searchable_keys if schema_dict[key].type == 'string'];">
+          <tal:block define="
+            searching python:request.get('role_submit', None);
+            searchable_keys python:here.portal_schemas.members.objectIds(['CPS String Field'])">
             <tal:block condition="python: not searching">
               <form method="POST" action="calendar_attendees_form">
                 <p>
@@ -80,7 +79,7 @@
                   <select name="search_param">
                    <option tal:repeat="propid searchable_keys"
                            tal:attributes="value propid"
-                           tal:content="python:str(schema_dict[propid].title)"
+                           tal:content="python:str(here.portal_schemas.members[propid].title)"
                            i18n:translate="">cpscalendar_option</option>
                   </select>
                   <span i18n:translate="cpscalendar_label_add_a_user_whose_is">
