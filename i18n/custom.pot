@@ -232,6 +232,12 @@ msgstr ""
 msgid "cpscalendar_label_month_long12"
 msgstr ""
 
+msgid "cpscalendar_workspace"
+msgstr ""
+
+msgid "cpscalendar_workspaces"
+msgstr ""
+
 msgid "cpscalendar_member"
 msgstr ""
 

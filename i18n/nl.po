@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2004-08-17 16:28default\n"
+"POT-Creation-Date: 2004-08-19 17:00default\n"
 "PO-Revision-Date: 2004-01-09 02:26+0100\n"
 "Last-Translator: Encolpe DEGOUTE <ed@nuxeo.com>\n"
 "Language-Team: French <cantact@nuxeo.com>\n"
@@ -36,14 +36,6 @@ msgstr ""
 #: from ../skins/cps_calendar/create_meeting_form.pt
 msgid "Category"
 msgstr "Category"
-
-#.   <option content="python:str('cpscalendar_pending_%s' % (status, ))" attributes="value status;
-#.                       selected python:status == selected" repeat="status statuses">
-#.             Confirm
-#.           </option>
-#: from ../skins/cps_calendar/calendar_macros.pt
-msgid "Confirm"
-msgstr "Confirm"
 
 #.   <block content="string:cpscalendar_option_status_${att/status}">
 #.                  Confirmed
@@ -140,7 +132,7 @@ msgstr "No attendees"
 
 #.   <input type="submit" value="cpscalendar_button_add" />
 #.   <input type="submit" class="mainbutton" value="cpscalendar_button_add" attributes="name python:addaction+':method'">
-#.                 </input>
+#.               </input>
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_button_add"
@@ -174,10 +166,11 @@ msgstr "Create"
 
 #.   <input type="submit" value="cpscalendar_button_delete" />
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
+#: ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_button_delete"
 msgstr "Delete"
 
-#.   <input type="submit" value="cpscalendar_button_delete_with_no_notification" />
+#.   <input type="submit" value="cpscalendar_button_delete_with_no_notification" condition="nothing" />
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_button_delete_with_no_notification"
 msgstr "Delete without any notification"
@@ -203,13 +196,14 @@ msgstr "Search"
 #.   <input type="submit" value="cpscalendar_button_validate" />
 #.   <input type="submit" name="confirmPendingEvent:method" value="cpscalendar_button_validate" />
 #.   <input type="submit" name="calendar_meeting_form:method" value="cpscalendar_button_validate" />
+#.   <input type="button" onclick="validateSelector()" value="cpscalendar_button_validate" condition="should_validate|nothing" />
 #: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
-#: ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_confirmdelevents.pt
 #: ../skins/cps_calendar/calendar_display_form.pt
 #: ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_macros.pt
-#: ../skins/cps_calendar/calendar_meeting_form.pt 1 more references
+#: ../skins/cps_calendar/calendar_meeting_form.pt
+#: ../skins/cps_calendar/selector_template.pt
 msgid "cpscalendar_button_validate"
 msgstr "Validate"
 
@@ -1158,6 +1152,14 @@ msgstr "November"
 msgid "cpscalendar_label_month_long12"
 msgstr "December"
 
+#, fuzzy
+msgid "cpscalendar_workspace"
+msgstr ":"
+
+#, fuzzy
+msgid "cpscalendar_workspaces"
+msgstr "Resources"
+
 msgid "cpscalendar_member"
 msgstr "Member"
 
@@ -1271,6 +1273,9 @@ msgstr "Show events"
 #, fuzzy
 msgid "cpscalendar_event_viewer_month"
 msgstr "Show events"
+
+#~ msgid "Confirm"
+#~ msgstr "Confirm"
 
 #~ msgid "portal_type_Calendar_title"
 #~ msgstr "Agenda"
