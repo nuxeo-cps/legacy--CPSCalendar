@@ -61,7 +61,7 @@
       <tal:block>
         <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title">
-            <label for="usertype">
+            <label for="usertype"
                      i18n:translate="cpscalendar_label_calendar_type">
               Calendar type
             </label>
