@@ -68,12 +68,10 @@
       <tal:block condition="can_edit"
                  define="addaction string:calendar_addattendee;
                          searchaction string:calendar_attendees_form;">
-        <form method="POST" tal:attributes="action here/REQUEST/URL1">
         <metal:block use-macro="here/calendar_macros/macros/searchform"
           tal:condition="python:type =='member'">
           the searchform
         </metal:block>
-        </form>
 
         <tal:block condition="python:type != 'member'">
           <tal:block define="addable_attendees all_attendees/?type|python:[];

@@ -7,6 +7,7 @@ New features:
   home folder
 - add a new view for the event of a calendar
 - add by_days option to Calendar.getEvents
+- Added back button in the search form
 Bug fixes:
 ~~~~~~~~~~
 - The date display in the weekly view now always uses two lines, one for weekday
