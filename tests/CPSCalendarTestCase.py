@@ -6,5 +6,5 @@ ZopeTestCase.installProduct('CPSCalendar')
 CPSTestCase.setupPortal()
 
 class CPSCalendarTestCase(CPSTestCase.CPSTestCase):
-    pass
+    user_id = 'manager'
 
