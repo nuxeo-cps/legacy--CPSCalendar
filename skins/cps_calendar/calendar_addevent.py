@@ -1,4 +1,5 @@
 ##parameters=REQUEST=None, **kw
+# $Id$
 
 from random import randrange
 locale = context.Localizer.default.get_selected_language()
@@ -11,7 +12,6 @@ id = str(int(DateTime()))+str(randrange(1000,10000))+('-%s' % (here.id))
 
 all_day = kw.get('all_day')
 from_date_day = kw.get('from_date_day')
-#raise "debug0", str(all_day)+': '+str(kw.get('from_date'))+' => '+str(kw.get('to_date'))
 
 from_date_string = kw.get('from_date','')
 if locale in ('en', 'hu', ):
@@ -60,8 +60,6 @@ kw['to_date'] = to_date
 # from_date < to_date. For an all_day event, from_date and to_date
 # will be switched
 
-#raise "debug", str(all_day or from_date <= to_date)+': '+str(from_date)+' => '+str(to_date)
-
 if all_day or from_date <= to_date:
     # TODO: add repeated event add manage
     here.invokeFactory('Event', id, **kw)
@@ -75,7 +73,6 @@ else:
     # the date entries are incorrect (from_date > to_date).
     # in a not all_day event, so propose to extend the event
     # to the next day
-    raise "debug", str(all_day)+': '+str(from_date)+' => '+str(to_date)
     kw['from_date'] = to_date
     kw['from_date_hour'] = to_date_hour
     kw['from_date_minute'] = to_date_minute
