@@ -1,5 +1,7 @@
 ##parameters=ids=None, id=None, REQUEST=None
 
+# $Id$
+
 if ids is None:
     ids = []
 
@@ -24,5 +26,5 @@ if new_attendees:
 
     context.setAttendees(attendees)
 
-if REQUEST:
+if REQUEST is not None:
     REQUEST.RESPONSE.redirect('%s/calendar_attendees_form' % (context.absolute_url(), ))

@@ -1,5 +1,7 @@
 ##parameters=comment=None, notify=None, REQUEST=None
 
+# $id:$
+
 event = context
 
 if comment is not None:
@@ -25,5 +27,5 @@ else:
     calendar = event.getCalendar()
     calendar.manage_delObjects([event.id])
 
-if REQUEST:
+if REQUEST is not None:
     REQUEST.RESPONSE.redirect(calendar.absolute_url())
