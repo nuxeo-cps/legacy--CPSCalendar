@@ -7,6 +7,8 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - It was impossible to change the event type after creation.
+- The montly display for was incorrect if the viewed day was in the end
+  of march. 
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
