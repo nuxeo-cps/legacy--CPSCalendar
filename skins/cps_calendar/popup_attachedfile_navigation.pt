@@ -7,7 +7,7 @@
                 root_uid=root_uid, current_uid=doc, REQUEST=request);
               type string:folder;">
 
-  <metal:block use-macro="here/navigation_lib/macros/select_navigation">
+  <metal:block use-macro="here/navigation_lib_select_navigation/macros/select_navigation">
     <metal:block fill-slot="action">
 
  <script type="text/javascript"
