@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2004-08-10 12:16default\n"
+"POT-Creation-Date: 2004-08-17 16:28default\n"
 "PO-Revision-Date: 2004-05-10 15:04+0100\n"
 "Last-Translator: Paolo Dina <paolo@php3.it>\n"
 "Language-Team: \n"
@@ -1195,7 +1195,7 @@ msgstr ""
 "OK se intendi scambiarle."
 
 #.   <span>
-#.         Modify
+#.   <!--       Modify -->
 #.       </span>
 #: from ../skins/cps_calendar/calendar_edit_form.pt
 #, fuzzy
@@ -1334,6 +1334,10 @@ msgstr "Non confermato"
 
 msgid "cpscalendar_option_status_canceled"
 msgstr "Annullato"
+
+#, fuzzy
+msgid "cpscalendar_option_status_tentative"
+msgstr "Proposta"
 
 msgid "cpscalendar_pending_confirmed"
 msgstr "Conferma"

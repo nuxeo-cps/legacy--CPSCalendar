@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2004-08-10 12:16default\n"
+"POT-Creation-Date: 2004-08-17 16:28default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -851,7 +851,7 @@ msgid "cpscalendar_message_your_request_has_expired"
 msgstr ""
 
 #.   <span>
-#.         Modify
+#.   <!--       Modify -->
 #.       </span>
 #: from ../skins/cps_calendar/calendar_edit_form.pt
 msgid "cpscalendar_modify_object_name"
@@ -968,6 +968,9 @@ msgid "cpscalendar_option_status_unconfirmed"
 msgstr ""
 
 msgid "cpscalendar_option_status_canceled"
+msgstr ""
+
+msgid "cpscalendar_option_status_tentative"
 msgstr ""
 
 msgid "cpscalendar_pending_confirmed"

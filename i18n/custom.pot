@@ -64,6 +64,9 @@ msgstr ""
 msgid "cpscalendar_option_status_canceled"
 msgstr ""
 
+msgid "cpscalendar_option_status_tentative"
+msgstr ""
+
 msgid "cpscalendar_pending_confirmed"
 msgstr ""
 

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2004-08-10 12:16default\n"
+"POT-Creation-Date: 2004-08-17 16:28default\n"
 "PO-Revision-Date: 2004-07-12 18:37+0200\n"
 "Last-Translator: Georg Hennemann <georg.hennemann@dhl.com>\n"
 "Language-Team: German <reinland@dzug.org>\n"
@@ -855,7 +855,7 @@ msgid "cpscalendar_message_your_request_has_expired"
 msgstr "Ihre Anfrage ist abgelaufen"
 
 #.   <span>
-#.         Modify
+#.   <!--       Modify -->
 #.       </span>
 #: from ../skins/cps_calendar/calendar_edit_form.pt
 msgid "cpscalendar_modify_object_name"
@@ -973,6 +973,10 @@ msgstr "nicht bestätigt"
 
 msgid "cpscalendar_option_status_canceled"
 msgstr "abgesagt"
+
+#, fuzzy
+msgid "cpscalendar_option_status_tentative"
+msgstr "Voraussichtlich"
 
 msgid "cpscalendar_pending_confirmed"
 msgstr "Bestätigen"

@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2004-08-10 12:16default\n"
+"POT-Creation-Date: 2004-08-17 16:28default\n"
 "PO-Revision-Date: 2004-08-10 12:17+0200\n"
 "Last-Translator: Lennart Regebro <rgebro@nuxeo.com>\n"
 "Language-Team: \n"
@@ -866,7 +866,7 @@ msgid "cpscalendar_message_your_request_has_expired"
 msgstr "Your request has expired"
 
 #.   <span>
-#.         Modify
+#.   <!--       Modify -->
 #.       </span>
 #: from ../skins/cps_calendar/calendar_edit_form.pt
 msgid "cpscalendar_modify_object_name"
@@ -984,6 +984,9 @@ msgstr "Unconfirmed"
 
 msgid "cpscalendar_option_status_canceled"
 msgstr "Canceled"
+
+msgid "cpscalendar_option_status_tentative"
+msgstr "Tentative"
 
 msgid "cpscalendar_pending_confirmed"
 msgstr "Confirm"
@@ -1287,4 +1290,3 @@ msgstr "Event for this month"
 
 #~ msgid "cpscalendar_option"
 #~ msgstr "option"
-

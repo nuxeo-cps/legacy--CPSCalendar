@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2004-08-10 12:16default\n"
+"POT-Creation-Date: 2004-08-17 16:28default\n"
 "PO-Revision-Date: 2004-01-09 02:26+0100\n"
 "Last-Translator: Encolpe DEGOUTE <ed@nuxeo.com>\n"
 "Language-Team: French <cantact@nuxeo.com>\n"
@@ -866,7 +866,7 @@ msgid "cpscalendar_message_your_request_has_expired"
 msgstr "Your request has expired"
 
 #.   <span>
-#.         Modify
+#.   <!--       Modify -->
 #.       </span>
 #: from ../skins/cps_calendar/calendar_edit_form.pt
 msgid "cpscalendar_modify_object_name"
@@ -988,6 +988,10 @@ msgstr "Unconfirmed"
 
 msgid "cpscalendar_option_status_canceled"
 msgstr "Canceled"
+
+#, fuzzy
+msgid "cpscalendar_option_status_tentative"
+msgstr "Tentative"
 
 msgid "cpscalendar_pending_confirmed"
 msgstr "Confirm"
