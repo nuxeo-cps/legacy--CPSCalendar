@@ -10,6 +10,14 @@ if REQUEST is not None:
 event_type = kw.get('event_type')
 cal_ids = kw.get('cal_ids', [])
 attendees = [ctool.getAttendeeInfo(id, 1) for id in cal_ids]
+
+# The owner of the current calendar is automatically confirmed
+cal_rpath = context.getRpath()
+for info in attendees:
+    if info['rpath'] != cal_rpath:
+        continue
+    info['status'] = 'confirmed'
+
 kw['attendees'] = attendees
 
 here = context.this()
