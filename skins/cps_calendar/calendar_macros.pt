@@ -22,6 +22,7 @@
 </metal:block>
 
 
+<!-- ============================================================ -->
 <metal:block define-macro="event_view"
              i18n:domain="cpscalendar">
   <tal:block define="organizer event/organizer|nothing;
@@ -188,6 +189,7 @@
   </tal:block>
 </metal:block>
 
+<!-- ============================================================ -->
 <metal:block define-macro="pendings_view"
          tal:define="ids python:here.objectIds('Event')">
   <tal:block repeat="pending pendings">
@@ -301,6 +303,7 @@
   </tal:block>
 </metal:block>
 
+<!-- ============================================================ -->
 <metal:block define-macro="notifyattendees"
          i18n:domain="cpscalendar">
   <tal:block condition="python:mtool.checkPermission('Add portal content', here)">
@@ -341,6 +344,80 @@
            value="cpscalendar_button_validate"
            i18n:attributes="value" />
       </form>
+    </tal:block>
+  </tal:block>
+</metal:block>
+
+<!-- ============================================================ -->
+<metal:block define-macro="searchform" i18n:domain="cpscalendar">
+  <tal:block define="
+    searching python:request.get('role_submit', None);
+    widgets here/portal_cpscalendar/getSearchWidgets;">
+    <tal:block condition="python: not searching">
+      <form method="POST" action="calendar_attendees_form">
+        <p>
+          <span i18n:translate="cpscalendar_label_add_a_user_whose">
+            Add a user whose
+          </span>
+          <select name="search_param">
+            <tal:span repeat="widget widgets">
+              <option tal:condition="python:'search' not in widget.hidden_layout_modes"
+                      tal:attributes="value python:widget.getWidgetId()">
+                <span  tal:condition="widget/is_i18n"
+                       i18n:domain="Default" i18n:translate=""
+                       tal:content="widget/label">label</span
+                ><span tal:condition="not:widget/is_i18n"
+                        tal:content="widget/label">label</span
+                ></option>
+            </tal:span>
+          </select>
+          <span i18n:translate="cpscalendar_label_add_a_user_whose_is">
+            is
+          </span> :
+          <input type="text" name="search_term" size="10">
+          <input class="mainbutton" type="submit" name="role_submit"
+                 value="cpscalendar_button_search"
+                 i18n:attributes="value">
+        </p>
+      </form>
+    </tal:block>
+    <tal:block condition="searching">
+      <tal:block define="search_param python: request.get('search_param', '');
+                         search_term  python: request.get('search_term', '');
+                         found python:search_param and dtool.searchEntries(**{search_param: search_term});
+                         found python:[member for member in found if member != this_user]">
+        <tal:block condition="found">
+          <form method="POST" action="calendar_addattendee">
+            <p>
+              <span i18n:translate="cpscalendar_label_add_attendee">
+                Add
+              </span>
+              <br>
+              <select name="ids:list" size="5" multiple>
+                <tal:block repeat="user_id found">
+                  <tal:block define="props python:dtool.getEntry(user_id)">
+                    <option
+                      tal:define="path python:caltool.getCalendarPathForUser(user_id)"
+                      tal:condition="path"
+                      tal:attributes="value path"
+                      tal:content="python:props['fullname']">
+                        Username
+                    </option>
+                  </tal:block>
+                </tal:block>
+              </select>
+              <br>
+              <input class="mainbutton" type="submit"
+                     value="cpscalendar_button_add"
+                     i18n:attributes="value">
+            </p>
+          </form>
+        </tal:block>
+        <p tal:condition="python: not found"
+           i18n:translate="cpscalendar_message_no_user_matching">
+           Sorry, there isn't any user matching your query
+        </p>
+      </tal:block>
     </tal:block>
   </tal:block>
 </metal:block>
