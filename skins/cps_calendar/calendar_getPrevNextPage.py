@@ -9,7 +9,10 @@ if calendar_display == 'month':
     year = this_day.year()
     month = this_day.month()
     month_start = int(DateTime(year,month,1))
-    month_end = int(DateTime(year,month+1,1))
+    if month == 12:
+        month_end = int(DateTime(year+1,1,1))
+    else:
+        month_end = int(DateTime(year,month+1,1))
     diff = (month_end-month_start)/(24*3600)
     return int(viewed_day-diff), int(viewed_day+diff)
     
