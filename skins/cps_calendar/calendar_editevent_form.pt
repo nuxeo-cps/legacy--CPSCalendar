@@ -60,26 +60,26 @@
 
   <tal:block tal:condition="nothing">
     <!-- Debug block that doesn't appear in the output -->
-    <hr>
+    <hr/>
     <p>
-    here/title = <tal:block tal:replace="here/title|nothing"/><br>
-    form.get('title') = <tal:block tal:replace="python:request.form.get('title')"/><br>
+      here/title = <tal:block tal:replace="here/title|nothing"/><br/>
+      form.get('title') = <tal:block tal:replace="python:request.form.get('title')"/><br/>
     </p>
-    <hr>
-      </tal:block>
+    <hr/>
+  </tal:block>
 
-     <h1>
-       <tal:block condition="create"
-                  i18n:translate="cpscalendar_description_create_a_new_event">
-         Create a new event
-       </tal:block>
-       <tal:block condition="not:create">
-         <span i18n:translate="cpscalendar_description_modify_event">
-           Modify the event
-         </span>
-         «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
-       </tal:block>
-     </h1>
+  <h1>
+    <tal:block condition="create"
+               i18n:translate="cpscalendar_description_create_a_new_event">
+       Create a new event
+    </tal:block>
+    <tal:block condition="not:create">
+      <span i18n:translate="cpscalendar_description_modify_event">
+        Modify the event
+      </span>
+      «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
+    </tal:block>
+  </h1>
 
   <tal:block condition="not:editevent"
              define="event nocall:here">
@@ -88,76 +88,77 @@
 
   <tal:block condition="editevent">
     <form tal:attributes="action here/absolute_url" method="POST">
-      <input type="hidden" name="create" tal:attributes="value create">
+      <input type="hidden" name="create" tal:attributes="value create" />
 
       <metal:block use-macro="here/calendar_macros/macros/form">
-    <metal:block fill-slot="content">
-      <metal:block use-macro="here/calendar_macros/macros/form_property">
-        <metal:block fill-slot="title"
-                     i18n:translate="cpscalendar_label_title">
-          Title
-        </metal:block>
         <metal:block fill-slot="content">
-          <input name="title" size="40"
-                 tal:attributes="value title;
-                     onchange string:document.getElementById('rememberTitle').value = this.value"
-                 i18n:attributes="value">
-        </metal:block>
-      </metal:block>
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
+            <metal:block fill-slot="title"
+                         i18n:translate="cpscalendar_label_title">
+              Title
+            </metal:block>
+            <metal:block fill-slot="content">
+              <input name="title" size="40" i18n:attributes="value"
+                     tal:attributes="value title;
+                       onchange string:document.getElementById('rememberTitle'
+                       ).value = this.value"
+              />
+            </metal:block>
+          </metal:block>
 
-      <metal:block use-macro="here/calendar_macros/macros/form_property">
-        <metal:block fill-slot="title"
-             i18n:translate="cpscalendar_label_eventtype">
-          Event Type
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
+            <metal:block fill-slot="title"
+                         i18n:translate="cpscalendar_label_eventtype">
+              Event Type
+            </metal:block>
+          <metal:block fill-slot="content">
+            <select name="event_type">
+              <option tal:repeat="type here/event_types"
+                      tal:attributes="value type;
+                                      selected python:event_type == type;">
+                <span tal:content="string:cpscalendar_option_${type}"
+                      i18n:translate="">cpscalendar_status</span>
+              </option>
+            </select>
+          </metal:block>
         </metal:block>
-        <metal:block fill-slot="content">
-          <select name="event_type">
-        <option tal:repeat="type here/event_types"
-                tal:attributes="value type;
-                                selected python:event_type == type;">
-              <span tal:content="string:cpscalendar_option_${type}"
-                    i18n:translate="">cpscalendar_status</span>
-        </option>
-          </select>
-        </metal:block>
-      </metal:block>
 
-      <metal:block use-macro="here/calendar_macros/macros/form_property">
-        <metal:block fill-slot="title">&nbsp;</metal:block>
-        <metal:block fill-slot="content">
-          <input type="submit" i18n:attributes="value" value="cpscalendar_label_change_type"
-            name="calendar_editevent_form:method">
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
+          <metal:block fill-slot="title">&nbsp;</metal:block>
+          <metal:block fill-slot="content">
+            <input type="submit" i18n:attributes="value" value="cpscalendar_label_change_type"
+                   name="calendar_editevent_form:method" />
+          </metal:block>
         </metal:block>
-      </metal:block>
 
 
-      <metal:block use-macro="here/calendar_macros/macros/form_property">
-        <metal:block fill-slot="title"
-                     i18n:translate="cpscalendar_label_date">
-          Date
-        </metal:block>
-        <metal:block fill-slot="content">
-          <strong>
-          <tal:block condition="python:event_type == 'event_allday'">
-          <input type="hidden" name="from_date_hour"
-                 tal:attributes="value from_date_hour" />
-          <input type="hidden" name="from_date_minute"
-                 tal:attributes="value from_date_minute" />
-          <input type="hidden" name="to_date_hour"
-                 tal:attributes="value to_date_hour" />
-          <input type="hidden" name="to_date_minute"
-                 tal:attributes="value to_date_minute" />
-          <span i18n:translate="cpscalendar_label_from_day">
-            From the
-          </span>
-          <input type="text" size="11" maxlength="22"
-                 tal:attributes="name string:from_date;
-                                 id string:from_date;
-                                 value from_date_string;" />
-            <button id="trigger"
-                    tal:attributes="id string:trigger_from_date">...</button>
-            <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
-                       replace="structure string:<script type='text/javascript'>
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
+          <metal:block fill-slot="title"
+                       i18n:translate="cpscalendar_label_date">
+            Date
+          </metal:block>
+         <metal:block fill-slot="content">
+            <strong>
+              <tal:block condition="python:event_type == 'event_allday'">
+                <input type="hidden" name="from_date_hour"
+                    tal:attributes="value from_date_hour" />
+                <input type="hidden" name="from_date_minute"
+                    tal:attributes="value from_date_minute" />
+                <input type="hidden" name="to_date_hour"
+                    tal:attributes="value to_date_hour" />
+                <input type="hidden" name="to_date_minute"
+                    tal:attributes="value to_date_minute" />
+                <span i18n:translate="cpscalendar_label_from_day">
+                  From the
+                </span>
+                <input type="text" size="11" maxlength="22"
+                    tal:attributes="name string:from_date;
+                                    id string:from_date;
+                                    value from_date_string;" />
+                <button id="trigger"
+                        tal:attributes="id string:trigger_from_date">...</button>
+                <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
+                        replace="structure string:<script type='text/javascript'>
 Calendar.setup(
 {
 inputField  : 'from_date',
@@ -168,17 +169,17 @@ range       : [2000, 2049]
 }
 );
 </script>" />
-            <span i18n:translate="cpscalendar_label_to_day">
-              to
-            </span>
-            <input type="text" size="11" maxlength="22"
-                   tal:attributes="name string:to_date;
-                                   id string:to_date;
-                                   value to_date_string;" />
-            <button id="trigger"
-                    tal:attributes="id string:trigger_to_date">...</button>
-            <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
-                       replace="structure string:<script type='text/javascript'>
+                <span i18n:translate="cpscalendar_label_to_day">
+                  to
+                </span>
+                <input type="text" size="11" maxlength="22"
+                    tal:attributes="name string:to_date;
+                                    id string:to_date;
+                                    value to_date_string;" />
+                <button id="trigger"
+                        tal:attributes="id string:trigger_to_date">...</button>
+                <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
+                        replace="structure string:<script type='text/javascript'>
 Calendar.setup(
 {
 inputField  : 'to_date',
@@ -189,91 +190,19 @@ range       : [2000, 2049]
 }
 );
 </script>" />
-            </tal:block>
-            <tal:block condition="python:event_type == 'event_tofrom'">
-
-              <input type="hidden" id="to_date" name="to_date"
-                     tal:attributes="value to_date_string" />
-              <input type="text" size="11" maxlength="22"
-                     tal:attributes="name string:from_date;
-                                     id string:from_date;
-                                     value from_date_string;" />
-              <button id="trigger"
-                      tal:attributes="id string:trigger_from_date">...</button>
-              <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
-                         replace="structure string:<script type='text/javascript'>
-Calendar.setup(
-{
-inputField  : 'from_date',
-ifFormat    : '${fmt}',
-button      : 'trigger_from_date',
-mondayFirst : true,
-range       : [2000, 2049]
-}
-);
-</script>" />
-              <br>
-              <span i18n:translate="cpscalendar_label_from_hour">From</span>
-              <select name="from_date_hour:int">
-                <option tal:repeat="hour python:range(0,24)"
-                        tal:content="hour"
-                        tal:attributes="value hour;
-                                        selected python:hour == from_date_hour;" />
-              </select>
-              <span i18n:translate="cpscalendar_hour_sep">:</span>
-              <select name="from_date_minute:int">
-                <option tal:repeat="minute python:range(0,60,5)"
-                        tal:content="python:'%02d' % minute"
-                        tal:attributes="value minute;
-                                        selected python:minute == from_date_minute;" />
-              </select>
-              <span i18n:translate="cpscalendar_label_to_hour">to</span>
-              <select name="to_date_hour:int">
-                <option tal:repeat="hour python:range(0,24)"
-                        tal:content="hour"
-                        tal:attributes="value hour;
-                                        selected python:hour == to_date_hour;" />
-              </select>
-              <span i18n:translate="cpscalendar_hour_sep">:</span>
-              <select name="to_date_minute:int">
-                <option tal:repeat="minute python:range(0,60,5)"
-                        tal:content="python:'%02d' % minute"
-                        tal:attributes="value minute;
-                                        selected python:minute == to_date_minute;" />
-              </select>
-
-              <tal:block condition="nothing">
-                (<tal:block content="string:cpscalendar_label_day_long${to_date/dow}"
-                           i18n:translate="" />
-                <tal:block replace="to_date_day" />
-                <tal:block content="string:cpscalendar_label_month_long${to_date_month}"
-                           i18n:translate="" />
-                <tal:block replace="to_date_year" />)
               </tal:block>
+              <tal:block condition="python:event_type == 'event_tofrom'">
 
-            </tal:block>
-          <tal:block condition="python:event_type == 'event_recurring'">
-            <select name="recurrance_period">
-                <option tal:repeat="period here/period_types"
-                        tal:content="python:'cpscalendar_label_' + period"
-                        tal:attributes="value period;
-                                        selected python:period == recurrance_period;"
-                        i18n:translate="" />
-            </select>
-            <br>
-            <input type="hidden" name="to_date"
-                   tal:attributes="value to_date_string" />
-            <span i18n:translate="cpscalendar_label_start_(day)">
-              First date
-            </span>
-            <input type="text" size="11" maxlength="22"
-                   tal:attributes="name string:from_date;
-                                   id string:from_date;
-                                   value from_date_string;" />
-            <button id="trigger"
-                    tal:attributes="id string:trigger_from_date">...</button>
-            <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
-                       replace="structure string:<script type='text/javascript'>
+                <input type="hidden" id="to_date" name="to_date"
+                       tal:attributes="value to_date_string" />
+                <input type="text" size="11" maxlength="22"
+                       tal:attributes="name string:from_date;
+                                       id string:from_date;
+                                       value from_date_string;" />
+                <button id="trigger"
+                        tal:attributes="id string:trigger_from_date">...</button>
+                <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
+                           replace="structure string:<script type='text/javascript'>
 Calendar.setup(
 {
 inputField  : 'from_date',
@@ -284,169 +213,243 @@ range       : [2000, 2049]
 }
 );
 </script>" />
-              <br>
-              <span i18n:translate="cpscalendar_label_from_hour">From</span>
-              <select name="from_date_hour:int">
-                <option tal:repeat="hour python:range(0,24)"
-                        tal:content="hour"
-                        tal:attributes="value hour;
-                                        selected python:hour == from_date_hour;" />
-              </select>
-              <span i18n:translate="cpscalendar_hour_sep">:</span>
-              <select name="from_date_minute:int">
-                <option tal:repeat="minute python:range(0,60,5)"
-                        tal:content="python:'%02d' % minute"
-                        tal:attributes="value minute;
-                                        selected python:minute == from_date_minute;" />
-              </select>
-              <span i18n:translate="cpscalendar_label_to_hour">to</span>
-              <select name="to_date_hour:int">
-                <option tal:repeat="hour python:range(0,24)"
-                        tal:content="hour"
-                        tal:attributes="value hour;
-                                        selected python:hour == to_date_hour;" />
-              </select>
-              <span i18n:translate="cpscalendar_hour_sep">:</span>
-              <select name="to_date_minute:int">
-                <option tal:repeat="minute python:range(0,60,5)"
-                        tal:content="python:'%02d' % minute"
-                        tal:attributes="value minute;
-                                        selected python:minute == to_date_minute;" />
-              </select>
-            </tal:block>
+                <br/>
+                <span i18n:translate="cpscalendar_label_from_hour">From</span>
+                <select name="from_date_hour:int">
+                  <option tal:repeat="hour python:range(0,24)"
+                          tal:content="hour"
+                          tal:attributes="value hour;
+                                          selected python:hour == from_date_hour;"
+                  />
+                </select>
+                <span i18n:translate="cpscalendar_hour_sep">:</span>
+                <select name="from_date_minute:int">
+                  <option tal:repeat="minute python:range(0,60,5)"
+                          tal:content="python:'%02d' % minute"
+                          tal:attributes="value minute;
+                                          selected python:minute == from_date_minute;"
+                  />
+                </select>
+                <span i18n:translate="cpscalendar_label_to_hour">to</span>
+                <select name="to_date_hour:int">
+                  <option tal:repeat="hour python:range(0,24)"
+                          tal:content="hour"
+                          tal:attributes="value hour;
+                                          selected python:hour == to_date_hour;"
+                  />
+                </select>
+                <span i18n:translate="cpscalendar_hour_sep">:</span>
+                <select name="to_date_minute:int">
+                  <option tal:repeat="minute python:range(0,60,5)"
+                          tal:content="python:'%02d' % minute"
+                          tal:attributes="value minute;
+                                          selected python:minute == to_date_minute;" />
+                </select>
 
-          </strong>
+                <tal:block condition="nothing">(
+                  <tal:block content="string:cpscalendar_label_day_long${to_date/dow}"
+                              i18n:translate="" />
+                  <tal:block replace="to_date_day" />
+                  <tal:block content="string:cpscalendar_label_month_long${to_date_month}"
+                             i18n:translate="" />
+                  <tal:block replace="to_date_year" />)
+                </tal:block>
+              </tal:block>
+              <tal:block condition="python:event_type == 'event_recurring'">
+                <select name="recurrance_period">
+                  <option tal:repeat="period here/period_types"
+                          tal:content="python:'cpscalendar_label_' + period"
+                          tal:attributes="value period;
+                                          selected python:period == recurrance_period;"
+                          i18n:translate="" />
+                </select>
+                <br/>
+                <input type="hidden" name="to_date"
+                    tal:attributes="value to_date_string" />
+                <span i18n:translate="cpscalendar_label_start_(day)">
+                  First date
+                </span>
+                <input type="text" size="11" maxlength="22"
+                    tal:attributes="name string:from_date;
+                                    id string:from_date;
+                                    value from_date_string;" />
+                <button id="trigger"
+                        tal:attributes="id string:trigger_from_date">...</button>
+                <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
+                        replace="structure string:<script type='text/javascript'>
+Calendar.setup(
+{
+inputField  : 'from_date',
+ifFormat    : '${fmt}',
+button      : 'trigger_from_date',
+mondayFirst : true,
+range       : [2000, 2049]
+}
+);
+</script>" />
+                <br/>
+                <span i18n:translate="cpscalendar_label_from_hour">From</span>
+                <select name="from_date_hour:int">
+                  <option tal:repeat="hour python:range(0,24)"
+                          tal:content="hour"
+                          tal:attributes="value hour;
+                                          selected python:hour == from_date_hour;" />
+                </select>
+                <span i18n:translate="cpscalendar_hour_sep">:</span>
+                <select name="from_date_minute:int">
+                  <option tal:repeat="minute python:range(0,60,5)"
+                          tal:content="python:'%02d' % minute"
+                          tal:attributes="value minute;
+                                          selected python:minute == from_date_minute;" />
+                </select>
+                <span i18n:translate="cpscalendar_label_to_hour">to</span>
+                <select name="to_date_hour:int">
+                  <option tal:repeat="hour python:range(0,24)"
+                          tal:content="hour"
+                          tal:attributes="value hour;
+                                          selected python:hour == to_date_hour;" />
+                </select>
+                <span i18n:translate="cpscalendar_hour_sep">:</span>
+                <select name="to_date_minute:int">
+                  <option tal:repeat="minute python:range(0,60,5)"
+                          tal:content="python:'%02d' % minute"
+                          tal:attributes="value minute;
+                                          selected python:minute == to_date_minute;" />
+                </select>
+              </tal:block>
+            </strong>
+          </metal:block>
         </metal:block>
-      </metal:block>
-      <metal:block use-macro="here/calendar_macros/macros/form_property">
-        <metal:block fill-slot="title"
-             i18n:translate="cpscalendar_label_location">
-          Location
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
+          <metal:block fill-slot="title"
+                       i18n:translate="cpscalendar_label_location">
+            Location
+          </metal:block>
+          <metal:block fill-slot="content">
+            <input name="location" size="40" tal:attributes="value location" />
+          </metal:block>
         </metal:block>
-        <metal:block fill-slot="content">
-          <input name="location" size="40" tal:attributes="value location" />
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
+          <metal:block fill-slot="title"
+               i18n:translate="cpscalendar_label_eventstatus">
+            Event status
+          </metal:block>
+          <metal:block fill-slot="content">
+            <select name="event_status"
+                tal:define="statuses python:['confirmed', 'unconfirmed', 'canceled'];
+                    statuses python:create and [status for status in statuses if status != 'canceled'] or statuses">
+              <option tal:repeat="status statuses"
+                      tal:attributes="value status;
+                                      selected python:status == event_status;">
+                <span tal:content="string:cpscalendar_option_status_${status}"
+                      i18n:translate="">cpscalendar_status</span>
+              </option>
+            </select>
+          </metal:block>
         </metal:block>
-      </metal:block>
-      <metal:block use-macro="here/calendar_macros/macros/form_property">
-        <metal:block fill-slot="title"
-             i18n:translate="cpscalendar_label_eventstatus">
-          Event status
-        </metal:block>
-        <metal:block fill-slot="content">
-          <select name="event_status"
-              tal:define="statuses python:['confirmed', 'unconfirmed', 'canceled'];
-                  statuses python:create and [status for status in statuses if status != 'canceled'] or statuses">
-        <option tal:repeat="status statuses"
-                tal:attributes="value status;
-                                selected python:status == event_status;">
-              <span tal:content="string:cpscalendar_option_status_${status}"
-                    i18n:translate="">cpscalendar_status</span>
-        </option>
-          </select>
-        </metal:block>
-      </metal:block>
-      <metal:block use-macro="here/calendar_macros/macros/form_property">
-        <metal:block fill-slot="title"
-             i18n:translate="cpscalendar_label_category">
-              Category
-        </metal:block>
-        <metal:block fill-slot="content">
-          <table width="100%" cellspacing="2" cellpadding="0" border="0">
-        <tr tal:repeat="cat categories/items">
-          <td width="30" valign="middle">
-            <input type="radio" name="category"
-               tal:attributes="value python:cat[0];
-                       checked python:cat[0] == category;" />
-          </td>
-          <td width="30" valign="middle">
-            <table cellpadding="0" cellspacing="0" width="80%"
-               height="10" border="0"
-               tal:attributes="bgcolor python:cat[1]['color']">
-              <tr>
-            <td>
-            </td>
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
+          <metal:block fill-slot="title"
+               i18n:translate="cpscalendar_label_category">
+            Category
+          </metal:block>
+          <metal:block fill-slot="content">
+            <table width="100%" cellspacing="2" cellpadding="0" border="0">
+              <tr tal:repeat="cat categories/items">
+                <td width="30" valign="middle">
+                  <input type="radio" name="category"
+                         tal:attributes="value python:cat[0];
+                                         checked python:cat[0] == category;" />
+                </td>
+                <td width="30" valign="middle">
+                  <table cellpadding="0" cellspacing="0" width="80%"
+                         height="10" border="0"
+                         tal:attributes="bgcolor python:cat[1]['color']">
+                    <tr>
+                      <td>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td valign="middle"
+                    tal:content="python:str(cat[1]['title'])"
+                    i18n:translate="">
+                  category
+                </td>
               </tr>
             </table>
-          </td>
-          <td valign="middle"
-          tal:content="python:str(cat[1]['title'])"
-          i18n:translate="">
-            category
-          </td>
-        </tr>
-          </table>
+          </metal:block>
         </metal:block>
-      </metal:block>
 
-      <metal:block use-macro="here/calendar_macros/macros/form_property">
-        <metal:block fill-slot="title"
-             i18n:translate="cpscalendar_label_transparent">
-          Transparent
-        </metal:block>
-        <metal:block fill-slot="content">
-          <select name="transparent:int"
-              tal:define="choices python:[{'id': 1, 'title': 'cpscalendar_option_yes'}, {'id':0, 'title': 'cpscalendar_option_no'}]">
-        <option tal:repeat="choice choices"
-            tal:attributes="value choice/id;
-                    selected python:transparent == choice['id']"
-            tal:content="python:str(choice['title'])"
-            i18n:translate="">
-          Yes
-        </option>
-        <p>
-          <small i18n:translate="cpscalendar_legend_transparent">
-            Transparent events mean that you're not busy during this event.
-          </small>
-        </p>
-          </select>
-        </metal:block>
-      </metal:block>
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
+          <metal:block fill-slot="title"
+               i18n:translate="cpscalendar_label_transparent">
+            Transparent
+          </metal:block>
+          <metal:block fill-slot="content">
 
-      <metal:block use-macro="here/calendar_macros/macros/form_property">
-        <metal:block fill-slot="title"
-             i18n:translate="cpscalendar_label_description">
-          Description
-        </metal:block>
-        <metal:block fill-slot="content">
-          <p>
-        <textarea rows="6" cols="40"
-              name="description"
-              tal:content="description">description</textarea>
-          </p>
-        </metal:block>
-      </metal:block>
+            <select name="transparent:int"
+                tal:define="choices python:[{'id': 1, 'title': 'cpscalendar_option_yes'}, {'id':0, 'title': 'cpscalendar_option_no'}]">
+              <option tal:repeat="choice choices"
+                tal:attributes="value choice/id;
+                         selected python:transparent == choice['id']"
+                tal:content="python:str(choice['title'])"
+                i18n:translate="">
+                Yes
+              </option>
+              <p>
+                <small i18n:translate="cpscalendar_legend_transparent">
+                  Transparent events mean that you're not busy during this event.
+                </small>
+              </p>
+            </select>
+          </metal:block>
+       </metal:block>
 
-      <tal:block condition="nothing">
-      <metal:block use-macro="here/calendar_macros/macros/form_property">
-        <metal:block fill-slot="title"
-             i18n:translate="cpscalendar_label_repeat_title">
-          Repeat
+       <metal:block use-macro="here/calendar_macros/macros/form_property">
+          <metal:block fill-slot="title"
+               i18n:translate="cpscalendar_label_description">
+            Description
+          </metal:block>
+          <metal:block fill-slot="content">
+            <p>
+              <textarea rows="6" cols="40"
+                  name="description"
+                  tal:content="description">description</textarea>
+            </p>
+          </metal:block>
         </metal:block>
-        <metal:block fill-slot="content">
-          <input name="repeat:bool" type="checkbox" />
-          <br>
-          <span i18n:translate="cpscalendar_label_repeat_times">Number of times</span>
-          &nbsp;&nbsp;
-          <input type="string" name="cpscalendar_form_repeat_times:int"
-             size="2" maxlength="2" value="0"/>
-        <br><input type="radio" name="repeat_frequency" value="daily">
-        <span i18n:translate="cpscalendar_label_repeat_daily">Daily</span>
-        <br><input type="radio" name="repeat_frequency" value="weekly">
-        <span i18n:translate="cpscalendar_label_repeat_weekly">Weekly</span>
-        <br><input type="radio" name="repeat_frequency" value="monthly">
-        <span i18n:translate="cpscalendar_label_repeat_monthly">Monthly</span>
-        <br><input type="radio" name="repeat_frequency" value="X_days">
-        <span i18n:translate="cpscalendar_label_repeat_every_X_days_begin">Every</span>
-          &nbsp;
-          <input type="string" name="cal_every_X_num:int"
-             size="3" maxlength="3" value="0"/>&nbsp;
-        <span i18n:translate="cpscalendar_label_repeat_every_X_days_end">days</span>
-        </metal:block>
-      </metal:block>
-      </tal:block>
 
+        <tal:block condition="nothing">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
+            <metal:block fill-slot="title"
+                i18n:translate="cpscalendar_label_repeat_title">
+              Repeat
+            </metal:block>
+            <metal:block fill-slot="content">
+              <input name="repeat:bool" type="checkbox" />
+              <br/>
+              <span i18n:translate="cpscalendar_label_repeat_times">Number of times</span>
+              &nbsp;&nbsp;
+              <input type="string" name="cpscalendar_form_repeat_times:int"
+                  size="2" maxlength="2" value="0"/>
+              <br/><input type="radio" name="repeat_frequency" value="daily"/>
+              <span i18n:translate="cpscalendar_label_repeat_daily">Daily</span>
+              <br/><input type="radio" name="repeat_frequency" value="weekly"/>
+              <span i18n:translate="cpscalendar_label_repeat_weekly">Weekly</span>
+              <br/><input type="radio" name="repeat_frequency" value="monthly"/>
+              <span i18n:translate="cpscalendar_label_repeat_monthly">Monthly</span>
+              <br/><input type="radio" name="repeat_frequency" value="X_days"/>
+              <span i18n:translate="cpscalendar_label_repeat_every_X_days_begin">Every</span>
+              &nbsp;
+              <input type="string" name="cal_every_X_num:int"
+                size="3" maxlength="3" value="0"/>&nbsp;
+              <span i18n:translate="cpscalendar_label_repeat_every_X_days_end">days</span>
+            </metal:block>
+          </metal:block>
+        </tal:block>
+
+      </metal:block>
     </metal:block>
-      </metal:block>
       <input type="submit"
              tal:attributes="name python:action + ':method';
                              value submit_value"
@@ -462,34 +465,34 @@ range       : [2000, 2049]
     </strong>:
     <metal:block use-macro="here/calendar_macros/macros/form">
       <metal:block fill-slot="content">
-    <metal:block use-macro="here/calendar_macros/macros/form_property">
-      <metal:block fill-slot="title"
-               i18n:translate="cpscalendar_label_status">
-        Status
-      </metal:block>
-      <metal:block fill-slot="content">
-        <select name="status"
-          tal:define="myid python:here.getCalendar().id;
-                      mystatus here/getMyStatus">
-          <option tal:repeat="status python:['confirmed', 'tentative', 'decline']"
-              tal:attributes="value status;
-                      selected python:status == mystatus"
-              tal:content="python:str('cpscalendar_pending_%s' % (status,))"
-              i18n:translate="">
-         Status
-           </option>
-        </select>
-      </metal:block>
-    </metal:block>
-    <metal:block use-macro="here/calendar_macros/macros/form_property">
-      <metal:block fill-slot="title"
-                   i18n:translate="cpscalendar_label_comment">
-        Comment
-      </metal:block>
-      <metal:block fill-slot="content">
-        <textarea name="comment" cols="40" rows="4"></textarea>
-      </metal:block>
-    </metal:block>
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
+          <metal:block fill-slot="title"
+                      i18n:translate="cpscalendar_label_status">
+            Status
+          </metal:block>
+          <metal:block fill-slot="content">
+            <select name="status"
+            tal:define="myid python:here.getCalendar().id;
+                        mystatus here/getMyStatus">
+            <option tal:repeat="status python:['confirmed', 'tentative', 'decline']"
+                tal:attributes="value status;
+                        selected python:status == mystatus"
+                tal:content="python:str('cpscalendar_pending_%s' % (status,))"
+                i18n:translate="">
+            Status
+            </option>
+            </select>
+          </metal:block>
+        </metal:block>
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
+          <metal:block fill-slot="title"
+                       i18n:translate="cpscalendar_label_comment">
+            Comment
+          </metal:block>
+          <metal:block fill-slot="content">
+            <textarea name="comment" cols="40" rows="4"></textarea>
+          </metal:block>
+        </metal:block>
       </metal:block>
     </metal:block>
     <input type="submit"
