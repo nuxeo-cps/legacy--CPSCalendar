@@ -698,6 +698,14 @@ def addCalendar(dispatcher, id,
         permission_to_manage='View',
         roles=['Manager', 'WorkgroupManager', 'WorkgroupMember', 'WorkgroupVisitor'],
         acquire=0)
+    ob.manage_permission(
+        permission_to_manage='Add portal content',
+        roles=['Manager', 'WorkgroupManager', 'WorkgroupMember'],
+        acquire=0)
+    ob.manage_permission(
+        permission_to_manage='Modify portal content',
+        roles=['Manager', 'WorkgroupManager', 'WorkgroupMember'],
+        acquire=0)
 
     if REQUEST is not None:
         url = dispatcher.DestinationURL()
