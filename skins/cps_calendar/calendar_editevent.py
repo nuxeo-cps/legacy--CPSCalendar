@@ -34,6 +34,7 @@ del kw['to_date_hour']
 del kw['to_date_minute']
 
 here.edit(**kw)
+here.updateAttendeesCalendars()
 
 if REQUEST:
     REQUEST.RESPONSE.redirect(here.absolute_url())

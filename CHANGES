@@ -22,6 +22,7 @@ Bug fixes:
 - Removing an attendee now sends a cancel to the attendee.
 - The organizer is now always a participant (even if it is an event).
 - Adding attendees now automatically sends a notification.
+- Modifying the event now automatically sends a notification.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
