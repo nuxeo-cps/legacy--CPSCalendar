@@ -140,8 +140,6 @@ class Calendars(Workgroup):
                 'id': id,
                 'usertype': calendar.usertype,
             }
-            if status:
-                info['status'] = 'unconfirmed'
             if calendar.usertype != 'member':
                 info['cn'] = calendar.title_or_id()
             else:
@@ -152,7 +150,22 @@ class Calendars(Workgroup):
                     info['cn'] = id
                 else:
                     info['cn'] = entry.get(members.display_prop, id)
-            return info
+        else:
+            # maybe a member with no created calendar
+            dirtool = getToolByName(self, 'portal_metadirectories')
+            members = dirtool.members
+            entry = members.getEntry(id)
+            if entry is None:
+                return None
+            else:
+                info = {
+                    'id': id,
+                    'usertype': 'member',
+                    'cn': entry.get(members.display_prop, id),
+                }
+        if status:
+            info['status'] = 'unconfirmed'
+        return info
 
     def __getitem__(self, name):
         LOG('NGCal', DEBUG, 'Calendars[%s]?' % (name, ))
