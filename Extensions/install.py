@@ -170,7 +170,7 @@ def update(self):
         'Delete objects': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
         'List folder contents': ['Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'],
         'Modify portal content': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
-        'View': ['Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'],
+        'View': ['Authenticated', 'Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'],
         'View management screens': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
         }
     pr("Calendars")
