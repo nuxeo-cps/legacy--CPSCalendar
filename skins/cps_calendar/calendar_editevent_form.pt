@@ -14,8 +14,8 @@
     Create a new event
   </tal:block>
   <tal:block condition="not:create">
-    <span i18n:translate="_Modify_(object name)_">
-      Modify
+    <span i18n:translate="cpscalendar_description_modify_event">
+      Modify the event
     </span>
     «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
   </tal:block>
@@ -85,8 +85,8 @@
 	     tal:attributes="value title">
       <input type="submit"
 	     tal:attributes="value python:
-			     all_day and str('_Create an all day_')
-			     or str('_Create a not all day_')"
+			     all_day and str('cpscalendar_create_all_day_event')
+			     or str('cpscalendar_create_not_all_day_event')"
 	     i18n:attributes="value">
     </form>
     <form action="calendar_changeeventtype" id="eventTypeForm"
@@ -95,8 +95,8 @@
 	     tal:attributes="value not:all_day">
       <input type="submit"
 	     tal:attributes="value python:
-			     all_day and str('_Change event to not all day_')
-			     or str('_Change event to all day_')"
+			     all_day and str('cpscalendar_change_event_to_not_all_day')
+			     or str('cpscalendar_change_event_to_all_day')"
 	     i18n:attributes="value">
     </form>
 

@@ -117,10 +117,8 @@
                       tal:define="statuses python:['confirmed', 'unconfirmed'];">
                 <option tal:repeat="status statuses"
                         tal:attributes="value status;
-                                        selected python:status == 'unconfirmed';"
-                        tal:content="python:str('_cal_eventstatus_%s_' % (status, ))"
-                        i18n:translate="">
-                  status
+                                        selected python:status == 'unconfirmed';">
+		      <span i18n:translate="" tal:content="status" >status</span>
                 </option>
               </select>
             </metal:block>
