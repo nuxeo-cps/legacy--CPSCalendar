@@ -117,9 +117,7 @@ class Calendars(Workgroup):
     def getCalendarsDict(self):
         calendars_dict = {}
         for ob in self.objectValues('Calendar'):
-            entry = calendars_dict.get(ob.usertype, None)
-            if entry is None:
-                calendars_dict[ob.usertype] = entry = []
+            entry = calendars_dict.setdefault(ob.usertype, [])
             entry.append({
               'id': ob.id,
               'cn': ob.title_or_id(),

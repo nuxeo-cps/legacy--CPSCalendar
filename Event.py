@@ -186,9 +186,7 @@ class Event(BaseDocument):
         """
         attendees_dict = {}
         for attendee in self.attendees:
-            entry = attendees_dict.get(attendee['usertype'], None)
-            if entry is None:
-                attendees_dict[attendee['usertype']] = entry = []
+            entry = attendees_dict.setdefault(attendee['usertype'], [])
             entry.append(deepcopy(attendee))
         return attendees_dict
 
