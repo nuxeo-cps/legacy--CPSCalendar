@@ -37,11 +37,11 @@
 <table border="1" width="100%"
        tal:condition="python:events[i]">
   <tr>
-    <th i18n:translate="cpscalendar_label_hour">Heure</th>
-    <th i18n:translate="cpscalendar_label_title">Intitulé</th>
-    <th i18n:translate="cpscalendar_label_eventstatus">Statut</th>
-    <th i18n:translate="cpscalendar_label_attendees">Participants</th>
-    <th i18n:translate="cpscalendar_label_location">Lieu</th>
+    <th i18n:translate="cpscalendar_label_hour">Hour</th>
+    <th i18n:translate="cpscalendar_label_title">Title</th>
+    <th i18n:translate="cpscalendar_label_eventstatus">Status</th>
+    <th i18n:translate="cpscalendar_label_attendees">Attendees</th>
+    <th i18n:translate="cpscalendar_label_location">Location</th>
   </tr>
   <tal:events repeat="event python:events[i]">
     <tr>
