@@ -3,9 +3,7 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
-- When searching for users in non-personal calendars, only users who are allowed to
-  view the calendar are displayed. In personal calendars all matching users are 
-  displayed, since typically, only the user can view his personal calendar.
+-
 Bug fixes:
 ~~~~~~~~~~
 -

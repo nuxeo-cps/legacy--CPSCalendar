@@ -1,4 +1,22 @@
 *******************************************
+** CPSCalendar V1.8.0 [R1 build 2004/08/11-10:44 by regebro]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- When searching for users in non-personal calendars, only users who are allowed to
+  view the calendar are displayed. In personal calendars all matching users are 
+  displayed, since typically, only the user can view his personal calendar.
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.7.6 [R1 build 2004/08/10-14:53 by regebro]
 
 Requires:
