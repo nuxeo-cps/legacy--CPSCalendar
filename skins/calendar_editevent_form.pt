@@ -3,11 +3,14 @@
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="header">
-  <tal:block condition="create">
+  <tal:block condition="create"
+    tal:replace="python:mcat('_Create_a_new_Event_')">
     Create a new event
   </tal:block>
   <tal:block condition="not:create">
-    Edit
+    <tal:block replace="python:mcat('_Modify_(object name)_')">
+      Modify
+    </tal:block>
     «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
   </tal:block>
 </metal:block>
@@ -46,18 +49,21 @@
     <form action="calendar_addevent_form" tal:condition="create">
       <input type="hidden" name="all_day:int"
         tal:attributes="value not:all_day" />
-      <input type="submit" value="Change event type">
+      <input type="submit"
+        tal:attributes="value python:all_day and mcat('_Create a not all day_') or mcat('_Create an all day_')">
     </form>
     <form action="calendar_changeeventtype" tal:condition="not:create">
       <input type="hidden" name="all_day:int"
         tal:attributes="value not:all_day" />
-      <input type="submit" value="Change event type">
+      <input type="submit"
+        tal:attributes="value python:all_day and mcat('_Change event to not all day_') or mcat('_Change event to all day_')">
     </form>
     <form tal:attributes="action action" method="POST">
       <metal:block use-macro="here/main_widgets/macros/form">
         <metal:block fill-slot="content">
           <metal:block use-macro="here/main_widgets/macros/form_property">
-            <metal:block fill-slot="title">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_summary_')">
               Summary
             </metal:block>
             <metal:block fill-slot="content">
@@ -65,7 +71,8 @@
             </metal:block>
           </metal:block>
           <metal:block use-macro="here/main_widgets/macros/form_property">
-            <metal:block fill-slot="title">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_date_')">
               Date
             </metal:block>
             <metal:block fill-slot="content">
@@ -79,7 +86,9 @@
                   tal:attributes="value to_date_hour" />
                 <input type="hidden" name="to_date_minute"
                   tal:attributes="value to_date_minute" />
-                From
+                <tal:block replace="python:mcat('_cal_date_From_')">
+                  From
+                </tal:block>
                 <select name="from_date_day">
                   <option tal:repeat="day python:range(1,32)"
                     tal:content="day" tal:attributes="value day;
@@ -96,7 +105,9 @@
                   <input name="from_date_year" size="4"
                   tal:attributes="value from_date_year" />
                 <br>
-                To
+                <tal:block replace="python:mcat('_cal_date_To_')">
+                  To
+                </tal:block>
                 <select name="to_date_day">
                   <option tal:repeat="day python:range(1,32)"
                     tal:content="day" tal:attributes="value day;
@@ -138,23 +149,27 @@
                   </h3>
                 </tal:block>
 
-                From
+                <tal:block replace="python:mcat('_cal_hour_From_')">
+                  From
+                </tal:block>
                 <select name="from_date_hour">
                   <option tal:repeat="hour python:range(0,24)"
                     tal:content="hour" tal:attributes="value hour;
                       selected python:hour == from_date_hour or nothing" />
-                </select>:<select name="from_date_minute">
+                </select><tal:block replace="python:mcat('_cal_hour_sep_')">:</tal:block><select name="from_date_minute">
                   <option tal:repeat="minute python:range(0,60,15)"
                     tal:content="minute" tal:attributes="value minute;
                       selected python:minute == from_date_minute or nothing" />
                 </select>
                 <br>
-                To
+                <tal:block replace="python:mcat('_cal_hour_To_')">
+                  To
+                </tal:block>
                 <select name="to_date_hour">
                   <option tal:repeat="hour python:range(0,24)"
                     tal:content="hour" tal:attributes="value hour;
                       selected python:hour == to_date_hour or nothing" />
-                </select>:<select name="to_date_minute">
+                </select><tal:block replace="python:mcat('_cal_hour_sep_')">:</tal:block><select name="to_date_minute">
                   <option tal:repeat="minute python:range(0,60,15)"
                     tal:content="minute" tal:attributes="value minute;
                       selected python:minute == to_date_minute or nothing" />
@@ -163,7 +178,8 @@
             </metal:block>
           </metal:block>
           <metal:block use-macro="here/main_widgets/macros/form_property">
-            <metal:block fill-slot="title">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_location_')">
               Location
             </metal:block>
             <metal:block fill-slot="content">
@@ -171,24 +187,23 @@
             </metal:block>
           </metal:block>
           <metal:block use-macro="here/main_widgets/macros/form_property">
-            <metal:block fill-slot="title">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_eventstatus_')">
               Event status
             </metal:block>
             <metal:block fill-slot="content">
               <select name="event_status"
                 tal:define="
-                  statuses python:(
-                    {'id':'unconfirmed', 'title':'Unconfirmed'},
-                    {'id':'confirmed', 'title':'Confirmed'},
-                    {'id':'canceled', 'title':'Canceled'},
-                    );
-                  statuses python:create and [status for status in statuses if status['id'] != 'canceled'] or statuses">
+                  statuses python:['confirmed', 'unconfirmed', 'canceled'];
+                  statuses python:create and [status for status in statuses if status != 'canceled'] or statuses">
                 <option tal:repeat="status statuses"
                   tal:attributes="
-                    value status/id;
-                    selected python:status['id'] == event_status;
+                    value status;
+                    selected python:status == event_status;
                   "
-                  tal:content="status/title">status</option>
+                  tal:content="python:mcat('_cal_eventstatus_%s_' % (status, ))">
+                  status
+                </option>
               </select>
             </metal:block>
           </metal:block>
@@ -200,25 +215,32 @@
     </form>
   </tal:block>
   <form action="setMyStatus" tal:condition="python:not (create or editevent)">
-    <h3>Modify status for this event:</h3>
+    <h3
+      tal:content="python:mcat('_Modify status for this event:')">
+      Modify status for this event:
+    </h3>
     <metal:block use-macro="here/main_widgets/macros/form">
       <metal:block fill-slot="content">
         <metal:block use-macro="here/main_widgets/macros/form_property">
-          <metal:block fill-slot="title">
+          <metal:block fill-slot="title"
+            tal:content="python:mcat('_cal_prop_status_')">
             Status
           </metal:block>
           <metal:block fill-slot="content">
             <select name="status"
               tal:define="myid python:here.getCalendar().id;
-                mystatus python:[att for att in here.attendees if att['id'] == myid]">
-              <option tal:repeat="status here/getAttendeeStatuses"
-                tal:attributes="value status/id; selected python:mystatus == status['id']"
-                tal:content="status/title">Status</option>
+                mystatus python:[att for att in here.attendees if att['id'] == myid][0]['status']">
+              <option tal:repeat="status python:['confirmed', 'tentative', 'decline']"
+                tal:attributes="
+                  value status;
+                  selected python:status == mystatus"
+                tal:content="python:mcat('_cal_pending_%s_' % (status,))">Status</option>
             </select>
           </metal:block>
         </metal:block>
         <metal:block use-macro="here/main_widgets/macros/form_property">
-          <metal:block fill-slot="title">
+          <metal:block fill-slot="title"
+            tal:content="python:mcat('_prop_comment_')">
             Comment
           </metal:block>
           <metal:block fill-slot="content">

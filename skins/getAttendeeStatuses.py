@@ -2,7 +2,7 @@
 
 return (
   {
-    'id': 'confirm',
+    'id': 'confirmed',
     'title': '_cal_status_confirmed_'
   },
   {

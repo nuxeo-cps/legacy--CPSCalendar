@@ -42,13 +42,20 @@
           tal:attributes="value python:mcat('_button_Remove events you declined_')" />
       </form>
     </tal:block>
-  </tal:block>
-  <tal:block condition="python:mtool.checkPermission('Add portal content', here)">
     <tal:block define="pendings_count here/getPendingEventsCount"
       condition="pendings_count">
       <h3>
-        <a href="calendar_pending_events">Pending requests:
-          <tal:block replace="pendings_count">1</tal:block>
+        <a href="calendar_pending_events"
+          tal:condition="python:pendings_count > 1"
+          tal:content="
+            python:mcat('_You have %s pending requests_') % (pendings_count, )">
+          You have 2 pending requests.
+        </a>
+        <a href="calendar_pending_events"
+          tal:condition="python:pendings_count == 1"
+          tal:content="
+            python:mcat('_You have one pending request_')">
+          You have one pending request.
         </a>
       </h3>
     </tal:block>

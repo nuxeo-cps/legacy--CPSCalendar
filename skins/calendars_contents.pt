@@ -30,7 +30,10 @@
     </tal:block>
   </tal:block>
   <tal:block condition="python:mtool.checkPermission('Add portal content', here)">
-    <a href="calendar_create_form">Create a calendar here</a>
+    <a href="calendar_create_form"
+      tal:content="python:mcat('_Create_a_calendar_')">
+      Create a calendar
+    </a>
   </tal:block>
 </metal:block>
 
