@@ -77,23 +77,24 @@
 		       tal:content="from_date_str">
 	    </tal:block>
 	    <tal:block condition="not:one_date">
-	      <span i18n:translate="cpscalendar_label_from">
-		From
+	      <span i18n:translate="cpscalendar_label_from_(day)">
+		From the
 	      </span>
 	      <tal:block replace="python:from_date.strftime('%m/%d/%Y ')" />
 	      <tal:block condition="not:all_day">
-		<span i18n:translate="cpscalendar_label_to">
-		To
+		<span i18n:translate="cpscalendar_label_at_(hour)">
+		at
 		</span>
 		<tal:block replace="python:from_date.strftime(' %H:%M')" />
 	      </tal:block>
 	      <br>
-	      <span i18n:translate="cpscalendar_label_to">
-		To
+	      <span i18n:translate="cpscalendar_label_to_(day)">
+		To the
 	      </span>
 	      <tal:block replace="python:to_date.strftime('%m/%d/%Y ')" />
 	      <tal:block condition="not:all_day">
-		<span i18n:translate="cpscalendar_label_to">
+		<span i18n:translate="cpscalendar_label_at_(hour)">
+	        at
 		</span>
 		<tal:block replace="python:to_date.strftime(' %H:%M')" />
 	      </tal:block>

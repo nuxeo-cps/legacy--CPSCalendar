@@ -27,7 +27,10 @@
 			 action python:create and 'calendar_addevent' or 'calendar_editevent';
 			 submit_value python:create and str('button_create') or str('button_modify');
 			 editevent python:create or here.canEditThisEvent();
-			 title python:create and request.form.get('title', str('_(document)_Untitled_')) or here.title;
+			 title python:create
+                                      and request.form.get('title',
+                                                           str('cpscalendar_untitled_(document)'))
+                                      or here.title;
 			 description python:create and str('') or here.description;
 			 location python:(not create) and here.location or '';
 			 event_status python:create and 'unconfirmed' or here.event_status;
@@ -64,7 +67,7 @@
 	here/all_day = <tal:block tal:replace="here/all_day|nothing"/><br>
 	form.get('all_day') = <tal:block tal:replace="python:request.form.get('all_day')"/><br>
 	here/title = <tal:block tal:replace="here/title|nothing"/><br>
-	form.get('title) = <tal:block tal:replace="python:request.form.get('title')"/><br>
+	form.get('title') = <tal:block tal:replace="python:request.form.get('title')"/><br>
 	</p>
 	<hr>
       </tal:block>
@@ -111,7 +114,8 @@
 	    <metal:block fill-slot="content">
 	      <input name="title" size="40"
 		     tal:attributes="value title;
-				     onchange string:document.getElementById('rememberTitle').value = this.value">
+				     onchange string:document.getElementById('rememberTitle').value = this.value"
+                     i18n:attributes="value">
 	    </metal:block>
 	  </metal:block>
 	  <metal:block use-macro="here/calendar_macros/macros/form_property">
@@ -142,8 +146,8 @@
 		       tal:attributes="value to_date_month" />
 		<input type="hidden" id="to_date_year" name="to_date_year"
 		       tal:attributes="value to_date_year" />
-		<span i18n:translate="cpscalendar_label_from">
-		  From
+		<span i18n:translate="cpscalendar_label_from_(day)">
+		  From the
 		</span>
 		<span id="from_date_string">
 		  <tal:block content="python:str('_cal_Day_long%s' % (from_date.dow(), ))"
@@ -158,8 +162,8 @@
 		  <img border="0"
 		       tal:attributes="src string:${portal_url}/day_selector_icon.png" /></a>
 		<br>
-		<span i18n:translate="cpscalendar_label_to">
-		  To
+		<span i18n:translate="cpscalendar_label_to_(day)">
+		  to
 		</span>
 		<span id="to_date_string">
 		  <tal:block content="python:str('_cal_Day_long%s' % (to_date.dow(), ))"
@@ -215,7 +219,7 @@
 		<input type="hidden" name="to_date_minute" id="to_date_minute"
 		       tal:attributes="value to_date_minute" />
 
-		  <span i18n:translate="cpscalendar_label_from">
+		  <span i18n:translate="cpscalendar_label_from_(hour)">
 		    From
 		  </span>
 		  <span id="from_date_hour_s"
@@ -223,8 +227,8 @@
 		    <span i18n:translate="cpscalendar_hour_sep">:</span>
 		    <span id="from_date_minute_s"
 			  tal:content="python:from_date_minute == 0 and '00' or from_date_minute">10</span>
-		  <span i18n:translate="cpscalendar_label_to">
-		    To
+		  <span i18n:translate="cpscalendar_label_to_(hour)">
+		    to
 		  </span>
 		  <span id="to_date_hour_s" tal:content="to_date_hour">10</span>
 		  <span i18n:translate="cpscalendar_hour_sep">:</span>

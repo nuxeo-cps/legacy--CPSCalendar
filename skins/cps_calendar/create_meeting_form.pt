@@ -16,7 +16,7 @@
 <metal:block fill-slot="main"
              tal:define="portal_url python:here.portal_url(relative=1);
                          meeting_infos python:here.meeting_infos(request);
-                         title python:str('_(document)_Untitled_');
+                         title python:str('cpscalendar_untitled_(document)');
                          from_date meeting_infos/from_date;
                          duration_hour meeting_infos/duration_hour;
                          duration_minute meeting_infos/duration_minute;
