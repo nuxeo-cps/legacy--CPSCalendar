@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2004-09-24 19:18default\n"
+"POT-Creation-Date: 2004-09-24 19:25default\n"
 "PO-Revision-Date: 2004-07-12 18:37+0200\n"
 "Last-Translator: Georg Hennemann <georg.hennemann@dhl.com>\n"
 "Language-Team: German <reinland@dzug.org>\n"

@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2004-09-24 19:18default\n"
+"POT-Creation-Date: 2004-09-24 19:25default\n"
 "PO-Revision-Date: 2004-01-09 02:26+0100\n"
 "Last-Translator: Encolpe DEGOUTE <ed@nuxeo.com>\n"
 "Language-Team: French <cantact@nuxeo.com>\n"

@@ -4,6 +4,7 @@
 # translation of en.po to
 # translation of en.po to
 # translation of en.po to
+# translation of en.po to
 # translation of en.po to ben
 # translation of en.po to French
 # translation of en.po to
@@ -16,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2004-09-24 19:18default\n"
-"PO-Revision-Date: 2004-08-19 16:07+0200\n"
+"POT-Creation-Date: 2004-09-24 19:25default\n"
+"PO-Revision-Date: 2004-09-24 19:37+0200\n"
 "Last-Translator: Lennart Regebro <rgebro@nuxeo.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -182,7 +183,6 @@ msgstr "Delete"
 
 #.   <input type="submit" value="cpscalendar_button_delete_event" />
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
-#, fuzzy
 msgid "cpscalendar_button_delete_event"
 msgstr "Delete the event"
 
@@ -357,7 +357,6 @@ msgstr "and"
 #.           to
 #.         </span>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
-#, fuzzy
 msgid "cpscalendar_label_and_day"
 msgstr "and the"
 
@@ -401,7 +400,6 @@ msgstr "Between"
 #.           From
 #.         </span>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
-#, fuzzy
 msgid "cpscalendar_label_between_day"
 msgstr "Between the"
 
@@ -409,7 +407,6 @@ msgstr "Between the"
 #.                      Browse
 #.                 </a>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
-#, fuzzy
 msgid "cpscalendar_label_browse"
 msgstr "Browse"
 
@@ -683,14 +680,12 @@ msgstr "To"
 #.                     to
 #.                   </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
-#, fuzzy
 msgid "cpscalendar_label_to_day"
 msgstr "To"
 
 #.   <span>to</span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
-#, fuzzy
 msgid "cpscalendar_label_to_hour"
 msgstr "Hour"
 
@@ -747,9 +742,8 @@ msgstr "Comment for the organizer"
 #.         These are the calendars where you can create events
 #.       </span>
 #: from ../skins/cps_calendar/calendar_overview.pt
-#, fuzzy
 msgid "cpscalendar_message_editable_calendars"
-msgstr "Create a calendar"
+msgstr " These are the calendars where you can create events:"
 
 #.   <span>
 #.         If you have an application that supports it, you can also
@@ -776,9 +770,8 @@ msgstr "Sorry, there isn't any user matching your query."
 #.         You can not view any calendars
 #.       </span>
 #: from ../skins/cps_calendar/calendar_overview.pt
-#, fuzzy
 msgid "cpscalendar_message_no_visible_calendars"
-msgstr "No shared calendars found"
+msgstr "You can not view any calendars"
 
 #.   <strong>
 #.       You have to notify other attendees of recent changes to this event.
@@ -871,9 +864,8 @@ msgstr "Unselect events you don't want to notify attendees"
 #.         These are the calendars you can only view:
 #.       </span>
 #: from ../skins/cps_calendar/calendar_overview.pt
-#, fuzzy
 msgid "cpscalendar_message_visible_calendars"
-msgstr "subscribe to this calendar"
+msgstr "These are the calendars you can only view:"
 
 #.   <span>
 #.         You can download
@@ -959,7 +951,6 @@ msgstr "Resources"
 #.         Search for free time:
 #.       </p>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
-#, fuzzy
 msgid "cpscalendar_search_for_free_time"
 msgstr "Search for possible meeting hours"
 
@@ -1253,7 +1244,6 @@ msgstr "No resource"
 msgid "cpscalendar_no_attendee_of_type_events_show"
 msgstr "No events"
 
-#, fuzzy
 msgid "cpscalendar_no_attendee_of_type_workspace"
 msgstr "No workspace calendars"
 
@@ -1349,3 +1339,4 @@ msgstr "Event for this month"
 
 #~ msgid "cpscalendar_option"
 #~ msgstr "option"
+
