@@ -679,10 +679,14 @@ class Calendar(CPSBaseFolder):
     security.declarePrivate('getEmail')
     def getEmail(self, member, directory):
         """Get email from member's properties in directory"""
-        member_prop = directory.getEntry(member)
-        if member_prop is None:
+        try:
+            member_prop = directory.getEntry(member)
+            if member_prop is None:
+                return None
+            return member_prop.get('email')
+        except KeyError:
+            # The user has an member data entry, but is not a member.
             return None
-        return member_prop.get('email')
 
     security.declarePrivate('notifyMembers')
     def notifyMembers(self, event_dict):
@@ -769,6 +773,12 @@ class Calendar(CPSBaseFolder):
                 if email is not None:
                     mails[email] = None
                 done[id] = None
+
+        for attendee in event_dict['event']['attendees']:
+            if attendee['status'] == 'unconfirmed':
+                email = self.getEmail(attendee['cn'], mdir)
+                if email is not None:
+                    mails[email] = None
 
         mails = mails.keys()
 
