@@ -18,11 +18,22 @@
 
 
 <metal:block fill-slot="header">
-    Calendar for
-  <tal:block define="title here/title_or_id;
-    title python:mcat(title);"
-    replace="title">Page Title</tal:block>
+  <tal:block condition="python:here.usertype == 'member'">
+    <tal:block replace="python:mcat('_cal_Calendar_of_')">
+      Calendar of
+    </tal:block>
+    <tal:block
+      define="user_id member/getUserName; user_props python:dtool.getEntry(user_id); fullname python:user_props and user_props.get(dtool.display_prop, user_id) or user_id;"
+      replace ="fullname">
+      Fullname
+    </tal:block>
+  </tal:block>
+  <tal:block condition="python:here.usertype != 'member'"
+    replace="python:mcat(here.title_or_id())">
+    Ressource
+  </tal:block>
 </metal:block>
+
 <metal:block fill-slot="header_plus"></metal:block>
 
 <metal:block fill-slot="main">
