@@ -1,4 +1,19 @@
 *******************************************
+** CPSCalendar V0.2.0 [R1 build 2003-09/05-16:38 by ben]
+
+ZODB Requires:
+~~~~~~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- CPS3 compatible
+Bug fixes:
+~~~~~~~~~~
+- ²
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- remove import of depracated metal macro form and form_property from CPSDefault
+*******************************************
 ** CPSCalendar V0.1.0 [R1 build 2003-06/20-16:10 by ben]
 
 ZODB Requires:

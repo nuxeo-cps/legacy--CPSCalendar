@@ -6,8 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- ²
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
-- remove import of depracated metal macro form and form_property from CPSDefault
-- CPS3 compatible
+-
