@@ -1,0 +1,47 @@
+--------------------------------------------------
+CPSCalendar Installation
+--------------------------------------------------
+
+$Id$
+
+--------------------------------------------------
+Requirements
+--------------------------------------------------
+
+CPSCalendar requires:
+- CPS3 (3.0 or higher)
+- product CPSInstaller (not included in CPS-3.0, but included in CPS-3.1)
+
+It's been tested with Zope 2.6 and Zope 2.7.
+
+--------------------------------------------------
+Installation notes
+--------------------------------------------------
+
+- Unpack the distribution into the Products folder of your Zope installation
+  and change its name 'CPSCalendar-X.X.X-X' to 'CPSCalendar'
+
+- Restart Zope. Check in Control_Panel/Products that there is a CPSCalendar
+  product and that there were no import errors.
+
+- From the ZMI, go to the CPS root, instantiate an External Method with the
+  following parameters:
+  ID = any Id you want, like cpscalendar_install
+  Title = anything you want, like CPSCalendar Installer
+  Module Name = CPSCalendar.install
+  Function Name = install
+
+- After creation, open the External Method object and click the "Test" tab to
+  run it.
+
+- CPSCalendar should now be installed.
+
+--------------------------------------------------
+Update notes
+--------------------------------------------------
+
+If your previous version of CPSCalendar was prior to version 1.2.0, compatibily
+is broken: you have to remove all your calendars and restart with new ones.
+
+If your previous version of CPSCalendar was prior to version 1.6.2, you have to
+rerun the install method, as it upgrades event objects.
