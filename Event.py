@@ -32,6 +32,7 @@ from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 
 from Products.CMFCore.CMFCorePermissions import View, ModifyPortalContent
+from Products.CMFCore.utils import getToolByName
 
 from Products.NuxCPSDocuments.BaseDocument import BaseDocument, BaseDocument_adder
 
@@ -201,7 +202,7 @@ class Event(BaseDocument):
     def getEventDict(self, comment=''):
         """
         """
-        (member, dtstamp) = self._getRequestInformations()
+        (member, member_cn, dtstamp) = self._getRequestInformations()
         return {
             'id': self.id,
             'request': 'request',
@@ -219,6 +220,7 @@ class Event(BaseDocument):
                 'comment': comment,
                 'dtstamp': dtstamp,
                 'sender': member,
+                'sender_cn': member_cn,
             }
         }
 
@@ -275,7 +277,7 @@ class Event(BaseDocument):
         """
         """
         user_id = self.getCalendarUser()
-        (member, dtstamp) = self._getRequestInformations()
+        (member, member_cn, dtstamp) = self._getRequestInformations()
         for attendee in self.attendees:
             if attendee['id'] == user_id:
                 old_status = attendee['status']
@@ -292,17 +294,19 @@ class Event(BaseDocument):
         if org_calendar is None:
             LOG('NGCal', INFO, "Can't get calendar for %s" % (self.organizer['id'], ))
             return
+        my_id = self.getCalendarUser()
         org_calendar.addPendingEvent({
             'id': self.id,
             'request': 'status',
             'change': ({
-                'attendee': self.getCalendarUser(),
-                'cn': self.getCalendar().title_or_id(),
+                'attendee': my_id,
+                'cn': self.getAttendeeInfo(my_id).get('cn', id),
                 'type': self.getCalendar().usertype,
                 'status': status,
                 'comment': comment,
                 'dtstamp': dtstamp,
-                'sender': member
+                'sender': member,
+                'sender_cn': member_cn,
             },)
         })
         
@@ -363,10 +367,17 @@ class Event(BaseDocument):
 
         
     def _getRequestInformations(self):
-        mtool = self.portal_membership
+        mtool = getToolByName(self, 'portal_membership')
         member = mtool.getAuthenticatedMember().getUserName()
+        dirtool = getToolByName(self, 'portal_metadirectories')
+        members = dirtool.members
+        entry = members.getEntry(member)
+        if entry is not None:
+            member_cn = entry.get(members.display_prop, member)
+        else:
+            member_cn = member
         dtstamp = DateTime()
-        return (member, dtstamp)
+        return (member, member_cn, dtstamp)
 
     def manage_afterAdd(self, item, container):
         """
