@@ -508,18 +508,13 @@
         <a tal:attributes="
              title python:'%s (%s - %s)' % (event_title, event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
              href event/absolute_url">
-          <img border="0"
-               tal:attributes="
-                  src string:${portal_url}/cal_event_${event/event_status}.png;
-                  height string:10;
-                  width string:10;" />
-          <img border="0"l
+          <img border="0" width="10" height="10" tal:attributes="
+              src string:${portal_url}/cal_event_${event/event_status}.png;" />
+          <img border="0" width="10" height="10"
                tal:condition="event/attendees"
                tal:define="status python:info['isdirty'] and 'dirty' or 'attendees'"
                tal:attributes="
-                  src string:${portal_url}/cal_event_${status}.png;
-                  height string:10;
-                  width string:10;" />
+                  src string:${portal_url}/cal_event_${status}.png;" />
           <tal:block replace="event_title" />
         </a>
     </td></tr>
