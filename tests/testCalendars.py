@@ -27,9 +27,11 @@ class TestCalendarTool(CPSCalendarTestCase):
         assert self.member
         self.user_home = mtool.getHomeFolder(self.user_id)
         self.assertEquals(self.user_home, self.portal.workspaces.members.root)
+        assert self.user_home.calendar
         self.user_home_url = mtool.getHomeUrl(self.user_id)
         self.assertEquals(self.user_home_url, 
                           "http://nohost/portal/workspaces/members/root")
+
         self.caltool = self.portal.portal_cpscalendar
         assert self.caltool 
 
@@ -41,28 +43,29 @@ class TestCalendarTool(CPSCalendarTestCase):
     def testCalendarTool(self):
         caltool = self.caltool
 
-        # rpath is the path to "someplace"
-        rpath = 'portal/workspaces/members/root'
-        cal = caltool.getCalendarForPath(rpath)
-        self.assertEquals(cal, self.user_home.calendar)
-        cal = caltool.getCalendarForPath(rpath + '/calendar')
-        self.assertEquals(cal, self.user_home.calendar)
+        self.assertEquals(caltool.getCalendarForPath('xxx'), None)
 
-        cal = caltool.getCalendarForUser('root')
-        self.assertEquals(cal, self.user_home.calendar)
+        rpath = 'workspaces/members/root/calendar'
+        self.assertEquals(caltool.getCalendarPathForUser('root'), rpath)
+
+        calendar = caltool.getCalendarForPath(rpath)
+        self.assertEquals(calendar, self.user_home.calendar)
+
+        calendar = caltool.getCalendarForUser('root')
+        self.assertEquals(calendar, self.user_home.calendar)
 
         l = caltool.listCalendarPaths()
         l.sort()
         self.assertEquals(l, [
-             'portal/workspaces/members/root/calendar',
-             'portal/workspaces/members/test_user_1_/calendar'])
+             'workspaces/members/root/calendar',
+             'workspaces/members/test_user_1_/calendar'])
 
         l = caltool.listCalendars()
-        l = [cal.getRpath() for cal in l]
+        l = [calendar.getRpath() for calendar in l]
         l.sort()
         self.assertEquals(l, [
-             'portal/workspaces/members/root/calendar',
-             'portal/workspaces/members/test_user_1_/calendar'])
+             'workspaces/members/root/calendar',
+             'workspaces/members/test_user_1_/calendar'])
 
         # XXX: test these later
         caltool.getCalendarsDict()
@@ -80,6 +83,9 @@ class TestCalendarTool(CPSCalendarTestCase):
 
 
     def testFreeBusy(self):
+        assert self.caltool.getCalendarForPath(
+            'workspaces/members/root/calendar')
+
         freebusy_info = self.caltool.getFreeBusy([], 
             DateTime('2004/01/15'), DateTime('2004/01/15'), 8, 0, 19, 0)
         self.assertEquals(freebusy_info['cals_dict'], {})
@@ -93,13 +99,13 @@ class TestCalendarTool(CPSCalendarTestCase):
                'stop': DateTime('2004/01/16')}]])
 
         freebusy_info = self.caltool.getFreeBusy(
-            ['portal/workspaces/members/root/calendar'], 
+            ['workspaces/members/root/calendar'], 
             DateTime('2004/01/15'), DateTime('2004/01/15'), 8, 0, 19, 0)
         self.assertEquals(freebusy_info['cals_dict'], 
-            {'portal/workspaces/members/root/calendar': [[]]})
+            {'workspaces/members/root/calendar': [[]]})
         # XXX: don't think that that's the right result
         self.assertEquals(freebusy_info['cal_users'],
-            {'portal/workspaces/members/root/calendar': 'calendar'})
+            {'workspaces/members/root/calendar': 'root'})
         self.assertEquals(freebusy_info['slots'], 
             [(DateTime('2004/01/15'), DateTime('2004/01/16'))])
         self.assertEquals(freebusy_info['mask_cal'], 
@@ -138,6 +144,9 @@ class TestCalendar(CPSCalendarTestCase):
                           + "cpscalendar_user_calendar_name_end")
         # XXX: there should be a description there.
         self.assertEquals(self.calendar.Description(), "")
+
+    def testGetOwnerId(self):
+        self.assertEquals(self.calendar.getOwnerId(), 'root')
 
     def testEmptyCalendar(self):
         self.assertEquals(self.calendar.getPendingEventsCount(), 0)
@@ -299,6 +308,9 @@ class TestCalendar(CPSCalendarTestCase):
         assert event.calendar_event_view()
         assert event.calendar_editevent_form()
         assert event.calendar_attendees_form()
+        html = event.calendar_attendees_form(search_param='id_')
+        #assert html.count(
+        #    'value="workspaces/members/root/calendar">root</option>')
 
     def testMeeting(self):
         self._addEvent()
@@ -308,6 +320,8 @@ class TestCalendar(CPSCalendarTestCase):
         event.updateAttendeesCalendars()
 
         # TODO: add some real attendees
+        event.setAttendees([{'rpath': 'workspaces/members/toto'}])
+        event.updateAttendeesCalendars()
 
     def testGetHourBlockCols(self):
         class DummyEvent:

@@ -79,6 +79,7 @@ def oldUpdate(self):
         if action.id == 'my_calendar':
             action_found = 1
 
+    # XXX: only show link if I really have a calendar ?
     if not action_found:
         portal['portal_actions'].addAction(
             id='my_calendar',

@@ -223,7 +223,8 @@ class Event(CPSBaseDocument):
     def getOrganizerCalendar(self):
         """Return the calendar of the organizer of the event"""
         ctool = getToolByName(self, 'portal_cpscalendar')
-        org_calendar = ctool.getCalendarForPath(self.organizer['rpath'])
+        org_calendar = ctool.getCalendarForPath(
+            self.organizer['rpath'], unrestricted=1)
         return org_calendar
 
     security.declareProtected(View, 'getAttendeesDict')
@@ -389,16 +390,18 @@ class Event(CPSBaseDocument):
             all_attendees.append(attendee_rpath)
             if attendees is not None and attendee_rpath not in attendees:
                 continue
-            attendee_calendar = caltool.getCalendarForPath(attendee_rpath)
+            # XXX: what's the visibility rule for invitations ?
+            attendee_calendar = caltool.getCalendarForPath(
+                attendee_rpath, unrestricted=1)
             if attendee_calendar is None:
                 LOG('CPSCalendar', INFO, "Can't get calendar for %s" 
                     % (attendee_rpath, ))
                 continue
             attendee_calendar.addPendingEvent(event_dict)
-            notified_attendees.append(attendee_id)
+            notified_attendees.append(attendee_rpath)
 
-        self.notified_attendees = [id for id in all_attendees 
-            if id in self.notified_attendees or id in notified_attendees]
+        self.notified_attendees = [rpath for rpath in all_attendees 
+            if rpath in self.notified_attendees or rpath in notified_attendees]
         if all_attendees == self.notified_attendees:
             self.isdirty = 0
         if REQUEST is not None:
@@ -480,7 +483,7 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
                 'cn': mtool.getAuthenticatedMember().getUserName(),
             }
     else:
-        raise "XXX: Is this line ever reached ???"
+        pass # Reached when responding to an invitation
     ob = Event(id, organizer=organizer, attendees=attendees, **kw)
     calendar._setObject(id, ob)
     if REQUEST is not None:

@@ -162,11 +162,20 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     security.declareProtected('View', 'listCalendarPaths')
     def listCalendarPaths(self):
         """Return all available Calendars' paths in a list"""
-        cals = self.listCalendars()
-        if cals:
-            return [cal.getRpath() for cal in cals]
-        else:
-            return []
+        calendars = self.listCalendars()
+        return [cal.getRpath() for cal in calendars]
+
+    security.declareProtected('View', 'getCalendarPathForUser')
+    def getCalendarPathForUser(self, user_id):
+        """Return calendar (r)path for user"""
+        mtool = getToolByName(self, 'portal_membership')
+        utool = getToolByName(self, 'portal_url')
+        return mtool.getHomeUrl(user_id)[len(utool())+1:] + '/calendar'
+
+    security.declareProtected('View', 'getCalendarForUser')
+    def getCalendarForUser(self, user_id):
+        """Get calendar for user <user_id>"""
+        return self.getCalendarForPath(self.getCalendarPathForUser(user_id))
 
     security.declareProtected(View, 'getCalendarsDict')
     def getCalendarsDict(self, exclude=''):
@@ -186,34 +195,30 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                   'cn': calendar.title_or_id(),
                   'usertype': calendar.usertype,
                   'rpath': rpath,
+                  'owner': calendar.getOwnerId(),
                   'path': calendar.absolute_url(),
                 })
         return calendars_dict
 
-    security.declareProtected('View', 'getCalendarForPath')
-    def getCalendarForPath(self, rpath):
+    security.declarePrivate('getCalendarForPath')
+    def getCalendarForPath(self, rpath, unrestricted=0):
         """Return a calendar
 
         rpath: relative path for the calendar
+        Return None if no calendar found
         """
-        # XXX: refactor this using restrictedTraverse()
-        if not rpath:
+        utool = getToolByName(self, 'portal_url')
+        portal = utool.getPortalObject()
+        try:
+            if unrestricted:
+                calendar = portal.unrestrictedTraverse(rpath)
+            else:
+                calendar = portal.restrictedTraverse(rpath)
+            if calendar.meta_type != 'Calendar':
+                raise KeyError
+            return calendar
+        except KeyError:
             return None
-        query = {'meta_type': 'Calendar', 'path': rpath}
-        brains = self.portal_catalog(**query)
-        if len(brains) == 1:
-            return brains[0].getObject()
-        else:
-            return None
-
-    security.declareProtected('View', 'getCalendarForPath')
-    def getCalendarForUser(self, user_id):
-        """Get calendar for user <user_id>"""
-
-        # TODO: hardcoded for now + what if user's calendar is not called
-        # calendar ?
-        return self.getCalendarForPath(
-            'portal/workspaces/members/%s/calendar' % user_id)
 
     # XXX use a special permission here
     security.declareProtected('View', 'listFreeSlots')
@@ -397,8 +402,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         Return a dictionary with cn, rpath, id, usertype and status.
         """
         id = rpath.split('/')[-1]
-        if rpath in self.listCalendarPaths():
-            calendar = self.getCalendarForPath(rpath)
+        calendar = self.getCalendarForPath(rpath, unrestricted=1)
+        if calendar:
             info = {
                 'id': id,
                 'rpath': rpath,
@@ -407,6 +412,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             if calendar.usertype != 'member':
                 info['cn'] = calendar.title_or_id()
             else:
+                id = calendar.getOwnerId()
                 dirtool = getToolByName(self, 'portal_metadirectories')
                 members = dirtool.members
                 entry = members.getEntry(id)

@@ -2,29 +2,31 @@
 
 # $Id$
 
-if ids is None:
-    ids = []
+rpaths = ids
+
+if rpaths is None:
+    rpaths = []
 
 if id is not None:
-    ids.append(id)
+    rpaths.append(id)
+
+caltool = context.portal_cpscalendar
 
 attendees = context.attendees
+attendees_rpaths = [att['rpath'] for att in attendees]
 
-attendees_ids = [att['id'] for att in attendees]
-
-add_ids = [id for id in ids if id not in attendees_ids]
+add_rpaths = [rpath for rpath in rpaths if rpath not in attendees_rpaths]
 
 try:
-    new_attendees = [context.getAttendeeInfo(id, 1) for id in add_ids]
+    new_attendees = [caltool.getAttendeeInfo(rpath, 1) for rpath in add_rpaths]
 except AttributeError:
     new_attendees = []
-
 
 if new_attendees:
     attendees = list(attendees)
     attendees.extend(new_attendees)
-
     context.setAttendees(attendees)
 
 if REQUEST is not None:
-    REQUEST.RESPONSE.redirect('%s/calendar_attendees_form' % (context.absolute_url(), ))
+    REQUEST.RESPONSE.redirect(
+        '%s/calendar_attendees_form' % context.absolute_url())

@@ -1,15 +1,32 @@
 ZODB Requires:
 ~~~~~~~~~~~~~~
--
+- Remove all your calendars and restart from start.
 
 New features:
 ~~~~~~~~~~~~~
--
-
-Bug fixes:
-~~~~~~~~~~
--
+- You can now have many calendars (but "your" calendar is the one with id
+  'calendar'.
 
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- calendars are now identified by their 'rpath' (relative path to the portal)
+  rather than id. So many method calls and datastructures use now 'rpath'
+  argument or field instead of 'id'.
+
+- new API:
+
+  For calendar tool:
+    - renamed getCalendarObjects -> listCalendars
+    - renamed getCalendarIds -> listCalendarPaths
+    - renamed getVisibleCalendars -> listVisibleCalendars
+    - renamed unionCals -> listFreeSlots
+    - renamed createUserCalendar -> createMemberCalendar
+    - new: getCalendarPathForUser, getCalendarForUser, getCalendarForPath
+
+  For Calendars:
+    - renamed: addDeclinedEvent -> declineEvent
+    - renamed: addCancelledEvent -> cancelEvent
+    - renamed: removeDeclinedEvent -> unDeclineEvent
+    - renamed: removeCancelledEvent -> unCancelEvent
+    - new: getOwnerId, getRpath
+

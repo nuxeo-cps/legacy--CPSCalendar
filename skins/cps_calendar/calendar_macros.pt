@@ -310,8 +310,8 @@
     <ul>
       <li tal:repeat="att here/attendees">
         <input type="checkbox" name="attendees:list"
-          tal:attributes="value att/id;
-                  checked python:att['id'] not in notified_attendees" />
+          tal:attributes="value att/rpath;
+                  checked python:att['rpath'] not in notified_attendees" />
         <tal:block replace="att/cn|att/id" />
       </li>
     </ul>

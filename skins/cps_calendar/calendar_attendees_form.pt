@@ -1,13 +1,14 @@
-<tal:block define="global current_action string:attendees" />
+<ltal:block define="global current_action string:attendees" />
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="this_user here/getCalendarUser;
                          user_types here/getUserTypes;
                          attendees_dict here/getAttendeesDict|python:{};
+                         caltool here/portal_cpscalendar;
                          dtool here/portal_metadirectories/members;
                          decline_attendees python:[att for att in here.attendees if att['status'] == 'decline'];
-                         all_attendees here/getCalendarsDict|python:{};
+                         all_attendees caltool/getCalendarsDict|python:{};
                          can_edit python:here.canEditThisEvent();">
 
   <h1>
@@ -65,7 +66,6 @@
         </ul>
       </tal:block>
       <tal:block condition="can_edit">
-
         <tal:block condition="python:type =='member'">
           <tal:block define="searching python: request.get('role_submit', None);
                              searchable_keys dtool/getSearchableSchemaKeys;
@@ -106,12 +106,16 @@
                       </span>
                       <br>
                       <select name="ids:list" size="5" multiple>
+                        <tal:block repeat="props found">
                         <option value="."
-                          tal:repeat="props found"
-                          tal:attributes="value python:props[dtool.entry_prop]"
-                          tal:content="python:props[dtool.display_prop]">
+                          tal:define="user_id python:props[dtool.display_prop];
+                                      path python:caltool.getCalendarPathForUser(props[dtool.entry_prop])"
+                          tal:condition="path"
+                          tal:attributes="value path"
+                          tal:content="user_id">
                           Username
                         </option>
+                        </tal:block>
                       </select>
                       <br>
                       <input class="mainbutton" type="submit"
@@ -131,8 +135,8 @@
 
         <tal:block condition="python:type != 'member'">
           <tal:block define="addable_attendees all_attendees/?type|python:[];
-                             attendees_ids python:[att['id'] for att in attendees];
-                             addable_attendees python:[att for att in addable_attendees if (att['id'] not in attendees_ids) and att['id'] != this_user]">
+                             attendees_ids python:[att['rpath'] for att in attendees];
+                             addable_attendees python:[att for att in addable_attendees if (att['rpath'] not in attendees_ids) and att['rpath'] != this_user]">
             <form action="calendar_addattendee"
               tal:condition="addable_attendees">
               <span i18n:translate="cpscalendar_label_add_attendee">
@@ -140,7 +144,7 @@
               </span>
               <select name="id">
                 <option tal:repeat="attendee addable_attendees"
-                  tal:attributes="value attendee/id"
+                  tal:attributes="value attendee/rpath"
                   tal:content="attendee/cn">Ressource</option>
               </select>
               <input type="submit"

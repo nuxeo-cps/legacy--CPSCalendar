@@ -36,6 +36,8 @@ from Products.CMFCore.CMFCorePermissions import ChangePermissions
 from Products.CPSCore.CPSBase import CPSBaseFolder#, CPSBase_adder
 #from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
 
+from Event import Event
+
 ManageWorkgroups = 'Manage Workspaces'
 setDefaultRoles(ManageWorkgroups, ('Manager',))
 
@@ -146,10 +148,6 @@ class Calendar(CPSBaseFolder):
                    )
 
     isDocumentContainer = 0
-    usertype = 'member'
-
-    # Workgroup dynamic title
-    _basetitle = '_cal_Calendar_of_%s_'
 
     _pending_events = ()
     _declined = ()
@@ -174,16 +172,31 @@ class Calendar(CPSBaseFolder):
         CPSBaseFolder.__init__(self, id, **kw)
         self.usertype = usertype
 
+    #
+    # We don't use this yet
+    #
     security.declarePrivate('genUid')
     def genUid(self):
         """UID generator. To be improved (so that uids are truly unique) and
         moved to a base class later."""
         import time, random
-        return str(time.time()) + str(random.randint(0, 1000))
+        return str(int(time.time())) + str(random.randint(0, 1000))
+
+    def createEvent(self, *args, **kw):
+        uid = self.genUid()
+        event = Event(id=uid, **kw)
+        self._setObject(uid, event)
+        return uid
+        
+
+    security.declarePrivate('getOwnerId')
+    def getOwnerId(self):
+        # getOwner() is part of the Zope API
+        return self.getOwner(1)[1]
 
     security.declarePrivate('getRpath')
     def getRpath(self):
-        return self.absolute_url(relative=1)
+        return self.absolute_url()[len(self.portal_url())+1:]
 
     security.declareProtected('Add portal content', 'getPendingEventsCount')
     def getPendingEventsCount(self):
@@ -270,14 +283,14 @@ class Calendar(CPSBaseFolder):
                     % (self.absolute_url(), event_id))
 
     security.declareProtected('Add portal content', 'cleanPendingEvents')
-    def cleanPendingEvents(self, id=None, REQUEST=None):
+    def cleanPendingEvents(self, event_id=None, REQUEST=None):
         """
         """
-        if id is None:
+        if event_id is None:
             self._pending_events = ()
         else:
             self._pending_events = tuple(
-                [ev for ev in self._pending_events if ev['id'] != id])
+                [ev for ev in self._pending_events if ev['id'] != event_id])
         if REQUEST is not None:
             REQUEST.RESPONSE.redirect(self.absolute_url())
 
