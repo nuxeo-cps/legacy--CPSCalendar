@@ -26,6 +26,8 @@ Bug fixes:
 - The confirmation options are now radio buttons instead of a select list.
 - You can now only modify and delete events via the organizers calendar.
 - searchCalendars now only returns users if they have a calendar.
+- The meeting creation form no longer loses the to and from times when
+  you search for users.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
