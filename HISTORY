@@ -1,4 +1,19 @@
 *******************************************
+** CPSCalendar V1.2.1 [R1 build 2004/02/02-10:55 by fermigier]
+
+New features:
+~~~~~~~~~~~~~
+- Better interface
+
+Bug fixes:
+~~~~~~~~~~
+- spelling
+
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- personal calendar id is now a pseudo-constant
+
+*******************************************
 ** CPSCalendar V1.2.0 [R1 build 2004/01/22-11:04 by fermigier]
 
 ZODB Requires:
