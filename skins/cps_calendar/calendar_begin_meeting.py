@@ -16,14 +16,14 @@ if REQUEST:
 if not cal_ids:
     return context.calendar_meeting_empty()
 
-from_date_string = kw.get('from_date','')
+from_date_string = kw.get('from_date_string','')
 from_date = caltool.stringToDateTime(from_date_string, locale)
 from_date_day = from_date.day()
 from_date_month = from_date.month()
 from_date_year = from_date.year()
 from_date_hour = kw.get('from_date_hour','')
 from_date_minute = kw.get('from_date_minute','')
-to_date_string = kw.get('to_date','')
+to_date_string = kw.get('to_date_string','')
 to_date = caltool.stringToDateTime(to_date_string, locale)
 to_date_day = to_date.day()
 to_date_month = to_date.month()

@@ -23,18 +23,23 @@
                          disp_infos python:here.calendar_getDispInformations(request);
                          selected_day disp_infos/selected_day;
                          args python:edit and request.SESSION['meeting']['args'];
-                         from_date_year python:edit and int(args['from_date_year']) or selected_day.year();
-                         from_date_month python:edit and int(args['from_date_month']) or selected_day.month();
-                         from_date_day python:edit and int(args['from_date_day']) or selected_day.day();
-                         to_date_year python:edit and int(args['to_date_year']) or selected_day.year();
-                         to_date_month python:edit and int(args['to_date_month']) or selected_day.month();
-                         to_date_day python:edit and int(args['to_date_day']) or selected_day.day();
-                         from_date python:DateTime(from_date_year, from_date_month, from_date_day);
-                         to_date python:DateTime(to_date_year, to_date_month, to_date_day);
-                         from_date_hour python:(edit and [int(args['from_date_hour'])] or [8])[0];
-                         from_date_minute python:(edit and [int(args['from_date_minute'])] or [0])[0];
-                         to_date_hour python:(edit and [int(args['to_date_hour'])] or [19])[0];
-                         to_date_minute python:(edit and [int(args['to_date_minute'])] or [0])[0];
+                         dateinfo python:here.calendar_getFromToDate(0, None, request);
+                         frominfo python:dateinfo[0];
+                         toinfo python:dateinfo[1];
+                         from_date_date frominfo/from_date_date;
+                         from_date_day frominfo/from_date_day;
+                         from_date_month frominfo/from_date_month;
+                         from_date_year frominfo/from_date_year;
+                         from_date_hour frominfo/from_date_hour;
+                         from_date_minute frominfo/from_date_minute;
+                         from_date_string  python:here.getDateStr(from_date_date, fmt='short');
+                         to_date_date toinfo/to_date_date;
+                         to_date_day toinfo/to_date_day;
+                         to_date_month toinfo/to_date_month;
+                         to_date_year toinfo/to_date_year;
+                         to_date_hour toinfo/to_date_hour;
+                         to_date_minute toinfo/to_date_minute;
+                         to_date_string python:here.getDateStr(to_date_date, fmt='short');
                          my_cal here/portal_cpscalendar/getHomeCalendarObject;
                          my_id my_cal/getRpath;
                          cal_ids request/cal_ids|request/SESSION/meeting/cal_ids|python:[my_id];
@@ -57,20 +62,18 @@
       i18n:translate="cpscalendar_heading_meeting_creation_helper">
     Meeting creation helper
   </h1>
-  <metal:block use-macro="here/calendar_macros/macros/searchform">
+  <form method="POST" tal:attributes="action here/REQUEST/URL1">
+  <metal:block use-macro="here/calendar_macros/macros/searchwidgets">
     the searchform
   </metal:block>
   <hr/>
-  <form method="POST" tal:attributes="action here/REQUEST/URL1">
     <p>
       <strong>
       <span i18n:translate="cpscalendar_label_from_day">
         From
       </span>
-  <input type="text" size="11" maxlength="22"
-    tal:attributes="name string:from_date;
-                    id string:from_date;
-                    value python:here.getDateStr(from_date, fmt='short')" />
+  <input type="text" size="11" maxlength="22" name="from_date_string"
+    id="from_date" tal:attributes="value from_date_string" />
   <button id="trigger"
     tal:attributes="id string:trigger_from_date">...</button>
   <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
@@ -88,10 +91,8 @@ range       : [2000, 2049]
       <span i18n:translate="cpscalendar_label_to_day">
         to
       </span>
-  <input type="text" size="11" maxlength="22"
-    tal:attributes="name string:to_date;
-                    id string:to_date;
-                    value python:here.getDateStr(to_date, fmt='short')" />
+  <input type="text" size="11" maxlength="22" name="to_date_string"
+    id="to_date"  tal:attributes="value to_date_string" />
   <button id="trigger"
     tal:attributes="id string:trigger_to_date">...</button>
   <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"

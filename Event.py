@@ -142,6 +142,7 @@ class Event(CPSBaseDocument):
         CPSBaseDocument.__init__(self, id, organizer=organizer, **kw)
         self.organizer = deepcopy(organizer)
         if attendees is not None:
+            attendees = list(attendees)
             add_organizer = 1
             for each in attendees:
                 if each['rpath'] == organizer['rpath']:
