@@ -6,7 +6,8 @@
     tal:attributes="href string:${portal_url}/calendar_stylesheet.css" />
 </metal:block>
 
-<metal:block fill-slot="header">
+<metal:block fill-slot="header"
+  tal:content="python:mcat('_Meeting creation helper_')">
     Meeting creation helper
 </metal:block>
 
@@ -33,11 +34,13 @@
     back_td1 string:${portal_url}/cal_line1.png;
     back_td2 string:${portal_url}/cal_line2.png;
     empty_src string:${portal_url}/cal_empty.gif;
-    ">
+    "
+    tal:on-error="python:request.RESPONSE.redirect('%s/calendar_meeting_expired' % (here.absolute_url(), ))">
   <table cellspacing="0" cellpadding="0" border="0" width="100%">
     <tr>
       <td>
-        <table align="right" cellspacing="0" cellpadding="0" border="0">
+        <table height="15" align="right"
+          cellspacing="0" cellpadding="0" border="0">
           <tr>
             <td width="30" class="cal_left_tab">
               <tal:block condition="python:disp_start > 0">
@@ -157,14 +160,16 @@
           <tr>
             <td bgcolor="#00FF00" width="40">
             </td>
-            <td>
+            <td
+              tal:content="python:mcat('_Period of free time you can use to create your meeting_')">
               Period of free time you can use to create your meeting
             </td>
           </tr>
           <tr>
             <td bgcolor="#AAAAAA" width="40">
             </td>
-            <td>
+            <td
+              tal:content="python:mcat('_Busy time_')">
               Busy time
             </td>
           </tr>
@@ -172,8 +177,12 @@
       </td>
     </tr>
   </table>
-  <h3>Calendar selection</h3>
-  <p>
+  <h3
+    tal:content="python:mcat('_Calendar selection_')">
+    Calendar selection
+  </h3>
+  <p
+    tal:content="python:mcat('_You can unselect some calendars if you want_')">
     You can unselect some calendars if you want.
   </p>
   <form action="calendar_meeting_ids" method="POST">
@@ -193,12 +202,13 @@
     <input type="submit"
       tal:attributes="value python:mcat('_button_validate_')" />
   </form>
-  <form action="" method="POST">
+  <form method="POST"
+    tal:attributes="action here/absolute_url">
     <input type="hidden" name="edit" value="1" />
     <input type="submit" name="calendar_meeting_form:method"
-      value="Modify your request" />
+      tal:attributes="value python:mcat('_Modify your request_')" />
     <input type="submit" name="calendar_meeting_cancel:method"
-      value="Cancel your request" />
+      tal:attributes="value python:mcat('_Cancel your request_')" />
   </form>
 </metal:block>
 

@@ -1,9 +1,13 @@
 ##parameters=cal_ids=[], REQUEST=None
 
+try:
+    meeting = REQUEST.SESSION['meeting']
+except KeyError:
+    return context.calendar_meeting_expired()
+
 if not cal_ids:
     return context.calendar_meeting_empty()
 
-meeting = REQUEST.SESSION['meeting']
 meeting['display_ids'] = cal_ids
 freebusy_infos = meeting['freebusy_infos']
 cals_dict = freebusy_infos['cals_dict']

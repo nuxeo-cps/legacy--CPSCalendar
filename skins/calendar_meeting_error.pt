@@ -1,14 +1,16 @@
 <tal:block define="global current_action string:meeting" />
 <html metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="header">
+<metal:block fill-slot="header"
+  tal:content="python:mcat('_Meeting creation helper_')">
   Meeting creation helper
 </metal:block>
 
 <metal:block fill-slot="header_plus" />
 
 <metal:block fill-slot="main">
-  <h2>
+  <h2
+    tal:content="python:mcat('_Your request for a meeting has errors:')">
     Your request for a meeting has errors:
   </h2>
   <ul>

@@ -1,7 +1,8 @@
 <tal:block define="global current_action string:meeting" />
 <html metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="header">
+<metal:block fill-slot="header"
+  tal:content="python:mcat('_Meeting creation helper_')">
   Meeting creation helper
 </metal:block>
 
@@ -28,7 +29,8 @@
     user_types here/getUserTypes;
     all_calendars python:here.getCalendarsDict(exclude=my_id);">
   <form action="calendar_begin_meeting" method="POST">
-    <h2>
+    <h2
+      tal:content="python:mcat('_Select the attendees you want for your meeting:')">
       Select the attendees you want for your meeting:
     </h2>
     <tal:block repeat="user_type user_types">
@@ -61,10 +63,13 @@
           tal:attributes="
             value my_id;
             checked python:my_id in cal_ids;" />
-        Include this calendar
+        <tal:block replace="python:mcat('_Include this calendar_')">
+          Include this calendar
+        </tal:block>
       </small>
     </p>
-    <h2>
+    <h2
+      tal:content="python:mcat('_Select the time interval you want for your meeting:')">
       Select the time interval you want for your meeting:
     </h2>
     <p>
@@ -106,7 +111,9 @@
         tal:attributes="value to_date_year" />
     </p>
     <p>
-      Between
+      <tal:block replace="python:mcat('_cal_Between_')">
+        Between
+      </tal:block>
       <select name="from_date_hour">
         <option tal:repeat="hour python:range(0,24)"
           tal:content="hour" tal:attributes="value hour;
@@ -116,7 +123,9 @@
           tal:content="minute" tal:attributes="value minute;
             selected python:minute == from_date_minute or nothing" />
       </select>
-      and
+      <tal:block replace="python:mcat('_(Between date)_and_')">
+        and
+      </tal:block>
       <select name="to_date_hour">
         <option tal:repeat="hour python:range(0,24)"
           tal:content="hour" tal:attributes="value hour;
@@ -127,7 +136,8 @@
             selected python:minute == to_date_minute or nothing" />
       </select>
     </p>
-    <h2>
+    <h2
+      tal:content="python:mcat('_Select the desired duration of your meeting:')">
       Select the desired duration of your meeting:
     </h2>
     <p>

@@ -10,11 +10,14 @@
 
 <metal:block fill-slot="main">
   <h2
-    tal:content="python:mcat('_Select at least one attendee_')">
-    Select at least one attendee.
+    tal:content="python:mcat('_Your request has expired_')">
+    Your request has expired.
   </h2>
-  <input type="button" onClick="history.back()"
-    tal:attributes="value python:mcat('_button_back_')" />
+  <form method="POST"
+    tal:attributes="action here/absolute_url">
+    <input type="submit"
+      tal:attributes="value python:mcat('_button_back_')" />
+  </form>
 </metal:block>
 
 </html>
