@@ -198,7 +198,7 @@ class Event(CPSBaseDocument):
                 return "%s upgraded to %s" % (self.absolute_url(), self.event_type)
         elif hasattr(self, 'recurrance_period'):
             # Upgrade from earlier bad spelling
-            self.recurrence_period = self.recurrance_period
+            self.recurrence_period = self.recurrance_period[:]
             delattr(self, 'recurrance_period')
             return "%s upgraded to 1.6.1" % self.absolute_url()
             
@@ -489,7 +489,7 @@ class Event(CPSBaseDocument):
             year = year + repeats
             todate = DateTime(year, month, day, hour, minute, second, tz)
             return fromdate, todate
-        raise ValueError('Unknown recurrence period ' + period)
+        raise ValueError('Unknown recurrence period ' + str(period))
 
     def _recurringMatch(self, start_time, end_time, slots):
         if start_time.greaterThan(self.to_date):
