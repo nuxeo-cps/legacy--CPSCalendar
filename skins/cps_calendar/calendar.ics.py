@@ -22,7 +22,7 @@ You are not authorized to access this ressource
 </html>""")
         return
 
-ical_conv = '%Y%m%dT%H%M%S'
+ical_conv = '%Y%m%dT%H%M%SZ'
 ical_date_conv = '%Y%m%d'
 
 def icalvalue(s):
@@ -49,7 +49,7 @@ timezone = dtstamp.localZone()
 
 event_header = """\
 BEGIN:VEVENT
-DTSTAMP:%sZ
+DTSTAMP:%s
 """ % (dtstamp.strftime(ical_conv), )
 
 event_footer = """\
@@ -57,6 +57,9 @@ END:VEVENT
 """
 
 for event in events:
+    eventfrom = event.from_date.toZone('UTC').strftime(ical_conv)
+    eventto = event.to_date.toZone('UTC').strftime(ical_conv)
+    
     message += event_header
 
     message += """\
@@ -75,12 +78,27 @@ DTSTART;VALUE=DATE:%s
 DTEND;VALUE=DATE:%s
 """ % (event.from_date.strftime(ical_date_conv),
         (event.to_date+1).strftime(ical_date_conv))
-    else:
+    elif event.event_type == 'event_tofrom':
         message += """\
-DTSTART;TZID=%s:%s
-DTEND;TZID=%s:%s
-""" % (event.from_date.localZone(), event.from_date.strftime(ical_conv),
-        event.to_date.localZone(), event.to_date.strftime(ical_conv))
+DTSTART:%s
+DTEND:%s
+""" % (eventfrom, eventto)
+    elif event.event_type == "event_recurring":
+        message += 'DTSTART:%s\nRRULE:FREQ=' % eventfrom
+        if event.recurrence_period == 'period_daily':
+            message += 'DAILY;'
+        elif event.recurrence_period == 'period_weekly':
+            message += 'WEEKLY;'
+        elif event.recurrence_period == 'period_monthly':
+            message += 'MONTHLY;'
+        elif event.recurrence_period == 'period_quarterly':
+            message += 'MONTLY;PERIOD=3;'
+        elif event.recurrence_period == 'period_yearly':
+            message += 'YEARLY;'
+        else:
+            raise "Unknown recurrance period", event.recurrence_period
+        message += 'UNTIL=%s\n' % (eventto)
+            
 
     message += event_footer
 

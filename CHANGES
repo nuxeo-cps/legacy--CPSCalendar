@@ -10,6 +10,12 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - Permission problems when validating fixed by using unrestrictedtraverse.
+- iCalendar export did not support recurring events
+- iCalendar export used TZID to specify timezope, without specifying a VTIMEZONE
+  part. This is false according to the RFC2445 which states "An individual
+  'VTIMEZONE' calendar component MUST be specified for each unique 'TZID'
+  parameter value specified in the iCalendar object." 
+  Dates are now always specified in UTC instead.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
