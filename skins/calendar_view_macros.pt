@@ -576,11 +576,12 @@
                       </tal:block>
                     </tal:block>
                   </tr>
-                  <tr tal:condition="line/day_lines">
+                  <tr tal:condition="python:line.get('day_lines', None)">
                     <td bgcolor="black" height="1" colspan="7">
                     </td>
                   </tr>
-                  <tr tal:repeat="day_line line/day_lines">
+                  <tr tal:repeat="day_line line/day_lines"
+                      tal:condition="python:line.get('day_lines', None)">
                     <tal:block repeat="col day_line">
                       <tal:block define="
                         colspan col/colspan;
@@ -628,7 +629,7 @@
                       </tal:block>
                     </tal:block>
                   </tr>
-                  <tr tal:condition="line/day_lines">
+                  <tr tal:condition="python:line.get('day_lines', None)">
                     <td bgcolor="black" height="1" colspan="7">
                     </td>
                   </tr>
