@@ -1,2 +1,4 @@
 - recurrent events
 - move hour events interface
+- verify total correctness of events
+- add global actions (in NuxCPS.cpsinstall) for "My calendar" and "Calendars"
