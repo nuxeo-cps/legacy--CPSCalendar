@@ -38,10 +38,11 @@
                          show_addbuttons nothing;
                          member_id python:here.portal_membership.getAuthenticatedMember().getMemberId();
 ">
-
-  <span i18n:translate="cpscalendar_heading_meeting_creation_helper">
+  <h1 i18n:domain="cpscalendar"
+      i18n:translate="cpscalendar_heading_meeting_creation_helper">
     Meeting creation helper
-  </span>
+  </h1>
+
   <table cellspacing="0" cellpadding="0" border="0">
     <tr>
       <td>
@@ -97,16 +98,6 @@
     </ul>
     <input type="submit"
            value="cpscalendar_button_validate"
-           i18n:attributes="value" />
-  </form>
-  <form method="POST"
-        tal:attributes="action here/absolute_url">
-    <input type="hidden" name="edit" value="1" />
-    <input type="submit" name="calendar_meeting_form:method"
-           value="cpscalendar_button_modify"
-           i18n:attributes="value" />
-    <input type="submit" name="calendar_meeting_cancel:method"
-           value="cpscalendar_button_cancel"
            i18n:attributes="value" />
   </form>
 </metal:block>
