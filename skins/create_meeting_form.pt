@@ -1,0 +1,166 @@
+<tal:block define="global current_action string:meeting" />
+<html metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="header">
+  <tal:block
+    tal:replace="python:mcat('_Create_a_new_Event_')">
+    Create a new event
+  </tal:block>
+</metal:block>
+
+<metal:block fill-slot="header_plus" />
+
+<metal:block fill-slot="main"
+  tal:define="
+    meeting_infos python:here.meeting_infos(request);
+    title python:mcat('_(document)_Untitled_');
+    from_date meeting_infos/from_date;
+    duration_hour meeting_infos/duration_hour;
+    duration_minute meeting_infos/duration_minute;
+    duration meeting_infos/duration;
+    from_oks meeting_infos/from_oks;
+    cat_info here/calendar_categories;
+    categories cat_info/categories;
+    cat_default cat_info/default;
+    hour_sep python:mcat('_cal_hour_sep_');
+    cal_users meeting_infos/cal_users;
+    cal_ids meeting_infos/cal_ids;
+    my_id here/id;
+    "
+    tal:on-error="python:request.RESPONSE.redirect('%s/calendar_meeting_expired' % (here.absolute_url(), ))">
+
+    <form action="create_meeting" method="POST">
+      <metal:block use-macro="here/main_widgets/macros/form">
+        <metal:block fill-slot="content">
+          <metal:block use-macro="here/main_widgets/macros/form_property">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_summary_')">
+              Summary
+            </metal:block>
+            <metal:block fill-slot="content">
+              <input name="title" size="40" tal:attributes="value title" />
+            </metal:block>
+          </metal:block>
+          <metal:block use-macro="here/main_widgets/macros/form_property">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_date_')">
+              Date
+            </metal:block>
+            <metal:block fill-slot="content">
+              <h3>
+                <tal:block replace="python:mcat('_cal_Day_long%s' % (from_date.dow(), ))" />
+                <tal:block replace="python:from_date.day()" />
+                <tal:block replace="python:mcat('_cal_Month%s' % (from_date.month(), ))" />
+                <tal:block replace="python:from_date.year()" />
+              </h3>
+              <tal:block replace="python:mcat('_cal_At_')">
+                At
+              </tal:block>
+              <select name="from_date:int">
+                <option tal:repeat="choice from_oks"
+                  tal:attributes="value choice/time"
+                  tal:content="string:${choice/hour}${hour_sep}${choice/minute}">
+                  10:00
+                </option>
+              </select>
+              <tal:block replace="
+                python:mcat('_(Duration: %sh %sm)_') % (duration_hour, duration_minute)">
+                (Duration: 1 hour 0 minute)
+              </tal:block>
+              <input type="hidden" name="duration:int"
+                tal:attributes="value duration" />
+            </metal:block>
+          </metal:block>
+          <metal:block use-macro="here/main_widgets/macros/form_property">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_location_')">
+              Location
+            </metal:block>
+            <metal:block fill-slot="content">
+              <input name="location" size="40" value="" />
+            </metal:block>
+          </metal:block>
+          <metal:block use-macro="here/main_widgets/macros/form_property">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_eventstatus_')">
+              Event status
+            </metal:block>
+            <metal:block fill-slot="content">
+              <select name="event_status"
+                tal:define="
+                  statuses python:['confirmed', 'unconfirmed'];">
+                <option tal:repeat="status statuses"
+                  tal:attributes="
+                    value status;
+                    selected python:status == 'unconfirmed';
+                  "
+                  tal:content="python:mcat('_cal_eventstatus_%s_' % (status, ))">
+                  status
+                </option>
+              </select>
+            </metal:block>
+          </metal:block>
+          <metal:block use-macro="here/main_widgets/macros/form_property">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_category_')">
+            </metal:block>
+            <metal:block fill-slot="content">
+              <table width="100%" cellspacing="2" cellpadding="0" border="0">
+                <tr tal:repeat="cat categories/items">
+                  <td width="30" valign="middle">
+                    <input type="radio" name="category"
+                      tal:attributes="
+                        value python:cat[0];
+                       checked python:cat[0] == cat_default;
+                      " />
+                  </td>
+                  <td width="30" valign="middle">
+                    <table cellpadding="0" cellspacing="0" width="80%"
+                      height="10"
+                      border="0"
+                      tal:attributes="
+                        bgcolor python:cat[1]['color']">
+                      <tr>
+                        <td>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td  valign="middle"
+                    tal:content="python:mcat(cat[1]['title'])">
+                    Category
+                  </td>
+                </tr>
+              </table>
+            </metal:block>
+          </metal:block>
+          <metal:block use-macro="here/main_widgets/macros/form_property">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_attendees_')">
+              Attendees
+            </metal:block>
+            <metal:block fill-slot="content">
+              <ul>
+                <tal:block repeat="user cal_users/items">
+                  <li tal:condition="python:user[0] != my_id">
+                    <input type="checkbox" name="cal_ids:list"
+                      tal:attributes="
+                        value python:user[0];
+                        checked python:user[0] in cal_ids;
+                      " />
+                    <tal:block replace="python:user[1]" />
+                  </li>
+                </tal:block>
+              </ul>
+            </metal:block>
+          </metal:block>
+        </metal:block>
+      </metal:block>
+      <input type="submit"
+        tal:attributes="value python:mcat('_button_create_')" />
+      <input type="button" onClick="history.back()"
+        tal:attributes="value python:mcat('_button_cancel_')" />
+    </form>
+</metal:block>
+
+</html>

@@ -74,13 +74,13 @@ else:
 ok = REQUEST is None or all_day or from_date < to_date
 
 if ok:
-    ob = here.invokeFactory('Event', id, **kw)
+    here.invokeFactory('Event', id, **kw)
 
     if REQUEST is not None:
         REQUEST.SESSION['calendar_viewed'] = from_date
         REQUEST.RESPONSE.redirect('%s/%s' % (here.absolute_url(), id))
     else:
-        return ob
+        return id
 else:
     # the date entries are incorrect (from_date > to_date).
     # in a not all_day event, so propose to extend the event

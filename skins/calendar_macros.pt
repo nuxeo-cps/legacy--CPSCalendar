@@ -13,6 +13,8 @@
       date_fmt python:all_day and mcat('_cal_%m/%d/%Y_')
         or mcat('_cal_%m/%d/%Y at %H:%M_');
       attendees event/attendees;
+      transparent event/transparent|nothing;
+      transparent python:not not transparent;
       cat_infos here/calendar_categories;
       categories cat_infos/categories;
       cat_default cat_infos/default;
@@ -121,6 +123,16 @@
             </metal:block>
           </metal:block>
         </tal:block>
+        <metal:block use-macro="here/main_widgets/macros/form_property">
+          <metal:block fill-slot="title"
+            tal:content="python:mcat('_cal_prop_transparent_')">
+            Transparent
+          </metal:block>
+          <metal:block fill-slot="content"
+            tal:content="python:transparent and mcat('_Yes_') or mcat('_No_')">
+            Yes
+          </metal:block>
+        </metal:block>
       </metal:block>
     </metal:block>
   </tal:block>

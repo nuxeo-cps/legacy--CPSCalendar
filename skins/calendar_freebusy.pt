@@ -132,11 +132,11 @@
                               bgcolor python:(busy and '#AAAAAA') or (ok and '#00FF00') or nothing">
                             <tal:block condition="ok">
                               <a
-                                title="Create the meeting here"
                                 tal:define="
                                   time python:int(block['start']);"
                                 tal:attributes="
-                                  href string:create_meeting?time=${time}">
+                                  title python:mcat('_Create the meeting here_');
+                                  href string:create_meeting_form?time=${time}&window=${height}">
                                 <img width="59" border="0"
                                   tal:attributes="
                                     height disp_height;
