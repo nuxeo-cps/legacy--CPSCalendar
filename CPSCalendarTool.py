@@ -172,7 +172,10 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         """Return calendar (r)path for user"""
         mtool = getToolByName(self, 'portal_membership')
         utool = getToolByName(self, 'portal_url')
-        return mtool.getHomeUrl(user_id)[len(utool())+1:] + '/' + CALENDAR_ID
+        homefolder = mtool.getHomeUrl(user_id)
+        if not homefolder:
+            return ''
+        return homefolder[len(utool())+1:] + '/' + CALENDAR_ID
 
     security.declareProtected('View', 'getCalendarForUser')
     def getCalendarForUser(self, user_id):
