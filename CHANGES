@@ -24,7 +24,7 @@ Bug fixes:
 - When creating an event, any meeting data stored in the session is cleared
   first, to prevent this data bleeding into the event creation.
 - Meeting creation now handles recurring events properly.
-- Screen reorganisation according to bug #722.
+- Screen reorganisations and fixes according to bugs #722 and #725.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Add getHomeCalendarObject and getHomeCalendarUrl method in CalendarTool
