@@ -35,6 +35,7 @@ Bug fixes:
 - The "Delete" action now says "Cancel"
 - When removing attendees from an event, if you didn't select any attendees
   you got an error message.
+- Fixed some language bugs.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
