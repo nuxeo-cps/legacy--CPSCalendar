@@ -17,6 +17,8 @@ Bug fixes:
 - The upgrade of events and calendars now tell you if it upgraded anything.
 - Rewrite of the date and time handling in the add and edit event forms
   removed several bugs.
+- Events that extended to the end of the search time would be ignored when
+  searching for free times in the meeting creation helper.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Add getHomeCalendarObject and getHomeCalendarUrl method in CalendarTool

@@ -458,7 +458,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             if event.to_date > mask.from_date and \
                event.to_date <= mask.to_date:
                 # Blocks the end
-                return [VirtualEvent(event.from_date, mask.to_date)]
+                return [VirtualEvent(event.from_date, mask.from_date)]
 
             if event.from_date < mask.from_date and \
                event.to_date > mask.to_date:
