@@ -81,10 +81,10 @@
        Create a new event
     </tal:block>
     <tal:block condition="not:create">
-      <span i18n:translate="cpscalendar_description_modify_event">
+      <tal:block i18n:translate="cpscalendar_description_modify_event">
         Modify the event
-      </span>
-      ла<span tal:replace="here/title_or_id">Title</span>а╗
+      </tal:block>
+      ла<tal:block tal:replace="here/title_or_id">Title</tal:block>а╗
     </tal:block>
   </h1>
 
@@ -238,7 +238,7 @@ range       : [2000, 2049]
                                           selected python:hour == from_date_hour;"
                   />
                 </select>
-                <span i18n:translate="cpscalendar_hour_sep">:</span>
+                <tal:block i18n:translate="cpscalendar_hour_sep">:</tal:block>
                 <select name="from_date_minute:int">
                   <option tal:repeat="minute python:range(0,60,5)"
                           tal:content="python:'%02d' % minute"
@@ -246,7 +246,7 @@ range       : [2000, 2049]
                                           selected python:minute == from_date_minute;"
                   />
                 </select>
-                <span i18n:translate="cpscalendar_label_to_hour">to</span>
+                <tal:block i18n:translate="cpscalendar_label_to_hour">to</tal:block>
                 <select name="to_date_hour:int">
                   <option tal:repeat="hour python:range(0,24)"
                           tal:content="hour"
@@ -254,7 +254,7 @@ range       : [2000, 2049]
                                           selected python:hour == to_date_hour;"
                   />
                 </select>
-                <span i18n:translate="cpscalendar_hour_sep">:</span>
+                <tal:block i18n:translate="cpscalendar_hour_sep">:</tal:block>
                 <select name="to_date_minute:int">
                   <option tal:repeat="minute python:range(0,60,5)"
                           tal:content="python:'%02d' % minute"
@@ -297,10 +297,9 @@ range       : [2000, 2049]
         </metal:block>
         <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title">
-            <span>
-               i18n:translate="cpscalendar_label_category">
+            <tal:block i18n:translate="cpscalendar_label_category">
               Category
-            </span>
+            </tal:block>
           </metal:block>
           <metal:block fill-slot="content">
             <table width="100%" cellspacing="2" cellpadding="0" border="0">
@@ -407,22 +406,22 @@ range       : [2000, 2049]
             <metal:block fill-slot="content">
               <input name="repeat:bool" type="checkbox" />
               <br/>
-              <span i18n:translate="cpscalendar_label_repeat_times">Number of times</span>
+              <tal:block i18n:translate="cpscalendar_label_repeat_times">Number of times</tal:block>
 
               <input type="string" name="cpscalendar_form_repeat_times:int"
                   size="2" maxlength="2" value="0"/>
               <br/><input type="radio" name="repeat_frequency" value="daily"/>
-              <span i18n:translate="cpscalendar_label_repeat_daily">Daily</span>
+              <tal:block i18n:translate="cpscalendar_label_repeat_daily">Daily</tal:block>
               <br/><input type="radio" name="repeat_frequency" value="weekly"/>
-              <span i18n:translate="cpscalendar_label_repeat_weekly">Weekly</span>
+              <tal:block i18n:translate="cpscalendar_label_repeat_weekly">Weekly</tal:block>
               <br/><input type="radio" name="repeat_frequency" value="monthly"/>
-              <span i18n:translate="cpscalendar_label_repeat_monthly">Monthly</span>
+              <tal:block i18n:translate="cpscalendar_label_repeat_monthly">Monthly</tal:block>
               <br/><input type="radio" name="repeat_frequency" value="X_days"/>
-              <span i18n:translate="cpscalendar_label_repeat_every_X_days_begin">Every</span>
+              <tal:block i18n:translate="cpscalendar_label_repeat_every_X_days_begin">Every</tal:block>
 
               <input type="string" name="cal_every_X_num:int"
                 size="3" maxlength="3" value="0"/>
-              <span i18n:translate="cpscalendar_label_repeat_every_X_days_end">days</span>
+              <tal:block i18n:translate="cpscalendar_label_repeat_every_X_days_end">days</tal:block>
             </metal:block>
           </metal:block>
         </tal:block>
