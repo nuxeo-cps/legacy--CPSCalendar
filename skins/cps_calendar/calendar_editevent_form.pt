@@ -33,7 +33,7 @@
     recurrence_period request/recurrence_period|recurrence_period;
     location python:(not create) and here.location or '';
     location request/location|location;
-    event_status python:create and 'unconfirmed' or here.event_status;
+    event_status python:create and 'confirmed' or here.event_status;
     event_status request/event_status|event_status;
     document_link python:(not create) and here.document or '';
     document_link request/document|document_link;
