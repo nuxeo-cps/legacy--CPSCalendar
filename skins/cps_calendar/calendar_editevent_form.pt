@@ -107,7 +107,7 @@
               </label>
             </metal:block>
             <metal:block fill-slot="content">
-              <input name="title" size="40" i18n:attributes="value"
+              <input name="title" id="title" size="40" i18n:attributes="value"
                      tal:attributes="value title;"
               />
             </metal:block>
@@ -121,7 +121,7 @@
               </label>
             </metal:block>
           <metal:block fill-slot="content">
-            <select name="event_type">
+            <select name="event_type" id="event_type">
               <option tal:repeat="type here/event_types"
                       tal:attributes="value type;
                                       selected python:event_type == type;">
@@ -143,7 +143,7 @@
 
         <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title">
-            <label for="recurrence_period"
+            <label for="from_date_string"
                        i18n:translate="cpscalendar_label_date">
               Date
             </label>
@@ -160,14 +160,16 @@
                 </select>
                 <br/>
               </tal:block>
-              <span tal:condition="python:event_type in ('event_recurring', 'event_allday')"
+              <label for="from_date_string"
+                     tal:condition="python:event_type in ('event_recurring', 'event_allday')"
                     i18n:translate="cpscalendar_label_from_day">
                 From the
-              </span>
-              <span tal:condition="python:event_type == 'event_tofrom'"
-                    i18n:translate="cpscalendar_label_at_day">
+              </label>
+              <label for="from_date_string"
+                     tal:condition="python:event_type == 'event_tofrom'"
+                     i18n:translate="cpscalendar_label_at_day">
                 At the
-              </span>
+              </label>
               <input type="text" size="11" maxlength="22"
                 tal:attributes="name string:from_date_string;
                                 id string:from_date_string;
@@ -186,9 +188,10 @@ range       : [2000, 2049]
 );
 </script>" />
               <tal:block condition="python:event_type in ('event_allday', 'event_recurring')">
-                <span i18n:translate="cpscalendar_label_to_day">
+                <label for="to_date_string"
+                       i18n:translate="cpscalendar_label_to_day">
                   to
-                </span>
+                </label>
                 <input type="text" size="11" maxlength="22"
                     tal:attributes="name string:to_date_string;
                                     id string:to_date_string;
@@ -224,8 +227,11 @@ range       : [2000, 2049]
               </tal:block>
               <tal:block condition="python:event_type != 'event_allday'">
                 <br/>
-                <span i18n:translate="cpscalendar_label_from_hour">From</span>
-                <select name="from_date_hour:int">
+                <label for="from_date_hour"
+                       i18n:translate="cpscalendar_label_from_hour">
+                  From
+                </label>
+                <select name="from_date_hour:int" id="from_date_hour">
                   <option tal:repeat="hour python:range(0,24)"
                           tal:content="hour"
                           tal:attributes="value hour;
@@ -266,7 +272,7 @@ range       : [2000, 2049]
             </label>
           </metal:block>
           <metal:block fill-slot="content">
-            <input name="location" size="40" tal:attributes="value location" />
+            <input name="location" id="location" size="40" tal:attributes="value location" />
           </metal:block>
         </metal:block>
         <metal:block use-macro="here/calendar_macros/macros/form_property">
@@ -277,7 +283,7 @@ range       : [2000, 2049]
             </label>
           </metal:block>
           <metal:block fill-slot="content">
-            <select name="event_status"
+            <select name="event_status"  id="event_status"
                 tal:define="statuses python:['confirmed', 'unconfirmed', 'canceled'];
                     statuses python:create and [status for status in statuses if status != 'canceled'] or statuses">
               <option tal:repeat="status statuses"
@@ -300,7 +306,7 @@ range       : [2000, 2049]
             <table width="100%" cellspacing="2" cellpadding="0" border="0">
               <tr tal:repeat="cat categories/items">
                 <td width="30" valign="middle">
-                  <input type="radio" name="category"
+                  <input type="radio" name="category" id="category"
                          tal:attributes="value python:cat[0];
                                          checked python:cat[0] == category;" />
                 </td>
@@ -333,7 +339,7 @@ range       : [2000, 2049]
           </metal:block>
           <metal:block fill-slot="content">
 
-            <select name="transparent:int"
+            <select name="transparent:int"  id="transparent:int"
                 tal:define="choices python:[{'id': 1, 'title': 'cpscalendar_option_yes'}, {'id':0, 'title': 'cpscalendar_option_no'}]">
               <option tal:repeat="choice choices"
                 tal:attributes="value choice/id;
@@ -381,7 +387,7 @@ range       : [2000, 2049]
           <metal:block fill-slot="content">
             <p>
               <textarea rows="6" cols="40"
-                  name="description"
+                  name="description"  id="description"
                   tal:content="description">description</textarea>
             </p>
           </metal:block>
@@ -390,7 +396,7 @@ range       : [2000, 2049]
         <tal:block condition="nothing">
           <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title">
-              <label for="repeat:bool"
+              <label for="repeat:bool"  id="repeat:bool"
                 i18n:translate="cpscalendar_label_repeat_title">
                 Repeat
               </label>
@@ -453,7 +459,7 @@ range       : [2000, 2049]
             </label>
           </metal:block>
           <metal:block fill-slot="content">
-            <select name="status"
+            <select name="status" id="status"
             tal:define="myid python:here.getCalendar().id;
                         mystatus here/getMyStatus">
             <option tal:repeat="status python:['confirmed', 'tentative', 'decline']"
@@ -474,7 +480,7 @@ range       : [2000, 2049]
             </label>
           </metal:block>
           <metal:block fill-slot="content">
-            <textarea name="comment" cols="40" rows="4"></textarea>
+            <textarea name="comment" id="comment" cols="40" rows="4"></textarea>
           </metal:block>
         </metal:block>
       </metal:block>
