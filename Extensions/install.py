@@ -225,10 +225,7 @@ def update(self):
 
     # loading po files
     for lang in languages:
-        if lang == 'en':
-            po_filename = 'locale.pot'
-        else:
-            po_filename = lang + '.po'
+        po_filename = lang + '.po'
         pr("   importing %s file" % po_filename)
         po_path = os.path.join(i18n_path, po_filename)
         try:
@@ -245,12 +242,12 @@ def update(self):
     if portalhas('translation_service'):
         translation_service = portal.translation_service
 
-        # how to test which domain is define in translation_service?
         try:
-            translation_service.cpscalendar
-        except AttributeError, cpscalendar:
-            translation_service.manage_addDomainInfo(calendar_catalog_id,
-                                                     'Localizer/'+calendar_catalog_id)
+            if getattr(translation_service, calendar_catalog_id, None) == None:
+                translation_service.manage_addDomainInfo(calendar_catalog_id,
+                                                         'Localizer/'+calendar_catalog_id)
+        except:
+            pass
         pr("   cpscalendar domain set to Localizer/cpscalendar")
 
         pr(" Reindexing catalog")
