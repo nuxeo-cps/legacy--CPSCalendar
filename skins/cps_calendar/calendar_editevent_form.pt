@@ -28,6 +28,7 @@
                          submit_value python:create and str('_button_create_') or str('_button_modify_');
                          editevent python:create or here.canEditThisEvent();
                          title python:create and str('_(document)_Untitled_') or here.title;
+                         description python:create and str('') or here.description;
                          location python:(not create) and here.location or '';
                          event_status python:create and 'unconfirmed' or here.event_status;
                          all_day python:(create and [request.form.get('all_day')] or [here.all_day])[0];
@@ -208,6 +209,7 @@
                      tal:attributes="href string:javascript:open_interval_selector(${a_start}, ${a_end}, 0, 0, 96)">
                     <img border="0"
                          tal:attributes="src string:${portal_url}/interval_selector_icon.png" /></a>
+
                   <tal:block condition="nothing">
                     (<tal:block content="python:str('_cal_Day_long%s' % (to_date.dow(), ))"
                                 i18n:translate="" />
@@ -216,6 +218,7 @@
                                 i18n:translate="" />
                     <tal:block replace="to_date_year" />)
                   </tal:block>
+
                 </h3>
               </tal:block>
             </metal:block>
@@ -279,6 +282,7 @@
               </table>
             </metal:block>
           </metal:block>
+
           <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_transparent_">
@@ -302,6 +306,17 @@
               </select>
             </metal:block>
           </metal:block>
+
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
+            <metal:block fill-slot="title"
+                         i18n:translate="cpscalendar_description">
+              Description
+            </metal:block>
+            <metal:block fill-slot="content">
+              <input name="location" size="40" tal:attributes="value description" />
+            </metal:block>
+          </metal:block>
+
           <tal:block condition="nothing">
           <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
@@ -331,6 +346,7 @@
             </metal:block>
           </metal:block>
           </tal:block>
+
         </metal:block>
       </metal:block>
       <input type="submit"
