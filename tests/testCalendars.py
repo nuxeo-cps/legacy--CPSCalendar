@@ -120,6 +120,9 @@ class TestCalendar(CPSCalendarTestCase):
         self.assertEquals(event.getCalendar(), self.calendar)
         self.assertEquals(event.getCalendarUser(), 'root')
 
+        assert event.getEventDict() # Too complex to test
+        self.assertEquals(event.getAttendeesDict(), {})
+
         # Test event's view and forms
         self.portal.REQUEST.SESSION = {}
         assert event.calendar_event_view()
@@ -128,6 +131,14 @@ class TestCalendar(CPSCalendarTestCase):
         # XXX: Are these method really called ?
         #assert event.getOrganizerCalendar()
         #assert event.setMyStatus('decline')
+
+        # Play with status
+        # XXX: move this to a ne test later
+        event.setEventStatus('cancelled')
+        self.assertEquals(event.event_status, 'cancelled')
+        self.assert_(event.isdirty)
+        self.assertEquals(self.calendar.getDeclinedCancelledEvents(),
+                          {'cancelled': ('event',), 'declined': ()})
 
     def testView(self):
         self.portal.REQUEST.SESSION = {}
