@@ -505,7 +505,9 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         # Make slots
         slots = []
         events_desc = []
-        #import pdb;pdb.set_trace()
+        MIN_HEIGHT = 50 # The minimum display height of an event.
+
+
         while slot_start.lessThan(end_time):
             slot_end = slot_start+1
             slots.append((slot_start, slot_end))
@@ -521,6 +523,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                                  to_time_hour,
                                  to_time_minute)
             freetimes = [VirtualEvent(start_time, stop_time)]
+
             for calendar in calendars:
                 events = calendar.getEvents(slot_start, slot_end)
                 for event in events:
@@ -561,9 +564,9 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 desc['event'] = event
                 desc['start'] = event.from_date
                 diff = (int(event.to_date) - int(event.from_date))/60
-                if diff < 50:
-                    accumulator += 50 - diff
-                    diff = 50 # The minimum display height.
+                if diff < MIN_HEIGHT:
+                    accumulator += MIN_HEIGHT - diff
+                    diff = MIN_HEIGHT # The minimum display height.
                 desc['height'] = diff
                 slot_events.append(desc)
                 # And go on the the next event:
