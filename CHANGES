@@ -7,6 +7,7 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - A bug in the Calendar upgrade of pending events was fixed. (#1383)
+- Re-added the document field.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
