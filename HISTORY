@@ -33,9 +33,6 @@ Bug fixes:
 - The Directory search for users is now limited to only include those users
   who have the View permission on the calendar, to speed up the search with
   large LDAP directories.
-- An intermittent session problem which caused the attendees to be dropped
-  when creating a meeting was maybe fixed. (As it is intermittent, it's hard
-  to be sure).
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
