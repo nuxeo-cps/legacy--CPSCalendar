@@ -747,7 +747,7 @@ class Calendar(CPSBaseFolder):
                 for k, v in dict.items():
                     if merged.has_key(k):
                         merged[k] = merged[k] + list(v)
-                    else:
+                    elif v:
                         merged[k] = list(v)
             # groups
             if hasattr(object, '__ac_local_group_roles__'):
@@ -757,7 +757,7 @@ class Calendar(CPSBaseFolder):
                     k = 'group:'+k
                     if merged.has_key(k):
                         merged[k] = merged[k] + list(v)
-                    else:
+                    elif v:
                         merged[k] = list(v)
             # end groups
             parent = aq_parent(object)
