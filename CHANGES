@@ -8,6 +8,7 @@ Bug fixes:
 ~~~~~~~~~~
 - The default for search fields now include groups.
 - The default day was always today, even if you clicked on a specific day.
+- A validation button in the meeting form had the wrong label.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Added a test for the mail notification.
