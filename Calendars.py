@@ -160,6 +160,15 @@ class Calendars(Workgroup):
             info['status'] = 'unconfirmed'
         return info
 
+    security.declareProtected('Access contents information', 'get')
+    def get(self, name, default=None):
+        """
+        """
+        try:
+            return self[name]
+        except KeyError:
+            return default
+
     def __getitem__(self, name):
         try:
             ob = Workgroup.__getitem__(self, name)
