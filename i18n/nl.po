@@ -642,7 +642,7 @@ msgstr "Transparent"
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_legend_transparent"
-msgstr "Transparent events mean that you're not busy during this event."
+msgstr "(Transparent events mean that you're not busy during this event.)"
 
 #.   <a href="calendar_printable_view">
 #.         Printable view

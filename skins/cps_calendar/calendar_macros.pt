@@ -9,16 +9,16 @@
 
 <!-- ============================================================ -->
 <metal:block define-macro="form_property">
-  <tal:block define="form_pos form_pos|nothing">
-    <tr>
-      <td valign="top" width="100" class="formMeta">
-    <metal:block define-slot="title">Field name</metal:block>
-      </td>
-      <td valign="middle">
-    <metal:block define-slot="content">Field content</metal:block>
-      </td>
-    </tr>
-  </tal:block>
+  <tr>
+    <td valign="top" width="100">
+      <div class="label">
+        <metal:block define-slot="title">Field name</metal:block>
+      </div>
+    </td>
+    <td valign="middle">
+      <metal:block define-slot="content">Field content</metal:block>
+    </td>
+  </tr>
 </metal:block>
 
 
@@ -47,6 +47,9 @@
              category event/category|nothing;">
     <metal:block use-macro="here/calendar_macros/macros/form">
       <metal:block fill-slot="content">
+
+    <h1 tal:content="title">Title</h1>
+
     <tal:block condition="organizer">
       <metal:block use-macro="here/calendar_macros/macros/form_property">
         <metal:block fill-slot="title"
@@ -59,28 +62,18 @@
         </metal:block>
       </metal:block>
     </tal:block>
-    <metal:block use-macro="here/calendar_macros/macros/form_property">
-      <metal:block fill-slot="title"
-               i18n:translate="cpscalendar_label_title">
-        Title
-      </metal:block>
-      <metal:block fill-slot="content"
-                   tal:content="title">
-        title
-      </metal:block>
-    </metal:block>
+
     <metal:block use-macro="here/calendar_macros/macros/form_property">
       <metal:block fill-slot="title"
                    i18n:translate="cpscalendar_label_date">
         Date
       </metal:block>
       <metal:block fill-slot="content">
-        <strong>
         <tal:block condition="not:all_day">
           <span tal:replace="from_date_string" /><br>
-          <span i18n:translate="cpscalendar_label_from_hour">at</span>
+          <span i18n:translate="cpscalendar_label_from_hour">from</span>
           <span tal:replace="python:from_date.strftime(' %H:%M')" />
-          <span i18n:translate="cpscalendar_label_to_hour">at</span>
+          <span i18n:translate="cpscalendar_label_to_hour">to</span>
           <span tal:replace="python:to_date.strftime(' %H:%M')" />
         </tal:block>
         <tal:block condition="all_day">
@@ -94,9 +87,9 @@
           <span i18n:translate="cpscalendar_label_at_(hour)">at</span>
           <span tal:replace="python:to_date.strftime(' %H:%M')" />
         </tal:block>
-        </strong>
       </metal:block>
     </metal:block>
+
     <tal:block condition="location">
       <metal:block use-macro="here/calendar_macros/macros/form_property">
         <metal:block fill-slot="title"
@@ -108,6 +101,7 @@
         </metal:block>
       </metal:block>
     </tal:block>
+
     <metal:block use-macro="here/calendar_macros/macros/form_property">
       <metal:block fill-slot="title"
                i18n:translate="cpscalendar_label_eventstatus">
@@ -117,8 +111,8 @@
        <span tal:content="string:cpscalendar_option_status_${event_status}"
              i18n:translate="">status</span>
       </metal:block>
-
     </metal:block>
+
     <tal:block condition="attendees">
       <metal:block use-macro="here/calendar_macros/macros/form_property">
         <metal:block fill-slot="title"
@@ -138,6 +132,7 @@
         </metal:block>
       </metal:block>
     </tal:block>
+
     <tal:block condition="category">
       <metal:block use-macro="here/calendar_macros/macros/form_property">
         <metal:block fill-slot="title"
@@ -152,6 +147,7 @@
         </metal:block>
       </metal:block>
     </tal:block>
+
     <metal:block use-macro="here/calendar_macros/macros/form_property">
       <metal:block fill-slot="title"
                i18n:translate="cpscalendar_label_transparent">
@@ -167,19 +163,17 @@
         </p>
       </metal:block>
     </metal:block>
+
     <metal:block use-macro="here/calendar_macros/macros/form_property">
       <metal:block fill-slot="title"
                i18n:translate="cpscalendar_label_description">
         Description
       </metal:block>
-        <metal:block fill-slot="content">
-          <p>
-        <textarea rows="6" cols="40" disabled="disabled"
-              name="description"
-              tal:content="description">description</textarea>
-          </p>
-        </metal:block>
+      <metal:block fill-slot="content">
+        <p tal:content="description">Description</p>
+      </metal:block>
     </metal:block>
+
       </metal:block>
     </metal:block>
   </tal:block>

@@ -638,7 +638,7 @@ msgstr "Transparent"
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_legend_transparent"
-msgstr "Un événement transparent est un événement durant lequel vous êtes disponible"
+msgstr "(Un événement transparent est un événement durant lequel vous êtes disponible.)"
 
 #.   <a href="calendar_printable_view">
 #.         Printable view
