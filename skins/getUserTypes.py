@@ -16,4 +16,9 @@ return [
         'title': '_cal_Ressource_',
         'plural_title': '_cal_Ressources_',
     },
+    {
+        'id': 'events_show',
+        'title': "_cal_Events_show_",
+        'plural_title': "_cal_Events_shows_",
+    }
 ]

@@ -6,7 +6,8 @@ all_calendars = here.objectIds()
 mtool = context.portal_membership
 mcat = context.portal_messages
 
-calendars = { 'private': [], 'others': [], 'rooms': [], 'ressources': [] }
+calendars = { 'private': [], 'others': [], 'rooms': [], 'ressources': [],
+    'events_shows': [] }
 isAnon = mtool.isAnonymousUser()
 user_id = mtool.getAuthenticatedMember().getUserName()
 has_private = 0
@@ -30,6 +31,8 @@ for calid in all_calendars:
         type = 'others'
     elif cal.usertype == 'room':
         type = 'rooms'
+    elif cal.usertype == 'events_show':
+        type = 'events_shows'
     else:
         type = 'ressources'
     calendars[type].append({

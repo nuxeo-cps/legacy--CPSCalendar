@@ -1,26 +1,35 @@
 <metal:block define-macro="day">
-  <a
-    tal:define="
-    prev_day python:int(viewed_day-1);"
-    tal:attributes="
-    href string:${here_url}?viewed_day=${prev_day}">
-    &lt;&lt;
-  </a>
-  <a
-    tal:define="
-      today python:int(DateTime());"
-    tal:attributes="
-      href string:${here_url}?viewed_day=${today}"
-    tal:content="python:mcat('_cal_Today_')">
-    Today
-  </a>
-  <a
-    tal:define="
-    next_day python:int(viewed_day+1);"
-    tal:attributes="
-    href string:${here_url}?viewed_day=${next_day}">
-    &gt;&gt;
-  </a>
+  <tal:block
+    condition="show_nav|python:1">
+    [<a href="calendar_printable_view"
+      target="_new"
+      tal:content="python:mcat('_cal_Printable_view_')">
+      Printable view
+    </a>]
+    <br />
+    <a
+      tal:define="
+      prev_day python:int(viewed_day-1);"
+      tal:attributes="
+      href string:${here_url}?viewed_day=${prev_day}">
+      &lt;&lt;
+    </a>
+    <a
+      tal:define="
+        today python:int(DateTime());"
+      tal:attributes="
+        href string:${here_url}?viewed_day=${today}"
+      tal:content="python:mcat('_cal_Today_')">
+      Today
+    </a>
+    <a
+      tal:define="
+      next_day python:int(viewed_day+1);"
+      tal:attributes="
+      href string:${here_url}?viewed_day=${next_day}">
+      &gt;&gt;
+    </a>
+  </tal:block>
   <table cellspacing="0" cellpadding="0" border="1">
     <tr>
       <td>
@@ -171,28 +180,37 @@
 </metal:block>
 
 <metal:block define-macro="week">
-  <a
-    tal:define="
-    prev_week python:int(viewed_day-7);"
-    tal:attributes="
-    href string:${here_url}?viewed_day=${prev_week}">
-    &lt;&lt;
-  </a>
-  <a
-    tal:define="
-      today python:int(DateTime());"
-    tal:attributes="
-      href string:${here_url}?viewed_day=${today}"
-    tal:content="python:mcat('_cal_Today_')">
-    Today
-  </a>
-  <a
-    tal:define="
-    next_week python:int(viewed_day+7);"
-    tal:attributes="
-    href string:${here_url}?viewed_day=${next_week}">
-    &gt;&gt;
-  </a>
+  <tal:block
+    condition="show_nav|python:1">
+    [<a href="calendar_printable_view"
+      target="_new"
+      tal:content="python:mcat('_cal_Printable_view_')">
+      Printable view
+    </a>]
+    <br />
+    <a
+      tal:define="
+      prev_week python:int(viewed_day-7);"
+      tal:attributes="
+      href string:${here_url}?viewed_day=${prev_week}">
+      &lt;&lt;
+    </a>
+    <a
+      tal:define="
+        today python:int(DateTime());"
+      tal:attributes="
+        href string:${here_url}?viewed_day=${today}"
+      tal:content="python:mcat('_cal_Today_')">
+      Today
+    </a>
+    <a
+      tal:define="
+      next_week python:int(viewed_day+7);"
+      tal:attributes="
+      href string:${here_url}?viewed_day=${next_week}">
+      &gt;&gt;
+    </a>
+  </tal:block>
   <table cellspacing="0" cellpadding="0" border="1">
     <tr>
       <td>
@@ -229,14 +247,22 @@
             </td>
             <tal:block repeat="col line">
               <td
+                tal:define="colspan col/colspan"
                 tal:attributes="
-                colspan python:col['colspan'] > 1 and col['colspan'] or nothing;
+                colspan python:colspan> 1 and colspan or nothing;
                 bgcolor python:col['event'] and '#DDDDDD'">
                 <tal:block condition="nocall:col/event">
                   <a
-                    tal:define="event nocall:col/event"
-                    tal:attributes="href event/absolute_url"
-                    tal:content="event/title_or_id" />
+                    tal:define="
+                      event nocall:col/event;
+                      title event/title_or_id;
+                      max_chars python:10*colspan-1;
+                      disp_title python:len(title)>max_chars and
+                        title[:max_chars].strip()+'...' or title"
+                      tal:attributes="
+                        href event/absolute_url;
+                        title title;"
+                        tal:content="disp_title" />
                 </tal:block>
               </td>
             </tal:block>
@@ -262,9 +288,9 @@
             </td>
             <tal:block repeat="col hour_block_cols">
               <td width="59" height="360" valign="top"
-                tal:define="odd repeat/col/odd"
+                tal:define="even repeat/col/even"
                 tal:attributes="
-                background python:odd and back_td2 or back_td1">
+                background python:even and back_td2 or back_td1">
                 <tal:block repeat="block col">
                   <tal:block
                     define="conf_len python:len(block)">
@@ -349,28 +375,37 @@
       month python:mcat('_cal_Month%s' % (viewed_day.month(), ));
       year viewed_day/year"
     tal:content="string:${month} ${year}" />
-  <a
-    tal:define="
-    prev_month python:int(start_time-5);"
-    tal:attributes="
-    href string:${here_url}?viewed_day=${prev_month}">
-    &lt;&lt;
-  </a>
-  <a
-    tal:define="
-      today python:int(DateTime());"
-    tal:attributes="
-    href string:${here_url}?viewed_day=${today}"
-    tal:content="python:mcat('_cal_Today_')">
-    Today
-  </a>
-  <a
-    tal:define="
-    next_month python:int(end_time+7);"
-    tal:attributes="
-    href string:${here_url}?viewed_day=${next_month}">
-    &gt;&gt;
-  </a>
+  <tal:block
+    condition="show_nav|python:1">
+    [<a href="calendar_printable_view"
+      target="_new"
+      tal:content="python:mcat('_cal_Printable_view_')">
+      Printable view
+    </a>]
+    <br />
+    <a
+      tal:define="
+      prev_month python:int(start_time-5);"
+      tal:attributes="
+      href string:${here_url}?viewed_day=${prev_month}">
+      &lt;&lt;
+    </a>
+    <a
+      tal:define="
+        today python:int(DateTime());"
+      tal:attributes="
+      href string:${here_url}?viewed_day=${today}"
+      tal:content="python:mcat('_cal_Today_')">
+      Today
+    </a>
+    <a
+      tal:define="
+      next_month python:int(end_time+7);"
+      tal:attributes="
+      href string:${here_url}?viewed_day=${next_month}">
+      &gt;&gt;
+    </a>
+  </tal:block>
   <table width="445" cellspacing="0" cellpadding="0" border="1">
     <tr>
       <td>
@@ -394,9 +429,9 @@
                         day_height events/day_height;
                         slot events/slot;
                         go_day python:int(slot[0]);
-                        odd repeat/events/odd"
+                        even repeat/events/even"
                     tal:attributes="
-                      bgcolor python:odd and '#EEEEFF' or nothing
+                      bgcolor python:even and '#DDDDFF' or '#EEEEFF'
                       ">
                       <a tal:attributes="
                         href string:${here_url}?disp=day&viewed_day=${go_day}">
@@ -413,14 +448,22 @@
             <tr tal:repeat="day_line line/day_lines">
               <tal:block repeat="col day_line">
                 <td
+                  tal:define="colspan col/colspan"
                   tal:attributes="
-                  colspan python:col['colspan'] > 1 and col['colspan'] or nothing;
+                  colspan python:colspan > 1 and colspan or nothing;
                   bgcolor python:col['event'] and '#DDDDDD'">
                   <tal:block condition="nocall:col/event">
                     <a
-                      tal:define="event nocall:col/event"
-                      tal:attributes="href event/absolute_url"
-                      tal:content="event/title_or_id" />
+                      tal:define="
+                      event nocall:col/event;
+                      title event/title_or_id;
+                      max_chars python:10*colspan-1;
+                      disp_title python:len(title)>max_chars and
+                        title[:max_chars].strip()+'...' or title"
+                      tal:attributes="
+                      href event/absolute_url;
+                      title title"
+                      tal:content="disp_title" />
                   </tal:block>
                 </td>
               </tal:block>
@@ -438,9 +481,9 @@
                   <td width="59" valign="top"
                     tal:define="
                         day_height events/day_height;
-                        odd repeat/events/odd"
+                        even repeat/events/even"
                     tal:attributes="
-                      bgcolor python:odd and '#EEEEFF' or nothing
+                      bgcolor python:even and '#DDDDFF' or nothing
                       ">
                     <li tal:repeat="hour_event events/hour">
                       <a
