@@ -19,4 +19,4 @@ Bug fixes:
   removed several bugs.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- Add getHomeCalendarObject and getHomeCalendarUrl method in CalendarTool
