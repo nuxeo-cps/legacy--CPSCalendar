@@ -41,6 +41,7 @@
              attendees event/attendees;
              transparent event/transparent|nothing;
              transparent python:not not transparent;
+             document_link event/document|nothing;
              cat_infos here/calendar_categories;
              categories cat_infos/categories;
              cat_default cat_infos/default;
@@ -175,14 +176,15 @@
       </metal:block>
     </metal:block>
 
+    <tal:block condition="nothing" content="string:removed until it works">
     <metal:block use-macro="here/calendar_macros/macros/form_property">
       <metal:block fill-slot="title"
                i18n:translate="cpscalendar_label_document_link">
         Document link
       </metal:block>
       <metal:block fill-slot="content">
-        <p tal:condition="here/document"
-           tal:define="docurl string:${here/portal_url/getPortalPath}/${here/document};
+        <p tal:condition="document_link"
+           tal:define="docurl string:${here/portal_url/getPortalPath}/${document_link};
            doc python:here.restrictedTraverse(docurl, None);">
           <a tal:condition="doc"
              tal:attributes="href doc/absolute_url"
@@ -190,6 +192,7 @@
         </p>
       </metal:block>
     </metal:block>
+    </tal:block>
 
         <metal:block use-macro="here/calendar_macros/macros/form_property">
       <metal:block fill-slot="title"

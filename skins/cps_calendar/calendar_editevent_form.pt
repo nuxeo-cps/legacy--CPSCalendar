@@ -77,7 +77,7 @@
       <span i18n:translate="cpscalendar_description_modify_event">
         Modify the event
       </span>
-      «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
+      « <span tal:replace="here/title_or_id">Title</span> »
     </tal:block>
   </h1>
 
@@ -124,7 +124,7 @@
         </metal:block>
 
         <metal:block use-macro="here/calendar_macros/macros/form_property">
-          <metal:block fill-slot="title">&nbsp;</metal:block>
+          <metal:block fill-slot="title"> </metal:block>
           <metal:block fill-slot="content">
             <input type="submit" i18n:attributes="value" value="cpscalendar_label_change_type"
                    name="calendar_editevent_form:method" />
@@ -333,6 +333,7 @@ range       : [2000, 2049]
           </metal:block>
        </metal:block>
 
+       <tal:block condition="nothing" content="string:removed until it works">
        <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
                i18n:translate="cpscalendar_label_document_link">
@@ -350,6 +351,7 @@ range       : [2000, 2049]
             </p>
           </metal:block>
         </metal:block>
+        </tal:block>
        
        <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
@@ -375,7 +377,7 @@ range       : [2000, 2049]
               <input name="repeat:bool" type="checkbox" />
               <br/>
               <span i18n:translate="cpscalendar_label_repeat_times">Number of times</span>
-              &nbsp;&nbsp;
+                
               <input type="string" name="cpscalendar_form_repeat_times:int"
                   size="2" maxlength="2" value="0"/>
               <br/><input type="radio" name="repeat_frequency" value="daily"/>
@@ -386,9 +388,9 @@ range       : [2000, 2049]
               <span i18n:translate="cpscalendar_label_repeat_monthly">Monthly</span>
               <br/><input type="radio" name="repeat_frequency" value="X_days"/>
               <span i18n:translate="cpscalendar_label_repeat_every_X_days_begin">Every</span>
-              &nbsp;
+               
               <input type="string" name="cal_every_X_num:int"
-                size="3" maxlength="3" value="0"/>&nbsp;
+                size="3" maxlength="3" value="0"/> 
               <span i18n:translate="cpscalendar_label_repeat_every_X_days_end">days</span>
             </metal:block>
           </metal:block>
