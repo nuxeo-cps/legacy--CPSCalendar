@@ -1,0 +1,212 @@
+<tal:block define="
+    first request/form/first;
+    last request/form/last;
+    should_validate python:1;
+">
+<html metal:use-macro="here/selector_template/macros/master">
+<metal:block fill-slot="script_plus">
+<script language="JavaScript" type="text/javascript"
+  tal:content="string:
+var first = ${first}
+var last = ${last}
+var start = ${request/form/start}
+var end = ${request/form/end}
+var interval = ${request/form/force_interval}
+">
+</script>
+<script language="JavaScript" type="text/javascript">
+<!--
+N = (document.all) ? 0 : 1;
+var ob;
+var rows = new Array(last-first)
+
+for(var i=first; i<last; i++) {
+    a  = new Array(7)
+    a[0] = String(i)
+    b = i % 4
+    a[1] = (i - b) / 4
+    a[5] = b == 0 ? '#AAAAAA' : '#DDDDDD'
+    a[6] = b == 0 ? '#555555' : '#888888'
+    b = b * 15
+    a[2] = b < 10 ? "0" + b : b
+    b = (i+1) % 4
+    c = (i + 1 - b)/4
+    a[3] = c == 24 ? 0 : c
+    b = b * 15
+    a[4] = b < 10 ? "0" + b : b
+    rows[i-first] = a
+}
+
+function initAll() {
+    setElements()
+    return true
+}
+
+function setElements() {
+    bstart = start
+    bend = end
+    if(bstart>bend) {
+        tp = bstart
+        bstart = bend
+        bend = tp
+    }
+    astart = String(bstart)
+    aend = String(bend)
+    colorize = false
+    for(var i=first ; i<last ; i++) {
+        el_id = rows[i-first][0]
+        if(el_id == astart) {
+            colorize = true
+        }
+        el = document.getElementById(el_id)
+        if(colorize == true) {
+            el.style.backgroundColor = rows[i-first][6]
+        } else {
+            el.style.backgroundColor = rows[i-first][5]
+        }
+        if(el_id == aend) {
+            colorize = false
+        }
+    }
+    document.getElementById('start_h').innerHTML = rows[bstart-first][1]
+    document.getElementById('start_m').innerHTML = rows[bstart-first][2]
+    document.getElementById('end_h').innerHTML = rows[bend-first][3]
+    document.getElementById('end_m').innerHTML = rows[bend-first][4]
+}
+
+function forceInterval() {
+    if(start + interval >= last) {
+        start = last - interval
+        end = last - 1
+    } else {
+        end = start + interval - 1
+    }
+}
+
+function validateSelector() {
+    if(end<start) {
+      x = start
+      start = end
+      end = x
+    }
+    startM = start % 4
+    startH = (start - startM) / 4
+    startM = startM * 15
+    end = end + 1
+    endM = end % 4
+    endH = (end - endM) / 4
+    endM = endM * 15
+    if(endH == 24) {
+        endH = 0
+    }
+    opener.document.getElementById('from_date_hour').value = startH
+    opener.document.getElementById('from_date_minute').value = startM
+    opener.document.getElementById('from_date_hour_s').innerHTML = document.getElementById('start_h').innerHTML
+    opener.document.getElementById('from_date_minute_s').innerHTML = document.getElementById('start_m').innerHTML
+    if(interval == 0) {
+        opener.document.getElementById('to_date_hour').value = endH
+        opener.document.getElementById('to_date_minute').value = endM
+        opener.document.getElementById('to_date_hour_s').innerHTML = document.getElementById('end_h').innerHTML
+        opener.document.getElementById('to_date_minute_s').innerHTML = document.getElementById('end_m').innerHTML
+    }
+    window.close()
+}
+
+function MD(e) {
+    if (N) {
+        ob = e.target
+    }
+    else {
+        ob = event.srcElement
+    }
+    a_start = ob.id
+    if(a_start && a_start != 'start_h' && a_start != 'end_h' && a_start != 'start_m' && a_start != 'end_m') {
+        start = eval(a_start)
+        if(interval != 0) {
+            forceInterval()
+        } else {
+            end = start
+        }
+        setElements()
+        return false
+    } else {
+        ob = null
+    }
+}
+function MM(e) {
+    if (ob) {
+        if (N) {
+            ob = e.target
+        }
+        else {
+            ob = event.srcElement
+        }
+        if(ob.id && ob.id != 'start' && ob.id != 'end') {
+            if(interval != 0) {
+                start = eval(ob.id)
+                forceInterval()
+            } else {
+                end = eval(ob.id)
+            }
+            setElements()
+        }
+    }
+}
+function MU() {
+    ob = null;
+}
+
+if (N) {
+    document.captureEvents(Event.MOUSEDOWN | Event.MOUSEMOVE | Event.MOUSEUP);
+}
+document.onmousedown = MD;
+document.onmousemove = MM;
+document.onmouseup = MU;
+//  Fin-->
+</script>
+</metal:block>
+<metal:block fill-slot="main">
+<table cellspacing="0" cellpadding="0" border="1"
+  tal:define="h00 python:mcat('_cal_hour_sep_')+'00'">
+  <tr>
+    <td colspan="2">
+      <table cellspacing="0" cellpadding="0" width="135" border="0">
+        <tr tal:repeat="i python:range(-2, first)">
+          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"
+            tal:content="python:str((i+2)/4 % 24) + h00">
+            13h00
+          </td>
+          <td height="3" bgcolor="white" width="100">
+          </td>
+        </tr>
+        <tr tal:repeat="i python:range(first, last)">
+          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"
+            tal:content="python:str((i+2)/4 % 24) + h00">
+            13h00
+          </td>
+          <td height="3" bgcolor="#DDDDDD" width="100"
+            tal:attributes="id i">
+          </td>
+        </tr>
+        <tr tal:repeat="i python:range(last, 98)">
+          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"
+            tal:content="python:str((i+2)/4 % 24) + h00">
+            13h00
+          </td>
+          <td height="3" bgcolor="white" width="100">
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td class="centered">
+      <span id="start_h"></span><tal:block replace="python:mcat('_cal_hour_sep_')" /><span id="start_m"></span>
+      -
+      <span id="end_h"></span><tal:block replace="python:mcat('_cal_hour_sep_')" /><span id="end_m"></span>
+    </td>
+  </tr>
+</table>
+</metal:block>
+</html>
+</tal:block>

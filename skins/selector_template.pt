@@ -42,11 +42,9 @@
   </metal:block>
 </head>
 
-<body bgcolor="white"
-  tal:define="button_value python:mcat('_button_close_this_window_');">
-  <input type="button" onClick="window.close()"
-    tal:attributes="value button_value" />
-  <table cellspacing="0" border="1" cellpadding="5" width="210">
+<body bgcolor="white" onLoad="initAll()"
+  tal:define="button_value python:mcat('_button_cancel_');">
+  <table cellspacing="0" border="1" cellpadding="5" width="100%">
     <tr>
       <td>
         <metal:block define-slot="main">
@@ -55,6 +53,9 @@
       </td>
     </tr>
   </table>
+  <input type="button" onClick="validateSelector()"
+    tal:attributes="value python:mcat('_button_validate_')"
+    tal:condition="should_validate|nothing" />
   <input type="button" onClick="window.close()"
     tal:attributes="value button_value" />
 </body>

@@ -1,11 +1,17 @@
-##parameters=title, location, from_date, duration, event_status, category, cal_ids=[], REQUEST=None
+##parameters=title, location, from_date, from_date_hour, from_date_minute, duration, event_status, category, cal_ids=[], REQUEST=None
 
 here = context.this()
 
 attendees = [here.getAttendeeInfo(id, 1) for id in cal_ids]
 
-to_date = from_date + duration*60
 from_date = DateTime(from_date)
+from_date_day = from_date.day()
+from_date_month = from_date.month()
+from_date_year = from_date.year()
+from_date = DateTime(from_date_year, from_date_month, from_date_day,
+    from_date_hour, from_date_minute)
+
+to_date = int(from_date) + duration*60
 to_date = DateTime(to_date)
 
 from random import randrange

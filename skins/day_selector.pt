@@ -14,29 +14,33 @@
   var date_disp_id = "${request/form/date_disp_id}"
   var other_input = "${request/form/other_input}"
   ' />
-    <script language="JavaScript" type="text/javascript"><!--
-      function set_input(element_id, value) {
-        a = opener.document.getElementById(element_id)
-        a.value = value
-      }
+<script language="JavaScript" type="text/javascript"><!--
+function initAll() {
+  return true
+}
 
-      function set_form(element_id, day, month, year) {
-        set_input(element_id + '_day', day)  
-        set_input(element_id + '_month', month)  
-        set_input(element_id + '_year', year)  
-      }
+function set_input(element_id, value) {
+  a = opener.document.getElementById(element_id)
+  a.value = value
+}
 
-      function select_day(day, month, year, day_disp) {
-        set_form(input_id, day, month, year)
-        b = opener.document.getElementById(date_disp_id)
-        b.innerHTML = day_disp
-        if(other_input) {
-          set_form(other_input, day, month, year)
-        }
-        window.close()
-      }
-      -->
-  </script>
+function set_form(element_id, day, month, year) {
+  set_input(element_id + '_day', day)  
+  set_input(element_id + '_month', month)  
+  set_input(element_id + '_year', year)  
+}
+
+function select_day(day, month, year, day_disp) {
+  set_form(input_id, day, month, year)
+  b = opener.document.getElementById(date_disp_id)
+  b.innerHTML = day_disp
+  if(other_input) {
+    set_form(other_input, day, month, year)
+  }
+  window.close()
+}
+-->
+</script>
 </metal:block>
 
 <metal:block fill-slot="main">

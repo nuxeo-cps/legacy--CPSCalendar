@@ -1,6 +1,11 @@
 <tal:block define="global current_action string:meeting" />
 <html metal:use-macro="here/main_template/macros/master">
 
+<metal:block fill-slot="script_plus"
+    tal:content="structure here/day_selector_popup.js">
+    Day selector popup script
+</metal:block>
+
 <metal:block fill-slot="header">
   <tal:block
     tal:replace="python:mcat('_Create_a_new_Event_')">
@@ -18,7 +23,6 @@
     duration_hour meeting_infos/duration_hour;
     duration_minute meeting_infos/duration_minute;
     duration meeting_infos/duration;
-    from_oks meeting_infos/from_oks;
     cat_info here/calendar_categories;
     categories cat_info/categories;
     cat_default cat_info/default;
@@ -53,22 +57,50 @@
                 <tal:block replace="python:mcat('_cal_Month%s' % (from_date.month(), ))" />
                 <tal:block replace="python:from_date.year()" />
               </h3>
-              <tal:block replace="python:mcat('_cal_At_')">
-                At
-              </tal:block>
-              <select name="from_date:int">
-                <option tal:repeat="choice from_oks"
-                  tal:attributes="value choice/time"
-                  tal:content="string:${choice/hour}${hour_sep}${choice/minute}">
-                  10:00
-                </option>
-              </select>
-              <tal:block replace="
-                python:mcat('_(Duration: %sh %sm)_') % (duration_hour, duration_minute)">
-                (Duration: 1 hour 0 minute)
-              </tal:block>
-              <input type="hidden" name="duration:int"
-                tal:attributes="value duration" />
+              <h3
+                tal:define="
+                  from_date meeting_infos/from_date;
+                  from_date_hour meeting_infos/from_date_hour;
+                  from_date_minute meeting_infos/from_date_minute;
+                  start python:from_date_hour*4 + from_date_minute/15;
+                  duration meeting_infos/duration;
+                  duration_q python:duration/15;
+                  end python:start+duration_q-1;
+                  window meeting_infos/window;
+                  first start;
+                  last python:start+(window/15);
+                  ">
+                <input type="hidden" name="duration:int"
+                  tal:attributes="value duration" />
+                <input type="hidden" name="from_date:int"
+                  tal:attributes="value python:int(from_date)" />
+                <input type="hidden" id="from_date_hour"
+                  name="from_date_hour:int"
+                  tal:attributes="value from_date_hour" />
+                <input type="hidden" id="from_date_minute"
+                  name="from_date_minute:int"
+                  tal:attributes="value from_date_minute" />
+                <tal:block replace="python:mcat('_cal_At_')">
+                  At
+                </tal:block>
+                <span id="from_date_hour_s"
+                  tal:content="from_date_hour">
+                  10
+                </span><tal:block replace="python:mcat('_cal_hour_sep_')" /><span id="from_date_minute_s"
+                  tal:content="python:from_date_minute and from_date_minute or '00'">
+                  00
+                </span>
+                <tal:block replace="
+                  python:mcat('_(Duration: %sh %sm)_') % (duration_hour, duration_minute)">
+                  (Duration: 1 hour 0 minute)
+                </tal:block>
+                <a
+                  tal:attributes="
+                    href string:javascript:open_interval_selector(${start}, ${end}, ${duration_q}, ${first}, ${last})">
+                  <img border="0"
+                    tal:attributes="src string:${portal_url}/interval_selector_icon.png" />
+                </a>
+              </h3>
             </metal:block>
           </metal:block>
           <metal:block use-macro="here/main_widgets/macros/form_property">

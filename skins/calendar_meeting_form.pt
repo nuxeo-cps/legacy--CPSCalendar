@@ -81,19 +81,19 @@
       tal:content="python:mcat('_Select the time interval you want for your meeting:')">
       Select the time interval you want for your meeting:
     </h2>
-    <p>
-      <input type="hidden" id="from_date_day" name="from_date_day"
-        tal:attributes="value from_date_day" />
-      <input type="hidden" id="from_date_month" name="from_date_month"
-        tal:attributes="value from_date_month" />
-      <input type="hidden" id="from_date_year" name="from_date_year"
-        tal:attributes="value from_date_year" />
-      <input type="hidden" id="to_date_day" name="to_date_day"
-        tal:attributes="value to_date_day" />
-      <input type="hidden" id="to_date_month" name="to_date_month"
-        tal:attributes="value to_date_month" />
-      <input type="hidden" id="to_date_year" name="to_date_year"
-        tal:attributes="value to_date_year" />
+    <input type="hidden" id="from_date_day" name="from_date_day"
+      tal:attributes="value from_date_day" />
+    <input type="hidden" id="from_date_month" name="from_date_month"
+      tal:attributes="value from_date_month" />
+    <input type="hidden" id="from_date_year" name="from_date_year"
+      tal:attributes="value from_date_year" />
+    <input type="hidden" id="to_date_day" name="to_date_day"
+      tal:attributes="value to_date_day" />
+    <input type="hidden" id="to_date_month" name="to_date_month"
+      tal:attributes="value to_date_month" />
+    <input type="hidden" id="to_date_year" name="to_date_year"
+      tal:attributes="value to_date_year" />
+    <h3>
       <tal:block replace="python:mcat('_cal_date_From_')">
         From
       </tal:block>
@@ -110,9 +110,11 @@
         tal:attributes="
           href string:javascript:open_day_selector('${int_date}', 'from_date', 'from_date_string', '')
           ">
-        <img tal:attributes="src string:${portal_url}/day_selector_icon.png" />
+        <img border="0"
+          tal:attributes="src string:${portal_url}/day_selector_icon.png" />
       </a>
-      <br />
+    </h3>
+    <h3>
       <tal:block replace="python:mcat('_cal_date_To_')">
         To
       </tal:block>
@@ -129,35 +131,43 @@
         tal:attributes="
           href string:javascript:open_day_selector('${int_date}', 'to_date', 'to_date_string', '')
           ">
-        <img tal:attributes="src string:${portal_url}/day_selector_icon.png" />
+        <img border="0"
+          tal:attributes="src string:${portal_url}/day_selector_icon.png" />
       </a>
-    </p>
-    <p>
+    </h3>
+    <input type="hidden" name="from_date_hour" id="from_date_hour"
+      tal:attributes="value from_date_hour" />
+    <input type="hidden" name="from_date_minute"
+      id="from_date_minute"
+      tal:attributes="value from_date_minute" />
+    <input type="hidden" name="to_date_hour" id="to_date_hour"
+      tal:attributes="value to_date_hour" />
+    <input type="hidden" name="to_date_minute"
+      id="to_date_minute"
+      tal:attributes="value to_date_minute" />
+    <h3>
       <tal:block replace="python:mcat('_cal_Between_')">
         Between
       </tal:block>
-      <select name="from_date_hour">
-        <option tal:repeat="hour python:range(0,24)"
-          tal:content="hour" tal:attributes="value hour;
-            selected python:hour == from_date_hour or nothing" />
-      </select><tal:block replace="python:mcat('_cal_hour_sep_')">:</tal:block><select name="from_date_minute">
-        <option tal:repeat="minute python:range(0,60,15)"
-          tal:content="minute" tal:attributes="value minute;
-            selected python:minute == from_date_minute or nothing" />
-      </select>
+      <span id="from_date_hour_s"
+        tal:content="from_date_hour">10</span><tal:block replace="python:mcat('_cal_hour_sep_')">:</tal:block><span id="from_date_minute_s"
+        tal:content="python:from_date_minute == 0 and '00' or from_date_minute">10</span>
       <tal:block replace="python:mcat('_(Between date)_and_')">
         and
       </tal:block>
-      <select name="to_date_hour">
-        <option tal:repeat="hour python:range(0,24)"
-          tal:content="hour" tal:attributes="value hour;
-            selected python:hour == to_date_hour or nothing" />
-      </select><tal:block replace="python:mcat('_cal_hour_sep_')">:</tal:block><select name="to_date_minute">
-        <option tal:repeat="minute python:range(0,60,15)"
-          tal:content="minute" tal:attributes="value minute;
-            selected python:minute == to_date_minute or nothing" />
-      </select>
-    </p>
+      <span id="to_date_hour_s"
+        tal:content="to_date_hour">10</span><tal:block replace="python:mcat('_cal_hour_sep_')">:</tal:block><span id="to_date_minute_s"
+        tal:content="python:to_date_minute == 0 and '00' or to_date_minute">10</span>
+      <a
+        tal:define="
+          a_start python:from_date_hour*4+from_date_minute/15;
+          a_end python:to_date_hour*4+to_date_minute/15-1;"
+        tal:attributes="
+        href string:javascript:open_interval_selector(${a_start}, ${a_end}, 0, 0, 96)">
+        <img border="0"
+          tal:attributes="src string:${portal_url}/interval_selector_icon.png" />
+      </a>
+    </h3>
     <h2
       tal:content="python:mcat('_Select the desired duration of your meeting:')">
       Select the desired duration of your meeting:
