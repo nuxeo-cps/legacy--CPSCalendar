@@ -104,14 +104,11 @@ class TestCalendar(CPSCalendarTestCase):
         self.assertEquals(self.calendar.getPendingEventsCount(), 0)
         self.assertEquals(self.calendar.getPendingEvents(), ())
 
-    def _addEvent(self):
+    def testEventDesc(self):
         from_date = DateTime(2003, 1, 1, 12, 0)
         to_date = DateTime(2003, 1, 1, 14, 0)
         self.calendar.invokeFactory(
             'Event', 'event', from_date=from_date, to_date=to_date)
-
-    def testEventDesc(self):
-        self._addEvent()
         event = self.calendar.event
 
         start_time = DateTime(2003, 1, 1, 10, 0)
@@ -134,6 +131,17 @@ class TestCalendar(CPSCalendarTestCase):
             start_time=DateTime(2003, 1, 1, 10, 0),
             end_time=DateTime(2003, 1, 1, 16, 0), disp='month')
         # XXX: add some test for desc here
+
+
+    def _addEvent(self):
+        # Create an event today so that it appears in the views for today
+        now = DateTime()
+        year, month, day = now.year(), now.month(), now.day()
+        from_date = DateTime(year, month, day, 12, 0)
+        to_date = DateTime(year, month, day, 14, 0)
+        self.calendar.invokeFactory(
+            'Event', 'event', title="xxyyzz", 
+            from_date=from_date, to_date=to_date)
 
     def testAccessors(self):
         self._addEvent()
@@ -171,7 +179,7 @@ class TestCalendar(CPSCalendarTestCase):
         self.assertEquals(self.calendar.getDeclinedCanceledEvents(),
                           {'canceled': ('event',), 'declined': ()})
 
-    def testViews(self):
+    def testViewsWithEmptyCalendar(self):
         self.portal.REQUEST.SESSION = {}
         assert self.calendar.calendar_view(disp="week")
         assert self.calendar.calendar_view(disp="month")
@@ -181,6 +189,29 @@ class TestCalendar(CPSCalendarTestCase):
         assert self.calendar.calendar_export()
         assert getattr(self.calendar, 'calendar.ics')()
 
+    def testViewsWithOneEvent(self):
+        self._addEvent()
+        event = self.calendar.event
+
+        self.portal.REQUEST.SESSION = {}
+        assert self.calendar.calendar_view(disp="week").count("xxyyzz")
+        assert self.calendar.calendar_view(disp="month").count("xxyyzz")
+        assert self.calendar.calendar_view(disp="day").count("xxyyzz")
+        assert self.calendar.calendar_addevent_form()
+        assert self.calendar.calendar_display_form()
+        assert self.calendar.calendar_export()
+        assert getattr(self.calendar, 'calendar.ics')().count("xxyyzz")
+
+    def testMeeting(self):
+        self._addEvent()
+        event = self.calendar.event
+
+        # No attendees so nothing should happen
+        event.updateAttendeesCalendars()
+
+        # TODO: add some attendees
+
+        
 
 def test_suite():
     suite = unittest.TestSuite()
