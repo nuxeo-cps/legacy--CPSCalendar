@@ -3,7 +3,7 @@
 here = context.this()
 
 mcat = context.Localizer.cpscalendar
-all_calendars = context.portal_cpscalendar.getCalendarObjects()
+all_calendars = context.portal_cpscalendar.listCalendars()
 mtool = context.portal_membership
 
 calendars = { 'private': [], 'others': [], 'rooms': [], 'ressources': [],
@@ -49,7 +49,7 @@ if not has_private and not isAnon:
     calendars['private'].append({
         'id': user_id,
         'title': 'user_id',
-        'url': context.mtool.getHomeUrl(id=user.id),
+        'url': mtool.getHomeUrl(id=user.id)+'/calendar',
         'pending': 0,
     })
 
