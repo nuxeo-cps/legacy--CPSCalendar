@@ -12,6 +12,8 @@ Bug fixes:
 - The navigation tabs moved only one day even in the week and month
   view. (Mantis #469)
 - The print view is now deprecated in favour for the standard print view.
+- One of the meeting helper screens had two buttons that did nothing.
+  It also did not have a proper heading.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
