@@ -129,32 +129,38 @@
       </a>
       </strong>
     </p>
-    <input type="hidden" name="from_date_hour" id="from_date_hour"
-      tal:attributes="value from_date_hour" />
-    <input type="hidden" name="from_date_minute"
-      id="from_date_minute"
-      tal:attributes="value from_date_minute" />
-    <input type="hidden" name="to_date_hour" id="to_date_hour"
-      tal:attributes="value to_date_hour" />
-    <input type="hidden" name="to_date_minute"
-      id="to_date_minute"
-      tal:attributes="value to_date_minute" />
     <p>
       <strong>
       <span i18n:translate="cpscalendar_label_between">
         Between
       </span>
-      <span id="from_date_hour_s" tal:content="from_date_hour">10</span><span i18n:translate="cpscalendar_hour_sep">:</span><span id="from_date_minute_s" tal:content="python:from_date_minute == 0 and '00' or from_date_minute">10</span>
-      <span i18n:translate="cpscalendar_label_and">
-        and
-      </span>
-      <span id="to_date_hour_s" tal:content="to_date_hour">10</span><span i18n:translate="cpscalendar_hour_sep">:</span><span id="to_date_minute_s" tal:content="python:to_date_minute == 0 and '00' or to_date_minute">10</span>
-      <a tal:define="a_start python:from_date_hour*4+from_date_minute/15;
-                     a_end python:to_date_hour*4+to_date_minute/15-1;"
-         tal:attributes="href string:javascript:open_interval_selector(${a_start}, ${a_end}, 0, 0, 96)">
-        <img border="0"
-             tal:attributes="src string:${portal_url}/interval_selector_icon.png" />
-      </a>
+      <select name="from_date_hour:int">
+        <option tal:repeat="hour python:range(0,24)"
+                tal:content="hour"
+                tal:attributes="value hour;
+                                selected python:hour == 8 or nothing;" />
+      </select>
+      <span i18n:translate="cpscalendar_hour_sep">:</span>
+      <select name="from_date_minute:int">
+        <option tal:repeat="minute python:range(0,60,5)"
+                tal:content="minute"
+                tal:attributes="value minute;
+                                selected python:minute == 0 or nothing;" />
+      </select>
+      <span i18n:translate="cpscalendar_label_and">and</span>
+      <select name="to_date_hour:int">
+        <option tal:repeat="hour python:range(0,24)"
+                tal:content="hour"
+                tal:attributes="value hour;
+                                selected python:hour == 19 or nothing;" />
+      </select>
+      <span i18n:translate="cpscalendar_hour_sep">:</span>
+      <select name="to_date_minute:int">
+        <option tal:repeat="minute python:range(0,60,5)"
+                tal:content="minute"
+                tal:attributes="value minute;
+                                selected python:minute == 0 or nothing;" />
+      </select>
       </strong>
     </p>
     <p>
@@ -167,7 +173,9 @@
         <option tal:repeat="hour python:range(0,24)"
           tal:content="hour" tal:attributes="value hour;
             selected python:hour == 1 or nothing" />
-      </select> <span i18n:translate="cpscalendar_hour_sep">:</span> <select name="duration_minute:int">
+      </select>
+      <span i18n:translate="cpscalendar_hour_sep">:</span>
+      <select name="duration_minute:int">
         <option tal:repeat="minute python:range(0,60,15)"
           tal:content="minute" tal:attributes="value minute;
             selected python:minute == 0 or nothing" />
