@@ -9,7 +9,7 @@
     <base tal:attributes="href string:${here/absolute_url}/" />
   </metal:block>
   <link rel="stylesheet" type="text/css"
-    tal:attributes="href string:${portal_url}/main_stylesheet.css" />        
+    tal:attributes="href string:${portal_url}/main_stylesheet.css" />
   <metal:block define-slot="css_slot" tal:replace="nothing">
     <!-- additional styles -->
   </metal:block>
@@ -29,12 +29,12 @@
     </tr>
   </table>
   <input type="button" onClick="validateSelector()"
-         tal:attributes="value python:str('_button_validate_')"
+         value="button_validate"
          tal:condition="should_validate|nothing"
-         i18n:attributes="value" />
+         i18n:attributes="" />
   <input type="button" onClick="window.close()"
-         tal:attributes="value python:str('_button_cancel_');"
-         i18n:attributes="value" />
+         value="button_cancel"
+         i18n:attributes="" />
 </body>
 
 </html>

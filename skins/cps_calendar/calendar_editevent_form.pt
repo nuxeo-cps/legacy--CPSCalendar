@@ -8,19 +8,6 @@
   Day selector popup script
 </metal:block>
 
-<metal:block fill-slot="head_slot">
-  <tal:block condition="create"
-    i18n:translate="cpscalendar_description_create_a_new_event">
-    Create a new event
-  </tal:block>
-  <tal:block condition="not:create">
-    <span i18n:translate="cpscalendar_description_modify_event">
-      Modify the event
-    </span>
-    «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
-  </tal:block>
-</metal:block>
-
 <metal:block fill-slot="main"
 	     tal:define="portal_url here/portal_url;
 			 disp_infos python:here.calendar_getDispInformations(request);
@@ -72,6 +59,19 @@
 	<hr>
       </tal:block>
 
+     <h1>
+       <tal:block condition="create"
+                  i18n:translate="cpscalendar_description_create_a_new_event">
+         Create a new event
+       </tal:block>
+       <tal:block condition="not:create">
+         <span i18n:translate="cpscalendar_description_modify_event">
+           Modify the event
+         </span>
+         «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
+       </tal:block>
+     </h1>
+
   <tal:block condition="not:editevent" define="event nocall:here">
     <metal:block use-macro="here/calendar_macros/macros/event_view" />
   </tal:block>
@@ -80,6 +80,7 @@
 
     <form action="calendar_addevent_form" id="eventTypeForm"
 	  tal:condition="create">
+      <p>
       <input type="hidden" name="all_day:int"
 	     tal:attributes="value not:all_day">
       <input type="hidden" name="from_date:int"
@@ -91,9 +92,11 @@
 			     all_day and str('cpscalendar_create_all_day_event')
 			     or str('cpscalendar_create_not_all_day_event')"
 	     i18n:attributes="value">
+      </p>
     </form>
     <form action="calendar_changeeventtype" id="eventTypeForm"
 	  tal:condition="not:create">
+      <p>
       <input type="hidden" name="all_day:int"
 	     tal:attributes="value not:all_day">
       <input type="submit"
@@ -101,6 +104,7 @@
 			     all_day and str('cpscalendar_change_event_to_not_all_day')
 			     or str('cpscalendar_change_event_to_all_day')"
 	     i18n:attributes="value">
+      </p>
     </form>
 
     <form tal:attributes="action action" method="POST">
@@ -150,10 +154,10 @@
 		  From the
 		</span>
 		<span id="from_date_string">
-		  <tal:block content="python:str('_cal_Day_long%s' % (from_date.dow(), ))"
+		  <tal:block content="python:str('label_day_long%s' % (from_date.dow(), ))"
 			     i18n:translate="" />
 		  <tal:block replace="from_date_day" />
-		  <tal:block content="python:str('_cal_Month%s' % (from_date_month, ))"
+		  <tal:block content="python:str('label_month_long%s' % (from_date_month, ))"
 			     i18n:translate="" />
 		  <tal:block replace="from_date_year" />
 		</span>
@@ -166,10 +170,10 @@
 		  to
 		</span>
 		<span id="to_date_string">
-		  <tal:block content="python:str('_cal_Day_long%s' % (to_date.dow(), ))"
+		  <tal:block content="python:str('label_day_long%s' % (to_date.dow(), ))"
 			     i18n:translate="" />
 		  <tal:block replace="to_date_day" />
-		  <tal:block content="python:str('_cal_Month%s' % (to_date_month, ))"
+		  <tal:block content="python:str('label_month_long%s' % (to_date_month, ))"
 			     i18n:translate="" />
 		  <tal:block replace="to_date_year" />
 		</span>
@@ -197,10 +201,10 @@
 		       tal:attributes="value to_date_year" />
 
 		  <span id="date_string">
-		    <tal:block content="python:str('_cal_Day_long%s' % (from_date.dow(), ))"
+		    <tal:block content="python:str('label_day_long%s' % (from_date.dow(), ))"
 			       i18n:translate="" />
 		    <tal:block replace="from_date_day" />
-		    <tal:block content="python:str('_cal_Month%s' % (from_date_month, ))"
+		    <tal:block content="python:str('label_month_long%s' % (from_date_month, ))"
 			       i18n:translate="" />
 		    <tal:block replace="from_date_year" />
 		  </span>
@@ -241,10 +245,10 @@
 			 tal:attributes="src string:${portal_url}/interval_selector_icon.png" /></a>
 
 		  <tal:block condition="nothing">
-		    (<tal:block content="python:str('_cal_Day_long%s' % (to_date.dow(), ))"
+		    (<tal:block content="python:str('label_day_long%s' % (to_date.dow(), ))"
 				i18n:translate="" />
 		    <tal:block replace="to_date_day" />
-		    <tal:block content="python:str('_cal_Month%s' % (to_date_month, ))"
+		    <tal:block content="python:str('label_month_long%s' % (to_date_month, ))"
 				i18n:translate="" />
 		    <tal:block replace="to_date_year" />)
 		  </tal:block>
@@ -389,14 +393,14 @@
     </form>
   </tal:block>
   <form action="setMyStatus" tal:condition="python:not (create or editevent)">
-    <h3 i18n:translate="_Modify status for this event:">
-      Modify status for this event:
-    </h3>
+    <strong i18n:translate="cpscalendar_label_modify_event_status">
+      Modify status for this event
+    </strong>:
     <metal:block use-macro="here/calendar_macros/macros/form">
       <metal:block fill-slot="content">
 	<metal:block use-macro="here/calendar_macros/macros/form_property">
 	  <metal:block fill-slot="title"
-		       i18n:translate="_cal_prop_status_">
+		       i18n:translate="cpscalendar_label_status">
 	    Status
 	  </metal:block>
 	  <metal:block fill-slot="content">
@@ -415,7 +419,7 @@
 	</metal:block>
 	<metal:block use-macro="here/calendar_macros/macros/form_property">
 	  <metal:block fill-slot="title"
-	    i18n:translate="_prop_comment_">
+	    i18n:translate="cpscalendar_label_comment">
 	    Comment
 	  </metal:block>
 	  <metal:block fill-slot="content">

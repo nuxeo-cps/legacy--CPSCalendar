@@ -68,10 +68,10 @@
                   <td>
                   </td>
                   <th>
-                    <span tal:content="python:str('_cal_Day_long%s' % date.dow())"
+                    <span tal:content="python:str('label_day_long%s' % date.dow())"
                           i18n:translate="" />
                     <span tal:replace="string:${date/day}"/> 
-                    <span tal:content="python:str('_cal_Month%s' % date.month())"
+                    <span tal:content="python:str('label_month_long%s' % date.month())"
                           i18n:translate="" />
                     <span tal:replace="string:${date/year}"/>
                   </th>
@@ -311,10 +311,10 @@
                         go_day python:int(date);"
                       tal:attributes="
                         href string:${here_url}?disp=day&viewed_day=${go_day}">
-                        <span tal:content="python:str('_cal_Day%s' % i)"
+                        <span tal:content="python:str('label_day%s' % i)"
                               i18n:translate="" />
                         <span tal:replace="string:${date/day}"/> 
-                        <span tal:content="python:str('_cal_Mo%s' % date.month())"
+                        <span tal:content="python:str('label_month%s' % date.month())"
                               i18n:translate="" />
                       </a>
                   </th>
@@ -488,7 +488,7 @@
                      global my_id member/getMemberId;
     "/>
   <span class="calTitle">
-    <span tal:content="python:str('_cal_Month%s' % (viewed_day.month(), ))" 
+    <span tal:content="python:str('label_month_long%s' % (viewed_day.month(), ))" 
           i18n:translate="" />
     <span tal:replace="viewed_day/year"/>
   </span>
@@ -551,7 +551,7 @@
                 <tr>
                   <th
                     tal:repeat="i python:[1,2,3,4,5,6,0]">
-                    <span tal:content="python:str('_cal_Day_long%s' % (i, ))"
+                    <span tal:content="python:str('label_day_long%s' % (i, ))"
                           i18n:translate="">week day</span>
                   </th>
                 </tr>

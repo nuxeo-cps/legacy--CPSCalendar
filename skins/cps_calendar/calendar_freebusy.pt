@@ -81,10 +81,10 @@
                   <th width="59"
                       tal:repeat="i python:range(slot_start, slot_end)">
                     <tal:block define="date python:slots[i][0];">
-                      <span tal:content="python:str('_cal_Day%s' % (i - slot_start + first_dow - 1))"
+                      <span tal:content="python:str('label_day%s' % (i - slot_start + first_dow - 1))"
                             i18n:translate="" />
                       <span tal:replace="string:${date/day}"/> 
-                      <span tal:content="python:str('_cal_Month%s' % date.month())"
+                      <span tal:content="python:str('label_month_long%s' % date.month())"
                             i18n:translate="" />
                     </tal:block>
                   </th>

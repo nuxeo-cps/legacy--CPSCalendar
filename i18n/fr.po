@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2003-10-10 17:21default\n"
-"PO-Revision-Date: 2003-10-10 16:55+0200\n"
+"POT-Creation-Date: 2003-10-10 18:06default\n"
+"PO-Revision-Date: 2003-10-10 18:01+0200\n"
 "Last-Translator: DARCHE <madarche@nuxeio.com>\n"
 "Language-Team: Francais <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -126,13 +126,6 @@ msgstr ""
 msgid "[1]"
 msgstr ""
 
-#.   <h3>
-#.         Modify status for this event:
-#.       </h3>
-#: from ../skins/cps_calendar/calendar_editevent_form.pt
-msgid "_Modify status for this event:"
-msgstr ""
-
 #.   <span>
 #.         Modify
 #.       </span>
@@ -152,20 +145,6 @@ msgstr ""
 #.     </span>
 #: from ../skins/cps_calendar/calendar_pending_events.pt
 msgid "_cal_Pending_events_for_"
-msgstr ""
-
-#.   <metal:block fill-slot="title">
-#.   	    Status
-#.   	  </metal:block>
-#: from ../skins/cps_calendar/calendar_editevent_form.pt
-msgid "_cal_prop_status_"
-msgstr ""
-
-#.   <metal:block fill-slot="title">
-#.   	    Comment
-#.   	  </metal:block>
-#: from ../skins/cps_calendar/calendar_editevent_form.pt
-msgid "_prop_comment_"
 msgstr ""
 
 #.   <metal:block fill-slot="title">
@@ -479,6 +458,9 @@ msgstr "Catégorie"
 #.               Comment
 #.             </block>
 #.   <metal:block fill-slot="title">
+#.   	    Comment
+#.   	  </metal:block>
+#.   <metal:block fill-slot="title">
 #.   		      Comment
 #.   		    </metal:block>
 #.   <metal:block fill-slot="title">
@@ -486,6 +468,7 @@ msgstr "Catégorie"
 #.   	      </metal:block>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_confirmdelevents.pt
+#: ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_comment"
 msgstr "Commentaire"
@@ -601,6 +584,14 @@ msgstr "Lieu"
 msgid "cpscalendar_label_m"
 msgstr "min"
 
+#.   <strong>
+#.         Modify status for this event
+#.       </strong>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#, fuzzy
+msgid "cpscalendar_label_modify_event_status"
+msgstr "Statut"
+
 #.   <metal:block fill-slot="title">
 #.   	      Organizer
 #.   	    </metal:block>
@@ -654,6 +645,14 @@ msgstr "de manière hebdomadaire"
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_sender"
 msgstr "Émetteur"
+
+#.   <metal:block fill-slot="title">
+#.   	    Status
+#.   	  </metal:block>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#, fuzzy
+msgid "cpscalendar_label_status"
+msgstr "à"
 
 #.   <metal:block fill-slot="title">
 #.   		      Title
@@ -908,7 +907,7 @@ msgstr ""
 msgid "status"
 msgstr ""
 
-#.   <span content="python:str('_cal_Day_long%s' % (i, ))">week day</span>
+#.   <span content="python:str('label_day_long%s' % (i, ))">week day</span>
 #: from ../skins/cps_calendar/calendar_view_macros.pt
 msgid "week day"
 msgstr ""
@@ -955,6 +954,121 @@ msgstr "Travail"
 
 msgid "cpscalendar_category_other"
 msgstr "Autre"
+
+msgid "label_month0"
+msgstr "Jan"
+
+msgid "label_month1"
+msgstr "Fev"
+
+msgid "label_month2"
+msgstr "Mar"
+
+msgid "label_month3"
+msgstr "Avr"
+
+msgid "label_month4"
+msgstr "Mai"
+
+msgid "label_month5"
+msgstr "Jui"
+
+msgid "label_month6"
+msgstr "Juil"
+
+msgid "label_month7"
+msgstr "Aou"
+
+msgid "label_month8"
+msgstr "Sep"
+
+msgid "label_month9"
+msgstr "Oct"
+
+msgid "label_month10"
+msgstr "Nov"
+
+msgid "label_month11"
+msgstr "Dec"
+
+msgid "label_month_long0"
+msgstr "Janvier"
+
+msgid "label_month_long1"
+msgstr "Février"
+
+msgid "label_month_long2"
+msgstr "Mars"
+
+msgid "label_month_long3"
+msgstr "Avril"
+
+#, fuzzy
+msgid "label_month_long4"
+msgstr "Mai"
+
+msgid "label_month_long5"
+msgstr "Juin"
+
+msgid "label_month_long6"
+msgstr "Juillet"
+
+msgid "label_month_long7"
+msgstr "Août"
+
+msgid "label_month_long8"
+msgstr "Septembre"
+
+msgid "label_month_long9"
+msgstr "Octobre"
+
+msgid "label_month_long10"
+msgstr "Novembre"
+
+msgid "label_month_long11"
+msgstr "Décembre"
+
+msgid "label_day0"
+msgstr "Lu"
+
+msgid "label_day1"
+msgstr "Ma"
+
+msgid "label_day2"
+msgstr "Me"
+
+msgid "label_day3"
+msgstr "Je"
+
+msgid "label_day4"
+msgstr "Ve"
+
+msgid "label_day5"
+msgstr "Sa"
+
+msgid "label_day6"
+msgstr "Di"
+
+msgid "label_day_long0"
+msgstr "Lun"
+
+msgid "label_day_long1"
+msgstr "Mar"
+
+msgid "label_day_long2"
+msgstr "Mer"
+
+msgid "label_day_long3"
+msgstr "Jeu"
+
+msgid "label_day_long4"
+msgstr "Ven"
+
+msgid "label_day_long5"
+msgstr "Sam"
+
+msgid "label_day_long6"
+msgstr "Dim"
 
 #, fuzzy
 #~ msgid "action_attendees"

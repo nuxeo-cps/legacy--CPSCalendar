@@ -91,10 +91,10 @@
         From
       </span>
       <span id="from_date_string">
-        <tal:block content="python:str('_cal_Day_long%s' % (from_date.dow(), ))"
+        <tal:block content="python:str('label_day_long%s' % (from_date.dow(), ))"
                    i18n:translate="" />
         <tal:block replace="from_date_day" />
-        <tal:block content="python:str('_cal_Month%s' % (from_date_month, ))"
+        <tal:block content="python:str('label_month_long%s' % (from_date_month, ))"
                    i18n:translate="" />
         <tal:block replace="from_date_year" />
       </span>
@@ -109,10 +109,10 @@
         To
       </span>
       <span id="to_date_string">
-        <tal:block content="python:str('_cal_Day_long%s' % (to_date.dow(), ))"
+        <tal:block content="python:str('label_day_long%s' % (to_date.dow(), ))"
                    i18n:translate="" />
         <tal:block replace="to_date_day" />
-        <tal:block content="python:str('_cal_Month%s' % (to_date_month, ))"
+        <tal:block content="python:str('label_month_long%s' % (to_date_month, ))"
                    i18n:translate="" />
         <tal:block replace="to_date_year" />
       </span>
