@@ -15,7 +15,7 @@
     The end hour you specified was earlier than the start hour. Do you want
     to extend the event to the next day?
   </p>
-  <form action="calendar_addevent">
+  <form action="calendar_addevent" method="POST">
     <input type="hidden" name="from_date"
            tal:attributes="value python:here.getDateStr(options['from_date'], fmt='short')" />
     <input type="hidden" name="from_date_hour"

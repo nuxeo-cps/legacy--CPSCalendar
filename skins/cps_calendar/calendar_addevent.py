@@ -4,20 +4,22 @@
 from random import randrange
 locale = context.Localizer.default.get_selected_language()
 
-if REQUEST:
+if REQUEST is not None:
     kw.update(REQUEST.form)
 
 here = context.this()
-id = str(int(DateTime()))+str(randrange(1000,10000))+('-%s' % (here.id))
+id = str(int(DateTime())) + str(randrange(1000, 10000)) + ('-%s' % (here.id))
 
 all_day = kw.get('all_day')
 from_date_day = kw.get('from_date_day')
 
 from_date_string = kw.get('from_date','')
 if locale in ('en', 'hu', ):
-    from_date_month, from_date_day, from_date_year = from_date_string.split('/')
+    from_date_month, from_date_day, from_date_year = \
+        from_date_string.split('/')
 else:
-    from_date_day, from_date_month, from_date_year = from_date_string.split('/')
+    from_date_day, from_date_month, from_date_year = \
+        from_date_string.split('/')
 
 # we are creating an event from a form
 from_date_day = int(from_date_day)
@@ -64,15 +66,15 @@ if all_day or from_date <= to_date:
     # TODO: add repeated event add manage
     here.invokeFactory('Event', id, **kw)
 
-    if REQUEST:
+    if REQUEST is not None:
         REQUEST.SESSION['calendar_viewed'] = from_date
         REQUEST.RESPONSE.redirect('%s/%s' % (here.absolute_url(), id))
     else:
         return id
 else:
-    # the date entries are incorrect (from_date > to_date).
+    # The date entries are incorrect (from_date > to_date)
     # in a not all_day event, so propose to extend the event
-    # to the next day
+    # to the next day.
     kw['from_date'] = to_date
     kw['from_date_hour'] = to_date_hour
     kw['from_date_minute'] = to_date_minute

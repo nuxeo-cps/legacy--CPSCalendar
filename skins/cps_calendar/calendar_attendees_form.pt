@@ -70,7 +70,7 @@
                              schema_dict dtool/getSchemaDict;
                              searchable_keys python:[key for key in searchable_keys if schema_dict[key].type == 'string'];">
             <tal:block condition="python: not searching">
-              <form method="post" action="calendar_attendees_form">
+              <form method="POST" action="calendar_attendees_form">
                 <p>
                   <span i18n:translate="cpscalendar_label_add_a_user_whose">
                     Add a user whose
@@ -97,7 +97,7 @@
                                  found python:search_param and dtool.searchEntry(**{search_param: search_term});
                                  found python:[member for member in found if member[dtool.entry_prop] != this_user]">
                 <tal:block condition="found">
-                  <form method="post" action="calendar_addattendee">
+                  <form method="POST" action="calendar_addattendee">
                     <p>
                       <span i18n:translate="cpscalendar_label_add_attendee">
                         Add
