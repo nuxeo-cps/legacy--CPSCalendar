@@ -1,49 +1,46 @@
 <tal:block define="current_action string:view">
   <html metal:use-macro="here/main_template/macros/master">
-
     <metal:block fill-slot="main" i18n:domain="cpscalendar">
-
       <tal:block define="event nocall:here">
 
-    <tal:block tal:condition="nothing">
-      <!-- Debug block that doesn't appear in the output -->
-      <tal:block define="
-        calendar_id here/id;
-        event_user_id python:event.getCalendarUser();
-        user python:here.portal_membership.getAuthenticatedMember();
-        user_id python:here.portal_membership
-                               .getAuthenticatedMember().getMemberId();
-        member_id member/getMemberId;
-        local_event1 python:user_id == event.getCalendarUser();
-        local_event2 python:member.getMemberId() == event.getCalendarUser();
-        event_type here/event_type;
-        from_date here/from_date;
-        to_date here/to_date;
-        ">
-        <hr>
-        <p>
-          calendar_id <tal:block tal:replace="calendar_id"/><br>
-          user <tal:block tal:replace="user"/><br>
-          user_id <tal:block tal:replace="user_id"/><br>
-          member_id <tal:block tal:replace="member_id"/><br>
-          event_user_id <tal:block tal:replace="event_user_id"/><br>
-          local_event1 ? <tal:block tal:replace="local_event1"/><br>
-          local_event2 ? <tal:block tal:replace="local_event2"/><br>
-          event_type <tal:block tal:replace="event_type"/><br>
-          from_date <tal:block tal:replace="from_date"/><br>
-          to_date <tal:block tal:replace="to_date"/><br>
+        <tal:block tal:condition="nothing">
+        <!-- Debug block that doesn't appear in the output -->
+          <tal:block define="
+            calendar_id here/id;
+            event_user_id python:event.getCalendarUser();
+            user python:here.portal_membership.getAuthenticatedMember();
+            user_id python:here.portal_membership
+                                .getAuthenticatedMember().getMemberId();
+            member_id member/getMemberId;
+            local_event1 python:user_id == event.getCalendarUser();
+            local_event2 python:member.getMemberId() == event.getCalendarUser();
+            event_type here/event_type;
+            from_date here/from_date;
+            to_date here/to_date;
+            ">
+            <hr>
+            <p>
+            calendar_id <tal:block tal:replace="calendar_id"/><br>
+            user <tal:block tal:replace="user"/><br>
+            user_id <tal:block tal:replace="user_id"/><br>
+            member_id <tal:block tal:replace="member_id"/><br>
+            event_user_id <tal:block tal:replace="event_user_id"/><br>
+            local_event1 ? <tal:block tal:replace="local_event1"/><br>
+            local_event2 ? <tal:block tal:replace="local_event2"/><br>
+            event_type <tal:block tal:replace="event_type"/><br>
+            from_date <tal:block tal:replace="from_date"/><br>
+            to_date <tal:block tal:replace="to_date"/><br>
             </p>
-        <hr>
+            <hr>
+          </tal:block>
+        </tal:block>
+        
+        <metal:block use-macro="here/calendar_macros/macros/event_view"/>
+
       </tal:block>
-    </tal:block>
-
-    <metal:block use-macro="here/calendar_macros/macros/event_view"/>
-
-      </tal:block>
-
+      
       <metal:block use-macro="here/calendar_macros/macros/notifyattendees" />
 
     </metal:block>
-
   </html>
 </tal:block>
