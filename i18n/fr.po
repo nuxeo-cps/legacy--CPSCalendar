@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2004-09-24 19:25default\n"
+"POT-Creation-Date: 2004-09-24 19:40default\n"
 "PO-Revision-Date: 2004-08-19 16:04+0200\n"
 "Last-Translator: Lennart Regebro <rgebro@nuxeo.com>\n"
 "Language-Team: \n"
@@ -95,6 +95,12 @@ msgstr "Vous avez ${pendings_count} requêtes en attente"
 msgid "You have pending requests for this event:"
 msgstr "Vous avez des demandes en attente pour cet événement:"
 
+#.   <h1>Calendar overview</h1>
+#: from ../skins/cps_calendar/calendar_overview.pt
+#, fuzzy
+msgid "action_calendar_overview"
+msgstr "Événements du jour"
+
 #.   <h1>Calendars supersposing</h1>
 #: from ../skins/cps_calendar/calendar_display_form.pt
 msgid "action_display"
@@ -103,11 +109,6 @@ msgstr ""
 #.   <h1>Export</h1>
 #: from ../skins/cps_calendar/calendar_export.pt
 msgid "action_export"
-msgstr ""
-
-#.   <h1>Calendar overview</h1>
-#: from ../skins/cps_calendar/calendar_overview.pt
-msgid "action_overview"
 msgstr ""
 
 #.   <input type="submit" value="button_cpscalendar_remove_all_attendees_who_declined" />
@@ -742,7 +743,7 @@ msgid "cpscalendar_message_comment_for_organizer"
 msgstr "Commentaire pour l'organisateur"
 
 #.   <span condition="editcals">
-#.         These are the calendars where you can create events
+#.         These are the calendars where you can create events:
 #.       </span>
 #: from ../skins/cps_calendar/calendar_overview.pt
 #, fuzzy

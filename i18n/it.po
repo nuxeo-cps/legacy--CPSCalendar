@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2004-09-24 19:25default\n"
+"POT-Creation-Date: 2004-09-24 19:40default\n"
 "PO-Revision-Date: 2004-05-10 15:04+0100\n"
 "Last-Translator: Paolo Dina <paolo@php3.it>\n"
 "Language-Team: \n"
@@ -115,6 +115,12 @@ msgstr "Hai ${pendings_count} richieste in attesa di valutazione."
 msgid "You have pending requests for this event:"
 msgstr ""
 
+#.   <h1>Calendar overview</h1>
+#: from ../skins/cps_calendar/calendar_overview.pt
+#, fuzzy
+msgid "action_calendar_overview"
+msgstr "Eventi del giorno"
+
 #.   <h1>Calendars supersposing</h1>
 #: from ../skins/cps_calendar/calendar_display_form.pt
 msgid "action_display"
@@ -123,11 +129,6 @@ msgstr ""
 #.   <h1>Export</h1>
 #: from ../skins/cps_calendar/calendar_export.pt
 msgid "action_export"
-msgstr ""
-
-#.   <h1>Calendar overview</h1>
-#: from ../skins/cps_calendar/calendar_overview.pt
-msgid "action_overview"
 msgstr ""
 
 #    <input type="submit" value="button_cpscalendar_remove_all_attendees_who_declined" />
@@ -1024,7 +1025,7 @@ msgstr "Organizer"
 #        Create a Calendar
 #      </block>
 #.   <span condition="editcals">
-#.         These are the calendars where you can create events
+#.         These are the calendars where you can create events:
 #.       </span>
 #: from ../skins/cps_calendar/calendar_overview.pt
 #, fuzzy
