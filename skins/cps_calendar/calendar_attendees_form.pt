@@ -65,7 +65,8 @@
           </li>
         </ul>
       </tal:block>
-      <tal:block condition="can_edit">
+      <tal:block condition="can_edit"
+                 define="addaction string:calendar_addattendee">
         <metal:block use-macro="here/calendar_macros/macros/searchform"
           tal:condition="python:type =='member'">
           the searchform

@@ -354,7 +354,7 @@
     searching python:request.get('role_submit', None);
     widgets here/portal_cpscalendar/getSearchWidgets;">
     <tal:block condition="python: not searching">
-      <form method="POST" action="calendar_attendees_form">
+      <form method="POST" tal:attributes="action here/REQUEST/URL0">
         <p>
           <span i18n:translate="cpscalendar_label_add_a_user_whose">
             Add a user whose
@@ -387,7 +387,7 @@
                          found python:search_param and dtool.searchEntries(**{search_param: search_term});
                          found python:[member for member in found if member != this_user]">
         <tal:block condition="found">
-          <form method="POST" action="calendar_addattendee">
+          <form method="POST" tal:attributes="action addaction">
             <p>
               <span i18n:translate="cpscalendar_label_add_attendee">
                 Add
