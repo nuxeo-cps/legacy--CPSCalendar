@@ -385,7 +385,7 @@
           <span i18n:translate="cpscalendar_label_add_a_user_whose">
             Add a user whose
           </span>
-          <select name="search_param">
+          <select name="search_param" tal:condition="python:len(widgets) > 1">
             <option value="nosearch"></option> 
             <tal:span repeat="widget widgets">
               <option tal:condition="python:'search' not in widget.hidden_layout_modes"
@@ -398,6 +398,16 @@
                 ></option>
             </tal:span>
           </select>
+          <tal:block condition="python:len(widgets) < 2"
+                     define="widget python:widgets[0]">
+            <span tal:condition="widget/is_i18n"
+                  i18n:domain="Default" i18n:translate=""
+                  tal:content="widget/label" />
+            <span tal:condition="not:widget/is_i18n"
+                  tal:content="widgets/label" />
+            <input type="hidden" name="search_param" 
+              tal:attributes="value python:widget.fields[0]" />
+          </tal:block>
           <span i18n:translate="cpscalendar_label_add_a_user_whose_is">
             is
           </span> :
