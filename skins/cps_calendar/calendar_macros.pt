@@ -351,19 +351,20 @@
 <!-- ============================================================ -->
 <metal:block define-macro="searchform" i18n:domain="cpscalendar">
   <tal:block define="
-    searching python:request.get('role_submit', None);
+    search_param python:request.get('search_param', 'nosearch');
+    searching python:search_param != 'nosearch';
     widgets here/portal_cpscalendar/getSearchWidgets;
     dtool here/portal_directories/members;
     caltool here/portal_cpscalendar;
     this_user here/getCalendarUser;
     ">
     <tal:block condition="python: not searching">
-      <form method="POST" tal:attributes="action here/REQUEST/URL0">
         <p>
           <span i18n:translate="cpscalendar_label_add_a_user_whose">
             Add a user whose
           </span>
           <select name="search_param">
+            <option value="nosearch"></option> 
             <tal:span repeat="widget widgets">
               <option tal:condition="python:'search' not in widget.hidden_layout_modes"
                       tal:attributes="value python:widget.getWidgetId()">
@@ -379,11 +380,11 @@
             is
           </span> :
           <input type="text" name="search_term" size="10">
-          <input class="mainbutton" type="submit" name="role_submit"
+          <input class="mainbutton" type="submit"
                  value="cpscalendar_button_search"
-                 i18n:attributes="value">
+                 i18n:attributes="value"
+                 tal:attributes="name python:searchaction+':method'">
         </p>
-      </form>
     </tal:block>
     <tal:block condition="searching">
       <tal:block define="search_param python: request.get('search_param', '');
@@ -391,7 +392,6 @@
                          found python:search_param and dtool.searchEntries(**{search_param: search_term});
                          found python:[member for member in found if member]">
         <tal:block condition="found">
-          <form method="POST" tal:attributes="action addaction">
             <p>
               <span i18n:translate="cpscalendar_label_add_attendee">
                 Add
@@ -413,9 +413,9 @@
               <br>
               <input class="mainbutton" type="submit"
                      value="cpscalendar_button_add"
-                     i18n:attributes="value">
+                     i18n:attributes="value"
+                     tal:attributes="name python:addaction+':method'">
             </p>
-          </form>
         </tal:block>
         <p tal:condition="python: not found"
            i18n:translate="cpscalendar_message_no_user_matching">
