@@ -203,7 +203,7 @@ class Calendar(CPSBaseFolder):
         kw = {}
         kw['title'] = title
         kw['description'] = description
-        self.uid = self.genUid()
+        #self.uid = self.genUid()
         CPSBaseFolder.__init__(self, id, **kw)
         self.usertype = usertype
 
