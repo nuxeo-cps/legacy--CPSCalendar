@@ -4,11 +4,11 @@
 """
 
 from Products.CPSInstaller.CPSInstaller import CPSInstaller
-from Products.CPSCore.CPSWorkflow import TRANSITION_INITIAL_CREATE
-from Products.CPSCore.CPSWorkflow import TRANSITION_ALLOWSUB_CREATE
-from Products.CPSCore.CPSWorkflow import TRANSITION_ALLOWSUB_DELETE
-from Products.CPSCore.CPSWorkflow import TRANSITION_ALLOWSUB_MOVE
-from Products.CPSCore.CPSWorkflow import TRANSITION_ALLOWSUB_COPY
+from Products.CPSWorkflow.transitions import TRANSITION_INITIAL_CREATE
+from Products.CPSWorkflow.transitions import TRANSITION_ALLOWSUB_CREATE
+from Products.CPSWorkflow.transitions import TRANSITION_ALLOWSUB_DELETE
+from Products.CPSWorkflow.transitions import TRANSITION_ALLOWSUB_MOVE
+from Products.CPSWorkflow.transitions import TRANSITION_ALLOWSUB_COPY
 from Products.CMFCore.permissions import View, ModifyPortalContent
 
 WebDavLockItem = 'WebDAV Lock items'
