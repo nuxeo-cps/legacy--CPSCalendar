@@ -1,0 +1,157 @@
+--------------------------------------------------
+CPSCalendar README
+--------------------------------------------------
+
+$Id$
+
+Summary:
+
+- Introduction
+- History & Bug fixes
+- Installation & upgrade
+- Features
+- Roles and permissions
+- Code overview
+
+--------------------------------------------------
+Introduction
+--------------------------------------------------
+
+CPSCalendar provides events managment, using calendars and events. Each user
+has access to its own personal calendar, and other calendars can be created in
+workspaces anywhere on the site.
+
+It is possible to create different sorts of events (private or public, confirmed
+or not,...), to specify attendees to an event, to superpose calendars,...
+
+See the 'Features' section below for more information.
+
+
+--------------------------------------------------
+History & Bug fixes
+--------------------------------------------------
+
+For history and bug fixes, please refer to the HISTORY file.
+
+
+--------------------------------------------------
+Installation & upgrade
+--------------------------------------------------
+
+For installation and upgrade information, please refer to the INSTALL file.
+
+
+--------------------------------------------------
+Features
+--------------------------------------------------
+
+Calendars
+---------
+
+Each user has access to its own personal calendar.
+
+Users can navigate through calendars by day, week and month. Each view gives
+access to a printable view. There is also a summary view of all the events of
+the week.
+
+It is possible to check when other users are available, using the shared
+calendars facility.
+
+It is also possible to add calendars in workspaces, and allow several users
+to add events to it.
+
+CPSCalendar provides an export feature using the iCalendar format. Other
+applications supporting this format will be able to import the exported events.
+
+
+Events
+------
+
+An event is defined using the following parameters:
+
+- Title
+
+- Event type:
+
+  o standard: specify a day, a starting hour and an ending hour.
+  o all day: specify a starting day and an ending day.
+  o recurring: specify the recurrency type, a starting day and hour, and an
+    ending day and hour.
+
+- Date: the date(s) and hour(s) to specify could chnage according to the event
+  type described above.
+
+- Location
+
+- Status:
+
+  o Unconfirmed: the user has not confirmed his/her participation to the event.
+  o Confirmed: the user has confirmed his/her participation to the event.
+  o Canceled:  the user has canceled his/her participation to the event.
+
+  The status is used for the system to decide if the user is available for
+  other events.
+
+- Category:
+
+  o Work: the event will be visible to other users.
+  o Private: the subject of the event will not be visible to other users, but
+    they will see that the user has plans for this period of time.
+
+- Transparent:
+
+  If the event is transparent, it means that the user is not busy during this
+  event, e.g. that this event is not very important :)
+  This option is used for the system to decide if the user is available for
+  other events.
+
+- Description: for complementary information.
+
+
+When an event has been created, it is possible to add attendees to it.
+Attendees are users of the site, and can confirm/unconfirm/cancel their
+participation to the event. They are notified when changes are made to the
+event.
+
+
+Meetings
+--------
+
+A meeting is an event.
+When adding a meeting, you have access to a search interface that allows you to
+specify attendees to the meeting, and chose a date for your event more easily:
+their personal calendars are checked to see when they are available.
+
+
+--------------------------------------------------
+Roles and permissions
+--------------------------------------------------
+
+Here is the mapping between roles and permissions on a calendar:
+- A manager of the calendar will be able to:
+  o view events
+  o edit events
+  o create events
+  o delete events
+  o manage events (XXX what does it mean ???)
+- A member of the calendar will be able to:
+  o view events
+  o edit events
+  o create events
+- A reader of the calendar will be able to:
+  o view events
+
+Calendars (and events) inherit the roles and permissions set on their folder
+container:
+- a workspace manager will be manager of the calendar.
+- a workspace member will be member of the calendar.
+- a workspace reader will be reader of the calendar.
+
+These roles can be set manually on a given calendar, by assigning local roles to
+users directly on it, as on any workspace.
+
+
+--------------------------------------------------
+Code Overview
+--------------------------------------------------
+
