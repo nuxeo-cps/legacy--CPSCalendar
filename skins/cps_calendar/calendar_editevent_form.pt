@@ -31,35 +31,30 @@
     recurrance_period python:create and recurrance_period or here.recurrance_period;
     location python:(not create) and here.location or '';
     event_status python:create and 'unconfirmed' or here.event_status;
-    from_date here/REQUEST/from_date|here/REQUEST/selected_day|nothing;
-    from_date python:from_date and DateTime(int(from_date)) or DateTime();
-    from_date python:create and from_date or here.from_date;
-    from_date_day from_date/day;
-    from_date_month from_date/month;
-    from_date_year from_date/year;
-    from_date_hour from_date/hour;
-    from_date_string python:here.getDateStr(from_date, fmt='short');
-    from_date_minute python:int((from_date.minute()+14)/15)*15;
-    from_date_minute python:from_date_minute==60 and 0 or from_date_minute;    
-    to_date python:create and from_date or here.to_date;
-    to_date_day to_date/day;
-    to_date_month to_date/month;
-    to_date_year to_date/year;
-    to_date_hour to_date/hour;
-    to_date_string python:here.getDateStr(to_date, fmt='short');
-    to_date_hour python:(create and (from_date_hour + 2)) or to_date_hour;
-    trim_hour python:create and to_date_hour > 23;
-    to_date_minute python:int((to_date.minute()+14)/15)*15;
-    to_date_minute python:to_date_minute==60 and 0 or to_date_minute;    
-    to_date_hour python:not trim_hour and to_date_hour or 0;
-    to_date_minute python:not trim_hour and to_date_minute or 0;
+    dateinfo python:here.calendar_getFromToDate(create, here, request);
+    frominfo python:dateinfo[0];
+    toinfo python:dateinfo[1];
+    from_date_date frominfo/from_date_date;
+    from_date_day frominfo/from_date_day;
+    from_date_month frominfo/from_date_month;
+    from_date_year frominfo/from_date_year;
+    from_date_hour frominfo/from_date_hour;
+    from_date_minute frominfo/from_date_minute;
+    from_date_string python:here.getDateStr(from_date_date, fmt='short');
+    to_date_date toinfo/to_date_date;
+    to_date_day toinfo/to_date_day;
+    to_date_month toinfo/to_date_month;
+    to_date_year toinfo/to_date_year;
+    to_date_hour toinfo/to_date_hour;
+    to_date_minute toinfo/to_date_minute;
+    to_date_string python:here.getDateStr(to_date_date, fmt='short');
     attendees python:(not create) and here.attendees or [];
     transparent python:not create and not not here.transparent or 0;
     cat_info here/calendar_categories;
     categories cat_info/categories;
     cat_default cat_info/default;
     category python:create and cat_default or here.category;
-    meeting here/REQUEST/SESSION/meeting|nothing;
+    meeting request/SESSION/meeting|nothing;
     ">
 
   <tal:block condition="nothing" >
@@ -157,15 +152,15 @@
                 From the
               </span>
               <input type="text" size="11" maxlength="22"
-                tal:attributes="name string:from_date;
-                                id string:from_date;
+                tal:attributes="name string:from_date_string;
+                                id string:from_date_string;
                                 value from_date_string;" />
               <button tal:attributes="id string:trigger_from_date">...</button>
               <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
                 replace="structure string:<script type='text/javascript'>
 Calendar.setup(
 {
-inputField  : 'from_date',
+inputField  : 'from_date_string',
 ifFormat    : '${fmt}',
 button      : 'trigger_from_date',
 mondayFirst : true,
@@ -178,8 +173,8 @@ range       : [2000, 2049]
                   to
                 </span>
                 <input type="text" size="11" maxlength="22"
-                    tal:attributes="name string:to_date;
-                                    id string:to_date;
+                    tal:attributes="name string:to_date_string;
+                                    id string:to_date_string;
                                     value to_date_string;" />
                 <button id="trigger"
                         tal:attributes="id string:trigger_to_date">...</button>
@@ -187,7 +182,7 @@ range       : [2000, 2049]
                         replace="structure string:<script type='text/javascript'>
 Calendar.setup(
 {
-inputField  : 'to_date',
+inputField  : 'to_date_string',
 ifFormat    : '${fmt}',
 button      : 'trigger_to_date',
 mondayFirst : true,

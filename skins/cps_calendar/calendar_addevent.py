@@ -15,13 +15,13 @@ kw['attendees'] = attendees
 here = context.this()
 id = str(int(DateTime())) + str(randrange(1000, 10000)) + ('-%s' % (here.id))
 
-from_date_string = kw.get('from_date','')
-from_date_hour = kw.get('from_date_hour')
-from_date_minute = kw.get('from_date_minute')
+from_date_string = kw['from_date_string']
+from_date_hour = kw['from_date_hour']
+from_date_minute = kw['from_date_minute']
 
-to_date_string = kw.get('to_date','')
-to_date_hour = kw.get('to_date_hour')
-to_date_minute = kw.get('to_date_minute')
+to_date_string = kw.get('to_date_string', from_date_string)
+to_date_hour = kw['to_date_hour']
+to_date_minute = kw['to_date_minute']
 
 if event_type == 'event_allday':
     to_date_string += ' 23:59'
