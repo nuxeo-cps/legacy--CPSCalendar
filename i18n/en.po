@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2003-12-08 15:08default\n"
+"POT-Creation-Date: 2003-12-17 14:41default\n"
 "PO-Revision-Date: 2003-12-08 14:31+0100\n"
 "Last-Translator: Encolpe DEGOUTE <ed@nuxeo.com>\n"
 "Language-Team: French <cantact@nuxeo.com>\n"
@@ -269,6 +269,9 @@ msgstr "Events deletion confirmation"
 #.   <block fill-slot="head_slot">
 #.     Meeting creation helper
 #.   </block>
+#.   <span>
+#.       Meeting creation helper
+#.     </span>
 #: from ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
 #: ../skins/cps_calendar/calendar_meeting_error.pt
@@ -324,9 +327,7 @@ msgstr "is"
 msgid "cpscalendar_label_add_attendee"
 msgstr "Add an attendee"
 
-#.   <span>
-#.           and
-#.         </span>
+#.   <span>and</span>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_and"
 msgstr "and"
@@ -625,12 +626,12 @@ msgstr "To"
 #.   		  to
 #.   		</span>
 #.   <span>
-#.           To
+#.           to
 #.         </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_to_day"
-msgstr "To"
+msgstr "to"
 
 #.   <span>
 #.   		    to
@@ -773,13 +774,6 @@ msgstr "Select the attendees you want for your meeting"
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_message_select_the_desired_duration_of_your_meeting"
 msgstr "Select the desired duration for your meeting"
-
-#.   <span class="calTitle">
-#.         Select the time interval you want for your meeting
-#.       </span>
-#: from ../skins/cps_calendar/calendar_meeting_form.pt
-msgid "cpscalendar_message_select_the_time_interval_you_want_for_your_meeting"
-msgstr "Select the time interval you want for your meeting"
 
 #.   <a attributes="href webcal_url">
 #.         subscribe to this calendar.
@@ -1157,3 +1151,12 @@ msgstr "Remove cancelled events"
 
 msgid "cpscalendar_button_remove_events_you_declined"
 msgstr "Remove events you declined"
+
+msgid "cpscalendar_from_incorrect_date"
+msgstr "from date invalid"
+
+msgid "cpscalendar_to_incorrect_date"
+msgstr "to dat invalid"
+
+msgid "cpscalendar_interval_invalid_date"
+msgstr "you cannot select a time interval larger than a month"

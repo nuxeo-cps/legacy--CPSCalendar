@@ -262,3 +262,12 @@ msgstr ""
 msgid "cpscalendar_button_remove_events_you_declined"
 msgstr ""
 
+msgid "cpscalendar_from_incorrect_date"
+msgstr ""
+
+msgid "cpscalendar_to_incorrect_date"
+msgstr ""
+
+msgid "cpscalendar_interval_invalid_date"
+msgstr ""
+

@@ -15,11 +15,10 @@ meeting['args'] = kw
 
 try:
     from_date_year = int(kw['from_date_year'])
-except ValueError:
-    pr('_From_date_is_incorrect_')
-
-from_date_month = int(kw['from_date_month'])
-from_date_day = int(kw['from_date_day'])
+    from_date_month = int(kw['from_date_month'])
+    from_date_day = int(kw['from_date_day'])
+except (ValueError, KeyError,):
+    pr('cpscalendar_from_incorrect_date')
 ok = 0
 if not errors:
     while not ok:
@@ -31,11 +30,11 @@ if not errors:
 
 try:
     to_date_year = int(kw['to_date_year'])
-except ValueError:
-    pr("_To_date_is_incorrect_")
+    to_date_month = int(kw['to_date_month'])
+    to_date_day = int(kw['to_date_day'])
+except (ValueError, KeyError,):
+    pr('cpscalendar_to_incorrect_date')
 
-to_date_month = int(kw['to_date_month'])
-to_date_day = int(kw['to_date_day'])
 ok = 0
 if not errors:
     while not ok:
@@ -48,7 +47,7 @@ if not errors:
 if not errors:
     days = from_date - to_date
     if abs(days) > 32:
-        pr("_You can't select a time interval larger than a month_")
+        pr('cpscalendar_interval_month')
 
 if errors:
     return context.calendar_meeting_error(errors=errors)

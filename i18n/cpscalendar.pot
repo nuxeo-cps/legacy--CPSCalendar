@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-12-08 15:08default\n"
+"POT-Creation-Date: 2003-12-17 14:41default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -265,6 +265,9 @@ msgstr ""
 #.   <block fill-slot="head_slot">
 #.     Meeting creation helper
 #.   </block>
+#.   <span>
+#.       Meeting creation helper
+#.     </span>
 #: from ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
 #: ../skins/cps_calendar/calendar_meeting_error.pt
@@ -320,9 +323,7 @@ msgstr ""
 msgid "cpscalendar_label_add_attendee"
 msgstr ""
 
-#.   <span>
-#.           and
-#.         </span>
+#.   <span>and</span>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_and"
 msgstr ""
@@ -621,7 +622,7 @@ msgstr ""
 #.   		  to
 #.   		</span>
 #.   <span>
-#.           To
+#.           to
 #.         </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_meeting_form.pt
@@ -768,13 +769,6 @@ msgstr ""
 #.       </span>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_message_select_the_desired_duration_of_your_meeting"
-msgstr ""
-
-#.   <span class="calTitle">
-#.         Select the time interval you want for your meeting
-#.       </span>
-#: from ../skins/cps_calendar/calendar_meeting_form.pt
-msgid "cpscalendar_message_select_the_time_interval_you_want_for_your_meeting"
 msgstr ""
 
 #.   <a attributes="href webcal_url">
@@ -1150,4 +1144,13 @@ msgid "cpscalendar_button_remove_cancelled_events"
 msgstr ""
 
 msgid "cpscalendar_button_remove_events_you_declined"
+msgstr ""
+
+msgid "cpscalendar_from_incorrect_date"
+msgstr ""
+
+msgid "cpscalendar_to_incorrect_date"
+msgstr ""
+
+msgid "cpscalendar_interval_invalid_date"
 msgstr ""
