@@ -1,6 +1,6 @@
 Requires:
 ~~~~~~~~~
-- CPSCore > 3.17.0
+-
 New features:
 ~~~~~~~~~~~~~
 -
@@ -9,4 +9,4 @@ Bug fixes:
 -
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
-- use CPSCore getAllowedRolesAndUsersOfObject instead of _allowedRolesAndUsers
+-
