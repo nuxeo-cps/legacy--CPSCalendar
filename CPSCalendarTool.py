@@ -28,7 +28,8 @@ from Products.CMFCore.CMFCorePermissions import AddPortalContent
 from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.utils import _getAuthenticatedUser, _checkPermission
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
-from Products.CPSCalendar.Event import VirtualEvent
+from Products.CMFCore.utils import UniqueObject, getToolByName, mergedLocalRoles
+from Products.CPSCore.utils import _allowedRolesAndUsers
 from Products.ZCatalog.ZCatalog import ZCatalog
 
 from AccessControl import ClassSecurityInfo
@@ -337,6 +338,33 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                    if w.getWidgetId() in self.search_fields]
         return widgets
 
+    security.declareProtected('View', 'searchCalendars')
+    def searchCalendars(self, search_param, search_term, calendar, directory):
+        if not search_param:
+            return {}
+        
+        users = directory.searchEntries(**{search_param: search_term})
+        
+        if self.getHomeCalendarObject().getRpath() != calendar.getRpath():
+            # Filter out users with view permission:
+            
+            #import pdb;pdb.set_trace()
+            local_users = []
+            allowed = _allowedRolesAndUsers(calendar)
+            for user in users:
+                if 'user:'+user in allowed:
+                    local_users.append(user)
+            users = local_users
+                    
+        res = {}
+        for user in users:
+            if user:
+                path = self.getCalendarPathForUser(user)
+                if path:
+                    res[user] = path
+            
+        return res
+        
     security.declareProtected('View', 'listCalendars')
     def listCalendars(self):
         """Return all available Calendar objects in a list"""
