@@ -127,6 +127,7 @@
 	      Date
 	    </metal:block>
 	    <metal:block fill-slot="content">
+              <strong>
 	      <tal:block condition="all_day">
 		<input type="hidden" name="all_day" value="on">
 		<input type="hidden" name="from_date_hour"
@@ -253,6 +254,7 @@
 		  </tal:block>
 
 	      </tal:block>
+              </strong>
 	    </metal:block>
 	  </metal:block>
 	  <metal:block use-macro="here/calendar_macros/macros/form_property">

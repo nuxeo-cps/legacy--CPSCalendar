@@ -73,6 +73,7 @@
 	  </metal:block>
 	  <metal:block fill-slot="content"
 		       tal:define="one_date python:from_date == to_date;">
+            <strong>
 	    <tal:block condition="python:one_date and here.get('from_date_str', 0)"
 		       tal:content="from_date_str">
 	    </tal:block>
@@ -99,6 +100,7 @@
 		<tal:block replace="python:to_date.strftime(' %H:%M')" />
 	      </tal:block>
 	    </tal:block>
+            </strong>
 	  </metal:block>
 	</metal:block>
 	<tal:block condition="location">

@@ -38,15 +38,17 @@
              tal:on-error="python:request.RESPONSE.redirect('%s/calendar_meeting_expired' % (here.absolute_url(), ))">
 
   <form action="calendar_begin_meeting" method="POST">
+    <p>
     <span clss="calTitle" i18n:translate="cpscalendar_message_select_the_attendees_you_want_for_your_meeting">
       Select the attendees you want for your meeting
-    </span>:
+    </span> :
+    </p>
     <tal:block repeat="user_type user_types">
       <tal:block define="type_id user_type/id;
                          calendars all_calendars/?type_id|nothing"
                  condition="calendars">
-        <h3 tal:content="python:str(user_type['plural_title'])"
-            i18n:translate="">User type</h3>
+        <p tal:content="python:str(user_type['plural_title'])"
+            i18n:translate="">User type</p>
         <ul>
           <li tal:repeat="cal calendars">
             <input type="checkbox" name="cal_ids:list"
@@ -72,7 +74,7 @@
     </p>
     <span class="calTitle" i18n:translate="cpscalendar_message_select_the_time_interval_you_want_for_your_meeting">
       Select the time interval you want for your meeting
-    </span>:
+    </span> :
     <input type="hidden" id="from_date_day" name="from_date_day"
       tal:attributes="value from_date_day" />
     <input type="hidden" id="from_date_month" name="from_date_month"
@@ -85,8 +87,9 @@
       tal:attributes="value to_date_month" />
     <input type="hidden" id="to_date_year" name="to_date_year"
       tal:attributes="value to_date_year" />
-    <h3>
-      <span i18n:translate="cpscalendar_label_from">
+    <p>
+      <strong>
+      <span i18n:translate="cpscalendar_label_from_(day)">
         From
       </span>
       <span id="from_date_string">
@@ -102,9 +105,11 @@
         <img border="0"
              tal:attributes="src string:${portal_url}/day_selector_icon.png" />
       </a>
-    </h3>
-    <h3>
-      <span i18n:translate="cpscalendar_label_to">
+      </strong>
+    </p>
+    <p>
+      <strong>
+      <span i18n:translate="cpscalendar_label_to_(day)">
         To
       </span>
       <span id="to_date_string">
@@ -120,7 +125,8 @@
         <img border="0"
              tal:attributes="src string:${portal_url}/day_selector_icon.png" />
       </a>
-    </h3>
+      </strong>
+    </p>
     <input type="hidden" name="from_date_hour" id="from_date_hour"
       tal:attributes="value from_date_hour" />
     <input type="hidden" name="from_date_minute"
@@ -131,7 +137,8 @@
     <input type="hidden" name="to_date_minute"
       id="to_date_minute"
       tal:attributes="value to_date_minute" />
-    <h3>
+    <p>
+      <strong>
       <span i18n:translate="cpscalendar_label_between">
         Between
       </span>
@@ -146,16 +153,19 @@
         <img border="0"
              tal:attributes="src string:${portal_url}/interval_selector_icon.png" />
       </a>
-    </h3>
+      </strong>
+    </p>
+    <p>
     <span class="calTitle" i18n:translate="cpscalendar_message_select_the_desired_duration_of_your_meeting">
       Select the desired duration for your meeting
-    </span>:
+    </span> :
+    </p>
     <p>
       <select name="duration_hour:int">
         <option tal:repeat="hour python:range(0,24)"
           tal:content="hour" tal:attributes="value hour;
             selected python:hour == 1 or nothing" />
-      </select><span i18n:translate="cpscalendar_hour_sep">:</span><select name="duration_minute:int">
+      </select> <span i18n:translate="cpscalendar_hour_sep">:</span> <select name="duration_minute:int">
         <option tal:repeat="minute python:range(0,60,15)"
           tal:content="minute" tal:attributes="value minute;
             selected python:minute == 0 or nothing" />
