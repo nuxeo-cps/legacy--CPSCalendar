@@ -1,4 +1,21 @@
 *******************************************
+** CPSCalendar V1.7.5 [R1 build 2004/08/10-10:32 by regebro]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- The listCalendars method now uses a calendar search unrestricted by rights.(#1437)
+- A missing translation was added. (#1438)
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.7.4 [R1 build 2004/08/10-09:33 by regebro]
 
 Requires:
