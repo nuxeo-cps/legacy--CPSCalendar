@@ -1,4 +1,12 @@
 *******************************************
+** CPSCalendar V1.2.2 [R1 build 2004/02/12-11:25 by regebro]
+
+Bug fixes:
+~~~~~~~~~~
+- Images were broken under windows.
+- The search for users wasn't working.
+
+*******************************************
 ** CPSCalendar V1.2.1 [R1 build 2004/02/02-10:55 by fermigier]
 
 New features:

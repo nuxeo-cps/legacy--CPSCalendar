@@ -1,4 +1,12 @@
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
 Bug fixes:
 ~~~~~~~~~~
-- Images were broken under windows.
-- The search for users wasn't working.
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
