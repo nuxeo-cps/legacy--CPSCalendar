@@ -87,8 +87,10 @@
         <tal:block condition="python:event_type == 'event_recurring'">
           <span tal:content="string:cpscalendar_label_${recurrance_period}" i18n:translate="" />
           <br>
-          <span i18n:translate="cpscalendar_label_start_(day)">First time</span>
+          <span i18n:translate="cpscalendar_label_from_(day)">First time</span>
           <span tal:replace="from_date_string" />
+          <span i18n:translate="cpscalendar_label_to_(day)">To the</span>
+          <span tal:replace="to_date_string" /><br/>
           <span i18n:translate="cpscalendar_label_from_hour">from</span>
           <span tal:replace="python:from_date.strftime(' %H:%M')" />
           <span i18n:translate="cpscalendar_label_to_hour">to</span>

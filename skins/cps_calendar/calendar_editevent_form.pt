@@ -139,26 +139,26 @@
           </metal:block>
          <metal:block fill-slot="content">
             <strong>
-              <tal:block condition="python:event_type == 'event_allday'">
-                <input type="hidden" name="from_date_hour"
-                    tal:attributes="value from_date_hour" />
-                <input type="hidden" name="from_date_minute"
-                    tal:attributes="value from_date_minute" />
-                <input type="hidden" name="to_date_hour"
-                    tal:attributes="value to_date_hour" />
-                <input type="hidden" name="to_date_minute"
-                    tal:attributes="value to_date_minute" />
-                <span i18n:translate="cpscalendar_label_from_day">
-                  From the
-                </span>
-                <input type="text" size="11" maxlength="22"
-                    tal:attributes="name string:from_date;
-                                    id string:from_date;
-                                    value from_date_string;" />
-                <button id="trigger"
-                        tal:attributes="id string:trigger_from_date">...</button>
-                <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
-                        replace="structure string:<script type='text/javascript'>
+              <tal:block condition="python:event_type == 'event_recurring'">
+                <select name="recurrance_period">
+                  <option tal:repeat="period here/period_types"
+                          tal:content="python:'cpscalendar_label_' + period"
+                          tal:attributes="value period;
+                                          selected python:period == recurrance_period;"
+                          i18n:translate="" />
+                </select>
+                <br/>
+              </tal:block> 
+              <span i18n:translate="cpscalendar_label_from_day">
+                From the
+              </span>
+              <input type="text" size="11" maxlength="22"
+                tal:attributes="name string:from_date;
+                                id string:from_date;
+                                value from_date_string;" />
+              <button tal:attributes="id string:trigger_from_date">...</button>
+              <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
+                replace="structure string:<script type='text/javascript'>
 Calendar.setup(
 {
 inputField  : 'from_date',
@@ -169,6 +169,7 @@ range       : [2000, 2049]
 }
 );
 </script>" />
+              <tal:block condition="python:event_type in ('event_allday', 'event_recurring')">
                 <span i18n:translate="cpscalendar_label_to_day">
                   to
                 </span>
@@ -190,29 +191,22 @@ range       : [2000, 2049]
 }
 );
 </script>" />
-              </tal:block>
+              </tal:block> 
               <tal:block condition="python:event_type == 'event_tofrom'">
-
                 <input type="hidden" id="to_date" name="to_date"
                        tal:attributes="value to_date_string" />
-                <input type="text" size="11" maxlength="22"
-                       tal:attributes="name string:from_date;
-                                       id string:from_date;
-                                       value from_date_string;" />
-                <button id="trigger"
-                        tal:attributes="id string:trigger_from_date">...</button>
-                <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
-                           replace="structure string:<script type='text/javascript'>
-Calendar.setup(
-{
-inputField  : 'from_date',
-ifFormat    : '${fmt}',
-button      : 'trigger_from_date',
-mondayFirst : true,
-range       : [2000, 2049]
-}
-);
-</script>" />
+              </tal:block> 
+              <tal:block condition="python:event_type == 'event_allday'">
+                <input type="hidden" name="from_date_hour"
+                    tal:attributes="value from_date_hour" />
+                <input type="hidden" name="from_date_minute"
+                    tal:attributes="value from_date_minute" />
+                <input type="hidden" name="to_date_hour"
+                    tal:attributes="value to_date_hour" />
+                <input type="hidden" name="to_date_minute"
+                    tal:attributes="value to_date_minute" />
+              </tal:block>
+              <tal:block condition="python:event_type != 'event_allday'">
                 <br/>
                 <span i18n:translate="cpscalendar_label_from_hour">From</span>
                 <select name="from_date_hour:int">
@@ -237,77 +231,6 @@ range       : [2000, 2049]
                           tal:attributes="value hour;
                                           selected python:hour == to_date_hour;"
                   />
-                </select>
-                <span i18n:translate="cpscalendar_hour_sep">:</span>
-                <select name="to_date_minute:int">
-                  <option tal:repeat="minute python:range(0,60,5)"
-                          tal:content="python:'%02d' % minute"
-                          tal:attributes="value minute;
-                                          selected python:minute == to_date_minute;" />
-                </select>
-
-                <tal:block condition="nothing">(
-                  <tal:block content="string:cpscalendar_label_day_long${to_date/dow}"
-                              i18n:translate="" />
-                  <tal:block replace="to_date_day" />
-                  <tal:block content="string:cpscalendar_label_month_long${to_date_month}"
-                             i18n:translate="" />
-                  <tal:block replace="to_date_year" />)
-                </tal:block>
-              </tal:block>
-              <tal:block condition="python:event_type == 'event_recurring'">
-                <select name="recurrance_period">
-                  <option tal:repeat="period here/period_types"
-                          tal:content="python:'cpscalendar_label_' + period"
-                          tal:attributes="value period;
-                                          selected python:period == recurrance_period;"
-                          i18n:translate="" />
-                </select>
-                <br/>
-                <input type="hidden" name="to_date"
-                    tal:attributes="value to_date_string" />
-                <span i18n:translate="cpscalendar_label_start_(day)">
-                  First date
-                </span>
-                <input type="text" size="11" maxlength="22"
-                    tal:attributes="name string:from_date;
-                                    id string:from_date;
-                                    value from_date_string;" />
-                <button id="trigger"
-                        tal:attributes="id string:trigger_from_date">...</button>
-                <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
-                        replace="structure string:<script type='text/javascript'>
-Calendar.setup(
-{
-inputField  : 'from_date',
-ifFormat    : '${fmt}',
-button      : 'trigger_from_date',
-mondayFirst : true,
-range       : [2000, 2049]
-}
-);
-</script>" />
-                <br/>
-                <span i18n:translate="cpscalendar_label_from_hour">From</span>
-                <select name="from_date_hour:int">
-                  <option tal:repeat="hour python:range(0,24)"
-                          tal:content="hour"
-                          tal:attributes="value hour;
-                                          selected python:hour == from_date_hour;" />
-                </select>
-                <span i18n:translate="cpscalendar_hour_sep">:</span>
-                <select name="from_date_minute:int">
-                  <option tal:repeat="minute python:range(0,60,5)"
-                          tal:content="python:'%02d' % minute"
-                          tal:attributes="value minute;
-                                          selected python:minute == from_date_minute;" />
-                </select>
-                <span i18n:translate="cpscalendar_label_to_hour">to</span>
-                <select name="to_date_hour:int">
-                  <option tal:repeat="hour python:range(0,24)"
-                          tal:content="hour"
-                          tal:attributes="value hour;
-                                          selected python:hour == to_date_hour;" />
                 </select>
                 <span i18n:translate="cpscalendar_hour_sep">:</span>
                 <select name="to_date_minute:int">

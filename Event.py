@@ -444,6 +444,13 @@ class Event(CPSBaseDocument):
                 self.from_date, self.to_date)
 
     def getRecurrance(self, repeats):
+        rstart = self.from_date
+        from_year = self.from_date.year()
+        from_month = self.from_date.month()
+        from_day = self.from_date.day()
+        to_hour = self.to_date.hour()
+        to_minute = self.to_date.minute()
+        rstop = DateTime(from_year, from_month, from_day, to_hour, to_minute)
         if self.recurrance_period == 'period_weekly':
             period = 'period_daily'
             repeats = repeats * 7
@@ -454,40 +461,52 @@ class Event(CPSBaseDocument):
             period = self.recurrance_period
 
         if period == 'period_daily':
-            return self.from_date + repeats, self.to_date + repeats
+            return rstart + repeats, rstop + repeats
         if period == 'period_monthly':
-            year, month, day, hour, minute, second, tz = self.from_date.parts()
+            year, month, day, hour, minute, second, tz = rstart.parts()
             month = month + repeats
-            year = year + month/12
-            month = month % 12
+            while month > 12:
+                month -= 12
+                year += 1
             fromdate = DateTime(year, month, day, hour, minute, second, tz)
-            year, month, day, hour, minute, second, tz = self.to_date.parts()
+            year, month, day, hour, minute, second, tz = rstop.parts()
             month = month + repeats
-            year = year + month/12
-            month = month % 12
+            while month > 12:
+                month -= 12
+                year += 1
             todate = DateTime(year, month, day, hour, minute, second, tz)
             return fromdate, todate
         if period == 'period_yearly':
-            year, month, day, hour, minute, second, tz = self.from_date.parts()
+            year, month, day, hour, minute, second, tz = rstart.parts()
             year = year + repeats
             fromdate = DateTime(year, month, day, hour, minute, second, tz)
-            year, month, day, hour, minute, second, tz = self.to_date.parts()
+            year, month, day, hour, minute, second, tz = rstop.parts()
             year = year + repeats
             todate = DateTime(year, month, day, hour, minute, second, tz)
             return fromdate, todate
         raise ValueError('Unknown recurrance period ' + period)
 
     def _recurringMatch(self, start_time, end_time, slots):
-        rstart = self.from_date
-        rstop = self.to_date
+        if start_time.greaterThan(self.to_date):
+            return []
+        
+        rstart, rstop = self.getRecurrance(0)
         repeats = 1
         while start_time.greaterThan(rstop):
+            print self.title_or_id(), 1, start_time, rstop
             rstart, rstop = self.getRecurrance(repeats)
             repeats += 1
 
+        if rstop.greaterThan(self.to_date):
+            return []
+        
+        print self.title_or_id(), 2, rstop, self.to_date
         result = self._standardMatch(start_time, end_time, slots, rstart, rstop)
         while end_time.greaterThanEqualTo(rstart):
             rstart, rstop = self.getRecurrance(repeats)
+            print self.title_or_id(), 2, rstop, self.to_date
+            if rstop.greaterThan(self.to_date):
+                break
             repeats += 1
             result.extend(self._standardMatch(start_time, end_time, slots,
                     rstart, rstop))
