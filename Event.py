@@ -101,6 +101,8 @@ class Event(CPSBaseDocument):
          'label': 'Event Type', 'select_variable': 'event_types' },
         {'id': 'recurrence_period', 'type': 'selection', 'mode': 'w',
          'label': 'Recurrence Period', 'select_variable': 'period_types' },
+        {'id': 'document', 'type': 'text', 'mode': 'w',
+         'label': 'Document Link',},
     )
 
     #
@@ -130,6 +132,7 @@ class Event(CPSBaseDocument):
 
     isdirty = 1
     notified_attendees = ()
+    document = ''
 
     def __init__(self, id, organizer={}, attendees=(),
                  from_date=None, to_date=None, **kw):
@@ -150,7 +153,7 @@ class Event(CPSBaseDocument):
 
     security.declareProtected('Modify portal content', 'edit')
     def edit(self, attendees=None, from_date=None, to_date=None,
-             event_type=None, transparent=None, **kw):
+             event_type=None, transparent=None, document='', **kw):
         """Edit method"""
         setdirty = 0
         old_status = self.event_status
@@ -181,6 +184,10 @@ class Event(CPSBaseDocument):
             setdirty = 1
             self.to_date = to_date
         self._normalize()
+        
+        if document != self.document:
+            setdirty = 1
+            self.document = document
 
         if setdirty:
             self.isdirty = 1

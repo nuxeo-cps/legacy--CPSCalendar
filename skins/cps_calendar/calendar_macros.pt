@@ -177,6 +177,22 @@
 
     <metal:block use-macro="here/calendar_macros/macros/form_property">
       <metal:block fill-slot="title"
+               i18n:translate="cpscalendar_label_document_link">
+        Document link
+      </metal:block>
+      <metal:block fill-slot="content">
+        <p tal:condition="here/document"
+           tal:define="docurl string:${here/portal_url/getPortalPath}/${here/document};
+           doc python:here.restrictedTraverse(docurl, None);">
+          <a tal:condition="doc"
+             tal:attributes="href doc/absolute_url"
+             tal:content="doc/Title">Title</a>
+        </p>
+      </metal:block>
+    </metal:block>
+
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
+      <metal:block fill-slot="title"
                i18n:translate="cpscalendar_label_description">
         Description
       </metal:block>

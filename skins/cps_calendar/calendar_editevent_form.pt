@@ -334,6 +334,24 @@ range       : [2000, 2049]
 
        <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
+               i18n:translate="cpscalendar_label_document_link">
+            Document link
+          </metal:block>
+          <metal:block fill-slot="content">
+              <p>
+              <input type="text" id="document_field" size=42 name="document"
+                tal:attributes="value here/document" >
+              <a class=".button"
+                 onClick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')"
+                 i18n:translate="cpscalendar_label_browse">
+                   Browse
+              </a>
+            </p>
+          </metal:block>
+        </metal:block>
+       
+       <metal:block use-macro="here/calendar_macros/macros/form_property">
+          <metal:block fill-slot="title"
                i18n:translate="cpscalendar_label_description">
             Description
           </metal:block>
