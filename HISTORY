@@ -1,4 +1,22 @@
 *******************************************
+** CPSCalendar V1.11.1 [R1 build 2004/08/23-05:39 by fermigier]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Some skins used the old "head_slot" instead of standard H1 titles.
+- Added the missing file calendar_edit.py. (#1496)
+- cpscalendar_no_attendee_of_type_workspace was untranslated. (#1527)
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.11.0 [R1 build 2004/08/19-16:37 by regebro]
 
 Requires:
