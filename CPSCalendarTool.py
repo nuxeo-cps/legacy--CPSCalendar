@@ -901,6 +901,16 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 cals.append(cal)
         return cals
            
+    security.declareProtected('View', 'listVisibleCalendars')
+    def listEditableCalendars(self):
+        """Return the list of all Calendar objects where use can add events"""
+        mtool = getToolByName(self, 'portal_membership')
+        cals = []
+        for cal in self.listCalendars():
+            if mtool.checkPermission('Add portal content', cal):
+                cals.append(cal)
+        return cals
+    
     def getCalendarFromPath(self, path):
         portalurl = getToolByName(self, 'portal_url').getPortalPath()
         return self.unrestrictedTraverse(portalurl + '/' + path)

@@ -13,8 +13,8 @@
   <p>
     <span i18n:translate="cpscalendar_message_editable_calendars"
           tal:condition="editcals">
-      These are the calendars where you can create events
-    </span> :
+      These are the calendars where you can create events:
+    </span>
     <ul>
       <li tal:repeat="cal editcals">
         <a tal:attributes="href python:cal.absolute_url()"
