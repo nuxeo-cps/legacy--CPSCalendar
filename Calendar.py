@@ -489,8 +489,8 @@ class Calendar(CPSBaseFolder):
             for ev in col:
                 start = ev['start']
                 stop = ev['stop']
-                start_min = start.hour()*60 + start.minute()
-                stop_min = stop.hour()*60 + stop.minute()
+                start_min = start.hour() * 60 + start.minute()
+                stop_min = stop.hour() * 60 + stop.minute()
                 if stop_min == 0:
                     stop_min = 1440
                 if conflict:
@@ -547,7 +547,7 @@ class Calendar(CPSBaseFolder):
                         conflict = []
                         last_ev = conflict_stop
                     else:
-                        # this event provoques conflicts
+                        # This event provoques conflicts
                         # so add this event to conflict's resolve
                         conflict.append({
                           'start_min': start_min,
@@ -558,8 +558,8 @@ class Calendar(CPSBaseFolder):
                 if not conflict:
                     if last_ev != start_min:
                         blocks.append([[{
-                            'event':None,
-                            'height':start_min - last_ev,
+                            'event': None,
+                            'height': start_min - last_ev,
                         }]])
                     conflict_start = start_min
                     conflict_stop = stop_min

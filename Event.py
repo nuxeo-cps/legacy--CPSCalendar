@@ -211,6 +211,7 @@ class Event(CPSBaseDocument):
         """Return the calendar where this event is in"""
         return aq_parent(aq_inner(self))
 
+    # FIXME 
     security.declareProtected(View, 'getCalendarUser')
     def getCalendarUser(self):
         """Return the id of the calendar instead of the user"""
@@ -277,7 +278,7 @@ class Event(CPSBaseDocument):
     security.declareProtected('Add portal content', 'isDirty')
     def isDirty(self):
         """Check if we can edit the event"""
-        return not not ((self.isdirty and self.attendees and \
+        return not not ((self.isdirty and self.attendees and
             self.canEditThisEvent()) or self.getPendingEvents())
 
     security.declareProtected('Add portal content', 'setEventStatus')
@@ -303,18 +304,19 @@ class Event(CPSBaseDocument):
     def setAttendees(self, attendees):
         """Set atendees of the event from a attendees dictionary"""
         self.attendees = deepcopy(attendees)
-        all_ids = tuple([at['id'] for at in attendees])
+        all_rpaths = tuple([attendee['rpath'] for attendee in attendees])
         self.notified_attendees = tuple(
-            [id for id in self.notified_attendees if id in all_ids])
-        self.isdirty = self.notified_attendees != all_ids
+            [rpath for rpath in self.notified_attendees 
+                   if rpath in all_rpaths])
+        self.isdirty = self.notified_attendees != all_rpaths
 
     security.declareProtected('Add portal content', 'setAttendeeStatus')
     def setAttendeeStatus(self, attendee, status):
         """Set the attendee's status"""
         change = 0
-        for att in self.attendees:
-            if att['id'] == attendee:
-                att['status'] = status
+        for attendee in self.attendees:
+            if attendee['rpath'] == attendee:
+                attendee['status'] = status
                 change = 1
         if change:
             self._p_changed = 1
@@ -341,7 +343,7 @@ class Event(CPSBaseDocument):
                     if status == 'decline':
                         calendar.declineEvent(self)
                     if old_status == 'decline':
-                        calendar.unDeclinedEvent(self)
+                        calendar.unDeclineEvent(self)
                 self._p_changed = 1
         org_calendar = self.getOrganizerCalendar()
         if org_calendar is None:

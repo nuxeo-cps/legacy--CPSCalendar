@@ -148,15 +148,22 @@ class TestCalendar(CPSCalendarTestCase):
         self.calendar.setAdditionalCalendars(('test',))
         self.assertEquals(self.calendar.getAdditionalCalendars(), ('test',))
 
-    def testEventDesc(self):
+    def testGetEvents(self):
+        start_time = DateTime(2003, 1, 1, 10, 0)
+        end_time = DateTime(2003, 1, 1, 16, 0)
+
+        events = self.calendar.getEvents(start_time, end_time)
+        self.assertEquals(events, [])
+
         from_date = DateTime(2003, 1, 1, 12, 0)
         to_date = DateTime(2003, 1, 1, 14, 0)
         self.calendar.invokeFactory(
             'Event', 'event', from_date=from_date, to_date=to_date)
         event = self.calendar.event
 
-        start_time = DateTime(2003, 1, 1, 10, 0)
-        end_time = DateTime(2003, 1, 1, 16, 0)
+        events = self.calendar.getEvents(start_time, end_time)
+        self.assertEquals(events, [event])
+
         desc = self.calendar.getEventsDesc(
             start_time=start_time, end_time=end_time, disp='day')
         self.assertEquals(desc,
