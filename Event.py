@@ -145,7 +145,7 @@ class Event(CPSBaseDocument):
         self.event_status = kw.get('event_status')
         self.category = kw.get('category')
         self.transparent = kw.get('transparent')
-        self.recurrence_period = kw.get('recurrence_period')
+        self.recurrence_period = kw.get('recurrence_period', 'period_daily')
         self._normalize()
 
     security.declareProtected('Modify portal content', 'edit')
@@ -510,7 +510,8 @@ class Event(CPSBaseDocument):
             year = year + repeats
             todate = DateTime(year, month, day, hour, minute, second, tz)
             return fromdate, todate
-        raise ValueError('Unknown recurrence period ' + str(period))
+        raise ValueError('Unknown recurrence period %s for object %s' % (
+            str(period), self.absolute_url()))
 
     def _recurringMatch(self, start_time, end_time, slots):
         if start_time.greaterThan(self.to_date):
