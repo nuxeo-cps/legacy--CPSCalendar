@@ -92,8 +92,8 @@
       <p>
       <input type="hidden" name="all_day:int"
              tal:attributes="value not:all_day">
-      <input type="hidden" name="from_date:int"
-             tal:attributes="value from_date/timeTime">
+      <input type="hidden" name="from_date"
+             tal:attributes="value from_date">
       <input type="hidden" name="title" id="rememberTitle"
              tal:attributes="value title">
       <input type="submit"

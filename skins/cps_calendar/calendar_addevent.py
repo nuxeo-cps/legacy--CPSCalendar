@@ -11,6 +11,7 @@ id = str(int(DateTime()))+str(randrange(1000,10000))+('-%s' % (here.id))
 
 all_day = kw.get('all_day')
 from_date_day = kw.get('from_date_day')
+#raise "debug0", str(all_day)+': '+str(kw.get('from_date'))+' => '+str(kw.get('to_date'))
 
 from_date_string = kw.get('from_date','')
 if locale in ('en', 'hu', ):
@@ -28,7 +29,10 @@ from_date = DateTime(from_date_year, from_date_month, from_date_day,
                      from_date_hour, from_date_minute)
 kw['from_date'] = from_date
 
-to_date_string = kw.get('to_date','')
+if all_day:
+    to_date_string = kw.get('to_date','')
+else:
+    to_date_string = from_date_string
 if locale in ('en', 'hu', ):
     to_date_month, to_date_day, to_date_year = to_date_string.split('/')
 else:
@@ -56,6 +60,8 @@ kw['to_date'] = to_date
 # from_date < to_date. For an all_day event, from_date and to_date
 # will be switched
 
+#raise "debug", str(all_day or from_date <= to_date)+': '+str(from_date)+' => '+str(to_date)
+
 if all_day or from_date <= to_date:
     # TODO: add repeated event add manage
     here.invokeFactory('Event', id, **kw)
@@ -69,11 +75,11 @@ else:
     # the date entries are incorrect (from_date > to_date).
     # in a not all_day event, so propose to extend the event
     # to the next day
-    to_date = DateTime(to_date_year, to_date_month, to_date_day) + 1
-    to_date_year = to_date.year()
-    to_date_month = to_date.month()
-    to_date_day = to_date.day()
-    to_date = DateTime(to_date_year, to_date_month, to_date_day,
-        to_date_hour, to_date_minute)
-    kw['to_date'] = to_date
+    raise "debug", str(all_day)+': '+str(from_date)+' => '+str(to_date)
+    kw['from_date'] = to_date
+    kw['from_date_hour'] = to_date_hour
+    kw['from_date_minute'] = to_date_minute
+    kw['to_date'] = from_date
+    kw['to_date_hour'] = from_date_hour
+    kw['to_date_minute'] = from_date_minute
     return context.calendar_confirmaddevent_form(**kw)

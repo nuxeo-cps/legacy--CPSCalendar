@@ -34,7 +34,7 @@ else:
 from_date = REQUEST.form.get('from_date')
 selected_day = REQUEST.form.get('selected_day')
 if from_date is not None:
-    selected_day = DateTime(int(from_date))
+    selected_day = DateTime(from_date)
     LOG('CPSCAL', DEBUG, "selected_day from from_date = %s" % selected_day)
 elif selected_day is not None:
     selected_day = DateTime(int(selected_day))

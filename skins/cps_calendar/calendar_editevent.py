@@ -1,4 +1,5 @@
 ##parameters=REQUEST=None, **kw
+# $Id$
 
 locale = context.Localizer.default.get_selected_language()
 
@@ -38,6 +39,8 @@ to_date_month = int(to_date_month)
 to_date_year = int(to_date_year)
 to_date_hour = int(kw.get('to_date_hour'))
 to_date_minute = int(kw.get('to_date_minute'))
+to_date = DateTime(to_date_year, to_date_month, to_date_day,
+                    to_date_hour, to_date_minute)
 
 # This code seems supposed to change a not all_day event in an all_day
 # event in the case of its from_date being the same as its to_date.
@@ -59,16 +62,14 @@ to_date_minute = int(kw.get('to_date_minute'))
 ##         to_date_year = from_date_year
 
 if not all_day and (from_date > to_date):
-    to_date = DateTime(from_date_year, from_date_month, from_date_day) + 1
-    to_date_day = to_date.day()
-    to_date_month = to_date.month()
-    to_date_year = to_date.year()
+    to_date = DateTime(from_date_year, from_date_month, from_date_day,
+                       to_date_hour, to_date_minute)
 
-to_date = DateTime(to_date_year, to_date_month, to_date_day,
-                   to_date_hour, to_date_minute)
 kw['to_date'] = to_date
 del kw['to_date_hour']
 del kw['to_date_minute']
+
+#raise "debug", str(from_date > to_date)+': '+str(from_date)+' => '+str(to_date)
 
 here.edit(**kw)
 
