@@ -315,12 +315,8 @@ class Calendar(CPSBaseFolder):
                         if event['id'] != event_id]
         self._pending_events = tuple(events)
         if REQUEST is not None:
-            if request == 'status':
-                REQUEST.RESPONSE.redirect("%s/%s/calendar_attendees_form"
-                    % (self.absolute_url(), event_id))
-            else:
-                REQUEST.RESPONSE.redirect("%s/%s"
-                    % (self.absolute_url(), event_id))
+            REQUEST.RESPONSE.redirect(
+                self.absolute_url()+'/calendar_pending_events')
 
     security.declareProtected('Add portal content', 'cleanPendingEvents')
     def cleanPendingEvents(self, event_id=None, REQUEST=None):

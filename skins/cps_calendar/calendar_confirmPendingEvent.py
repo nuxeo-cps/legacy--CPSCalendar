@@ -17,9 +17,6 @@ else:
     event.setMyStatus(status, comment=comment)
     if delete:
         context.manage_delObjects([event_id])
-        url = context.absolute_url()
-    else:
-        url = event.absolute_url()
 
 if REQUEST is not None:
-    REQUEST.RESPONSE.redirect(url)
+    REQUEST.RESPONSE.redirect(context.absolute_url()+'/calendar_pending_events')
