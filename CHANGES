@@ -23,6 +23,7 @@ Bug fixes:
 - The organizer is now always a participant (even if it is an event).
 - Adding attendees now automatically sends a notification.
 - Modifying the event now automatically sends a notification.
+- The confirmation options are now radio buttons instead of a select list.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

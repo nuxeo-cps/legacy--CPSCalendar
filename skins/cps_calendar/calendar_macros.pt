@@ -268,24 +268,25 @@
             </metal:block>
           </metal:block>
         </metal:block>
-          </metal:block>
-          <br />
-          <select name="status"
-        tal:define="
-          statuses python:['confirmed', 'tentative', 'decline', 'decline_and_delete', 'ignore'];
+        </metal:block>
+        <br />
+        <tal:block define="
+          statuses python:['confirmed', 'tentative', 'decline',
+                   'decline_and_delete', 'ignore'];
           selected python:event['event_status'] == 'canceled'
                    and 'ignore' or 'confirmed'">
-        <option tal:repeat="status statuses"
-            tal:attributes="value status;
-                    selected python:status == selected"
-            tal:content="python:str('cpscalendar_pending_%s' % (status, ))"
-            i18n:translate="">
-          Confirm
-        </option>
-          </select>
-          <input type="submit" name="calendar_confirmPendingEvent:method"
-                 tal:attributes="value string:cpscalendar_button_validate"
-                 i18n:attributes="value"/>
+          <tal:block repeat="status statuses">
+            <input type="radio" name="status"
+              tal:attributes="value status;
+                              selected python:status == selected">
+            <tal:block i18n:translate="" 
+               content="python:str('cpscalendar_pending_%s' % (status, ))"
+            /><br />
+          </tal:block>
+        </tal:block>
+        <input type="submit" name="calendar_confirmPendingEvent:method"
+               tal:attributes="value string:cpscalendar_button_validate"
+               i18n:attributes="value"/>
         </tal:block>
       </tal:block>
     </tal:block>
