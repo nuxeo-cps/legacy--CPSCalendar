@@ -1,4 +1,24 @@
-- recurrent events
 - move hour events interface
+
 - verify total correctness of events
+
 - add global actions (in NuxCPS.cpsinstall) for "My calendar" and "Calendars"
+
+- show today with a different color
+
+- makes the all_day lines in month and week view use alternate color
+  in cols with no event
+
+- add an interface to filter what canceled and declined events we really
+  want to delete
+
+- recurring events
+
+- possibility to use a central calendar to specify (and display in some
+  manner) hollydays or vacations.
+
+- add history to events
+
+- i18n of mail notifications messages
+
+- add an interface to send freeform mails to attendees and/or organizer
