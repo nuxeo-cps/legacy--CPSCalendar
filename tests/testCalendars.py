@@ -364,6 +364,27 @@ class TestCalendar(CPSCalendarTestCase):
         self.assertEquals(event_block['height'], 
             (calendar.last_hour - calendar.first_hour) * 60)
 
+        hour_cols = [
+            [{'event': event,
+              'start': DateTime('2004/01/18 10:00:00'), 
+              'stop': DateTime('2004/01/18 14:00:00')}],
+            [{'event': event,
+              'start': DateTime('2004/01/18 9:00:00'), 
+              'stop': DateTime('2004/01/18 12:00:00')}]]
+        hour_block_cols = calendar._getHourBlockCols(hour_cols, 1)
+        self.assertEquals(hour_block_cols,
+            [[[[{'height': 120, 'event': None}]], 
+              [[{'height': 240, 'event': event, 'isdirty': 0}]]], 
+             [[[{'height': 60, 'event': None}]], 
+              [[{'height': 180, 'event': event, 'isdirty': 0}]]]])
+
+    def testEventDeletion(self):
+        self._addEvent()
+        event = self.calendar.event
+
+        self.calendar.manage_delObjects(['event'])
+        self.assert_(not hasattr(self.calendar, 'event'))
+
 
 def test_suite():
     suite = unittest.TestSuite()

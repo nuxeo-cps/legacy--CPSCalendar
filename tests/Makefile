@@ -18,10 +18,11 @@ cover:
 	mkdir cover
 
 coverage: cover
+	rm .coverage
 	INSTANCE_HOME=$(INSTANCE_HOME) \
-	SOFTWARE_HOME=$(SOFTWARE_HOME) \
-	PYTHONPATH=$(PYTHONPATH) \
-	$(PYTHON) coverage.py -x runalltests.py
+		SOFTWARE_HOME=$(SOFTWARE_HOME) \
+		PYTHONPATH=$(PYTHONPATH) \
+		$(PYTHON) coverage.py -x runalltests.py
 	$(PYTHON) coverage.py -r ../*.py
 	$(PYTHON) coverage.py -a -d cover ../*.py
 	echo "Annotated files saved in cover/*.py,cover"

@@ -647,13 +647,10 @@ class Calendar(CPSBaseFolder):
     def notifyMembers(self, event_dict):
         """Notify members when a pending event arrives"""
 
-        # get mailhost object
-        mailhost = getattr(self, 'MailHost')
-        if mailhost is None:
-            LOG('NGCal', INFO, "Can't get MailHost object")
-            return
+        # Get mailhost object through acquisition
+        mailhost = self.MailHost
 
-        # get current user email
+        # Get current user email
         mtool = getToolByName(self, 'portal_membership')
         mdtool = getToolByName(self, 'portal_metadirectories')
         dir = mdtool.members
