@@ -6,10 +6,12 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- Now adds a "null_wf" that onlyhas a create state, for objects that should 
+- Now adds a "null_wf" that only has a create state, for objects that should 
   not have any workflow actions, in this case calendars and events. 
   This removes the "Checkout version" and "submit links" on events and the
-  "New" link on calendars.
+  "New" link on calendars.(Bug #978).
+- The organizer is now displayed with the full name for new events.
+  This solves bug #908.
 
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
