@@ -14,7 +14,7 @@
 
 <metal:block fill-slot="css_slot">
   <link rel="stylesheet" type="text/css"
-        tal:attributes="href string:${portal_url}/calendar_stylesheet.css" />
+        tal:attributes="href string:${portal_url}/nuxeo_print_css.css" />
 </metal:block>
 
 <body>
