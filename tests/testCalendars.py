@@ -64,8 +64,7 @@ class TestCalendar(CPSCalendarTestCase):
 
         member_home = mtool.getHomeFolder(self.user_id)
         assert member_home
-
-        self.calendar = getattr(member_home, 'calendar')
+        self.calendar = member_home.calendar
         assert self.calendar
 
 
@@ -115,6 +114,21 @@ class TestCalendar(CPSCalendarTestCase):
             start_time=DateTime(2003, 1, 1, 10, 0),
             end_time=DateTime(2003, 1, 1, 16, 0), disp='month')
         # XXX: add some test for desc here
+
+        # Test event's view and forms
+        self.portal.REQUEST.SESSION = {}
+        assert event.calendar_event_view()
+        assert event.calendar_editevent_form()
+
+    def testView(self):
+        self.portal.REQUEST.SESSION = {}
+        assert self.calendar.calendar_view(disp="week")
+        assert self.calendar.calendar_view(disp="month")
+        assert self.calendar.calendar_view(disp="day")
+        assert self.calendar.calendar_addevent_form()
+        #assert self.calendar.calendar_display_form()
+        assert self.calendar.calendar_export()
+        assert getattr(self.calendar, 'calendar.ics')()
 
 
 def test_suite():

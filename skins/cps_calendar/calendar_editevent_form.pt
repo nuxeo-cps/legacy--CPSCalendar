@@ -9,8 +9,8 @@
     tal:attributes="src string:${base_url}calendar.js"></script>
 
   <script type="text/javascript" src="lang/calendar-en.js"
-    tal:define="local cpsmcat/get_selected_language"
-    tal:attributes="src string:${base_url}lang/calendar-${local}.js"></script>
+    tal:define="locale cpsmcat/get_selected_language|string:en"
+    tal:attributes="src string:${base_url}lang/calendar-${locale}.js"></script>
   <script type="text/javascript" src="calendar-setup.js"
     tal:attributes="src string:${base_url}calendar-setup.js"></script>
 </metal:block>
@@ -408,7 +408,7 @@ range       : [2000, 2049]
       <metal:block fill-slot="content">
         <select name="status"
           tal:define="myid python:here.getCalendar().id;
-              mystatus python:[att for att in here.attendees if att['id'] == myid][0]['status']">
+                      mystatus here/getMyStatus">
           <option tal:repeat="status python:['confirmed', 'tentative', 'decline']"
               tal:attributes="value status;
                       selected python:status == mystatus"

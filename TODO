@@ -27,3 +27,7 @@ P3:
 
 - add 
 
+Cleanup / refactoring:
+
+- suppress "string:en" in the forms.
+

@@ -137,8 +137,7 @@ class Event(CPSBaseDocument):
     security.declareProtected('Modify portal content', 'edit')
     def edit(self, attendees=None, from_date=None, to_date=None, 
              all_day=None, transparent=None, **kw):
-        """ Edit method
-        """
+        """Edit method"""
         setdirty = 0
         old_status = self.event_status
         CPSBaseDocument.edit(self, **kw)
@@ -174,8 +173,7 @@ class Event(CPSBaseDocument):
             self.notified_attendees = ()
 
     def _normalize(self):
-        """ Normalize from_date and to_date attributes
-        """
+        """Normalize from_date and to_date attributes"""
         if self.all_day:
             from_date = self.from_date
             if from_date is not None:
@@ -203,34 +201,29 @@ class Event(CPSBaseDocument):
 
     security.declareProtected(View, 'SearchableText')
     def SearchableText(self):
-        """ Used by the catalog for basic full text indexing.
-        """
+        """Used by the catalog for basic full text indexing."""
         return '%s %s' % (self.title, self.description)
 
     security.declareProtected(View, 'getCalendar')
     def getCalendar(self):
-        """ Return the calendar where this event is in
-        """
+        """Return the calendar where this event is in"""
         return aq_parent(aq_inner(self))
 
     security.declareProtected(View, 'getCalendarUser')
     def getCalendarUser(self):
-        """ Return the id of the calendar instead of the user
-        """
+        """Return the id of the calendar instead of the user"""
         return self.getCalendar().id
 
     security.declareProtected(View, 'getOrganizerCalendar')
     def getOrganizerCalendar(self):
-        """ Return the calendar of the organizer of the event
-        """
+        """Return the calendar of the organizer of the event"""
         ctool = getToolByName(self, 'portal_cpscalendar')
         org_calendar = ctool.getCalendarForPath(self.organizer['rpath'])
         return org_calendar
 
     security.declareProtected(View, 'getAttendeesDict')
     def getAttendeesDict(self):
-        """ Return the attendees of the event
-        """
+        """Return the attendees of the event"""
         attendees_dict = {}
         for attendee in self.attendees:
             entry = attendees_dict.setdefault(attendee['usertype'], [])
@@ -239,8 +232,7 @@ class Event(CPSBaseDocument):
 
     security.declareProtected('Add portal content', 'getPendingEvents')
     def getPendingEvents(self):
-        """ Return pending events of this event's calendar
-        """
+        """Return pending events of this event's calendar"""
         return self.getCalendar().getPendingEvents(event_id=self.id)
 
     security.declareProtected(View, 'getEventDict')
@@ -273,14 +265,12 @@ class Event(CPSBaseDocument):
 
     security.declareProtected('View', 'canEditThisEvent')
     def canEditThisEvent(self):
-        """ Return True if we are in the organizer's calendar
-        """
+        """Return True if we are in the organizer's calendar"""
         return self.getCalendarUser() == self.organizer['id']
 
     security.declareProtected('Add portal content', 'isDirty')
     def isDirty(self):
-        """ Check if we can edit the event
-        """
+        """Check if we can edit the event"""
         return not not ((self.isdirty and self.attendees and \
             self.canEditThisEvent()) or self.getPendingEvents())
 
@@ -312,8 +302,7 @@ class Event(CPSBaseDocument):
 
     security.declareProtected('Add portal content', 'setAttendeeStatus')
     def setAttendeeStatus(self, attendee, status):
-        """ Set the attendee's status
-        """
+        """Set the attendee's status"""
         change = 0
         for att in self.attendees:
             if att['id'] == attendee:
@@ -324,8 +313,7 @@ class Event(CPSBaseDocument):
 
     security.declareProtected('View', 'getMyStatus')
     def getMyStatus(self):
-        """ Return the status of the current calendar for this event
-        """
+        """Return the status of the current calendar for this event"""
         my_id = self.getCalendarUser()
         for attendee in self.attendees:
             if attendee['id'] == my_id:
@@ -333,8 +321,7 @@ class Event(CPSBaseDocument):
 
     security.declareProtected('Add portal content', 'setMyStatus')
     def setMyStatus(self, status, comment='', REQUEST=None):
-        """ Set the status for the current calendar
-        """
+        """Set the status for the current calendar"""
         user_id = self.getCalendarUser()
         (member, member_cn, dtstamp) = self._getRequestInformations()
         for attendee in self.attendees:
@@ -444,8 +431,8 @@ class Event(CPSBaseDocument):
 
         
     def _getRequestInformations(self):
-        """ Return a tuple with current member name, his properties and 
-            a Datetime object
+        """Return a tuple with current member name, his properties and 
+           a Datetime object
         """
         mtool = getToolByName(self, 'portal_membership')
         member = mtool.getAuthenticatedMember().getUserName()
@@ -460,8 +447,8 @@ class Event(CPSBaseDocument):
         return (member, member_cn, dtstamp)
 
     def manage_afterAdd(self, item, container):
-        """ Check if the event is cancelled, then register it in 
-            calendar._cencelled
+        """Check if the event is cancelled, then register it in 
+           calendar._cencelled
         """
         CPSBaseDocument.manage_afterAdd(self, item, container)
         if aq_base(item) is aq_base(self):

@@ -8,8 +8,8 @@
     tal:attributes="src string:${base_url}calendar.js"></script>
 
   <script type="text/javascript" src="lang/calendar-en.js"
-    tal:define="local cpsmcat/get_selected_language"
-    tal:attributes="src string:${base_url}lang/calendar-${local}.js"></script>
+    tal:define="locale cpsmcat/get_selected_language|string:en"
+    tal:attributes="src string:${base_url}lang/calendar-${locale}.js"></script>
   <script type="text/javascript" src="calendar-setup.js"
     tal:attributes="src string:${base_url}calendar-setup.js"></script>
 </metal:block>

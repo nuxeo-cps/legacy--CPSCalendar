@@ -21,9 +21,6 @@
 <metal:block fill-slot="main"
              tal:define="can_add_evts python:mtool.checkPermission('Add portal content', here)"
              i18n:domain="cpscalendar">
-<span tal:replace="python:here.absolute_url(relative=1)" /><br/>
-<span tal:replace="events_desc/hour_block_cols" /><br>
-<span tal:replace="events_desc/keys" /><br>
   <tal:block condition="can_add_evts">
     <tal:block define="ev_dict here/getDeclinedCancelledEvents">
       <form action="calendar_delevents" method="POST"
