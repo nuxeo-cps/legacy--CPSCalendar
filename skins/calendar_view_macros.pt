@@ -312,7 +312,7 @@
                         <span tal:content="python:str('_cal_Day%s' % i)"
                               i18n:translate="" />
                         <span tal:replace="string:${date/day}"/> 
-                        <span tal:content="python:str('_cal_Mo%s' % date.month());"
+                        <span tal:content="python:str('_cal_Mo%s' % date.month())"
                               i18n:translate="" />
                       </a>
                   </th>
