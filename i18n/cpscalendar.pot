@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2004-06-17 11:04default\n"
+"POT-Creation-Date: 2004-07-02 14:21default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -360,6 +360,13 @@ msgstr ""
 msgid "cpscalendar_label_between"
 msgstr ""
 
+#.   <a class=".button" onclick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')">
+#.                      Browse
+#.                 </a>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_label_browse"
+msgstr ""
+
 #.   <td>
 #.                 Busy time
 #.               </td>
@@ -437,6 +444,17 @@ msgstr ""
 #: ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_description"
+msgstr ""
+
+#.   <block fill-slot="title">
+#.               Document link
+#.             </block>
+#.   <metal:block fill-slot="title">
+#.           Document link
+#.         </metal:block>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_label_document_link"
 msgstr ""
 
 #.   <span>Duration</span>
