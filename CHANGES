@@ -10,6 +10,8 @@ Bug fixes:
 ~~~~~~~~~~
 - stringToDateTime required python2.2 or higher, now it also supports python2.1.
 - calendar_getPrevNext.py didn't handle year crossings.
+- The setting for duration when creating meetings was never used, so it's
+  removed.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Meetings and events are now the same thing, greatly simplyfying things.
