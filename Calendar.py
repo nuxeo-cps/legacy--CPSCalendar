@@ -627,11 +627,13 @@ class Calendar(Workgroup):
         calendar_url = self.absolute_url()
         event = getattr(self, event_dict['id'], None)
         if event is None:
+            new_event = 1
             event_title = event_dict['event']['title']
         else:
+            new_event = 0
             event_title = event.title_or_id()
 
-        mailing = self.calendar_mailing_notify(event_dict, calendar_url, calendar_title, event_title, mail_from, mails)
+        mailing = self.calendar_mailing_notify(event_dict, calendar_url, calendar_title, event_title, mail_from, mails, new_event=new_event)
         LOG('NGCal', DEBUG, 'Notifying from %s to %s:\n%s' % (mail_from, mails, mailing, ))
         try:
             mailhost.send(mailing,

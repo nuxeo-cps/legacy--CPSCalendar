@@ -147,8 +147,9 @@
                                   </th>
                                 </tr>
                                 <tr>
-                                  <td
-                                    bgcolor="#0000FF">
+                                  <td bgcolor="#0000FF"
+                                    tal:attributes="
+                                      height python:height-15">
                                   </td>
                                 </tr>
                               </tal:block>

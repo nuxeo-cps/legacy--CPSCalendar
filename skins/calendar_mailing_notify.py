@@ -1,4 +1,4 @@
-##parameters=event_dict, calendar_url, calendar_title, event_title, mail_from, mails
+##parameters=event_dict, calendar_url, calendar_title, event_title, mail_from, mails, new_event
 
 mcat = context.portal_messages
 request = event_dict['request']
@@ -16,14 +16,23 @@ Mime-Version: 1.0
 """ % (mail_from, ', '.join(mails), event_title)
 
 if request == 'request':
-    event = event_dict['event']
-    message = """
-Calendar for %(calendar_title)s received a request/update for event "%(event_title)s".
+    if new_event:
+        message = """
+%(calendar_title)s received a request for event "%(event_title)s".
+"""
+    else:
+        message = """
+%(calendar_title)s received an update for event "%(event_title)s".
 """
     message = message % {
         'calendar_title': calendar_title,
         'event_title': event_title,
     }
+    comment = event_dict['event']['comment'].strip()
+    if comment:
+        message += """
+Comment:
+%(comment)s""" % {'comment': comment}
 elif request == 'status':
     attendees = event_dict['change']
     message = """
@@ -33,6 +42,11 @@ Calendar for %(calendar_title)s received a status update for event "%(event_titl
     }
     for att in attendees:
         message += ("\n  - %s (%s)" % (att.get('cn', att['attendee']), att['status']))
+        comment = att['comment'].strip()
+        if comment:
+            message += """
+Comment:
+%(comment)s""" % {'comment': comment}
 
 message += """
 Please confirm/commit by using this URL:
