@@ -1,6 +1,6 @@
-# (c) 2002 Nuxeo SARL <http://nuxeo.com>
-# (c) 2002 Florent Guillaume <mailto:fg@nuxeo.com>
-# (c) 2002 Préfecture du Bas-Rhin, France
+# Copyright (c) 2002-2003 Nuxeo SARL <http://nuxeo.com>
+# Copyright (c) 2002 Préfecture du Bas-Rhin, France
+# Author: Florent Guillaume <mailto:fg@nuxeo.com>
 # See license info at the end of this file.
 # $Id$
 
@@ -16,8 +16,7 @@ from Globals import InitializeClass
 from Acquisition import aq_inner, aq_parent
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.CMFCorePermissions import \
-     setDefaultRoles, View, ManageProperties
+from Products.CMFCore.CMFCorePermissions import setDefaultRoles, View
 
 from Products.CPSCore.CPSBase import CPSBaseFolder#, CPSBase_adder
 #from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
@@ -33,7 +32,7 @@ WorkgroupManagerRoles = (WorkgroupManager, WorkgroupMember, WorkgroupVisitor,)
 WorkgroupMemberRoles = (WorkgroupMember, WorkgroupVisitor,)
 WorkgroupVisitorRoles = (WorkgroupVisitor,)
 
-def cmp_ev(a, b):
+def cmpEv(a, b):
     return a['start'].__cmp__(b['start'])
 
 factory_type_information = (
@@ -149,6 +148,7 @@ class Calendar(CPSBaseFolder):
     _additional_cals = ()
 
     def __init__(self, id, title='', description='', usertype='member'):
+        # XXX: title and description not used. Why ?
         #CPSBaseFolder.__init__(self, id, title, description)
         CPSBaseFolder.__init__(self, id)
         self.usertype = usertype
@@ -190,7 +190,8 @@ class Calendar(CPSBaseFolder):
         if event_dict['request'] == 'status':
             # append status change
             if this_event is not None:
-                event_dict['change'] = this_event['change'] + event_dict['change']
+                event_dict['change'] = this_event['change'] \
+                    + event_dict['change']
         events.append(event_dict)
         self._pending_events = tuple(events)
         self.notifyMembers(base_dict)
@@ -226,13 +227,16 @@ class Calendar(CPSBaseFolder):
                 return
             for change in pending['change']:
                 event.setAttendeeStatus(change['attendee'], change['status'])
-        events = [event for event in self._pending_events if event['id'] != event_id]
+        events = [event for event in self._pending_events 
+                        if event['id'] != event_id]
         self._pending_events = tuple(events)
         if REQUEST is not None:
             if request == 'status':
-                REQUEST.RESPONSE.redirect("%s/%s/calendar_attendees_form" % (self.absolute_url(), event_id))
+                REQUEST.RESPONSE.redirect("%s/%s/calendar_attendees_form" 
+                    % (self.absolute_url(), event_id))
             else:
-                REQUEST.RESPONSE.redirect("%s/%s" % (self.absolute_url(), event_id))
+                REQUEST.RESPONSE.redirect("%s/%s" 
+                    % (self.absolute_url(), event_id))
 
     security.declareProtected('Add portal content', 'cleanPendingEvents')
     def cleanPendingEvents(self, id=None, REQUEST=None):
@@ -241,27 +245,31 @@ class Calendar(CPSBaseFolder):
         if id is None:
             self._pending_events = ()
         else:
-            self._pending_events = tuple([ev for ev in self._pending_events if ev['id'] != id])
+            self._pending_events = tuple(
+                [ev for ev in self._pending_events if ev['id'] != id])
         if REQUEST is not None:
             REQUEST.RESPONSE.redirect(self.absolute_url())
 
     security.declareProtected('View', 'getEventsDesc')
     def getEventsDesc(self, start_time, end_time, disp, additional=1):
-        """Returns events between start_time and end_time
-        formatted according for a disp display type.
+        """Return events between start_time and end_time formatted according
+        for a disp display type.
 
         disp can be 'day', 'month', 'view'
         """
+        assert disp in ('day', 'month', 'view')
+
         mtool = getToolByName(self, 'portal_membership')
         show_dirty = mtool.checkPermission('Add portal content', self)
+
+        slots = []
+        slot_list = []
         if disp == 'day':
             slots = [(start_time, end_time)]
             slot_list = [{'desc': start_time, 'day': [], 'hour': []}]
         elif disp == 'week':
             slot_start = start_time
-            slots = []
-            slot_list = []
-            for i in range(0,7):
+            for i in range(0, 7):
                 slots.append((slot_start, slot_start+1))
                 slot_list.append({
                   'desc': slot_start,
@@ -271,8 +279,6 @@ class Calendar(CPSBaseFolder):
                 slot_start += 1
         elif disp == 'month':
             slot_start = start_time
-            slots = []
-            slot_list = []
             while slot_start.lessThan(end_time):
                 slots.append((slot_start, slot_start+1))
                 slot_list.append({
@@ -281,14 +287,16 @@ class Calendar(CPSBaseFolder):
                   'hour': [],
                 })
                 slot_start += 1
-                slot_start = DateTime(slot_start.year(), slot_start.month(), slot_start.day())
+                slot_start = DateTime(slot_start.year(), slot_start.month(), 
+                                      slot_start.day())
+
         events = self.objectValues('Event')
         events_ids = self.objectIds('Event')
         if additional and self._additional_cals:
             mtool = getToolByName(self, 'portal_membership')
             calendars = aq_parent(aq_inner(self))
-            cal_ids = [id for id in calendars.objectIds('Calendar') \
-                if id in self._additional_cals]
+            cal_ids = [id for id in calendars.objectIds('Calendar')
+                          if id in self._additional_cals]
             for cal_id in cal_ids:
                 cal = getattr(calendars, cal_id)
                 if self.id != cal_id and mtool.checkPermission('View', cal):
@@ -314,13 +322,14 @@ class Calendar(CPSBaseFolder):
             return {
               'slots': slots,
               'day_events': slot_list[0]['day'],
-              'hour_blocks': self._get_hour_block_cols(hour_cols, show_dirty)[0],
+              'hour_blocks': 
+                  self._getHourBlockCols(hour_cols, show_dirty)[0],
             }
         elif disp == 'week':
             day_events_list = [slot['day'] for slot in slot_list]
             hour_cols = [slot['hour'] for slot in slot_list]
-            day_lines = self._get_day_lines(day_events_list, len(slots))
-            hour_block_cols = self._get_hour_block_cols(hour_cols, show_dirty)
+            day_lines = self._getDayLines(day_events_list, len(slots))
+            hour_block_cols = self._getHourBlockCols(hour_cols, show_dirty)
             return {
                 'slots': slots,
                 'day_lines': day_lines,
@@ -342,7 +351,7 @@ class Calendar(CPSBaseFolder):
                 slot_day = slot['day']
                 day_events_list.append(slot_day)
                 slot_hour = slot['hour']
-                slot_hour.sort(cmp_ev)
+                slot_hour.sort(cmpEv)
                 slot = slots[i]
                 i += 1
                 current_line.append({
@@ -352,7 +361,7 @@ class Calendar(CPSBaseFolder):
                     'day_height': len(slot_hour),
                 })
                 if current_day == 7:
-                    day_lines = self._get_day_lines(day_events_list, 7)
+                    day_lines = self._getDayLines(day_events_list, 7)
                     current_dict['day_lines'] = day_lines
                     day_events_list = []
                     current_day = 1
@@ -365,7 +374,7 @@ class Calendar(CPSBaseFolder):
                     current_day += 1
             if current_day > 1:
                 day_events_list.extend([[]]*(8-current_day))
-                day_lines = self._get_day_lines(day_events_list, 7)
+                day_lines = self._getDayLines(day_events_list, 7)
                 current_dict['day_lines'] = day_lines
                 current_line.extend([None]*(8-current_day))
             return {
@@ -373,13 +382,12 @@ class Calendar(CPSBaseFolder):
                 'lines': lines,
             }
 
-    def _get_day_lines(self, day_events_list, len_slots):
+    def _getDayLines(self, day_events_list, len_slots):
         day_lines = []
         day_ids = []
         day_dict = {}
         day_occupation = []
         day_empty = []
-        hour_cols = []
         i = 0
         for day_events in day_events_list:
             event_ids = [ev['event_id'] for ev in day_events]
@@ -412,13 +420,11 @@ class Calendar(CPSBaseFolder):
                                 'event': None,
                                 'colspan': empty_span,
                                 'pos': pos,
-                            }
-                        )
+                            })
                     day_lines[line].append(
                         {
                             'event': ev['event'],
-                        }
-                    )
+                        })
             i += 1
         i = 0
         for day_line in day_lines:
@@ -432,8 +438,7 @@ class Calendar(CPSBaseFolder):
                             'event': None,
                             'colspan': empty_span,
                             'pos': pos,
-                        }
-                    )
+                        })
             else:
                 line, colstart = day_dict[id]
                 day_lines[line][-1]['colspan'] = len_slots - colstart
@@ -441,14 +446,14 @@ class Calendar(CPSBaseFolder):
 
         return day_lines
 
-    def _get_hour_block_cols(self, hour_cols, show_dirty):
+    def _getHourBlockCols(self, hour_cols, show_dirty):
         hour_block_cols = []
         for col in hour_cols:
             blocks = []
             hour_block_cols.append(blocks)
             if not col:
                 continue
-            col.sort(cmp_ev)
+            col.sort(cmpEv)
             conflict = []
             conflict_start = 0
             conflict_stop = 0
@@ -456,8 +461,8 @@ class Calendar(CPSBaseFolder):
             for ev in col:
                 start = ev['start']
                 stop = ev['stop']
-                start_min = start.hour()*60+start.minute()
-                stop_min = stop.hour()*60+stop.minute()
+                start_min = start.hour()*60 + start.minute()
+                stop_min = stop.hour()*60 + stop.minute()
                 if stop_min == 0:
                     stop_min = 1440
                 if conflict:
@@ -470,7 +475,8 @@ class Calendar(CPSBaseFolder):
                             the_event = conflict[0]['ev']['event']
                             blocks.append([[{
                               'event': the_event,
-                              'height': conflict[0]['stop_min'] - conflict[0]['start_min'],
+                              'height': conflict[0]['stop_min'] 
+                                        - conflict[0]['start_min'],
                               'isdirty': show_dirty and the_event.isDirty()
                             }]])
                         else:
@@ -538,7 +544,8 @@ class Calendar(CPSBaseFolder):
                     the_event = conflict[0]['ev']['event']
                     blocks.append([[{
                       'event': the_event,
-                      'height': conflict[0]['stop_min'] - conflict[0]['start_min'],
+                      'height': conflict[0]['stop_min'] 
+                                - conflict[0]['start_min'],
                       'isdirty': show_dirty and the_event.isDirty(),
                     }]])
                 else:
@@ -607,7 +614,8 @@ class Calendar(CPSBaseFolder):
         member = mtool.getAuthenticatedMember().getUserName()
         mail_from = self.getEmail(member, dir)
         if mail_from is None:
-            LOG('NGCal', INFO, "Can't get email address for %s" % (mail_from, ))
+            LOG('NGCal', INFO, "Can't get email address for %s" 
+                % (mail_from, ))
             return
         reply_to = mail_from
         m = getattr(self, 'get_apparent_mail_from', None)
@@ -690,7 +698,9 @@ class Calendar(CPSBaseFolder):
             new_event = 0
             event_title = event.title_or_id()
 
-        mailing = self.calendar_mailing_notify(event_dict, calendar_url, calendar_title, event_title, mail_from, reply_to, mails, new_event=new_event)
+        mailing = self.calendar_mailing_notify(event_dict, calendar_url, 
+            calendar_title, event_title, mail_from, reply_to, mails, 
+            new_event=new_event)
         try:
             mailhost.send(mailing,
                 mto=mails,
@@ -701,7 +711,8 @@ class Calendar(CPSBaseFolder):
             LOG('NGCal', INFO, "Error while sending notification email")
 
     security.declareProtected('View', 'getEvents')
-    def getEvents(from_date, to_date):
+    def getEvents(self, from_date, to_date):
+        # XXX: Docstring ? What does this do ?
         return ()
 
     security.declarePrivate('addDeclinedEvent')
@@ -720,13 +731,15 @@ class Calendar(CPSBaseFolder):
     def removeDeclinedEvent(self, event):
         event_id = event.id
         if event_id in self._declined:
-            self._declined = tuple([id for id in self._declined if id != event_id])
+            self._declined = tuple(
+                [id for id in self._declined if id != event_id])
 
     security.declarePrivate('removeCancelledEvent')
     def removeCancelledEvent(self, event):
         event_id = event.id
         if event_id in self._cancelled:
-            self._cancelled = tuple([id for id in self._cancelled if id != event_id])
+            self._cancelled = tuple(
+                [id for id in self._cancelled if id != event_id])
 
     security.declareProtected('Add portal content', 'getDeclinedCancelledEvents')
     def getDeclinedCancelledEvents(self):
@@ -749,7 +762,8 @@ class Calendar(CPSBaseFolder):
     def manage_delObjects(self, ids, *args, **kw):
         """
         """
-        self._pending_events = tuple([ev for ev in self._pending_events if ev['id'] not in ids])
+        self._pending_events = tuple(
+            [ev for ev in self._pending_events if ev['id'] not in ids])
         declined = [id for id in self._declined if id not in ids]
         cancelled = [id for id in self._cancelled if id not in ids]
         CPSBaseFolder.manage_delObjects(self, ids, *args, **kw)
@@ -772,11 +786,13 @@ def addCalendar(dispatcher, id,
     # sets correct permissions on ob
     ob.manage_permission(
         permission_to_manage='Access contents information',
-        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'],
+        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember', 
+               'WorkspaceReader'],
         acquire=0)
     ob.manage_permission(
         permission_to_manage='View',
-        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'],
+        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember', 
+               'WorkspaceReader'],
         acquire=0)
     ob.manage_permission(
         permission_to_manage='Add portal content',

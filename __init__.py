@@ -1,6 +1,6 @@
-# (c) 2002 Nuxeo SARL <http://nuxeo.com>
-# (c) 2002 Florent Guillaume <mailto:fg@nuxeo.com>
-# (c) 2002 Préfecture du Bas-Rhin, France
+# Copyright (c) 2002-2003 Nuxeo SARL <http://nuxeo.com>
+# Copyright (c) 2002 Préfecture du Bas-Rhin, France
+# Author: Florent Guillaume <mailto:fg@nuxeo.com>
 # See license info at the end of this file.
 # $Id$
 
@@ -10,11 +10,9 @@ from Products.CMFCore import utils
 from Products.CMFCore.DirectoryView import registerDirectory
 from Products.CMFCore.CMFCorePermissions import AddPortalContent
 
-
 import Calendars
 import Calendar
 import Event
-
 
 contentClasses = (Calendars.Calendars,
         Calendar.Calendar,

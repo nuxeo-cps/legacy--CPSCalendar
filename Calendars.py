@@ -1,6 +1,6 @@
-# (c) 2002 Nuxeo SARL <http://nuxeo.com>
-# (c) 2002 Florent Guillaume <mailto:fg@nuxeo.com>
-# (c) 2002 Préfecture du Bas-Rhin, France
+# Copyright (c) 2002-2003 Nuxeo SARL <http://nuxeo.com>
+# Copyright (c) 2002 Préfecture du Bas-Rhin, France
+# Author: Florent Guillaume <mailto:fg@nuxeo.com>
 # See license info at the end of this file.
 # $Id$
 
@@ -12,14 +12,13 @@
 
 from zLOG import LOG, DEBUG
 
-from Acquisition import aq_parent, aq_inner, aq_base
+from Acquisition import aq_parent, aq_inner
 from DateTime import DateTime
 
 from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass
 
-from Products.CMFCore.CMFCorePermissions import \
-     setDefaultRoles, View, ModifyPortalContent, ManageProperties
+from Products.CMFCore.CMFCorePermissions import setDefaultRoles, View
 from Products.CMFCore.utils import getToolByName
 
 from Products.CPSCore.CPSBase import CPSBaseFolder, CPSBase_adder
@@ -72,15 +71,15 @@ factory_type_information = (
      },
     )
 
-def cmp_ev(a, b):
+def _cmpEv(a, b):
     return cmp(b['start'], a['start'])
 
-def slot_union(cal_slot, with_free=0):
+def _slotUnion(cal_slot, with_free=0):
     result = []
     if not cal_slot:
         return []
     cal_slot = cal_slot[:]
-    cal_slot.sort(cmp_ev)
+    cal_slot.sort(_cmpEv)
     ev = cal_slot.pop()
     start = ev['start']
     stop = ev['stop']
@@ -170,13 +169,15 @@ class Calendars(CPSBaseFolder):
             return []
         if kw.get('with_free'):
             with_free = 1
+        else:
+            with_free = 0 # XXX: is with_free always set to 1 ?
         result = []
         length = len(cals[0])
         for i in range(length):
             this_slot = []
             for cal in cals:
                 this_slot.extend(cal[i])
-            result.append(slot_union(this_slot, with_free=with_free))
+            result.append(_slotUnion(this_slot, with_free=with_free))
         return result
 
     security.declareProtected('View', 'getFreeBusy')
@@ -185,7 +186,8 @@ class Calendars(CPSBaseFolder):
                     to_time_hour, to_time_minute):
         """Gets free/busy informations on attendees calendars"""
         # normalize
-        start_time = DateTime(from_date.year(), from_date.month(), from_date.day())
+        start_time = DateTime(from_date.year(), from_date.month(), 
+                              from_date.day())
         to_date = to_date + 1
         end_time = DateTime(to_date.year(), to_date.month(), to_date.day())
         slot_start = start_time
@@ -193,16 +195,17 @@ class Calendars(CPSBaseFolder):
         while slot_start.lessThan(end_time):
             slots.append((slot_start, slot_start+1))
             slot_start += 1
-            slot_start = DateTime(slot_start.year(), slot_start.month(), slot_start.day())
+            slot_start = DateTime(slot_start.year(), slot_start.month(), 
+                                  slot_start.day())
 
         length = len(slots)
 
         # first create the mask calendar
         mask_cal = []
-        if (to_time_hour or to_time_minute) and \
-            (from_time_hour > to_time_hour or \
-                (from_time_hour == to_time_hour and \
-                    from_time_minute > to_time_minute)):
+        if ((to_time_hour or to_time_minute) and
+            (from_time_hour > to_time_hour or
+                (from_time_hour == to_time_hour and
+                    from_time_minute > to_time_minute))):
             from_time_hour, to_time_hour = to_time_hour, from_time_hour
             from_time_minute, to_time_minute = to_time_minute, from_time_minute
 
@@ -213,14 +216,16 @@ class Calendars(CPSBaseFolder):
             month = date.month()
             day = date.day()
             if from_time_hour or from_time_minute:
-                mask_from = DateTime(year, month, day, from_time_hour, from_time_minute)
+                mask_from = DateTime(year, month, day, 
+                                     from_time_hour, from_time_minute)
                 this_day.append({
                     'start': date,
                     'stop': mask_from,
                 })
 
             if to_time_hour or to_time_minute:
-                mask_to = DateTime(year, month, day, to_time_hour, to_time_minute)
+                mask_to = DateTime(year, month, day, 
+                                   to_time_hour, to_time_minute)
                 this_day.append({
                     'start': mask_to,
                     'stop': slot[1],
@@ -242,8 +247,7 @@ class Calendars(CPSBaseFolder):
                 if event.transparent:
                     continue
                 event_slots = event.getEventInSlots(
-                    start_time, end_time, slots
-                )
+                    start_time, end_time, slots)
                 if event_slots is None:
                     continue
                 i = 0
@@ -266,7 +270,7 @@ class Calendars(CPSBaseFolder):
                 if slots_done[i] is not None:
                     list.append([slots_done[i]])
                 else:
-                    list.append(slot_union(cal_slot))
+                    list.append(_slotUnion(cal_slot))
                 i += 1
             
         return {
@@ -278,7 +282,7 @@ class Calendars(CPSBaseFolder):
 
     security.declareProtected(View, 'getCalendarForId')
     def getCalendarForId(self, id):
-        """Gets calendar for id, creates it if id is a user"""
+        """Get calendar for id, create it if id is a user"""
         id = str(id)
         ids = self.objectIds('Calendar')
         if id in ids:
@@ -291,18 +295,16 @@ class Calendars(CPSBaseFolder):
         mtool.checkPermission('Modify portal content', self)
         current_user = mtool.getAuthenticatedMember().getUserName()
         members = dirtool.members
-        entry_prop = members._getInternalEntryProp()
         entry = members._getEntry(id)
 
         if entry:
-        
             # create this calendar for this member
             ttool = getToolByName(context, 'portal_types')
             wtool = getToolByName(context, 'portal_workflow')
             self.manage_setLocalGroupRoles('role:Anonymous',
-                                           ['WorkspaceManager'] )
+                                           ['WorkspaceManager'])
             wtool.invokeFactoryFor(self, 'Calendar', id)
-            self.manage_delLocalGroupRoles( ['role:Anonymous'])
+            self.manage_delLocalGroupRoles(['role:Anonymous'])
             calendar_type_info = ttool.getTypeInfo('Calendar')
             
             ob = self._getOb(id)
@@ -311,10 +313,12 @@ class Calendars(CPSBaseFolder):
 
             if not mtool.isAnonymousUser():
                 ob.manage_delLocalRoles(userids=[current_user])
-            ob.manage_setLocalRoles(id, ['WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'])
+            ob.manage_setLocalRoles(id, 
+                ['WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'])
             ob.reindexObject()
             return ob
-        return None
+        else:
+            return None
 
     security.declareProtected(View, 'getCalendarsDict')
     def getCalendarsDict(self, exclude=None):
@@ -390,10 +394,7 @@ class Calendars(CPSBaseFolder):
 
 InitializeClass(Calendars)
 
-def addCalendars(dispatcher, id,
-                 title='',
-                 description='',
-                 REQUEST=None):
+def addCalendars(dispatcher, id, title='', description='', REQUEST=None):
     """Adds a Calendars container."""
     ob = Calendars(id)#, title, description)
     container = dispatcher.Destination()
