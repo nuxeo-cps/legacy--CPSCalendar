@@ -344,6 +344,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
     security.declareProtected('View', 'searchCalendars')
     def searchCalendars(self, search_param, search_term, calendar, directory):
+        """Searches for user calendars"""
         if not search_param:
             return {}
         
@@ -358,8 +359,9 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             restrict_search = 1
         else:
             restrict_search = 0
-            
-        if restrict_search:
+        
+        idfield = directory.id_field
+        if restrict_search and search_param != idfield:
             # Filter out users with view permission:
             local_users = []
             allowed = _allowedRolesAndUsers(calendar)
@@ -367,7 +369,6 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 if each.startswith('user:'):
                     local_users.append(each[5:])
 
-            idfield = directory.id_field
             users = directory.searchEntries(**{search_param: search_term,
                                                idfield: local_users})
         else:

@@ -29,6 +29,8 @@ Bug fixes:
 - The meeting creation form no longer loses the to and from times when
   you search for users.
 - Some formatting errors in the pending events view was fixed.
+- Searching for calendars on the id field when restrictive user search was
+  selected, returned all users with View-permission.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
