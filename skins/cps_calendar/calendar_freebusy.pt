@@ -88,11 +88,9 @@
     <input type="hidden" name="to_date_minute:int"
         tal:attributes="value meeting/args/to_date_minute">
     <ul tal:define="cal_users meeting/cal_users;
-                    selected_users cal_users/keys;">
       <li tal:repeat="user cal_users/items">
-        <input type="checkbox" name="cal_ids:list"
-               tal:attributes="value python:user[0];
-                               checked python:user[0] in selected_users;" />
+        <input type="checkbox" name="cal_ids:list" checked
+               tal:attributes="value python:user[0];" />
         <tal:block replace="python:user[1]" />
       </li>
     </ul>

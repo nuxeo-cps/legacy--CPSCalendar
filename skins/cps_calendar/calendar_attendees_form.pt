@@ -45,7 +45,8 @@
           <ul>
             <li tal:repeat="attendee attendees">
               <input type="checkbox" name="ids:list"
-                tal:attributes="value string:${attendee/id}" />
+                tal:attributes="value string:${attendee/id}"
+                tal:condition="python:here.organizer['id']!=attendee['id']" />
               <tal:block replace="attendee/cn|attendee/id" />
               (<tal:block content="python:str('cpscalendar_status_%s' % (attendee['status'], ))"
                           i18n:translate="">cpscalendar_confirmed</tal:block>)
