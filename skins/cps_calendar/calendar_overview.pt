@@ -1,0 +1,43 @@
+<tal:block define="global current_action string:display" />
+<html metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="main" i18n:domain="cpscalendar"
+             tal:define="ctool here/portal_cpscalendar;
+                         cals ctool/listVisibleCalendars;
+                         editcals ctool/listEditableCalendars;
+                         vcals python:[x for x in cals if x not in editcals];
+                         ">
+
+  <h1 i18n:domain="Default"
+      i18n:translate="action_overview">Calendar overview</h1>
+  <p>
+    <span i18n:translate="cpscalendar_message_editable_calendars"
+          tal:condition="editcals">
+      These are the calendars where you can create events
+    </span> :
+    <ul>
+      <li tal:repeat="cal editcals">
+        <a tal:attributes="href python:cal.absolute_url()"
+           tal:content="cal/title" />
+      </li>
+    </ul>
+  <p>
+    <span i18n:translate="cpscalendar_message_visible_calendars"
+          tal:condition="vcals">
+      These are the calendars you can only view:
+    </span>
+  </p>
+    <ul>
+      <li tal:repeat="cal vcals">
+        <a tal:attributes="href python:cal.absolute_url()"
+           tal:content="cal/title" />
+      </li>
+    </ul>
+  <tal:block condition="not:cals">
+    <span i18n:translate="cpscalendar_message_no_visible_calendars">
+      You can not view any calendars
+    </span>
+  </tal:block>
+</metal:block>
+
+</html>
