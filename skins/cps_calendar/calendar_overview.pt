@@ -18,7 +18,7 @@
     <ul>
       <li tal:repeat="cal editcals">
         <a tal:attributes="href python:cal.absolute_url()"
-           tal:content="cal/title" />
+           tal:content="cal/title_or_id" />
       </li>
     </ul>
   <p>
@@ -30,7 +30,7 @@
     <ul>
       <li tal:repeat="cal vcals">
         <a tal:attributes="href python:cal.absolute_url()"
-           tal:content="cal/title" />
+           tal:content="cal/title_or_id" />
       </li>
     </ul>
   <tal:block condition="not:cals">
