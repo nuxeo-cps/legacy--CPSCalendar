@@ -75,7 +75,9 @@ class CalendarInstaller(CPSInstaller):
             
         # Temporary fix to force reinstall of types. This should be tested
         # to see if it's needed, or a isUserModified() should be called.
-        ttool.manage_delObjects(['Event', 'Calendar'])
+        for type in ['Event', 'Calendar']:
+            if hasattr(ttool, type):
+                ttool.manage_delObjects([type])
 
         ptypes = {'Calendar':{'allowed_content_types':('Event',),
                               'typeinfo_name':'CPSCalendar: Calendar',
