@@ -142,6 +142,15 @@ class Event(CPSBaseDocument):
         CPSBaseDocument.__init__(self, id, organizer=organizer, **kw)
         self.organizer = deepcopy(organizer)
         if attendees is not None:
+            add_organizer = 1
+            for each in attendees:
+                if each['rpath'] == organizer['rpath']:
+                    add_organizer = 0
+                    break
+            if add_organizer:
+                orgdict = deepcopy(organizer)
+                orgdict['status'] = 'confirmed'
+                attendees = attendees + [orgdict]
             self.setAttendees(attendees)
         self.from_date = from_date 
         self.to_date = to_date
@@ -158,16 +167,21 @@ class Event(CPSBaseDocument):
         self.isdirty = 0
 
     security.declareProtected('Modify portal content', 'edit')
-    def edit(self, attendees=None, from_date=None, to_date=None,
+    def edit(self, from_date=None, to_date=None,
              event_type=None, transparent=None, document=None, **kw):
         """Edit method"""
-        old_status = self.event_status
-        if self._edit(attendees, from_date, to_date,
+        if self._edit(from_date, to_date,
              event_type, transparent, document, **kw):
             self.isdirty = 1
             self.notified_attendees = ()
-        new_status = self.event_status
         
+    def _edit(self, from_date=None, to_date=None,
+             event_type=None, transparent=None, document=None, **kw):
+        """Edits an event and returns 1 if there was any changes"""
+        setdirty = 0
+        old_status = self.event_status
+        CPSBaseDocument.edit(self, **kw)
+        new_status = self.event_status
         if new_status != old_status:
             if new_status == 'canceled':
                 calendar = self.getCalendar()
@@ -175,22 +189,13 @@ class Event(CPSBaseDocument):
             if old_status == 'canceled':
                 calendar = self.getCalendar()
                 calendar.unCancelEvent(self)
-            self.isdirty = 1
-            self.notified_attendees = ()
-    
-    def _edit(self, attendees=None, from_date=None, to_date=None,
-             event_type=None, transparent=None, document=None, **kw):
-        """Edits an event and returns 1 if there was any changes"""
-        setdirty = 0
-        CPSBaseDocument.edit(self, **kw)
+            setdirty = 1
 
         if event_type is not None and event_type != self.event_type:
             setdirty = 1
             self.event_type = event_type
         if transparent is not None:
             self.transparent = transparent
-        if attendees is not None:
-            self.setAttendees(attendees)
         if from_date is not None and self.from_date != from_date:
             setdirty = 1
             self.from_date = from_date
@@ -388,6 +393,28 @@ class Event(CPSBaseDocument):
         self.isdirty = self.notified_attendees != all_rpaths
 
     def removeAttendees(self, attendees):
+        """Removes attendees from attendee-list"""
+        self._removeAttendees(attendees)
+        
+        ctool = getToolByName(self, 'portal_cpscalendar')
+        for attendee in self.attendees:
+            apath = attendee['rpath']
+            acal = ctool.getCalendarForPath(apath, unrestricted=1)
+            event = acal._getOb(self.getId(), None)
+            if event is not None:
+                event._removeAttendees(attendees)
+            
+            # Check pending events
+            for event in acal._pending_events:
+                if event['id'] != event_id:
+                    continue
+                for att in event['event']['attendees']:
+                    if att['rpath'] in attendees:
+                        event['event']['attendees'].remove(att)
+                        acal._p_changed = 1
+
+        
+    def _removeAttendees(self, attendees):
         """Removes attendees from attendee-list"""
         event_dict = self.getEventDict()
         event_dict['event']['event_status'] = 'canceled'

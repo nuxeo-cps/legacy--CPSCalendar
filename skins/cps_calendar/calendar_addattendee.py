@@ -26,6 +26,7 @@ if new_attendees:
     attendees = list(attendees)
     attendees.extend(new_attendees)
     context.setAttendees(attendees)
+    context.updateAttendeesCalendars()
 
 if REQUEST is not None:
     REQUEST.RESPONSE.redirect(

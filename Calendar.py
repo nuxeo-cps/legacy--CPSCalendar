@@ -291,7 +291,7 @@ class Calendar(CPSBaseFolder):
             if event['id'] == event_id:
                 pending = event
                 break
-        if event is None:
+        if pending is None:
             return
         request = pending['request']
         if request == 'request':

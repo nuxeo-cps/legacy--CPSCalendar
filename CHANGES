@@ -20,6 +20,8 @@ Bug fixes:
 - Deleting events now cancels them, even in the deleters calendar.
 - Verifying cancellations no longer sends new events to verify.
 - Removing an attendee now sends a cancel to the attendee.
+- The organizer is now always a participant (even if it is an event).
+- Adding attendees now automatically sends a notification.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
