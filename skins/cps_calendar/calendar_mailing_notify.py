@@ -6,7 +6,7 @@ confirm_url = '%s/calendar_pending_events?event_id=%s' % (calendar_url, event_di
 
 # Personal calendars have a tendency to have titles ending in the ordinal 160.
 # That doesn't work.
-if ord(calendar_title[-1]):
+if ord(calendar_title[-1]) == 160:
     calendar_title = calendar_title[:-1]
 else:
     calendar_title = mcat(calendar_title.strip())
