@@ -2,13 +2,6 @@
   <tal:block define="
     global non_local string:#777777;
     "/>
-  <tal:block
-    condition="show_nav|python:1">
-    [<a href="calendar_printable_view"
-      i18n:translate="cpscalendar_link_printable_view">
-      Printable view
-    </a>]
-  </tal:block>
   <table cellspacing="0" cellpadding="0" border="0">
     <tr>
       <td align="right"><div class="contentTabs"><span class="opentab"> </span><a
@@ -217,13 +210,6 @@
 <metal:block define-macro="week">
   <tal:block define="global non_local string:#777777;
     "/>
-  <tal:block
-    condition="show_nav|python:1">
-    [<a href="calendar_printable_view"
-      i18n:translate="cpscalendar_link_printable_view">
-      Printable view
-    </a>]
-  </tal:block>
   <table cellspacing="0" cellpadding="0" border="0">
     <tr tal:condition="show_tab|python:1">
       <td align="right"><div class="contentTabs"><span class="opentab"> </span><a
@@ -490,13 +476,6 @@
           i18n:translate="" />
     <span tal:replace="viewed_day/year"/>
   </span>
-  <tal:block
-    condition="show_nav|python:1">
-    [<a href="calendar_printable_view"
-      i18n:translate="cpscalendar_link_printable_view">
-      Printable view
-    </a>]
-  </tal:block>
   <table cellspacing="0" cellpadding="0" border="0">
     <tr>
       <td align="right"><div class="contentTabs"><span class="opentab"> </span><a

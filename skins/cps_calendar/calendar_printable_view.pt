@@ -21,7 +21,7 @@
 
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="can_add_evts python:mtool.checkPermission('Add portal content', here);
-                         show_nav nothing">
+                         show_tab nothing;">
   <h1 tal:content="here/title_or_id">
     Linus Torvalds (This is the name of calendar owner and we don't want it to be translated)
   </h1>

@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- The printable view now shows the same day as you were looking at, and
+  not today. It pops up in a separate window.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

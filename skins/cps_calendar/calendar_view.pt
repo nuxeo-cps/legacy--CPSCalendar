@@ -5,6 +5,7 @@
                    calendar_disp disp_infos/disp;
                    selected_day disp_infos/selected_day;
                    viewed_day disp_infos/viewed_day;
+                   viewed_day_int python:int(viewed_day);
                    start_time disp_infos/start_time;
                    end_time disp_infos/end_time;
                    events_desc python:here.getEventsDesc(start_time, end_time, calendar_disp);
@@ -66,6 +67,13 @@
         </a>
       </h3>
     </tal:block>
+  </tal:block>
+  <tal:block>
+    [<a target="_blank"
+      tal:attributes="href string:calendar_printable_view?viewed_day=${viewed_day_int}"
+      i18n:translate="cpscalendar_link_printable_view">
+      Printable view
+    </a>]
   </tal:block>
   <metal:block use-macro="here/calendar_view_macros/macros/?calendar_disp" />
 
