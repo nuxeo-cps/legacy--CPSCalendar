@@ -17,21 +17,9 @@ from Acquisition import aq_inner, aq_parent
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.CMFCorePermissions import \
-     setDefaultRoles, View, ManageProperties
+     View, ManageProperties
 
-from OFS.Folder import Folder
-#from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
-
-ManageWorkgroups = 'Manage Workgroups'
-setDefaultRoles(ManageWorkgroups, ('Manager',))
-
-
-WorkgroupManager = 'WorkgroupManager'
-WorkgroupMember = 'WorkgroupMember'
-WorkgroupVisitor = 'WorkgroupVisitor'
-WorkgroupManagerRoles = (WorkgroupManager, WorkgroupMember, WorkgroupVisitor,)
-WorkgroupMemberRoles = (WorkgroupMember, WorkgroupVisitor,)
-WorkgroupVisitorRoles = (WorkgroupVisitor,)
+from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
 
 def cmp_ev(a, b):
     return a['start'].__cmp__(b['start'])
@@ -113,7 +101,7 @@ factory_type_information = (
     )
 
 
-class Calendar(Folder):
+class Calendar(Workgroup):
     """
     """
     meta_type = 'Calendar'
@@ -140,7 +128,7 @@ class Calendar(Folder):
     _additional_cals = ()
 
     def __init__(self, id, title='', description='', usertype='member'):
-        Folder.__init__(self, id, title, description)
+        Workgroup.__init__(self, id, title, description)
         self.usertype = usertype
 
     security.declareProtected('Add portal content', 'getPendingEventsCount')
@@ -739,7 +727,7 @@ class Calendar(Folder):
         self._pending_events = tuple([ev for ev in self._pending_events if ev['id'] not in ids])
         declined = [id for id in self._declined if id not in ids]
         cancelled = [id for id in self._cancelled if id not in ids]
-        Folder.manage_delObjects(self, ids, *args, **kw)
+        Workgroup.manage_delObjects(self, ids, *args, **kw)
         self._declined = tuple(declined)
         self._cancelled = tuple(cancelled)
 
