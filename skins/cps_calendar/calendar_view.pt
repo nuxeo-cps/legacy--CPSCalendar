@@ -45,14 +45,15 @@
       </form>
     </tal:block>
     <tal:block define="pendings_count here/getPendingEventsCount"
-      condition="pendings_count">
+               condition="pendings_count">
       <h3>
         <a href="calendar_pending_events"
            tal:attributes="href string:${context_url}/calendar_pending_events"
            tal:condition="python:pendings_count > 1"
-           tal:content="string:cpscalendar_have ${pending_count} pending requests_"
            i18n:translate="">
-           You have 2 pending requests.
+           You have <span tal:replace="pendings_count"
+                          i18n:name="pendings_count">2</span>
+           pending requests.
         </a>
         <a href="calendar_pending_events"
            tal:attributes="href string:${context_url}/calendar_pending_events"

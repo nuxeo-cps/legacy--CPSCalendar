@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2003-12-17 16:47default\n"
+"POT-Creation-Date: 2003-12-17 17:01default\n"
 "PO-Revision-Date: 2003-12-08 14:31+0100\n"
 "Last-Translator: Encolpe DEGOUTE <ed@nuxeo.com>\n"
 "Language-Team: French <cantact@nuxeo.com>\n"
@@ -83,12 +83,13 @@ msgstr "User type"
 msgid "Yes"
 msgstr "Yes"
 
-#.   <a condition="python:pendings_count > 1" attributes="href string:${context_url}/calendar_pending_events" content="string:cpscalendar_have ${pending_count} pending requests_" href="calendar_pending_events">
-#.              You have 2 pending requests.
+#.   <a condition="python:pendings_count > 1" attributes="href string:${context_url}/calendar_pending_events" href="calendar_pending_events">
+#.              You have ${pendings_count (tal replace="pendings_count")}
+#.              pending requests.
 #.           </a>
 #: from ../skins/cps_calendar/calendar_view.pt
-msgid "You have 2 pending requests."
-msgstr ""
+msgid "You have ${pendings_count} pending requests."
+msgstr "You have ${pendings_count} pending requests."
 
 #.   <a attributes="href string:${cal/url}/calendar_pending_events" content="string:[${cal/pending}]">
 #.                 [1]
@@ -860,7 +861,7 @@ msgstr "No ressource selected"
 #.           </a>
 #: from ../skins/cps_calendar/calendar_view.pt
 msgid "cpscalendar_one_pending_request"
-msgstr "There is one pending request"
+msgstr "You have one pending request"
 
 #.   <option repeat="propid searchable_keys" attributes="value propid" content="python:str(schema_dict[propid].title)">cpscalendar_option</option>
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
@@ -1160,4 +1161,3 @@ msgstr "you cannot select a time interval larger than a month"
 
 msgid "cpscalendar_create_the_meeting_here"
 msgstr "Create the meeting here"
-

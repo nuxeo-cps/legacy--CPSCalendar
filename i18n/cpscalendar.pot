@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-12-17 16:47default\n"
+"POT-Creation-Date: 2003-12-17 17:01default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -79,11 +79,12 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#.   <a condition="python:pendings_count > 1" attributes="href string:${context_url}/calendar_pending_events" content="string:cpscalendar_have ${pending_count} pending requests_" href="calendar_pending_events">
-#.              You have 2 pending requests.
+#.   <a condition="python:pendings_count > 1" attributes="href string:${context_url}/calendar_pending_events" href="calendar_pending_events">
+#.              You have ${pendings_count (tal replace="pendings_count")}
+#.              pending requests.
 #.           </a>
 #: from ../skins/cps_calendar/calendar_view.pt
-msgid "You have 2 pending requests."
+msgid "You have ${pendings_count} pending requests."
 msgstr ""
 
 #.   <a attributes="href string:${cal/url}/calendar_pending_events" content="string:[${cal/pending}]">
