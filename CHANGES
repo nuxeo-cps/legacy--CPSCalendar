@@ -6,8 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- Added labels to the event modification form to improve accessibility + removed
-  unwanted span elements cluttering the HTML output. Fixes #469
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
