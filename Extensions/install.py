@@ -52,9 +52,6 @@ def cpscalendarinstall(self):
     skins = ('cpscalendar',)
     paths = {
         'cpscalendar': 'Products/CPSCalendar/skins',
-        'sit_base': 'Products/SIT_ALSACE/skins',
-        'sit_images': 'Products/SIT_ALSACE/images',
-        'sit_document': 'Products/SIT_ALSACE/skins/cps_document',
     }
     for skin in skins:
         path = paths[skin]
