@@ -3,6 +3,7 @@
 # translation of en.po to
 # translation of en.po to
 # translation of en.po to
+# translation of en.po to
 # translation of en.po to ben
 # translation of en.po to French
 # translation of en.po to
@@ -16,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
 "POT-Creation-Date: 2004-08-17 16:28default\n"
-"PO-Revision-Date: 2004-08-19 12:27+0200\n"
+"PO-Revision-Date: 2004-08-19 16:07+0200\n"
 "Last-Translator: Lennart Regebro <rgebro@nuxeo.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -990,19 +991,19 @@ msgid "cpscalendar_option_status_tentative"
 msgstr "Tentative"
 
 msgid "cpscalendar_pending_confirmed"
-msgstr "Confirm"
+msgstr "Attend this event"
 
 msgid "cpscalendar_pending_tentative"
-msgstr "Tentative"
+msgstr "Try to attend this event"
 
 msgid "cpscalendar_pending_decline"
-msgstr "Decline"
+msgstr "Decline this event"
 
 msgid "cpscalendar_pending_decline_and_delete"
-msgstr "Decline and delete"
+msgstr "Decline and delete this event from your calendar"
 
 msgid "cpscalendar_pending_ignore"
-msgstr "ignore"
+msgstr "Ignore this event"
 
 msgid "cpscalendar_category_private"
 msgstr "Private"
