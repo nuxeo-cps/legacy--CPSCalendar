@@ -6,8 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- Made the calendar CSS be returned with the correct mime-type which is
-  "text/css" + normalization.
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
