@@ -10,6 +10,7 @@ Bug fixes:
 - The date display in the weekly view now always uses two lines, one for weekday
   and date, one for month.
 - Some fixes for better french in the translations.
+- The end date didn't follow the start date on standard even creation.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

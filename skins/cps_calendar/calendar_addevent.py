@@ -25,9 +25,15 @@ to_date_minute = kw.get('to_date_minute')
 
 if event_type == 'event_allday':
     to_date_string += ' 23:59'
-else:
+elif event_type == 'event_recurring':
     from_date_string += ' %s:%s' %(from_date_hour,from_date_minute)
     to_date_string += ' %s:%s' %(to_date_hour,to_date_minute)
+else:
+    # For standard events, to date and from date is the same, so start with
+    # Setting to_date string to the from_date_string + hours.
+    to_date_string = from_date_string + ' %s:%s' %(to_date_hour,to_date_minute)
+    from_date_string += ' %s:%s' %(from_date_hour,from_date_minute)
+
 from_date = ctool.stringToDateTime(from_date_string, locale)
 to_date = ctool.stringToDateTime(to_date_string, locale)
 kw['from_date'] = from_date
