@@ -313,7 +313,7 @@
               Description
             </metal:block>
             <metal:block fill-slot="content">
-              <input name="location" size="40" tal:attributes="value description" />
+              <input name="description" size="40" tal:attributes="value description" />
             </metal:block>
           </metal:block>
 
