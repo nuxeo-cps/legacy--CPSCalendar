@@ -17,11 +17,23 @@ from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass
 
 from Products.CMFCore.CMFCorePermissions import \
-     View, ManageProperties
+     setDefaultRoles, View, ManageProperties
 from Products.CMFCore.utils import getToolByName
 
 
-from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
+from OFS.Folder import Folder
+#from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
+
+ManageWorkgroups = 'Manage Workgroups'
+setDefaultRoles(ManageWorkgroups, ('Manager',))
+
+
+WorkgroupManager = 'WorkgroupManager'
+WorkgroupMember = 'WorkgroupMember'
+WorkgroupVisitor = 'WorkgroupVisitor'
+WorkgroupManagerRoles = (WorkgroupManager, WorkgroupMember, WorkgroupVisitor,)
+WorkgroupMemberRoles = (WorkgroupMember, WorkgroupVisitor,)
+WorkgroupVisitorRoles = (WorkgroupVisitor,)
 
 factory_type_information = (
     {'id': 'Calendars',
@@ -132,7 +144,7 @@ def slot_union(cal_slot, with_free=0):
 
     return result
 
-class Calendars(Workgroup):
+class Calendars(Folder):
     """
     """
     meta_type = 'Calendars'
