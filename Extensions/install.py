@@ -82,131 +82,137 @@ def cpscalendarinstall(self):
         portal.portal_skins.addSkinSelection(skin_name, npath)
         pr(" Fixup of skin %s" % skin_name)
         
-    # create workflow
-    pr("Setup workflow shemas")
+##    # create workflow
+##    pr("Setup workflow shemas")
     wftool = portal.portal_workflow
-    wfids = wftool.objectIds()
+    trtool = portal.portal_trees
+##    wfids = wftool.objectIds()
 
-    # WF calendars
-    wfid = 'calendar_folder_wf'
-    pr(" Setup workflow %s" % wfid)
-    if wfid in wfids:
-        wftool.manage_delObjects([wfid])
-    wftool.manage_addWorkflow(id=wfid,
-                              workflow_type='cps_workflow (Web-configurable workflow for CPS)')
-    wf = wftool[wfid]
+##    # WF calendars
+##    wfid = 'calendar_folder_wf'
+##    pr(" Setup workflow %s" % wfid)
+##    if wfid in wfids:
+##        wftool.manage_delObjects([wfid])
+##    wftool.manage_addWorkflow(id=wfid,
+##                              workflow_type='cps_workflow (Web-configurable workflow for CPS)')
+##    wf = wftool[wfid]
     
-    for s in ('work', ):
-        wf.states.addState(s)
-    for t in ('create', 'create_content', 'create_folder'):
-        wf.transitions.addTransition(t)
+##    for s in ('work', ):
+##        wf.states.addState(s)
+##    for t in ('create', 'create_content', 'create_folder'):
+##        wf.transitions.addTransition(t)
 
-    s = wf.states.get('work')
-    s.setProperties(title='Work', 
-                    transitions=('create_content',))
-    t = wf.transitions.get('create')
-    t.setProperties(title='Initial creation', new_state_id='work', 
-                    transition_behavior=(TRANSITION_INITIAL_CREATE, ), 
-                    clone_allowed_transitions=None,
-                    actbox_name='', actbox_category='workflow', actbox_url='',
-                    props={'guard_permissions':'', 
-                           'guard_roles':'Manager; WorkspaceManager; WorkspaceMember', 
-                           'guard_expr':''},
-                    )
-    t = wf.transitions.get('create_content')
-    t.setProperties(title='Create content', new_state_id='work', 
-                    transition_behavior=(TRANSITION_ALLOWSUB_CREATE, ), 
-                    clone_allowed_transitions=None,
-                    trigger_type=TRIGGER_USER_ACTION, 
-                    actbox_name='New',
-                    actbox_category='',
-                    actbox_url='',
-                    props={'guard_permissions':'', 
-                           'guard_roles':'Manager; WorkspaceManager; WorkspaceMember', 
-                           'guard_expr':''},
-                    )
+##    s = wf.states.get('work')
+##    s.setProperties(title='Work', 
+##                    transitions=('create_content',))
+##    t = wf.transitions.get('create')
+##    t.setProperties(title='Initial creation', new_state_id='work', 
+##                    transition_behavior=(TRANSITION_INITIAL_CREATE, ), 
+##                    clone_allowed_transitions=None,
+##                    actbox_name='', actbox_category='workflow', actbox_url='',
+##                    props={'guard_permissions':'', 
+##                           'guard_roles':'Manager; WorkspaceManager; WorkspaceMember', 
+##                           'guard_expr':''},
+##                    )
+##    t = wf.transitions.get('create_content')
+##    t.setProperties(title='Create content', new_state_id='work', 
+##                    transition_behavior=(TRANSITION_ALLOWSUB_CREATE, ), 
+##                    clone_allowed_transitions=None,
+##                    trigger_type=TRIGGER_USER_ACTION, 
+##                    actbox_name='New',
+##                    actbox_category='',
+##                    actbox_url='',
+##                    props={'guard_permissions':'', 
+##                           'guard_roles':'Manager; WorkspaceManager; WorkspaceMember', 
+##                           'guard_expr':''},
+##                    )
 
-    # WF workspace content
-    wfid = 'calendar_content_wf'
-    pr(" Setup workflow %s" % wfid)
-    if wfid in wfids:
-        wftool.manage_delObjects([wfid])
-    wftool.manage_addWorkflow(id=wfid,
-                              workflow_type='cps_workflow (Web-configurable workflow for CPS)')
-    wf = wftool[wfid]
+##    # WF workspace content
+##    wfid = 'calendar_content_wf'
+##    pr(" Setup workflow %s" % wfid)
+##    if wfid in wfids:
+##        wftool.manage_delObjects([wfid])
+##    wftool.manage_addWorkflow(id=wfid,
+##                              workflow_type='cps_workflow (Web-configurable workflow for CPS)')
+##    wf = wftool[wfid]
     
-    for s in ('work', ):
-        wf.states.addState(s)
-    for t in ('create', 'copy_submit', ):
-        wf.transitions.addTransition(t)
-    for v in ('action', 'actor', 'comments', 'review_history', 'time'):
-        wf.variables.addVariable(v)
-    for p in (View, ModifyPortalContent, ):
-        wf.addManagedPermission(p)
+##    for s in ('work', ):
+##        wf.states.addState(s)
+##    for t in ('create', 'copy_submit', ):
+##        wf.transitions.addTransition(t)
+##    for v in ('action', 'actor', 'comments', 'review_history', 'time'):
+##        wf.variables.addVariable(v)
+##    for p in (View, ModifyPortalContent, ):
+##        wf.addManagedPermission(p)
         
-    s = wf.states.get('work')
-    s.setProperties(title='Work', 
-                    transitions=('copy_submit',))
-    s.setPermission(ModifyPortalContent, 0, ('Manager', 'WorkspaceManager', 'WorkspaceMember'))
-    s.setPermission(View, 0, ('Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'))
+##    s = wf.states.get('work')
+##    s.setProperties(title='Work', 
+##                    transitions=('copy_submit',))
+##    s.setPermission(ModifyPortalContent, 0, ('Manager', 'WorkspaceManager', 'WorkspaceMember'))
+##    s.setPermission(View, 0, ('Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'))
 
-    t = wf.transitions.get('create')
-    t.setProperties(title='Initial creation', new_state_id='work', 
-                    transition_behavior=(TRANSITION_INITIAL_CREATE, ),
-                    clone_allowed_transitions=None,
-                    actbox_name='', actbox_category='workflow', actbox_url='',
-                    props={'guard_permissions':'',
-                           'guard_roles':'Manager; WorkspaceManager; WorkspaceMember', 
-                           'guard_expr':''},
-                    )
-    t = wf.transitions.get('copy_submit')
-    t.setProperties(title='Copy content into a section for Publishing',
-                    new_state_id='', 
-                    transition_behavior=(TRANSITION_BEHAVIOR_PUBLISHING, ), 
-                    clone_allowed_transitions=('submit', 'publish'),
-                    trigger_type=TRIGGER_USER_ACTION, 
-                    actbox_name='Submit', actbox_category='workflow',
-                    actbox_url='%(content_url)s/content_submit_form',
-                    props={'guard_permissions':'', 
-                           'guard_roles':'Manager; WorkspaceManager; WorkspaceMember', 
-                           'guard_expr':''},
-                    )
+##    t = wf.transitions.get('create')
+##    t.setProperties(title='Initial creation', new_state_id='work', 
+##                    transition_behavior=(TRANSITION_INITIAL_CREATE, ),
+##                    clone_allowed_transitions=None,
+##                    actbox_name='', actbox_category='workflow', actbox_url='',
+##                    props={'guard_permissions':'',
+##                           'guard_roles':'Manager; WorkspaceManager; WorkspaceMember', 
+##                           'guard_expr':''},
+##                    )
+##    t = wf.transitions.get('copy_submit')
+##    t.setProperties(title='Copy content into a section for Publishing',
+##                    new_state_id='', 
+##                    transition_behavior=(TRANSITION_BEHAVIOR_PUBLISHING, ), 
+##                    clone_allowed_transitions=('submit', 'publish'),
+##                    trigger_type=TRIGGER_USER_ACTION, 
+##                    actbox_name='Submit', actbox_category='workflow',
+##                    actbox_url='%(content_url)s/content_submit_form',
+##                    props={'guard_permissions':'', 
+##                           'guard_roles':'Manager; WorkspaceManager; WorkspaceMember', 
+##                           'guard_expr':''},
+##                    )
     
-    # wf variables
-    wf.variables.setStateVar('review_state')
-    vdef = wf.variables['action']
-    vdef.setProperties(description='The last transition',
-                       default_expr='transition/getId|nothing',
-                       for_status=1, update_always=1)
+##    # wf variables
+##    wf.variables.setStateVar('review_state')
+##    vdef = wf.variables['action']
+##    vdef.setProperties(description='The last transition',
+##                       default_expr='transition/getId|nothing',
+##                       for_status=1, update_always=1)
 
-    vdef = wf.variables['actor']
-    vdef.setProperties(description='The ID of the user who performed '
-                       'the last transition',
-                       default_expr='user/getId',
-                       for_status=1, update_always=1)
+##    vdef = wf.variables['actor']
+##    vdef.setProperties(description='The ID of the user who performed '
+##                       'the last transition',
+##                       default_expr='user/getId',
+##                       for_status=1, update_always=1)
 
-    vdef = wf.variables['comments']
-    vdef.setProperties(description='Comments about the last transition',
-                       default_expr="python:state_change.kwargs.get('comment', '')",
-                       for_status=1, update_always=1)
+##    vdef = wf.variables['comments']
+##    vdef.setProperties(description='Comments about the last transition',
+##                       default_expr="python:state_change.kwargs.get('comment', '')",
+##                       for_status=1, update_always=1)
 
-    vdef = wf.variables['review_history']
-    vdef.setProperties(description='Provides access to workflow history',
-                       default_expr="state_change/getHistory",
-                       props={'guard_permissions':'',
-                              'guard_roles':'Manager; WorkspaceManager; WorkspaceMember; WorkspaceReader',
-                              'guard_expr':''})
+##    vdef = wf.variables['review_history']
+##    vdef.setProperties(description='Provides access to workflow history',
+##                       default_expr="state_change/getHistory",
+##                       props={'guard_permissions':'',
+##                              'guard_roles':'Manager; WorkspaceManager; WorkspaceMember; WorkspaceReader',
+##                              'guard_expr':''})
 
-    vdef = wf.variables['time']
-    vdef.setProperties(description='Time of the last transition',
-                       default_expr="state_change/getDateTime",
-                       for_status=1, update_always=1)
+##    vdef = wf.variables['time']
+##    vdef.setProperties(description='Time of the last transition',
+##                       default_expr="state_change/getDateTime",
+##                       for_status=1, update_always=1)
 
 
     # setup portal_type: CPS Proxy Document, CPS Proxy Folder
     # CPS Folder
     pr("Verifying portal types")
     ttool = portal.portal_types
+    workspaceACT = list(ttool['Workspace'].allowed_content_types)
+    if 'Calendars' not in  workspaceACT:
+        workspaceACT.append('Calendars')
+    if 'Calendar' not in  workspaceACT:
+        workspaceACT.append('Calendar')
     ptypes = {
         'CPSCalendar':('Calendars',
                        'Calendar',
@@ -217,6 +223,7 @@ def cpscalendarinstall(self):
                             'Calendars' : ('Calendar',),
                             'Calendar' : ('Event',),
                             'Event' : (),
+                            'Workspace' : workspaceACT
                             }
     
     ptypes_installed = ttool.objectIds()
@@ -235,14 +242,15 @@ def cpscalendarinstall(self):
                 )
             pr("   Installation")
     
-    for ptype in ('Calendar', 'Event',):
+    for ptype in ('Workspace', 'Calendars', 'Calendar', 'Event',):
         ttool[ptype].allowed_content_types = allowed_content_type[ptype]
 
     # check workflow association
     pr("Verifying workflow schemas")
     wfs = {
-        'Calendars': 'calendar_folder_wf',
-        'Calendar': 'calendar_folder_wf',
+        'Calendars': 'workspace_folder_wf',
+        'Calendar': 'workspace_folder_wf',
+        'Event': 'workspace_content_wf',
         }
     wftool = portal.portal_workflow
     pr("Installing workflow schemas")
@@ -250,16 +258,71 @@ def cpscalendarinstall(self):
         wftool.setChainForPortalTypes([pt], chain)
     wftool.setDefaultChain('')
 
-    #if 1:
-    #    return 'stop'
-    # check site and calendars proxies
-    calendars_id = 'Calendars'
+    # check site and workspaces
+    workspace_id = 'calendars'
+    calendars_id = 'members'
+    pr("Verifying roots: %s and %s" % (calendars_id, workspace_id))
+    if not portalhas(workspace_id):
+        portal.portal_workflow.invokeFactoryFor(portal.this(), 'Workspace',
+                                                workspace_id)
+        portal[workspace_id].getContent().setTitle('Root of calendars workspace') # XXX L10N
+        portal[workspace_id].reindexObject()
+        pr("  Adding %s Folder" % workspace_id)
     pr("Verifying roots: %s " % (calendars_id))
-    if not portalhas(calendars_id):
-        portal.portal_workflow.invokeFactoryFor(portal.this(), 'Calendars',
+
+    pr("Verifying permissions")
+    workspaces_perm = {
+        'Add portal content': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
+        'Add portal folders': ['Manager', 'WorkspaceManager'],
+        'Change permissions': ['Manager', 'WorkspaceManager'],
+        'Delete objects': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
+        'List folder contents': ['Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'],
+        'Modify portal content': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
+        'View': ['Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'],
+        'View management screens': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
+        }
+
+    pr("Calendar workspace")
+    for perm, roles in workspaces_perm.items():
+        portal[workspace_id].manage_permission(perm, roles, 0)
+        pr("  Permission %s" % perm)
+    portal[workspace_id].reindexObjectSecurity()
+    
+    pr("Verifying local workflow association")
+    if not '.cps_workflow_configuration' in portal[workspace_id].objectIds():
+        pr("  Adding workflow configuration to %s" % workspace_id)
+        portal[workspace_id].manage_addProduct['CPSCore'].addCPSWorkflowConfiguration()
+        wfc = getattr(portal[workspace_id], '.cps_workflow_configuration')
+        wfc.manage_addChain(portal_type='Workspace',
+                            chain='workspace_folder_wf')
+        wfc.manage_addChain(portal_type='Event',
+                            chain='workspace_content_wf')
+        wfc.manage_addChain(portal_type='Calendars',
+                            chain='workspace_folder_wf')
+        wfc.manage_addChain(portal_type='Calendar',
+                            chain='workspace_folder_wf')
+
+    # init Tree Tool
+    if workspace_id not in trtool.objectIds():
+        pr("  Adding cache for tree %s" % workspace_id)
+        trtool.manage_addCPSTreeCache(id=workspace_id)
+        trtool[workspace_id].manage_changeProperties(
+            title=workspace_id+' Cache', 
+            root=workspace_id, 
+            type_names=('Workspace',),
+            info_method='getFolderInfo')
+    trtool[workspace_id].manage_rebuild()
+    pr("   Workspaces cache rebuilded")
+    
+    # check site and calendars proxies
+    if calendars_id not in portal[workspace_id].objectIds():
+        portal[workspace_id].portal_workflow.invokeFactoryFor(portal[workspace_id].this(), 'Calendars',
                                                 calendars_id)
-        portal[calendars_id].getContent().setTitle('Root of Calendars') # XXX L10N
-        portal[calendars_id].reindexObject()
+        #if 1:
+        #    pr(dir(portal[workspace_id].members))
+        #    return 'stop'
+        portal[workspace_id].members.getContent().setTitle('Root of members calendars') # XXX L10N
+        portal[workspace_id].members.reindexObject()
         pr("  Adding %s Folder" % calendars_id)
         
     pr("Verifying permissions")
@@ -275,32 +338,32 @@ def cpscalendarinstall(self):
         }
     pr("Calendars")
     for perm, roles in calendars_perm.items():
-        portal[calendars_id].manage_permission(perm, roles, 0)
+        portal[workspace_id].members.manage_permission(perm, roles, 0)
         pr("  Permission %s" % perm)
-    portal[calendars_id].reindexObjectSecurity()
+    portal[workspace_id].members.reindexObjectSecurity()
     
-    pr("Verifying local workflow association")
-    if not '.cps_workflow_configuration' in portal[calendars_id].objectIds():
-        pr("  Adding workflow configuration to %s" % calendars_id)
-        portal[calendars_id].manage_addProduct['CPSCore'].addCPSWorkflowConfiguration()
-        wfc = getattr(portal[calendars_id], '.cps_workflow_configuration')
-        wfc.manage_addChain(portal_type='Calendar',
-                            chain='calendar_folder_wf')
-        wfc.manage_addChain(portal_type='Section',
-                            chain='')
-        wfc.manage_addChain(portal_type='Event',
-                            chain='calendar_content_wf')
+##    pr("Verifying local workflow association")
+##    if not '.cps_workflow_configuration' in portal[calendars_id].objectIds():
+##        pr("  Adding workflow configuration to %s" % calendars_id)
+##        portal[calendars_id].manage_addProduct['CPSCore'].addCPSWorkflowConfiguration()
+##        wfc = getattr(portal[calendars_id], '.cps_workflow_configuration')
+##        wfc.manage_addChain(portal_type='Calendar',
+##                            chain='workspace_folder_wf')
+##        wfc.manage_addChain(portal_type='Calendars',
+##                            chain='workspace_folder_wf')
+##        wfc.manage_addChain(portal_type='Event',
+##                            chain='workspace_content_wf')
 
     # init Tree Tool
-    trtool = portal.portal_trees
     pr("Verifying cache trees")
+    pr("   Sections cache rebuilded")
     if calendars_id not in trtool.objectIds():
         pr("  Adding cache for tree %s" % calendars_id)
         trtool.manage_addCPSTreeCache(id=calendars_id)
         trtool[calendars_id].manage_changeProperties(
             title=calendars_id+' Cache', 
             root=calendars_id, 
-            type_names=('Calendar',),
+            type_names=('Calendars',),
             info_method='getFolderInfo')
         trtool[calendars_id].manage_rebuild()
 
@@ -342,6 +405,7 @@ def cpscalendarinstall(self):
         except NameError:
             pr("    %s file not found" % po_path)
         else:
+            pr("  before  %s file imported" % po_path)
             defaultCatalog.manage_import(lang, po_file)
             pr("    %s file imported" % po_path)
 
