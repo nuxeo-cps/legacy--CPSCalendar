@@ -307,4 +307,17 @@ msgstr ""
 msgid "cpscalendar_label_period_yearly"
 msgstr ""
 
+msgid "cpscalendar_mailnotify_request"
+msgstr ""
 
+msgid "cpscalendar_mailnotify_update"
+msgstr ""
+
+msgid "cpscalendar_mailnotify_status_update"
+msgstr ""
+
+msgid "cpscalendar_mailnotify_confirm_here"
+msgstr ""
+
+msgid "cpscalendar_mailnotify_comment"
+msgstr ""

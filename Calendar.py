@@ -794,8 +794,7 @@ class Calendar(CPSBaseFolder):
             event_title = event.title_or_id()
 
         mailing = self.calendar_mailing_notify(event_dict, calendar_url,
-            calendar_title, event_title, mail_from, reply_to, mails,
-            new_event=new_event)
+            calendar_title, event_title, new_event=new_event)
         try:
             mailhost.send(mailing, mto=mails, mfrom=mail_from,
                 subject="[CAL] %s" % event_title, encode='8bit')
