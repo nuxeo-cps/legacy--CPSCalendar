@@ -11,6 +11,8 @@ Bug fixes:
 - In french Locale, date and month got flipped when type was changed.
 - Mantis bug #896 and #940 fixed.
 - A button was not translated (#783).
+- with workgroups calendars, starting meetings always added the site
+  manager instead of the user as a default attendee.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

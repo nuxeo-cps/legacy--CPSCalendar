@@ -35,7 +35,8 @@
                          from_date_minute python:(edit and [int(args['from_date_minute'])] or [0])[0];
                          to_date_hour python:(edit and [int(args['to_date_hour'])] or [19])[0];
                          to_date_minute python:(edit and [int(args['to_date_minute'])] or [0])[0];
-                         my_id here/getRpath;
+                         my_cal here/portal_cpscalendar/getHomeCalendarObject;
+                         my_id my_cal/getRpath;
                          cal_ids request/cal_ids|request/SESSION/meeting/cal_ids|python:[my_id];
                          new_cal_ids here/REQUEST/ids|python:[];
                          cal_ids python:cal_ids + [id for id in new_cal_ids if not id in cal_ids];
