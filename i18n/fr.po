@@ -404,7 +404,6 @@ msgstr "Entre le"
 #.                      Browse
 #.                 </a>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
-#, fuzzy
 msgid "cpscalendar_label_browse"
 msgstr "Parcourir"
 
@@ -495,9 +494,8 @@ msgstr "Description"
 #.         </metal:block>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
-#, fuzzy
 msgid "cpscalendar_label_document_link"
-msgstr "Document"
+msgstr "Vers le document"
 
 #.   <span>Duration</span>
 #: from ../skins/cps_calendar/create_meeting_form.pt
@@ -1316,8 +1314,3 @@ msgstr "Événements du mois"
 
 #~ msgid "portal_type_Calendar_Event_description"
 #~ msgstr "Un événement d'agenda"
-
-#, fuzzy
-#~ msgid "portal_type_Event_description"
-#~ msgstr "Description"
-

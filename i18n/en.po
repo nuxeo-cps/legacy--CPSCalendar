@@ -101,9 +101,8 @@ msgstr "You have pending requests for this event:"
 
 #.   <h1>Calendar overview</h1>
 #: from ../skins/cps_calendar/calendar_overview.pt
-#, fuzzy
 msgid "action_calendar_overview"
-msgstr "Event for this day"
+msgstr "All calendars overview"
 
 #.   <h1>Calendars supersposing</h1>
 #: from ../skins/cps_calendar/calendar_display_form.pt
@@ -498,9 +497,8 @@ msgstr "Description"
 #.         </metal:block>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
-#, fuzzy
 msgid "cpscalendar_label_document_link"
-msgstr "Document"
+msgstr "To the document"
 
 #.   <span>Duration</span>
 #: from ../skins/cps_calendar/create_meeting_form.pt
@@ -1315,10 +1313,6 @@ msgstr "Event for this month"
 
 #~ msgid "portal_type_Calendar_Event_description"
 #~ msgstr "An calendar'event"
-
-#, fuzzy
-#~ msgid "portal_type_Event_description"
-#~ msgstr "Description"
 
 #~ msgid "User type"
 #~ msgstr "User type"
