@@ -4,7 +4,6 @@
 """
 
 import os, sys
-from AccessControl import getSecurityManager
 from zLOG import LOG, INFO, DEBUG
 
 import Products.CPSCalendar
@@ -23,7 +22,7 @@ class CPSInstaller(BaseInstaller):
         self.log("Starting CPSCalendar install")
         self.setupSkins(SKINS)
         self.installTool()
-        self.log(old_update(self.portal))
+        self.log(oldUpdate(self.portal))
         self.addUidIndex()
         self.log("End of specific CPSCalendar install")
 
@@ -52,7 +51,7 @@ def update(self):
 
 
 # XXX: refactor the rest later
-def old_update(self):
+def oldUpdate(self):
     _log = []
     def pr(bla, _log=_log):
         if bla == 'flush':
