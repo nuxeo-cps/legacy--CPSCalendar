@@ -105,6 +105,7 @@ DTEND:%s
 message += footer
 
 #OK, it seems to have worked fine. Set the content type and return
-REQUEST.RESPONSE.setHeader('Content-Type', 'text/calendar')
+if REQUEST is not None:
+    REQUEST.RESPONSE.setHeader('Content-Type', 'text/calendar')
 
 return message
