@@ -1,29 +1,23 @@
 <html metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="header"
-    tal:content="python:str('_cal_del_Confirmation_')">
+<metal:block fill-slot="head_slot"
+             i18n:translate="_cal_del_Confirmation_">
 </metal:block>
 
-<metal:block fill-slot="header_plus" />
-
 <metal:block fill-slot="main">
-  <h3
-    tal:content="
-      python:str('_You have to notify attendees that you will delete this events_')">
+  <h3 i18n:translate="_You have to notify attendees that you will delete this events_">
     You have to notify attendees that you will delete this events.
   </h3>
-  <p
-    tal:content="
-      python:str('_Unselect events you don-t want to notify attendees_')">
+  <p i18n:translate="_Unselect events you don-t want to notify attendees_">
     Unselect events you don't want to notify attendees.
   </p>
   <form action="calendar_delevents" method="POST">
     <ul tal:define="events options/events">
       <li tal:repeat="event events">
         <input type="hidden" name="ids:list"
-          tal:attributes="value event/id" />
+               tal:attributes="value event/id" />
         <input type="checkbox" name="notify:list" checked="1"
-          tal:attributes="value event/id" />
+               tal:attributes="value event/id" />
         <tal:block replace="event/title_or_id">
           Event
         </tal:block>
@@ -33,14 +27,13 @@
       <metal:block fill-slot="content">
         <metal:block use-macro="here/generic_lib/macros/form_property">
           <metal:block fill-slot="title"
-            tal:content="python:str('_prop_comment_')">
+                       i18n:translate="_prop_comment_">
             Comment
           </metal:block>
           <metal:block fill-slot="content">
             <textarea name="comment" cols="40" rows="4"></textarea>
             <br />
-            <small tal:content="
-              python:str('_This message will be sent to attendees with a cancel notification_')">
+            <small i18n:translate="_This message will be sent to attendees with a cancel notification_">
               This message will be sent to attendees with a cancel notification.
             </small>
           </metal:block>
@@ -48,7 +41,8 @@
       </metal:block>
     </metal:block>
     <input type="submit"
-      tal:attributes="value python:str('_button_validate_')" />
+           tal:attributes="value python:str('_button_validate_')"
+           i18n:attributes="value" />
   </form>
 </metal:block>
 

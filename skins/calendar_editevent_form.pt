@@ -7,7 +7,7 @@
   Day selector popup script
 </metal:block>
 
-<metal:block fill-slot="header">
+<metal:block fill-slot="head_slot">
   <tal:block condition="create"
     i18n:translate="_Create_a_new_Event_">
     Create a new event
@@ -19,8 +19,6 @@
     «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
   </tal:block>
 </metal:block>
-
-<metal:block fill-slot="header_plus" />
 
 <metal:block fill-slot="main"
              tal:define="portal_url here/portal_url;
