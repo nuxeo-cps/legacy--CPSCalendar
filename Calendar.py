@@ -217,7 +217,7 @@ class Calendar(CPSBaseFolder):
     security.declarePrivate('getOwnerId')
     def getOwnerId(self):
         # getOwner() is part of the Zope API
-        return self.getOwnerTuple()[1]
+        return self.getOwner(1)[1]
     
     security.declarePublic('getCalendarUser')
     def getCalendarUser(self):
