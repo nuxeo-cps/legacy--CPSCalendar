@@ -3,20 +3,8 @@
     global non_local string:#777777;
     "/>
   <table cellspacing="0" cellpadding="0" border="0">
-    <tr>
-      <td align="right"><div class="contentTabs"><span class="opentab"> </span><a
-                class="default"
-                tal:define="prev_day python:int(viewed_day-1);"
-                tal:attributes="href string:${here_url}?viewed_day=${prev_day}">&lt;&lt;</a><a
-                class="default"
-                tal:define="today python:int(DateTime());"
-                tal:attributes="href string:${here_url}?viewed_day=${today}"
-                i18n:translate="cpscalendar_link_today">Today</a><a
-                class="default"
-                tal:define="next_day python:int(viewed_day+1);"
-                tal:attributes="href string:${here_url}?viewed_day=${next_day}">&gt;&gt;</a><span class="closetab"> </span></div></td>
-    </tr>
-    <tr>
+     <metal:block use-macro="here/calendar_view_macros/macros/navigation_tabs" />
+     <tr>
       <td>
         <table cellspacing="0" cellpadding="0" border="1"
                tal:define="cat_info here/calendar_categories;
@@ -211,19 +199,7 @@
   <tal:block define="global non_local string:#777777;
     "/>
   <table cellspacing="0" cellpadding="0" border="0">
-    <tr tal:condition="show_tab|python:1">
-      <td align="right"><div class="contentTabs"><span class="opentab"> </span><a
-               class="default"
-               tal:define="prev_week python:int(viewed_day-7);"
-               tal:attributes="href string:${here_url}?viewed_day=${prev_week}">&lt;&lt;</a><a
-               class="default"
-               tal:define="today python:int(DateTime());"
-               tal:attributes="href string:${here_url}?viewed_day=${today}"
-               i18n:translate="cpscalendar_link_today">Today</a><a
-               class="default"
-               tal:define="next_week python:int(viewed_day+7);"
-               tal:attributes="href string:${here_url}?viewed_day=${next_week}">&gt;&gt;</a><span class="closetab"> </span></div></td>
-    </tr>
+    <metal:block use-macro="here/calendar_view_macros/macros/navigation_tabs" />
     <tr>
       <td>
         <table cellspacing="0" cellpadding="0" border="1"
@@ -477,19 +453,7 @@
     <span tal:replace="viewed_day/year"/>
   </span>
   <table cellspacing="0" cellpadding="0" border="0">
-    <tr>
-      <td align="right"><div class="contentTabs"><span class="opentab"> </span><a
-                class="default"
-                tal:define="prev_month python:int(start_time-5);"
-                tal:attributes="href string:${here_url}?viewed_day=${prev_month};">&lt;&lt;</a><a
-                class="default"
-                tal:define="today python:int(DateTime());"
-                tal:attributes="href string:${here_url}?viewed_day=${today};"
-                i18n:translate="cpscalendar_link_today">Today</a><a
-                class="default"
-                tal:define="next_month python:int(end_time+7);"
-                tal:attributes="href string:${here_url}?viewed_day=${next_month};">&gt;&gt;</a><span class="closetab"> </span></div></td>
-    </tr>
+    <metal:block use-macro="here/calendar_view_macros/macros/navigation_tabs" />
     <tr>
       <td>
         <table width="445" cellspacing="0" cellpadding="0" border="1"
@@ -644,4 +608,20 @@
       </td>
     </tr>
   </table>
+</metal:block>
+
+<metal:block define-macro="navigation_tabs">
+    <tr tal:condition="show_navigation|python:1">
+      <td align="right"><div class="contentTabs"><span class="opentab"> </span><a
+                class="default"
+                tal:define="prev_day python:int(viewed_day-1);"
+                tal:attributes="href string:${here_url}?viewed_day=${prev_day}">&lt;&lt;</a><a
+                class="default"
+                tal:define="today python:int(DateTime());"
+                tal:attributes="href string:${here_url}?viewed_day=${today}"
+                i18n:translate="cpscalendar_link_today">Today</a><a
+                class="default"
+                tal:define="next_day python:int(viewed_day+1);"
+                tal:attributes="href string:${here_url}?viewed_day=${next_day}">&gt;&gt;</a><span class="closetab"> </span></div></td>
+    </tr>
 </metal:block>

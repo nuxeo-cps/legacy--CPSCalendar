@@ -34,7 +34,8 @@
                          events_desc23 python:{'slots': freebusy_infos['slots'], 'day_lines': [], 'hour_block_cols': meeting['hour_block_cols']};
                          events_desc meeting;
                          can_add_evts nothing;
-                         show_tab nothing;
+                         show_navigation nothing;
+                         show_addbuttons nothing;
                          member_id python:here.portal_membership.getAuthenticatedMember().getMemberId();
 ">
 
