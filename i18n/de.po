@@ -79,12 +79,6 @@ msgstr "Sie haben ${pendings_count} schwebende Anfragen."
 msgid "You have pending requests for this event:"
 msgstr ""
 
-#.   <h1>Calendar overview</h1>
-#: from ../skins/cps_calendar/calendar_overview.pt
-#, fuzzy
-msgid "action_calendar_overview"
-msgstr "Export"
-
 #.   <h1>Calendars supersposing</h1>
 #: from ../skins/cps_calendar/calendar_display_form.pt
 msgid "action_display"
@@ -160,12 +154,6 @@ msgstr "Erstellen"
 #.   <input type="submit" value="cpscalendar_button_delete" />
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 msgid "cpscalendar_button_delete"
-msgstr "Löschen"
-
-#.   <input type="submit" value="cpscalendar_button_delete_event" />
-#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
-#, fuzzy
-msgid "cpscalendar_button_delete_event"
 msgstr "Löschen"
 
 #.   <input type="submit" value="cpscalendar_button_delete_with_no_notification" condition="nothing" />
@@ -336,14 +324,6 @@ msgid "cpscalendar_label_and"
 msgstr "und"
 
 #.   <span>
-#.           to
-#.         </span>
-#: from ../skins/cps_calendar/calendar_meeting_form.pt
-#, fuzzy
-msgid "cpscalendar_label_and_day"
-msgstr "Am"
-
-#.   <span>
 #.                     At
 #.                   </span>
 #: from ../skins/cps_calendar/create_meeting_form.pt
@@ -377,22 +357,6 @@ msgstr "Teilnehmer"
 #.         </span>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_between"
-msgstr "Zwischen"
-
-#.   <span>
-#.           From
-#.         </span>
-#: from ../skins/cps_calendar/calendar_meeting_form.pt
-#, fuzzy
-msgid "cpscalendar_label_between_day"
-msgstr "Zwischen"
-
-#.   <a style="text-decoration:none;border:1px solid black;padding:0.2em 0.3em;" onclick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')">
-#.                      Browse
-#.                 </a>
-#: from ../skins/cps_calendar/calendar_editevent_form.pt
-#, fuzzy
-msgid "cpscalendar_label_browse"
 msgstr "Zwischen"
 
 #.   <td>
@@ -473,18 +437,6 @@ msgstr "Datum"
 #: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_description"
 msgstr "Beschreibung"
-
-#.   <block fill-slot="title">
-#.               Document link
-#.             </block>
-#.   <metal:block fill-slot="title">
-#.           Document link
-#.         </metal:block>
-#: from ../skins/cps_calendar/calendar_editevent_form.pt
-#: ../skins/cps_calendar/calendar_macros.pt
-#, fuzzy
-msgid "cpscalendar_label_document_link"
-msgstr "Kommentar"
 
 #.   <span>Duration</span>
 #: from ../skins/cps_calendar/create_meeting_form.pt
@@ -661,21 +613,6 @@ msgstr "Titel"
 msgid "cpscalendar_label_to_(day)"
 msgstr "Bis"
 
-#.   <span>
-#.                     to
-#.                   </span>
-#: from ../skins/cps_calendar/calendar_editevent_form.pt
-#, fuzzy
-msgid "cpscalendar_label_to_day"
-msgstr "Bis"
-
-#.   <span>to</span>
-#: from ../skins/cps_calendar/calendar_editevent_form.pt
-#: ../skins/cps_calendar/calendar_macros.pt
-#, fuzzy
-msgid "cpscalendar_label_to_hour"
-msgstr "Bis"
-
 #.   <block fill-slot="title">
 #.               Transparent
 #.             </block>
@@ -727,14 +664,6 @@ msgstr "Kommentar für die Teilnehmer"
 msgid "cpscalendar_message_comment_for_organizer"
 msgstr "Kommentar für den Organisator"
 
-#.   <span condition="editcals">
-#.         These are the calendars where you can create events:
-#.       </span>
-#: from ../skins/cps_calendar/calendar_overview.pt
-#, fuzzy
-msgid "cpscalendar_message_editable_calendars"
-msgstr "Erstellen eines Kalenders"
-
 #.   <span>
 #.         If you have an application that supports it, you can also
 #.       </span>
@@ -755,14 +684,6 @@ msgstr "Keine gemeinsamen Kalender gefunden"
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_message_no_user_matching"
 msgstr "Sorry, kein User da der zu Ihrer Anfrage passt."
-
-#.   <span>
-#.         You can not view any calendars
-#.       </span>
-#: from ../skins/cps_calendar/calendar_overview.pt
-#, fuzzy
-msgid "cpscalendar_message_no_visible_calendars"
-msgstr "Keine gemeinsamen Kalender gefunden"
 
 #.   <strong>
 #.       You have to notify other attendees of recent changes to this event.
@@ -855,14 +776,6 @@ msgid "cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees"
 msgstr ""
 "Abwählen der Events wo keine Benachrichigung der Teilnehmer gewünscht ist"
 
-#.   <span condition="vcals">
-#.         These are the calendars you can only view:
-#.       </span>
-#: from ../skins/cps_calendar/calendar_overview.pt
-#, fuzzy
-msgid "cpscalendar_message_visible_calendars"
-msgstr "diesen Kalender abbonieren"
-
 #.   <span>
 #.         You can download
 #.       </span>
@@ -943,14 +856,6 @@ msgstr "Druckerfreundliche Ansicht"
 msgid "cpscalendar_ressources"
 msgstr "Ressourcen"
 
-#.   <p class="calTitle">
-#.         Search for free time:
-#.       </p>
-#: from ../skins/cps_calendar/calendar_meeting_form.pt
-#, fuzzy
-msgid "cpscalendar_search_for_free_time"
-msgstr "mal"
-
 #.   <span content="string:cpscalendar_option_${type}">cpscalendar_status</span>
 #.   <span content="string:cpscalendar_option_status_${status}">cpscalendar_status</span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
@@ -1018,10 +923,6 @@ msgstr "nicht bestätigt"
 
 msgid "cpscalendar_option_status_canceled"
 msgstr "abgesagt"
-
-#, fuzzy
-msgid "cpscalendar_option_status_tentative"
-msgstr "Voraussichtlich"
 
 msgid "cpscalendar_pending_confirmed"
 msgstr "Bestätigen"
@@ -1188,14 +1089,6 @@ msgstr "November"
 msgid "cpscalendar_label_month_long12"
 msgstr "Dezember"
 
-#, fuzzy
-msgid "cpscalendar_workspace"
-msgstr ":"
-
-#, fuzzy
-msgid "cpscalendar_workspaces"
-msgstr "Ressourcen"
-
 msgid "cpscalendar_member"
 msgstr "Teilnehmer"
 
@@ -1243,10 +1136,6 @@ msgstr "Keine Ressourcen"
 
 msgid "cpscalendar_no_attendee_of_type_events_show"
 msgstr "Keine Events"
-
-#, fuzzy
-msgid "cpscalendar_no_attendee_of_type_workspace"
-msgstr "Keine Ressourcen"
 
 msgid "cpscalendar_button_remove_canceled_events"
 msgstr "Entfernen der gecancelten Events"
@@ -1303,36 +1192,3 @@ msgstr "Events in dieser Woche"
 
 msgid "cpscalendar_event_viewer_month"
 msgstr "Events für diesen Monat"
-
-#~ msgid "Confirm"
-#~ msgstr "Bestätigen"
-
-#~ msgid "portal_type_Calendar_title"
-#~ msgstr "Kalender"
-
-#~ msgid "portal_type_Calendar_Event_title"
-#~ msgstr "Event"
-
-#~ msgid "portal_type_Calendar_Event_description"
-#~ msgstr "... Ereignisse portalweit ankündigen"
-
-#~ msgid "User type"
-#~ msgstr "User Typ"
-
-#~ msgid "cpscalendar_label_include_this_calendar"
-#~ msgstr "Aufnehmen dieses Kalenders"
-
-#~ msgid "cpscalendar_label_start_(day)"
-#~ msgstr "Erster Tag"
-
-#~ msgid "[1]"
-#~ msgstr "[]"
-
-#~ msgid "cpscalendar_heading_event_attendees"
-#~ msgstr "Event Teilnehmer"
-
-#~ msgid "cpscalendar_label_at_(hour)"
-#~ msgstr "um"
-
-#~ msgid "cpscalendar_option"
-#~ msgstr "option"

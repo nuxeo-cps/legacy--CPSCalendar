@@ -1264,12 +1264,3 @@ msgstr ""
 
 msgid "cpscalendar_event_viewer_month"
 msgstr ""
-
-#~ msgid "portal_type_Calendar_title"
-#~ msgstr "Orden del da"
-
-#~ msgid "portal_type_Calendar_Event_title"
-#~ msgstr "Evento"
-
-#~ msgid "portal_type_Calendar_Event_description"
-#~ msgstr "Un evento"

@@ -785,21 +785,24 @@ msgstr ""
 #.     </strong>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_message_notify_attendees_you_will_delete_event"
-msgstr "Vous devez prévenir les participants que vous allez supprimer cet événement."
+msgstr ""
+"Vous devez prévenir les participants que vous allez supprimer cet événement."
 
 #.   <strong>
 #.       You have to notify attendees that you will delete those events.
 #.     </strong>
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
 msgid "cpscalendar_message_notify_attendees_you_will_delete_events"
-msgstr "Vous devez prévenir les participants que vous allez supprimer ces événements."
+msgstr ""
+"Vous devez prévenir les participants que vous allez supprimer ces événements."
 
 #.   <strong condition="python:notify == 'decline'">
 #.         You have to notify event's organizer that you will delete this event.
 #.     </strong>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_message_notify_organizer_you_will_delete_event"
-msgstr "Vous devez prévenir l'organisateur que vous allez supprimer cet événement."
+msgstr ""
+"Vous devez prévenir l'organisateur que vous allez supprimer cet événement."
 
 #.   <span class="calTitle">
 #.       Select at least one attendee.
@@ -849,7 +852,8 @@ msgstr "la version iCalendar de cet agenda"
 #.     </p>
 #: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
 msgid "cpscalendar_message_too_early_specified_hour"
-msgstr "L'heure de fin que vous avez spécifiée est antérieure à la date de début. "
+msgstr ""
+"L'heure de fin que vous avez spécifiée est antérieure à la date de début. "
 
 #.   <p>
 #.       Unselect events you don't want to notify attendees.
@@ -952,7 +956,8 @@ msgstr "Ressources"
 #.       </p>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_search_for_free_time"
-msgstr "Recherche d'une plage horaire libre pour tous les participants à la réunion"
+msgstr ""
+"Recherche d'une plage horaire libre pour tous les participants à la réunion"
 
 #.   <span content="string:cpscalendar_option_${type}">cpscalendar_status</span>
 #.   <span content="string:cpscalendar_option_status_${status}">cpscalendar_status</span>
@@ -1302,15 +1307,3 @@ msgstr "Événements de la semaine"
 
 msgid "cpscalendar_event_viewer_month"
 msgstr "Événements du mois"
-
-#~ msgid "Confirm"
-#~ msgstr "Confirmer"
-
-#~ msgid "portal_type_Calendar_title"
-#~ msgstr "Agenda"
-
-#~ msgid "portal_type_Calendar_Event_title"
-#~ msgstr "Événement"
-
-#~ msgid "portal_type_Calendar_Event_description"
-#~ msgstr "Un événement d'agenda"

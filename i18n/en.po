@@ -1301,36 +1301,3 @@ msgstr "Event for this week"
 
 msgid "cpscalendar_event_viewer_month"
 msgstr "Event for this month"
-
-#~ msgid "Confirm"
-#~ msgstr "Confirm"
-
-#~ msgid "portal_type_Calendar_title"
-#~ msgstr "Calendar"
-
-#~ msgid "portal_type_Calendar_Event_title"
-#~ msgstr "Event"
-
-#~ msgid "portal_type_Calendar_Event_description"
-#~ msgstr "An calendar'event"
-
-#~ msgid "User type"
-#~ msgstr "User type"
-
-#~ msgid "cpscalendar_label_include_this_calendar"
-#~ msgstr "Include this calendar"
-
-#~ msgid "cpscalendar_label_start_(day)"
-#~ msgstr "First date"
-
-#~ msgid "[1]"
-#~ msgstr "[]"
-
-#~ msgid "cpscalendar_heading_event_attendees"
-#~ msgstr "Event attendees"
-
-#~ msgid "cpscalendar_label_at_(hour)"
-#~ msgstr "at"
-
-#~ msgid "cpscalendar_option"
-#~ msgstr "option"
