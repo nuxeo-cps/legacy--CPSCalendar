@@ -1,0 +1,68 @@
+<tal:block define="global current_action string:edit;
+                   global create options/create|nothing" />
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master">
+  <metal:block fill-slot="base">
+    <base href="." tal:attributes="href string:${here/absolute_url}/">
+  </metal:block>
+<body>
+
+
+<metal:block fill-slot="header">
+  <tal:block condition="create"
+      tal:replace="python:mcat('_Create_a_Calendar_')">
+    Create a Calendar 
+  </tal:block>
+  <tal:block condition="not:create">
+    <tal:block replace="python:mcat('_Modify_(object name)_')">
+      Modify
+    </tal:block>
+    «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
+  </tal:block>
+</metal:block>
+
+
+<metal:block fill-slot="main"
+     tal:define="title python:create and mcat('_(document)_Untitled_') or here.Title();
+                 description python:(create and [''] or [here.Description()])[0];
+                 submitvalue python:create and mcat('_button_create_') or mcat('_button_modify_');
+                 action python:create and 'calendar_create' or 'folder_edit';
+                ">
+
+  <form action="." method="post" enctype="multipart/form-data"
+        tal:attributes="action action">
+
+  <metal:block use-macro="here/main_widgets/macros/form">
+    <metal:block fill-slot="content">
+      <metal:block tal:condition="create" use-macro="here/main_widgets/macros/form_property">
+        <metal:block fill-slot="title"
+          tal:content="python:mcat('_prop_id_')">
+          Id
+        </metal:block>
+        <metal:block fill-slot="content">
+          <input type="text" name="id" value="" />
+        </metal:block>
+      </metal:block>
+      <metal:block use-macro="here/main_widgets/macros/form_property">
+        <metal:block fill-slot="title"
+          tal:content="python:mcat('_prop_description_')">
+          Description
+        </metal:block>
+        <metal:block fill-slot="content">
+          <textarea name="description:text" rows="5" cols="50" wrap="soft"
+           tal:content="description"></textarea>
+        </metal:block>
+      </metal:block>
+    </metal:block>
+  </metal:block>
+
+  <input type="submit" value="value" tal:attributes="value submitvalue">
+
+  </form>
+
+</metal:block>
+
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<tal:block define="global current_action string:view" />
+<tal:block define="calendars here/calendars_get">
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master">
+<metal:block fill-slot="base">
+  <base href="." tal:attributes="href string:${here/absolute_url}/" />
+</metal:block>
+<body>
+
+
+<metal:block fill-slot="header">
+  Calendars
+</metal:block>
+<metal:block fill-slot="header_plus"></metal:block>
+
+<metal:block fill-slot="main">
+
+  <tal:block repeat="type python:(
+    {'id':'private', 'title':'Private'},
+    {'id':'others', 'title':'Others'},
+    {'id':'rooms', 'title':'Rooms'},
+    {'id':'ressources', 'title':'Ressources'},
+    )">
+    <tal:block define="id type/id; cals calendars/?id"
+      condition="cals">
+      <h2 tal:content="type/title">Rooms</h2>
+      <ul>
+        <li tal:repeat="cal cals">
+          <a tal:attributes="href cal/url" tal:content="cal/title">Calendar</a>
+        </li>
+      </ul>
+    </tal:block>
+  </tal:block>
+  <tal:block condition="python:mtool.checkPermission('Add portal content', here)">
+    <a href="calendar_create_form">Create a calendar here</a>
+  </tal:block>
+</metal:block>
+
+</body>
+</html>
+</tal:block>

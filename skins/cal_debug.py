@@ -1,0 +1,3 @@
+##parameters=
+
+return context.attendees

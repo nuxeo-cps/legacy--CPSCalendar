@@ -1,0 +1,68 @@
+##parameters=
+
+ical_conv = '%Y%m%dT%H%M%S'
+ical_date_conv = '%Y%m%d'
+
+mcat = context.portal_messages
+def icalvalue(s):
+    return unicode('\\,'.join(s.split(',')), 'latin1').encode('UTF-8')
+
+header="""BEGIN:VCALENDAR
+CALSCALE:GREGORIAN
+X-WR-TIMEZONE;VALUE=TEXT:Europe/Paris
+PRODID:-//Nuxeo//NuxGroupCalendar 0.1//EN
+X-WR-CALNAME;VALUE=TEXT:%s
+X-WR-RELCALID;VALUE=TEXT:%s
+VERSION:2.0
+""" % (icalvalue(mcat(context.title_or_id())), context.id)
+
+footer = """\
+END:VCALENDAR
+"""
+
+message = header
+
+events = context.objectValues()
+dtstamp = DateTime('UTC')
+timezone = dtstamp.localZone()
+
+event_header = """\
+BEGIN:VEVENT
+DTSTAMP:%sZ
+""" % (dtstamp.strftime(ical_conv), )
+
+event_footer = """\
+END:VEVENT
+"""
+
+for event in events:
+    message += event_header
+
+    message += """\
+SUMMARY:%s
+UID:%s
+""" % (icalvalue(mcat(event.title_or_id())), event.id)
+
+    if event.location:
+        message += """\
+LOCATION:%s
+""" % (icalvalue(event.location), )
+
+    if event.all_day:
+        message += """\
+DTSTART;VALUE=DATE:%s
+DTEND;VALUE=DATE:%s
+""" % (event.from_date.strftime(ical_date_conv),
+        (event.to_date+1).strftime(ical_date_conv))
+    else:
+        message += """\
+DTSTART;TZID=%s:%s
+DTEND;TZID=%s:%s
+""" % (event.from_date.localZone(), event.from_date.strftime(ical_conv),
+        event.to_date.localZone(), event.to_date.strftime(ical_conv))
+
+    message += event_footer
+
+message += footer
+
+return message

@@ -1,0 +1,188 @@
+<tal:block define="create options/create|nothing;
+  current_action python:create and 'addevent' or 'edit'">
+<html metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="header">
+  <tal:block condition="create">
+    Create a new event
+  </tal:block>
+  <tal:block condition="not:create">
+    Edit
+    «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
+  </tal:block>
+</metal:block>
+
+<metal:block fill-slot="header_plus" />
+
+<metal:block fill-slot="main"
+  tal:define="
+    disp_infos python:here.calendar_getDispInformations(request);
+    action python:create and 'calendar_addevent' or 'calendar_editevent';
+    submit_value python:create and mcat('_button_create_') or mcat('_button_modify_');
+    editevent python:create or here.canEditThisEvent();
+    title python:create and mcat('_(document)_Untitled_') or here.title;
+    location python:(not create) and here.location or '';
+    event_status python:create and 'unconfirmed' or here.event_status;
+    from_date python:create and disp_infos['selected_day'] or here.from_date;
+    from_date_day from_date/day;
+    from_date_month from_date/month;
+    from_date_year from_date/year;
+    from_date_hour from_date/hour;
+    from_date_minute python:int(from_date.minute()/15)*15;
+    to_date python:create and (disp_infos['selected_day']+0.084) or here.to_date;
+    to_date_day to_date/day;
+    to_date_month to_date/month;
+    to_date_year to_date/year;
+    to_date_hour to_date/hour;
+    to_date_minute python:int(to_date.minute()/15)*15;
+    all_day python:(not create) and here.all_day or 0;
+    attendees python:(not create) and here.attendees or [];
+  ">
+
+  <tal:block condition="not:editevent" define="event nocall:here">
+    <metal:block use-macro="here/calendar_macros/macros/event_view" />
+  </tal:block>
+  <form tal:attributes="action action" method="POST" tal:condition="editevent">
+    <metal:block use-macro="here/main_widgets/macros/form">
+      <metal:block fill-slot="content">
+        <metal:block use-macro="here/main_widgets/macros/form_property">
+          <metal:block fill-slot="title">
+            Summary
+          </metal:block>
+          <metal:block fill-slot="content">
+            <input name="title" size="40" tal:attributes="value title" />
+          </metal:block>
+        </metal:block>
+        <metal:block use-macro="here/main_widgets/macros/form_property">
+          <metal:block fill-slot="title">
+            Date
+          </metal:block>
+          <metal:block fill-slot="content">
+            From
+            <select name="from_date_day">
+              <option tal:repeat="day python:range(1,32)"
+                tal:content="day" tal:attributes="value day;
+                  selected python:day == from_date_day or nothing" />
+            </select>/<select name="from_date_month">
+              <option tal:repeat="month python:range(1,13)"
+                tal:content="month" tal:attributes="value month;
+                selected python:month == from_date_month or nothing"/>
+            </select>/<input name="from_date_year" size="4"
+              tal:attributes="value from_date_year" />
+            at
+            <select name="from_date_hour">
+              <option tal:repeat="hour python:range(0,24)"
+                tal:content="hour" tal:attributes="value hour;
+                  selected python:hour == from_date_hour or nothing" />
+            </select>:<select name="from_date_minute">
+              <option tal:repeat="minute python:range(0,60,15)"
+                tal:content="minute" tal:attributes="value minute;
+                  selected python:minute == from_date_minute or nothing" />
+            </select>
+            <br>
+            To
+            <select name="to_date_day">
+              <option tal:repeat="day python:range(1,32)"
+                tal:content="day" tal:attributes="value day;
+                  selected python:day == to_date_day or nothing" />
+            </select>/<select name="to_date_month">
+              <option tal:repeat="month python:range(1,13)"
+                tal:content="month" tal:attributes="value month;
+                selected python:month == to_date_month or nothing"/>
+            </select>/<input name="to_date_year" size="4"
+              tal:attributes="value to_date_year" />
+            at
+            <select name="to_date_hour">
+              <option tal:repeat="hour python:range(0,24)"
+                tal:content="hour" tal:attributes="value hour;
+                  selected python:hour == to_date_hour or nothing" />
+            </select>:<select name="to_date_minute">
+              <option tal:repeat="minute python:range(0,60,15)"
+                tal:content="minute" tal:attributes="value minute;
+                  selected python:minute == to_date_minute or nothing" />
+            </select>
+            <br>
+            All day event:
+            <input type="checkbox" name="all_day"
+              tal:attributes="checked python:all_day or nothing" />
+          </metal:block>
+        </metal:block>
+        <metal:block use-macro="here/main_widgets/macros/form_property">
+          <metal:block fill-slot="title">
+            Location
+          </metal:block>
+          <metal:block fill-slot="content">
+            <input name="location" size="40" tal:attributes="value location" />
+          </metal:block>
+        </metal:block>
+        <metal:block use-macro="here/main_widgets/macros/form_property">
+          <metal:block fill-slot="title">
+            Event status
+          </metal:block>
+          <metal:block fill-slot="content">
+            <select name="event_status">
+              <option tal:repeat="status python:(
+                {'id':'unconfirmed', 'title':'Unconfirmed'},
+                {'id':'confirmed', 'title':'Confirmed'},
+                {'id':'canceled', 'title':'Canceled'},
+                )"
+                tal:attributes="
+                value status/id;
+                selected python:status['id'] == event_status;
+                "
+                tal:content="status/title">status</option>
+            </select>
+          </metal:block>
+        </metal:block>
+        <metal:block use-macro="here/main_widgets/macros/form_property">
+          <metal:block fill-slot="title">
+            Attendees
+          </metal:block>
+          <metal:block fill-slot="content">
+            <textarea cols="40" rows="10" name="attendees:lines"
+              tal:content="python:'\n'.join([at['id'] for at in attendees])"></textarea>
+          </metal:block>
+        </metal:block>
+      </metal:block>
+    </metal:block>
+    <input type="submit" tal:attributes="value submit_value" />
+    <input type="button" onClick="history.back()"
+      tal:attributes="value python:mcat('_button_cancel_')" />
+  </form>
+  <form action="setMyStatus" tal:condition="python:not (create or editevent)">
+    <h3>Modify status for this event:</h3>
+    <metal:block use-macro="here/main_widgets/macros/form">
+      <metal:block fill-slot="content">
+        <metal:block use-macro="here/main_widgets/macros/form_property">
+          <metal:block fill-slot="title">
+            Status
+          </metal:block>
+          <metal:block fill-slot="content">
+            <select name="status"
+              tal:define="myid python:here.getCalendar().id;
+                mystatus python:[att for att in here.attendees if att['id'] == myid]">
+              <option tal:repeat="status here/getAttendeeStatuses"
+                tal:attributes="value status/id; selected python:mystatus == status['id']"
+                tal:content="status/title">Status</option>
+            </select>
+          </metal:block>
+        </metal:block>
+        <metal:block use-macro="here/main_widgets/macros/form_property">
+          <metal:block fill-slot="title">
+            Comment
+          </metal:block>
+          <metal:block fill-slot="content">
+            <textarea name="comment" cols="40" rows="4"></textarea>
+          </metal:block>
+        </metal:block>
+      </metal:block>
+    </metal:block>
+    <input type="submit"
+      tal:attributes="value python:mcat('_button_modify_')" />
+    <input type="button" onClick="history.back()"
+      tal:attributes="value python:mcat('_button_cancel_')" />
+  </form>
+</metal:block>
+
+</html>
+</tal:block>

@@ -1,0 +1,41 @@
+##parameters=event_dict, calendar_url, calendar_title, event_title, mail_from, mails
+
+mcat = context.portal_messages
+request = event_dict['request']
+confirm_url = '%s/calendar_pending_events?event_id=%s' % (calendar_url, event_dict['id'])
+
+calendar_title = mcat(calendar_title)
+event_title = mcat(event_title)
+
+header = """\
+From: %s
+To: %s
+Subject: [CAL] %s
+Content-Type: text/plain; charset=ISO-8859-15
+Mime-Version: 1.0
+""" % (mail_from, ', '.join(mails), event_title)
+
+if request == 'request':
+    event = event_dict['event']
+    message = """
+Calendar for %(calendar_title)s received a request/update for event "%(event_title)s".
+"""
+    message = message % {
+        'calendar_title': calendar_title,
+        'event_title': event_title,
+    }
+elif request == 'status':
+    attendees = event_dict['change']
+    message = """
+Calendar for %(calendar_title)s received a status update for event "%(event_title)s":""" % {
+        'calendar_title': calendar_title,
+        'event_title': event_title,
+    }
+    for att in attendees:
+        message += ("\n  - %s (%s)" % (att.get('cn', att['attendee']), att['status']))
+
+message += """
+Please confirm/commit by using this URL:
+%s""" % (confirm_url, )
+
+return header+message

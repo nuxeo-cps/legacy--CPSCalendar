@@ -1,0 +1,31 @@
+<tal:block define="
+    event_id request/form/event_id|nothing;
+    event nocall:here/?event_id|nothing;
+    pendings python:here.getPendingEvents(event_id)
+    ">
+<html metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="header">
+  Pending requests for
+  <tal:block replace="python:mcat(here.title_or_id())">
+    calendar
+  </tal:block>
+</metal:block>
+
+<metal:block fill-slot="header_plus" />
+
+<metal:block fill-slot="main">
+  <tal:block condition="event">
+    <h2>Loot at <a tal:attributes="href event/absolute_url">this event in this calendar</a>.</h2>
+  </tal:block>
+  <tal:block condition="not:pendings">
+    <h3 tal:condition="event_id">There is no pending request for this event.</h3>
+    <h3 tal:condition="not:event_id">There is no pending request.</h3>
+  </tal:block>
+  <tal:block condition="pendings">
+    <metal:block use-macro="here/calendar_macros/macros/pendings_view" />
+  </tal:block>
+</metal:block>
+
+</html>
+</tal:block>

@@ -1,0 +1,57 @@
+<tal:block define="
+  disp_infos python:here.calendar_getDispInformations(request);
+  current_action disp_infos/current_action;
+  calendar_disp disp_infos/disp;
+  selected_day disp_infos/selected_day;
+  viewed_day disp_infos/viewed_day;
+  ">
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master">
+<metal:block fill-slot="base">
+  <base href="." tal:attributes="href string:${here/absolute_url}/" />
+</metal:block>
+<body>
+
+
+<metal:block fill-slot="header">
+    Calendar for
+  <tal:block define="title here/title_or_id;
+    title python:mcat(title);"
+    replace="title">Page Title</tal:block>
+</metal:block>
+<metal:block fill-slot="header_plus"></metal:block>
+
+<metal:block fill-slot="main">
+  <tal:block condition="python:mtool.checkPermission('Add portal content', here)">
+    <tal:block define="pendings_count here/getPendingEventsCount"
+      condition="pendings_count">
+      <h3>
+        <a href="calendar_pending_events">Pending requests:
+          <tal:block replace="pendings_count">1</tal:block>
+        </a>
+      </h3>
+    </tal:block>
+  </tal:block>
+  <h2>View</h2>
+  <strong>Current view</strong>:
+  <tal:block replace="calendar_disp">day</tal:block>
+  <br>
+  <strong>Selected day</strong>:
+  <tal:block replace="selected_day">date</tal:block>
+  <br>
+  <strong>Viewed day</strong>:
+  <tal:block replace="viewed_day">date</tal:block>
+  <h2>Events</h2>
+  <ul tal:define="events here/objectValues">
+    <li tal:repeat="event events">
+      <a tal:attributes="href event/absolute_url" tal:content="event/id">Id</a>
+      <metal:block use-macro="here/calendar_macros/macros/event_view" />
+    </li>
+  </ul>
+</metal:block>
+
+
+</body>
+</html>
+</tal:block>
