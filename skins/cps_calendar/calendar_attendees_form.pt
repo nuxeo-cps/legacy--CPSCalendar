@@ -1,4 +1,4 @@
-<ltal:block define="global current_action string:attendees" />
+<tal:block define="global current_action string:attendees" />
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
