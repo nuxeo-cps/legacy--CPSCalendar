@@ -124,7 +124,7 @@ class Event(CPSBaseDocument):
         self.organizer = deepcopy(organizer)
         if attendees is not None:
             self.setAttendees(attendees)
-        self.from_date = from_date
+        self.from_date = from_date 
         self.to_date = to_date
         self.location = kw.get('location')
         self.event_status = kw.get('event_status')

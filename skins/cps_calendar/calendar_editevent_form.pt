@@ -37,13 +37,14 @@
                          from_date_month from_date/month;
                          from_date_year from_date/year;
                          from_date_hour from_date/hour;
+                         from_date_hour python:from_date_hour + 14;
                          from_date_minute python:int(from_date.minute()/15)*15;
                          to_date python:create and from_date or here.to_date;
                          to_date_day to_date/day;
                          to_date_month to_date/month;
                          to_date_year to_date/year;
                          to_date_hour to_date/hour;
-                         to_date_hour python:(create and not all_day and to_date_hour+2) or to_date_hour;
+                         to_date_hour python:(create and not all_day and from_date_hour + 2) or to_date_hour;
                          trim_hour python:create and not all_day and to_date_hour > 23;
                          to_date_minute python:int(to_date.minute()/15)*15;
                          to_date_hour python:not trim_hour and to_date_hour or 0;
