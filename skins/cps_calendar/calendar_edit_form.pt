@@ -22,10 +22,10 @@
 
 
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
-             tal:define="title python:create and str('_(document)_Untitled_') or here.Title();
+             tal:define="title python:create and '' or here.Title();
                          description python:(create and [''] or [here.Description()])[0];
                          usertype python:create and 'ressources' or here.usertype;
-                         submitvalue python:create and str('_button_create_') or str('_button_modify_');
+                         submitvalue python:create and str('button_create') or str('button_modify');
                          action python:create and 'calendar_create' or 'folder_edit';">
 
   <form action="." method="post" enctype="multipart/form-data"

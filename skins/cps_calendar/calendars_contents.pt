@@ -8,11 +8,11 @@
 </metal:block>
 
 <metal:block fill-slot="main" i18n:domain="cpscalendar">
-  <tal:block repeat="type python:({'id':'private', 'title':'_cal_Private_'},
-                                  {'id':'others', 'title':'_cal_Others_'},
-                                  {'id':'events_shows', 'title':'_cal_Events_shows_'},
-                                  {'id':'rooms', 'title':'_cal_Rooms_'},
-                                  {'id':'ressources', 'title':'_cal_Ressources_'},)">
+  <tal:block repeat="type python:({'id':'private', 'title':'cpscalendar_private'},
+                                  {'id':'others', 'title':'cpscalendar_others'},
+                                  {'id':'events_shows', 'title':'cpscalendar_events_shows'},
+                                  {'id':'rooms', 'title':'cpscalendar_rooms'},
+                                  {'id':'ressources', 'title':'cpscalendar_ressources'},)">
     <tal:block define="id type/id;
                        cals calendars/?id"
                condition="cals">
