@@ -10,6 +10,8 @@ Bug fixes:
 - Reccuring and all-day events now properly block times in the
   meeting helper screen.
 - The installer now upgrades old events.
+- The navigation tabs moved only one day even in the week and month 
+  view. (Mantis #469)
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
