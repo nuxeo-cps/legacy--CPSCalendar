@@ -273,7 +273,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                    {'id':'create_member_calendar', 'type':'boolean', 'mode': 'w',
                     'label': "Create a calendar when creating the user's home folder"},
                    {'id':'member_can_create_home_calendar', 'type':'boolean', 'mode': 'w',
-                    'label': "Create a calendar when creating the user's home folder"},
+                    'label': "Member can create a home calendar"},
                    {'id':'event_fulltext_index', 'type':'boolean', 'mode': 'w',
                     'label': "Index searchableText for events"},
                    )
