@@ -37,7 +37,7 @@ if from_date > to_date:
 if not errors:
     days = from_date - to_date
     if abs(days) > 32:
-        pr('cpscalendar_interval_month')
+        pr('cpscalendar_interval_invalid_date')
 
 if errors:
     return context.calendar_meeting_error(errors=errors)
