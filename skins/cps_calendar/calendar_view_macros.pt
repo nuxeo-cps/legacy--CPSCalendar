@@ -1,11 +1,9 @@
 <metal:block define-macro="day">
   <tal:block define="global non_local string:#777777;
-                     global my_id member/getMemberId;
     "/>
   <tal:block
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
-      target="_new"
       i18n:translate="cpscalendar_link_printable_view">
       Printable view
     </a>]
@@ -82,7 +80,7 @@
                   <td
                     tal:define="
                       event nocall:day_event/event;
-                      local_event python:my_id == event.getCalendarUser();
+                      local_event python:member_id == event.getCalendarUser();
                       category event/category;
                       bgcolor categories/?category/color|def_color;"
                     tal:attributes="
@@ -143,7 +141,7 @@
                                         <td
                                           tal:define="
                                             category event/category;
-                                            local_event python:my_id == event.getCalendarUser();
+                                            local_event python:member_id == event.getCalendarUser();
                                             bgcolor categories/?category/color|def_color;
                                           "
                                           tal:attributes="
@@ -191,7 +189,7 @@
                                         <td
                                           tal:define="
                                             category event/category;
-                                            local_event python:my_id == event.getCalendarUser();
+                                            local_event python:member_id == event.getCalendarUser();
                                             bgcolor categories/?category/color|def_color;
                                           "
                                           tal:attributes="
@@ -235,12 +233,10 @@
 
 <metal:block define-macro="week">
   <tal:block define="global non_local string:#777777;
-                     global my_id member/getMemberId;
     "/>
   <tal:block
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
-      target="_new"
       i18n:translate="cpscalendar_link_printable_view">
       Printable view
     </a>]
@@ -331,7 +327,7 @@
                         <td
                           tal:define="
                             category event/category;
-                            local_event python:my_id == event.getCalendarUser();
+                            local_event python:member_id == event.getCalendarUser();
                             bgcolor categories/?category/color|def_color;
                           "
                           tal:attributes="
@@ -412,7 +408,7 @@
                                           <td valign="top"
                                             tal:define="
                                               base_class python:event.attendees and (info['isdirty'] and 'weekDirty' or 'weekAtt') or 'week';
-                                              local_event python:my_id == event.getCalendarUser();
+                                              local_event python:member_id == event.getCalendarUser();
                                               category event/category;
                                               bgcolor categories/?category/color|def_color;
                                               tdclass string:${base_class}${event/event_status};"
@@ -485,17 +481,15 @@
 
 <metal:block define-macro="month">
   <tal:block define="global non_local string:#777777;
-                     global my_id member/getMemberId;
     "/>
   <span class="calTitle">
-    <span tal:content="python:str('label_month_long%s' % (viewed_day.month(), ))" 
+    <span tal:content="python:str('label_month_long%s' % (viewed_day.month(), ))"
           i18n:translate="" />
     <span tal:replace="viewed_day/year"/>
   </span>
   <tal:block
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
-      target="_new"
       i18n:translate="cpscalendar_link_printable_view">
       Printable view
     </a>]
@@ -611,7 +605,7 @@
                           <td
                             tal:define="
                               category event/category;
-                              local_event python:my_id == event.getCalendarUser();
+                              local_event python:member_id == event.getCalendarUser();
                               bgcolor categories/?category/color|def_color"
                             tal:attributes="
                               bgcolor python:local_event and bgcolor or non_local;
@@ -654,7 +648,7 @@
                               tal:define="
                               event nocall:hour_event/event;
                               category event/category;
-                              local_event python:my_id == event.getCalendarUser();
+                              local_event python:member_id == event.getCalendarUser();
                               color categories/?category/color|def_color;
                               title python:'%s (%s - %s)' % (event.title_or_id(), event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
                               disp_title python:len(title) > 5 and (title[:5] + '...') or title;

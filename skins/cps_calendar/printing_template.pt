@@ -24,8 +24,8 @@
 </head>
 
 <body bgcolor="white">
-  <input type="button" onClick="window.close()"
-         value="button_close_this_window"
+  <input type="button" onclick="history.back()"
+         value="button_back"
          i18n:attributes="value" />
   <table cellspacing="0" border="1" cellpadding="5" width="465">
     <tr>
@@ -36,8 +36,8 @@
       </td>
     </tr>
   </table>
-  <input type="button" onClick="window.close()"
-         value="button_close_this_window"
+  <input type="button" onclick="history.back()"
+         value="button_back"
          i18n:attributes="value" />
 </body>
 
