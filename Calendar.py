@@ -87,7 +87,7 @@ factory_type_information = (
                  {'id': 'meeting',
                   'name': 'action_addmeeting',
                   'action': 'string:${object_url}/calendar_meeting_form',
-                  'condition': "python:hasattr(object, 'getFreeBusy'",
+                  'condition': "python:hasattr(object, 'getFreeBusy')",
                   'permissions': ("Add portal content",),
                   'category': 'object',
                   },
