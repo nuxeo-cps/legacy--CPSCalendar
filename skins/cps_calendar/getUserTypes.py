@@ -4,7 +4,7 @@ return [
     {
         'id': 'workspace',
         'title': 'cpscalendar_workspace',
-        'plural_title': 'cpscalendar_workspacess',
+        'plural_title': 'cpscalendar_workspaces',
      }, {
         'id': 'member',
         'title': 'cpscalendar_member',
