@@ -501,8 +501,8 @@
          tal:define="
            local_event python:member_id == event.getCalendarUser();
            event_title event/title_or_id;
-           short_title python:event_title[:(width/10)-2];
-           short_title python:short_title + ((short_title != event_title) and '...' or '');
+           max_chars python:(width/5)-(event.attendees and 5 or 3);
+           short_title python:event_title[:max_chars];
            category event/category;
            bgcolor categories/?category/color|def_color;"
          tal:attributes="width width;">
