@@ -50,19 +50,22 @@ factory_type_information = (
                                ),
      'actions': ({'id': 'view',
                   'name': '_action_view_',
-                  'action': 'calendars_contents',
+                  'action': 'string:calendars_contents',
+                  'condition': '',
                   'permissions': (View,),
                   'category': 'object',
                   },
                  {'id': 'localroles',
                   'name': '_action_access_rights_',
-                  'action': 'folder_localrole_form',
+                  'action': 'string:folder_localrole_form',
+                  'condition': '',
                   'permissions': (ManageWorkgroups,),
                   'category': 'object'
                   },
                  {'id': 'create',
                   'name': '_action_create_',
-                  'action': 'calendars_create_form',
+                  'action': 'string:calendars_create_form',
+                  'condition': '',
                   'visible': 0,
                   'permissions': ()},
                  ),
@@ -273,7 +276,7 @@ class Calendars(CPSBaseFolder):
             'slots': slots,
         }
 
-    security.declareProtected(ModifyPortalContent, 'getCalendarForId')
+    security.declareProtected(View, 'getCalendarForId')
     def getCalendarForId(self, id):
         """Gets calendar for id, creates it if id is a user"""
         id = str(id)
@@ -288,14 +291,19 @@ class Calendars(CPSBaseFolder):
         members = dirtool.members
         entry_prop = members._getInternalEntryProp()
         entry = members._getEntry(id)
+
         if entry:
+        
             # create this calendar for this member
             ttool = getToolByName(context, 'portal_types')
             wtool = getToolByName(context, 'portal_workflow')
             LOG(' Calendar automatic: ', DEBUG, repr(wtool))
             LOG(' Calendar automatic: ', DEBUG, repr(self))
             LOG(' Calendar automatic: ', DEBUG, current_user)
+            self.manage_setLocalGroupRoles('role:Anonymous',
+                                           ['WorkspaceManager'] )
             wtool.invokeFactoryFor(self, 'Calendar', id)
+            selfmanage_delLocalGroupRoles( ['role:Anonymous'])
 ##            calendar_type_info = ttool.getTypeInfo('Calendar')
 ##            # do ti.constructInstance(self, id) without permission checks
 ##            product = self.manage_addProduct[calendar_type_info.product]

@@ -5,25 +5,16 @@
 
 import os
 import sys
-from random import randrange
-from Acquisition import aq_base
-from DateTime.DateTime import DateTime
 from AccessControl import getSecurityManager
 from App.Extensions import getPath
 from zLOG import LOG, INFO, DEBUG
 from Products.CMFCore.ActionInformation import ActionInformation
-from Products.CMFCore.Expression import Expression
 from Products.CMFCore.CMFCorePermissions import View, ModifyPortalContent, \
      ReviewPortalContent, RequestReview
 
-from Products.CPSCore.CPSWorkflow import \
-     TRANSITION_INITIAL_PUBLISHING, TRANSITION_INITIAL_CREATE, \
-     TRANSITION_ALLOWSUB_CREATE, TRANSITION_ALLOWSUB_PUBLISHING, \
-     TRANSITION_BEHAVIOR_PUBLISHING, TRANSITION_BEHAVIOR_FREEZE
-from Products.DCWorkflow.Transitions import TRIGGER_USER_ACTION
 import Products.CPSCalendar
 
-def cpscalendarinstall(self):
+def update(self):
     _log = []
     def pr(bla, _log=_log):
         if bla == 'flush':
@@ -134,7 +125,6 @@ def cpscalendarinstall(self):
             if ptype in ptypes_installed:
                 ttool.manage_delObjects([ptype])
                 pr("   Deleted")
-
             ttool.manage_addTypeInformation(
                 id=ptype,
                 add_meta_type='Factory-based Type Information',
