@@ -29,8 +29,8 @@
   </tal:block>
   <metal:block use-macro="here/calendar_macros/macros/notifyattendees" />
   <tal:block repeat="user_type user_types">
-    <h2 tal:content="python:str(user_type['plural_title'])"
-        i18n:translate="">Ressources</h2>
+    <span class="calTitle" tal:content="python:str(user_type['plural_title'])"
+        i18n:translate="">Ressources</span>
     <tal:block define="type user_type/id;
                        attendees attendees_dict/?type|python:[]">
       <p tal:condition="not:attendees"

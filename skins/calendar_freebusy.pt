@@ -40,9 +40,9 @@
         <table height="15" align="right"
           cellspacing="0" cellpadding="0" border="0">
           <tr>
-            <td width="30" class="cal_left_tab">
+            <td width="30" class="calLeftTab">
               <tal:block condition="python:disp_start > 0">
-                <a class="cal_event"
+                <a class="calEvent"
                   tal:define="
                     prev python:disp_start - 7;
                   "
@@ -51,9 +51,9 @@
                 </a>
               </tal:block>
             </td>
-            <td width="30" class="cal_right_tab">
+            <td width="30" class="calRightTab">
               <tal:block condition="python:disp_end < len_slots">
-                <a class="cal_event"
+                <a class="calEvent"
                   tal:define="
                     next python:disp_start + 7;
                   "

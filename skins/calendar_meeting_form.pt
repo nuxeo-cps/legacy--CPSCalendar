@@ -39,9 +39,9 @@
              tal:on-error="python:request.RESPONSE.redirect('%s/calendar_meeting_expired' % (here.absolute_url(), ))">
 
   <form action="calendar_begin_meeting" method="POST">
-    <h2 i18n:translate="_Select the attendees you want for your meeting:">
+    <span clss="calTitle" i18n:translate="_Select the attendees you want for your meeting:">
       Select the attendees you want for your meeting:
-    </h2>
+    </span>
     <tal:block repeat="user_type user_types">
       <tal:block define="type_id user_type/id;
                          calendars all_calendars/?type_id|nothing"
@@ -71,9 +71,9 @@
         </span>
       </small>
     </p>
-    <h2 i18n:translate="_Select the time interval you want for your meeting:">
+    <span class="calTitle" i18n:translate="_Select the time interval you want for your meeting:">
       Select the time interval you want for your meeting:
-    </h2>
+    </span>
     <input type="hidden" id="from_date_day" name="from_date_day"
       tal:attributes="value from_date_day" />
     <input type="hidden" id="from_date_month" name="from_date_month"
@@ -148,9 +148,9 @@
              tal:attributes="src string:${portal_url}/interval_selector_icon.png" />
       </a>
     </h3>
-    <h2 i18n:translate="_Select the desired duration of your meeting:">
+    <span class="calTitle" i18n:translate="_Select the desired duration of your meeting:">
       Select the desired duration of your meeting:
-    </h2>
+    </span>
     <p>
       <select name="duration_hour:int">
         <option tal:repeat="hour python:range(0,24)"

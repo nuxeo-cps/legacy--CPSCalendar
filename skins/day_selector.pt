@@ -54,14 +54,14 @@ function select_day(day, month, year, day_disp) {
         <table height="15" align="right"
           cellspacing="0" cellpadding="0" border="0">
           <tr>
-            <td width="30" class="cal_left_tab">
-              <a class="cal_event"
+            <td width="30" class="calLeftTab">
+              <a class="calEvent"
                 tal:attributes="href cal_infos/prev_url">
                 <<
               </a>
             </td>
-            <td width="30" class="cal_right_tab">
-              <a class="cal_event"
+            <td width="30" class="calRightTab">
+              <a class="calEvent"
                 tal:attributes="href cal_infos/next_url">
                 >>
               </a>

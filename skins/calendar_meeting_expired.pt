@@ -9,9 +9,9 @@
 <metal:block fill-slot="header_plus" />
 
 <metal:block fill-slot="main">
-  <h2 i18n:translate="_Your request has expired_">
+  <span class="calTitle" i18n:translate="_Your request has expired_">
     Your request has expired.
-  </h2>
+  </span>
   <form method="POST"
     tal:attributes="action here/absolute_url">
     <input type="submit"

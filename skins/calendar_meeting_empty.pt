@@ -7,9 +7,9 @@
 </metal:block>
 
 <metal:block fill-slot="main">
-  <h2 i18n:translate="_Select at least one attendee_">
+  <span class="calTitle" i18n:translate="_Select at least one attendee_">
     Select at least one attendee.
-  </h2>
+  </span>
   <input type="button" onClick="history.back()"
     tal:attributes="value python:str('_button_back_')" />
 </metal:block>

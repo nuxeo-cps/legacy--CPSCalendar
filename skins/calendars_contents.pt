@@ -10,7 +10,7 @@
 <body>
 
 <metal:block fill-slot="main">
-
+        <tal:block replace="calendars"/>
   <tal:block repeat="type python:({'id':'private', 'title':'_cal_Private_'},
                                   {'id':'others', 'title':'_cal_Others_'},
                                   {'id':'events_shows', 'title':'_cal_Events_shows_'},
@@ -18,8 +18,8 @@
                                   {'id':'ressources', 'title':'_cal_Ressources_'},)">
     <tal:block define="id type/id; cals calendars/?id"
                condition="cals">
-      <h2 tal:content="python:type['title']"
-          i18n:translate="">Rooms</h2>
+      <span class="calTitle" tal:content="python:type['title']"
+          i18n:translate="">Rooms</span>
       <ul>
         <li tal:repeat="cal cals">
           <a tal:attributes="href cal/url" tal:content="cal/title">Calendar</a>

@@ -1,61 +1,61 @@
 <tal:block define="global portal_url python:here.portal_url(relative=1)" />
-<tal:block repeat="att python:['', 'att_', 'dirty_']">
+<tal:block repeat="att python:['', 'Att', 'Dirty']">
   <tal:block repeat="status python:['confirmed', 'unconfirmed', 'cancelled']">
-td.week_<tal:block replace="att" /><tal:block replace="status" /> {
-  background-image: url(<tal:block replace="portal_url" />/cal_week_<tal:block replace="att" /><tal:block replace="status" />.png);
+td.week<tal:block replace="att" /><tal:block replace="status" /> {
+  background-image: url(<tal:block replace="portal_url" />/calWeek<tal:block replace="att" /><tal:block replace="status" />.png);
   background-repeat: no-repeat;
 }
   </tal:block>
 </tal:block>
 
-small.cal_event {
+small.calEvent {
   color: white
 }
 
-a.cal_event {
+a.calEvent {
   color: white
 }
 
-a.cal_event:link {
+a.calEvent:link {
   color: white
 }
 
-a.cal_event:visited {
+a.calEvent:visited {
   color: white
 }
 
-a.cal_event:active {
+a.calEvent:active {
   color: #DDDDDD
 }
 
-a.cal_event:hover {
+a.calEvent:hover {
   color: white
 }
 
-th.day_event {
+th.dayEvent {
   background-color: black;
   text-align: left;
 }
 
-img.day_icon {
+img.dayIcon {
   vertical-align:middle
 }
 
-td.cal_left_tab {
+td.calLeftTab {
   vertical-align:middle;
   color: white;
   text-align: center;
   background-image: url(<tal:block replace="portal_url" />/cal_left_tab.png);
 }
 
-td.cal_center_tab {
+td.calCenterTab {
   vertical-align:middle;
   color: white;
   text-align: center;
   background-image: url(<tal:block replace="portal_url" />/cal_center_tab.png);
 }
 
-td.cal_right_tab {
+td.calRightTab {
   vertical-align:middle;
   color: white;
   text-align: center;
