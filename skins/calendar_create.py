@@ -12,5 +12,7 @@ if not id:
 
 here.invokeFactory('Calendar', id, **kw)
 
+ob = getattr(here, id)
+
 if REQUEST is not None:
-    REQUEST.RESPONSE.redirect(here.absolute_url())
+    REQUEST.RESPONSE.redirect('%s/workgroup_localrole_form' % (ob.absolute_url(), ))
