@@ -6,6 +6,7 @@ New features:
 - create a property to control the creation of a calendar when creating an user
   home folder
 - add a new view for the event of a calendar
+- add by_days option to Calendar.getEvents
 Bug fixes:
 ~~~~~~~~~~
 - The date display in the weekly view now always uses two lines, one for weekday
