@@ -1,0 +1,100 @@
+<tal:block define="
+  disp_infos python:here.calendar_getDispInformations(request);
+  calendar_disp disp_infos/disp;
+  selected_day disp_infos/selected_day;
+  viewed_day disp_infos/viewed_day;
+  viewed_day_int python:int(viewed_day);
+  start_time disp_infos/start_time;
+  end_time disp_infos/end_time;
+  events_desc python:here.getEventsDesc(start_time, end_time, calendar_disp, additional=0);
+  ">
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="main"
+             i18n:domain="cpscalendar">
+
+<h2 tal:content="string:cpscalendar_event_viewer_${calendar_disp}"
+    i18n:translate="">
+  Calendar of the <span tal:replace="calendar_disp" />
+</h2>
+<p tal:condition="python:0"
+   tal:content="disp_infos" />
+<p tal:condition="python:0"
+   tal:content="events_desc" />
+<tal:days repeat="day events_desc/hour_block_cols">
+
+<p tal:define="index repeat/day/index;
+               slot python:events_desc['slots'][index];
+               date python:slot[0];
+               dow date/dow"
+   tal:condition="python:day or 1">
+  <span tal:content="string:cpscalendar_label_day_long${dow}"
+        i18n:translate="" />
+  <span tal:replace="date/day"/>
+  <span tal:content="string:cpscalendar_label_month_long${date/month}"
+        i18n:translate="" />
+</p>
+<table border="1" width="100%"
+       tal:condition="day">
+  <tr>
+    <th i18n:translate="cpscalendar_label_hour">Heure</th>
+    <th i18n:translate="cpscalendar_label_title">Intitulé</th>
+    <th i18n:translate="cpscalendar_label_eventstatus">Statut</th>
+    <th i18n:translate="cpscalendar_label_attendees">Participants</th>
+    <th i18n:translate="cpscalendar_label_location">Lieu</th>
+  </tr>
+  <tal:block repeat="block day">
+  <tal:block_cols repeat="block_cols block">
+  <tal:events repeat="info block_cols">
+    <tr tal:define="event nocall:info/event;">
+      <td>
+        <span tal:replace="event/from_date/hour"/>
+        <span i18n:translate="cpscalendar_hour_sep">:</span>
+        <span tal:define="minute event/from_date/minute"
+              tal:content="python:'%02d' % minute"/>
+      </td>
+      <td>
+        <span tal:condition="event/title"
+              tal:replace="event/title">
+          Title
+        </span>
+        <span tal:condition="not:event/title"
+              tal:replace="structure string:&nbsp;">
+        </span>
+      </td>
+      <td tal:content="string:cpscalendar_option_status_${event/event_status}"
+          i18n:translate="">Status</td>
+      <td>
+        <ul tal:condition="event/attendees">
+          <li tal:repeat="att event/attendees">
+            <strong tal:content="att/cn|att/id">attendee</strong>
+            (<tal:block content="string:cpscalendar_option_status_${att/status}"
+                      i18n:translate="">
+               Confirmed
+             </tal:block>)
+          </li>
+        </ul>
+        <p tal:condition="not:event/attendees">&nbsp;</p>
+      </td>
+      <td>
+        <span tal:condition="event/location"
+              tal:replace="event/location">
+          Location
+        </span>
+        <span tal:condition="not:event/location"
+              tal:replace="structure string:&nbsp;">
+        </span>
+      </td>
+    </tr>
+  </tal:events>
+  </tal:block_cols>
+  </tal:block>
+</table>
+</tal:days>
+
+</metal:block>
+
+</html>
+</tal:block>
