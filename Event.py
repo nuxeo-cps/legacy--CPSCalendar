@@ -1,6 +1,7 @@
-# Copyright (c) 2002-2003 Nuxeo SARL <http://nuxeo.com>
+# Copyright (c) 2002-2004 Nuxeo SARL <http://nuxeo.com>
 # Copyright (c) 2002 CIRB, Belgique
-# Author: Julien Jalon <mailto:jj@nuxeo.com>
+# Authors: Julien Jalon <mailto:jj@nuxeo.com>
+#          Lennart Regebro <mailto:lr@nuxeo.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 2 as published
@@ -585,8 +586,6 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
         url = dispatcher.DestinationURL()
         REQUEST.RESPONSE.redirect('%s/manage_main' % (url, ))
 
-from Acquisition import Implicit
-from ExtensionClass import Base
 
 class VirtualEvent(Event):
 
