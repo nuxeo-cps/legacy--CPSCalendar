@@ -154,12 +154,12 @@ range       : [2000, 2049]
       </select>
       </strong>
     </p>
-    <p condition="nothing">
+    <p tal:condition="nothing">
     <span class="calTitle" i18n:translate="cpscalendar_message_select_the_desired_duration_of_your_meeting">
       Select the desired duration for your meeting
     </span> :
     </p>
-    <p condition="nothing">
+    <p tal:condition="nothing">
       <select name="duration_hour:int">
         <option tal:repeat="hour python:range(0,24)"
           tal:content="hour" tal:attributes="value hour;
