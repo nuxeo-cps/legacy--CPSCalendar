@@ -1,9 +1,15 @@
+ZODB Requires:
+~~~~~~~~~~~~~~
+-
+
+New features:
+~~~~~~~~~~~~~
+-
+
 Bug fixes:
 ~~~~~~~~~~
-- too many to mention here
+-
 
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
-- too many to mention here
-- compatibility with previous release is broken
-- there are still some untested or broken functionalities
+-

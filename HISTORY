@@ -1,4 +1,21 @@
 *******************************************
+** CPSCalendar V1.0.0 [R1 build 2004/01/21-10:55 by ben]
+
+ZODB Requires:
+~~~~~~~~~~~~~~
+- WARNING: compatibility with previous version is broken
+- there are still some untested or broken functionalities
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- too many to mention here
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- huge refactoring by encolpe/damien/sf
+
+*******************************************
 ** CPSCalendar V0.2.5 [R1 build 2003/12/23-12:01 by edegoute]
 
 ZODB Requires:
