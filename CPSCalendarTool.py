@@ -429,5 +429,5 @@ def addCPSCalendarTool(container, REQUEST=None):
     ob = CPSCalendarTool()
     id = ob.getId()
     container._setObject(id, ob)
-    if REQUEST is not None:
+    if REQUEST:
         REQUEST.RESPONSE.redirect(container.absolute_url()+'/manage_main')

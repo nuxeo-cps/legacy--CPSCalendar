@@ -2,7 +2,7 @@
 
 mcat = context.Localizer.cpscalendar
 if not int(redirect):
-    if REQUEST is not None:
+    if REQUEST:
         REQUEST = context.REQUEST
 
     mtool = context.portal_membership

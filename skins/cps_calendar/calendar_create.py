@@ -1,6 +1,6 @@
 ##parameters=REQUEST=None, **kw
 
-if REQUEST is not None:
+if REQUEST:
     kw.update(REQUEST.form)
 
 here=context.this()
@@ -18,5 +18,5 @@ here.invokeFactory('Calendar', id, **kw)
 
 ob = getattr(here, id)
 
-if REQUEST is not None:
+if REQUEST:
     REQUEST.RESPONSE.redirect('%s/folder_localrole_form' % (ob.absolute_url(), ))

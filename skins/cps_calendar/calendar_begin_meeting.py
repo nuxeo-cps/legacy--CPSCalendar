@@ -5,7 +5,7 @@ locale = context.Localizer.default.get_selected_language()
 
 pr = errors.append
 
-if REQUEST is not None:
+if REQUEST:
     kw.update(REQUEST.form)
 
 if not cal_ids:
@@ -69,7 +69,7 @@ meeting['busy_infos'] = busy_infos
 
 REQUEST.SESSION['freebusy_start'] = 0
 
-if REQUEST is not None:
+if REQUEST:
     REQUEST.SESSION['meeting'] = meeting
     REQUEST.RESPONSE.redirect('%s/calendar_freebusy' % (context.absolute_url(), ))
 

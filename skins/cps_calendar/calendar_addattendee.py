@@ -24,5 +24,5 @@ if new_attendees:
 
     context.setAttendees(attendees)
 
-if REQUEST is not None:
+if REQUEST:
     REQUEST.RESPONSE.redirect('%s/calendar_attendees_form' % (context.absolute_url(), ))

@@ -25,5 +25,5 @@ else:
     calendar = event.getCalendar()
     calendar.manage_delObjects([event.id])
 
-if REQUEST is not None:
+if REQUEST:
     REQUEST.RESPONSE.redirect(calendar.absolute_url())

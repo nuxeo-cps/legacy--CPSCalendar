@@ -4,7 +4,7 @@
 from random import randrange
 locale = context.Localizer.default.get_selected_language()
 
-if REQUEST is not None:
+if REQUEST:
     kw.update(REQUEST.form)
 
 here = context.this()
@@ -64,7 +64,7 @@ if all_day or from_date <= to_date:
     # TODO: add repeated event add manage
     here.invokeFactory('Event', id, **kw)
 
-    if REQUEST is not None:
+    if REQUEST:
         REQUEST.SESSION['calendar_viewed'] = from_date
         REQUEST.RESPONSE.redirect('%s/%s' % (here.absolute_url(), id))
     else:

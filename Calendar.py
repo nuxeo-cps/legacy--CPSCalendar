@@ -204,7 +204,7 @@ class Calendar(CPSBaseFolder):
     def confirmPendingEvent(self, event_id, REQUEST=None, **kw):
         """
         """
-        if REQUEST is not None:
+        if REQUEST:
             kw.update(REQUEST.form)
         pending = None
         for event in self._pending_events:
@@ -234,7 +234,7 @@ class Calendar(CPSBaseFolder):
         events = [event for event in self._pending_events
                         if event['id'] != event_id]
         self._pending_events = tuple(events)
-        if REQUEST is not None:
+        if REQUEST:
             if request == 'status':
                 REQUEST.RESPONSE.redirect("%s/%s/calendar_attendees_form"
                     % (self.absolute_url(), event_id))
@@ -251,7 +251,7 @@ class Calendar(CPSBaseFolder):
         else:
             self._pending_events = tuple(
                 [ev for ev in self._pending_events if ev['id'] != id])
-        if REQUEST is not None:
+        if REQUEST:
             REQUEST.RESPONSE.redirect(self.absolute_url())
 
     security.declareProtected('View', 'getEventsDesc')
@@ -805,7 +805,7 @@ def addCalendar(dispatcher, id,
         roles=['Manager', 'WorkspaceManager', 'WorkspaceMember'],
         acquire=0)
 
-    if REQUEST is not None:
+    if REQUEST:
         url = dispatcher.DestinationURL()
         REQUEST.RESPONSE.redirect('%s/manage_main' % url)
     #return CPSBase_adder(container, ob, REQUEST=REQUEST)

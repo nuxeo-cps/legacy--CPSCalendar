@@ -372,7 +372,7 @@ class Event(CPSBaseDocument):
             },)
         })
         
-        if REQUEST is not None:
+        if REQUEST:
             REQUEST.RESPONSE.redirect(self.absolute_url())
 
     security.declareProtected('Add portal content', 'updateAttendeesCalendars')
@@ -402,7 +402,7 @@ class Event(CPSBaseDocument):
             if id in self.notified_attendees or id in notified_attendees]
         if all_attendees == self.notified_attendees:
             self.isdirty = 0
-        if REQUEST is not None:
+        if REQUEST:
             REQUEST.RESPONSE.redirect(self.absolute_url())
 
     security.declarePrivate('getEventInSlots')
@@ -479,6 +479,6 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
     ob = Event(id, organizer=organizer, attendees=attendees, **kw)
     calendar._setObject(id, ob)
     ob = getattr(calendar, id)
-    if REQUEST is not None:
+    if REQUEST:
         url = dispatcher.DestinationURL()
-        REQUEST.RESPONSe.redirect('%s/manage_main' % (url, ))
+        REQUEST.RESPONSE.redirect('%s/manage_main' % (url, ))

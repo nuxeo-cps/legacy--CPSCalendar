@@ -2,5 +2,5 @@
 
 context.setAdditionalCalendars(cal_ids)
 
-if REQUEST is not None:
+if REQUEST:
     REQUEST.RESPONSE.redirect(context.absolute_url())

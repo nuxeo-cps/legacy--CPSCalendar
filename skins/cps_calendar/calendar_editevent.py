@@ -3,7 +3,7 @@
 
 locale = context.Localizer.default.get_selected_language()
 
-if REQUEST is not None:
+if REQUEST:
     kw.update(REQUEST.form)
 
 here = context.this()
@@ -53,6 +53,6 @@ del kw['to_date_minute']
 
 here.edit(**kw)
 
-if REQUEST is not None:
+if REQUEST:
     REQUEST.RESPONSE.redirect(here.absolute_url())
 

@@ -21,5 +21,5 @@ else:
     if confirm_events:
         return context.calendar_confirmdelevents(events=confirm_events)
 
-if REQUEST is not None:
+if REQUEST:
     REQUEST.RESPONSE.redirect(context.absolute_url())

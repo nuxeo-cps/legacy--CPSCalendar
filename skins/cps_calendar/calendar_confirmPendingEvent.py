@@ -19,5 +19,5 @@ else:
     else:
         url = event.absolute_url()
 
-if REQUEST is not None:
+if REQUEST:
     REQUEST.RESPONSE.redirect(url)

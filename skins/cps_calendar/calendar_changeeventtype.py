@@ -5,5 +5,5 @@ if not all_day:
 else:
     context.edit(all_day=1)
 
-if REQUEST is not None:
+if REQUEST:
     REQUEST.RESPONSE.redirect('%s/calendar_editevent_form' % (context.absolute_url(), ))
