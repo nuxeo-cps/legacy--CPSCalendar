@@ -1,6 +1,4 @@
 # translation of pt-BR.po to Português do Brasil
-# translation of pt-br.po to Português do Brasil
-# translation of cpscalendar.po to Português do Brasil
 # ##########################################################
 # ################# DON'T EDIT THIS FILE! ##################
 # ##########################################################
@@ -11,13 +9,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt-BR\n"
 "POT-Creation-Date: 2004-08-20 15:21default\n"
-"PO-Revision-Date: 2004-06-07 20:02-0300\n"
+"PO-Revision-Date: 2004-09-01 11:46-0300\n"
 "Last-Translator: Mario Olimpio de Menezes <mario@curiango.ipen.br>\n"
-"Language-Team: Português do Brasil <pt@li.org>\n"
+"Language-Team: Portugues do Brasil <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
 
 #.   <h2 content="string:cpscalendar_event_viewer_${calendar_disp}">
 #.     Calendar of the <span replace="calendar_disp" />
@@ -30,7 +27,6 @@ msgstr "Agenda de "
 #.                       Category
 #.                     </td>
 #: from ../skins/cps_calendar/create_meeting_form.pt
-#, fuzzy
 msgid "Category"
 msgstr "Categoria"
 
@@ -86,17 +82,15 @@ msgstr "Você tem ${pendings_count} pedidos pendentes."
 #.   <span>You have pending requests for this event:</span>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "You have pending requests for this event:"
-msgstr ""
+msgstr "Você tem pedidos pendentes para este evento:"
 
 #.   <h1>Calendars supersposing</h1>
 #: from ../skins/cps_calendar/calendar_display_form.pt
-#, fuzzy
 msgid "action_display"
 msgstr "Mostrar"
 
 #.   <h1>Export</h1>
 #: from ../skins/cps_calendar/calendar_export.pt
-#, fuzzy
 msgid "action_export"
 msgstr "Exportar"
 
@@ -109,7 +103,7 @@ msgstr "Remover participantes que não aceitaram."
 #.       </input>
 #: from ../skins/cps_calendar/popup_attachedfile_navigation.pt
 msgid "button_update"
-msgstr ""
+msgstr "Atualizar"
 
 #.   <td valign="middle" content="python:str(cat[1]['title'])">
 #.                     category
@@ -169,9 +163,8 @@ msgstr "Remover"
 
 #.   <input type="submit" value="cpscalendar_button_delete_event" />
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
-#, fuzzy
 msgid "cpscalendar_button_delete_event"
-msgstr "Remover"
+msgstr "Remover este evento"
 
 #.   <input type="submit" value="cpscalendar_button_delete_with_no_notification" condition="nothing" />
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
@@ -380,9 +373,8 @@ msgstr "Entre"
 #.                      Browse
 #.                 </a>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
-#, fuzzy
 msgid "cpscalendar_label_browse"
-msgstr "Entre"
+msgstr "Navegar"
 
 #.   <td>
 #.                 Busy time
@@ -471,9 +463,8 @@ msgstr "Descrição"
 #.         </metal:block>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
-#, fuzzy
 msgid "cpscalendar_label_document_link"
-msgstr "Comentário"
+msgstr "Documento"
 
 #.   <span>Duration</span>
 #: from ../skins/cps_calendar/create_meeting_form.pt
@@ -651,9 +642,8 @@ msgstr "Título do evento"
 
 #.   <span>To the</span>
 #: from ../skins/cps_calendar/calendar_macros.pt
-#, fuzzy
 msgid "cpscalendar_label_to_(day)"
-msgstr "até"
+msgstr "Até (dia)"
 
 #.   <span>
 #.                     to
@@ -700,59 +690,49 @@ msgstr ""
 #.         Printable view
 #.       </a>
 #: from ../skins/cps_calendar/calendar_view.pt
-#, fuzzy
 msgid "cpscalendar_link_printable_view"
-msgstr "Título do evento"
+msgstr "Visão para imprimir"
 
 #.   <a class="default" attributes="href string:${here_url}?viewed_day=${today}" define="today python:int(DateTime());">Today</a>
 #: from ../skins/cps_calendar/calendar_view_macros.pt
-#, fuzzy
 msgid "cpscalendar_link_today"
-msgstr "até"
+msgstr "Hoje"
 
 #.   <small condition="python:notify == 'cancel'">
 #.                 This message will be sent to attendees with a cancel notification.
 #.               </small>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_confirmdelevents.pt
-#, fuzzy
 msgid "cpscalendar_message_comment_for_attendees"
-msgstr ""
-"Você tem que notificar os outros participantes de recentes mudanças neste "
-"evento"
+msgstr "Comentário para participantes"
 
 #.   <small condition="python:notify == 'decline'">
 #.                 This message will be sent to the event's organizer.
 #.               </small>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
-#, fuzzy
 msgid "cpscalendar_message_comment_for_organizer"
-msgstr "Organizador"
+msgstr "Comentário para o organizador"
 
 #.   <span>
 #.         If you have an application that supports it, you can also
 #.       </span>
 #: from ../skins/cps_calendar/calendar_export.pt
 msgid "cpscalendar_message_if_you_have_an_application_that_supports_it_you_can"
-msgstr ""
+msgstr "Se você tem uma aplicação que suporta, você também pode "
 
 #.   <span>
 #.         No shared calendar found
 #.       </span>
 #: from ../skins/cps_calendar/calendar_display_form.pt
-#, fuzzy
 msgid "cpscalendar_message_no_shared_calendars_found"
-msgstr "Criar uma agenda"
+msgstr "Nenhuma agenda compartilhada encontrada"
 
 #.   <p>
 #.               Sorry, there isn't any user matching your query
 #.             </p>
 #: from ../skins/cps_calendar/calendar_macros.pt
-#, fuzzy
 msgid "cpscalendar_message_no_user_matching"
-msgstr ""
-"Você tem que notificar os outros participantes de recentes mudanças neste "
-"evento"
+msgstr "Desculpe, não há usuários que coincidam com sua consulta."
 
 #.   <strong>
 #.       You have to notify other attendees of recent changes to this event.
@@ -767,49 +747,38 @@ msgstr ""
 #.       You have to notify attendees that you will delete this event.
 #.     </strong>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
-#, fuzzy
 msgid "cpscalendar_message_notify_attendees_you_will_delete_event"
-msgstr ""
-"Você tem que notificar os outros participantes de recentes mudanças neste "
-"evento"
+msgstr "Você precisa notificar os participantes que você removerá este evento."
 
 #.   <strong>
 #.       You have to notify attendees that you will delete those events.
 #.     </strong>
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
-#, fuzzy
 msgid "cpscalendar_message_notify_attendees_you_will_delete_events"
 msgstr ""
-"Você tem que notificar os outros participantes de recentes mudanças neste "
-"evento"
+"Você precisa notificar os participantes que você removerá estes eventos."
 
 #.   <strong condition="python:notify == 'decline'">
 #.         You have to notify event's organizer that you will delete this event.
 #.     </strong>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
-#, fuzzy
 msgid "cpscalendar_message_notify_organizer_you_will_delete_event"
 msgstr ""
-"Você tem que notificar os outros participantes de recentes mudanças neste "
-"evento"
+"Você precisa notificar o organizador do evento que você removerá este evento."
 
 #.   <span class="calTitle">
 #.       Select at least one attendee.
 #.     </span>
 #: from ../skins/cps_calendar/calendar_meeting_empty.pt
-#, fuzzy
 msgid "cpscalendar_message_select_at_least_one_attendee"
-msgstr ""
-"Você tem que notificar os outros participantes de recentes mudanças neste "
-"evento"
+msgstr "Selecione pelo menos um participante."
 
 #.   <span>
 #.         Select the calendars you want to display along with this calendar
 #.       </span>
 #: from ../skins/cps_calendar/calendar_display_form.pt
-#, fuzzy
 msgid "cpscalendar_message_select_calendars_to_display_with_this_calendar"
-msgstr "Selecione os participantes que você quer para o seu encontro"
+msgstr "Selecione as agendas que você quer mostrar juntamente com esta agenda."
 
 #.   <span>
 #.           Select the attendees you want for your meeting
@@ -822,25 +791,22 @@ msgstr "Selecione os participantes que você quer para o seu encontro"
 #.         Select the desired duration for your meeting
 #.       </span>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
-#, fuzzy
 msgid "cpscalendar_message_select_the_desired_duration_of_your_meeting"
-msgstr "Selecione os participantes que você quer para o seu encontro"
+msgstr "Selecione a duração desejada do seu encontro."
 
 #.   <a attributes="href webcal_url">
 #.         subscribe to this calendar.
 #.       </a>
 #: from ../skins/cps_calendar/calendar_export.pt
-#, fuzzy
 msgid "cpscalendar_message_subscribe_to_this_calendar"
-msgstr "Criar uma agenda"
+msgstr "Inscrever-se nesta agenda."
 
 #.   <a attributes="href string:${here_url}/calendar.ics">
 #.         the iCalendar version of this calendar.
 #.       </a>
 #: from ../skins/cps_calendar/calendar_export.pt
-#, fuzzy
 msgid "cpscalendar_message_the_iCalendar_version_of_this_calendar"
-msgstr "Hora especificada muito cedo"
+msgstr " a versão iCalendar desta agenda."
 
 #.   <p>
 #.       The start hour you specified was earlier than the end hour. Did you mean
@@ -848,140 +814,126 @@ msgstr "Hora especificada muito cedo"
 #.     </p>
 #: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
 msgid "cpscalendar_message_too_early_specified_hour"
-msgstr "Hora especificada muito cedo"
+msgstr ""
+"A hora final que você especificou é mais cedo do que a hora inicial. Você "
+"quer trocá-las? Pressione OK se você quiser trocar a hora final com a "
+"inicial."
 
 #.   <p>
 #.       Unselect events you don't want to notify attendees.
 #.     </p>
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
-#, fuzzy
 msgid "cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees"
-msgstr "Selecione os participantes que você quer para o seu encontro"
+msgstr "Deselecione os eventos que você não quer notificar os participantes."
 
 #.   <span>
 #.         You can download
 #.       </span>
 #: from ../skins/cps_calendar/calendar_export.pt
-#, fuzzy
 msgid "cpscalendar_message_you_can_download"
-msgstr ""
-"Você tem que notificar os outros participantes de recentes mudanças neste "
-"evento"
+msgstr "Você pode baixar "
 
 #.   <p>
 #.       You can unselect some calendars if you want.
 #.     </p>
 #: from ../skins/cps_calendar/calendar_freebusy.pt
-#, fuzzy
 msgid "cpscalendar_message_you_can_unselect_some_calendars"
-msgstr "Hora especificada muito cedo"
+msgstr "Você pode deselecionar algumas agendas se quiser. "
 
 #.   <span class="calTitle">
 #.       Your request for a meeting has errors
 #.     </span>
 #: from ../skins/cps_calendar/calendar_meeting_error.pt
-#, fuzzy
 msgid "cpscalendar_message_your_meeting_request_has_errors"
-msgstr "Ajuda para a criação de encontros"
+msgstr "Seu pedido de um encontro tem erros."
 
 #.   <span class="calTitle">
 #.       Your request has expired.
 #.     </span>
 #: from ../skins/cps_calendar/calendar_meeting_expired.pt
-#, fuzzy
 msgid "cpscalendar_message_your_request_has_expired"
-msgstr "Hora especificada muito cedo"
+msgstr "Seu pedido expirou. "
 
 #.   <span>
 #.   <!--       Modify -->
 #.       </span>
 #: from ../skins/cps_calendar/calendar_edit_form.pt
-#, fuzzy
 msgid "cpscalendar_modify_object_name"
-msgstr "Data até incorreta"
+msgstr "Modificar"
 
 #.   <span condition="not:event_id">
 #.             There is no pending request</span>
 #: from ../skins/cps_calendar/calendar_pending_events.pt
-#, fuzzy
 msgid "cpscalendar_no_pending_request"
-msgstr "Ignorar em espera"
+msgstr "Não há pedidos pendentes."
 
 #.   <span condition="event_id">
 #.             There is no pending request for this event</span>
 #: from ../skins/cps_calendar/calendar_pending_events.pt
-#, fuzzy
 msgid "cpscalendar_no_pending_request_for_event"
-msgstr "Novo evento"
+msgstr "Não há pedidos pendentes para este evento."
 
 #.   <p content="python:str('cpscalendar_no_attendee_of_type_%s' % type)" condition="not:attendees">
 #.           cpscalendar_no_ressources_selected
 #.         </p>
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
-#, fuzzy
 msgid "cpscalendar_no_ressources_selected"
-msgstr "Recursos"
+msgstr "Nenhum recurso selecionado"
 
 #.   <a href="calendar_pending_events" attributes="href string:${context_url}/calendar_pending_events" condition="python:pendings_count == 1">
 #.              You have one pending request.
 #.           </a>
 #: from ../skins/cps_calendar/calendar_view.pt
-#, fuzzy
 msgid "cpscalendar_one_pending_request"
-msgstr "Ignorar em espera"
+msgstr "Você tem um pedido pendente."
 
 #.   <span>
 #.       Pending events for
 #.     </span>
 #: from ../skins/cps_calendar/calendar_pending_events.pt
-#, fuzzy
 msgid "cpscalendar_pending_events_for"
-msgstr "Ignorar em espera"
+msgstr "Eventos pendentes para "
 
 #.   <title>
 #.   	 Printing version of your calendar
 #.     </title>
 #: from ../skins/cps_calendar/printing_template.pt
-#, fuzzy
 msgid "cpscalendar_printable_view"
-msgstr "Título do evento"
+msgstr "Versão para impressão da sua agenda"
 
 #.   <h2 class="label" content="python:str(user_type['plural_title'])">cpscalendar_ressources</h2>
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
-#, fuzzy
 msgid "cpscalendar_ressources"
 msgstr "Recursos"
 
 #.   <span content="string:cpscalendar_option_${type}">cpscalendar_status</span>
 #.   <span content="string:cpscalendar_option_status_${status}">cpscalendar_status</span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
-#, fuzzy
 msgid "cpscalendar_status"
-msgstr "Estado"
+msgstr "Status da Agenda"
 
 #.   <span content="widget/label" condition="widget/is_i18n">label</span>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "label"
-msgstr ""
+msgstr "rótulo"
 
 #.   <span content="string:cpscalendar_option_status_${event_status}">status</span>
 #.   <span content="string:cpscalendar_option_status_${status}">status</span>
 #: from ../skins/cps_calendar/calendar_macros.pt
 #: ../skins/cps_calendar/create_meeting_form.pt
-#, fuzzy
 msgid "status"
-msgstr "Estado"
+msgstr "status"
 
 #.   <span content="string:cpscalendar_label_day_long${i}">week day</span>
 #: from ../skins/cps_calendar/calendar_view_macros.pt
 msgid "week day"
-msgstr ""
+msgstr "dia da semana"
 
 msgid "cpscalendar_user_calendar_name_beg"
-msgstr "Agenda de"
+msgstr "Agenda de "
 
 msgid "cpscalendar_user_calendar_name_end"
-msgstr " "
+msgstr ":"
 
 msgid "cpscalendar_create_all_day_event"
 msgstr "Criar um evento de um dia inteiro"
@@ -999,10 +951,10 @@ msgid "cpscalendar_option_event_tofrom"
 msgstr "Padrão"
 
 msgid "cpscalendar_option_event_allday"
-msgstr "o dia todo"
+msgstr "O dia todo"
 
 msgid "cpscalendar_option_event_recurring"
-msgstr "recorrente"
+msgstr "Recorrente"
 
 msgid "cpscalendar_label_period_daily"
 msgstr "Diariamente"
@@ -1022,24 +974,23 @@ msgstr "Não Confirmado"
 msgid "cpscalendar_option_status_canceled"
 msgstr "Cancelado"
 
-#, fuzzy
 msgid "cpscalendar_option_status_tentative"
 msgstr "Tentativa"
 
 msgid "cpscalendar_pending_confirmed"
-msgstr "Esperando confirmação"
+msgstr "Participar deste evento"
 
 msgid "cpscalendar_pending_tentative"
-msgstr "Tentativa em espera"
+msgstr "Tentar participar deste evento"
 
 msgid "cpscalendar_pending_decline"
-msgstr "Rejeição em espera"
+msgstr "Declinar convite para evento"
 
 msgid "cpscalendar_pending_decline_and_delete"
-msgstr "Remoção e rejeição em espera"
+msgstr "Declinar convite e remover este evento da sua agenda"
 
 msgid "cpscalendar_pending_ignore"
-msgstr "Ignorar em espera"
+msgstr "Ignorar este evento"
 
 msgid "cpscalendar_category_private"
 msgstr "Privado"
@@ -1191,13 +1142,11 @@ msgstr "Novembro"
 msgid "cpscalendar_label_month_long12"
 msgstr "Dezembro"
 
-#, fuzzy
 msgid "cpscalendar_workspace"
-msgstr ":"
+msgstr "Agenda de Área de Trabalho"
 
-#, fuzzy
 msgid "cpscalendar_workspaces"
-msgstr "Recursos"
+msgstr "Agenda de Áreas de Trabalho"
 
 msgid "cpscalendar_member"
 msgstr "Membro"
@@ -1247,9 +1196,8 @@ msgstr "Nenhum participante de recurso tipo"
 msgid "cpscalendar_no_attendee_of_type_events_show"
 msgstr "Nenhum participante de tipo mostra evento"
 
-#, fuzzy
 msgid "cpscalendar_no_attendee_of_type_workspace"
-msgstr "Nenhum participante de recurso tipo"
+msgstr "Nenhuma agenda de área de trabalho"
 
 msgid "cpscalendar_button_remove_canceled_events"
 msgstr "Remover eventos cancelados"
@@ -1264,7 +1212,7 @@ msgid "cpscalendar_to_incorrect_date"
 msgstr "Data até incorreta"
 
 msgid "cpscalendar_interval_invalid_date"
-msgstr "data inválida"
+msgstr "Data inválida"
 
 msgid "cpscalendar_create_the_meeting_here"
 msgstr "Criar"
@@ -1304,19 +1252,3 @@ msgstr "Visualização da Semana"
 
 msgid "cpscalendar_event_viewer_month"
 msgstr "Visualização do Mês"
-
-#~ msgid "Confirm"
-#~ msgstr "Confirmar"
-
-#~ msgid "portal_type_Calendar_title"
-#~ msgstr "Agenda"
-
-#~ msgid "portal_type_Calendar_Event_title"
-#~ msgstr "Evento"
-
-#~ msgid "portal_type_Calendar_Event_description"
-#~ msgstr "Um evento"
-
-#, fuzzy
-#~ msgid "portal_type_Event_description"
-#~ msgstr "Descrição"
