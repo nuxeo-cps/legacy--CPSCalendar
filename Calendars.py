@@ -107,7 +107,7 @@ class Calendars(Workgroup):
             this_slot = []
             for cal in cals:
                 this_slot.extend(cal[i])
-        result.append(slot_union(this_slot))
+            result.append(slot_union(this_slot))
         return result
 
     security.declareProtected('View', 'getFreeBusy')
@@ -134,7 +134,9 @@ class Calendars(Workgroup):
             LOG('NGC', DEBUG, 'Calculating %s' % (id, ))
             calendar = self.getCalendarForId(id)
             cal_users[id] = self.getAttendeeInfo(id)['cn']
-            calendar_slots = [[]] * len(slots)
+            calendar_slots = []
+            for i in range(len(slots)):
+                calendar_slots.append([])
             slots_done = [None] * length
             for event in calendar.objectValues('Event'):
                 ## transparence XXX
@@ -149,11 +151,12 @@ class Calendars(Workgroup):
                     LOG('NGC', DEBUG, 'done: %s' % (slots_done, ))
                     if event_slot is not None and slots_done[i] is None:
                         if event.all_day:
-                            LOG('NGC', DEBUG, 'all day')
+                            LOG('NGC', DEBUG, 'all day %i' % (i, ))
                             slots_done[i] = (event_slot['start'],
                                 event_slot['stop'])
                         else:
-                            LOG('NGC', DEBUG, 'Appending event')
+                            LOG('NGC', DEBUG, 'calendar_slots=%s' % (calendar_slots, ))
+                            LOG('NGC', DEBUG, 'Appending event %s' % (i, ))
                             calendar_slots[i].append((event_slot['start'], event_slot['stop']))
                     i += 1
             cals_dict[id] = list = []
