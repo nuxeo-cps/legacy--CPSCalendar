@@ -11,6 +11,10 @@
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="here/simple_template/macros/master">
+<metal:block fill-slot="style_plus">
+  <link rel="stylesheet" type="text/css"
+    tal:attributes="href string:${portal_url}/calendar_stylesheet.css" />
+</metal:block>
 <body>
 
 <metal:block fill-slot="main"

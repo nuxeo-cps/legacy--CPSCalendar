@@ -1,6 +1,6 @@
 <tal:block define="portal_url python:here.portal_url(relative=1)">
-  <tal:block repeat="att python:['', 'att_']">
-    <tal:block repeat="status python:['confirmed', 'unconfirmed', 'canceled']">
+  <tal:block repeat="att python:['', 'att_', 'dirty_']">
+    <tal:block repeat="status python:['confirmed', 'unconfirmed', 'cancelled']">
 td.week_<tal:block replace="att" /><tal:block replace="status" /> {
   background-image: url(<tal:block replace="portal_url" />/cal_week_<tal:block replace="att" /><tal:block replace="status" />.png);
   background-repeat: no-repeat;
@@ -8,3 +8,36 @@ td.week_<tal:block replace="att" /><tal:block replace="status" /> {
     </tal:block>
   </tal:block>
 </tal:block>
+
+small.cal_event {
+  color: white
+}
+
+a.cal_event {
+  color: white
+}
+
+a.cal_event:link {
+  color: white
+}
+
+a.cal_event:visited {
+  color: white
+}
+
+a.cal_event:active {
+  color: #DDDDDD
+}
+
+a.cal_event:hover {
+  color: white
+}
+
+th.day_event {
+  background-color: black;
+  text-align: left;
+}
+
+img.day_icon {
+  vertical-align:middle
+}

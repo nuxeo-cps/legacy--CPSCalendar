@@ -111,7 +111,7 @@ class Calendar(Workgroup):
 
     _pending_events = ()
     _declined = ()
-    _canceled = ()
+    _cancelled = ()
 
     def __init__(self, id, title='', description='', usertype='member'):
         Workgroup.__init__(self, id, title, description)
@@ -216,6 +216,8 @@ class Calendar(Workgroup):
 
         disp can be 'day', 'month', 'view'
         """
+        mtool = getToolByName(self, 'portal_membership')
+        show_dirty = mtool.checkPermission('Add portal content', self)
         if disp == 'day':
             slots = [(start_time, end_time)]
             slot_list = [{'desc': start_time, 'day': [], 'hour': []}]
@@ -262,13 +264,13 @@ class Calendar(Workgroup):
             return {
               'slots': slots,
               'day_events': slot_list[0]['day'],
-              'hour_blocks': self._get_hour_block_cols(hour_cols)[0],
+              'hour_blocks': self._get_hour_block_cols(hour_cols, show_dirty)[0],
             }
         elif disp == 'week':
             day_events_list = [slot['day'] for slot in slot_list]
             hour_cols = [slot['hour'] for slot in slot_list]
             day_lines = self._get_day_lines(day_events_list, len(slots))
-            hour_block_cols = self._get_hour_block_cols(hour_cols)
+            hour_block_cols = self._get_hour_block_cols(hour_cols, show_dirty)
             return {
                 'slots': slots,
                 'day_lines': day_lines,
@@ -389,7 +391,7 @@ class Calendar(Workgroup):
 
         return day_lines
 
-    def _get_hour_block_cols(self, hour_cols):
+    def _get_hour_block_cols(self, hour_cols, show_dirty):
         hour_block_cols = []
         for col in hour_cols:
             blocks = []
@@ -415,9 +417,11 @@ class Calendar(Workgroup):
                         # so resolve conflict
                         if len(conflict) == 1:
                             # just a simple event
+                            the_event = conflict[0]['ev']['event']
                             blocks.append([[{
-                              'event': conflict[0]['ev']['event'],
+                              'event': the_event,
                               'height': conflict[0]['stop_min'] - conflict[0]['start_min'],
+                              'isdirty': show_dirty and the_event.isDirty()
                             }]])
                         else:
                             block_cols = []
@@ -446,9 +450,11 @@ class Calendar(Workgroup):
                                         'event': None,
                                         'height': conf_start - correct_stop
                                     })
+                                the_event = c_ev['event']
                                 correct_col.append({
-                                    'event': c_ev['event'],
-                                    'height': conf_stop - conf_start
+                                    'event': the_event,
+                                    'height': conf_stop - conf_start,
+                                    'isdirty': show_dirty and the_event.isDirty(),
                                 })
                                 block_stops[i] = conf_stop
                             blocks.append(block_cols)
@@ -479,9 +485,11 @@ class Calendar(Workgroup):
                     })
             if conflict:
                 if len(conflict) == 1:
+                    the_event = conflict[0]['ev']['event']
                     blocks.append([[{
-                      'event': conflict[0]['ev']['event'],
+                      'event': the_event,
                       'height': conflict[0]['stop_min'] - conflict[0]['start_min'],
+                      'isdirty': show_dirty and the_event.isDirty(),
                     }]])
                 else:
                     block_cols = []
@@ -510,19 +518,15 @@ class Calendar(Workgroup):
                                 'event': None,
                                 'height': conf_start - correct_stop
                             })
+                        the_event = ev['event']
                         correct_col.append({
-                            'event': ev['event'],
-                            'height': conf_stop - conf_start
+                            'event': the_event,
+                            'height': conf_stop - conf_start,
+                            'isdirty': show_dirty and the_event.isDirty(),
                         })
                         block_stops[i] = conf_stop
                     blocks.append(block_cols)
                 last_ev = conflict_stop
-
-            if last_ev < 1439:
-                blocks.append([[{
-                    'event': None,
-                        'height': 1439 - last_ev
-                    }]])
 
         return hour_block_cols
 
@@ -648,11 +652,11 @@ class Calendar(Workgroup):
         if event_id not in self._declined:
             self._declined = self._declined + (event_id, )
 
-    security.declarePrivate('addCanceledEvent')
-    def addCanceledEvent(self, event):
+    security.declarePrivate('addCancelledEvent')
+    def addCancelledEvent(self, event):
         event_id = event.id
-        if event_id not in self._canceled:
-            self._canceled = self._canceled + (event_id, )
+        if event_id not in self._cancelled:
+            self._cancelled = self._cancelled + (event_id, )
 
     security.declarePrivate('removeDeclinedEvent')
     def removeDeclinedEvent(self, event):
@@ -660,18 +664,18 @@ class Calendar(Workgroup):
         if event_id in self._declined:
             self._declined = tuple([id for id in self._declined if id != event_id])
 
-    security.declarePrivate('removeCanceledEvent')
-    def removeCanceledEvent(self, event):
+    security.declarePrivate('removeCancelledEvent')
+    def removeCancelledEvent(self, event):
         event_id = event.id
-        if event_id in self._canceled:
-            self._canceled = tuple([id for id in self._canceled if id != event_id])
+        if event_id in self._cancelled:
+            self._cancelled = tuple([id for id in self._cancelled if id != event_id])
 
-    security.declareProtected('Add portal content', 'getDeclinedCanceledEvents')
-    def getDeclinedCanceledEvents(self):
+    security.declareProtected('Add portal content', 'getDeclinedCancelledEvents')
+    def getDeclinedCancelledEvents(self):
         """
         """
         return {
-            'canceled': self._canceled,
+            'cancelled': self._cancelled,
             'declined': self._declined,
         }
 
@@ -681,10 +685,10 @@ class Calendar(Workgroup):
         """
         self._pending_events = tuple([ev for ev in self._pending_events if ev['id'] not in ids])
         declined = [id for id in self._declined if id not in ids]
-        canceled = [id for id in self._canceled if id not in ids]
+        cancelled = [id for id in self._cancelled if id not in ids]
         Workgroup.manage_delObjects(self, ids, *args, **kw)
         self._declined = tuple(declined)
-        self._canceled = tuple(canceled)
+        self._cancelled = tuple(cancelled)
 
 InitializeClass(Calendar)
 

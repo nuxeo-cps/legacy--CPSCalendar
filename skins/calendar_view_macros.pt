@@ -36,7 +36,6 @@
         <table width="445" cellspacing="2" cellpadding="0" border="0"
           tal:define="
             empty_src string:${portal_url}/cal_empty.gif;
-            event_src string:${portal_url}/cal_event;
             slots events_desc/slots;
             date python:slots[0][0];
             day_events events_desc/day_events;
@@ -86,75 +85,79 @@
               <tal:block repeat="block hour_blocks">
                 <tal:block
                   define="conf_len python:len(block)">
-                  <tal:block condition="python:conf_len == 1">
-                    <tal:block define="
-                      info python:block[0];
-                      event nocall:info/event;
-                      ">
-                      <img width="445"
-                        tal:condition="not:nocall:event"
-                        tal:attributes="
-                          src empty_src;
-                          height python:info['height']/3" />
-                      <table width="445" cellpadding="2" celspacing="0"
-                        border="1"
-                        tal:attributes="height python:info['height']/3"
-                        tal:condition="nocall:event">
-                        <tr>
-                          <td valign="top"
-                            tal:attributes="
-                            background string:${event_src}_${event/event_status}.png">
-                            <a
+                  <table cellpadding="0" cellspacing="0"
+                    width="445" border="0"
+                    tal:define="width python:445/conf_len">
+                    <tr>
+                      <td valign="top" tal:repeat="block_col block">
+                        <tal:block repeat="info block_col">
+                          <tal:block define="event nocall:info/event">
+                            <img
+                              tal:condition="not:nocall:event"
                               tal:attributes="
-                                href event/absolute_url"
-                                tal:content="event/title_or_id">
-                              Event
-                            </a>
-                          </td>
-                        </tr>
-                      </table>
-                    </tal:block>
-                  </tal:block>
-                  <tal:block condition="python:conf_len > 1">
-                    <table cellpadding="0" cellspacing="0"
-                      width="445" border="0"
-                      tal:define="width python:445/conf_len">
-                      <tr>
-                        <td valign="top" tal:repeat="block_col block">
-                          <tal:block repeat="info block_col">
-                            <tal:block define="event nocall:info/event">
-                              <img
-                                tal:condition="not:nocall:event"
-                                tal:attributes="
-                                  border python:not not event;
-                                  src empty_src;
-                                  width width;
-                                  height python:info['height']/3" />
-                              <table cellpadding="2" celspacing="0"
-                                border="1"
-                                tal:attributes="
-                                  width width;
-                                  height python:info['height']/3"
-                                tal:condition="nocall:event">
+                                border python:not not event;
+                                src empty_src;
+                                width width;
+                                height python:info['height']/3" />
+                            <table cellpadding="0" cellspacing="0"
+                              border="0"
+                              tal:define="
+                                height python:info['height']/3"
+                              tal:attributes="
+                                width width;
+                                height height"
+                              tal:condition="nocall:event">
+                              <tal:block condition="python:height<20">
                                 <tr>
-                                  <td valign="top"
-                                    tal:attributes="
-                                    background string:${event_src}_${event/event_status}.png;">
-                                    <a
+                                  <td bgcolor="#0000FF">
+                                    <a class="cal_event"
+                                      tal:attributes="
+                                        href event/absolute_url">
+                                      <img border="0"
+                                        tal:condition="python:height<20"
+                                        tal:attributes="
+                                            width width;
+                                            height height;
+                                            src empty_src;" />
+                                     </a>
+                                   </td>
+                                </tr>
+                              </tal:block>
+                              <tal:block condition="python:height>19">
+                                <tr>
+                                  <th valign="top" class="day_event"
+                                    height="15">
+                                    <img class="day_icon"
+                                      tal:attributes="
+                                        src string:${portal_url}/cal_day_${event/event_status}.png" />
+                                    <tal:block condition="event/attendees">
+                                      <img class="day_icon"
+                                        tal:define="
+                                          icon python:info['isdirty'] and 'cal_day_dirty' or 'cal_day_att';"
+                                        tal:attributes="
+                                          src string:${portal_url}/${icon}.png"
+                                        />
+                                    </tal:block>
+                                    <a class="cal_event"
                                       tal:attributes="
                                         href event/absolute_url"
-                                        tal:content="event/title_or_id">
+                                      tal:content="event/title_or_id">
                                       Event
                                     </a>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td
+                                    bgcolor="#0000FF">
                                   </td>
                                 </tr>
-                              </table>
-                            </tal:block>
+                              </tal:block>
+                            </table>
                           </tal:block>
-                        </td>
-                      </tr>
-                    </table>
-                  </tal:block>
+                        </tal:block>
+                      </td>
+                    </tr>
+                  </table>
                 </tal:block>
               </tal:block>
             </td>
@@ -322,36 +325,39 @@
                                       width width;">
                                   </td>
                                   <tal:block condition="nocall:event">
-                                    <td bgcolor="#0000FF"
+                                    <td bgcolor="#0000FF" valign="top"
                                       tal:define="
-                                        base_class python:event.attendees and 'week_att_' or 'week_';"
+                                        base_class python:event.attendees and (info['isdirty'] and 'week_dirty_' or 'week_att_') or 'week_';
+                                        tdclass string:${base_class}${event/event_status};"
                                       tal:attributes="
-                                      width width;
-                                      height height;
-                                      class string:${base_class}${event/event_status};
+                                        width width;
+                                        height height;
+                                        class python:height>12 and tdclass or nothing;
                                       ">
                                       <a
                                         tal:define="
-                                          event_title event/title_or_id;"
+                                            event_title event/title_or_id;"
                                         tal:attributes="
-                                          title python:'%s (%s -> %s)' % (event, event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
+                                          title python:'%s (%s -> %s)' % (event_title, event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
                                           href event/absolute_url">
                                         <img border="0"
                                           tal:condition="
-                                            python:height<30"
+                                            python:height<22 or width<28"
                                           tal:attributes="
                                             src empty_src;
                                             width width;
                                             height height" />
                                         <tal:block
-                                          condition="python:height>=30">
-                                          <img border="0" height="10"
+                                          condition="python:height>21 and width>27">
+                                          <img border="0" height="11"
                                             tal:attributes="
                                             src empty_src;
                                             width width;" />
-                                          <small
-                                            tal:content="
-                                            python:(width<59 and '...') or (len(event_title)>10 and event_title[:8]+'...') or event_title" />
+                                          <small class="cal_event">
+                                            &nbsp;<tal:block
+                                              content="
+                                              python:(width<59 and '...') or (len(event_title)>10 and event_title[:8]+'...') or event_title" />
+                                          </small>
                                         </tal:block>
                                       </a>
                                     </td>

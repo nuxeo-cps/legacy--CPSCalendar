@@ -207,8 +207,8 @@
             <metal:block fill-slot="content">
               <select name="event_status"
                 tal:define="
-                  statuses python:['confirmed', 'unconfirmed', 'canceled'];
-                  statuses python:create and [status for status in statuses if status != 'canceled'] or statuses">
+                  statuses python:['confirmed', 'unconfirmed', 'cancelled'];
+                  statuses python:create and [status for status in statuses if status != 'cancelled'] or statuses">
                 <option tal:repeat="status statuses"
                   tal:attributes="
                     value status;

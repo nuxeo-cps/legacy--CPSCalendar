@@ -114,18 +114,21 @@ class Event(BaseDocument):
 
     security.declareProtected('Modify portal content', 'edit')
     def edit(self, attendees=None, from_date=None, to_date=None, all_day=None, transparent=None, **kw):
+        setdirty = 0
         old_status = self.event_status
         BaseDocument.edit(self, **kw)
         new_status = self.event_status
         if new_status != old_status:
-            if new_status == 'canceled':
+            if new_status == 'cancelled':
                 calendar = self.getCalendar()
-                calendar.addCanceledEvent(self)
-            if old_status == 'canceled':
+                calendar.addCancelledEvent(self)
+            if old_status == 'cancelled':
                 calendar = self.getCalendar()
-                calendar.removeCanceledEvent(self)
+                calendar.removeCancelledEvent(self)
+            setdirty = 1
 
-        if all_day is not None:
+        if all_day is not None and (not self.all_day) != (not all_day):
+            setdirty = 1
             self.all_day = all_day
 
         if transparent is not None:
@@ -133,13 +136,16 @@ class Event(BaseDocument):
 
         if attendees is not None:
             self.attendees = deepcopy(attendees)
-        if from_date is not None:
+        if from_date is not None and self.from_date != from_date:
+            setdirty = 1
             self.from_date = from_date
-        if to_date is not None:
+        if to_date is not None and self.to_date != to_date:
+            setdirty = 1
             self.to_date = to_date
         self._normalize()
 
-        self.isdirty = 1
+        if setdirty:
+            self.isdirty = 1
 
     def _normalize(self):
         if self.all_day:
@@ -240,18 +246,25 @@ class Event(BaseDocument):
         """
         return self.getCalendarUser() == self.organizer['id']
 
+    security.declareProtected('Add portal content', 'isDirty')
+    def isDirty(self):
+        """
+        """
+        return not not ((self.isdirty and self.attendees and \
+            self.canEditThisEvent()) or self.getPendingEvents())
+
     security.declareProtected('Add portal content', 'setEventStatus')
     def setEventStatus(self, status):
         """
         """
         old_status = self.event_status
         if status != old_status:
-            if status == 'canceled':
+            if status == 'cancelled':
                 calendar = self.getCalendar()
-                calendar.addCanceledEvent(self)
-            if old_status == 'canceled':
+                calendar.addCancelledEvent(self)
+            if old_status == 'cancelled':
                 calendar = self.getCalendar()
-                calendar.removeCanceledEvent(self)
+                calendar.removeCancelledEvent(self)
             self.isdirty = 1
         self.event_status = status
 
@@ -260,7 +273,6 @@ class Event(BaseDocument):
         """
         """
         self.attendees = deepcopy(attendees)
-        self.isdirty = 1
 
     security.declareProtected('Add portal content', 'setAttendeeStatus')
     def setAttendeeStatus(self, attendee, status):
@@ -272,7 +284,6 @@ class Event(BaseDocument):
                 att['status'] = status
                 change = 1
         if change:
-            self.isdirty = 1
             self._p_changed = 1
 
     security.declareProtected('View', 'getMyStatus')
@@ -394,9 +405,9 @@ class Event(BaseDocument):
         """
         BaseDocument.manage_afterAdd(self, item, container)
         if aq_base(item) is aq_base(self):
-            if self.event_status == 'canceled':
+            if self.event_status == 'cancelled':
                 calendar = self.getCalendar()
-                calendar.addCanceledEvent(self)
+                calendar.addCancelledEvent(self)
 
 InitializeClass(Event)
 

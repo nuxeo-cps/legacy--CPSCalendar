@@ -23,15 +23,15 @@
 <metal:block fill-slot="main"
   tal:define="can_add_evts python:mtool.checkPermission('Add portal content', here)">
   <tal:block condition="can_add_evts">
-    <tal:block define="ev_dict here/getDeclinedCanceledEvents">
+    <tal:block define="ev_dict here/getDeclinedCancelledEvents">
       <form action="calendar_delevents" method="POST"
-        tal:define="canceled ev_dict/canceled"
-        tal:condition="canceled">
+        tal:define="cancelled ev_dict/cancelled"
+        tal:condition="cancelled">
         <input type="hidden" name="ids:list"
-          tal:repeat="id canceled"
+          tal:repeat="id cancelled"
           tal:attributes="value id" />
         <input type="submit"
-          tal:attributes="value python:mcat('_button_Remove canceled events_')" />
+          tal:attributes="value python:mcat('_button_Remove cancelled events_')" />
       </form>
       <form action="calendar_delevents" method="POST"
         tal:define="declined ev_dict/declined"

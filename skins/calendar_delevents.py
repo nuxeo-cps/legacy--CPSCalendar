@@ -5,7 +5,7 @@ if comment is not None:
     notify = [id for id in notify if id in event_ids]
     events = [getattr(context, id) for id in notify]
     for event in events:
-        event.setEventStatus('canceled')
+        event.setEventStatus('cancelled')
         event.updateAttendeesCalendars(comment=comment)
     context.manage_delObjects(ids)
 else:
@@ -13,7 +13,7 @@ else:
 
     noconfirm_ids = [event.id for event in events if (not event.attendees) or
         (not event.canEditThisEvent()) or
-        (event.event_status == 'canceled' and not event.isdirty)]
+        (event.event_status == 'cancelled' and not event.isdirty)]
     confirm_events = [event for event in events if event.id not in noconfirm_ids]
 
     context.manage_delObjects(noconfirm_ids)
