@@ -1,6 +1,5 @@
 <tal:block define="create options/create|nothing;
-		   current_action python:create and 'addevent' or 'edit'"
-	   i18n:domain="cpscalendar">
+		   current_action python:create and 'addevent' or 'edit'">
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="javascript_head_slot"
@@ -8,7 +7,7 @@
   Day selector popup script
 </metal:block>
 
-<metal:block fill-slot="main"
+<metal:block fill-slot="main" i18n:domain="cpscalendar"
 	     tal:define="portal_url here/portal_url;
 			 disp_infos python:here.calendar_getDispInformations(request);
 			 action python:create and 'calendar_addevent' or 'calendar_editevent';

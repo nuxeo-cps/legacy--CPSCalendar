@@ -2,14 +2,12 @@
 <tal:block define="calendars here/calendars_get">
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      metal:use-macro="here/main_template/macros/master"
-      i18n:domain="cpscalendar">
+      metal:use-macro="here/main_template/macros/master">
 <metal:block fill-slot="base">
   <base href="." tal:attributes="href string:${here/absolute_url}/" />
 </metal:block>
-<body>
 
-<metal:block fill-slot="main">
+<metal:block fill-slot="main" i18n:domain="cpscalendar">
   <tal:block repeat="type python:({'id':'private', 'title':'_cal_Private_'},
                                   {'id':'others', 'title':'_cal_Others_'},
                                   {'id':'events_shows', 'title':'_cal_Events_shows_'},
@@ -17,7 +15,7 @@
                                   {'id':'ressources', 'title':'_cal_Ressources_'},)">
     <tal:block define="id type/id;
                        cals calendars/?id"
-               condition="cals"> 
+               condition="cals">
       <span class="calTitle"
             tal:content="python:type['title']"
             i18n:translate="">Rooms</span>
@@ -44,6 +42,5 @@
   </tal:block>
 </metal:block>
 
-</body>
 </html>
 </tal:block>

@@ -1,8 +1,7 @@
 <tal:block define="global current_action string:display" />
-<html metal:use-macro="here/main_template/macros/master"
-      i18n:domain="cpscalendar">
+<html metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="main"
+<metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="cals here/getVisibleCalendars|nothing;
                          additionals here/getAdditionalCalendars;">
   <p i18n:translate="cpscalendar_message_select_calendars_to_display_with_this_calendar">

@@ -9,8 +9,7 @@
                    end_time disp_infos/end_time;
                    events_desc python:here.getEventsDesc(start_time, end_time, calendar_disp);
 		   member_id python:here.portal_membership.getAuthenticatedMember().getMemberId();
-		   "
-           i18n:domain="cpscalendar">
+		   ">
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="here/main_template/macros/master">
@@ -19,10 +18,9 @@
     tal:attributes="href string:${portal_url}/calendar_stylesheet.css">
 </metal:block>
 
-<body>
-
 <metal:block fill-slot="main"
-             tal:define="can_add_evts python:mtool.checkPermission('Add portal content', here)">
+             tal:define="can_add_evts python:mtool.checkPermission('Add portal content', here)"
+             i18n:domain="cpscalendar">
   <tal:block condition="can_add_evts">
     <tal:block define="ev_dict here/getDeclinedCancelledEvents">
       <form action="calendar_delevents" method="POST"
@@ -65,6 +63,5 @@
   <metal:block use-macro="here/calendar_view_macros/macros/?calendar_disp" />
 </metal:block>
 
-</body>
 </html>
 </tal:block>

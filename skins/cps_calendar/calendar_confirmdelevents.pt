@@ -1,10 +1,11 @@
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="head_slot"
+             i18n:domain="cpscalendar"
              i18n:translate="cpscalendar_heading_events_deletion_confirmation">
 </metal:block>
 
-<metal:block fill-slot="main">
+<metal:block fill-slot="main" i18n:domain="cpscalendar">
   <strong i18n:translate="cpscalendar_message_notify_attendees_you_will_delete_events">
     You have to notify attendees that you will delete those events.
   </strong>

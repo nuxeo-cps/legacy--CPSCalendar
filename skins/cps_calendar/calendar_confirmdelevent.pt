@@ -1,12 +1,12 @@
 <tal:block define="global current_action string:delete" />
-<html metal:use-macro="here/main_template/macros/master"
-      i18n:domain="cpscalendar">
+<html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="head_slot"
+             i18n:domain="cpscalendar"
              i18n:translate="cpscalendar_heading_event_deletion_confirmation">
 </metal:block>
 
-<metal:block fill-slot="main"
+<metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="notify options/notify">
   <strong tal:condition="python:notify == 'cancel'"
       i18n:translate="cpscalendar_message_notify_attendees_you_will_delete_event">

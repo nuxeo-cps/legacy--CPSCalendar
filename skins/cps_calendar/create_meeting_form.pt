@@ -1,6 +1,5 @@
 <tal:block define="global current_action string:meeting" />
-<html metal:use-macro="here/main_template/macros/master"
-      i18n:domain="cpscalendar">
+<html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="javascript_head_slot"
     tal:content="structure here/day_selector_popup.js">
@@ -13,7 +12,7 @@
   </span>
 </metal:block>
 
-<metal:block fill-slot="main"
+<metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="portal_url python:here.portal_url(relative=1);
                          meeting_infos python:here.meeting_infos(request);
                          title python:str('cpscalendar_untitled_(document)');

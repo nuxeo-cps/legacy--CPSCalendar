@@ -1,7 +1,6 @@
 <tal:block define="first request/form/first;
                    last request/form/last;
-                   should_validate python:1;"
-           i18n:domain="cpscalendar">
+                   should_validate python:1;">
 <html metal:use-macro="here/selector_template/macros/master">
 <metal:block fill-slot="javascript_head_slot">
 <script language="JavaScript" type="text/javascript"
@@ -164,7 +163,8 @@ document.onmouseup = MU;
 //  Fin-->
 </script>
 </metal:block>
-<metal:block fill-slot="main">
+
+<metal:block fill-slot="main" i18n:domain="cpscalendar">
 <table cellspacing="0" cellpadding="0" border="1"
   tal:define="h00 python:str('cpscalendar_hour_sep')+'00'">
   <tr>

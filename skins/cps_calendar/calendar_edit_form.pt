@@ -2,14 +2,12 @@
                    global create options/create|nothing"/>
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      metal:use-macro="here/main_template/macros/master"
-      i18n:domain="cpscalendar">
+      metal:use-macro="here/main_template/macros/master">
   <metal:block fill-slot="base">
     <base href="." tal:attributes="href string:${here/absolute_url}/">
   </metal:block>
-<body>
 
-<metal:block fill-slot="head_slot">
+<metal:block fill-slot="head_slot" i18n:domain="cpscalendar">
   <tal:block condition="create"
              i18n:translate="cpscalendar_create_a_calendar">
     Create a Calendar
@@ -23,7 +21,7 @@
 </metal:block>
 
 
-<metal:block fill-slot="main"
+<metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="title python:create and str('_(document)_Untitled_') or here.Title();
                          description python:(create and [''] or [here.Description()])[0];
                          usertype python:create and 'ressources' or here.usertype;
@@ -87,6 +85,4 @@
 
 </metal:block>
 
-
-</body>
 </html>

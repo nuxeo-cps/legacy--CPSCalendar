@@ -1,16 +1,15 @@
 <tal:block define="event_id request/form/event_id|nothing;
-                   pendings python:here.getPendingEvents(event_id)"
-           i18n:domain="cpscalendar">
+                   pendings python:here.getPendingEvents(event_id)">
 <html metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="head_slot">
+<metal:block fill-slot="head_slot" i18n:domain="cpscalendar">
   <span i18n:translate="_cal_Pending_events_for_">
     Pending events for
   </span>
   «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
 </metal:block>
 
-<metal:block fill-slot="main">
+<metal:block fill-slot="main" i18n:domain="cpscalendar">
   <tal:block condition="not:pendings">
     <h3 tal:condition="event_id"
         i18n:translate="There is no pending request for this event.">
