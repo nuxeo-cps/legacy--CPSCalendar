@@ -795,7 +795,7 @@ msgstr "la version iCalendar de ce calendrier"
 #: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
 msgid "cpscalendar_message_too_early_specified_hour"
 msgstr ""
-"L'heure de fin que vous avez spécifié est plus antérieure à la date de "
+"L'heure de fin que vous avez spécifié est antérieure à la date de "
 "début. Voulez-vous étendre l'événement jusqu'au jour suivant ?"
 
 #.   <p>
