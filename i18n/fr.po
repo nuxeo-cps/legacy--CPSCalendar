@@ -731,7 +731,7 @@ msgstr "Vous devez sélectionner au moins un participant"
 #.       </span>
 #: from ../skins/cps_calendar/calendar_display_form.pt
 msgid "cpscalendar_message_select_calendars_to_display_with_this_calendar"
-msgstr "Sélectionner les calendriers que vous voulez afficher avec ce calendrier"
+msgstr "Sélectionner les agendas que vous voulez afficher avec cet agenda"
 
 #.   <span clss="calTitle">
 #.         Select the attendees you want for your meeting
@@ -759,7 +759,7 @@ msgstr "Vous inscrire à cet agenda"
 #.       </a>
 #: from ../skins/cps_calendar/calendar_export.pt
 msgid "cpscalendar_message_the_iCalendar_version_of_this_calendar"
-msgstr "la version iCalendar de ce calendrier"
+msgstr "la version iCalendar de cet agenda"
 
 #.   <p>
 #.       The end hour you specified was earlier than the start hour. Do you want
@@ -768,7 +768,7 @@ msgstr "la version iCalendar de ce calendrier"
 #: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
 msgid "cpscalendar_message_too_early_specified_hour"
 msgstr ""
-"L'heure de fin que vous avez spécifié est antérieure à la date de début. "
+"L'heure de fin que vous avez spécifiée est antérieure à la date de début. "
 "Voulez-vous étendre l'événement jusqu'au jour suivant ?"
 
 #.   <p>
@@ -778,7 +778,7 @@ msgstr ""
 msgid "cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees"
 msgstr ""
 "Déselectionner les événements pour lesquels vous ne voulez pas que les "
-"participants soient prévenus"
+"participants soient prévenus."
 
 #.   <span>
 #.         You can download
@@ -839,7 +839,7 @@ msgstr "Aucune ressource n'est sélectionnée."
 #.           </a>
 #: from ../skins/cps_calendar/calendar_view.pt
 msgid "cpscalendar_one_pending_request"
-msgstr "Vous avez une requête en attente"
+msgstr "Vous avez une requête en attente."
 
 #.   <option repeat="propid searchable_keys" attributes="value propid" content="python:str(schema_dict[propid].title)">cpscalendar_option</option>
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
@@ -1141,7 +1141,7 @@ msgid "cpscalendar_to_incorrect_date"
 msgstr "date de fin non valide"
 
 msgid "cpscalendar_interval_invalid_date"
-msgstr "vous ne pouvez pas choisir un interval de temps supérieur à un mois"
+msgstr "vous ne pouvez pas choisir un intervalle de temps supérieur à un mois"
 
 msgid "cpscalendar_create_the_meeting_here"
 msgstr "Créer la réunion ici"
