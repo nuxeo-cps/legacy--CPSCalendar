@@ -146,7 +146,7 @@
 </metal:block>
 
 <metal:block define-macro="pendings_view"
-  tal:define="ids here/objectIds">
+  tal:define="ids python:here.objectIds('Event')">
   <tal:block repeat="pending pendings">
     <form action="" method="POST">
       <input type="hidden" name="event_id"

@@ -2,7 +2,7 @@
 
 here = context.this()
 
-all_calendars = here.objectIds()
+all_calendars = here.objectIds('Calendar')
 mtool = context.portal_membership
 mcat = context.portal_messages
 

@@ -43,7 +43,7 @@ END:VCALENDAR
 
 message = header
 
-events = context.objectValues()
+events = context.objectValues('Event')
 dtstamp = DateTime('UTC')
 timezone = dtstamp.localZone()
 

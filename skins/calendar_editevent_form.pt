@@ -44,7 +44,7 @@
     to_date_hour python:not trim_hour and to_date_hour or 0;
     to_date_minute python:not trim_hour and to_date_minute or 0;
     attendees python:(not create) and here.attendees or [];
-    transparent python:create and 1 or not not here.transparent;
+    transparent python:create and 0 or not not here.transparent;
     cat_info here/calendar_categories;
     categories cat_info/categories;
     cat_default cat_info/default;
