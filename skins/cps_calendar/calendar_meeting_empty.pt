@@ -1,17 +1,19 @@
 <tal:block define="global current_action string:meeting" />
 <html metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="head_slot"
-             i18n:translate="cpscalendar_heading_meeting_creation_helper">
-  Meeting creation helper
-</metal:block>
+<h1 i18n:domain="cpscalendar"
+    i18n:translate="cpscalendar_heading_meeting_creation_helper">
+    Meeting creation helper
+</h1>
 
 <metal:block fill-slot="main">
-  <span class="calTitle" i18n:translate="cpscalendar_message_select_at_least_one_attendee">
+  <span class="calTitle" i18n:domain="cpscalendar" 
+        i18n:translate="cpscalendar_message_select_at_least_one_attendee">
     Select at least one attendee.
   </span>
   <input type="button" onClick="history.back()"
          value="cpscalendar_button_back"
+         i18n:domain="cpscalendar"
          i18n:attributes="value" />
 </metal:block>
 
