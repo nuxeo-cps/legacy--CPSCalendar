@@ -818,12 +818,15 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         user = user.__of__(aclu)
 
         # create this calendar for this member
-        title = mcat('cpscalendar_user_calendar_name_beg').encode('ISO-8859-15',
-                                                                  'ignore')\
-              + user.getUserName()\
-              + mcat('cpscalendar_user_calendar_name_end').encode('ISO-8859-15',
-                                                                  'ignore')
-        #raise str(title)
+        directory=context.portal_directories.members
+        entry = directory.getEntry(member_id)
+        fullname = entry.get(directory.title_field, id)
+
+        title = mcat('cpscalendar_user_calendar_name_beg').encode(
+                     'ISO-8859-15', 'ignore')\
+              + fullname\
+              + mcat('cpscalendar_user_calendar_name_end').encode(
+                     'ISO-8859-15', 'ignore')
         wtool = getToolByName(self, 'portal_workflow')
         wtool.invokeFactoryFor(context, 'Calendar', CALENDAR_ID,
                                title=title,
