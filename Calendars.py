@@ -264,7 +264,7 @@ class Calendars(Workgroup):
     def getCalendarForId(self, id):
         """Gets calendar for id, creates it if id is a user"""
         id = str(id)
-        ids = self.objectIds()
+        ids = self.objectIds('Calendar')
         if id in ids:
             return getattr(self, id)
         context = aq_parent(aq_inner(self))

@@ -265,7 +265,16 @@
         tal:content="python:mcat('_You have to notify other attendees of recent changes to this event_')">
         You have to notify other attendees of recent changes to this event.
       </h3>
-      <form action="updateAttendeesCalendars">
+      <form action="updateAttendeesCalendars"
+        tal:define="notified_attendees here/notified_attendees">
+        <ul>
+          <li tal:repeat="att here/attendees">
+            <input type="checkbox" name="attendees:list"
+              tal:attributes="
+              value att/id; checked python:att['id'] not in notified_attendees" />
+            <tal:block replace="att/cn|att/id" />
+          </li>
+        </ul>
         <metal:block use-macro="here/main_widgets/macros/form">
           <metal:block fill-slot="content">
             <metal:block use-macro="here/main_widgets/macros/form_property">

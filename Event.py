@@ -105,11 +105,13 @@ class Event(BaseDocument):
     transparent = 0
 
     isdirty = 1
+    notified_attendees = ()
 
     def __init__(self, id, organizer={}, attendees=(), from_date=None, to_date=None, **kw):
         BaseDocument.__init__(self, id, organizer=organizer, **kw)
         self.organizer = deepcopy(organizer)
-        self.attendees = deepcopy(attendees)
+        if attendees is not None:
+            self.setAttendees(attendees)
         self.from_date = from_date
         self.to_date = to_date
         self._normalize()
@@ -137,7 +139,7 @@ class Event(BaseDocument):
             self.transparent = transparent
 
         if attendees is not None:
-            self.attendees = deepcopy(attendees)
+            self.setAttendees(attendees)
         if from_date is not None and self.from_date != from_date:
             setdirty = 1
             self.from_date = from_date
@@ -148,6 +150,7 @@ class Event(BaseDocument):
 
         if setdirty:
             self.isdirty = 1
+            self.notified_attendees = ()
 
     def _normalize(self):
         if self.all_day:
@@ -269,6 +272,7 @@ class Event(BaseDocument):
             if old_status == 'cancelled':
                 calendar = self.getCalendar()
                 calendar.removeCancelledEvent(self)
+            self.notified_attendees = ()
             self.isdirty = 1
         self.event_status = status
 
@@ -277,6 +281,9 @@ class Event(BaseDocument):
         """
         """
         self.attendees = deepcopy(attendees)
+        all_ids = tuple([at['id'] for at in attendees])
+        self.notified_attendees = tuple([id for id in self.notified_attendees if id in all_ids])
+        self.isdirty = self.notified_attendees != all_ids
 
     security.declareProtected('Add portal content', 'setAttendeeStatus')
     def setAttendeeStatus(self, attendee, status):
@@ -339,23 +346,29 @@ class Event(BaseDocument):
             REQUEST.RESPONSE.redirect(self.absolute_url())
 
     security.declareProtected('Add portal content', 'updateAttendeesCalendars')
-    def updateAttendeesCalendars(self, comment='', REQUEST=None):
+    def updateAttendeesCalendars(self, comment='', attendees=None, REQUEST=None):
         """
         """
-        if not self.isdirty:
-            LOG('NGCal', INFO, 'Event %s does not need to be updated' % self.id)
-            return
+        notified_attendees = []
+        all_attendees = []
         event_dict = self.getEventDict(comment=comment)
         calendar = self.getCalendar()
         calendars = aq_parent(aq_inner(calendar))
         for attendee in self.attendees:
             attendee_id = attendee['id']
+            all_attendees.append(attendee_id)
+            if attendees is not None and attendee_id not in attendees:
+                continue
             attendee_calendar = calendars.getCalendarForId(attendee_id)
             if attendee_calendar is None:
                 LOG('NGCal', INFO, "Can't get calendar for %s" % (attendee_id, ))
                 continue
             attendee_calendar.addPendingEvent(event_dict=event_dict)
-        self.isdirty = 0
+            notified_attendees.append(attendee_id)
+
+        self.notified_attendees = [id for id in all_attendees if id in self.notified_attendees or id in notified_attendees]
+        if all_attendees == self.notified_attendees:
+            self.isdirty = 0
         if REQUEST is not None:
             REQUEST.RESPONSE.redirect(self.absolute_url())
 
