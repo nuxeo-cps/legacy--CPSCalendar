@@ -4,7 +4,7 @@
     should_validate python:1;
 ">
 <html metal:use-macro="here/selector_template/macros/master">
-<metal:block fill-slot="script_plus">
+<metal:block fill-slot="javascript_head_slot">
 <script language="JavaScript" type="text/javascript"
   tal:content="string:
 var first = ${first}
@@ -172,27 +172,18 @@ document.onmouseup = MU;
     <td colspan="2">
       <table cellspacing="0" cellpadding="0" width="135" border="0">
         <tr tal:repeat="i python:range(-2, first)">
-          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"
-            tal:content="python:str((i+2)/4 % 24) + h00">
-            13h00
-          </td>
+          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"><tal:block replace="python:str((i+2)/4 % 24)" /><span i18n:translate="_cal_hour_sep_" />00</td>
           <td height="3" bgcolor="white" width="100">
           </td>
         </tr>
         <tr tal:repeat="i python:range(first, last)">
-          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"
-            tal:content="python:str((i+2)/4 % 24) + h00">
-            13h00
-          </td>
+          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"><tal:block replace="python:str((i+2)/4 % 24)" /><span i18n:translate="_cal_hour_sep_" />00</td>
           <td height="3" bgcolor="#DDDDDD" width="100"
             tal:attributes="id i">
           </td>
         </tr>
         <tr tal:repeat="i python:range(last, 98)">
-          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"
-            tal:content="python:str((i+2)/4 % 24) + h00">
-            13h00
-          </td>
+          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"><tal:block replace="python:str((i+2)/4 % 24)" /><span i18n:translate="_cal_hour_sep_" />00</td>
           <td height="3" bgcolor="white" width="100">
           </td>
         </tr>
@@ -201,9 +192,9 @@ document.onmouseup = MU;
   </tr>
   <tr>
     <td class="centered">
-      <span id="start_h"></span><tal:block replace="python:str('_cal_hour_sep_')" /><span id="start_m"></span>
+      <span id="start_h"></span><span i18n:translate="_cal_hour_sep_" /><span id="start_m"></span>
       -
-      <span id="end_h"></span><tal:block replace="python:str('_cal_hour_sep_')" /><span id="end_m"></span>
+      <span id="end_h"></span><span i18n:translate="_cal_hour_sep_" /><span id="end_m"></span>
     </td>
   </tr>
 </table>
