@@ -136,7 +136,7 @@ class Event(CPSBaseDocument):
     document = ''
 
     def __init__(self, id, organizer={}, attendees=(),
-                 from_date=None, to_date=None, **kw):
+                 from_date=None, to_date=None, document='', **kw):
         LOG('CPSCalendar', DEBUG, "__init__ kw = ", kw)
         CPSBaseDocument.__init__(self, id, organizer=organizer, **kw)
         self.organizer = deepcopy(organizer)
@@ -150,6 +150,7 @@ class Event(CPSBaseDocument):
         self.category = kw.get('category')
         self.transparent = kw.get('transparent')
         self.recurrence_period = kw.get('recurrence_period', 'period_daily')
+        self.document = document
         self._normalize()
 
     security.declareProtected('Modify portal content', 'edit')
