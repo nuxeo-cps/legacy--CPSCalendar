@@ -523,6 +523,17 @@ class Event(CPSBaseDocument):
             i += 1
         return result
 
+    def matchesTime(self, start, stop):
+        event_start, event_stop = self.from_date, self.to_date
+        repeats = 0
+        if self.event_type == 'event_recurring':
+            while start.greaterThan(event_stop):
+                event_start, event_stop = self.getRecurrance(repeats)
+                repeats += 1
+
+        if event_stop > start and event_start < stop:
+            return 1
+        return 0
 
     def _getRequestInformations(self):
         """Return a tuple with current member name, his properties and

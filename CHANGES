@@ -7,6 +7,8 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - The add event buttons now do not show up in the print view.
+- Reccuring and all-day events now properly block times in the
+  meeting helper screen.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

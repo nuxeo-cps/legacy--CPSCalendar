@@ -779,10 +779,9 @@ class Calendar(CPSBaseFolder):
     security.declareProtected('View', 'getEvents')
     def getEvents(self, from_date, to_date):
         """Return all events with from_date and to_date in the interval"""
-        # XXX defer the matching to the event, to support recurring events.
         events = self.objectValues('Event')
         return [event for event in events
-                if event.from_date >= from_date and event.to_date <= to_date]
+                if event.matchesTime(from_date, to_date)]
 
     security.declarePrivate('declineEvent')
     def declineEvent(self, event):
