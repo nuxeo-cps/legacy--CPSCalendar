@@ -377,7 +377,7 @@ range       : [2000, 2049]
 
       </metal:block>
     </metal:block>
-    <tal:block condition="meeting">
+    <tal:block condition="python:meeting and create">
       <h2 i18n:translate="cpscalendar_label_attendees">participants</h2> 
       <tal:block define="cal_users meeting/cal_users">
       <p tal:repeat="user cal_users/items">
