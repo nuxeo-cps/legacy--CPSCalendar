@@ -520,7 +520,7 @@ class Calendar(CPSBaseFolder):
     def _getHourBlockCols(self, hour_cols, show):
         """
         """
-        MIN_HEIGHT = 42 # The minimum display height of an event.
+        MIN_HEIGHT = 50 # The minimum display height of an event.
         hour_block_cols = []
         for col in hour_cols:
             blocks = []

@@ -19,6 +19,8 @@ Bug fixes:
   removed several bugs.
 - Events that extended to the end of the search time would be ignored when
   searching for free times in the meeting creation helper.
+- Events shorter than an hour could cause later events the same day to be
+  displayed slightly incorrectly.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Add getHomeCalendarObject and getHomeCalendarUrl method in CalendarTool
