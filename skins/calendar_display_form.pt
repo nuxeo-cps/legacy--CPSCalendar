@@ -3,17 +3,19 @@
       i18n:domain="cpscalendar">
 
 <metal:block fill-slot="main"
-             tal:define="cals here/getVisibleCalendars;
-                         additionals here/getAdditionalCalendars;
-                         cals python:[cal for cal in cals if cal.id != here.id]">
+             tal:define="cals here/getVisibleCalendars|nothing;
+                         additionals here/getAdditionalCalendars;">
+                         
   <p i18n:translate="_Select the calendars you want to display with this calendar:">
     Select the calendars you want to display with this calendar:
   </p>
-  <form action="calendar_display">
-    <ul>
-      <li tal:repeat="cal cals">
+  <form action="calendar_display"
+        tal:condition="cals">
+    <ul tal:define="calendars python:[cal for cal in cals if cal.id != here.id]">
+      <li tal:repeat="cal calendars">
         <input type="checkbox" name="cal_ids:list"
-               tal:attributes="value cal/id; checked python:cal.id in additionals" />
+               tal:attributes="value cal/id;
+                               checked python:cal.id in additionals" />
         <tal:block replace="cal/title_or_id" />
       </li>
     </ul>
@@ -21,6 +23,11 @@
            tal:attributes="value python:str('_button_validate_')"
            i18n:attributes="value"/>
   </form>
+  <tal:block condition="not:cals">
+    <span i18n:translate="cal_no_calendars_shared_found">
+      No calendar shared found
+    </span>
+  </tal:block>
 </metal:block>
 
 </html>
