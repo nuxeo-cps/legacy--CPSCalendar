@@ -81,7 +81,7 @@
                       <option tal:condition="python:'search' not in widget.hidden_layout_modes"
                               tal:attributes="value python:widget.getId()">
                         <span  tal:condition="widget/is_i18n"
-                               i18n:domain="switch_to_default" i18n:translate=""
+                               i18n:domain="Default" i18n:translate=""
                                tal:content="widget/label">label</span
                         ><span tal:condition="not:widget/is_i18n"
                                tal:content="widget/label">label</span
