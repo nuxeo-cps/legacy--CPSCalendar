@@ -214,7 +214,12 @@ class TestCalendar(CPSCalendarTestCase):
         self.assertEquals(event.getCalendarUser(), 'root')
 
         assert event.getEventDict() # Too complex to test
-        self.assertEquals(event.getAttendeesDict(), {})
+        self.assertEquals(event.getAttendeesDict(), 
+            {'member': [{'status': 'confirmed', 
+                         'usertype': 'member',
+                         'rpath': 'workspaces/members/root/calendar', 
+                         'id': 'root', 'cn': 'root'}]
+                         })
 
     def testViews(self):
         self._addEvent()
