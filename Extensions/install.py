@@ -52,6 +52,9 @@ def cpscalendarinstall(self):
     skins = ('cpscalendar',)
     paths = {
         'cpscalendar': 'Products/CPSCalendar/skins',
+        'sit_base': 'Products/SIT_ALSACE/skins',
+        'sit_images': 'Products/SIT_ALSACE/images',
+        'sit_document': 'Products/SIT_ALSACE/skins/cps_document',
     }
     for skin in skins:
         path = paths[skin]
@@ -82,20 +85,37 @@ def cpscalendarinstall(self):
         portal.portal_skins.addSkinSelection(skin_name, npath)
         pr(" Fixup of skin %s" % skin_name)
         
-##    pr("Setup workflow shemas")
+    pr("Setup workflow shemas")
     wftool = portal.portal_workflow
     trtool = portal.portal_trees
 
+    # Verification of the action and addinf if neccesarly 
+    action_found = 0
+    for action in portal['portal_actions'].listActions():
+        if action.id == 'my_calendar':
+            action_found = 1
+
+    if not action_found:
+        portal['portal_actions'].addAction(
+            id='my_calendar',
+            name='My calendar',
+            action='string: ${portal_url}/workspaces/calendars/${member}',
+            condition='member',
+            permission=('View',),
+            category='user',
+            visible=1)
+        pr(" Added Action My calendar")
+    else:
+        pass
 
     # setup portal_type: CPS Proxy Document, CPS Proxy Folder
     # CPS Folder
     pr("Verifying portal types")
     ttool = portal.portal_types
     workspaceACT = list(ttool['Workspace'].allowed_content_types)
-    if 'Calendars' not in  workspaceACT:
-        workspaceACT.append('Calendars')
-    if 'Calendar' not in  workspaceACT:
-        workspaceACT.append('Calendar')
+    for ptype in ('Calendars', 'Calendar'):
+        if ptype not in  workspaceACT:
+            workspaceACT.append(ptype)
     ptypes = {
         'CPSCalendar':('Calendars',
                        'Calendar',
