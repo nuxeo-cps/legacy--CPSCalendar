@@ -9,6 +9,8 @@ Bug fixes:
 - The user search no longer displays users that have no calendar.
   This solves Mantis bug #804. 
 - Searching when creating members no longer clear the attendee list.
+- Fixed Mantis bug #653: Searching for dates with start date after 
+  end date caused an error message.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
