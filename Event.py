@@ -322,34 +322,32 @@ class Event(CPSBaseDocument):
     security.declareProtected('View', 'getMyStatus')
     def getMyStatus(self):
         """Return the status of the current calendar for this event"""
-        my_id = self.getCalendarUser()
+        my_rpath = self.getCalendar().getRpath()
         for attendee in self.attendees:
-            if attendee['id'] == my_id:
+            if attendee['rpath'] == my_rpath:
                 return attendee['status']
 
     security.declareProtected('Add portal content', 'setMyStatus')
     def setMyStatus(self, status, comment='', REQUEST=None):
         """Set the status for the current calendar"""
-        user_id = self.getCalendarUser()
         calendar = self.getCalendar()
+        calendar_rpath = calendar.getRpath()
         (member, member_cn, dtstamp) = self._getRequestInformations()
         for attendee in self.attendees:
-            if attendee['id'] == user_id:
+            if attendee['rpath'] == calendar_rpath:
                 old_status = attendee['status']
                 attendee['status'] = status
                 if status != old_status:
                     if status == 'decline':
-                        calendar.addDeclinedEvent(self)
+                        calendar.declineEvent(self)
                     if old_status == 'decline':
-                        calendar.removeDeclinedEvent(self)
+                        calendar.unDeclinedEvent(self)
                 self._p_changed = 1
         org_calendar = self.getOrganizerCalendar()
         if org_calendar is None:
             LOG('NGCal', INFO, "Can't get calendar for %s" 
-                % (self.organizer['id'], ))
+                % (self.organizer['rpath'], ))
             return
-
-        my_id = self.getCalendarUser()
 
         try:
             cn = self.getAttendeeInfo(calendar.getRpath()).get('cn', id)
@@ -361,7 +359,7 @@ class Event(CPSBaseDocument):
             'id': self.id,
             'request': 'status',
             'change': ({
-                'attendee': my_id,
+                'attendee': calendar_rpath,
                 'cn': cn,
                 'type': self.getCalendar().usertype,
                 'status': status,
@@ -483,7 +481,6 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
         raise "XXX: Is this line ever reached ???"
     ob = Event(id, organizer=organizer, attendees=attendees, **kw)
     calendar._setObject(id, ob)
-    ob = getattr(calendar, id)
     if REQUEST is not None:
         url = dispatcher.DestinationURL()
         REQUEST.RESPONSE.redirect('%s/manage_main' % (url, ))

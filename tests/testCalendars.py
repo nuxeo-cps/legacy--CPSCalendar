@@ -143,6 +143,11 @@ class TestCalendar(CPSCalendarTestCase):
         self.assertEquals(self.calendar.getPendingEventsCount(), 0)
         self.assertEquals(self.calendar.getPendingEvents(), ())
 
+    def testAdditionalCalendars(self):
+        self.assertEquals(self.calendar.getAdditionalCalendars(), ())
+        self.calendar.setAdditionalCalendars(('test',))
+        self.assertEquals(self.calendar.getAdditionalCalendars(), ('test',))
+
     def testEventDesc(self):
         from_date = DateTime(2003, 1, 1, 12, 0)
         to_date = DateTime(2003, 1, 1, 14, 0)
@@ -206,9 +211,11 @@ class TestCalendar(CPSCalendarTestCase):
         self._addEvent()
         event = self.calendar.event
 
+        # assert somthing with event.getMyStatus()
         event.setMyStatus('decline')
+        # assert somthing with event.getMyStatus()
 
-    def testCancel(self):
+    def testCancel1(self):
         self._addEvent()
         event = self.calendar.event
 
@@ -217,6 +224,43 @@ class TestCalendar(CPSCalendarTestCase):
         self.assert_(event.isdirty)
         self.assertEquals(self.calendar.getDeclinedCanceledEvents(),
                           {'canceled': ('event',), 'declined': ()})
+
+    def testCancel2(self):
+        self._addEvent()
+        event = self.calendar.event
+
+        event.cancelEvent(event)
+        #self.assertEquals(event.event_status, 'canceled')
+        self.assertEquals(self.calendar.getDeclinedCanceledEvents(),
+                          {'canceled': ('event',), 'declined': ()})
+
+        event.unCancelEvent(event)
+        #self.assertEquals(event.event_status, 'canceled')
+        self.assertEquals(self.calendar.getDeclinedCanceledEvents(),
+                          {'canceled': (), 'declined': ()})
+
+    def _testDecline1(self):
+        self._addEvent()
+        event = self.calendar.event
+
+        event.setEventStatus('decline')
+        self.assertEquals(event.event_status, 'decline')
+        self.assert_(event.isdirty)
+        self.assertEquals(self.calendar.getDeclinedCanceledEvents(),
+                          {'canceled': (), 'declined': ('event',)})
+
+    def testDecline2(self):
+        self._addEvent()
+        event = self.calendar.event
+
+        self.calendar.declineEvent(event)
+        #self.assertEquals(event.event_status, 'decline')
+        self.assertEquals(self.calendar.getDeclinedCanceledEvents(),
+                          {'canceled': (), 'declined': ('event',)})
+        #self.calendar.unDeclineEvent(event)
+        #self.assertEquals(event.event_status, 'XXX')
+        #self.assertEquals(self.calendar.getDeclinedCanceledEvents(),
+        #                  {'canceled': (), 'declined': ()})
 
     def testViewsWithEmptyCalendar(self):
         calendar = self.calendar
@@ -246,7 +290,6 @@ class TestCalendar(CPSCalendarTestCase):
         assert event.calendar_event_view()
         assert event.calendar_editevent_form()
         assert event.calendar_attendees_form()
-
 
     def testMeeting(self):
         self._addEvent()

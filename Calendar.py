@@ -757,7 +757,7 @@ class Calendar(CPSBaseFolder):
             self._canceled = self._canceled + (event_id, )
 
     security.declarePrivate('unDeclineEvent')
-    def unDeclinedEvent(self, event):
+    def unDeclineEvent(self, event):
         """Remove event from declined events list"""
         event_id = event.id
         if event_id in self._declined:
