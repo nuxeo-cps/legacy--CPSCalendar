@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2004-09-23 16:46default\n"
+"POT-Creation-Date: 2004-09-23 16:53default\n"
 "PO-Revision-Date: 2004-07-12 18:37+0200\n"
 "Last-Translator: Georg Hennemann <georg.hennemann@dhl.com>\n"
 "Language-Team: German <reinland@dzug.org>\n"
@@ -330,6 +330,14 @@ msgid "cpscalendar_label_and"
 msgstr "und"
 
 #.   <span>
+#.           to
+#.         </span>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+#, fuzzy
+msgid "cpscalendar_label_and_day"
+msgstr "Am"
+
+#.   <span>
 #.                     At
 #.                   </span>
 #: from ../skins/cps_calendar/create_meeting_form.pt
@@ -363,6 +371,14 @@ msgstr "Teilnehmer"
 #.         </span>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_between"
+msgstr "Zwischen"
+
+#.   <span>
+#.           From
+#.         </span>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+#, fuzzy
+msgid "cpscalendar_label_between_day"
 msgstr "Zwischen"
 
 #.   <a style="text-decoration:none;border:1px solid black;padding:0.2em 0.3em;" onclick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')">
@@ -509,11 +525,7 @@ msgstr "Von"
 #.   <span condition="python:event_type in ('event_recurring', 'event_allday')">
 #.                   From the
 #.                 </span>
-#.   <span>
-#.           From
-#.         </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
-#: ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_from_day"
 msgstr "Von"
 
@@ -646,11 +658,7 @@ msgstr "Bis"
 #.   <span>
 #.                     to
 #.                   </span>
-#.   <span>
-#.           to
-#.         </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
-#: ../skins/cps_calendar/calendar_meeting_form.pt
 #, fuzzy
 msgid "cpscalendar_label_to_day"
 msgstr "Bis"

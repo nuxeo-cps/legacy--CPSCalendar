@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2004-09-23 16:46default\n"
+"POT-Creation-Date: 2004-09-23 16:53default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -337,6 +337,13 @@ msgid "cpscalendar_label_and"
 msgstr ""
 
 #.   <span>
+#.           to
+#.         </span>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_label_and_day"
+msgstr ""
+
+#.   <span>
 #.                     At
 #.                   </span>
 #: from ../skins/cps_calendar/create_meeting_form.pt
@@ -370,6 +377,13 @@ msgstr ""
 #.         </span>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_between"
+msgstr ""
+
+#.   <span>
+#.           From
+#.         </span>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_label_between_day"
 msgstr ""
 
 #.   <a style="text-decoration:none;border:1px solid black;padding:0.2em 0.3em;" onclick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')">
@@ -514,11 +528,7 @@ msgstr ""
 #.   <span condition="python:event_type in ('event_recurring', 'event_allday')">
 #.                   From the
 #.                 </span>
-#.   <span>
-#.           From
-#.         </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
-#: ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_from_day"
 msgstr ""
 
@@ -651,11 +661,7 @@ msgstr ""
 #.   <span>
 #.                     to
 #.                   </span>
-#.   <span>
-#.           to
-#.         </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
-#: ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_to_day"
 msgstr ""
 

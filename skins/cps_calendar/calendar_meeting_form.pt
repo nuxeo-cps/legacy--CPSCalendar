@@ -93,7 +93,7 @@
     </p>
     <p>
       <strong>
-      <span i18n:translate="cpscalendar_label_from_day">
+      <span i18n:translate="cpscalendar_label_between_day">
         From
       </span>
   <input type="text" size="11" maxlength="22" name="from_date_string"
@@ -112,7 +112,7 @@ range       : [2000, 2049]
 }
 );
   </script>" />
-      <span i18n:translate="cpscalendar_label_to_day">
+      <span i18n:translate="cpscalendar_label_and_day">
         to
       </span>
   <input type="text" size="11" maxlength="22" name="to_date_string"

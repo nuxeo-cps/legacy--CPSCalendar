@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2004-09-23 16:46default\n"
+"POT-Creation-Date: 2004-09-23 16:53default\n"
 "PO-Revision-Date: 2004-08-19 16:04+0200\n"
 "Last-Translator: Lennart Regebro <rgebro@nuxeo.com>\n"
 "Language-Team: \n"
@@ -323,7 +323,7 @@ msgstr ":"
 #.             </span>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_add_a_user_whose"
-msgstr "Ajouter un utilisateur dont"
+msgstr "Recherchez les utilisateurs qui participeront à la réunion dont"
 
 #.   <span>
 #.               is
@@ -344,6 +344,14 @@ msgstr "Ajouter un participant"
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_and"
 msgstr "et"
+
+#.   <span>
+#.           to
+#.         </span>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+#, fuzzy
+msgid "cpscalendar_label_and_day"
+msgstr "et le"
 
 #.   <span>
 #.                     At
@@ -380,6 +388,14 @@ msgstr "Participants"
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_between"
 msgstr "Entre"
+
+#.   <span>
+#.           From
+#.         </span>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+#, fuzzy
+msgid "cpscalendar_label_between_day"
+msgstr "Entre le"
 
 #.   <a style="text-decoration:none;border:1px solid black;padding:0.2em 0.3em;" onclick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')">
 #.                      Browse
@@ -525,11 +541,7 @@ msgstr "Du"
 #.   <span condition="python:event_type in ('event_recurring', 'event_allday')">
 #.                   From the
 #.                 </span>
-#.   <span>
-#.           From
-#.         </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
-#: ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_from_day"
 msgstr "Du"
 
@@ -662,11 +674,7 @@ msgstr "Au"
 #.   <span>
 #.                     to
 #.                   </span>
-#.   <span>
-#.           to
-#.         </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
-#: ../skins/cps_calendar/calendar_meeting_form.pt
 #, fuzzy
 msgid "cpscalendar_label_to_day"
 msgstr "Au"
@@ -927,7 +935,8 @@ msgstr "Ressources"
 #.       </p>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_search_for_free_time"
-msgstr "Recherche d'une plage horaire libre pour tous les participants à la réunion"
+msgstr ""
+"Recherche d'une plage horaire libre pour tous les participants à la réunion"
 
 #.   <span content="string:cpscalendar_option_${type}">cpscalendar_status</span>
 #.   <span content="string:cpscalendar_option_status_${status}">cpscalendar_status</span>

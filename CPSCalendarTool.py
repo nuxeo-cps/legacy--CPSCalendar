@@ -900,7 +900,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             if mtool.checkPermission('List folder contents', cal):
                 cals.append(cal)
         return cals
-
+           
     def getCalendarFromPath(self, path):
         portalurl = getToolByName(self, 'portal_url').getPortalPath()
         return self.unrestrictedTraverse(portalurl + '/' + path)
