@@ -91,15 +91,15 @@
     tal:attributes="id string:trigger_from_date">...</button>
   <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
     replace="structure string:<script type='text/javascript'>
-    Calendar.setup(
-      {
-        inputField  : 'from_date',
-        ifFormat    : 'd/m/y',
-        button      : 'trigger_from_date',
-        mondayFirst : true,
-        range       : [2000, 2049]
-      }
-    );
+Calendar.setup(
+{
+inputField  : 'from_date',
+ifFormat    : '${fmt}',
+button      : 'trigger_from_date',
+mondayFirst : true,
+range       : [2000, 2049]
+}
+);
   </script>" />
       <span i18n:translate="cpscalendar_label_to_day">
         to
@@ -112,16 +112,16 @@
     tal:attributes="id string:trigger_to_date">...</button>
   <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
     replace="structure string:<script type='text/javascript'>
-    Calendar.setup(
-      {
-        inputField  : 'to_date',
-        ifFormat    : 'd/m/y',
-        button      : 'trigger_to_date',
-        mondayFirst : true,
-        range       : [2000, 2049]
-      }
-    );
-  </script>" />
+Calendar.setup(
+{
+inputField  : 'to_date',
+ifFormat    : '${fmt}',
+button      : 'trigger_to_date',
+mondayFirst : true,
+range       : [2000, 2049]
+}
+);
+</script>" />
       </strong>
     </p>
     <p>

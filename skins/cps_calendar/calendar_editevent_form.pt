@@ -162,7 +162,7 @@
 Calendar.setup(
 {
 inputField  : 'from_date',
-ifFormat    : ${fmt},
+ifFormat    : '${fmt}',
 button      : 'trigger_from_date',
 mondayFirst : true,
 range       : [2000, 2049]
@@ -183,7 +183,7 @@ range       : [2000, 2049]
 Calendar.setup(
 {
 inputField  : 'to_date',
-ifFormat    : ${fmt},
+ifFormat    : '${fmt}',
 button      : 'trigger_to_date',
 mondayFirst : true,
 range       : [2000, 2049]
@@ -207,7 +207,7 @@ range       : [2000, 2049]
 Calendar.setup(
 {
 inputField  : 'from_date',
-ifFormat    : 'd/m/y',
+ifFormat    : '${fmt}',
 button      : 'trigger_from_date',
 mondayFirst : true,
 range       : [2000, 2049]
