@@ -12,10 +12,10 @@
   <tal:block define="form_pos form_pos|nothing">
     <tr>
       <td valign="top" width="100" class="formMeta">
-	<metal:block define-slot="title">Field name</metal:block>
+    <metal:block define-slot="title">Field name</metal:block>
       </td>
       <td valign="middle">
-	<metal:block define-slot="content">Field content</metal:block>
+    <metal:block define-slot="content">Field content</metal:block>
       </td>
     </tr>
   </tal:block>
@@ -23,288 +23,289 @@
 
 
 <metal:block define-macro="event_view"
-	     i18n:domain="cpscalendar">
+         i18n:domain="cpscalendar">
   <tal:block define="organizer event/organizer|nothing;
-		     title event/title;
-		     id event/id|nothing;
-		     title python:title or id;
-		     description event/description;
-		     from_date event/from_date;
-		     to_date event/to_date;
-		     all_day event/all_day;
-		     location event/location;
-		     event_status event/event_status;
-		     attendees event/attendees;
-		     transparent event/transparent|nothing;
-		     transparent python:not not transparent;
-		     cat_infos here/calendar_categories;
-		     categories cat_infos/categories;
-		     cat_default cat_infos/default;
-		     cat_def_title categories/?cat_default/title;
-		     category event/category|nothing;">
+             title event/title;
+             id event/id|nothing;
+             title python:title or id;
+             description event/description;
+             from_date event/from_date;
+             to_date event/to_date;
+             all_day event/all_day;
+             location event/location;
+             event_status event/event_status;
+             attendees event/attendees;
+             transparent event/transparent|nothing;
+             transparent python:not not transparent;
+             cat_infos here/calendar_categories;
+             categories cat_infos/categories;
+             cat_default cat_infos/default;
+             cat_def_title categories/?cat_default/title;
+             category event/category|nothing;">
     <metal:block use-macro="here/calendar_macros/macros/form">
       <metal:block fill-slot="content">
-	<tal:block condition="organizer">
-	  <metal:block use-macro="here/calendar_macros/macros/form_property">
-	    <metal:block fill-slot="title"
-			 i18n:translate="cpscalendar_label_organizer">
-	      Organizer
-	    </metal:block>
-	    <metal:block fill-slot="content"
-	      tal:content="organizer/cn|organizer/id">
-	      organizer
-	    </metal:block>
-	  </metal:block>
-	</tal:block>
-	<metal:block use-macro="here/calendar_macros/macros/form_property">
-	  <metal:block fill-slot="title"
-		       i18n:translate="cpscalendar_label_title">
-	    Title
-	  </metal:block>
-	  <metal:block fill-slot="content"
-	    tal:content="title">
-	    title
-	  </metal:block>
-	</metal:block>
-	<metal:block use-macro="here/calendar_macros/macros/form_property">
-	  <metal:block fill-slot="title"
-		       i18n:translate="cpscalendar_label_date">
-	    Date
-	  </metal:block>
-	  <metal:block fill-slot="content"
-		       tal:define="one_date python:from_date == to_date;">
+    <tal:block condition="organizer">
+      <metal:block use-macro="here/calendar_macros/macros/form_property">
+        <metal:block fill-slot="title"
+             i18n:translate="cpscalendar_label_organizer">
+          Organizer
+        </metal:block>
+        <metal:block fill-slot="content"
+          tal:content="organizer/cn|organizer/id">
+          organizer
+        </metal:block>
+      </metal:block>
+    </tal:block>
+    <metal:block use-macro="here/calendar_macros/macros/form_property">
+      <metal:block fill-slot="title"
+               i18n:translate="cpscalendar_label_title">
+        Title
+      </metal:block>
+      <metal:block fill-slot="content"
+        tal:content="title">
+        title
+      </metal:block>
+    </metal:block>
+    <metal:block use-macro="here/calendar_macros/macros/form_property">
+      <metal:block fill-slot="title"
+               i18n:translate="cpscalendar_label_date">
+        Date
+      </metal:block>
+      <metal:block fill-slot="content"
+               tal:define="one_date python:from_date == to_date;">
             <strong>
-	    <tal:block condition="python:one_date and here.get('from_date_str', 0)"
-		       tal:content="from_date_str">
-	    </tal:block>
-	    <tal:block condition="not:one_date">
-	      <span i18n:translate="cpscalendar_label_from_(day)">
-		From the
-	      </span>
-	      <tal:block replace="python:from_date.strftime('%m/%d/%Y ')" />
-	      <tal:block condition="not:all_day">
-		<span i18n:translate="cpscalendar_label_at_(hour)">
-		at
-		</span>
-		<tal:block replace="python:from_date.strftime(' %H:%M')" />
-	      </tal:block>
-	      <br>
-	      <span i18n:translate="cpscalendar_label_to_(day)">
-		To the
-	      </span>
-	      <tal:block replace="python:to_date.strftime('%m/%d/%Y ')" />
-	      <tal:block condition="not:all_day">
-		<span i18n:translate="cpscalendar_label_at_(hour)">
-	        at
-		</span>
-		<tal:block replace="python:to_date.strftime(' %H:%M')" />
-	      </tal:block>
-	    </tal:block>
+        <tal:block condition="python:one_date and here.get('from_date_str', 0)"
+               tal:content="from_date_str">
+        </tal:block>
+        <tal:block condition="not:one_date">
+          <span i18n:translate="cpscalendar_label_from_(day)">
+        From the
+          </span>
+          <tal:block replace="python:from_date.strftime('%m/%d/%Y ')" />
+          <tal:block condition="not:all_day">
+        <span i18n:translate="cpscalendar_label_at_(hour)">
+        at
+        </span>
+        <tal:block replace="python:from_date.strftime(' %H:%M')" />
+          </tal:block>
+          <br>
+          <span i18n:translate="cpscalendar_label_to_(day)">
+        To the
+          </span>
+          <tal:block replace="python:to_date.strftime('%m/%d/%Y ')" />
+          <tal:block condition="not:all_day">
+        <span i18n:translate="cpscalendar_label_at_(hour)">
+            at
+        </span>
+        <tal:block replace="python:to_date.strftime(' %H:%M')" />
+          </tal:block>
+        </tal:block>
             </strong>
-	  </metal:block>
-	</metal:block>
-	<tal:block condition="location">
-	  <metal:block use-macro="here/calendar_macros/macros/form_property">
-	    <metal:block fill-slot="title"
+      </metal:block>
+    </metal:block>
+    <tal:block condition="location">
+      <metal:block use-macro="here/calendar_macros/macros/form_property">
+        <metal:block fill-slot="title"
                    i18n:translate="cpscalendar_label_location">
-	      Location
-	    </metal:block>
-	    <metal:block fill-slot="content"
-	      tal:content="location">
-	    </metal:block>
-	  </metal:block>
-	</tal:block>
-	<metal:block use-macro="here/calendar_macros/macros/form_property">
-	  <metal:block fill-slot="title"
-		       i18n:translate="cpscalendar_label_eventstatus">
-	    Event status
-	  </metal:block>
-	  <metal:block fill-slot="content" i18n:translate="">
-       <span tal:replace="event_status">status</span>
-	  </metal:block>
+          Location
+        </metal:block>
+        <metal:block fill-slot="content"
+          tal:content="location">
+        </metal:block>
+      </metal:block>
+    </tal:block>
+    <metal:block use-macro="here/calendar_macros/macros/form_property">
+      <metal:block fill-slot="title"
+               i18n:translate="cpscalendar_label_eventstatus">
+        Event status
+      </metal:block>
+      <metal:block fill-slot="content">
+       <span tal:content="string:cpscalendar_option_status_${event_status}"
+             i18n:translate="">status</span>
+      </metal:block>
 
-	</metal:block>
-	<tal:block condition="attendees">
-	  <metal:block use-macro="here/calendar_macros/macros/form_property">
-	    <metal:block fill-slot="title"
-			 i18n:translate="cpscalendar_label_attendees">
-		    Attendees
-	    </metal:block>
-	    <metal:block fill-slot="content">
-	      <ul tal:condition="attendees">
-		<li tal:repeat="att attendees">
-		  <strong tal:content="att/cn|att/id">attendee</strong>
-		  (<tal:block content="python:str('cpscalendar_option_status_%s' % (att['status'], ))"
-			      i18n:translate="">
-		    Confirmed
-		  </tal:block>)
-		</li>
-	      </ul>
-	    </metal:block>
-	  </metal:block>
-	</tal:block>
-	<tal:block condition="category">
-	  <metal:block use-macro="here/calendar_macros/macros/form_property">
-	    <metal:block fill-slot="title"
-			 i18n:translate="cpscalendar_label_category">
-	      Category
-	    </metal:block>
-	    <metal:block fill-slot="content"
-			 tal:define="cat_title categories/?category/title|cat_def_title"
-			 tal:content="python:str(cat_title)"
-			 i18n:translate="">
-	      category
-	    </metal:block>
-	  </metal:block>
-	</tal:block>
-	<metal:block use-macro="here/calendar_macros/macros/form_property">
-	  <metal:block fill-slot="title"
-		       i18n:translate="cpscalendar_label_transparent">
-	    Transparent
-	  </metal:block>
-	  <metal:block fill-slot="content">
-	    <p tal:condition="transparent" i18n:translate="cpscalendar_button_yes">Yes</p>
-	    <p tal:condition="not:transparent" i18n:translate="cpscalendar_button_no">No</p>
-	    <p>
-	      <small i18n:translate="cpscalendar_legend_transparent">
-		Transparent events mean that you're not busy during this event.
-	      </small>
-	    </p>
-	  </metal:block>
-	</metal:block>
-	<metal:block use-macro="here/calendar_macros/macros/form_property">
-	  <metal:block fill-slot="title"
-		       i18n:translate="cpscalendar_label_description">
-	    Description
-	  </metal:block>
-	    <metal:block fill-slot="content">
-	      <p>
-		<textarea rows="6" cols="40" disabled="disabled"
-			  name="description"
-			  tal:content="description">description</textarea>
-	      </p>
-	    </metal:block>
-	</metal:block>
+    </metal:block>
+    <tal:block condition="attendees">
+      <metal:block use-macro="here/calendar_macros/macros/form_property">
+        <metal:block fill-slot="title"
+             i18n:translate="cpscalendar_label_attendees">
+            Attendees
+        </metal:block>
+        <metal:block fill-slot="content">
+          <ul tal:condition="attendees">
+        <li tal:repeat="att attendees">
+          <strong tal:content="att/cn|att/id">attendee</strong>
+          (<tal:block content="string:cpscalendar_option_status_${att/status}"
+                      i18n:translate="">
+            Confirmed
+          </tal:block>)
+        </li>
+          </ul>
+        </metal:block>
+      </metal:block>
+    </tal:block>
+    <tal:block condition="category">
+      <metal:block use-macro="here/calendar_macros/macros/form_property">
+        <metal:block fill-slot="title"
+             i18n:translate="cpscalendar_label_category">
+          Category
+        </metal:block>
+        <metal:block fill-slot="content"
+             tal:define="cat_title categories/?category/title|cat_def_title"
+             tal:content="python:str(cat_title)"
+             i18n:translate="">
+          category
+        </metal:block>
+      </metal:block>
+    </tal:block>
+    <metal:block use-macro="here/calendar_macros/macros/form_property">
+      <metal:block fill-slot="title"
+               i18n:translate="cpscalendar_label_transparent">
+        Transparent
+      </metal:block>
+      <metal:block fill-slot="content">
+        <p tal:condition="transparent" i18n:translate="cpscalendar_button_yes">Yes</p>
+        <p tal:condition="not:transparent" i18n:translate="cpscalendar_button_no">No</p>
+        <p>
+          <small i18n:translate="cpscalendar_legend_transparent">
+        Transparent events mean that you're not busy during this event.
+          </small>
+        </p>
+      </metal:block>
+    </metal:block>
+    <metal:block use-macro="here/calendar_macros/macros/form_property">
+      <metal:block fill-slot="title"
+               i18n:translate="cpscalendar_label_description">
+        Description
+      </metal:block>
+        <metal:block fill-slot="content">
+          <p>
+        <textarea rows="6" cols="40" disabled="disabled"
+              name="description"
+              tal:content="description">description</textarea>
+          </p>
+        </metal:block>
+    </metal:block>
       </metal:block>
     </metal:block>
   </tal:block>
 </metal:block>
 
 <metal:block define-macro="pendings_view"
-	     tal:define="ids python:here.objectIds('Event')">
+         tal:define="ids python:here.objectIds('Event')">
   <tal:block repeat="pending pendings">
     <form method="POST"
-	  tal:attributes="action here/absolute_url">
+      tal:attributes="action here/absolute_url">
       <input type="hidden" name="event_id"
-	     tal:attributes="value pending/id" />
+         tal:attributes="value pending/id" />
       <tal:block define="request pending/request">
-	<tal:block condition="python:request == 'request'">
-	  <tal:block define="
-	    event pending/event;
-	    id event/id;
-	    in_event python:here.meta_type == 'Event';
-	    real_event python:(in_event and here) or (id in ids and getattr(here, id)) or nothing">
-	    <tal:block condition="nocall:real_event">
-	      <h3 i18n:translate="cpscalendar_heading_event_update">
-		Event update
-	      </h3>
-	    </tal:block>
-	    <tal:block condition="not:nocall:real_event">
-	      <h3 i18n:translate="cpscalendar_heading_new_event">
-		New event
-	      </h3>
-	    </tal:block>
-	    <p tal:condition="event/comment|nothing">
-	      <strong tal:content="event/sender_cn|event_sender|nothing">
-		sender
-	      </strong>:
-	      <em tal:content="event/comment">comment</em>
-	    </p>
-	    <p tal:condition="not:event/comment|nothing">
-	      <strong i18n:translate="cpscalendar_label_sender">
-		Sender
-	      </strong>:
-	      <tal:block replace="event/sender_cn|event/sender|nothing">
-		sender
-	      </tal:block>
-	    </p>
-	    <metal:block use-macro="here/calendar_macros/macros/event_view">
-	    </metal:block>
-	    <input type="submit" name="confirmPendingEvent:method"
-	      tal:condition="nocall:real_event"
-	      tal:attributes="value python:str('cpscalendar_button_validate')"
+    <tal:block condition="python:request == 'request'">
+      <tal:block define="
+        event pending/event;
+        id event/id;
+        in_event python:here.meta_type == 'Event';
+        real_event python:(in_event and here) or (id in ids and getattr(here, id)) or nothing">
+        <tal:block condition="nocall:real_event">
+          <h3 i18n:translate="cpscalendar_heading_event_update">
+        Event update
+          </h3>
+        </tal:block>
+        <tal:block condition="not:nocall:real_event">
+          <h3 i18n:translate="cpscalendar_heading_new_event">
+        New event
+          </h3>
+        </tal:block>
+        <p tal:condition="event/comment|nothing">
+          <strong tal:content="event/sender_cn|event_sender|nothing">
+        sender
+          </strong>:
+          <em tal:content="event/comment">comment</em>
+        </p>
+        <p tal:condition="not:event/comment|nothing">
+          <strong i18n:translate="cpscalendar_label_sender">
+        Sender
+          </strong>:
+          <tal:block replace="event/sender_cn|event/sender|nothing">
+        sender
+          </tal:block>
+        </p>
+        <metal:block use-macro="here/calendar_macros/macros/event_view">
+        </metal:block>
+        <input type="submit" name="confirmPendingEvent:method"
+          tal:condition="nocall:real_event"
+          tal:attributes="value python:str('cpscalendar_button_validate')"
         i18n:attributes="value"/>
-	    <tal:block condition="not:nocall:real_event">
-	      <metal:block use-macro="here/calendar_macros/macros/form">
-		<metal:block fill-slot="content">
-		  <metal:block
-		    use-macro="here/calendar_macros/macros/form_property">
-		    <metal:block fill-slot="title"
-				 i18n:translate="cpscalendar_label_comment">
-		      Comment
-		    </metal:block>
-		    <metal:block fill-slot="content">
-		      <textarea name="comment" cols="40" rows="4"></textarea>
-		    </metal:block>
-		  </metal:block>
-		</metal:block>
-	      </metal:block>
-	      <br />
-	      <select name="status"
-		tal:define="
-		  statuses python:['confirmed', 'tentative', 'decline', 'decline_and_delete', 'ignore'];
-		  selected python:event['event_status'] == 'cancelled'
-				   and 'ignore' or 'confirmed'">
-		<option tal:repeat="status statuses"
-			tal:attributes="value status;
-					selected python:status == selected"
-			tal:content="python:str('cpscalendar_pending_%s' % (status, ))"
-			i18n:translate="">
-		  Confirm
-		</option>
-	      </select>
-	      <input type="submit" name="calendar_confirmPendingEvent:method"
-		     tal:attributes="value python:str('cpscalendar_button_validate')"
-        i18n:attributes="value"/>
-	    </tal:block>
-	  </tal:block>
-	</tal:block>
-	<tal:block condition="python:request == 'status'">
-	  <h3 i18n:translate="cpscalendar_heading_status_update">
-	    Status update
-	  </h3>
-	  <ul>
-	    <li tal:repeat="attendee pending/change">
-	      <strong tal:content="attendee/cn|attendee/id">Attendee</strong>
-	      (<tal:block content="python:str('cpscalendar_option_status_%s' % (attendee['status'], ))"
-			  i18n:translate="" />)
-	      <p tal:condition="attendee/comment|nothing">
-		<strong tal:content="attendee/sender_cn|attendee/sender|nothing">
-		  sender
-		</strong>:
-		<em tal:content="attendee/comment">comment</em>
-	      </p>
-	      <p tal:condition="not:attendee/comment|nothing">
-		<strong i18n:translate="cpscalendar_label_sender">
-		  Sender
-		</strong>:
-		<tal:block replace="attendee/sender_cn|attendee/sender|nothing">
-		  sender
-		</tal:block>
-	      </p>
-	    </li>
-	  </ul>
-	  <input type="submit" name="confirmPendingEvent:method"
-		 value="cpscalendar_button_validate"
-		 i18n:attributes="value" />
-	</tal:block>
+        <tal:block condition="not:nocall:real_event">
+          <metal:block use-macro="here/calendar_macros/macros/form">
+        <metal:block fill-slot="content">
+          <metal:block
+            use-macro="here/calendar_macros/macros/form_property">
+            <metal:block fill-slot="title"
+                 i18n:translate="cpscalendar_label_comment">
+              Comment
+            </metal:block>
+            <metal:block fill-slot="content">
+              <textarea name="comment" cols="40" rows="4"></textarea>
+            </metal:block>
+          </metal:block>
+        </metal:block>
+          </metal:block>
+          <br />
+          <select name="status"
+        tal:define="
+          statuses python:['confirmed', 'tentative', 'decline', 'decline_and_delete', 'ignore'];
+          selected python:event['event_status'] == 'cancelled'
+                   and 'ignore' or 'confirmed'">
+        <option tal:repeat="status statuses"
+            tal:attributes="value status;
+                    selected python:status == selected"
+            tal:content="python:str('cpscalendar_pending_%s' % (status, ))"
+            i18n:translate="">
+          Confirm
+        </option>
+          </select>
+          <input type="submit" name="calendar_confirmPendingEvent:method"
+                 tal:attributes="value string:cpscalendar_button_validate"
+                 i18n:attributes="value"/>
+        </tal:block>
+      </tal:block>
+    </tal:block>
+    <tal:block condition="python:request == 'status'">
+      <h3 i18n:translate="cpscalendar_heading_status_update">
+        Status update
+      </h3>
+      <ul>
+        <li tal:repeat="attendee pending/change">
+          <strong tal:content="attendee/cn|attendee/id">Attendee</strong>
+          (<tal:block content="python:str('cpscalendar_option_status_%s' % (attendee['status'], ))"
+              i18n:translate="" />)
+          <p tal:condition="attendee/comment|nothing">
+        <strong tal:content="attendee/sender_cn|attendee/sender|nothing">
+          sender
+        </strong>:
+        <em tal:content="attendee/comment">comment</em>
+          </p>
+          <p tal:condition="not:attendee/comment|nothing">
+        <strong i18n:translate="cpscalendar_label_sender">
+          Sender
+        </strong>:
+        <tal:block replace="attendee/sender_cn|attendee/sender|nothing">
+          sender
+        </tal:block>
+          </p>
+        </li>
+      </ul>
+      <input type="submit" name="confirmPendingEvent:method"
+         value="cpscalendar_button_validate"
+         i18n:attributes="value" />
+    </tal:block>
       </tal:block>
     </form>
   </tal:block>
 </metal:block>
 
 <metal:block define-macro="notifyattendees"
-	     i18n:domain="cpscalendar">
+         i18n:domain="cpscalendar">
   <tal:block condition="python:mtool.checkPermission('Add portal content', here)">
     <tal:block define="pendings here/getPendingEvents"
       condition="pendings">
@@ -313,35 +314,35 @@
     </tal:block>
     <tal:block condition="python:here.canEditThisEvent() and here.attendees and here.isdirty">
       <stong i18n:translate="cpscalendar_message_notify_attendees">
-	You have to notify other attendees of recent changes to this event.
+    You have to notify other attendees of recent changes to this event.
       </stong>
       <form action="updateAttendeesCalendars"
-	    tal:attributes="action string:${context_url}/updateAttendeesCalendars"
-	    tal:define="notified_attendees here/notified_attendees">
-	<ul>
-	  <li tal:repeat="att here/attendees">
-	    <input type="checkbox" name="attendees:list"
-	      tal:attributes="value att/id;
-			      checked python:att['id'] not in notified_attendees" />
-	    <tal:block replace="att/cn|att/id" />
-	  </li>
-	</ul>
-	<metal:block use-macro="here/calendar_macros/macros/form">
-	  <metal:block fill-slot="content">
-	    <metal:block use-macro="here/calendar_macros/macros/form_property">
-	      <metal:block fill-slot="title"
-			   i18n:translate="cpscalendar_label_comment">
-		Comment
-	      </metal:block>
-	      <metal:block fill-slot="content">
-		<textarea name="comment" cols="40" rows="4"></textarea>
-	      </metal:block>
-	    </metal:block>
-	  </metal:block>
-	</metal:block>
-	<input type="submit"
-	       value="cpscalendar_button_validate"
-	       i18n:attributes="value" />
+        tal:attributes="action string:${context_url}/updateAttendeesCalendars"
+        tal:define="notified_attendees here/notified_attendees">
+    <ul>
+      <li tal:repeat="att here/attendees">
+        <input type="checkbox" name="attendees:list"
+          tal:attributes="value att/id;
+                  checked python:att['id'] not in notified_attendees" />
+        <tal:block replace="att/cn|att/id" />
+      </li>
+    </ul>
+    <metal:block use-macro="here/calendar_macros/macros/form">
+      <metal:block fill-slot="content">
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
+          <metal:block fill-slot="title"
+               i18n:translate="cpscalendar_label_comment">
+        Comment
+          </metal:block>
+          <metal:block fill-slot="content">
+        <textarea name="comment" cols="40" rows="4"></textarea>
+          </metal:block>
+        </metal:block>
+      </metal:block>
+    </metal:block>
+    <input type="submit"
+           value="cpscalendar_button_validate"
+           i18n:attributes="value" />
       </form>
     </tal:block>
   </tal:block>
