@@ -7,7 +7,8 @@ New features:
   home folder
 Bug fixes:
 ~~~~~~~~~~
--
+- The date display in the weekly view now always uses two lines, one for weekday
+  date, one for month.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

@@ -169,7 +169,7 @@
                        tal:attributes="href string:${here_url}?disp=day&viewed_day=${go_day}">
                         <span tal:content="string:cpscalendar_label_day${dow}"
                               i18n:translate="" />
-                        <span tal:replace="date/day"/>
+                        <span tal:replace="date/day"/><br/>
                         <span tal:content="string:cpscalendar_label_month${date/month}"
                               i18n:translate="" />
                       </a>
