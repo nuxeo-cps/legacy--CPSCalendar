@@ -257,7 +257,7 @@ class Calendar(CPSBaseFolder):
         base_dict = event_dict
         event_dict = deepcopy(event_dict)
         events = []
-        this_event = None
+        this_event = event_dict
         for event in self._pending_events:
             if event['id'] == event_dict['id']:
                 this_event = event
