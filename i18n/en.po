@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2003-10-15 14:15default\n"
+"POT-Creation-Date: 2003-11-26 17:58default\n"
 "PO-Revision-Date: 2003-11-18 17:49+0100\n"
 "Last-Translator: Lennart Regebro <rgebro@nuxeo.com>\n"
 "Language-Team: \n"
@@ -888,7 +888,7 @@ msgstr ""
 msgid "status"
 msgstr ""
 
-#.   <span content="python:str('label_day_long%s' % (i, ))">week day</span>
+#.   <span content="python:str('label_day_long%s' % str(i))">week day</span>
 #: from ../skins/cps_calendar/calendar_view_macros.pt
 msgid "week day"
 msgstr ""
@@ -956,9 +956,6 @@ msgstr "Fr"
 msgid "label_day6"
 msgstr "Sa"
 
-msgid "label_day7"
-msgstr "Su"
-
 msgid "label_day_long0"
 msgstr "Sun"
 
@@ -980,8 +977,9 @@ msgstr "Fri"
 msgid "label_day_long6"
 msgstr "Sat"
 
-msgid "label_day_long7"
-msgstr "Sun"
+#, fuzzy
+msgid "label_month0"
+msgstr "Oct"
 
 msgid "label_month1"
 msgstr "Jan"
@@ -1016,8 +1014,9 @@ msgstr "Oct"
 msgid "label_month11"
 msgstr "Nov"
 
-msgid "label_month12"
-msgstr "Dec"
+#, fuzzy
+msgid "label_month_long0"
+msgstr "October"
 
 msgid "label_month_long1"
 msgstr "January"
@@ -1051,9 +1050,6 @@ msgstr "October"
 
 msgid "label_month_long11"
 msgstr "November"
-
-msgid "label_month_long12"
-msgstr "December"
 
 msgid "cpscalendar_member"
 msgstr "Member"
@@ -1105,6 +1101,18 @@ msgstr "No resource"
 msgid "cpscalendar_no_attendee_of_type_events_show"
 msgstr "No events"
 
+#~ msgid "label_day7"
+#~ msgstr "Su"
+
+#~ msgid "label_day_long7"
+#~ msgstr "Sun"
+
+#~ msgid "label_month12"
+#~ msgstr "Dec"
+
+#~ msgid "label_month_long12"
+#~ msgstr "December"
+
 #~ msgid "cpscalendar_label_from"
 #~ msgstr "From"
 
@@ -1113,4 +1121,3 @@ msgstr "No events"
 
 #~ msgid "Calendar"
 #~ msgstr "Calendar"
-

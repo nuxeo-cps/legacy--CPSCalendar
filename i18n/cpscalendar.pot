@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-10-15 14:15default\n"
+"POT-Creation-Date: 2003-11-26 17:58default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -881,7 +881,7 @@ msgstr ""
 msgid "status"
 msgstr ""
 
-#.   <span content="python:str('label_day_long%s' % (i, ))">week day</span>
+#.   <span content="python:str('label_day_long%s' % str(i))">week day</span>
 #: from ../skins/cps_calendar/calendar_view_macros.pt
 msgid "week day"
 msgstr ""

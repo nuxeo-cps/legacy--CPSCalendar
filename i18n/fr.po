@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2003-10-15 14:15default\n"
+"POT-Creation-Date: 2003-11-26 17:58default\n"
 "PO-Revision-Date: 2003-10-15 14:14+0200\n"
 "Last-Translator: DARCHE <madarche@nuxeio.com>\n"
 "Language-Team: Francais <fr@li.org>\n"
@@ -24,7 +24,6 @@ msgstr ""
 #.                 <span replace="event_status">status</span>
 #.   	  </metal:block>
 #: from ../skins/cps_calendar/calendar_macros.pt
-#, fuzzy
 msgid "<span replace=\"event_status\">status</span>"
 msgstr "Statut"
 
@@ -359,7 +358,6 @@ msgstr "à"
 #.   	        at
 #.   		</span>
 #: from ../skins/cps_calendar/calendar_macros.pt
-#, fuzzy
 msgid "cpscalendar_label_at_(hour)"
 msgstr "à"
 
@@ -645,7 +643,6 @@ msgstr "Au"
 #.   		    to
 #.   		  </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
-#, fuzzy
 msgid "cpscalendar_label_to_(hour)"
 msgstr "à"
 
@@ -874,7 +871,6 @@ msgstr "Il n'y a pas de requête en attente pour cet événement"
 #.       Pending events for
 #.     </span>
 #: from ../skins/cps_calendar/calendar_pending_events.pt
-#, fuzzy
 msgid "cpscalendar_pending_events_for"
 msgstr "Nouvel événement"
 
@@ -882,7 +878,6 @@ msgstr "Nouvel événement"
 #.   	 Printing version of your calendar
 #.     </title>
 #: from ../skins/cps_calendar/printing_template.pt
-#, fuzzy
 msgid "cpscalendar_printable_view"
 msgstr "Version imprimable"
 
@@ -897,7 +892,7 @@ msgstr ""
 msgid "status"
 msgstr "Statut"
 
-#.   <span content="python:str('label_day_long%s' % (i, ))">week day</span>
+#.   <span content="python:str('label_day_long%s' % str(i))">week day</span>
 #: from ../skins/cps_calendar/calendar_view_macros.pt
 msgid "week day"
 msgstr ""
@@ -914,14 +909,12 @@ msgstr "Changer pour un événement sur plusieurs jours"
 msgid "cpscalendar_change_event_to_not_all_day"
 msgstr "Changer pour un événement ponctuel"
 
-#, fuzzy
 msgid "cpscalendar_untitled_(document)"
 msgstr "Sans titre"
 
 msgid "confirmed"
 msgstr "Confirmé"
 
-#, fuzzy
 msgid "unconfirmed"
 msgstr "Non confirmé"
 
@@ -937,11 +930,9 @@ msgstr "Travail"
 msgid "cpscalendar_category_other"
 msgstr "Autre"
 
-#, fuzzy
 msgid "option_no"
 msgstr "Non"
 
-#, fuzzy
 msgid "option_yes"
 msgstr "Oui"
 
@@ -966,9 +957,6 @@ msgstr "Ve"
 msgid "label_day6"
 msgstr "Sa"
 
-msgid "label_day7"
-msgstr "Di"
-
 msgid "label_day_long0"
 msgstr "Dim"
 
@@ -989,9 +977,6 @@ msgstr "Ven"
 
 msgid "label_day_long6"
 msgstr "Sam"
-
-msgid "label_day_long7"
-msgstr "Dim"
 
 msgid "label_month1"
 msgstr "Jan"
@@ -1041,7 +1026,6 @@ msgstr "Mars"
 msgid "label_month_long4"
 msgstr "Avril"
 
-#, fuzzy
 msgid "label_month_long5"
 msgstr "Mai"
 
@@ -1090,7 +1074,6 @@ msgstr "Affichage des événements"
 msgid "cpscalendar_events_shows"
 msgstr "Affichages des événements"
 
-#, fuzzy
 msgid "cpscalendar_status_confirmed"
 msgstr "Confirmé"
 
@@ -1100,7 +1083,6 @@ msgstr "Refusé"
 msgid "cpscalendar_status_tentative"
 msgstr "Invitation"
 
-#, fuzzy
 msgid "cpscalendar_status_unconfirmed"
 msgstr "Non confirmé"
 
@@ -1116,6 +1098,18 @@ msgstr "Aucune ressource"
 msgid "cpscalendar_no_attendee_of_type_events_show"
 msgstr "Aucun participant"
 
+#~ msgid "label_day7"
+#~ msgstr "Di"
+
+#~ msgid "label_day_long7"
+#~ msgstr "Dim"
+
+#~ msgid "label_month12"
+#~ msgstr "Dec"
+
+#~ msgid "label_month_long12"
+#~ msgstr "Décembre"
+
 #~ msgid "cpscalendar_label_from"
 #~ msgstr "De"
 
@@ -1125,11 +1119,9 @@ msgstr "Aucun participant"
 #~ msgid "button_close_this_window"
 #~ msgstr "Fermer cette fenêtre"
 
-#, fuzzy
 #~ msgid "action_attendees"
 #~ msgstr "Participants"
 
-#, fuzzy
 #~ msgid "action_calendar"
 #~ msgstr "Consulter l'agenda"
 
@@ -1139,6 +1131,5 @@ msgstr "Aucun participant"
 #~ msgid "cpscalendar_option_eventstatus_cancelled"
 #~ msgstr "Annulé"
 
-#, fuzzy
 #~ msgid "python:str('cpscalendar_option_eventstatus_%s') % event_status"
 #~ msgstr "Statut"
