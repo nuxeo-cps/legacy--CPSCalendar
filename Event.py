@@ -465,7 +465,6 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
     calendar = dispatcher.Destination()
     if organizer is None:
         # By default, organizer is the current calendar user
-        print calendar.rpath
         try:
             organizer = calendar.getAttendeeInfo(calendar.rpath)
         except AttributeError:
