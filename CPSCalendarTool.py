@@ -44,12 +44,11 @@ WorkspaceVisitorRoles = (WorkspaceVisitor,)
 
 
 def _cmpEv(a, b):
-    """ Compare cal_slot by start date
-    """
+    """Compare cal_slot by start date"""
     return cmp(b['start'], a['start'])
 
 def _slotUnion(cal_slot, with_free=0):
-    """ Calculate and fusion events' display information from cal_slot.
+    """Calculate and fusion events' display information from cal_slot.
 
     with_free: give only free time
     """
@@ -155,8 +154,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
     security.declareProtected('View', 'listCalendars')
     def listCalendars(self):
-        """ return all available Calendar objects in a list
-        """
+        """Return all available Calendar objects in a list"""
         brains = self.portal_catalog.searchResults(meta_type='Calendar')
         if brains:
             return [brain.getObject() for brain in brains]
@@ -165,8 +163,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
     security.declareProtected('View', 'listCalendarPaths')
     def listCalendarPaths(self):
-        """ Return all available Calendars' path in a list
-        """
+        """Return all available Calendars' paths in a list"""
         cals = self.listCalendars()
         if cals:
             return [cal.absolute_url(relative=1) for cal in cals]
@@ -175,10 +172,11 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
     security.declareProtected(View, 'listCalendarsDict')
     def listCalendarsDict(self, exclude=''):
-        """ Return a short summary of all calendars
-            It's used in meeting preparation to have all possibles attendees
+        """Return a short summary of all calendars
 
-            exclude: one calendar rpath to remove of the list
+        It's used in meeting preparation to have all possible attendees
+
+        exclude: one calendar rpath to remove of the list
         """
         calendars_dict = {}
         for ob in self.listCalendars():
@@ -196,7 +194,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
     security.declareProtected('View', 'getCalendarPath')
     def getCalendarForPath(self, rpath):
-        """ Return a calendar
+        """Return a calendar
 
         rpath: relative path for the calendar
         """
@@ -212,7 +210,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     # XXX use a special permission here
     security.declareProtected('View', 'unionCals')
     def unionCals(self, with_free=0, *cals):
-        """ Return the list of free slot for the list cals
+        """Return the list of free slot for the list cals
 
         *cals: list of calendar
         with_free: binary, calculate free time slot
@@ -232,7 +230,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     def getFreeBusy(self, attendees, from_date, to_date,
                     from_time_hour, from_time_minute,
                     to_time_hour, to_time_minute):
-        """Gets free/busy informations on attendees calendars
+        """Get free/busy informations on attendees calendars
 
         attendees: list of calendars
         """
@@ -334,7 +332,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
     security.declareProtected(ManagePortal, 'createMemberCalendar')
     def createMemberCalendar(self, member_id):
-        """Create an calendar in the home folder of a member
+        """Create a calendar in the home folder of a member
 
         member_id: member's id for which we create this calendar
         """
@@ -381,7 +379,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
     security.declareProtected(View, 'getAttendeeInfo')
     def getAttendeeInfo(self, rpath, status=0):
-        """ get info from others attendees of one event.
+        """Get info from others attendees of one event.
         attendees are other calendars.
 
         return a dictionnary with cn, id, usertype and status.
@@ -424,7 +422,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
     security.declareProtected('View', 'listVisibleCalendars')
     def listVisibleCalendars(self):
-        """ return the list of all Calendar objects visible by the user
+        """Return the list of all Calendar objects visible by the user
         """
         mtool = getToolByName(self, 'portal_membership')
         cals = []
@@ -440,5 +438,5 @@ def addCPSCalendarTool(container, REQUEST=None):
     ob = CPSCalendarTool()
     id = ob.getId()
     container._setObject(id, ob)
-    if REQUEST:
+    if REQUEST is not None:
         REQUEST.RESPONSE.redirect(container.absolute_url()+'/manage_main')
