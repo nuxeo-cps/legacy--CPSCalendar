@@ -26,6 +26,7 @@
 <metal:block fill-slot="main"
      tal:define="title python:create and mcat('_(document)_Untitled_') or here.Title();
                  description python:(create and [''] or [here.Description()])[0];
+                 usertype python:create and 'ressources' or here.usertype;
                  submitvalue python:create and mcat('_button_create_') or mcat('_button_modify_');
                  action python:create and 'calendar_create' or 'folder_edit';
                 ">
@@ -37,11 +38,11 @@
     <metal:block fill-slot="content">
       <metal:block tal:condition="create" use-macro="here/main_widgets/macros/form_property">
         <metal:block fill-slot="title"
-          tal:content="python:mcat('_prop_id_')">
-          Id
+          tal:content="python:mcat('_prop_title_')">
+          Title
         </metal:block>
         <metal:block fill-slot="content">
-          <input type="text" name="id" value="" />
+          <input type="text" name="title" value="" />
         </metal:block>
       </metal:block>
       <metal:block use-macro="here/main_widgets/macros/form_property">
@@ -54,9 +55,34 @@
            tal:content="description"></textarea>
         </metal:block>
       </metal:block>
+      <tal:block condition="python:usertype != 'member'">
+        <metal:block use-macro="here/main_widgets/macros/form_property">
+          <metal:block fill-slot="title"
+            tal:content="python:mcat('_prop_cal_usertype_')">
+            Calendar type
+          </metal:block>
+          <metal:block fill-slot="content">
+            <select name="usertype"
+              tal:define="usertypes here/getUserTypes">
+              <tal:block repeat="type usertypes">
+                <option
+                  tal:condition="python:type['id'] != 'member'"
+                  tal:attributes="
+                  value type/id;
+                  selected python:type['id'] == usertype"
+                  tal:content="python:mcat(type['title'])" />
+              </tal:block>
+            </select>
+          </metal:block>
+        </metal:block>
+      </tal:block>
     </metal:block>
   </metal:block>
 
+  <tal:block condition="create">
+    <input type="hidden" name="default_id_from" value="title" />
+    <input type="hidden" name="default_title_from" value="description" />
+  </tal:block>
   <input type="submit" value="value" tal:attributes="value submitvalue">
 
   </form>

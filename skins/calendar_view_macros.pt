@@ -1,0 +1,414 @@
+<metal:block define-macro="day">
+  <a
+    tal:define="
+    prev_day python:int(viewed_day-1);"
+    tal:attributes="
+    href string:${here_url}?viewed_day=${prev_day}">
+    &lt;&lt;
+  </a>
+  <a
+    tal:define="
+      today python:int(DateTime());"
+    tal:attributes="
+      href string:${here_url}?viewed_day=${today}"
+    tal:content="python:mcat('_cal_Today_')">
+    Today
+  </a>
+  <a
+    tal:define="
+    next_day python:int(viewed_day+1);"
+    tal:attributes="
+    href string:${here_url}?viewed_day=${next_day}">
+    &gt;&gt;
+  </a>
+  <table cellspacing="0" cellpadding="0" border="1">
+    <tr>
+      <td>
+        <table width="445" cellspacing="2" cellpadding="0" border="0"
+          tal:define="
+            empty_src string:${portal_url}/cal_empty.gif;
+            event_src string:${portal_url}/cal_event;
+            slots events_desc/slots;
+            day_events events_desc/day_events;
+            hour_blocks events_desc/hour_blocks">
+          <tr>
+            <td>
+            </td>
+            <th
+              tal:define="
+                date python:slots[0][0];
+                dow python:mcat('_cal_Day_long%s' % date.dow());
+                dom date/day;
+                year date/year;
+                month python:mcat('_cal_Month%s' % date.month());"
+              tal:content="string:${dow} ${dom} ${month} ${year}" />
+          </tr>
+          <tr tal:repeat="day_event day_events">
+            <td>
+            </td>
+            <td bgcolor="#DDDDDD"
+              tal:define="event nocall:day_event/event">
+              <a
+                tal:attributes="href event/absolute_url"
+                tal:content="event/title_or_id" />
+            </td>
+          </tr>
+          <tr tal:condition="day_events">
+            <td colspan="2" height="2" bgcolor="black">
+            </td>
+          </tr>
+          <tr>
+            <td valign="top" bgcolor="#DDDDDD">
+              <table cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td height="5">
+                  </td>
+                </tr>
+                <tr tal:repeat="i python:range(1,25)">
+                  <td height="20" valign="bottom"
+                    tal:define="h python:i<24 and i or '00'"
+                    tal:content="string:${h}:00">
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td width="445" height="480" valign="top"
+              tal:attributes="background string:${portal_url}/cal_line.png">
+              <tal:block repeat="block hour_blocks">
+                <tal:block
+                  define="conf_len python:len(block)">
+                  <tal:block condition="python:conf_len == 1">
+                    <tal:block define="
+                      info python:block[0];
+                      event nocall:info/event;
+                      ">
+                      <img width="445"
+                        tal:condition="not:nocall:event"
+                        tal:attributes="
+                          src empty_src;
+                          height python:info['height']/3" />
+                      <table width="445" cellpadding="2" celspacing="0"
+                        border="1"
+                        tal:attributes="height python:info['height']/3"
+                        tal:condition="nocall:event">
+                        <tr>
+                          <td valign="top"
+                            tal:attributes="
+                            background string:${event_src}_${event/event_status}.png">
+                            <a
+                              tal:attributes="
+                                href event/absolute_url"
+                                tal:content="event/title_or_id">
+                              Event
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </tal:block>
+                  </tal:block>
+                  <tal:block condition="python:conf_len > 1">
+                    <table cellpadding="0" cellspacing="0"
+                      width="445" border="0"
+                      tal:define="width python:445/conf_len">
+                      <tr>
+                        <td valign="top" tal:repeat="block_col block">
+                          <tal:block repeat="info block_col">
+                            <tal:block define="event nocall:info/event">
+                              <img
+                                tal:condition="not:nocall:event"
+                                tal:attributes="
+                                  border python:not not event;
+                                  src empty_src;
+                                  width width;
+                                  height python:info['height']/3" />
+                              <table cellpadding="2" celspacing="0"
+                                border="1"
+                                tal:attributes="
+                                  width width;
+                                  height python:info['height']/3"
+                                tal:condition="nocall:event">
+                                <tr>
+                                  <td valign="top"
+                                    tal:attributes="
+                                    background string:${event_src}_${event/event_status}.png;">
+                                    <a
+                                      tal:attributes="
+                                        href event/absolute_url"
+                                        tal:content="event/title_or_id">
+                                      Event
+                                    </a>
+                                  </td>
+                                </tr>
+                              </table>
+                            </tal:block>
+                          </tal:block>
+                        </td>
+                      </tr>
+                    </table>
+                  </tal:block>
+                </tal:block>
+              </tal:block>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</metal:block>
+
+<metal:block define-macro="week">
+  <a
+    tal:define="
+    prev_week python:int(viewed_day-7);"
+    tal:attributes="
+    href string:${here_url}?viewed_day=${prev_week}">
+    &lt;&lt;
+  </a>
+  <a
+    tal:define="
+      today python:int(DateTime());"
+    tal:attributes="
+      href string:${here_url}?viewed_day=${today}"
+    tal:content="python:mcat('_cal_Today_')">
+    Today
+  </a>
+  <a
+    tal:define="
+    next_week python:int(viewed_day+7);"
+    tal:attributes="
+    href string:${here_url}?viewed_day=${next_week}">
+    &gt;&gt;
+  </a>
+  <table cellspacing="0" cellpadding="0" border="1">
+    <tr>
+      <td>
+        <table width="445" cellspacing="2" cellpadding="0" border="0"
+          tal:define="
+            empty_src string:${portal_url}/cal_empty.gif;
+            event_src string:${portal_url}/cal_event;
+            back_td1 string:${portal_url}/cal_line1.png;
+            back_td2 string:${portal_url}/cal_line2.png;
+            slots events_desc/slots;
+            day_lines events_desc/day_lines;
+            hour_block_cols events_desc/hour_block_cols">
+          <tr>
+            <td>
+            </td>
+            <th width="59" tal:repeat="i python:range(0,7)">
+              <a
+                tal:define="
+                  dow python:mcat('_cal_Day%s' % i);
+                  date python:slots[i][0];
+                  dom date/day;
+                  month python:mcat('_cal_Mo%s' % date.month());
+                  go_day python:int(date);
+                "
+                tal:attributes="
+                  href string:${here_url}?disp=day&viewed_day=${go_day}"
+                tal:content="string:${dow} ${dom} ${month}" />
+            </th>
+          </tr>
+          <tr tal:repeat="line day_lines">
+            <td>
+            </td>
+            <tal:block repeat="col line">
+              <td
+                tal:attributes="
+                colspan python:col['colspan'] > 1 and col['colspan'] or nothing;
+                bgcolor python:col['event'] and '#DDDDDD'">
+                <tal:block condition="nocall:col/event">
+                  <a
+                    tal:define="event nocall:col/event"
+                    tal:attributes="href event/absolute_url"
+                    tal:content="event/title_or_id" />
+                </tal:block>
+              </td>
+            </tal:block>
+          </tr>
+          <tr tal:condition="day_lines">
+            <td colspan="8" bgcolor="black" height="1">
+            </td>
+          </tr>
+          <tr>
+            <td valign="top" bgcolor="#DDDDDD">
+              <table cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td height="5">
+                  </td>
+                </tr>
+                <tr tal:repeat="i python:range(1,25)">
+                  <td height="15" valign="bottom"
+                    tal:define="h python:i<24 and i or '00'"
+                    tal:content="string:${h}:00">
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <tal:block repeat="col hour_block_cols">
+              <td width="59" height="360" valign="top"
+                tal:define="odd repeat/col/odd"
+                tal:attributes="
+                background python:odd and back_td2 or back_td1">
+                <tal:block repeat="block col">
+                  <tal:block
+                    define="conf_len python:len(block)">
+                    <tal:block condition="python:conf_len == 1">
+                      <tal:block define="
+                        info python:block[0];
+                        event nocall:info/event;
+                        src python:event and ('%s_%s.png' % (event_src, event.event_status)) or empty_src;
+                        ">
+                        <a
+                          tal:omit-tag="not:nocall:event"
+                          tal:attributes="
+                            title python:event and '%s (%s -> %s)' % (event.title_or_id(), event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
+                            href python:event and event.absolute_url()">
+                          <img
+                            tal:define="
+                              border python:not not event;"
+                            tal:attributes="
+                              border border;
+                              src src;
+                              width python:59 - border*2;
+                              height python:info['height']/4 - border" />
+                        </a>
+                      </tal:block>
+                    </tal:block>
+                    <tal:block condition="python:conf_len > 1">
+                      <table cellpadding="0" cellspacing="0"
+                        width="59" border="0"
+                        tal:define="width python:59/conf_len">
+                        <tr>
+                          <td valign="top" tal:repeat="block_col block">
+                            <tal:block repeat="info block_col">
+                              <a
+                                tal:define="
+                                  event nocall:info/event;
+                                  src python:event and ('%s_%s.png' % (event_src, event.event_status)) or empty_src;
+                                  "
+                                tal:omit-tag="not:nocall:event"
+                                tal:attributes="
+                                title python:event and '%s (%s -> %s)' % (event.title_or_id(), event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
+                                  href python:event and event.absolute_url()">
+                                <img
+                                  tal:define="
+                                    border python:not not event;"
+                                  tal:attributes="
+                                    border border;
+                                    src src;
+                                    width python:width - border*2;
+                                    height python:info['height']/4 - border" />
+                              </a>
+                            </tal:block>
+                          </td>
+                        </tr>
+                      </table>
+                    </tal:block>
+                  </tal:block>
+                </tal:block>
+              </td>
+            </tal:block>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</metal:block>
+
+<metal:block define-macro="month">
+  <h2
+    tal:define="
+      month python:mcat('_cal_Month%s' % (viewed_day.month(), ));
+      year viewed_day/year"
+    tal:content="string:${month} ${year}" />
+  <a
+    tal:define="
+    prev_month python:int(start_time-5);"
+    tal:attributes="
+    href string:${here_url}?viewed_day=${prev_month}">
+    &lt;&lt;
+  </a>
+  <a
+    tal:define="
+      today python:int(DateTime());"
+    tal:attributes="
+    href string:${here_url}?viewed_day=${today}"
+    tal:content="python:mcat('_cal_Today_')">
+    Today
+  </a>
+  <a
+    tal:define="
+    next_month python:int(end_time+7);"
+    tal:attributes="
+    href string:${here_url}?viewed_day=${next_month}">
+    &gt;&gt;
+  </a>
+  <table width="445" cellspacing="0" cellpadding="0" border="1">
+    <tr>
+      <td>
+        <table width="445" cellspacing="2" cellpadding="0" border="0">
+          <tr>
+            <th
+              tal:repeat="i python:[1,2,3,4,5,6,0]"
+              tal:content="python:mcat('_cal_Day_long%s' % (i, ))">
+              Mon
+            </th>
+          </tr>
+          <tal:block repeat="day_line events_desc/day_lines">
+            <tr>
+              <tal:block repeat="events day_line">
+                <td width="59"
+                  tal:condition="not:events">
+                </td>
+                <tal:block condition="events">
+                  <td width="59" valign="top"
+                    tal:define="
+                        day_height events/day_height;
+                        odd repeat/events/odd"
+                    tal:attributes="
+                      bgcolor python:odd and '#EEEEFF' or nothing
+                      ">
+                    <strong tal:content="events/dom">1</strong>
+                    <table width="59" cellspacing="1" cellpadding="0" border="0"
+                      tal:define="allday_events events/day"
+                      tal:condition="allday_events">
+                      <tr tal:repeat="allday_event allday_events">
+                        <td bgcolor="#DDDDDD">
+                          <a
+                            tal:define="event nocall:allday_event/event"
+                            tal:attributes="href event/absolute_url"
+                            tal:content="event/title_or_id">
+                            Event
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                    <li tal:repeat="hour_event events/hour">
+                      <a
+                        tal:define="event nocall:hour_event/event"
+                        tal:attributes="
+                          href event/absolute_url"
+                        tal:content="event/title_or_id">
+                        Event
+                      </a>
+                    </li>
+                    <br
+                      tal:define="
+                        compense_height python:5 - day_height;
+                      "
+                      tal:condition="python:compense_height > 0"
+                      tal:repeat="i python:range(0, compense_height)" />
+                  </td>
+                </tal:block>
+              </tal:block>
+            </tr>
+            <tr tal:condition="not:repeat/day_line/end">
+              <td colspan="7" bgcolor="black" height="1">
+              </td>
+            </tr>
+          </tal:block>
+        </table>
+      </td>
+    </tr>
+  </table>
+</metal:block>

@@ -10,6 +10,7 @@
 
 from zLOG import LOG, DEBUG, INFO
 from copy import deepcopy
+from DateTime import DateTime
 from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass
 from Acquisition import aq_inner, aq_parent
@@ -159,9 +160,7 @@ class Calendar(Workgroup):
             return
         request = pending['request']
         if request == 'request':
-            LOG('NGCal', DEBUG, 'Ok?')
             status = kw.get('status')
-            LOG('NGCal', DEBUG, 'Ok!')
             event = getattr(self, event_id, None)
             if event is None:
                 self.invokeFactory('Event', **pending['event'])
@@ -192,6 +191,304 @@ class Calendar(Workgroup):
         self._pending_events = ()
         if REQUEST is not None:
             REQUEST.RESPONSE.redirect(self.absolute_url())
+
+    security.declareProtected('View', 'getEventsDesc')
+    def getEventsDesc(self, start_time, end_time, disp):
+        """Returns events between start_time and end_time
+        formatted according for a disp display type.
+
+        disp can be 'day', 'month', 'view'
+        """
+        if disp == 'day':
+            slots = [(start_time, end_time)]
+            slot_list = [{'desc': start_time, 'day': [], 'hour': []}]
+        elif disp == 'week':
+            slot_start = start_time
+            slots = []
+            slot_list = []
+            for i in range(0,7):
+                slots.append((slot_start, slot_start+1))
+                slot_list.append({
+                  'desc': slot_start,
+                  'day': [],
+                  'hour': [],
+                })
+                slot_start += 1
+        elif disp == 'month':
+            slot_start = start_time
+            slots = []
+            slot_list = []
+            while slot_start.lessThan(end_time):
+                slots.append((slot_start, slot_start+1))
+                slot_list.append({
+                  'desc': slot_start,
+                  'day': [],
+                  'hour': [],
+                })
+                slot_start += 1
+                slot_start = DateTime(slot_start.year(), slot_start.month(), slot_start.day())
+        events = self.objectValues()
+        for event in events:
+            event_slots = event.getEventInSlots(start_time, end_time, slots)
+            if event_slots is not None:
+                key = event.all_day and 'day' or 'hour'
+                i = 0
+                for slot_desc in slot_list:
+                    event_slot = event_slots[i]
+                    if event_slot is not None:
+                        slot_desc[key].append(event_slot)
+                    i += 1
+
+        # reform result for correct display according to disp
+        if disp == 'day':
+            hour_cols = [slot_list[0]['hour']]
+            return {
+              'slots': slots,
+              'day_events': slot_list[0]['day'],
+              'hour_blocks': self._get_hour_block_cols(hour_cols)[0],
+            }
+        elif disp == 'week':
+            day_lines = []
+            day_ids = []
+            day_dict = {}
+            day_occupation = []
+            day_empty = []
+            hour_cols = []
+            i = 0
+            for slot in slot_list:
+                day_events = slot['day']
+                hour_cols.append(slot['hour'])
+                event_ids = [ev['event_id'] for ev in day_events]
+                remove_ids = [id for id in day_ids if id not in event_ids]
+                for id in remove_ids:
+                    line, colstart = day_dict[id]
+                    day_lines[line][-1]['colspan'] = i - colstart
+                    day_occupation[line] = None
+                    del day_dict[id]
+                    day_ids.remove(id)
+                    day_empty[line] = i
+                for ev in day_events:
+                    id = ev['event_id']
+                    if id not in day_ids:
+                        try:
+                            line = day_occupation.index(None)
+                        except ValueError:
+                            line = len(day_occupation)
+                            day_lines.append([])
+                            day_occupation.append(None)
+                            day_empty.append(0)
+                        day_occupation[line] = id
+                        day_ids.append(id)
+                        day_dict[id] = (line, i)
+                        empty_span = i - day_empty[line]
+                        if empty_span:
+                            day_lines[line].append(
+                                {
+                                    'event': None,
+                                    'colspan': empty_span,
+                                }
+                            )
+                        day_lines[line].append(
+                            {
+                                'event': ev['event'],
+                            }
+                        )
+                i += 1
+            i = 0
+            len_slots = len(slots)
+            for day_line in day_lines:
+                id = day_occupation[i]
+                if id is None:
+                    empty_span = len_slots - day_empty[i]
+                    if empty_span > 0:
+                        day_line.append(
+                            {
+                                'event': None,
+                                'colspan': empty_span,
+                            }
+                        )
+                else:
+                    line, colstart = day_dict[id]
+                    day_lines[line][-1]['colspan'] = len_slots - colstart
+                i += 1
+
+            LOG('NGC', DEBUG, 'day_lines=\n%s' % (day_lines, ))
+            hour_block_cols = self._get_hour_block_cols(hour_cols)
+            return {
+                'slots': slots,
+                'day_lines': day_lines,
+                'hour_block_cols': hour_block_cols,
+            }
+        elif disp == 'month':
+            day_lines = []
+            current_day = start_time.dow()
+            if current_day == 0:
+                current_day = 7
+            current_line = [None]*(current_day-1)
+            day_lines.append(current_line)
+            i = 1
+            for slot in slot_list:
+                slot_day = slot['day']
+                slot_hour = slot['hour']
+                day_height = len(slot_day) + len(slot_hour)
+                current_line.append({
+                    'day': slot_day,
+                    'hour': slot_hour,
+                    'dom': i,
+                    'day_height': day_height,
+                })
+                if current_day == 7:
+                    current_day = 1
+                    current_line = []
+                    day_lines.append(current_line)
+                else:
+                    current_day += 1
+                i += 1
+            if current_day > 1:
+                current_line.extend([None]*(8-current_day))
+            return {
+                'slots': slots,
+                'day_lines': day_lines,
+            }
+
+    def _get_hour_block_cols(self, hour_cols):
+        hour_block_cols = []
+        def cmp_ev(a, b):
+            return a['start'].__cmp__(b['start'])
+        for col in hour_cols:
+            blocks = []
+            hour_block_cols.append(blocks)
+            if not col:
+                continue
+            col.sort(cmp_ev)
+            conflict = []
+            conflict_start = 0
+            conflict_stop = 0
+            last_ev = 0
+            for ev in col:
+                start = ev['start']
+                stop = ev['stop']
+                start_min = start.hour()*60+start.minute()
+                stop_min = stop.hour()*60+stop.minute()
+                if stop_min == 0:
+                    stop_min = 1440
+                if conflict:
+                    # event conflict
+                    if conflict_stop <= start_min:
+                        # this event does not have conflicts
+                        # so resolve conflict
+                        if len(conflict) == 1:
+                            # just a simple event
+                            blocks.append([{
+                              'event': conflict[0]['ev']['event'],
+                              'height': conflict[0]['stop_min'] - conflict[0]['start_min'],
+                            }])
+                        else:
+                            block_cols = []
+                            block_stops = []
+                            for conf in conflict:
+                                c_ev = conf['ev']
+                                conf_start = conf['start_min']
+                                conf_stop = conf['stop_min']
+                                i = -1
+                                correct_i = -1
+                                for correct_stop in block_stops:
+                                    if correct_stop <= conf_start:
+                                        correct_i = i
+                                        break
+                                    i += 1
+                                i = correct_i
+                                if i == -1:
+                                    i = len(block_cols)
+                                    block_cols.append([])
+                                    block_stops.append(conflict_start)
+                                    correct_stop = conflict_start
+
+                                correct_col = block_cols[i]
+                                if conf_start > correct_stop:
+                                    correct_col.append({
+                                        'event': None,
+                                        'height': conf_start - correct_stop
+                                    })
+                                correct_col.append({
+                                    'event': c_ev['event'],
+                                    'height': conf_stop - conf_start
+                                })
+                                block_stops[i] = conf_stop
+                            blocks.append(block_cols)
+                                
+                        conflict = []
+                        last_ev = conflict_stop
+                    else:
+                        # this event provoques conflicts
+                        # so add this event to conflict's resolve
+                        conflict.append({
+                          'start_min': start_min,
+                          'stop_min': stop_min,
+                          'ev': ev,
+                        })
+                        conflict_stop = max(stop_min, conflict_stop)
+                if not conflict:
+                    if last_ev != start_min:
+                        blocks.append([{
+                            'event':None,
+                            'height':start_min - last_ev,
+                        }])
+                    conflict_start = start_min
+                    conflict_stop = stop_min
+                    conflict.append({
+                      'start_min': start_min,
+                      'stop_min': stop_min,
+                      'ev': ev
+                    })
+            if conflict:
+                if len(conflict) == 1:
+                    blocks.append([{
+                      'event': conflict[0]['ev']['event'],
+                      'height': conflict[0]['stop_min'] - conflict[0]['start_min'],
+                    }])
+                else:
+                    block_cols = []
+                    block_stops = []
+                    for conf in conflict:
+                        ev = conf['ev']
+                        conf_start = conf['start_min']
+                        conf_stop = conf['stop_min']
+                        i = -1
+                        correct_i = -1
+                        for correct_stop in block_stops:
+                            if correct_stop <= conf_start:
+                                correct_i = i+1
+                                break
+                            i += 1
+                        i = correct_i
+                        if i == -1:
+                            i = len(block_cols)
+                            block_cols.append([])
+                            block_stops.append(conflict_start)
+                            correct_stop = conflict_start
+
+                        correct_col = block_cols[i]
+                        if conf_start > correct_stop:
+                            correct_col.append({
+                                'event': None,
+                                'height': conf_start - correct_stop
+                            })
+                        correct_col.append({
+                            'event': ev['event'],
+                            'height': conf_stop - conf_start
+                        })
+                        block_stops[i] = conf_stop
+                    blocks.append(block_cols)
+                last_ev = conflict_stop
+
+            if last_ev < 1439:
+                blocks.append([{
+                    'event': None,
+                        'height': 1439 - last_ev
+                    }])
+
+        return hour_block_cols
 
     def _get_email_for(self, member, dir):
         """
@@ -316,7 +613,7 @@ def addCalendar(dispatcher, id,
                  title='',
                  description='',
                  usertype='member',
-                 REQUEST=None):
+                 REQUEST=None, **kw):
     """Adds an Events container."""
     ob = Calendar(id, title, description, usertype)
     container = dispatcher.Destination()

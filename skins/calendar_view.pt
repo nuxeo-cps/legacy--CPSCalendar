@@ -4,6 +4,9 @@
   calendar_disp disp_infos/disp;
   selected_day disp_infos/selected_day;
   viewed_day disp_infos/viewed_day;
+  start_time disp_infos/start_time;
+  end_time disp_infos/end_time;
+  events_desc python:here.getEventsDesc(start_time, end_time, calendar_disp)
   ">
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
@@ -33,22 +36,7 @@
       </h3>
     </tal:block>
   </tal:block>
-  <h2>View</h2>
-  <strong>Current view</strong>:
-  <tal:block replace="calendar_disp">day</tal:block>
-  <br>
-  <strong>Selected day</strong>:
-  <tal:block replace="selected_day">date</tal:block>
-  <br>
-  <strong>Viewed day</strong>:
-  <tal:block replace="viewed_day">date</tal:block>
-  <h2>Events</h2>
-  <ul tal:define="events here/objectValues">
-    <li tal:repeat="event events">
-      <a tal:attributes="href event/absolute_url" tal:content="event/id">Id</a>
-      <metal:block use-macro="here/calendar_macros/macros/event_view" />
-    </li>
-  </ul>
+  <metal:block use-macro="here/calendar_view_macros/macros/?calendar_disp" />
 </metal:block>
 
 

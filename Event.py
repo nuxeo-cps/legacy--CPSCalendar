@@ -98,6 +98,7 @@ class Event(BaseDocument):
         self.attendees = deepcopy(attendees)
         self.from_date = from_date
         self.to_date = to_date
+        self._normalize()
 
     security.declareProtected('Modify portal content', 'edit')
     def edit(self, attendees=None, from_date=None, to_date=None, **kw):
@@ -108,8 +109,24 @@ class Event(BaseDocument):
             self.from_date = from_date
         if to_date is not None:
             self.to_date = to_date
+        self._normalize()
 
         self.isdirty = 1
+
+    def _normalize(self):
+        if self.all_day:
+            from_date = self.from_date
+            if from_date is not None:
+                time_since_daystart = from_date.hour()*3600+from_date.minute()*60+from_date.second()
+                if time_since_daystart:
+                    timeTime = from_date.timeTime()
+                    self.from_date = DateTime(timeTime - time_since_daystart)
+            to_date = self.to_date
+            if to_date is not None:
+                time_since_daystart = to_date.hour()*3600+to_date.minute()*60+to_date.second()
+                if time_since_daystart != 86399:
+                    timeTime = to_date.timeTime()
+                    self.to_date = DateTime(timeTime - time_since_daystart + 86399)
 
     security.declareProtected(View, 'SearchableText')
     def SearchableText(self):
@@ -243,6 +260,37 @@ class Event(BaseDocument):
         if REQUEST is not None:
             REQUEST.RESPONSE.redirect(self.absolute_url())
 
+    security.declarePrivate('getEventInSlots')
+    def getEventInSlots(self, start_time, end_time, slots):
+        """
+        """
+        def max(a, b):
+            if a.lessThan(b):
+                return b
+            else:
+                return a
+        def min(a,b):
+            if a.greaterThan(b):
+                return b
+            else:
+                return a
+
+        if start_time.greaterThan(self.to_date) or end_time.lessThanEqualTo(self.from_date):
+            return None
+        result = []
+        for start, stop in slots:
+            if start.greaterThan(self.to_date) or stop.lessThanEqualTo(self.from_date):
+                result.append(None)
+            else:
+                result.append({
+                  'event_id': self.id,
+                  'event': self,
+                  'start': max(start, self.from_date),
+                  'stop': min(stop, self.to_date),
+                })
+        return result
+
+        
     def _getRequestInformations(self):
         mtool = self.portal_membership
         member = mtool.getAuthenticatedMember().getUserName()

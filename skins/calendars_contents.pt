@@ -9,22 +9,19 @@
 <body>
 
 
-<metal:block fill-slot="header">
-  Calendars
-</metal:block>
 <metal:block fill-slot="header_plus"></metal:block>
 
 <metal:block fill-slot="main">
 
   <tal:block repeat="type python:(
-    {'id':'private', 'title':'Private'},
-    {'id':'others', 'title':'Others'},
-    {'id':'rooms', 'title':'Rooms'},
-    {'id':'ressources', 'title':'Ressources'},
+    {'id':'private', 'title':'_cal_Private_'},
+    {'id':'others', 'title':'_cal_Others_'},
+    {'id':'rooms', 'title':'_cal_Rooms_'},
+    {'id':'ressources', 'title':'_cal_Ressources_'},
     )">
     <tal:block define="id type/id; cals calendars/?id"
       condition="cals">
-      <h2 tal:content="type/title">Rooms</h2>
+      <h2 tal:content="python:mcat(type['title'])">Rooms</h2>
       <ul>
         <li tal:repeat="cal cals">
           <a tal:attributes="href cal/url" tal:content="cal/title">Calendar</a>
