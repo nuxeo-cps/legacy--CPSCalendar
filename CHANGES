@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- Typo made groups not notified of pending events.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - splitting macro lib in progress
