@@ -37,6 +37,7 @@ Bug fixes:
   you got an error message.
 - Fixed some language bugs.
 - The Content-Type of the ics export is now text/calendar.
+- Default event status is now 'confirmed'.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
