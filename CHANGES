@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- When browsing for a new document when creating, and error occured. (#1442)
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

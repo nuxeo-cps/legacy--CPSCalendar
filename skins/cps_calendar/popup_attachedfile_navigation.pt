@@ -2,8 +2,9 @@
 <metal:block use-macro="here/main_template/macros/master">
 <metal:block fill-slot="body"
   tal:define="root_uid string:workspaces;
+              doc here/document|nothing;
               res python:here.getCalendarNavigation(finder='cps',
-                root_uid=root_uid, current_uid=here.document, REQUEST=request);
+                root_uid=root_uid, current_uid=doc, REQUEST=request);
               type string:folder;">
 
   <metal:block use-macro="here/navigation_lib/macros/select_navigation">
