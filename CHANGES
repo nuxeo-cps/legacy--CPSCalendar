@@ -6,12 +6,12 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- The add event buttons now do not show up in the print view.
 - Reccuring and all-day events now properly block times in the
   meeting helper screen.
 - The installer now upgrades old events.
-- The navigation tabs moved only one day even in the week and month 
+- The navigation tabs moved only one day even in the week and month
   view. (Mantis #469)
+- The print view is now deprecated in favour for the standard print view.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
