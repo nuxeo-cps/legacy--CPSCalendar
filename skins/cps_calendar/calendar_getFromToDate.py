@@ -6,13 +6,15 @@
 #
 # Also makes sure everything is of the correct type
 
+locale = context.Localizer.default.get_selected_language()
+
 if REQUEST.has_key('from_date_string'):
     #OK, we have a REQUEST that comes from a form
     #Build valid dates from this form
     event_type = REQUEST['event_type']
-    from_date_date = context.portal_cpscalendar.stringToDateTime(REQUEST['from_date_string'])    
+    from_date_date = context.portal_cpscalendar.stringToDateTime(REQUEST['from_date_string'], locale)    
     if REQUEST.has_key('to_date_string'):
-        to_date_date = context.portal_cpscalendar.stringToDateTime(REQUEST['to_date_string'])    
+        to_date_date = context.portal_cpscalendar.stringToDateTime(REQUEST['to_date_string'], locale)    
     else:
         to_date_date = from_date_date
 
