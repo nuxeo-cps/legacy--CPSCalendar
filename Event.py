@@ -22,7 +22,6 @@
   Event
 """
 
-import string
 from copy import deepcopy
 
 from zLOG import LOG, DEBUG, INFO

@@ -6,8 +6,6 @@
 import os, sys
 from zLOG import LOG, INFO, DEBUG
 
-import Products.CPSCalendar
-
 from Products.CPSDefault.Installer import BaseInstaller
 
 SKINS = (
