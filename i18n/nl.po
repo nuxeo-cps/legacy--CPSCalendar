@@ -1,0 +1,1162 @@
+# translation of en.po to French
+# translation of en.po to
+# translation of en.po to Francais
+# Gettext Message File for default.
+# Encolpe DEGOUTE <ed@nuxeo.com>, 2003.
+# DARCHE <madarche@nuxeo.com>, 2003.
+# Lennart Regebro <rgebro@nuxeo.com>, 2003.
+msgid ""
+msgstr ""
+"Project-Id-Version: en\n"
+"POT-Creation-Date: 2003-12-17 17:01default\n"
+"PO-Revision-Date: 2003-12-08 14:31+0100\n"
+"Last-Translator: Encolpe DEGOUTE <ed@nuxeo.com>\n"
+"Language-Team: French <cantact@nuxeo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-code: LL\n"
+"Language-name: Language\n"
+"Preferred-encodings: utf-8 latin1\n"
+"Domain: default\n"
+"X-Generator: KBabel 1.0.2\n"
+
+#.   <td content="python:str(cat[1]['title'])" valign="middle">
+#.                       Category
+#.                     </td>
+#: from ../skins/cps_calendar/create_meeting_form.pt
+msgid "Category"
+msgstr "Category"
+
+#.   <option repeat="status statuses" attributes="value status;
+#.                       selected python:status == selected" content="python:str('cpscalendar_pending_%s' % (status, ))">
+#.             Confirm
+#.           </option>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "Confirm"
+msgstr "Confirm"
+
+#.   <block content="string:cpscalendar_option_status_${att/status}">
+#.               Confirmed
+#.             </block>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "Confirmed"
+msgstr "Confirmed"
+
+#.   <li repeat="error options/errors" content="python:str(error)">
+#.         Error
+#.       </li>
+#: from ../skins/cps_calendar/calendar_meeting_error.pt
+msgid "Error"
+msgstr ""
+
+#.   <h3 content="cal_infos/base_disp">January 2003</h3>
+#: from ../skins/cps_calendar/day_selector.pt
+msgid "January 2003"
+msgstr "January 2003"
+
+#.   <span content="python:type['title']" class="calTitle">Rooms</span>
+#: from ../skins/cps_calendar/calendars_contents.pt
+msgid "Rooms"
+msgstr "Rooms"
+
+#.   <option repeat="status python:['confirmed', 'tentative', 'decline']" attributes="value status;
+#.                         selected python:status == mystatus" content="python:str('cpscalendar_pending_%s' % (status,))">
+#.            Status
+#.              </option>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "Status"
+msgstr "Status"
+
+#.   <p content="python:str(user_type['plural_title'])">User type</p>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "User type"
+msgstr "User type"
+
+#.   <option repeat="choice choices" attributes="value choice/id;
+#.                       selected python:transparent == choice['id']" content="python:str(choice['title'])">
+#.             Yes
+#.           </option>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "Yes"
+msgstr "Yes"
+
+#.   <a condition="python:pendings_count > 1" attributes="href string:${context_url}/calendar_pending_events" href="calendar_pending_events">
+#.              You have ${pendings_count (tal replace="pendings_count")}
+#.              pending requests.
+#.           </a>
+#: from ../skins/cps_calendar/calendar_view.pt
+msgid "You have ${pendings_count} pending requests."
+msgstr "You have ${pendings_count} pending requests."
+
+#.   <a attributes="href string:${cal/url}/calendar_pending_events" content="string:[${cal/pending}]">
+#.                 [1]
+#.               </a>
+#: from ../skins/cps_calendar/calendars_contents.pt
+msgid "[1]"
+msgstr "[]"
+
+#.   <input value="button_cpscalendar_remove_all_attendees_who_declined" type="submit" />
+#: from ../skins/cps_calendar/calendar_attendees_form.pt
+msgid "button_cpscalendar_remove_all_attendees_who_declined"
+msgstr "Remove all attendees who declined"
+
+#.   <td content="python:str(cat[1]['title'])" valign="middle">
+#.               category
+#.             </td>
+#.   <metal:block fill-slot="content" define="cat_title categories/?category/title|cat_def_title" content="python:str(cat_title)">
+#.             category
+#.           </metal:block>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+msgid "category"
+msgstr "category"
+
+#.   <input value="cpscalendar_button_add" class="mainbutton" type="submit">
+#.                       </input>
+#.   <input value="cpscalendar_button_add" type="submit" />
+#: from ../skins/cps_calendar/calendar_attendees_form.pt
+msgid "cpscalendar_button_add"
+msgstr "Add"
+
+#.   <input onclick="history.back()" type="button" value="cpscalendar_button_back" />
+#: from ../skins/cps_calendar/calendar_meeting_empty.pt
+#: ../skins/cps_calendar/calendar_meeting_error.pt
+#: ../skins/cps_calendar/calendar_meeting_expired.pt
+#: ../skins/cps_calendar/printing_template.pt
+msgid "cpscalendar_button_back"
+msgstr "Back"
+
+#.   <input onclick="history.back()" type="button" value="cpscalendar_button_cancel" />
+#.   <input value="cpscalendar_button_cancel" name="calendar_meeting_cancel:method" type="submit" />
+#.   <input onclick="window.close()" type="button" value="cpscalendar_button_cancel" />
+#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
+#: ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_freebusy.pt
+#: ../skins/cps_calendar/calendar_meeting_form.pt
+#: ../skins/cps_calendar/create_meeting_form.pt
+#: ../skins/cps_calendar/selector_template.pt
+msgid "cpscalendar_button_cancel"
+msgstr "Cancel"
+
+#.   <input value="cpscalendar_button_create" type="submit" />
+#: from ../skins/cps_calendar/create_meeting_form.pt
+msgid "cpscalendar_button_create"
+msgstr "Create"
+
+#.   <input value="cpscalendar_button_delete" type="submit" />
+#: from ../skins/cps_calendar/calendar_attendees_form.pt
+msgid "cpscalendar_button_delete"
+msgstr "Delete"
+
+#.   <input value="cpscalendar_button_delete_with_no_notification" type="submit" />
+#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
+msgid "cpscalendar_button_delete_with_no_notification"
+msgstr "Delete without any notification"
+
+#.   <input value="cpscalendar_button_modify" type="submit" />
+#.   <input value="cpscalendar_button_modify" name="calendar_meeting_form:method" type="submit" />
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_freebusy.pt
+msgid "cpscalendar_button_modify"
+msgstr "Modify"
+
+#.   <p condition="not:transparent">No</p>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_button_no"
+msgstr "No"
+
+#.   <input value="cpscalendar_button_search" class="mainbutton" name="role_submit" type="submit">
+#.                   </input>
+#.   <input value="cpscalendar_button_search" type="submit" />
+#: from ../skins/cps_calendar/calendar_attendees_form.pt
+#: ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_button_search"
+msgstr "Search"
+
+#.   <input value="cpscalendar_button_validate" type="submit" />
+#.   <input value="cpscalendar_button_validate" name="confirmPendingEvent:method" type="submit" />
+#.   <input condition="should_validate|nothing" onclick="validateSelector()" type="button" value="cpscalendar_button_validate" />
+#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
+#: ../skins/cps_calendar/calendar_confirmdelevents.pt
+#: ../skins/cps_calendar/calendar_display_form.pt
+#: ../skins/cps_calendar/calendar_freebusy.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+#: ../skins/cps_calendar/selector_template.pt
+msgid "cpscalendar_button_validate"
+msgstr "Validate"
+
+#.   <p condition="transparent">Yes</p>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_button_yes"
+msgstr "Yes"
+
+#.   <block content="python:str('cpscalendar_status_%s' % (attendee['status'], ))">cpscalendar_confirmed</block>
+#: from ../skins/cps_calendar/calendar_attendees_form.pt
+msgid "cpscalendar_confirmed"
+msgstr "Confirmed"
+
+#.   <block condition="create">
+#.       Create a Calendar
+#.     </block>
+#.   <a href="calendar_create_form">
+#.         Create a calendar
+#.       </a>
+#: from ../skins/cps_calendar/calendar_edit_form.pt
+#: ../skins/cps_calendar/calendars_contents.pt
+msgid "cpscalendar_create_a_calendar"
+msgstr "Create a calendar"
+
+#.   <block fill-slot="head_sot">
+#.     Create a new event
+#.   </block>
+#.   <block condition="create">
+#.            Create a new event
+#.          </block>
+#.   <span>
+#.       Create a new event
+#.     </span>
+#: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
+#: ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/create_meeting_form.pt
+msgid "cpscalendar_description_create_a_new_event"
+msgstr "Create a new event"
+
+#.   <span>
+#.              Modify the event
+#.            </span>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_description_modify_event"
+msgstr "Modify an event"
+
+#.   <h3>
+#.       Calendar selection
+#.     </h3>
+#: from ../skins/cps_calendar/calendar_freebusy.pt
+msgid "cpscalendar_heading_calendar_selection"
+msgstr "Calendar selection"
+
+#.   <span>
+#.       cpscalendar_attendees_for_event
+#.     </span>
+#: from ../skins/cps_calendar/calendar_attendees_form.pt
+msgid "cpscalendar_heading_event_attendees"
+msgstr "Event attendees"
+
+#.   <block fill-slot="head_slot">
+#.   </block>
+#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
+msgid "cpscalendar_heading_event_deletion_confirmation"
+msgstr "Event deletion confirmation"
+
+#.   <h3>
+#.           Event update
+#.             </h3>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_heading_event_update"
+msgstr "Event update"
+
+#.   <block fill-slot="head_slot">
+#.   </block>
+#: from ../skins/cps_calendar/calendar_confirmdelevents.pt
+msgid "cpscalendar_heading_events_deletion_confirmation"
+msgstr "Events deletion confirmation"
+
+#.   <span>
+#.       Meeting creation helper
+#.     </span>
+#.   <block fill-slot="head_slot">
+#.     Meeting creation helper
+#.   </block>
+#.   <span />
+#: from ../skins/cps_calendar/calendar_freebusy.pt
+#: ../skins/cps_calendar/calendar_meeting_empty.pt
+#: ../skins/cps_calendar/calendar_meeting_error.pt
+#: ../skins/cps_calendar/calendar_meeting_expired.pt
+#: ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_heading_meeting_creation_helper"
+msgstr "Meeting creation helper"
+
+#.   <h3>
+#.           New event
+#.             </h3>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_heading_new_event"
+msgstr "New event"
+
+#.   <h3>
+#.           Status update
+#.         </h3>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_heading_status_update"
+msgstr "Status update"
+
+#.   <span>:</span>
+#.   <span />
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_meeting_form.pt
+#: ../skins/cps_calendar/create_meeting_form.pt
+#: ../skins/cps_calendar/interval_selector.pt 3 more references
+msgid "cpscalendar_hour_sep"
+msgstr ":"
+
+#.   <span>
+#.                       Add a user whose
+#.                     </span>
+#: from ../skins/cps_calendar/calendar_attendees_form.pt
+msgid "cpscalendar_label_add_a_user_whose"
+msgstr "Add a user whose"
+
+#.   <span>
+#.                       is
+#.                     </span>
+#: from ../skins/cps_calendar/calendar_attendees_form.pt
+msgid "cpscalendar_label_add_a_user_whose_is"
+msgstr "is"
+
+#.   <span>
+#.                           Add
+#.                         </span>
+#.   <span>
+#.                   Add
+#.                 </span>
+#: from ../skins/cps_calendar/calendar_attendees_form.pt
+msgid "cpscalendar_label_add_attendee"
+msgstr "Add an attendee"
+
+#.   <span>and</span>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_label_and"
+msgstr "and"
+
+#.   <span>
+#.                     At
+#.                   </span>
+#: from ../skins/cps_calendar/create_meeting_form.pt
+msgid "cpscalendar_label_at"
+msgstr "at"
+
+#.   <span>
+#.           at
+#.           </span>
+#.   <span>
+#.               at
+#.           </span>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_label_at_(hour)"
+msgstr "at"
+
+#.   <metal:block fill-slot="title">
+#.               Attendees
+#.           </metal:block>
+#.   <block fill-slot="title">
+#.                 Attendees
+#.               </block>
+#: from ../skins/cps_calendar/calendar_macros.pt
+#: ../skins/cps_calendar/create_meeting_form.pt
+msgid "cpscalendar_label_attendees"
+msgstr "Attendees"
+
+#.   <span>
+#.           Between
+#.         </span>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_label_between"
+msgstr "Between"
+
+#.   <td>
+#.                 Busy time
+#.               </td>
+#: from ../skins/cps_calendar/calendar_freebusy.pt
+msgid "cpscalendar_label_busy_time"
+msgstr "Busy time"
+
+#.   <block fill-slot="title">
+#.               Calendar type
+#.             </block>
+#: from ../skins/cps_calendar/calendar_edit_form.pt
+msgid "cpscalendar_label_calendar_type"
+msgstr "Calendar type"
+
+#.   <block fill-slot="title">
+#.                 Category
+#.           </block>
+#.   <metal:block fill-slot="title">
+#.             Category
+#.           </metal:block>
+#.   <block fill-slot="title">
+#.               </block>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+#: ../skins/cps_calendar/create_meeting_form.pt
+msgid "cpscalendar_label_category"
+msgstr "Category"
+
+#.   <block fill-slot="title">
+#.               Comment
+#.             </block>
+#.   <block fill-slot="title">
+#.           Comment
+#.         </block>
+#.   <metal:block fill-slot="title">
+#.                 Comment
+#.               </metal:block>
+#.   <metal:block fill-slot="title">
+#.           Comment
+#.             </metal:block>
+#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
+#: ../skins/cps_calendar/calendar_confirmdelevents.pt
+#: ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_label_comment"
+msgstr "Comment"
+
+#.   <block fill-slot="title">
+#.             Date
+#.           </block>
+#.   <metal:block fill-slot="title">
+#.           Date
+#.         </metal:block>
+#.   <block fill-slot="title">
+#.                 Date
+#.               </block>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+#: ../skins/cps_calendar/create_meeting_form.pt
+msgid "cpscalendar_label_date"
+msgstr "Date"
+
+#.   <block fill-slot="title">
+#.             Description
+#.           </block>
+#.   <metal:block fill-slot="title">
+#.           Description
+#.         </metal:block>
+#: from ../skins/cps_calendar/calendar_edit_form.pt
+#: ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_label_description"
+msgstr "Description"
+
+#.   <span>Duration</span>
+#: from ../skins/cps_calendar/create_meeting_form.pt
+msgid "cpscalendar_label_duration"
+msgstr "Duration"
+
+#.   <block fill-slot="title">
+#.             Event status
+#.           </block>
+#.   <metal:block fill-slot="title">
+#.           Event status
+#.         </metal:block>
+#.   <block fill-slot="title">
+#.                 Event status
+#.               </block>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+#: ../skins/cps_calendar/create_meeting_form.pt
+msgid "cpscalendar_label_eventstatus"
+msgstr "Status"
+
+#.   <td>
+#.                 Period of free time you can use to create your meeting
+#.               </td>
+#: from ../skins/cps_calendar/calendar_freebusy.pt
+msgid "cpscalendar_label_free_time_you_can_use"
+msgstr "Free time"
+
+#.   <span>
+#.           From the
+#.             </span>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_label_from_(day)"
+msgstr "From"
+
+#.   <span>
+#.             From the
+#.           </span>
+#.   <span>
+#.           From
+#.         </span>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_label_from_day"
+msgstr "From"
+
+#.   <span>
+#.               From
+#.             </span>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_label_from_hour"
+msgstr "From"
+
+#.   <span>h</span>
+#: from ../skins/cps_calendar/create_meeting_form.pt
+msgid "cpscalendar_label_h"
+msgstr "h"
+
+#.   <span>
+#.             Include this calendar
+#.           </span>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_label_include_this_calendar"
+msgstr "Include this calendar"
+
+#.   <block fill-slot="title">
+#.             Location
+#.           </block>
+#.   <metal:block fill-slot="title">
+#.             Location
+#.           </metal:block>
+#.   <block fill-slot="title">
+#.                 Location
+#.               </block>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+#: ../skins/cps_calendar/create_meeting_form.pt
+msgid "cpscalendar_label_location"
+msgstr "Location"
+
+#.   <span>min</span>
+#: from ../skins/cps_calendar/create_meeting_form.pt
+msgid "cpscalendar_label_m"
+msgstr "min"
+
+#.   <strong>
+#.         Modify status for this event
+#.       </strong>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_label_modify_event_status"
+msgstr "Modify the status for this event"
+
+#.   <metal:block fill-slot="title">
+#.             Organizer
+#.           </metal:block>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_label_organizer"
+msgstr "Organizer"
+
+#.   <span>Daily</span>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_label_repeat_daily"
+msgstr "Daily"
+
+#.   <span>Every</span>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_label_repeat_every_X_days_begin"
+msgstr "every"
+
+#.   <span>days</span>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_label_repeat_every_X_days_end"
+msgstr "days"
+
+#.   <span>Monthly</span>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_label_repeat_monthly"
+msgstr "month"
+
+#.   <span>Number of times</span>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_label_repeat_times"
+msgstr "times"
+
+#.   <block fill-slot="title">
+#.             Repeat
+#.           </block>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_label_repeat_title"
+msgstr "Repeat"
+
+#.   <span>Weekly</span>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_label_repeat_weekly"
+msgstr "weekly"
+
+#.   <strong>
+#.           Sender
+#.             </strong>
+#.   <strong>
+#.             Sender
+#.           </strong>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_label_sender"
+msgstr "Sender"
+
+#.   <block fill-slot="title">
+#.           Status
+#.         </block>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_label_status"
+msgstr "Status"
+
+#.   <block fill-slot="title">
+#.             Title
+#.           </block>
+#.   <block fill-slot="title">
+#.                 Title
+#.           </block>
+#.   <metal:block fill-slot="title">
+#.           Title
+#.         </metal:block>
+#.   <block fill-slot="title">
+#.                 Title
+#.               </block>
+#: from ../skins/cps_calendar/calendar_edit_form.pt
+#: ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+#: ../skins/cps_calendar/create_meeting_form.pt
+msgid "cpscalendar_label_title"
+msgstr "Title"
+
+#.   <span>
+#.           To the
+#.             </span>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_label_to_(day)"
+msgstr "To"
+
+#.   <span>
+#.             to
+#.           </span>
+#.   <span>
+#.           to
+#.         </span>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_label_to_day"
+msgstr "to"
+
+#.   <span>
+#.               to
+#.             </span>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_label_to_hour"
+msgstr "at"
+
+#.   <block fill-slot="title">
+#.             Transparent
+#.           </block>
+#.   <metal:block fill-slot="title">
+#.           Transparent
+#.         </metal:block>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_label_transparent"
+msgstr "Transparent"
+
+#.   <small>
+#.               Transparent events mean that you're not busy during this event.
+#.             </small>
+#.   <small>
+#.           Transparent events mean that you're not busy during this event.
+#.             </small>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_legend_transparent"
+msgstr "Transparent events mean that you're not busy during this event."
+
+#.   <a href="calendar_printable_view">
+#.         Printable view
+#.       </a>
+#: from ../skins/cps_calendar/calendar_view_macros.pt
+msgid "cpscalendar_link_printable_view"
+msgstr "Printable view"
+
+#.   <a define="
+#.                     today python:int(DateTime());" attributes="
+#.                     href string:${here_url}?viewed_day=${today}" class="calEvent">
+#.                   Today
+#.                 </a>
+#.   <a define="
+#.                     today python:int(DateTime());" attributes="
+#.                   href string:${here_url}?viewed_day=${today}" class="calEvent">
+#.                   Today
+#.                 </a>
+#: from ../skins/cps_calendar/calendar_view_macros.pt
+msgid "cpscalendar_link_today"
+msgstr "Today"
+
+#.   <small condition="python:notify == 'cancel'">
+#.                 This message will be sent to attendees with a cancel notification.
+#.               </small>
+#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
+#: ../skins/cps_calendar/calendar_confirmdelevents.pt
+msgid "cpscalendar_message_comment_for_attendees"
+msgstr "Comment for attendees"
+
+#.   <small condition="python:notify == 'decline'">
+#.                 This message will be sent to the event's organizer.
+#.               </small>
+#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
+msgid "cpscalendar_message_comment_for_organizer"
+msgstr "Comment for the organizer"
+
+#.   <span>
+#.         If you have an application that supports it, you can also
+#.       </span>
+#: from ../skins/cps_calendar/calendar_export.pt
+msgid "cpscalendar_message_if_you_have_an_application_that_supports_it_you_can"
+msgstr "If you have an application that supports it, you can"
+
+#.   <span>
+#.         No shared calendar found
+#.       </span>
+#: from ../skins/cps_calendar/calendar_display_form.pt
+msgid "cpscalendar_message_no_shared_calendars_found"
+msgstr "No shared calendars found"
+
+#.   <p condition="python: not found">
+#.                       Sorry, there isn't any user matching your query
+#.                   </p>
+#: from ../skins/cps_calendar/calendar_attendees_form.pt
+msgid "cpscalendar_message_no_user_matching"
+msgstr "Sorry, there isn't any user matching your query."
+
+#.   <stong>
+#.       You have to notify other attendees of recent changes to this event.
+#.         </stong>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "cpscalendar_message_notify_attendees"
+msgstr "You have to notify other attendees of recent changes to this event."
+
+#.   <strong condition="python:notify == 'cancel'">
+#.       You have to notify attendees that you will delete this event.
+#.     </strong>
+#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
+msgid "cpscalendar_message_notify_attendees_you_will_delete_event"
+msgstr "You have to notify attendees that you will delete this event."
+
+#.   <strong>
+#.       You have to notify attendees that you will delete those events.
+#.     </strong>
+#: from ../skins/cps_calendar/calendar_confirmdelevents.pt
+msgid "cpscalendar_message_notify_attendees_you_will_delete_events"
+msgstr "You have to notify attendees that you will delete those events."
+
+#.   <strong condition="python:notify == 'decline'">
+#.         You have to notify event's organizer that you will delete this event.
+#.     </strong>
+#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
+msgid "cpscalendar_message_notify_organizer_you_will_delete_event"
+msgstr "You have to notify event's organizer that you will delete this event."
+
+#.   <span class="calTitle">
+#.       Select at least one attendee.
+#.     </span>
+#: from ../skins/cps_calendar/calendar_meeting_empty.pt
+msgid "cpscalendar_message_select_at_least_one_attendee"
+msgstr "You have to select at least one attendee"
+
+#.   <span>
+#.         Select the calendars you want to display along with this calendar
+#.       </span>
+#: from ../skins/cps_calendar/calendar_display_form.pt
+msgid "cpscalendar_message_select_calendars_to_display_with_this_calendar"
+msgstr "Select the calendars you want to display along with this calendar"
+
+#.   <span clss="calTitle">
+#.         Select the attendees you want for your meeting
+#.       </span>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_message_select_the_attendees_you_want_for_your_meeting"
+msgstr "Select the attendees you want for your meeting"
+
+#.   <span class="calTitle">
+#.         Select the desired duration for your meeting
+#.       </span>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_message_select_the_desired_duration_of_your_meeting"
+msgstr "Select the desired duration for your meeting"
+
+#.   <a attributes="href webcal_url">
+#.         subscribe to this calendar.
+#.       </a>
+#: from ../skins/cps_calendar/calendar_export.pt
+msgid "cpscalendar_message_subscribe_to_this_calendar"
+msgstr "subscribe to this calendar"
+
+#.   <a attributes="href string:${here_url}/calendar.ics">
+#.         the iCalendar version of this calendar.
+#.       </a>
+#: from ../skins/cps_calendar/calendar_export.pt
+msgid "cpscalendar_message_the_iCalendar_version_of_this_calendar"
+msgstr " the iCalendar version of this calendar."
+
+#.   <p>
+#.       The end hour you specified was earlier than the start hour. Do you want
+#.       to extend the event to the next day?
+#.     </p>
+#: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
+msgid "cpscalendar_message_too_early_specified_hour"
+msgstr ""
+"The end hour you specified was earlier than the start hour. Do you want to "
+"extend the event to the next day?"
+
+#.   <p>
+#.       Unselect events you don't want to notify attendees.
+#.     </p>
+#: from ../skins/cps_calendar/calendar_confirmdelevents.pt
+msgid "cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees"
+msgstr "Unselect events you don't want to notify attendees"
+
+#.   <span>
+#.         You can download
+#.       </span>
+#: from ../skins/cps_calendar/calendar_export.pt
+msgid "cpscalendar_message_you_can_download"
+msgstr "You can download"
+
+#.   <p>
+#.       You can unselect some calendars if you want.
+#.     </p>
+#: from ../skins/cps_calendar/calendar_freebusy.pt
+msgid "cpscalendar_message_you_can_unselect_some_calendars"
+msgstr "You can unselect some calendars if you want."
+
+#.   <span class="calTitle">
+#.       Your request for a meeting has errors
+#.     </span>
+#: from ../skins/cps_calendar/calendar_meeting_error.pt
+msgid "cpscalendar_message_your_meeting_request_has_errors"
+msgstr "Your request for a meeting has errors"
+
+#.   <span class="calTitle">
+#.       Your request has expired.
+#.     </span>
+#: from ../skins/cps_calendar/calendar_meeting_expired.pt
+msgid "cpscalendar_message_your_request_has_expired"
+msgstr "Your request has expired"
+
+#.   <span>
+#.         Modify
+#.       </span>
+#: from ../skins/cps_calendar/calendar_edit_form.pt
+msgid "cpscalendar_modify_object_name"
+msgstr "Modify object name"
+
+#.   <span condition="not:event_id">
+#.             There is no pending request</span>
+#: from ../skins/cps_calendar/calendar_pending_events.pt
+msgid "cpscalendar_no_pending_request"
+msgstr "There is no pending request"
+
+#.   <span condition="event_id">
+#.             There is no pending request for this event</span>
+#: from ../skins/cps_calendar/calendar_pending_events.pt
+msgid "cpscalendar_no_pending_request_for_event"
+msgstr "There is no pending request for this event"
+
+#.   <p condition="not:attendees" content="python:str('cpscalendar_no_attendee_of_type_%s' % type)">
+#.           cpscalendar_no_ressources_selected
+#.         </p>
+#: from ../skins/cps_calendar/calendar_attendees_form.pt
+msgid "cpscalendar_no_ressources_selected"
+msgstr "No ressource selected"
+
+#.   <a condition="python:pendings_count == 1" attributes="href string:${context_url}/calendar_pending_events" href="calendar_pending_events">
+#.              You have one pending request.
+#.           </a>
+#: from ../skins/cps_calendar/calendar_view.pt
+msgid "cpscalendar_one_pending_request"
+msgstr "You have one pending request"
+
+#.   <option repeat="propid searchable_keys" attributes="value propid" content="python:str(schema_dict[propid].title)">cpscalendar_option</option>
+#: from ../skins/cps_calendar/calendar_attendees_form.pt
+msgid "cpscalendar_option"
+msgstr "option"
+
+#.   <span>
+#.       Pending events for
+#.     </span>
+#: from ../skins/cps_calendar/calendar_pending_events.pt
+msgid "cpscalendar_pending_events_for"
+msgstr "Pending event for"
+
+#.   <title>
+#.   	 Printing version of your calendar
+#.     </title>
+#: from ../skins/cps_calendar/printing_template.pt
+msgid "cpscalendar_printable_view"
+msgstr "Printable view"
+
+#.   <span content="python:str(user_type['plural_title'])" class="calTitle">cpscalendar_ressources</span>
+#: from ../skins/cps_calendar/calendar_attendees_form.pt
+msgid "cpscalendar_ressources"
+msgstr "Resources"
+
+#.   <span content="string:cpscalendar_option_status_${status}">cpscalendar_status</span>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_status"
+msgstr "Status"
+
+#.   <span content="string:cpscalendar_option_status_${event_status}">status</span>
+#.   <span content="status">status</span>
+#: from ../skins/cps_calendar/calendar_macros.pt
+#: ../skins/cps_calendar/create_meeting_form.pt
+msgid "status"
+msgstr "status"
+
+#.   <span content="python:str('cpscalendar_label_day_long%s' % str(i))">week day</span>
+#: from ../skins/cps_calendar/calendar_view_macros.pt
+msgid "week day"
+msgstr "week day"
+
+msgid "cpscalendar_create_all_day_event"
+msgstr "Create an event during many days"
+
+msgid "cpscalendar_create_not_all_day_event"
+msgstr "Create a punctual event"
+
+msgid "cpscalendar_change_event_to_all_day"
+msgstr "Change for an event on many days"
+
+msgid "cpscalendar_change_event_to_not_all_day"
+msgstr "Change for a punctual event"
+
+msgid "cpscalendar_untitled_(document)"
+msgstr "Untitled"
+
+msgid "cpscalendar_option_status_confirmed"
+msgstr "Confirmed"
+
+msgid "cpscalendar_option_status_decline"
+msgstr "Decline"
+
+msgid "cpscalendar_option_status_unconfirmed"
+msgstr "Unconfirmed"
+
+msgid "cpscalendar_option_status_cancelled"
+msgstr "Cancelled"
+
+msgid "cpscalendar_pending_confirmed"
+msgstr "Confirm"
+
+msgid "cpscalendar_pending_tentative"
+msgstr "Tentative"
+
+msgid "cpscalendar_pending_decline"
+msgstr "Decline"
+
+msgid "cpscalendar_pending_decline_and_delete"
+msgstr "Decline and delete"
+
+msgid "cpscalendar_pending_ignore"
+msgstr "ignore"
+
+msgid "cpscalendar_category_private"
+msgstr "Private"
+
+msgid "cpscalendar_category_work"
+msgstr "Work"
+
+msgid "cpscalendar_category_others"
+msgstr "Other members"
+
+msgid "cpscalendar_category_events_shows"
+msgstr "Events shows"
+
+msgid "cpscalendar_category_rooms"
+msgstr "Rooms"
+
+msgid "cpscalendar_category_ressources"
+msgstr "Resources"
+
+msgid "cpscalendar_option_no"
+msgstr "No"
+
+msgid "cpscalendar_option_yes"
+msgstr "Yes"
+
+msgid "cpscalendar_label_day0"
+msgstr "Su"
+
+msgid "cpscalendar_label_day1"
+msgstr "Mo"
+
+msgid "cpscalendar_label_day2"
+msgstr "Tu"
+
+msgid "cpscalendar_label_day3"
+msgstr "We"
+
+msgid "cpscalendar_label_day4"
+msgstr "Th"
+
+msgid "cpscalendar_label_day5"
+msgstr "Fr"
+
+msgid "cpscalendar_label_day6"
+msgstr "Sa"
+
+msgid "cpscalendar_label_day7"
+msgstr "Su"
+
+msgid "cpscalendar_label_day_long0"
+msgstr "Sunday"
+
+msgid "cpscalendar_label_day_long1"
+msgstr "Monday"
+
+msgid "cpscalendar_label_day_long2"
+msgstr "Tuesday"
+
+msgid "cpscalendar_label_day_long3"
+msgstr "Wednesday"
+
+msgid "cpscalendar_label_day_long4"
+msgstr "Thursday"
+
+msgid "cpscalendar_label_day_long5"
+msgstr "Friday"
+
+msgid "cpscalendar_label_day_long6"
+msgstr "Saturday"
+
+msgid "cpscalendar_label_day_long7"
+msgstr "Sunday"
+
+msgid "cpscalendar_label_month0"
+msgstr "Dec"
+
+msgid "cpscalendar_label_month1"
+msgstr "Jan"
+
+msgid "cpscalendar_label_month2"
+msgstr "Feb"
+
+msgid "cpscalendar_label_month3"
+msgstr "Mar"
+
+msgid "cpscalendar_label_month4"
+msgstr "Apr"
+
+msgid "cpscalendar_label_month5"
+msgstr "May"
+
+msgid "cpscalendar_label_month6"
+msgstr "Jun"
+
+msgid "cpscalendar_label_month7"
+msgstr "Jul"
+
+msgid "cpscalendar_label_month8"
+msgstr "Aug"
+
+msgid "cpscalendar_label_month9"
+msgstr "Sep"
+
+msgid "cpscalendar_label_month10"
+msgstr "Oct"
+
+msgid "cpscalendar_label_month11"
+msgstr "Nov"
+
+msgid "cpscalendar_label_month12"
+msgstr "Dec"
+
+msgid "cpscalendar_label_month_long0"
+msgstr "December"
+
+msgid "cpscalendar_label_month_long1"
+msgstr "January"
+
+msgid "cpscalendar_label_month_long2"
+msgstr "February"
+
+msgid "cpscalendar_label_month_long3"
+msgstr "March"
+
+msgid "cpscalendar_label_month_long4"
+msgstr "April"
+
+msgid "cpscalendar_label_month_long5"
+msgstr "May"
+
+msgid "cpscalendar_label_month_long6"
+msgstr "June"
+
+msgid "cpscalendar_label_month_long7"
+msgstr "July"
+
+msgid "cpscalendar_label_month_long8"
+msgstr "August"
+
+msgid "cpscalendar_label_month_long9"
+msgstr "September"
+
+msgid "cpscalendar_label_month_long10"
+msgstr "October"
+
+msgid "cpscalendar_label_month_long11"
+msgstr "November"
+
+msgid "cpscalendar_label_month_long12"
+msgstr "December"
+
+msgid "cpscalendar_member"
+msgstr "Member"
+
+msgid "cpscalendar_members"
+msgstr "Members"
+
+msgid "cpscalendar_room"
+msgstr "Room"
+
+msgid "cpscalendar_rooms"
+msgstr "Rooms"
+
+msgid "cpscalendar_resource"
+msgstr "Resource"
+
+msgid "cpscalendar_resources"
+msgstr "Resources"
+
+msgid "cpscalendar_events_show"
+msgstr "Show events"
+
+msgid "cpscalendar_events_shows"
+msgstr "Events shows"
+
+msgid "cpscalendar_status_confirmed"
+msgstr "Confirmed"
+
+msgid "cpscalendar_status_decline"
+msgstr "Decline"
+
+msgid "cpscalendar_status_tentative"
+msgstr "Tentative"
+
+msgid "cpscalendar_status_unconfirmed"
+msgstr "Unconfirmed"
+
+msgid "cpscalendar_no_attendee_of_type_member"
+msgstr "No attendees"
+
+msgid "cpscalendar_no_attendee_of_type_room"
+msgstr "No attendees"
+
+msgid "cpscalendar_no_attendee_of_type_resource"
+msgstr "No resource"
+
+msgid "cpscalendar_no_attendee_of_type_events_show"
+msgstr "No events"
+
+msgid "cpscalendar_button_remove_cancelled_events"
+msgstr "Remove cancelled events"
+
+msgid "cpscalendar_button_remove_events_you_declined"
+msgstr "Remove events you declined"
+
+msgid "cpscalendar_from_incorrect_date"
+msgstr "from date invalid"
+
+msgid "cpscalendar_to_incorrect_date"
+msgstr "to dat invalid"
+
+msgid "cpscalendar_interval_invalid_date"
+msgstr "you cannot select a time interval larger than a month"
+
+msgid "cpscalendar_create_the_meeting_here"
+msgstr "Create the meeting here"
