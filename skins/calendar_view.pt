@@ -46,11 +46,13 @@
       condition="pendings_count">
       <h3>
         <a href="calendar_pending_events"
+           tal:attributes="href string:${context_url}/calendar_pending_events"
            tal:condition="python:pendings_count > 1"
            tal:content="string:_You have ${pending_count} pending requests_">
            You have 2 pending requests.
         </a>
         <a href="calendar_pending_events"
+           tal:attributes="href string:${context_url}/calendar_pending_events"
            tal:condition="python:pendings_count == 1"
            i18n:translate="_You have one pending request_">
            You have one pending request.
