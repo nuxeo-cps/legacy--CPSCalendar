@@ -4,7 +4,6 @@
 # Gettext Message File for default.
 # Encolpe DEGOUTE <ed@nuxeo.com>, 2003.
 # DARCHE <madarche@nuxeo.com>, 2003.
-# DARCHE <madarche@nuxeio.com>, 2003.
 # Lennart Regebro <rgebro@nuxeo.com>, 2003.
 msgid ""
 msgstr ""
