@@ -57,9 +57,9 @@ factory_type_information = (
     )
 
 def cmp_ev(a, b):
-    return cmp(b[0], a[0])
+    return cmp(b['start'], a['start'])
 
-def slot_union(cal_slot):
+def slot_union(cal_slot, with_free=0):
     LOG('NGC', DEBUG, 'union %s' % (cal_slot, ))
     result = []
     if not cal_slot:
@@ -67,17 +67,68 @@ def slot_union(cal_slot):
     cal_slot = cal_slot[:]
     cal_slot.sort(cmp_ev)
     ev = cal_slot.pop()
-    start = ev[0]
-    stop = ev[1]
+    start = ev['start']
+    stop = ev['stop']
+    if with_free:
+        y, m, d, h, m, x, x = start.parts()
+        start_height = h*60 + m
+        if start_height:
+            result.append({
+                'busy': 0,
+                'height': start_height,
+                'start': DateTime(y, m, d),
+            })
     while cal_slot:
         ev = cal_slot.pop()
-        if stop.lessThan(ev[0]):
-            result.append((start, stop))
-            start = ev[0]
-            stop = ev[1]
+        if stop.lessThan(ev['start']):
+            if with_free:
+                x, x, x, h, m, x, x = stop.parts()
+                stop_height = h*60 + m
+                if not stop_height:
+                    stop_height = 1440
+                result.append({
+                  'busy': 1,
+                  'height': stop_height - start_height
+                })
+            else:
+                result.append({
+                  'start': start,
+                  'stop': stop,
+                })
+            start = ev['start']
+            if with_free:
+                x, x, x, h, m, x, x = start.parts()
+                start_height = h*60 + m
+                free_time = start_height - stop_height
+                if free_time:
+                    result.append({
+                      'busy': 0,
+                      'height': free_time,
+                      'start': stop,
+                    })
+            stop = ev['stop']
         else:
-            stop = max(ev[1], stop)
-    result.append((start, stop))
+            stop = max(ev['stop'], stop)
+    if with_free:
+        x, x, x, h, m, x, x = stop.parts()
+        stop_height = h*60 + m
+        if not stop_height:
+            stop_height = 1440
+        result.append({
+          'busy': 1,
+          'height': stop_height - start_height,
+        })
+        if stop_height < 1439:
+            free_time = 1440 - stop_height
+            result.append({
+              'busy': 0,
+              'height': free_time,
+            })
+    else:
+        result.append({
+          'start': start,
+          'stop': stop,
+        })
 
     return result
 
@@ -98,20 +149,24 @@ class Calendars(Workgroup):
 
     # XXX use a special permission here
     security.declareProtected('View', 'unionCals')
-    def unionCals(self, *cals):
+    def unionCals(self, *cals, **kw):
         if not cals:
             return []
+        if kw.get('with_free'):
+            with_free = 1
         result = []
         length = len(cals[0])
         for i in range(length):
             this_slot = []
             for cal in cals:
                 this_slot.extend(cal[i])
-            result.append(slot_union(this_slot))
+            result.append(slot_union(this_slot, with_free=with_free))
         return result
 
     security.declareProtected('View', 'getFreeBusy')
-    def getFreeBusy(self, attendees, from_date, to_date):
+    def getFreeBusy(self, attendees, from_date, to_date,
+                    from_time_hour, from_time_minute,
+                    to_time_hour, to_time_minute):
         """Gets free/busy informations on attendees calendars"""
         # normalize
         start_time = DateTime(from_date.year(), from_date.month(), from_date.day())
@@ -125,6 +180,36 @@ class Calendars(Workgroup):
             slot_start = DateTime(slot_start.year(), slot_start.month(), slot_start.day())
 
         length = len(slots)
+
+        # first create the mask calendar
+        mask_cal = []
+        if (to_time_hour or to_time_minute) and \
+            (from_time_hour > to_time_hour or \
+                (from_time_hour == to_time_hour and \
+                    from_time_minute > to_time_minute)):
+            from_time_hour, to_time_hour = to_time_hour, from_time_hour
+            from_time_minute, to_time_minute = to_time_minute, from_time_minute
+
+        for slot in slots:
+            this_day = []
+            date = slot[0]
+            year = date.year()
+            month = date.month()
+            day = date.day()
+            if from_time_hour or from_time_minute:
+                mask_from = DateTime(year, month, day, from_time_hour, from_time_minute)
+                this_day.append({
+                    'start': date,
+                    'stop': mask_from,
+                })
+
+            if to_time_hour or to_time_minute:
+                mask_to = DateTime(year, month, day, to_time_hour, to_time_minute)
+                this_day.append({
+                    'start': mask_to,
+                    'stop': slot[1],
+                })
+            mask_cal.append(this_day)
 
         ids = self.objectIds('Calendar')
         ids = [id for id in attendees if id in ids]
@@ -152,12 +237,17 @@ class Calendars(Workgroup):
                     if event_slot is not None and slots_done[i] is None:
                         if event.all_day:
                             LOG('NGC', DEBUG, 'all day %i' % (i, ))
-                            slots_done[i] = (event_slot['start'],
-                                event_slot['stop'])
+                            slots_done[i] = {
+                                'start': event_slot['start'],
+                                'stop': event_slot['stop'],
+                            }
                         else:
                             LOG('NGC', DEBUG, 'calendar_slots=%s' % (calendar_slots, ))
                             LOG('NGC', DEBUG, 'Appending event %s' % (i, ))
-                            calendar_slots[i].append((event_slot['start'], event_slot['stop']))
+                            calendar_slots[i].append({
+                                'start': event_slot['start'], 
+                                'stop': event_slot['stop']
+                            })
                     i += 1
             cals_dict[id] = list = []
             i = 0
@@ -169,14 +259,12 @@ class Calendars(Workgroup):
                     list.append(slot_union(cal_slot))
                 i += 1
             
-        allcals = self.unionCals(*cals_dict.values())
-        return """
-%s
-    ----
-%s
-    ----
-%s
-""" % (cal_users, allcals, cals_dict)
+        return {
+            'cal_users': cal_users,
+            'cals_dict': cals_dict,
+            'mask_cal': mask_cal,
+            'slots': slots,
+        }
 
     security.declareProtected(View, 'getCalendarForId')
     def getCalendarForId(self, id):
@@ -221,15 +309,16 @@ class Calendars(Workgroup):
         return None
 
     security.declareProtected(View, 'getCalendarsDict')
-    def getCalendarsDict(self):
+    def getCalendarsDict(self, exclude=None):
         calendars_dict = {}
         for ob in self.objectValues('Calendar'):
             entry = calendars_dict.setdefault(ob.usertype, [])
-            entry.append({
-              'id': ob.id,
-              'cn': ob.title_or_id(),
-              'usertype': ob.usertype,
-            })
+            if exclude is None or exclude != ob.id:
+                entry.append({
+                  'id': ob.id,
+                  'cn': ob.title_or_id(),
+                  'usertype': ob.usertype,
+                })
         return calendars_dict
 
     security.declareProtected(View, 'getAttendeeInfo')

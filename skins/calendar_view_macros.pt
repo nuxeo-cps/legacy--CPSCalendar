@@ -290,10 +290,12 @@
                         max_chars python:10*colspan-1;
                         disp_title python:len(title)>max_chars and
                           title[:max_chars].strip()+'...' or title"
-                        tal:attributes="
-                          href event/absolute_url;
-                          title title;"
-                          tal:content="disp_title" />
+                      tal:attributes="
+                        href event/absolute_url;
+                        title title;"
+                      tal:content="disp_title">
+                      Event
+                    </a>
                   </td>
                 </tal:block>
                 <tal:block condition="not:nocall:event">

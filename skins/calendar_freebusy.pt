@@ -1,0 +1,136 @@
+<tal:block define="global current_action string:meeting" />
+<html metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="header">
+    Meeting creation helper
+</metal:block>
+
+<metal:block fill-slot="header_plus" />
+
+<metal:block fill-slot="main"
+  tal:define="
+    meeting request/SESSION/meeting;
+    freebusy_infos meeting/freebusy_infos;
+    slots freebusy_infos/slots;
+    busy_infos meeting/busy_infos;
+    hour meeting/args/duration_hour;
+    minute meeting/args/duration_minute;
+    desired_height python:hour*60+minute;
+    back_td1 string:${portal_url}/cal_line1.png;
+    back_td2 string:${portal_url}/cal_line2.png;
+    empty_src string:${portal_url}/cal_empty.gif;
+    ">
+  <table cellspacing="2" cellpadding="0">
+    <tr>
+      <td bgcolor="#00FF00" width="40">
+      </td>
+      <td>
+        Period of free time you can use to create your meeting
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#AAAAAA" width="40">
+      </td>
+      <td>
+        Busy time
+      </td>
+    </tr>
+  </table>
+  <table width="445" cellspacing="0" cellpadding="0" border="1">
+
+    <tr>
+      <td>
+        <table width="445" cellspacing="2" cellpadding="0" border="0">
+          <tr>
+            <td>
+            </td>
+            <th width="59" tal:repeat="i python:range(0,7)">
+              <tal:block
+                define="
+                  dow python:mcat('_cal_Day%s' % i);
+                  date python:slots[i][0];
+                  dom date/day;
+                  month python:mcat('_cal_Mo%s' % date.month());
+                "
+                tal:content="string:${dow} ${dom} ${month}" />
+            </th>
+          </tr>
+          <tr>
+            <td width="25" valign="top" bgcolor="#DDDDDD">
+              <table cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td height="5">
+                  </td>
+                </tr>
+                <tr tal:repeat="i python:range(1,25)">
+                  <td height="15" valign="bottom"
+                    tal:define="h python:i<24 and i or '00'"
+                    tal:content="string:${h}:00">
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <tal:block
+              repeat="busy_day busy_infos">
+              <td with="59" height="365" valign="top"
+                tal:define="even repeat/busy_day/even"
+                tal:attributes="
+                  background python:even and back_td2 or back_td1">
+                <table cellspacing="0" cellpadding="0" width="59" border="0">
+                  <tr tal:repeat="block busy_day">
+                    <td width="59"
+                      tal:define="
+                        height block/height;
+                        busy block/busy;
+                        ok python:not busy and height >= desired_height;
+                        disp_height python:height/4;"
+                      tal:attributes="
+                        height disp_height;
+                        bgcolor python:(busy and '#AAAAAA') or (ok and '#00FF00') or nothing">
+                      <tal:block condition="ok">
+                        <a
+                          title="Create the meeting here"
+                          tal:define="
+                            time python:int(block['start']);"
+                          tal:attributes="
+                            href string:create_meeting?time=${time}">
+                          <img width="59"
+                            tal:attributes="
+                              height disp_height;
+                              src empty_src;" />
+                        </a>
+                      </tal:block>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tal:block>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <h3>Calendar selection</h3>
+  <p>
+    You can unselect some calendars if you want.
+  </p>
+  <form action="calendar_meeting_ids" method="POST">
+    <ul
+      tal:define="
+        cal_users meeting/freebusy_infos/cal_users;
+        selected_users meeting/display_ids;">
+      <li tal:repeat="user cal_users/items">
+        <input type="checkbox" name="cal_ids:list"
+          tal:attributes="
+            value python:user[0];
+            checked python:user[0] in selected_users;
+          " />
+        <tal:block replace="python:user[1]" />
+      </li>
+    </ul>
+    <input type="submit"
+      tal:attributes="value python:mcat('_button_validate_')" />
+  </form>
+</metal:block>
+
+</html>

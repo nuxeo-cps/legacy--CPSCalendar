@@ -1,0 +1,134 @@
+<tal:block define="global current_action string:meeting" />
+<html metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="header">
+  Meeting creation helper
+</metal:block>
+
+<metal:block fill-slot="header_plus" />
+
+<metal:block fill-slot="main"
+  tal:define="
+    disp_infos python:here.calendar_getDispInformations(request);
+    selected_day disp_infos/selected_day;
+    from_date_year selected_day/year;
+    from_date_month selected_day/month;
+    from_date_day selected_day/day;
+    from_date_hour python:9;
+    from_date_minute python:0;
+    to_date_hour python:17;
+    to_date_minute python:0;
+    my_id here/id;
+    user_types here/getUserTypes;
+    all_calendars python:here.getCalendarsDict(exclude=my_id);">
+  <form action="calendar_begin_meeting" method="POST">
+    <h2>
+      Select the attendees you want for your meeting:
+    </h2>
+    <tal:block repeat="user_type user_types">
+      <tal:block
+        define="
+          type_id user_type/id;
+          calendars all_calendars/?type_id|nothing"
+        condition="calendars">
+        <h3 tal:content="python:mcat(user_type['plural_title'])">User type</h3>
+        <ul>
+          <li tal:repeat="cal calendars">
+            <input type="checkbox" name="cal_ids:list"
+              tal:attributes="value cal/id" />
+            <tal:block replace="cal/cn">
+              Calendar
+            </tal:block>
+          </li>
+        </ul>
+      </tal:block>
+    </tal:block>
+    <p>
+      <small>
+        <input type="checkbox" checked="checked" name="cal_ids:list"
+          tal:attributes="value my_id" />
+        Include this calendar
+      </small>
+    </p>
+    <h2>
+      Select the time interval you want for your meeting:
+    </h2>
+    <p>
+      <tal:block replace="python:mcat('_cal_date_From_')">
+        From
+      </tal:block>
+      <select name="from_date_day">
+        <option tal:repeat="day python:range(1,32)"
+          tal:content="day" tal:attributes="value day;
+            selected python:day == from_date_day or nothing" />
+      </select>
+      <select name="from_date_month">
+        <option tal:repeat="month python:range(1,13)"
+          tal:content="
+            python:mcat('_cal_Month%s' % (month, ));"
+          tal:attributes="
+            value month;
+            selected python:month == from_date_month or nothing"/>
+        </select>
+        <input name="from_date_year" size="4"
+        tal:attributes="value from_date_year" />
+      <tal:block replace="python:mcat('_cal_date_To_')">
+        To
+      </tal:block>
+      <select name="to_date_day">
+        <option tal:repeat="day python:range(1,32)"
+          tal:content="day" tal:attributes="value day;
+            selected python:day == from_date_day or nothing" />
+      </select>
+      <select name="to_date_month">
+        <option tal:repeat="month python:range(1,13)"
+          tal:content="
+            python:mcat('_cal_Month%s' % (month, ));"
+          tal:attributes="
+            value month;
+            selected python:month == from_date_month or nothing"/>
+      </select>
+      <input name="to_date_year" size="4"
+        tal:attributes="value from_date_year" />
+    </p>
+    <p>
+      Between
+      <select name="from_date_hour">
+        <option tal:repeat="hour python:range(0,24)"
+          tal:content="hour" tal:attributes="value hour;
+            selected python:hour == from_date_hour or nothing" />
+      </select><tal:block replace="python:mcat('_cal_hour_sep_')">:</tal:block><select name="from_date_minute">
+        <option tal:repeat="minute python:range(0,60,15)"
+          tal:content="minute" tal:attributes="value minute;
+            selected python:minute == from_date_minute or nothing" />
+      </select>
+      and
+      <select name="to_date_hour">
+        <option tal:repeat="hour python:range(0,24)"
+          tal:content="hour" tal:attributes="value hour;
+            selected python:hour == to_date_hour or nothing" />
+      </select><tal:block replace="python:mcat('_cal_hour_sep_')">:</tal:block><select name="to_date_minute">
+        <option tal:repeat="minute python:range(0,60,15)"
+          tal:content="minute" tal:attributes="value minute;
+            selected python:minute == to_date_minute or nothing" />
+      </select>
+    </p>
+    <h2>
+      Select the desired duration of your meeting:
+    </h2>
+    <p>
+      <select name="duration_hour:int">
+        <option tal:repeat="hour python:range(0,24)"
+          tal:content="hour" tal:attributes="value hour;
+            selected python:hour == 1 or nothing" />
+      </select><tal:block replace="python:mcat('_cal_hour_sep_')">:</tal:block><select name="duration_minute:int">
+        <option tal:repeat="minute python:range(0,60,15)"
+          tal:content="minute" tal:attributes="value minute;
+            selected python:minute == 0 or nothing" />
+      </select>
+    </p>
+    <input type="submit"
+      tal:attributes="value python:mcat('_button_search_')" />
+  </form>
+</metal:block>
+</html>
