@@ -11,7 +11,7 @@
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="this_user here/getCalendarUser;
                          user_types here/getUserTypes;
-                         attendees_dict here/getAttendeesDict;
+                         attendees_dict here/getAttendeesDict|{};
                          dtool here/portal_metadirectories/members;
                          decline_attendees python:[att for att in here.attendees if att['status'] == 'decline'];
                          all_attendees here/getCalendarsDict;

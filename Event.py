@@ -350,12 +350,19 @@ class Event(CPSBaseDocument):
                 % (self.organizer['id'], ))
             return
         my_id = self.getCalendarUser()
+
+        try:
+            cn = self.getAttendeeInfo(my_id).get('cn', id)
+        except AttributeError:
+            mtool = getToolByName(calendar, 'portal_membership')
+            cn = mtool.getAuthenticatedMember().getUserName()
+
         org_calendar.addPendingEvent({
             'id': self.id,
             'request': 'status',
             'change': ({
                 'attendee': my_id,
-                'cn': self.getAttendeeInfo(my_id).get('cn', id),
+                'cn': cn,
                 'type': self.getCalendar().usertype,
                 'status': status,
                 'comment': comment,
@@ -460,7 +467,15 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
     calendar = dispatcher.Destination()
     if organizer is None:
         # By default, organizer is the current calendar user
-        organizer = calendar.getAttendeeInfo(calendar.id)
+        try:
+            organizer = calendar.getAttendeeInfo(calendar.id)
+        except AttributeError:
+            mtool = getToolByName(calendar, 'portal_membership')
+            organizer = {
+                'id': mtool.getAuthenticatedMember().getId(),
+                'usertype': calendar.usertype,
+                'cn': mtool.getAuthenticatedMember().getUserName(),
+                }
     ob = Event(id, organizer=organizer, attendees=attendees, **kw)
     calendar._setObject(id, ob)
     ob = getattr(calendar, id)

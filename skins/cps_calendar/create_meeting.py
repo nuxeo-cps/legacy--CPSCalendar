@@ -2,7 +2,10 @@
 
 here = context.this()
 
-attendees = [here.getAttendeeInfo(id, 1) for id in cal_ids]
+if getattr(here, getAttendeeInfo):
+    attendees = [here.getAttendeeInfo(id, 1) for id in cal_ids]
+else:
+    attendees = []
 
 from_date = DateTime(from_date)
 from_date_day = from_date.day()
