@@ -199,7 +199,7 @@ class Event(CPSBaseDocument):
                 self.event_type = 'event_tofrom'
                 msg.append("%s upgraded to %s" % (self.absolute_url(),
                                                   self.event_type))
-        elif hasattr(self, 'recurrance_period'):
+        elif hasattr(aq_base(self), 'recurrance_period'):
             # Upgrade from earlier bad spelling
             self.recurrence_period = self.recurrance_period[:]
             delattr(self, 'recurrance_period')
