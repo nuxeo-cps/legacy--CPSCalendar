@@ -21,17 +21,22 @@
     action python:create and 'calendar_addevent' or 'calendar_editevent';
     submit_value python:create and str('cpscalendar_button_create') or str('cpscalendar_button_modify');
     editevent python:create or here.canEditThisEvent();
-    title python:create and request.form.get('title',
-                                             'cpscalendar_untitled_(document)')
-                        or here.title;
-    description python:create and str('') or here.description;
+    title python:(not create) and here.title or
+      'cpscalendar_untitled_(document)';
+    title request/title|title;
+    description python:(not create) and here.description or '';
+    description request/description|description;
     event_type python:create and 'event_tofrom' or here.event_type;
     event_type request/event_type|event_type;
-    recurrence_period request/recurrence_period|string:period_daily;
-    recurrence_period python:create and recurrence_period or here.recurrence_period;
+    recurrence_period python:create and 'period_daily' or
+      here.recurrence_period;
+    recurrence_period request/recurrence_period|recurrence_period;
     location python:(not create) and here.location or '';
+    location request/location|location;
     event_status python:create and 'unconfirmed' or here.event_status;
-    document_link python:(not create and here.document) or '';
+    event_status request/event_status|event_status;
+    document_link python:(not create) and here.document or '';
+    document_link request/document|document_link;
     dateinfo python:here.calendar_getFromToDate(create, here, request);
     frominfo python:dateinfo[0];
     toinfo python:dateinfo[1];
@@ -50,11 +55,13 @@
     to_date_minute toinfo/to_date_minute;
     to_date_string python:here.getDateStr(to_date_date, fmt='short');
     attendees python:(not create) and here.attendees or [];
-    transparent python:not create and not not here.transparent or 0;
+    transparent python:(not create) and not not here.transparent or 0;
+    transparent request/transparent|transparent;
     cat_info here/calendar_categories;
     categories cat_info/categories;
     cat_default cat_info/default;
     category python:create and cat_default or here.category;
+    category request/category|category;
     meeting request/SESSION/meeting|nothing;
     ">
 

@@ -8,7 +8,7 @@ New features:
   calendar owner. (#1467)
 Bug fixes:
 ~~~~~~~~~~
--
+- Some event information was lost when changing event type.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

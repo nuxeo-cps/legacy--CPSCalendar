@@ -65,7 +65,7 @@ factory_type_information = (
                  {'id': 'delete',
                   'name': 'action_delete',
                   'action': 'string:${object_url}/calendar_delevent',
-                  'condition': '',
+                  'condition': 'python:object.canEditThisEvent()',
                   'permissions': (ModifyPortalContent,)},
                  {'id': 'calendar',
                   'name': 'action_calendar',
