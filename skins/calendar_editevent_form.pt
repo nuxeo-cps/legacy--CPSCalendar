@@ -73,9 +73,9 @@
         i18n:attributes="value">
     </form>
     <form tal:attributes="action action" method="POST">
-      <metal:block use-macro="here/generic_lib/macros/form">
+      <metal:block use-macro="here/calendar_macros/macros/form">
         <metal:block fill-slot="content">
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
               tal:content="python:str('_cal_prop_summary_')" i18n:translate="">
               Summary
@@ -85,7 +85,7 @@
                      i18n:attributes="value"/>
             </metal:block>
           </metal:block>
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_date_">
               Date
@@ -220,7 +220,7 @@
               </tal:block>
             </metal:block>
           </metal:block>
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_location_">
               Location
@@ -229,7 +229,7 @@
               <input name="location" size="40" tal:attributes="value location" />
             </metal:block>
           </metal:block>
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_eventstatus_">
               Event status
@@ -248,7 +248,7 @@
               </select>
             </metal:block>
           </metal:block>
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_category_">
             </metal:block>
@@ -279,7 +279,7 @@
               </table>
             </metal:block>
           </metal:block>
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_transparent_">
               Transparent
@@ -316,9 +316,9 @@
     <h3 i18n:translate="_Modify status for this event:">
       Modify status for this event:
     </h3>
-    <metal:block use-macro="here/generic_lib/macros/form">
+    <metal:block use-macro="here/calendar_macros/macros/form">
       <metal:block fill-slot="content">
-        <metal:block use-macro="here/generic_lib/macros/form_property">
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
                        i18n:translate="_cal_prop_status_">
             Status
@@ -337,7 +337,7 @@
             </select>
           </metal:block>
         </metal:block>
-        <metal:block use-macro="here/generic_lib/macros/form_property">
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
             i18n:translate="_prop_comment_">
             Comment

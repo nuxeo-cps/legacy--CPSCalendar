@@ -30,9 +30,9 @@
                          my_id here/id;">
 
     <form action="create_meeting" method="POST">
-      <metal:block use-macro="here/generic_lib/macros/form">
+      <metal:block use-macro="here/calendar_macros/macros/form">
         <metal:block fill-slot="content">
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_summary_">
               Summary
@@ -43,7 +43,7 @@
                      i18n:attributes="value" />
             </metal:block>
           </metal:block>
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_date_">
               Date
@@ -98,7 +98,7 @@
               </h3>
             </metal:block>
           </metal:block>
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_location_">
               Location
@@ -107,7 +107,7 @@
               <input name="location" size="40" value="" />
             </metal:block>
           </metal:block>
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_eventstatus_">
               Event status
@@ -125,7 +125,7 @@
               </select>
             </metal:block>
           </metal:block>
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_category_">
             </metal:block>
@@ -156,7 +156,7 @@
               </table>
             </metal:block>
           </metal:block>
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_attendees_">
               Attendees

@@ -23,9 +23,9 @@
         </tal:block>
       </li>
     </ul>
-    <metal:block use-macro="here/generic_lib/macros/form">
+    <metal:block use-macro="here/calendar_macros/macros/form">
       <metal:block fill-slot="content">
-        <metal:block use-macro="here/generic_lib/macros/form_property">
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
                        i18n:translate="_prop_comment_">
             Comment

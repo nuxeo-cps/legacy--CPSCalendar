@@ -33,9 +33,9 @@
   <form action="." method="post" enctype="multipart/form-data"
         tal:attributes="action action">
 
-  <metal:block use-macro="here/generic_lib/macros/form">
+  <metal:block use-macro="here/calendar_macros/macros/form">
     <metal:block fill-slot="content">
-      <metal:block tal:condition="create" use-macro="here/generic_lib/macros/form_property">
+      <metal:block tal:condition="create" use-macro="here/calendar_macros/macros/form_property">
         <metal:block fill-slot="title"
                      i18n:translate="_prop_title_">
           Title
@@ -44,7 +44,7 @@
           <input type="text" name="title" value="" />
         </metal:block>
       </metal:block>
-      <metal:block use-macro="here/generic_lib/macros/form_property">
+      <metal:block use-macro="here/calendar_macros/macros/form_property">
         <metal:block fill-slot="title"
                      i18n:translate="_prop_description_">
           Description
@@ -55,7 +55,7 @@
         </metal:block>
       </metal:block>
       <tal:block condition="python:usertype != 'member'">
-        <metal:block use-macro="here/generic_lib/macros/form_property">
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
                      i18n:translate="_prop_cal_usertype_">
             Calendar type

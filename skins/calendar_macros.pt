@@ -1,3 +1,27 @@
+<!-- ============================================================ -->
+<metal:block define-macro="form">
+  <table width="100%" cellpadding="4" cellspacing="4" border="0">
+    <metal:block define-slot="content">
+    </metal:block>
+  </table>
+</metal:block>
+
+
+<!-- ============================================================ -->
+<metal:block define-macro="form_property">
+  <tal:block define="form_pos form_pos|nothing">
+    <tr>
+      <td valign="top" width="100" class="formMeta">
+        <metal:block define-slot="title">Field name</metal:block>
+      </td>
+      <td valign="middle">
+        <metal:block define-slot="content">Field content</metal:block>
+      </td>
+    </tr>
+  </tal:block>
+</metal:block>
+
+
 <metal:block define-macro="event_view"
              i18n:domain="cpscalendar">
   <tal:block define="organizer event/organizer|nothing;
@@ -17,10 +41,10 @@
                      cat_default cat_infos/default;
                      cat_def_title categories/?cat_default/title;
                      category event/category|nothing;">
-    <metal:block use-macro="here/generic_lib/macros/form">
+    <metal:block use-macro="here/calendar_macros/macros/form">
       <metal:block fill-slot="content">
         <tal:block condition="organizer">
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_organizer_">
               Organizer
@@ -31,7 +55,7 @@
             </metal:block>
           </metal:block>
         </tal:block>
-        <metal:block use-macro="here/generic_lib/macros/form_property">
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
                        i18n:translate="_cal_prop_summary_">
             Summary
@@ -41,7 +65,7 @@
             title
           </metal:block>
         </metal:block>
-        <metal:block use-macro="here/generic_lib/macros/form_property">
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
                        i18n:translate="_cal_prop_date_">
             Date
@@ -73,7 +97,7 @@
           </metal:block>
         </metal:block>
         <tal:block condition="location">
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_location_">
               Location
@@ -83,7 +107,7 @@
             </metal:block>
           </metal:block>
         </tal:block>
-        <metal:block use-macro="here/generic_lib/macros/form_property">
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
                        i18n:translate="_cal_prop_eventstatus_">
             Event status
@@ -94,7 +118,7 @@
           </metal:block>
         </metal:block>
         <tal:block condition="attendees">
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_attendees_">
               Attendees
@@ -113,7 +137,7 @@
           </metal:block>
         </tal:block>
         <tal:block condition="category">
-          <metal:block use-macro="here/generic_lib/macros/form_property">
+          <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
                          i18n:translate="_cal_prop_category_">
               Category
@@ -126,7 +150,7 @@
             </metal:block>
           </metal:block>
         </tal:block>
-        <metal:block use-macro="here/generic_lib/macros/form_property">
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
                        i18n:translate="_cal_prop_transparent_">
             Transparent
@@ -189,10 +213,10 @@
               tal:condition="nocall:real_event"
               tal:attributes="value python:str('_button_validate_')" />
             <tal:block condition="not:nocall:real_event">
-              <metal:block use-macro="here/generic_lib/macros/form">
+              <metal:block use-macro="here/calendar_macros/macros/form">
                 <metal:block fill-slot="content">
                   <metal:block
-                    use-macro="here/generic_lib/macros/form_property">
+                    use-macro="here/calendar_macros/macros/form_property">
                     <metal:block fill-slot="title"
                                  i18n:translate="_prop_comment_">
                       Comment
@@ -278,9 +302,9 @@
             <tal:block replace="att/cn|att/id" />
           </li>
         </ul>
-        <metal:block use-macro="here/generic_lib/macros/form">
+        <metal:block use-macro="here/calendar_macros/macros/form">
           <metal:block fill-slot="content">
-            <metal:block use-macro="here/generic_lib/macros/form_property">
+            <metal:block use-macro="here/calendar_macros/macros/form_property">
               <metal:block fill-slot="title"
                            i18n:translate="_prop_comment_">
                 Comment
