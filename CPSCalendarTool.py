@@ -551,6 +551,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         mcat = self.Localizer.cpscalendar or (lambda x: unicode(x))
 
         context = mtool.getHomeFolder(member_id)
+        if not context:
+            return None
 
         # Check that the user has the permissions.
         if not _checkPermission(AddPortalContent, context):
