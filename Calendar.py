@@ -258,7 +258,6 @@ class Calendar(CPSBaseFolder):
     security.declarePublic('addPendingEvent')
     def addPendingEvent(self, event_dict):
         """Add an event request"""
-        #import pdb;pdb.set_trace()
         if event_dict['request'] == 'status' and \
                 event_dict['id'] not in self.objectIds('Event'):
             # Status change lost because this event was once deleted
@@ -285,7 +284,6 @@ class Calendar(CPSBaseFolder):
     def confirmPendingEvent(self, event_id, REQUEST=None, **kw):
         """
         """
-        import pdb;pdb.set_trace()
         if REQUEST is not None:
             kw.update(REQUEST.form)
         pending = None
