@@ -7,7 +7,7 @@
 
   <h1 i18n:domain="Default"
       i18n:translate="action_display">Calendars supersposing</h1>
-    
+
   <p>
     <span i18n:translate="cpscalendar_message_select_calendars_to_display_with_this_calendar">
       Select the calendars you want to display along with this calendar
@@ -15,11 +15,12 @@
   </p>
   <form action="calendar_display"
         tal:condition="cals">
-    <ul tal:define="calendars python:[cal for cal in cals if cal.id != here.id]">
+    <ul tal:define="calendars python:[x for x in cals if x.getPhysicalPath() != here.getPhysicalPath()] ">
       <li tal:repeat="cal calendars">
         <input type="checkbox" name="cal_ids:list"
-               tal:attributes="value cal/id;
-                               checked python:cal.id in additionals" />
+               tal:define="calpath python:'/'.join(cal.getPhysicalPath())"
+               tal:attributes="value calpath;
+                               checked python:calpath in additionals" />
         <tal:block replace="cal/title_or_id" />
       </li>
     </ul>

@@ -24,6 +24,7 @@
 
 from zLOG import LOG, DEBUG, INFO
 from copy import deepcopy
+import time, random
 from DateTime import DateTime
 from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass
@@ -186,7 +187,6 @@ class Calendar(CPSBaseFolder):
     def genUid(self):
         """UID generator. To be improved (so that uids are truly unique) and
         moved to a base class later."""
-        import time, random
         return str(int(time.time())) + str(random.randint(0, 1000))
 
     def createEvent(self, *args, **kw):
@@ -810,7 +810,7 @@ class Calendar(CPSBaseFolder):
 
     security.declareProtected('Add portal content', 'getDeclinedCanceledEvents')
     def getDeclinedCanceledEvents(self):
-        """Return a dictionary with canceled events ids and declined 
+        """Return a dictionary with canceled events ids and declined
         events ids"""
         return {
             'canceled': self._canceled,
@@ -828,6 +828,12 @@ class Calendar(CPSBaseFolder):
         """
         """
         return self._additional_cals
+
+    security.declareProtected('Add portal content', 'getAdditionalCalendars')
+    def getAdditionalCalendarObjs(self):
+        """
+        """
+        return [ self.restrictedTraverse(x) for x in self._additional_cals]
 
     security.declareProtected('Delete objects', 'manage_delObjects')
     def manage_delObjects(self, ids, *args, **kw):

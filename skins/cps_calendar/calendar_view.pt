@@ -68,6 +68,17 @@
     </tal:block>
   </tal:block>
   <metal:block use-macro="here/calendar_view_macros/macros/?calendar_disp" />
+  <tal:block repeat="cal here/getAdditionalCalendarObjs">
+    <tal:block define="events_desc python:cal.getEventsDesc(start_time, end_time, calendar_disp);
+                       can_add_evts python:mtool.checkPermission('Add portal content', here);
+                       here_url cal/absolute_url;
+    ">
+      <h1 tal:content="cal/title">Calendar title</h1>
+
+    <metal:block use-macro="cal/calendar_view_macros/macros/?calendar_disp" />
+  </tal:block>
+  </tal:block>
+
 </metal:block>
 
 </html>

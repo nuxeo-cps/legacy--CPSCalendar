@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- Fixed the display of multiple calendars (bugzilla #259)
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
