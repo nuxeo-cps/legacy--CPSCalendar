@@ -1,4 +1,22 @@
 *******************************************
+** CPSCalendar V1.10.0 [R1 build 2004/08/13-14:22 by regebro]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- The resource booking functionality is fixed and re-enabled. (#249)
+- Events can no longer be edited if they are in the past, except by the
+  calendar owner. (#1467)
+Bug fixes:
+~~~~~~~~~~
+- Some event information was lost when changing event type.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.9.1 [R1 build 2004/08/12-14:11 by regebro]
 
 Requires:
