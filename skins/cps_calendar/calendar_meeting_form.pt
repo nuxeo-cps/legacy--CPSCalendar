@@ -52,11 +52,11 @@
       i18n:translate="cpscalendar_heading_meeting_creation_helper">
     Meeting creation helper
   </h1>
+  <metal:block use-macro="here/calendar_macros/macros/searchform">
+    the searchform
+  </metal:block>
+  <hr/>
   <form method="POST" tal:attributes="action here/REQUEST/URL1">
-    <metal:block use-macro="here/calendar_macros/macros/searchform">
-      the searchform
-    </metal:block>
-    <hr/>
     <p>
       <strong>
       <span i18n:translate="cpscalendar_label_from_day">

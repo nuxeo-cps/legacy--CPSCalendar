@@ -362,6 +362,7 @@
     this_user here/getCalendarUser;
     ">
     <tal:block condition="python: not searching">
+      <form method="POST" tal:attributes="action here/REQUEST/URL1">
         <p>
           <span i18n:translate="cpscalendar_label_add_a_user_whose">
             Add a user whose
@@ -388,6 +389,7 @@
                  i18n:attributes="value"
                  tal:attributes="name python:searchaction+':method'">
         </p>
+      </form>
     </tal:block>
     <tal:block condition="searching">
       <tal:block define="search_param python: request.get('search_param', '');
@@ -420,10 +422,13 @@
                      tal:attributes="name python:addaction+':method'">
             </p>
         </tal:block>
-        <p tal:condition="python: not found"
-           i18n:translate="cpscalendar_message_no_user_matching">
-           Sorry, there isn't any user matching your query
-        </p>
+        <tal:block condition="python:not found">
+          <p i18n:translate="cpscalendar_message_no_user_matching">
+            Sorry, there isn't any user matching your query
+          </p>
+          <input type="submit" onClick="javascript:history.go(-1)"
+            name="javascript:history.go(-1)" value="back"/>
+        </tal:block>
       </tal:block>
     </tal:block>
   </tal:block>
