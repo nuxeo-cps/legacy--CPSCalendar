@@ -291,7 +291,7 @@ msgstr ":"
 #.                     </span>
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 msgid "cpscalendar_label_add_a_user_whose"
-msgstr "Ajouter un utilisateur qui"
+msgstr "Ajouter un utilisateur dont"
 
 #.   <span>
 #.                       is
@@ -855,7 +855,7 @@ msgid "cpscalendar_pending_events_for"
 msgstr "Nouvel événement"
 
 #.   <title>
-#.   	 Printing version of your calendar
+#.       Printing version of your calendar
 #.     </title>
 #: from ../skins/cps_calendar/printing_template.pt
 msgid "cpscalendar_printable_view"

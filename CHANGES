@@ -8,7 +8,8 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - The date display in the weekly view now always uses two lines, one for weekday
-  date, one for month.
+  and date, one for month.
+- Some fixes for better french in the translations.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
