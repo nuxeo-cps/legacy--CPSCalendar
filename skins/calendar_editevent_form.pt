@@ -26,19 +26,23 @@
     title python:create and mcat('_(document)_Untitled_') or here.title;
     location python:(not create) and here.location or '';
     event_status python:create and 'unconfirmed' or here.event_status;
+    all_day python:(create and [request.form.get('all_day')] or [here.all_day])[0];
     from_date python:create and disp_infos['selected_day'] or here.from_date;
     from_date_day from_date/day;
     from_date_month from_date/month;
     from_date_year from_date/year;
     from_date_hour from_date/hour;
     from_date_minute python:int(from_date.minute()/15)*15;
-    to_date python:create and (disp_infos['selected_day']+0.084) or here.to_date;
+    to_date python:create and from_date or here.to_date;
     to_date_day to_date/day;
     to_date_month to_date/month;
     to_date_year to_date/year;
     to_date_hour to_date/hour;
+    to_date_hour python:(create and not all_day and to_date_hour+2) or to_date_hour;
+    trim_hour python:create and not all_day and to_date_hour > 23;
     to_date_minute python:int(to_date.minute()/15)*15;
-    all_day python:(create and [request.form.get('all_day')] or [here.all_day])[0];
+    to_date_hour python:not trim_hour and to_date_hour or 0;
+    to_date_minute python:not trim_hour and to_date_minute or 0;
     attendees python:(not create) and here.attendees or [];
   ">
 
@@ -124,7 +128,11 @@
                 <input name="to_date_year" size="4"
                   tal:attributes="value to_date_year" />
               </tal:block>
-              <tal:block condition="not:all_day">
+              <tal:block condition="not:all_day"
+                tal:define="
+                  multi_day_event python:(from_date_day != to_date_day) or
+                    (from_date_month != to_date_month) or
+                    (from_date_year != to_date_year)">
                 <input type="hidden" name="from_date_day"
                   tal:attributes="value from_date_day" />
                 <input type="hidden" name="from_date_month"
@@ -137,17 +145,12 @@
                   tal:attributes="value to_date_month" />
                 <input type="hidden" name="to_date_year"
                   tal:attributes="value to_date_year" />
-                <tal:block define="
-                  multi_day_event python:(from_date_day != to_date_day) or
-                    (from_date_month != to_date_month) or
-                    (from_date_year != to_date_year)">
-                  <h3 tal:condition="not:multi_day_event">
-                    <tal:block replace="python:mcat('_cal_Day_long%s' % (from_date.dow(), ))" />
-                    <tal:block replace="from_date_day" />
-                    <tal:block replace="python:mcat('_cal_Month%s' % (from_date_month, ))" />
-                    <tal:block replace="from_date_year" />
-                  </h3>
-                </tal:block>
+                <h3>
+                  <tal:block replace="python:mcat('_cal_Day_long%s' % (from_date.dow(), ))" />
+                  <tal:block replace="from_date_day" />
+                  <tal:block replace="python:mcat('_cal_Month%s' % (from_date_month, ))" />
+                  <tal:block replace="from_date_year" />
+                </h3>
 
                 <tal:block replace="python:mcat('_cal_hour_From_')">
                   From
@@ -174,6 +177,16 @@
                     tal:content="minute" tal:attributes="value minute;
                       selected python:minute == to_date_minute or nothing" />
                 </select>
+                <tal:block condition="multi_day_event">
+                  (<tal:block
+                    replace="
+                      python:mcat('_cal_Day_long%s' % (to_date.dow(), ))" />
+                  <tal:block replace="to_date_day" />
+                  <tal:block
+                    replace="
+                      python:mcat('_cal_Month%s' % (to_date_month, ))" />
+                  <tal:block replace="to_date_year" />)
+                </tal:block>
               </tal:block>
             </metal:block>
           </metal:block>

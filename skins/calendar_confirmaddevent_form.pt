@@ -1,0 +1,50 @@
+<tal:block define="global current_action string:addevent" />
+<html
+  metal:use-macro="here/main_template/macros/master">
+
+<metal:block fill-slot="header"
+  tal:content="python:mcat('_Create_a_new_Event_')">
+  Create a new event
+</metal:block>
+
+<metal:block fill-slot="header_plus" />
+
+<metal:block fill-slot="main"
+  tal:define="
+    event python:{
+      'title': options['title'],
+      'from_date': options['from_date'],
+      'to_date': options['to_date'],
+      'all_day': 0,
+      'location': options['location'],
+      'event_status': options['event_status'],
+      'attendees': options.get('attendees', []),
+    }">
+  <p
+    tal:content="
+    python:mcat('_The end hour you specified was earlier than the start hour. Do you want to extend the event to the next day?_')">
+    The end hour you specified was earlier than the start hour. Do you want
+    to extend the event to the next day?
+  </p>
+  <form action="calendar_confirmaddevent">
+    <input type="hidden" name="from_date:int"
+      tal:attributes="value python:int(options['from_date'])" />
+    <input type="hidden" name="to_date:int"
+      tal:attributes="value python:int(options['to_date'])" />
+    <input type="hidden" name="title"
+      tal:attributes="value options/title" />
+    <input type="hidden" name="location"
+      tal:attributes="value options/location" />
+    <input type="hidden" name="event_status"
+      tal:attributes="value options/event_status" />
+    <metal:block use-macro="here/calendar_macros/macros/event_view">
+      The event
+    </metal:block>
+    <input type="submit"
+      tal:attributes="value python:mcat('_button_validate_')" />
+    <input type="button" onClick="history.back()"
+      tal:attributes="value python:mcat('_button_cancel_')" />
+  </form>
+</metal:block>
+
+</html>

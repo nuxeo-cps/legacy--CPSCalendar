@@ -155,6 +155,13 @@ class Event(BaseDocument):
                 if time_since_daystart != 86399:
                     timeTime = to_date.timeTime()
                     self.to_date = DateTime(timeTime - time_since_daystart + 86399)
+        if self.to_date.lessThan(self.from_date):
+            to_date = self.to_date
+            self.to_date = self.from_date
+            self.from_date = to_date
+
+            if self.all_day:
+                self._normalize()
 
     security.declareProtected(View, 'SearchableText')
     def SearchableText(self):
@@ -352,11 +359,12 @@ class Event(BaseDocument):
             else:
                 return a
 
-        if start_time.greaterThan(self.to_date) or end_time.lessThanEqualTo(self.from_date):
+        if start_time.greaterThanEqualTo(self.to_date) or end_time.lessThanEqualTo(self.from_date):
             return None
         result = []
         for start, stop in slots:
-            if start.greaterThan(self.to_date) or stop.lessThanEqualTo(self.from_date):
+            if start.greaterThanEqualTo(self.to_date) or \
+                stop.lessThanEqualTo(self.from_date):
                 result.append(None)
             else:
                 result.append({

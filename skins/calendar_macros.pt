@@ -1,7 +1,7 @@
 <metal:block define-macro="event_view">
   <tal:block
     define="
-      organizer event/organizer;
+      organizer event/organizer|nothing;
       title event/title;
       id event/id|nothing;
       title python:title or id;
@@ -16,16 +16,18 @@
     ">
     <metal:block use-macro="here/main_widgets/macros/form">
       <metal:block fill-slot="content">
-        <metal:block use-macro="here/main_widgets/macros/form_property">
-          <metal:block fill-slot="title"
-            tal:content="python:mcat('_cal_prop_organizer_')">
-            Organizer
+        <tal:block condition="organizer">
+          <metal:block use-macro="here/main_widgets/macros/form_property">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_organizer_')">
+              Organizer
+            </metal:block>
+            <metal:block fill-slot="content"
+              tal:content="organizer/cn|organizer/id">
+              organizer
+            </metal:block>
           </metal:block>
-          <metal:block fill-slot="content"
-            tal:content="organizer/cn|organizer/id">
-            organizer
-          </metal:block>
-        </metal:block>
+        </tal:block>
         <metal:block use-macro="here/main_widgets/macros/form_property">
           <metal:block fill-slot="title"
             tal:content="python:mcat('_cal_prop_summary_')">
@@ -62,15 +64,17 @@
             </tal:block>
           </metal:block>
         </metal:block>
-        <metal:block use-macro="here/main_widgets/macros/form_property">
-          <metal:block fill-slot="title"
-            tal:content="python:mcat('_cal_prop_location_')">
-            Location
+        <tal:block condition="location">
+          <metal:block use-macro="here/main_widgets/macros/form_property">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_location_')">
+              Location
+            </metal:block>
+            <metal:block fill-slot="content"
+              tal:content="location">
+            </metal:block>
           </metal:block>
-          <metal:block fill-slot="content"
-            tal:content="location">
-          </metal:block>
-        </metal:block>
+        </tal:block>
         <metal:block use-macro="here/main_widgets/macros/form_property">
           <metal:block fill-slot="title"
             tal:content="python:mcat('_cal_prop_eventstatus_')">
@@ -80,22 +84,24 @@
             tal:content="python:mcat('_cal_eventstatus_%s_' % (event_status, ))">
           </metal:block>
         </metal:block>
-        <metal:block use-macro="here/main_widgets/macros/form_property">
-          <metal:block fill-slot="title"
-            tal:content="python:mcat('_cal_prop_attendees_')">
-            Attendees
+        <tal:block condition="attendees">
+          <metal:block use-macro="here/main_widgets/macros/form_property">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_attendees_')">
+              Attendees
+            </metal:block>
+            <metal:block fill-slot="content">
+              <ul tal:condition="attendees">
+                <li tal:repeat="att attendees">
+                  <strong tal:content="att/cn|att/id">attendee</strong>
+                  (<tal:block replace="python:mcat('_cal_status_%s_' % (att['status'], ))">
+                    Confirmed
+                  </tal:block>)
+                </li>
+              </ul>
+            </metal:block>
           </metal:block>
-          <metal:block fill-slot="content">
-            <ul tal:condition="attendees">
-              <li tal:repeat="att attendees">
-                <strong tal:content="att/cn|att/id">attendee</strong>
-                (<tal:block replace="python:mcat('_cal_status_%s_' % (att['status'], ))">
-                  Confirmed
-                </tal:block>)
-              </li>
-            </ul>
-          </metal:block>
-        </metal:block>
+        </tal:block>
       </metal:block>
     </metal:block>
   </tal:block>
