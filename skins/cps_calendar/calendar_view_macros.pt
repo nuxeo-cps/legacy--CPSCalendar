@@ -547,9 +547,8 @@
         bgcolor string:#00FF00;
         ">
         <a tal:define="time python:int(info['start'])"
-           tal:attributes="
-             title string:cpscalendar_create_the_meeting_here;
-             href string:create_meeting_form?time=${time}&window=${height};"
+           tal:attributes="title string:cpscalendar_create_the_meeting_here;
+             href string:calendar_addevent_form?from_date=${time}&create=1;"
              i18n:attributes="title">
           <img border="0"
                tal:attributes="

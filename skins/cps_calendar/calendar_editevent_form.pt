@@ -18,7 +18,6 @@
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
   tal:define="
     portal_url here/portal_url;
-    disp_infos python:here.calendar_getDispInformations(request);
     action python:create and 'calendar_addevent' or 'calendar_editevent';
     submit_value python:create and str('cpscalendar_button_create') or str('cpscalendar_button_modify');
     editevent python:create or here.canEditThisEvent();
@@ -32,14 +31,16 @@
     recurrance_period python:create and recurrance_period or here.recurrance_period;
     location python:(not create) and here.location or '';
     event_status python:create and 'unconfirmed' or here.event_status;
-    from_date here/from_date|python:disp_infos['selected_day'];
+    from_date here/REQUEST/from_date|nothing;
+    from_date python:from_date and DateTime(int(from_date)) or DateTime();
+    from_date python:create and from_date or here.from_date;
     from_date_day from_date/day;
     from_date_month from_date/month;
     from_date_year from_date/year;
     from_date_hour from_date/hour;
     from_date_string python:here.getDateStr(from_date, fmt='short');
-    from_date_hour python:create and (from_date_hour + 14) or from_date_hour;
-    from_date_minute python:int(from_date.minute()/15)*15;
+    from_date_minute python:int((from_date.minute()+14)/15)*15;
+    from_date_minute python:from_date_minute==60 and 0 or from_date_minute;    
     to_date python:create and from_date or here.to_date;
     to_date_day to_date/day;
     to_date_month to_date/month;
@@ -48,7 +49,8 @@
     to_date_string python:here.getDateStr(to_date, fmt='short');
     to_date_hour python:(create and (from_date_hour + 2)) or to_date_hour;
     trim_hour python:create and to_date_hour > 23;
-    to_date_minute python:int(to_date.minute()/15)*15;
+    to_date_minute python:int((to_date.minute()+14)/15)*15;
+    to_date_minute python:to_date_minute==60 and 0 or to_date_minute;    
     to_date_hour python:not trim_hour and to_date_hour or 0;
     to_date_minute python:not trim_hour and to_date_minute or 0;
     attendees python:(not create) and here.attendees or [];
@@ -56,15 +58,17 @@
     cat_info here/calendar_categories;
     categories cat_info/categories;
     cat_default cat_info/default;
-    category python:create and cat_default or here.category;">
+    category python:create and cat_default or here.category;
+    meeting here/REQUEST/SESSION/meeting|nothing;
+    ">
 
-  <tal:block tal:condition="nothing">
+  <tal:block condition="nothing" >
     <!-- Debug block that doesn't appear in the output -->
     <hr/>
-    <p>
-      here/title = <tal:block tal:replace="here/title|nothing"/><br/>
-      form.get('title') = <tal:block tal:replace="python:request.form.get('title')"/><br/>
-    </p>
+    <p tal:content="meeting" />
+    <p tal:content="create" />
+    <p tal:content="from_date_minute" />
+    <p tal:content="python:from_date_hour==20" />
     <hr/>
   </tal:block>
 
@@ -373,6 +377,14 @@ range       : [2000, 2049]
 
       </metal:block>
     </metal:block>
+    <tal:block condition="meeting"
+       define="cal_users meeting/cal_users">
+      <p tal:repeat="user cal_users/items">
+        <input type="checkbox" name="cal_ids:list" checked
+               tal:attributes="value python:user[0]" />
+        <tal:block replace="python:user[1]" />
+      </p>
+    </tal:block>
       <input type="submit"
              tal:attributes="name python:action + ':method';
                              value submit_value"

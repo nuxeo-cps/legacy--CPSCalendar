@@ -7,10 +7,13 @@ ctool = context.portal_cpscalendar
 if REQUEST is not None:
     kw.update(REQUEST.form)
 
+event_type = kw.get('event_type')
+cal_ids = kw.get('cal_ids', {})
+attendees = [ctool.getAttendeeInfo(id, 1) for id in cal_ids]
+kw['attendees'] = attendees
+
 here = context.this()
 id = str(int(DateTime())) + str(randrange(1000, 10000)) + ('-%s' % (here.id))
-
-event_type = kw.get('event_type')
 
 from_date_string = kw.get('from_date','')
 from_date_hour = kw.get('from_date_hour')
@@ -34,10 +37,11 @@ kw['to_date'] = to_date
 # from_date < to_date.
 
 if from_date <= to_date:
-    here.invokeFactory('Event', id, **kw)
+    event = here.invokeFactory('Event', id, **kw)
 
     if REQUEST is not None:
         REQUEST.SESSION['calendar_viewed'] = from_date
+        REQUEST.SESSION['meeting'] = None
         REQUEST.RESPONSE.redirect('%s/%s' % (here.absolute_url(), id))
     else:
         return id

@@ -738,7 +738,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         attendees are other calendars.
 
         Return a dictionary with cn, rpath, id, usertype and status.
-        """
+        """       
         id = rpath.split('/')[-1]
         calendar = self.getCalendarForPath(rpath, unrestricted=1)
         if calendar:
