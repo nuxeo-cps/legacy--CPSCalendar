@@ -1,0 +1,62 @@
+<html metal:define-macro="master"
+  tal:define="utool nocall:here/portal_url;
+    mtool here/portal_membership;
+    atool here/portal_actions;
+    wtool here/portal_workflow;
+    btool here/portal_boxes;
+    dirtool here/portal_metadirectories;
+    dtool dirtool/members;
+    gdtool dirtool/groups;
+    mcat nocall:here/portal_messages;
+    portal_object utool/getPortalObject;
+    portal_title portal_object/Title;
+    object_title here/Title;
+    rportal_url python:utool(relative=1);
+    portal_url python:rportal_url and '/'+rportal_url or '';
+    here_url python:'/'+here.absolute_url(relative=1);
+    bcs here/breadcrumbs;
+    member mtool/getAuthenticatedMember;
+    isAnon mtool/isAnonymousUser;
+    actions python: atool.listFilteredActionsFor(here);
+    docinfo python:here.cpsdocument_info_get(item=here);
+    global_actions actions/global;
+    pss modules/Products/PythonScripts/standard;
+    showthirdcol showthirdcol|nothing;
+    hideactions hideactions|nothing;
+    portal_status_message request/form/portal_status_message|nothing;
+    hierarchies here/getMainHierarchies;
+">
+<head>
+  <title tal:content="here/expanded_title">Nuxeo | Solutions web pour mieux collaborer</title>
+  <metal:block define-slot="base">
+    <!-- Additional head elements -->
+    <base tal:attributes="href string:${here/absolute_url}/" />
+  </metal:block>
+  <link rel="stylesheet" type="text/css"
+    tal:attributes="href string:${portal_url}/main_stylesheet.css" />        
+  <metal:block define-slot="style_plus" tal:replace="nothing">
+    <!-- additional styles -->
+  </metal:block>
+  <metal:block define-slot="script_plus" tal:replace="nothing">
+    <!-- additional scripts -->
+  </metal:block>
+</head>
+
+<body bgcolor="white"
+  tal:define="button_value python:mcat('_button_close_this_window_');">
+  <input type="button" onClick="window.close()"
+    tal:attributes="value button_value" />
+  <table cellspacing="0" border="1" cellpadding="5" width="210">
+    <tr>
+      <td>
+        <metal:block define-slot="main">
+          Main
+        </metal:block>
+      </td>
+    </tr>
+  </table>
+  <input type="button" onClick="window.close()"
+    tal:attributes="value button_value" />
+</body>
+
+</html>

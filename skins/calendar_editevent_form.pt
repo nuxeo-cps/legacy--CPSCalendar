@@ -2,6 +2,10 @@
   current_action python:create and 'addevent' or 'edit'">
 <html metal:use-macro="here/main_template/macros/master">
 
+<metal:block fill-slot="script_plus"
+  tal:content="structure here/day_selector_popup.js">
+  Day selector popup script
+</metal:block>
 <metal:block fill-slot="header">
   <tal:block condition="create"
     tal:replace="python:mcat('_Create_a_new_Event_')">
@@ -95,66 +99,89 @@
                   tal:attributes="value to_date_hour" />
                 <input type="hidden" name="to_date_minute"
                   tal:attributes="value to_date_minute" />
+                <input type="hidden" id="from_date_day" name="from_date_day"
+                  tal:attributes="value from_date_day" />
+                <input type="hidden" id="from_date_month" name="from_date_month"
+                  tal:attributes="value from_date_month" />
+                <input type="hidden" id="from_date_year" name="from_date_year"
+                  tal:attributes="value from_date_year" />
+                <input type="hidden" id="to_date_day" name="to_date_day"
+                  tal:attributes="value to_date_day" />
+                <input type="hidden" id="to_date_month" name="to_date_month"
+                  tal:attributes="value to_date_month" />
+                <input type="hidden" id="to_date_year" name="to_date_year"
+                  tal:attributes="value to_date_year" />
                 <tal:block replace="python:mcat('_cal_date_From_')">
                   From
                 </tal:block>
-                <select name="from_date_day">
-                  <option tal:repeat="day python:range(1,32)"
-                    tal:content="day" tal:attributes="value day;
-                      selected python:day == from_date_day or nothing" />
-                </select>
-                <select name="from_date_month">
-                  <option tal:repeat="month python:range(1,13)"
-                    tal:content="
-                      python:mcat('_cal_Month%s' % (month, ));"
-                    tal:attributes="
-                      value month;
-                      selected python:month == from_date_month or nothing"/>
-                  </select>
-                  <input name="from_date_year" size="4"
-                  tal:attributes="value from_date_year" />
-                <br>
+                <span id="from_date_string">
+                  <tal:block replace="python:mcat('_cal_Day_long%s' % (from_date.dow(), ))" />
+                  <tal:block replace="from_date_day" />
+                  <tal:block replace="python:mcat('_cal_Month%s' % (from_date_month, ))" />
+                  <tal:block replace="from_date_year" />
+                </span>
+                <a
+                  tal:define="
+                    int_date python:int(from_date);
+                  "
+                  tal:attributes="
+                    href string:javascript:open_day_selector('${int_date}', 'from_date', 'from_date_string', '')
+                    ">
+                  Edit
+                </a>
+                <br />
                 <tal:block replace="python:mcat('_cal_date_To_')">
                   To
                 </tal:block>
-                <select name="to_date_day">
-                  <option tal:repeat="day python:range(1,32)"
-                    tal:content="day" tal:attributes="value day;
-                      selected python:day == to_date_day or nothing" />
-                </select>
-                <select name="to_date_month">
-                  <option tal:repeat="month python:range(1,13)"
-                    tal:content="
-                      python:mcat('_cal_Month%s' % (month, ));"
-                    tal:attributes="
-                      value month;
-                      selected python:month == to_date_month or nothing"/>
-                </select>
-                <input name="to_date_year" size="4"
-                  tal:attributes="value to_date_year" />
+                <span id="to_date_string">
+                  <tal:block replace="python:mcat('_cal_Day_long%s' % (to_date.dow(), ))" />
+                  <tal:block replace="to_date_day" />
+                  <tal:block replace="python:mcat('_cal_Month%s' % (to_date_month, ))" />
+                  <tal:block replace="to_date_year" />
+                </span>
+                <a
+                  tal:define="
+                    int_date python:int(to_date);
+                  "
+                  tal:attributes="
+                    href string:javascript:open_day_selector('${int_date}', 'to_date', 'to_date_string', '')
+                    ">
+                  Edit
+                </a>
               </tal:block>
               <tal:block condition="not:all_day"
                 tal:define="
                   multi_day_event python:(from_date_day != to_date_day) or
                     (from_date_month != to_date_month) or
                     (from_date_year != to_date_year)">
-                <input type="hidden" name="from_date_day"
+                <input type="hidden" id="from_date_day" name="from_date_day"
                   tal:attributes="value from_date_day" />
-                <input type="hidden" name="from_date_month"
+                <input type="hidden" id="from_date_month" name="from_date_month"
                   tal:attributes="value from_date_month" />
-                <input type="hidden" name="from_date_year"
+                <input type="hidden" id="from_date_year" name="from_date_year"
                   tal:attributes="value from_date_year" />
-                <input type="hidden" name="to_date_day"
+                <input type="hidden" id="to_date_day" name="to_date_day"
                   tal:attributes="value to_date_day" />
-                <input type="hidden" name="to_date_month"
+                <input type="hidden" id="to_date_month" name="to_date_month"
                   tal:attributes="value to_date_month" />
-                <input type="hidden" name="to_date_year"
+                <input type="hidden" id="to_date_year" name="to_date_year"
                   tal:attributes="value to_date_year" />
                 <h3>
-                  <tal:block replace="python:mcat('_cal_Day_long%s' % (from_date.dow(), ))" />
-                  <tal:block replace="from_date_day" />
-                  <tal:block replace="python:mcat('_cal_Month%s' % (from_date_month, ))" />
-                  <tal:block replace="from_date_year" />
+                  <span id="date_string">
+                    <tal:block replace="python:mcat('_cal_Day_long%s' % (from_date.dow(), ))" />
+                    <tal:block replace="from_date_day" />
+                    <tal:block replace="python:mcat('_cal_Month%s' % (from_date_month, ))" />
+                    <tal:block replace="from_date_year" />
+                  </span>
+                  <a
+                    tal:define="
+                      int_date python:int(from_date);
+                    "
+                    tal:attributes="
+                      href string:javascript:open_day_selector('${int_date}', 'from_date', 'date_string', 'to_date')
+                      ">
+                    Edit
+                  </a>
                 </h3>
 
                 <tal:block replace="python:mcat('_cal_hour_From_')">

@@ -1,0 +1,7 @@
+<script language="JavaScript" type="text/javascript"><!--
+  function open_day_selector(base_date, input_id, date_disp_id, other_input) {
+  selector_window = window.open('day_selector?date:int='+base_date+'&input_id='+input_id+'&date_disp_id='+date_disp_id+'&other_input='+other_input, 'selector', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=1,dependent=1,width=215,height=250')
+    if(!selector_window.opener) selector_window.opener = window
+  }
+  -->
+</script>
