@@ -15,8 +15,8 @@ duration_hour = args['duration_hour']
 duration_minute = args['duration_minute']
 duration = duration_hour * 60 + duration_minute
 
-cal_users = meeting['freebusy_infos']['cal_users']
-cal_ids = meeting['display_ids']
+cal_users = meeting['cal_users']
+cal_ids = cal_users.keys()
 
 return {
   'from_date': from_date,

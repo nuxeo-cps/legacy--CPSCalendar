@@ -1,4 +1,4 @@
-<tal:block define="create options/create|nothing;
+<tal:block define="create options/create|request/create|nothing;
            current_action python:create and 'addevent' or 'edit'">
 <html metal:use-macro="here/main_template/macros/master">
 
@@ -26,17 +26,19 @@
                                              'cpscalendar_untitled_(document)')
                         or here.title;
     description python:create and str('') or here.description;
+    event_type request/event_type|string:event_tofrom;
+    event_type python:create and event_type or here.event_type;
+    recurrance_period request/recurrance_period|string:period_daily;
+    recurrance_period python:create and recurrance_period or here.recurrance_period;
     location python:(not create) and here.location or '';
     event_status python:create and 'unconfirmed' or here.event_status;
-    here_all_day here/all_day|python:0;
-    all_day python:test(create, request.form.get('all_day', 0), here_all_day);
     from_date here/from_date|python:disp_infos['selected_day'];
     from_date_day from_date/day;
     from_date_month from_date/month;
     from_date_year from_date/year;
     from_date_hour from_date/hour;
     from_date_string python:here.getDateStr(from_date, fmt='short');
-    from_date_hour python:create and not all_day and (from_date_hour + 14) or from_date_hour;
+    from_date_hour python:create and (from_date_hour + 14) or from_date_hour;
     from_date_minute python:int(from_date.minute()/15)*15;
     to_date python:create and from_date or here.to_date;
     to_date_day to_date/day;
@@ -44,8 +46,8 @@
     to_date_year to_date/year;
     to_date_hour to_date/hour;
     to_date_string python:here.getDateStr(to_date, fmt='short');
-    to_date_hour python:(create and not all_day and (from_date_hour + 2)) or to_date_hour;
-    trim_hour python:create and not all_day and to_date_hour > 23;
+    to_date_hour python:(create and (from_date_hour + 2)) or to_date_hour;
+    trim_hour python:create and to_date_hour > 23;
     to_date_minute python:int(to_date.minute()/15)*15;
     to_date_hour python:not trim_hour and to_date_hour or 0;
     to_date_minute python:not trim_hour and to_date_minute or 0;
@@ -60,8 +62,6 @@
     <!-- Debug block that doesn't appear in the output -->
     <hr>
     <p>
-    here/all_day = <tal:block tal:replace="here/all_day|nothing"/><br>
-    form.get('all_day') = <tal:block tal:replace="python:request.form.get('all_day')"/><br>
     here/title = <tal:block tal:replace="here/title|nothing"/><br>
     form.get('title') = <tal:block tal:replace="python:request.form.get('title')"/><br>
     </p>
@@ -87,36 +87,9 @@
   </tal:block>
 
   <tal:block condition="editevent">
-    <form action="calendar_addevent_form" id="eventTypeForm"
-          tal:condition="create">
-      <p>
-      <input type="hidden" name="all_day:int"
-             tal:attributes="value not:all_day">
-      <input type="hidden" name="from_date"
-             tal:attributes="value from_date">
-      <input type="hidden" name="title" id="rememberTitle"
-             tal:attributes="value title">
-      <input type="submit"
-             tal:attributes="value python:
-                             all_day and str('cpscalendar_create_all_day_event')
-                                or str('cpscalendar_create_not_all_day_event');"
-             i18n:attributes="value">
-      </p>
-    </form>
-    <form action="calendar_changeeventtype" id="eventTypeForm"
-      tal:condition="not:create">
-      <p>
-      <input type="hidden" name="all_day:int"
-             tal:attributes="value not:all_day">
-      <input type="submit"
-             tal:attributes="value python:
-                             all_day and str('cpscalendar_change_event_to_not_all_day')
-                                     or str('cpscalendar_change_event_to_all_day');"
-             i18n:attributes="value">
-      </p>
-    </form>
+    <form tal:attributes="action here/absolute_url" method="POST">
+      <input type="hidden" name="create" tal:attributes="value create">
 
-    <form tal:attributes="action action" method="POST">
       <metal:block use-macro="here/calendar_macros/macros/form">
     <metal:block fill-slot="content">
       <metal:block use-macro="here/calendar_macros/macros/form_property">
@@ -131,6 +104,33 @@
                  i18n:attributes="value">
         </metal:block>
       </metal:block>
+
+      <metal:block use-macro="here/calendar_macros/macros/form_property">
+        <metal:block fill-slot="title"
+             i18n:translate="cpscalendar_label_eventtype">
+          Event Type
+        </metal:block>
+        <metal:block fill-slot="content">
+          <select name="event_type">
+        <option tal:repeat="type here/event_types"
+                tal:attributes="value type;
+                                selected python:event_type == type;">
+              <span tal:content="string:cpscalendar_option_${type}"
+                    i18n:translate="">cpscalendar_status</span>
+        </option>
+          </select>
+        </metal:block>
+      </metal:block>
+
+      <metal:block use-macro="here/calendar_macros/macros/form_property">
+        <metal:block fill-slot="title">&nbsp;</metal:block>
+        <metal:block fill-slot="content">
+          <input type="submit" value="cpscalendar_label_change_type"
+            name="calendar_editevent_form:method">
+        </metal:block>
+      </metal:block>
+
+
       <metal:block use-macro="here/calendar_macros/macros/form_property">
         <metal:block fill-slot="title"
                      i18n:translate="cpscalendar_label_date">
@@ -138,8 +138,7 @@
         </metal:block>
         <metal:block fill-slot="content">
           <strong>
-          <tal:block condition="all_day">
-          <input type="hidden" name="all_day" value="on">
+          <tal:block condition="python:event_type == 'event_allday'">
           <input type="hidden" name="from_date_hour"
                  tal:attributes="value from_date_hour" />
           <input type="hidden" name="from_date_minute"
@@ -191,8 +190,7 @@ range       : [2000, 2049]
 );
 </script>" />
             </tal:block>
-            <tal:block condition="not:all_day"
-                       tal:define="multi_day_event python:from_date_string != to_date_string;">
+            <tal:block condition="python:event_type == 'event_tofrom'">
 
               <input type="hidden" id="to_date" name="to_date"
                      tal:attributes="value to_date_string" />
@@ -254,6 +252,69 @@ range       : [2000, 2049]
               </tal:block>
 
             </tal:block>
+          <tal:block condition="python:event_type == 'event_recurring'">
+            <select name="recurrance_period">
+                <option tal:repeat="period here/period_types"
+                        tal:content="python:'cpscalendar_label_' + period"
+                        tal:attributes="value period;
+                                        selected python:period == recurrance_period;"
+                        i18n:translate="" />
+            </select>
+            <br>
+            <input type="hidden" name="to_date"
+                   tal:attributes="value to_date_string" />
+            <span i18n:translate="cpscalendar_label_start_(day)">
+              First date
+            </span>
+            <input type="text" size="11" maxlength="22"
+                   tal:attributes="name string:from_date;
+                                   id string:from_date;
+                                   value from_date_string;" />
+            <button id="trigger"
+                    tal:attributes="id string:trigger_from_date">...</button>
+            <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
+                       replace="structure string:<script type='text/javascript'>
+Calendar.setup(
+{
+inputField  : 'from_date',
+ifFormat    : '${fmt}',
+button      : 'trigger_from_date',
+mondayFirst : true,
+range       : [2000, 2049]
+}
+);
+</script>" />
+              <br>
+              <span i18n:translate="cpscalendar_label_from_hour">From</span>
+              <select name="from_date_hour:int">
+                <option tal:repeat="hour python:range(0,24)"
+                        tal:content="hour"
+                        tal:attributes="value hour;
+                                        selected python:hour == from_date_hour;" />
+              </select>
+              <span i18n:translate="cpscalendar_hour_sep">:</span>
+              <select name="from_date_minute:int">
+                <option tal:repeat="minute python:range(0,60,5)"
+                        tal:content="python:'%02d' % minute"
+                        tal:attributes="value minute;
+                                        selected python:minute == from_date_minute;" />
+              </select>
+              <span i18n:translate="cpscalendar_label_to_hour">to</span>
+              <select name="to_date_hour:int">
+                <option tal:repeat="hour python:range(0,24)"
+                        tal:content="hour"
+                        tal:attributes="value hour;
+                                        selected python:hour == to_date_hour;" />
+              </select>
+              <span i18n:translate="cpscalendar_hour_sep">:</span>
+              <select name="to_date_minute:int">
+                <option tal:repeat="minute python:range(0,60,5)"
+                        tal:content="python:'%02d' % minute"
+                        tal:attributes="value minute;
+                                        selected python:minute == to_date_minute;" />
+              </select>
+            </tal:block>
+
           </strong>
         </metal:block>
       </metal:block>
@@ -387,8 +448,9 @@ range       : [2000, 2049]
     </metal:block>
       </metal:block>
       <input type="submit"
-                   tal:attributes="value submit_value"
-                   i18n:attributes="value"/>
+             tal:attributes="name python:action + ':method';
+                             value submit_value"
+             i18n:attributes="value"/>
       <input type="button" onClick="history.back()"
          value="cpscalendar_button_cancel"
          i18n:attributes="value"/>

@@ -87,19 +87,22 @@ class Event(CPSBaseDocument):
     meta_type = 'Event'
 
     security = ClassSecurityInfo()
+    display_type = 'standard_event'
 
     _properties = CPSBaseDocument._properties + (
         # FIXME: organizer is now a dictionary, so it doesn't make
         # sense to make it editable in a text field.
         {'id': 'organizer', 'type': 'text', 'mode': 'w', 'label': 'Organizer'},
-        {'id': 'all_day', 'type': 'boolean', 'mode': 'w', 
-         'label': 'All Day Event'},
-        {'id': 'transparent', 'type': 'boolean', 'mode': 'w', 
+        {'id': 'transparent', 'type': 'boolean', 'mode': 'w',
          'label': 'Transparent Event'},
         {'id': 'location', 'type': 'text', 'mode': 'w', 'label': 'Location'},
-        {'id': 'event_status', 'type': 'text', 'mode': 'w', 
+        {'id': 'event_status', 'type': 'text', 'mode': 'w',
          'label': 'Event Status'},
         {'id': 'category', 'type': 'text', 'mode': 'w', 'label': 'Category'},
+        {'id': 'event_type', 'type': 'selection', 'mode': 'w',
+         'label': 'Event Type', 'select_variable': 'event_types' },
+        {'id': 'recurrance_period', 'type': 'selection', 'mode': 'w',
+         'label': 'Recurrance Period', 'select_variable': 'period_types' },
     )
 
     #
@@ -110,16 +113,27 @@ class Event(CPSBaseDocument):
     attendees = ()
     from_date = None
     to_date = None
-    all_day = 0
     location = ''
     event_status = 'unconfirmed'
     category = ''
     transparent = 0
+    # Marks that an upgrade from the older 'all_day' attribute is needed
+    event_type = None
+    recurrance_period = 'period_daily'
+    event_types = [ 'event_tofrom',     # To a time from a time
+                    'event_allday',     # From a date to a date
+                    'event_recurring']  # Repeats
+    period_types = ['period_daily',
+                    'period_weekly',
+                    'period_monthly',
+                    'period_quarterly', # Every three months
+                    'period_yearly',
+                    ]
 
     isdirty = 1
     notified_attendees = ()
 
-    def __init__(self, id, organizer={}, attendees=(), 
+    def __init__(self, id, organizer={}, attendees=(),
                  from_date=None, to_date=None, **kw):
         LOG('CPSCalendar', DEBUG, "__init__ kw = ", kw)
         CPSBaseDocument.__init__(self, id, organizer=organizer, **kw)
@@ -128,7 +142,7 @@ class Event(CPSBaseDocument):
             self.setAttendees(attendees)
         self.from_date = from_date 
         self.to_date = to_date
-        self.all_day = kw.get('all_day')
+        self.event_type = kw.get('event_type', 'event_tofrom')
         self.location = kw.get('location')
         self.event_status = kw.get('event_status')
         self.category = kw.get('category')
@@ -136,8 +150,8 @@ class Event(CPSBaseDocument):
         self._normalize()
 
     security.declareProtected('Modify portal content', 'edit')
-    def edit(self, attendees=None, from_date=None, to_date=None, 
-             all_day=None, transparent=None, **kw):
+    def edit(self, attendees=None, from_date=None, to_date=None,
+             event_type=None, transparent=None, **kw):
         """Edit method"""
         setdirty = 0
         old_status = self.event_status
@@ -152,9 +166,9 @@ class Event(CPSBaseDocument):
                 calendar.unCancelEvent(self)
             setdirty = 1
 
-        if all_day is not None and (not self.all_day) != (not all_day):
+        if event_type is not None and event_type != self.event_type:
             setdirty = 1
-            self.all_day = all_day
+            self.event_type = event_type
 
         if transparent is not None:
             self.transparent = transparent
@@ -173,9 +187,21 @@ class Event(CPSBaseDocument):
             self.isdirty = 1
             self.notified_attendees = ()
 
+    def upgradeEventType(self, REQUEST=None):
+        """Upgrades properties"""
+        if self.event_type is None:
+            if self.all_day:
+                self.event_type = 'event_allday'
+            else:
+                self.event_type = 'event_tofrom'
+            if REQUEST is not None:
+                return "Upgraded to %s" % self.event_type
+        if REQUEST is not None:
+            return "No upgrade needed"
+
     def _normalize(self):
         """Normalize from_date and to_date attributes"""
-        if self.all_day:
+        if self.event_type == 'event_allday':
             from_date = self.from_date
             if from_date is not None:
                 time_since_daystart = from_date.hour() * 3600 \
@@ -210,7 +236,7 @@ class Event(CPSBaseDocument):
         """Return the calendar where this event is in"""
         return aq_parent(aq_inner(self))
 
-    # FIXME 
+    # FIXME
     security.declareProtected(View, 'getCalendarUser')
     def getCalendarUser(self):
         """Return the id of the calendar instead of the user"""
@@ -255,7 +281,7 @@ class Event(CPSBaseDocument):
                 'from_date': self.from_date,
                 'to_date': self.to_date,
                 'category': self.category,
-                'all_day': self.all_day,
+                'event_type': self.event_type,
                 'title': self.title,
                 'description': self.description,
                 'location': self.location,
@@ -306,7 +332,7 @@ class Event(CPSBaseDocument):
         self.attendees = deepcopy(attendees)
         all_rpaths = tuple([attendee['rpath'] for attendee in attendees])
         self.notified_attendees = tuple(
-            [rpath for rpath in self.notified_attendees 
+            [rpath for rpath in self.notified_attendees
                    if rpath in all_rpaths])
         self.isdirty = self.notified_attendees != all_rpaths
 
@@ -410,6 +436,64 @@ class Event(CPSBaseDocument):
     def getEventInSlots(self, start_time, end_time, slots):
         """
         """
+        if self.event_type == 'event_recurring':
+            return self._recurringMatch(start_time, end_time, slots)
+        else:
+            return self._standardMatch(start_time, end_time, slots,
+                self.from_date, self.to_date)
+
+    def getRecurrance(self, repeats):
+        if self.recurrance_period == 'period_weekly':
+            period = 'period_daily'
+            repeats = repeats * 7
+        elif self.recurrance_period == 'period_quarterly':
+            period = 'period_monthly'
+            repeats = repeats * 3
+        else:
+            period = self.recurrance_period
+
+        if period == 'period_daily':
+            return self.from_date + repeats, self.to_date + repeats
+        if period == 'period_monthly':
+            year, month, day, hour, minute, second, tz = self.from_date.parts()
+            month = month + repeats
+            year = year + month/12
+            month = month % 12
+            fromdate = DateTime(year, month, day, hour, minute, second, tz)
+            year, month, day, hour, minute, second, tz = self.to_date.parts()
+            month = month + repeats
+            year = year + month/12
+            month = month % 12
+            todate = DateTime(year, month, day, hour, minute, second, tz)
+            return fromdate, todate
+        if period == 'period_yearly':
+            year, month, day, hour, minute, second, tz = self.from_date.parts()
+            year = year + repeats
+            fromdate = DateTime(year, month, day, hour, minute, second, tz)
+            year, month, day, hour, minute, second, tz = self.to_date.parts()
+            year = year + repeats
+            todate = DateTime(year, month, day, hour, minute, second, tz)
+            return fromdate, todate
+        raise ValueError('Unknown recurrance period ' + period)
+
+    def _recurringMatch(self, start_time, end_time, slots):
+        rstart = self.from_date
+        rstop = self.to_date
+        repeats = 1
+        while start_time.greaterThan(rstop):
+            rstart, rstop = self.getRecurrance(repeats)
+            repeats += 1
+
+        result = self._standardMatch(start_time, end_time, slots, rstart, rstop)
+        while end_time.greaterThanEqualTo(rstart):
+            rstart, rstop = self.getRecurrance(repeats)
+            repeats += 1
+            result.extend(self._standardMatch(start_time, end_time, slots,
+                    rstart, rstop))
+        return result
+
+    def _standardMatch(self, start_time, end_time, slots, from_date, to_date):
+        # Why redefine two built-in methods? /regebro
         def max(a, b):
             if a.lessThan(b):
                 return b
@@ -421,26 +505,27 @@ class Event(CPSBaseDocument):
             else:
                 return a
 
-        if (start_time.greaterThanEqualTo(self.to_date) 
-                or end_time.lessThanEqualTo(self.from_date)):
-            return None
+        if (start_time.greaterThanEqualTo(to_date)
+                or end_time.lessThanEqualTo(from_date)):
+            return []
         result = []
+        i = 0
         for start, stop in slots:
-            if (start.greaterThanEqualTo(self.to_date) or
-                    stop.lessThanEqualTo(self.from_date)):
-                result.append(None)
-            else:
+            if not (start.greaterThanEqualTo(to_date) or
+                    stop.lessThanEqualTo(from_date)):
                 result.append({
                   'event_id': self.id,
                   'event': self,
-                  'start': max(start, self.from_date),
-                  'stop': min(stop, self.to_date),
+                  'start': max(start, from_date),
+                  'stop': min(stop, to_date),
+                  'slot': i,
                 })
+            i += 1
         return result
 
-        
+
     def _getRequestInformations(self):
-        """Return a tuple with current member name, his properties and 
+        """Return a tuple with current member name, his properties and
            a Datetime object
         """
         mtool = getToolByName(self, 'portal_membership')
@@ -488,3 +573,25 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
     if REQUEST is not None:
         url = dispatcher.DestinationURL()
         REQUEST.RESPONSE.redirect('%s/manage_main' % (url, ))
+
+from Acquisition import Implicit
+from ExtensionClass import Base
+
+class VirtualEvent(Event):
+
+    security = ClassSecurityInfo()
+    display_type = 'freetime_event'
+
+    def __init__(self, from_date=None, to_date=None):
+        self.from_date = from_date
+        self.to_date = to_date
+        self.attendees = ()
+
+    security.declarePublic('getCalendarUser')
+    def getCalendarUser(self):
+        return ''
+
+    def absolute_url(self):
+        return ''
+
+InitializeClass(VirtualEvent)

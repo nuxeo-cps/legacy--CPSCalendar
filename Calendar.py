@@ -171,6 +171,16 @@ class Calendar(CPSBaseFolder):
     # skins
     cell_height = 20
 
+    event_types = [ 'event_tofrom',     # To a time from a time
+                    'event_allday',     # From a date to a date
+                    'event_recurring']  # Repeats
+    period_types = ['period_daily',
+                    'period_weekly',
+                    'period_monthly',
+                    'period_quarterly', # Every three months
+                    'period_yearly',
+                    ]
+
     def __init__(self, id, title='', description='', usertype='member'):
         # XXX: title and description not used. Why ?
         kw = {}
@@ -355,14 +365,13 @@ class Calendar(CPSBaseFolder):
 
         for event in events:
             event_slots = event.getEventInSlots(start_time, end_time, slots)
-            if event_slots is not None:
-                key = event.all_day and 'day' or 'hour'
-                i = 0
-                for slot_desc in slot_list:
-                    event_slot = event_slots[i]
+            if event_slots:
+                key = event.event_type == 'event_allday' and 'day' or 'hour'
+                for event_slot in event_slots:
                     if event_slot is not None:
+                        slot = event_slot['slot']
+                        slot_desc = slot_list[slot]
                         slot_desc[key].append(event_slot)
-                    i += 1
 
         # reform result for correct display according to disp
         if disp == 'day':
@@ -770,8 +779,9 @@ class Calendar(CPSBaseFolder):
     security.declareProtected('View', 'getEvents')
     def getEvents(self, from_date, to_date):
         """Return all events with from_date and to_date in the interval"""
+        # XXX defer the matching to the event, to support recurring events.
         events = self.objectValues('Event')
-        return [event for event in events 
+        return [event for event in events
                 if event.from_date >= from_date and event.to_date <= to_date]
 
     security.declarePrivate('declineEvent')

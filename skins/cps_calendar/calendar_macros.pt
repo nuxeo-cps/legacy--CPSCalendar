@@ -34,7 +34,7 @@
              from_date_string python:here.getDateStr(from_date, fmt=fmt);
              to_date event/to_date;
              to_date_string python:here.getDateStr(to_date, fmt=fmt);
-             all_day event/all_day;
+             event_type event/event_type;
              location event/location;
              event_status event/event_status;
              attendees event/attendees;
@@ -44,7 +44,8 @@
              categories cat_infos/categories;
              cat_default cat_infos/default;
              cat_def_title categories/?cat_default/title;
-             category event/category|nothing;">
+             category event/category|nothing;
+             recurrance_period event/recurrance_period|nothing;">
     <metal:block use-macro="here/calendar_macros/macros/form">
       <metal:block fill-slot="content">
 
@@ -69,22 +70,28 @@
         Date
       </metal:block>
       <metal:block fill-slot="content">
-        <tal:block condition="not:all_day">
+        <tal:block condition="python:event_type == 'event_tofrom'">
           <span tal:replace="from_date_string" /><br>
           <span i18n:translate="cpscalendar_label_from_hour">from</span>
           <span tal:replace="python:from_date.strftime(' %H:%M')" />
           <span i18n:translate="cpscalendar_label_to_hour">to</span>
           <span tal:replace="python:to_date.strftime(' %H:%M')" />
         </tal:block>
-        <tal:block condition="all_day">
+        <tal:block condition="python:event_type == 'event_allday'">
           <span i18n:translate="cpscalendar_label_from_(day)">From the</span>
           <span tal:replace="from_date_string" />
-          <span i18n:translate="cpscalendar_label_at_(hour)">at</span>
-          <span tal:replace="python:from_date.strftime(' %H:%M')" />
           <br>
           <span i18n:translate="cpscalendar_label_to_(day)">To the</span>
           <span tal:replace="to_date_string" />
-          <span i18n:translate="cpscalendar_label_at_(hour)">at</span>
+        </tal:block>
+        <tal:block condition="python:event_type == 'event_recurring'">
+          <span tal:content="string:cpscalendar_label_${recurrance_period}" i18n:translate="" />
+          <br>
+          <span i18n:translate="cpscalendar_label_start_(day)">First time</span>
+          <span tal:replace="from_date_string" />
+          <span i18n:translate="cpscalendar_label_from_hour">from</span>
+          <span tal:replace="python:from_date.strftime(' %H:%M')" />
+          <span i18n:translate="cpscalendar_label_to_hour">to</span>
           <span tal:replace="python:to_date.strftime(' %H:%M')" />
         </tal:block>
       </metal:block>

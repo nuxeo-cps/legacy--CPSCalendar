@@ -1,9 +1,11 @@
-##parameters=all_day, REQUEST=None
+##parameters=event_type, REQUEST=None
 
-if not all_day:
-    context.edit(all_day=0, to_date=context.from_date+0.084)
+# This skin is no longer used, AFAIK. Keeping it for a while, just in case. /lennart
+
+if event_type != 'event_allday':
+    context.edit(event_type=event_type, to_date=context.from_date+0.084)
 else:
-    context.edit(all_day=1)
+    context.edit(event_type=event_type)
 
 if REQUEST:
     REQUEST.RESPONSE.redirect('%s/calendar_editevent_form' % (context.absolute_url(), ))

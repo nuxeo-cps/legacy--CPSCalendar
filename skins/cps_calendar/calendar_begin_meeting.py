@@ -2,6 +2,8 @@
 
 # $Id$
 
+from zLOG import LOG
+
 caltool = context.portal_cpscalendar
 errors = []
 locale = context.Localizer.default.get_selected_language()
@@ -14,10 +16,8 @@ if REQUEST:
 if not cal_ids:
     return context.calendar_meeting_empty()
 
-meeting = {}
-meeting['args'] = kw
-
 from_date_string = kw.get('from_date','')
+
 if locale in ('en', 'hu', ):
     from_date_month, from_date_day, from_date_year = from_date_string.split('/')
 else:
@@ -52,22 +52,10 @@ from_date_minute = int(kw['from_date_minute'])
 to_date_hour = int(kw['to_date_hour'])
 to_date_minute = int(kw['to_date_minute'])
 
-freebusy_infos = caltool.getFreeBusy(
-    cal_ids, from_date, to_date, from_date_hour, from_date_minute,
+
+meeting = caltool.getFreeBusy(cal_ids, from_date, to_date, from_date_hour, from_date_minute,
     to_date_hour, to_date_minute)
-
-meeting['freebusy_infos'] = freebusy_infos
-
-display_ids = freebusy_infos['cal_users'].keys()
-meeting['display_ids'] = display_ids
-
-# Calculate the whole freebusy
-busy_infos = caltool.listFreeSlots(
-    freebusy_infos['cals_dict'].values() + [freebusy_infos['mask_cal']], 
-    with_free=1)
-
-meeting['busy_infos'] = busy_infos
-
+meeting['args'] = kw
 REQUEST.SESSION['freebusy_start'] = 0
 
 if REQUEST is not None:

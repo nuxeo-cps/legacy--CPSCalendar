@@ -32,12 +32,11 @@
                          from_date_minute python:(edit and [int(args['from_date_minute'])] or [0])[0];
                          to_date_hour python:(edit and [int(args['to_date_hour'])] or [19])[0];
                          to_date_minute python:(edit and [int(args['to_date_minute'])] or [0])[0];
-                         my_id here/id;
+                         my_id python:'/'.join(here.getPhysicalPath());
                          cal_ids python:edit and args['cal_ids'] or [my_id];
                          user_types here/getUserTypes;
-                         all_calendars python:hasattr(here, 'getCalendarsDict') 
-                                              and here.getCalendarsDict(exclude=my_id)
-                                              or {};">
+                         all_calendars here/portal_cpscalendar/getCalendarsDict;
+                         ">
 
   <h1 i18n:domain="cpscalendar"
       i18n:translate="cpscalendar_heading_meeting_creation_helper">
@@ -54,7 +53,7 @@
       <tal:block define="type_id user_type/id;
                          calendars all_calendars/?type_id|nothing"
                  condition="calendars">
-        <p tal:content="python:str(user_type['plural_title'])"
+        <p tal:content="user_type/plural_title"
             i18n:translate="">User type</p>
         <ul>
           <li tal:repeat="cal calendars">
@@ -70,7 +69,7 @@
       </tal:block>
     </tal:block>
     <p>
-      <small>
+      <small tal:condition="nothing">
         <input type="checkbox" name="cal_ids:list"
           tal:attributes="value my_id;
                           checked python:my_id in cal_ids;" />

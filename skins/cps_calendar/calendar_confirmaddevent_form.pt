@@ -7,13 +7,15 @@
                                        'description': options['description'],
                                        'from_date': options['from_date'],
                                        'to_date': options['to_date'],
-                                       'all_day': 0,
+                                       'event_type': options['event_type'],
                                        'location': options['location'],
                                        'event_status': options['event_status'],
-                                       'attendees': options.get('attendees', []),}">
+                                       'attendees': options.get('attendees', []),
+                                       'recurrance_period': options.get('recurrance_period', ''),
+                                       }">
   <p i18n:translate="cpscalendar_message_too_early_specified_hour">
-    The end hour you specified was earlier than the start hour. Do you want
-    to extend the event to the next day?
+    The start hour you specified was earlier than the end hour. Did you mean
+    to switch them? Press OK if you want to switch the start and end times.
   </p>
   <form action="calendar_addevent" method="POST">
     <input type="hidden" name="from_date"
@@ -34,6 +36,12 @@
            tal:attributes="value options/location" />
     <input type="hidden" name="event_status"
            tal:attributes="value options/event_status" />
+    <input type="hidden" name="event_type"
+           tal:attributes="value options/event_type" />
+    <input type="hidden" name="recurrance_period"
+           tal:attributes="value event/recurrance_period" />
+    <input type="hidden" name="description"
+           tal:attributes="value event/description" />
     <metal:block use-macro="here/calendar_macros/macros/event_view">
       The event
     </metal:block>

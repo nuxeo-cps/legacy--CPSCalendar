@@ -22,7 +22,7 @@ from random import randrange
 id = str(int(DateTime()))+str(randrange(1000,10000))+('-%s' % (here.id))
 
 here.invokeFactory('Event', id, title=title, location=location,
-    from_date=from_date, to_date=to_date, all_day=0,
+    from_date=from_date, to_date=to_date, event_type='event_tofrom',
     event_status=event_status, category=category, attendees=attendees,
     transparent=0)
 

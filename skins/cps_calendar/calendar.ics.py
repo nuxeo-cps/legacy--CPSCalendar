@@ -69,7 +69,7 @@ UID:%s
 LOCATION:%s
 """ % (icalvalue(event.location), )
 
-    if event.all_day:
+    if event.event_type == 'event_allday':
         message += """\
 DTSTART;VALUE=DATE:%s
 DTEND;VALUE=DATE:%s

@@ -8,7 +8,7 @@ if REQUEST:
 
 here = context.this()
 
-all_day = kw.get('all_day', 0)
+event_type = kw.get('event_type')
 
 from_date_string = kw.get('from_date','')
 if locale in ('en', 'hu', ):
@@ -43,7 +43,7 @@ to_date = DateTime(to_date_year, to_date_month, to_date_day,
                     to_date_hour, to_date_minute)
 
 
-if not all_day and (from_date > to_date):
+if event_type != 'event_allday' and (from_date > to_date):
     to_date = DateTime(from_date_year, from_date_month, from_date_day,
                        to_date_hour, to_date_minute)
 

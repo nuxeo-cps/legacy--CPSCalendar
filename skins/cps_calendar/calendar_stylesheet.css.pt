@@ -3,7 +3,7 @@
 <tal:block repeat="att python:['', 'Att', 'Dirty']">
   <tal:block repeat="status python:['confirmed', 'unconfirmed', 'canceled']">
 td.week<tal:block replace="att" /><tal:block replace="status" /> {
-  background-image: url(<tal:block replace="portal_url" />/calWeek<tal:block replace="att" /><tal:block replace="status" />.png);
+  background-image: url(<tal:block replace="portal_url" />/cal_week_<tal:block replace="att" /><tal:block replace="status" />.png);
   background-repeat: no-repeat;
 }
   </tal:block>

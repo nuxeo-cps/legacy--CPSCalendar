@@ -130,7 +130,7 @@ def _slotUnion(cal_slot, with_free=0):
 class CPSCalendarTool(UniqueObject, PortalFolder):
     """
     This tool gives access to the collaborative side of CPSCalendar.
-    
+
     It contains all the methods needed by Calendars object to find the others
     and process meeting or superpose calendars.
     """
@@ -198,7 +198,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             rpath = calendar.getRpath()
             if exclude != rpath:
                 entry.append({
-                  'id': calendar.id,
+                  'id': '/'.join(calendar.getPhysicalPath()),
                   'cn': calendar.title_or_id(),
                   'usertype': calendar.usertype,
                   'rpath': rpath,
@@ -255,6 +255,160 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
         attendees: list of calendars
         """
+        # Some support methods:
+        from Products.CPSCalendar.Event import VirtualEvent
+        def eventMask(event, mask):
+            if event is None or mask is None:
+                return [event]
+            # XXX this does not support recurring events yet
+            # The matching needs to be deferred to the event object
+            if event.from_date >= mask.to_date or \
+               event.to_date <= mask.from_date:
+                # No masking
+                return [event]
+
+            if event.to_date <= mask.to_date and \
+               event.from_date >= mask.from_date:
+                # Complete masked out
+                return []
+
+            if event.from_date < mask.to_date and \
+               event.from_date >= mask.from_date:
+                # Blocks the start
+                return [VirtualEvent(mask.to_date, event.to_date)]
+
+            if event.to_date > mask.from_date and \
+               event.to_date <= mask.to_date:
+                # Blocks the end
+                return [VirtualEvent(event.from_date, mask.to_date)]
+
+            if event.from_date < mask.from_date and \
+               event.to_date > mask.to_date:
+                # The mask blocks a part of the event
+                return [VirtualEvent(event.from_date, mask.from_date),
+                        VirtualEvent(mask.to_date, event.to_date)]
+
+            raise ValueError('Could not find case type when masking.\n'
+                'Event from %s to %s; Mask from %s to %s' % \
+                (event.from_date, event.to_date, mask.from_date, mask.to_date))
+
+        # normalize
+        start_time = DateTime(from_date.year(), from_date.month(),
+                              from_date.day())
+        to_date = to_date + 1
+        end_time = DateTime(to_date.year(), to_date.month(), to_date.day())
+        slot_start = start_time
+
+        # Flip the times if they are wrong.
+        if ((to_time_hour or to_time_minute) and
+            (from_time_hour > to_time_hour or
+                (from_time_hour == to_time_hour and
+                    from_time_minute > to_time_minute))):
+            from_time_hour, to_time_hour = to_time_hour, from_time_hour
+            from_time_minute, to_time_minute = to_time_minute, from_time_minute
+
+        # Get the involved calendars
+        calendars = []
+        cal_users = {}
+        for calendar in self.listCalendars():
+            rpath = '/'.join(calendar.getPhysicalPath())
+            if rpath in attendees:
+                calendars.append(calendar)
+                cal_users[rpath] = self.getAttendeeInfo(rpath)['cn']
+
+        # XXX For efficiency, we could get all events within the
+        # timeframe first. But that is what the code I'm throwing out
+        # now does, and I throw it out, because it's incomprehensable
+        # because it's too complicated.
+        # If wee need to improve efficiency in the future, a Catalog
+        # is the way to go. Having huge complicated methods that to
+        # strange magick on huge complicated lists of lists of lists of
+        # lists of dictionaries is simply not a good idea.
+
+        # Make slots
+        slots = []
+        events_desc = []
+        #import pdb;pdb.set_trace()
+        while slot_start.lessThan(end_time):
+            slot_end = slot_start+1
+            slots.append((slot_start, slot_end))
+
+            start_time = DateTime(slot_start.year(),
+                                  slot_start.month(),
+                                  slot_start.day(),
+                                  from_time_hour,
+                                  from_time_minute)
+            stop_time = DateTime(slot_start.year(),
+                                 slot_start.month(),
+                                 slot_start.day(),
+                                 to_time_hour,
+                                 to_time_minute)
+            freetimes = [VirtualEvent(start_time, stop_time)]
+            for calendar in calendars:
+                events = calendar.getEvents(slot_start, slot_end)
+                for event in events:
+                    newfreetimes = []
+                    for freetime in freetimes:
+                        newfreetimes.extend(eventMask(freetime, event))
+                    freetimes = newfreetimes
+
+            # Generate the event structure for display.
+            # The calendar starts display at 8:00
+            slot_events = []
+            cal_time = DateTime(slot_start.year(),
+                                slot_start.month(),
+                                slot_start.day(),
+                                8,0)
+
+            for event in freetimes:
+                # First check the diff between the previous time (or the
+                # start of the day for the first event)
+                diff = (int(event.from_date) - int(cal_time))/60
+                if diff>0:
+                    # There is space between the two events, we need a
+                    # "NullEvent" to fill it up:
+                    desc = {'start': DateTime(slot_start.year(),
+                                            slot_start.month(),
+                                            slot_start.day()),
+                            'event': None,
+                            'height': diff,
+                        }
+                    slot_events.append(desc)
+
+                # Now add the event
+                desc = {}
+                desc['event'] = event
+                desc['start'] = event.from_date
+                diff = int(event.to_date) - int(event.from_date)
+                desc['height'] = diff/60
+                slot_events.append(desc)
+                # And go on the the next event:
+                cal_time = event.to_date
+
+            # Wrap each slot into two lists, to conform with the
+            # display format needed by the display macro.
+            events_desc.append([[slot_events]])
+            slot_start = slot_end
+
+        length = len(slots)
+        res = {}
+        res['slots'] = slots
+        res['hour_block_cols'] = events_desc
+        res['day_lines'] = []
+        res['cal_users'] = cal_users
+
+        return res
+
+
+    # Old version kept here for reference. /regebro
+    security.declareProtected('View', 'getFreeBusyOld')
+    def getFreeBusyOld(self, attendees, from_date, to_date,
+                    from_time_hour, from_time_minute,
+                    to_time_hour, to_time_minute):
+        """Get free/busy informations on attendees calendars
+
+        attendees: list of calendars
+        """
         # normalize
         start_time = DateTime(from_date.year(), from_date.month(),
                               from_date.day())
@@ -265,13 +419,20 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         while slot_start.lessThan(end_time):
             slots.append((slot_start, slot_start+1))
             slot_start += 1
+            #Hour and minute where stripped above, no need to strip with
+            #every loop.  /regebro
             slot_start = DateTime(slot_start.year(), slot_start.month(),
                                   slot_start.day())
 
         length = len(slots)
 
         # first create the mask calendar
+        # The mask is a list of times/stretches that we are NOT interested in.
+        # This is sligthly strange, since it requres two time stretches for
+        # each day... Besides, they are all exactly the same, except for the
+        # date, so what is the point?
         mask_cal = []
+        # Flip the times if they are wrong.
         if ((to_time_hour or to_time_minute) and
             (from_time_hour > to_time_hour or
                 (from_time_hour == to_time_hour and
@@ -479,6 +640,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     def getCalendarFromPath(self, path):
         portalurl = getToolByName(self, 'portal_url').getPortalPath()
         return self.restrictedTraverse(portalurl + '/' + path)
+
 
 InitializeClass(CPSCalendarTool)
 

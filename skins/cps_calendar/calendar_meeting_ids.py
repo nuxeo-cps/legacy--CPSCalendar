@@ -9,14 +9,13 @@ if not cal_ids:
     return context.calendar_meeting_empty()
 
 meeting['display_ids'] = cal_ids
-freebusy_infos = meeting['freebusy_infos']
-cals_dict = freebusy_infos['cals_dict']
-mask_cal = freebusy_infos['mask_cal']
-cals = [cals_dict[id] for id in cal_ids]
 
 meeting['busy_infos']  = context.listFreeSlots(
     with_free=1, *(cals + [mask_cal]))
 
+meeting = caltool.getFreeBusy(cal_ids, from_date, to_date, from_date_hour, from_date_minute,
+    to_date_hour, to_date_minute)
+        
 if REQUEST is not None:
     REQUEST.SESSION['meeting'] = meeting
     REQUEST.RESPONSE.redirect(

@@ -16,7 +16,9 @@
         member_id member/getMemberId;
         local_event1 python:user_id == event.getCalendarUser();
         local_event2 python:member.getMemberId() == event.getCalendarUser();
-        all_day here/all_day;
+        event_type here/event_type;
+        from_date here/from_date;
+        to_date here/to_date;
         ">
         <hr>
         <p>
@@ -27,8 +29,9 @@
           event_user_id <tal:block tal:replace="event_user_id"/><br>
           local_event1 ? <tal:block tal:replace="local_event1"/><br>
           local_event2 ? <tal:block tal:replace="local_event2"/><br>
-          all_day <tal:block tal:replace="all_day"/><br>
-          kw.get('all_day') <tal:block tal:replace="python:request.form.get('all_day')"/><br>
+          event_type <tal:block tal:replace="event_type"/><br>
+          from_date <tal:block tal:replace="from_date"/><br>
+          to_date <tal:block tal:replace="to_date"/><br>
             </p>
         <hr>
       </tal:block>
