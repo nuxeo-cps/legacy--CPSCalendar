@@ -183,8 +183,7 @@ class Event(BaseDocument):
         """
         Used by the catalog for basic full text indexing.
         """
-        return '%s %s %s' % (self.title,
-                                self.description,)
+        return '%s %s' % (self.title, self.description)
 
     security.declareProtected(View, 'getCalendar')
     def getCalendar(self):
