@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-12-08 14:28default\n"
+"POT-Creation-Date: 2003-12-08 14:37default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -1141,4 +1141,10 @@ msgid "cpscalendar_no_attendee_of_type_resource"
 msgstr ""
 
 msgid "cpscalendar_no_attendee_of_type_events_show"
+msgstr ""
+
+msgid "cpscalendar_button_remove_cancelled_events"
+msgstr ""
+
+msgid "cpscalendar_button_remove_events_you_declined"
 msgstr ""
