@@ -3,7 +3,7 @@
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="head_slot" i18n:domain="cpscalendar">
-  <span i18n:translate="_cal_Pending_events_for_">
+  <span i18n:translate="cpscalendar_pending_events_for">
     Pending events for
   </span>
   «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
@@ -11,12 +11,14 @@
 
 <metal:block fill-slot="main" i18n:domain="cpscalendar">
   <tal:block condition="not:pendings">
-    <h3 tal:condition="event_id"
-        i18n:translate="There is no pending request for this event.">
-          There is no pending request for this event.</h3>
-    <h3 tal:condition="not:event_id"
-        i18n:translate="There is no pending request.">
-          There is no pending request.</h3>
+    <strong>
+    <span tal:condition="event_id"
+        i18n:translate="cpscalendar_no_pending_request_for_event">
+          There is no pending request for this event</span>.
+    <span tal:condition="not:event_id"
+        i18n:translate="cpscalendar_no_pending_request">
+          There is no pending request</span>.
+    </strong>
   </tal:block>
   <tal:block condition="pendings">
     <metal:block use-macro="here/calendar_macros/macros/pendings_view" />

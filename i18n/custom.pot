@@ -205,3 +205,15 @@ msgstr ""
 msgid "cpscalendar_status_unconfirmed"
 msgstr ""
 
+msgid "cpscalendar_no_attendee_of_type_member"
+msgstr ""
+
+msgid "cpscalendar_no_attendee_of_type_room"
+msgstr ""
+
+msgid "cpscalendar_no_attendee_of_type_resource"
+msgstr ""
+
+msgid "cpscalendar_no_attendee_of_type_events_show"
+msgstr ""
+

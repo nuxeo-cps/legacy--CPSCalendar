@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-10-15 11:20default\n"
+"POT-Creation-Date: 2003-10-15 14:15default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -41,7 +41,7 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
-#.   <block content="python:str('_cal_status_%s_' % (attendee['status'], ))">Confirmed</block>
+#.   <block content="python:str('cpscalendar_status_%s' % (attendee['status'], ))">Confirmed</block>
 #.   <block content="python:str('cpscalendar_option_status_%s_' % (att['status'], ))">
 #.   		    Confirmed
 #.   		  </block>
@@ -55,7 +55,7 @@ msgstr ""
 msgid "January 2003"
 msgstr ""
 
-#.   <p condition="not:attendees" content="python:str('_cal_no_attendee_of_type_%s_' % type)">
+#.   <p condition="not:attendees" content="python:str('cpscalendar_no_attendee_of_type_%s' % type)">
 #.           No ressources selected
 #.         </p>
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
@@ -80,19 +80,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#.   <h3 condition="event_id">
-#.             There is no pending request for this event.</h3>
-#: from ../skins/cps_calendar/calendar_pending_events.pt
-msgid "There is no pending request for this event."
-msgstr ""
-
-#.   <h3 condition="not:event_id">
-#.             There is no pending request.</h3>
-#: from ../skins/cps_calendar/calendar_pending_events.pt
-msgid "There is no pending request."
-msgstr ""
-
-#.   <h3 content="python:str(user_type['plural_title'])">User type</h3>
+#.   <p content="python:str(user_type['plural_title'])">User type</p>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "User type"
 msgstr ""
@@ -124,13 +112,6 @@ msgstr ""
 #.           </a>
 #: from ../skins/cps_calendar/calendar_view.pt
 msgid "_You have one pending request_"
-msgstr ""
-
-#.   <span>
-#.       Pending events for
-#.     </span>
-#: from ../skins/cps_calendar/calendar_pending_events.pt
-msgid "_cal_Pending_events_for_"
 msgstr ""
 
 #.   <input value="button_add" class="mainbutton" type="submit">
@@ -502,20 +483,17 @@ msgid "cpscalendar_label_free_time_you_can_use"
 msgstr ""
 
 #.   <span>
-#.           From
-#.         </span>
-#: from ../skins/cps_calendar/calendar_meeting_form.pt
-msgid "cpscalendar_label_from"
-msgstr ""
-
-#.   <span>
 #.   		  From the
 #.   		</span>
 #.   <span>
 #.   		From the
 #.   	      </span>
+#.   <span>
+#.           From
+#.         </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
+#: ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_from_(day)"
 msgstr ""
 
@@ -646,20 +624,17 @@ msgid "cpscalendar_label_title"
 msgstr ""
 
 #.   <span>
-#.           To
-#.         </span>
-#: from ../skins/cps_calendar/calendar_meeting_form.pt
-msgid "cpscalendar_label_to"
-msgstr ""
-
-#.   <span>
 #.   		  to
 #.   		</span>
 #.   <span>
 #.   		To the
 #.   	      </span>
+#.   <span>
+#.           To
+#.         </span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
+#: ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_to_(day)"
 msgstr ""
 
@@ -784,9 +759,9 @@ msgstr ""
 msgid "cpscalendar_message_select_at_least_one_attendee"
 msgstr ""
 
-#.   <p>
-#.       Select the calendars you want to display along with this calendar
-#.     </p>
+#.   <span>
+#.         Select the calendars you want to display along with this calendar
+#.       </span>
 #: from ../skins/cps_calendar/calendar_display_form.pt
 msgid "cpscalendar_message_select_calendars_to_display_with_this_calendar"
 msgstr ""
@@ -867,6 +842,25 @@ msgstr ""
 #.     </span>
 #: from ../skins/cps_calendar/calendar_meeting_expired.pt
 msgid "cpscalendar_message_your_request_has_expired"
+msgstr ""
+
+#.   <span condition="not:event_id">
+#.             There is no pending request</span>
+#: from ../skins/cps_calendar/calendar_pending_events.pt
+msgid "cpscalendar_no_pending_request"
+msgstr ""
+
+#.   <span condition="event_id">
+#.             There is no pending request for this event</span>
+#: from ../skins/cps_calendar/calendar_pending_events.pt
+msgid "cpscalendar_no_pending_request_for_event"
+msgstr ""
+
+#.   <span>
+#.       Pending events for
+#.     </span>
+#: from ../skins/cps_calendar/calendar_pending_events.pt
+msgid "cpscalendar_pending_events_for"
 msgstr ""
 
 #.   <title>
@@ -1079,4 +1073,16 @@ msgid "cpscalendar_status_tentative"
 msgstr ""
 
 msgid "cpscalendar_status_unconfirmed"
+msgstr ""
+
+msgid "cpscalendar_no_attendee_of_type_member"
+msgstr ""
+
+msgid "cpscalendar_no_attendee_of_type_room"
+msgstr ""
+
+msgid "cpscalendar_no_attendee_of_type_resource"
+msgstr ""
+
+msgid "cpscalendar_no_attendee_of_type_events_show"
 msgstr ""

@@ -33,7 +33,7 @@
     <tal:block define="type user_type/id;
                        attendees attendees_dict/?type|python:[]">
       <p tal:condition="not:attendees"
-         tal:content="python:str('_cal_no_attendee_of_type_%s_' % type)"
+         tal:content="python:str('cpscalendar_no_attendee_of_type_%s' % type)"
          i18n:translate="">
         No ressources selected
       </p>
@@ -44,7 +44,7 @@
               <input type="checkbox" name="ids:list"
                 tal:attributes="value string:${attendee/id}" />
               <tal:block replace="attendee/cn|attendee/id" />
-              (<tal:block content="python:str('_cal_status_%s_' % (attendee['status'], ))"
+              (<tal:block content="python:str('cpscalendar_status_%s' % (attendee['status'], ))"
                           i18n:translate="">Confirmed</tal:block>)
             </li>
           </ul>
@@ -57,7 +57,7 @@
         <ul>
           <li tal:repeat="attendee attendees">
             <tal:block replace="attendee/cn|attendee/id" />
-            (<tal:block content="python:str('_cal_status_%s_' % (attendee['status'], ))"
+            (<tal:block content="python:str('cpscalendar_status_%s' % (attendee['status'], ))"
                         i18n:translate="">Confirmed</tal:block>)
           </li>
         </ul>
@@ -83,7 +83,7 @@
                   </select>
                   <span i18n:translate="cpscalendar_label_(add_a_user_whose_)is">
                     is
-                  </span>:
+                  </span> :
                   <input type="text" name="search_term" size="10">
                   <input class="mainbutton" type="submit" name="role_submit"
                          value="button_search"
