@@ -10,7 +10,6 @@
 <body>
 
 <metal:block fill-slot="main">
-        <tal:block replace="calendars"/>
   <tal:block repeat="type python:({'id':'private', 'title':'_cal_Private_'},
                                   {'id':'others', 'title':'_cal_Others_'},
                                   {'id':'events_shows', 'title':'_cal_Events_shows_'},
