@@ -1,19 +1,12 @@
 Requires:
 ~~~~~~~~~
-- You must run the install after upgrading from previous versions.
+-
 New features:
 ~~~~~~~~~~~~~
 -
 Bug fixes:
 ~~~~~~~~~~
-- The user search no longer displays users that have no calendar.
-  This solves Mantis bug #804. 
-- Searching when creating members no longer clear the attendee list.
-  This solves Mantis bug #805.
-- Fixed Mantis bug #653: Searching for dates with start date after 
-  end date caused an error message.
-- Changed the spelling of recurrance to recurrence.
-- Bugfixes in the handling of recurring events in meeting creation.
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
