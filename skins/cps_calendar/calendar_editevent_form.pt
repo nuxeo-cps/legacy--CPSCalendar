@@ -27,7 +27,7 @@
                          action python:create and 'calendar_addevent' or 'calendar_editevent';
                          submit_value python:create and str('_button_create_') or str('_button_modify_');
                          editevent python:create or here.canEditThisEvent();
-                         title python:create and str('_(document)_Untitled_') or here.title;
+                         title python:create and request.form.get('title', str('_(document)_Untitled_')) or here.title;
                          description python:create and str('') or here.description;
                          location python:(not create) and here.location or '';
                          event_status python:create and 'unconfirmed' or here.event_status;
@@ -61,8 +61,10 @@
 	<!-- Debug block that doesn't appear in the output -->
 	<hr>
         <p>
-	here/all_day = <tal:block tal:condition="exists:here/all_day" tal:replace="here/all_day"/><br>
+	here/all_day = <tal:block tal:replace="here/all_day|nothing"/><br>
 	form.get('all_day') = <tal:block tal:replace="python:request.form.get('all_day')"/><br>
+	here/title = <tal:block tal:replace="here/title|nothing"/><br>
+	form.get('title) = <tal:block tal:replace="python:request.form.get('title')"/><br>
         </p>
 	<hr>
       </tal:block>
@@ -73,20 +75,24 @@
 
   <tal:block condition="editevent">
 
-    <form action="calendar_addevent_form" tal:condition="create">
+    <form action="calendar_addevent_form" id="eventTypeForm"
+          tal:condition="create">
       <input type="hidden" name="all_day:int"
-             tal:attributes="value not:all_day" />
+             tal:attributes="value not:all_day">
       <input type="hidden" name="from_date:int"
-             tal:attributes="value python:from_date.timeTime()" />
+             tal:attributes="value python:from_date.timeTime()">
+      <input type="hidden" name="title" id="rememberTitle"
+             tal:attributes="value title">
       <input type="submit"
              tal:attributes="value python:
 	                     all_day and str('_Create an all day_') 
                              or str('_Create a not all day_')"
              i18n:attributes="value">
     </form>
-    <form action="calendar_changeeventtype" tal:condition="not:create">
+    <form action="calendar_changeeventtype" id="eventTypeForm"
+          tal:condition="not:create">
       <input type="hidden" name="all_day:int"
-             tal:attributes="value not:all_day" />
+             tal:attributes="value not:all_day">
       <input type="submit"
              tal:attributes="value python:
                              all_day and str('_Change event to not all day_') 
@@ -103,7 +109,9 @@
               Summary
             </metal:block>
             <metal:block fill-slot="content">
-              <input name="title" size="40" tal:attributes="value title"
+              <input name="title" size="40" 
+                     tal:attributes="value title;
+		                     onchange string:document.getElementById('rememberTitle').value = this.value"
                      i18n:attributes="value"/>
             </metal:block>
           </metal:block>
