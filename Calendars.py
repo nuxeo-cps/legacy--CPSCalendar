@@ -18,6 +18,7 @@ from DateTime import DateTime
 from AccessControl import ClassSecurityInfo
 from AccessControl.SecurityManagement import getSecurityManager
 from AccessControl.SecurityManagement import newSecurityManager
+from Products.CPSCore.CPSMembershipTool import CPSUnrestrictedUser
 from AccessControl.User import UnrestrictedUser
 from Globals import InitializeClass
 
@@ -294,30 +295,51 @@ class Calendars(CPSBaseFolder):
         context = aq_parent(aq_inner(self))
         dirtool = getToolByName(context, 'portal_metadirectories')
         mtool = getToolByName(context, 'portal_membership')
+        ttool = getToolByName(context, 'portal_types')
 
-        mtool.checkPermission('Modify portal content', self)
-        current_user = mtool.getAuthenticatedMember().getUserName()
         members = dirtool.members
         entry = members._getEntry(id)
+        
+        aclu = self.acl_users
+        user = aclu.getUser(id).__of__(aclu)
 
         if entry:
             # create this calendar for this member
-            ttool = getToolByName(context, 'portal_types')
+            #ttool = getToolByName(context, 'portal_types')
             wtool = getToolByName(context, 'portal_workflow')
-            self.manage_setLocalGroupRoles('role:Anonymous',
-                                           ['WorkspaceManager'])
+            
+            # Setup a temporary security manager so that creation is not
+            # hampered by insufficient roles.
+            old_user = getSecurityManager().getUser()
+            # Use member_id so that the Owner role is set for it
+            tmp_user = CPSUnrestrictedUser(id, '',
+                                           ['Manager', 'Member'], '')
+            tmp_user = tmp_user.__of__(aclu)
+            newSecurityManager(None, tmp_user)
+            
             wtool.invokeFactoryFor(self, 'Calendar', id)
-            self.manage_delLocalGroupRoles(['role:Anonymous'])
+            
             calendar_type_info = ttool.getTypeInfo('Calendar')
 
             ob = self._getOb(id)
             ob._computedtitle = 1
             calendar_type_info._finishConstruction(ob)
+            
+            # Grant ownership to Member
+            try:
+                ob.changeOwnership(user)
+                # XXX this method is define in a testcase and just does a pass
+            except AttributeError:
+                pass  # Zope 2.1.x compatibility
 
-            if not mtool.isAnonymousUser():
-                ob.manage_delLocalRoles(userids=[current_user])
             ob.manage_setLocalRoles(id, ['Owner', 'WorkspaceManager'])
-            ob.reindexObject()
+
+            # Rebuild the tree with corrected local roles.
+            # This needs a user that can View the object.
+            portal_eventservice = getToolByName(self, 'portal_eventservice')
+            portal_eventservice.notify('sys_modify_security', ob, {})
+
+            newSecurityManager(None, old_user)
             return ob
         else:
             return None
