@@ -1,3 +1,4 @@
+
 <tal:block define="global portal_url python:here.portal_url(relative=1)" />
 <tal:block repeat="att python:['', 'Att', 'Dirty']">
   <tal:block repeat="status python:['confirmed', 'unconfirmed', 'cancelled']">
@@ -7,6 +8,8 @@ td.week<tal:block replace="att" /><tal:block replace="status" /> {
 }
   </tal:block>
 </tal:block>
+
+.calMaigre {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 75%; color: #000000; text-decoration: none}
 
 small.calEvent {
   color: white
