@@ -31,6 +31,9 @@ to_date_year = to_date.year()
 to_date_hour = kw.get('to_date_hour','')
 to_date_minute = kw.get('to_date_minute','')
 
+if from_date > to_date:
+    from_date, to_date = to_date, from_date
+
 if not errors:
     days = from_date - to_date
     if abs(days) > 32:
