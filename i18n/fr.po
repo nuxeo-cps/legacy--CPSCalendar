@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2003-12-08 14:37default\n"
+"POT-Creation-Date: 2003-12-08 15:08default\n"
 "PO-Revision-Date: 2003-12-08 14:30+0100\n"
 "Last-Translator: Encolpe DEGOUTE <ed@nuxeo.com>\n"
 "Language-Team: French <cantact@nuxeo.com>\n"
@@ -935,6 +935,9 @@ msgstr "Sans titre"
 msgid "cpscalendar_option_status_confirmed"
 msgstr "Confirmé"
 
+msgid "cpscalendar_option_status_decline"
+msgstr "Décliné"
+
 msgid "cpscalendar_option_status_unconfirmed"
 msgstr "Non confirmé"
 
@@ -1159,4 +1162,3 @@ msgstr "Effacer les événements annulés"
 
 msgid "cpscalendar_button_remove_events_you_declined"
 msgstr "Effacer les événements déclinés"
-

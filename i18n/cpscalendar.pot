@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-12-08 14:37default\n"
+"POT-Creation-Date: 2003-12-08 15:08default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -922,6 +922,9 @@ msgid "cpscalendar_untitled_(document)"
 msgstr ""
 
 msgid "cpscalendar_option_status_confirmed"
+msgstr ""
+
+msgid "cpscalendar_option_status_decline"
 msgstr ""
 
 msgid "cpscalendar_option_status_unconfirmed"
