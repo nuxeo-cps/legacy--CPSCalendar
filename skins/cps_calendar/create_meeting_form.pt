@@ -114,7 +114,7 @@
                 <option tal:repeat="status statuses"
                         tal:attributes="value status;
                                         selected python:status == 'unconfirmed';">
-		      <span i18n:translate="" tal:content="status" >status</span>
+              <span i18n:translate="" tal:content="status" >status</span>
                 </option>
               </select>
             </metal:block>
