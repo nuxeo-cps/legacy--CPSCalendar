@@ -229,15 +229,15 @@ class Calendar(CPSBaseFolder):
                 return
             for change in pending['change']:
                 event.setAttendeeStatus(change['attendee'], change['status'])
-        events = [event for event in self._pending_events 
+        events = [event for event in self._pending_events
                         if event['id'] != event_id]
         self._pending_events = tuple(events)
         if REQUEST is not None:
             if request == 'status':
-                REQUEST.RESPONSE.redirect("%s/%s/calendar_attendees_form" 
+                REQUEST.RESPONSE.redirect("%s/%s/calendar_attendees_form"
                     % (self.absolute_url(), event_id))
             else:
-                REQUEST.RESPONSE.redirect("%s/%s" 
+                REQUEST.RESPONSE.redirect("%s/%s"
                     % (self.absolute_url(), event_id))
 
     security.declareProtected('Add portal content', 'cleanPendingEvents')
@@ -256,7 +256,7 @@ class Calendar(CPSBaseFolder):
     def getEventsDesc(self, start_time, end_time, disp, additional=1):
         """Return events between start_time and end_time formatted according
         for a disp display type.
-        
+
         disp can be 'day', 'month', 'week'
         """
         assert disp in ('day', 'month', 'week')
@@ -289,7 +289,7 @@ class Calendar(CPSBaseFolder):
                   'hour': [],
                 })
                 slot_start += 1
-                slot_start = DateTime(slot_start.year(), slot_start.month(), 
+                slot_start = DateTime(slot_start.year(), slot_start.month(),
                                       slot_start.day())
 
         events = self.objectValues('Event')
@@ -306,7 +306,7 @@ class Calendar(CPSBaseFolder):
                         for id in cal.objectIds('Event')
                         if id not in events_ids]
                     events.extend(add_events)
-                
+
         for event in events:
             event_slots = event.getEventInSlots(start_time, end_time, slots)
             if event_slots is not None:
@@ -324,7 +324,7 @@ class Calendar(CPSBaseFolder):
             return {
               'slots': slots,
               'day_events': slot_list[0]['day'],
-              'hour_blocks': 
+              'hour_blocks':
                   self._getHourBlockCols(hour_cols, show_dirty)[0],
             }
         elif disp == 'week':
@@ -477,7 +477,7 @@ class Calendar(CPSBaseFolder):
                             the_event = conflict[0]['ev']['event']
                             blocks.append([[{
                               'event': the_event,
-                              'height': conflict[0]['stop_min'] 
+                              'height': conflict[0]['stop_min']
                                         - conflict[0]['start_min'],
                               'isdirty': show_dirty and the_event.isDirty()
                             }]])
@@ -517,7 +517,7 @@ class Calendar(CPSBaseFolder):
                                 })
                                 block_stops[i] = conf_stop
                             blocks.append(block_cols)
-                                
+
                         conflict = []
                         last_ev = conflict_stop
                     else:
@@ -547,7 +547,7 @@ class Calendar(CPSBaseFolder):
                     the_event = conflict[0]['ev']['event']
                     blocks.append([[{
                       'event': the_event,
-                      'height': conflict[0]['stop_min'] 
+                      'height': conflict[0]['stop_min']
                                 - conflict[0]['start_min'],
                       'isdirty': show_dirty and the_event.isDirty(),
                     }]])
@@ -589,7 +589,7 @@ class Calendar(CPSBaseFolder):
                 last_ev = conflict_stop
 
         return hour_block_cols
-    
+
     security.declarePrivate('getEmail')
     def getEmail(self, member, dir):
         """
@@ -603,7 +603,7 @@ class Calendar(CPSBaseFolder):
     def notifyMembers(self, event_dict):
         """Notify members when a pending event arrives
         """
-        
+
         # get mailhost object
         mailhost = getattr(self, 'MailHost')
         if mailhost is None:
@@ -617,7 +617,7 @@ class Calendar(CPSBaseFolder):
         member = mtool.getAuthenticatedMember().getUserName()
         mail_from = self.getEmail(member, dir)
         if mail_from is None:
-            LOG('NGCal', INFO, "Can't get email address for %s" 
+            LOG('NGCal', INFO, "Can't get email address for %s"
                 % (mail_from, ))
             return
         reply_to = mail_from
@@ -701,8 +701,8 @@ class Calendar(CPSBaseFolder):
             new_event = 0
             event_title = event.title_or_id()
 
-        mailing = self.calendar_mailing_notify(event_dict, calendar_url, 
-            calendar_title, event_title, mail_from, reply_to, mails, 
+        mailing = self.calendar_mailing_notify(event_dict, calendar_url,
+            calendar_title, event_title, mail_from, reply_to, mails,
             new_event=new_event)
         try:
             mailhost.send(mailing, mto=mails, mfrom=mail_from,
@@ -786,12 +786,12 @@ def addCalendar(dispatcher, id,
     # sets correct permissions on ob
     ob.manage_permission(
         permission_to_manage='Access contents information',
-        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember', 
+        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember',
                'WorkspaceReader'],
         acquire=0)
     ob.manage_permission(
         permission_to_manage='View',
-        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember', 
+        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember',
                'WorkspaceReader'],
         acquire=0)
     ob.manage_permission(
