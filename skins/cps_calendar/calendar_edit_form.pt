@@ -33,20 +33,24 @@
   <metal:block use-macro="here/calendar_macros/macros/form">
     <metal:block fill-slot="content">
       <metal:block use-macro="here/calendar_macros/macros/form_property">
-        <metal:block fill-slot="title"
+        <metal:block fill-slot="title">
+          <label for="title"
                      i18n:translate="cpscalendar_label_title">
-          Title
+            Title
+          </label>
         </metal:block>
         <metal:block fill-slot="content">
-          <input type="text" name="title" 
+          <input type="text" name="title"
                  tal:attributes="value here/Title"/>
         </metal:block>
       </metal:block>
 
       <metal:block use-macro="here/calendar_macros/macros/form_property">
-        <metal:block fill-slot="title"
+        <metal:block fill-slot="title">
+          <label for="description:text"
                      i18n:translate="cpscalendar_label_description">
-          Description
+            Description
+          </label>
         </metal:block>
         <metal:block fill-slot="content">
           <textarea name="description:text" rows="5" cols="50" wrap="soft"
@@ -56,9 +60,11 @@
 
       <tal:block>
         <metal:block use-macro="here/calendar_macros/macros/form_property">
-          <metal:block fill-slot="title"
+          <metal:block fill-slot="title">
+            <label for="usertype">
                      i18n:translate="cpscalendar_label_calendar_type">
-            Calendar type
+              Calendar type
+            </label>
           </metal:block>
           <metal:block fill-slot="content">
             <select name="usertype"

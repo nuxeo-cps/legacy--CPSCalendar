@@ -100,9 +100,11 @@
       <metal:block use-macro="here/calendar_macros/macros/form">
         <metal:block fill-slot="content">
           <metal:block use-macro="here/calendar_macros/macros/form_property">
-            <metal:block fill-slot="title"
+            <metal:block fill-slot="title">
+              <label for="title"
                          i18n:translate="cpscalendar_label_title">
-              Title
+                Title
+              </label>
             </metal:block>
             <metal:block fill-slot="content">
               <input name="title" size="40" i18n:attributes="value"
@@ -112,9 +114,11 @@
           </metal:block>
 
           <metal:block use-macro="here/calendar_macros/macros/form_property">
-            <metal:block fill-slot="title"
+            <metal:block fill-slot="title">
+              <label for="event_type"
                          i18n:translate="cpscalendar_label_eventtype">
-              Event Type
+                Event Type
+              </label>
             </metal:block>
           <metal:block fill-slot="content">
             <select name="event_type">
@@ -138,9 +142,11 @@
 
 
         <metal:block use-macro="here/calendar_macros/macros/form_property">
-          <metal:block fill-slot="title"
+          <metal:block fill-slot="title">
+            <label for="recurrence_period"
                        i18n:translate="cpscalendar_label_date">
-            Date
+              Date
+            </label>
           </metal:block>
          <metal:block fill-slot="content">
             <strong>
@@ -153,7 +159,7 @@
                           i18n:translate="" />
                 </select>
                 <br/>
-              </tal:block> 
+              </tal:block>
               <span tal:condition="python:event_type in ('event_recurring', 'event_allday')"
                     i18n:translate="cpscalendar_label_from_day">
                 From the
@@ -201,11 +207,11 @@ range       : [2000, 2049]
 }
 );
 </script>" />
-              </tal:block> 
+              </tal:block>
               <tal:block condition="python:event_type == 'event_tofrom'">
                 <input type="hidden" id="to_date" name="to_date"
                        tal:attributes="value to_date_string" />
-              </tal:block> 
+              </tal:block>
               <tal:block condition="python:event_type == 'event_allday'">
                 <input type="hidden" name="from_date_hour"
                     tal:attributes="value from_date_hour" />
@@ -254,18 +260,21 @@ range       : [2000, 2049]
           </metal:block>
         </metal:block>
         <metal:block use-macro="here/calendar_macros/macros/form_property">
-          <metal:block fill-slot="title"
-                       i18n:translate="cpscalendar_label_location">
-            Location
+          <metal:block fill-slot="title">
+            <label for="location" i18n:translate="cpscalendar_label_location">
+              Location
+            </label>
           </metal:block>
           <metal:block fill-slot="content">
             <input name="location" size="40" tal:attributes="value location" />
           </metal:block>
         </metal:block>
         <metal:block use-macro="here/calendar_macros/macros/form_property">
-          <metal:block fill-slot="title"
+          <metal:block fill-slot="title">
+            <label for="event_status"
                i18n:translate="cpscalendar_label_eventstatus">
-            Event status
+              Event status
+            </label>
           </metal:block>
           <metal:block fill-slot="content">
             <select name="event_status"
@@ -281,9 +290,11 @@ range       : [2000, 2049]
           </metal:block>
         </metal:block>
         <metal:block use-macro="here/calendar_macros/macros/form_property">
-          <metal:block fill-slot="title"
+          <metal:block fill-slot="title">
+            <label for="category"
                i18n:translate="cpscalendar_label_category">
-            Category
+              Category
+            </label>
           </metal:block>
           <metal:block fill-slot="content">
             <table width="100%" cellspacing="2" cellpadding="0" border="0">
@@ -314,9 +325,11 @@ range       : [2000, 2049]
         </metal:block>
 
         <metal:block use-macro="here/calendar_macros/macros/form_property">
-          <metal:block fill-slot="title"
+          <metal:block fill-slot="title">
+            <label for="transparent:int"
                i18n:translate="cpscalendar_label_transparent">
-            Transparent
+              Transparent
+            </label>
           </metal:block>
           <metal:block fill-slot="content">
 
@@ -339,9 +352,11 @@ range       : [2000, 2049]
        </metal:block>
 
        <metal:block use-macro="here/calendar_macros/macros/form_property">
-          <metal:block fill-slot="title"
+          <metal:block fill-slot="title">
+            <label for="document_field"
                i18n:translate="cpscalendar_label_document_link">
-            Document link
+              Document link
+            </label>
           </metal:block>
           <metal:block fill-slot="content">
               <p>
@@ -355,11 +370,13 @@ range       : [2000, 2049]
             </p>
           </metal:block>
         </metal:block>
-       
+
        <metal:block use-macro="here/calendar_macros/macros/form_property">
-          <metal:block fill-slot="title"
+          <metal:block fill-slot="title">
+           <label for="description"
                i18n:translate="cpscalendar_label_description">
-            Description
+              Description
+           </label>
           </metal:block>
           <metal:block fill-slot="content">
             <p>
@@ -372,15 +389,17 @@ range       : [2000, 2049]
 
         <tal:block condition="nothing">
           <metal:block use-macro="here/calendar_macros/macros/form_property">
-            <metal:block fill-slot="title"
+            <metal:block fill-slot="title">
+              <label for="repeat:bool"
                 i18n:translate="cpscalendar_label_repeat_title">
-              Repeat
+                Repeat
+              </label>
             </metal:block>
             <metal:block fill-slot="content">
               <input name="repeat:bool" type="checkbox" />
               <br/>
               <span i18n:translate="cpscalendar_label_repeat_times">Number of times</span>
-                
+
               <input type="string" name="cpscalendar_form_repeat_times:int"
                   size="2" maxlength="2" value="0"/>
               <br/><input type="radio" name="repeat_frequency" value="daily"/>
@@ -391,9 +410,9 @@ range       : [2000, 2049]
               <span i18n:translate="cpscalendar_label_repeat_monthly">Monthly</span>
               <br/><input type="radio" name="repeat_frequency" value="X_days"/>
               <span i18n:translate="cpscalendar_label_repeat_every_X_days_begin">Every</span>
-               
+
               <input type="string" name="cal_every_X_num:int"
-                size="3" maxlength="3" value="0"/> 
+                size="3" maxlength="3" value="0"/>
               <span i18n:translate="cpscalendar_label_repeat_every_X_days_end">days</span>
             </metal:block>
           </metal:block>
@@ -402,7 +421,7 @@ range       : [2000, 2049]
       </metal:block>
     </metal:block>
     <tal:block condition="python:meeting and create">
-      <h2 i18n:translate="cpscalendar_label_attendees">participants</h2> 
+      <h2 i18n:translate="cpscalendar_label_attendees">participants</h2>
       <tal:block define="cal_users meeting/cal_users">
       <p tal:repeat="user cal_users/items">
         <input type="checkbox" name="cal_ids:list" checked
@@ -427,9 +446,11 @@ range       : [2000, 2049]
     <metal:block use-macro="here/calendar_macros/macros/form">
       <metal:block fill-slot="content">
         <metal:block use-macro="here/calendar_macros/macros/form_property">
-          <metal:block fill-slot="title"
+          <metal:block fill-slot="title">
+            <label for="status"
                       i18n:translate="cpscalendar_label_status">
-            Status
+              Status
+            </label>
           </metal:block>
           <metal:block fill-slot="content">
             <select name="status"
@@ -446,9 +467,11 @@ range       : [2000, 2049]
           </metal:block>
         </metal:block>
         <metal:block use-macro="here/calendar_macros/macros/form_property">
-          <metal:block fill-slot="title"
+          <metal:block fill-slot="title">
+            <label for="comment"
                        i18n:translate="cpscalendar_label_comment">
-            Comment
+              Comment
+            </label>
           </metal:block>
           <metal:block fill-slot="content">
             <textarea name="comment" cols="40" rows="4"></textarea>
