@@ -1,4 +1,21 @@
 *******************************************
+** CPSCalendar V1.7.4 [R1 build 2004/08/10-09:33 by regebro]
+
+Requires:
+~~~~~~~~~
+- Run the installer after installing this version to uprade pending events.s
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- A bug in the Calendar upgrade of pending events was fixed. (#1383)
+- Re-added the document field.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.7.3 [R1 build 2004/08/09-15:04 by regebro]
 
 Requires:
