@@ -547,7 +547,7 @@
         ">
         <a tal:define="time python:int(info['start'])"
            tal:attributes="title string:cpscalendar_create_the_meeting_here;
-             href string:calendar_addevent_form?from_date=${time}&create=1;"
+             href string:calendar_editevent_form?from_date=${time}&create=1;"
              i18n:attributes="title">
           <img border="0"
                tal:attributes="
