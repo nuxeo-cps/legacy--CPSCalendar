@@ -12,9 +12,9 @@ attendees_ids = [att['id'] for att in attendees]
 
 add_ids = [id for id in ids if id not in attendees_ids]
 
-if getattr(here, getAttendeeInfo):
+try:
     new_attendees = [context.getAttendeeInfo(id, 1) for id in add_ids]
-else:
+except AttributeError:
     new_attendees = []
 
 

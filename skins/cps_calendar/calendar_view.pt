@@ -8,8 +8,8 @@
                    start_time disp_infos/start_time;
                    end_time disp_infos/end_time;
                    events_desc python:here.getEventsDesc(start_time, end_time, calendar_disp);
-		   member_id python:here.portal_membership.getAuthenticatedMember().getMemberId();
-		   ">
+                   member_id python:here.portal_membership.getAuthenticatedMember().getMemberId();
+                   ">
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="here/main_template/macros/master">

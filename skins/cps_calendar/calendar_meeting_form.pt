@@ -34,7 +34,9 @@
                          my_id here/id;
                          cal_ids python:edit and args['cal_ids'] or [my_id];
                          user_types here/getUserTypes;
-                         all_calendars python:here.getCalendarsDict(exclude=my_id);"
+                         all_calendars python:hasattr(here, 'getCalendarsDict') 
+                                              and here.getCalendarsDict(exclude=my_id)
+                                              or {};"
              tal:on-error="python:request.RESPONSE.redirect('%s/calendar_meeting_expired' % (here.absolute_url(), ))">
 
   <form action="calendar_begin_meeting" method="POST">

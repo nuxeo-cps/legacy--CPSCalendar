@@ -2,9 +2,9 @@
 
 here = context.this()
 
-if getattr(here, getAttendeeInfo):
-    attendees = [here.getAttendeeInfo(id, 1) for id in cal_ids]
-else:
+try:
+    attendees = [context.getAttendeeInfo(id, 1) for id in cal_ids]
+except AttributeError:
     attendees = []
 
 from_date = DateTime(from_date)
