@@ -34,7 +34,9 @@ def update(self):
     installername = getSecurityManager().getUser().getUserName()
     pr("Current user: %s" % installername)
 
-    # skins
+    workspaces_id = 'workspaces'
+
+    # Install skins
     pr("Verifying skins")
     skins = ('cpscalendar_skins', 'cpscalendar_images',)
     paths = {
@@ -70,15 +72,13 @@ def update(self):
         portal.portal_skins.addSkinSelection(skin_name, npath)
         pr(" Fixup of skin %s" % skin_name)
 
-
+    # Install CPSCalendar Tool
     pr("Verifying CPS Advanced Calendar tool")
     if not portalhas('portal_cpscalendar'):
         pr(" Creating CPS Advanced Calendar tool")
         portal.manage_addProduct['CPSCalendar'].addCPSCalendarTool()
 
-    pr("Setup workflow shemas")
-    wftool = portal.portal_workflow
-    
+
     # Verification of the action and addinf if neccesarly 
     action_found = 0
     for action in portal['portal_actions'].listActions():
@@ -89,7 +89,7 @@ def update(self):
         portal['portal_actions'].addAction(
             id='my_calendar',
             name='My calendar',
-            action='string: ${portal_url}/workspaces/calendars/${member}',
+            action='string:${portal/portal_membership/getHomeUrl}/calendar',
             condition='member',
             permission=('View',),
             category='user',
@@ -106,21 +106,24 @@ def update(self):
     for ptype in ('Calendars', 'Calendar'):
         if ptype not in  workspaceACT:
             workspaceACT.append(ptype)
+
     ptypes = {
-        'CPSCalendar':('Calendars',
-                       'Calendar',
-                       'Event',
-                      ),
-        }
+        'CPSCalendar':(
+            'Calendars',
+            'Calendar',
+            'Event',
+        ),
+    }
+
     allowed_content_type = {
-                            'Calendars' : ('Calendar',),
-                            'Calendar' : ('Event',),
-                            'Event' : (),
-                            'Workspace' : workspaceACT
-                            }
-    
+        'Calendars' : ('Calendar',),
+        'Calendar' : ('Event',),
+        'Event' : (),
+        'Workspace' : workspaceACT
+    }
+
     ptypes_installed = ttool.objectIds()
-    
+
     for prod in ptypes.keys():
         for ptype in ptypes[prod]:
             pr("  Type '%s'" % ptype)
@@ -134,53 +137,24 @@ def update(self):
                 )
             pr("   Installation")
     
-    for ptype in ('Workspace', 'Calendars', 'Calendar', 'Event',):
+    for ptype in allowed_content_type.keys():
         ttool[ptype].allowed_content_types = allowed_content_type[ptype]
 
     # check workflow association
-    pr("Verifying workflow schemas")
+    pr("Setup workflow shemas")
+    wftool = portal.portal_workflow
     wfs = {
         'Calendars': 'workspace_folder_wf',
         'Calendar': 'workspace_folder_wf',
         'Event': 'workspace_content_wf',
-        }
-    wftool = portal.portal_workflow
+    }
+
     pr("Installing workflow schemas")
-    for pt, chain in wfs.items():
-        wftool.setChainForPortalTypes([pt], chain)
-    wftool.setDefaultChain('')
+    wfc = getattr(portal[workspaces_id], '.cps_workflow_configuration')
+    for portal_type, chain in wfs.items():
+        wfc.manage_addChain(portal_type=portal_type, chain=chain)
 
-    # check site and workspaces
-    workspaces_id = 'workspaces'
-    calendars_id = 'calendars'
-    pr("Verifying roots: %s and %s" % (calendars_id, workspaces_id))
-
-    
-    # check site and calendars proxies
-    if calendars_id not in portal[workspaces_id].objectIds():
-        portal[workspaces_id].portal_workflow.invokeFactoryFor(portal[workspaces_id].this(), 'Calendars',
-                                                calendars_id)
-        portal[workspaces_id].calendars.getContent().setTitle('Calendars Areas') # XXX L10N
-        portal[workspaces_id].calendars.reindexObject()
-        pr("  Adding %s Folder" % calendars_id)
-        
-    pr("Verifying permissions")
-    calendars_perm = {
-        'Add portal content': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
-        'Add portal folders': ['Manager', 'WorkspaceManager'],
-        'Change permissions': ['Manager', 'WorkspaceManager'],
-        'Delete objects': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
-        'List folder contents': ['Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'],
-        'Modify portal content': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
-        'View': ['Authenticated', 'Manager', 'WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'],
-        'View management screens': ['Manager', 'WorkspaceManager', 'WorkspaceMember'],
-        }
-    pr("Calendars")
-    for perm, roles in calendars_perm.items():
-        portal[workspaces_id].calendars.manage_permission(perm, roles, 0)
-        pr("  Permission %s" % perm)
-    portal[workspaces_id].calendars.reindexObjectSecurity()
-
+    # We need it to collaborative job
     pr("=> Update portal_trees cache")
     trtool = portal.portal_trees
     pr(repr(trtool[workspaces_id].type_names))
