@@ -55,7 +55,7 @@ factory_type_information = (
                  {'id': 'edit',
                   'name': 'action_modify',
                   'action': 'string:${object_url}/calendar_editevent_form',
-                  'condition': '',
+                  'condition': 'python:object.getCalendar() == object.getOrganizerCalendar()',
                   'permissions': (ModifyPortalContent,)},
                  {'id': 'attendees',
                   'name': 'action_attendees',

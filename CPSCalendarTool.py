@@ -359,7 +359,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     security.declareProtected('View', 'getCalendarForUser')
     def getCalendarForUser(self, user_id):
         """Get calendar for user <user_id>"""
-        return self.getCalendarForPath(self.getCalendarPathForUser(user_id))
+        return self.getCalendarForPath(self.getCalendarPathForUser(user_id),
+            unrestricted=1)
 
     security.declareProtected(View, 'getCalendarsDict')
     def getCalendarsDict(self, exclude=''):
@@ -838,7 +839,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
     def getCalendarFromPath(self, path):
         portalurl = getToolByName(self, 'portal_url').getPortalPath()
-        return self.restrictedTraverse(portalurl + '/' + path)
+        return self.unrestrictedTraverse(portalurl + '/' + path)
 
     def stringToDateTime(self, string, locale=None):
         return stringToDateTime(string, locale)

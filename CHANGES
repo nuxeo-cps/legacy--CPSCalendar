@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- Permission problems when validating fixed by using unrestrictedtraverse.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
