@@ -146,24 +146,13 @@ def cpscalendarinstall(self):
     calendars_id = 'calendars'
     pr("Verifying roots: %s and %s" % (calendars_id, workspace_id))
 
-    # init Tree Tool
-    if workspace_id not in trtool.objectIds():
-        pr("  Adding cache for tree %s" % workspace_id)
-        trtool.manage_addCPSTreeCache(id=workspace_id)
-        trtool[workspace_id].manage_changeProperties(
-            title=workspace_id+' Cache', 
-            root=workspace_id, 
-            type_names=('Workspace',),
-            info_method='getFolderInfo')
-    trtool[workspace_id].manage_rebuild()
-    pr("   Workspaces cache rebuilded")
     
     # check site and calendars proxies
     if calendars_id not in portal[workspace_id].objectIds():
         portal[workspace_id].portal_workflow.invokeFactoryFor(portal[workspace_id].this(), 'Calendars',
                                                 calendars_id)
-        portal[workspace_id].members.getContent().setTitle('Root of members calendars') # XXX L10N
-        portal[workspace_id].members.reindexObject()
+        portal[workspace_id].calendars.getContent().setTitle('Root of calendars') # XXX L10N
+        portal[workspace_id].calendars.reindexObject()
         pr("  Adding %s Folder" % calendars_id)
         
     pr("Verifying permissions")
@@ -179,22 +168,9 @@ def cpscalendarinstall(self):
         }
     pr("Calendars")
     for perm, roles in calendars_perm.items():
-        portal[workspace_id].members.manage_permission(perm, roles, 0)
+        portal[workspace_id].calendars.manage_permission(perm, roles, 0)
         pr("  Permission %s" % perm)
-    portal[workspace_id].members.reindexObjectSecurity()
-
-    # init Tree Tool
-    pr("Verifying cache trees")
-    pr("   Sections cache rebuilded")
-    if calendars_id not in trtool.objectIds():
-        pr("  Adding cache for tree %s" % calendars_id)
-        trtool.manage_addCPSTreeCache(id=calendars_id)
-        trtool[calendars_id].manage_changeProperties(
-            title=calendars_id+' Cache', 
-            root=calendars_id, 
-            type_names=('Calendars',),
-            info_method='getFolderInfo')
-        trtool[calendars_id].manage_rebuild()
+    portal[workspace_id].calendars.reindexObjectSecurity()
 
     # i18n
     pr(" Adding i18n support")
