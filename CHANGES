@@ -11,6 +11,9 @@ Bug fixes:
 - Made the creator of an event automatically confirmed.
 - Made notification on event creation automatic.
 - The organizer doesn't need to approve his own meeting request.
+- Confirmation of events now is done directly on all
+  attendees calendars, and not via the organizing calendar.
+- New events are not set to dirty.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

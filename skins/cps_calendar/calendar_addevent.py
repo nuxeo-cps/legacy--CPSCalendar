@@ -51,7 +51,10 @@ kw['to_date'] = to_date
 # from_date < to_date.
 
 if from_date <= to_date:
-    event = here.invokeFactory('Event', id, **kw)
+    event_id = here.invokeFactory('Event', id, **kw)
+    # Automatically notify all attendees at creation time
+    event = here[event_id]
+    event.updateAttendeesCalendars(comment='')
 
     if REQUEST is not None:
         REQUEST.SESSION['calendar_viewed'] = from_date

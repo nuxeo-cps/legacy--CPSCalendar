@@ -152,6 +152,9 @@ class Event(CPSBaseDocument):
         self.recurrence_period = kw.get('recurrence_period', 'period_daily')
         self.document = document
         self._normalize()
+        # It should never be dirty after creation, but some of the
+        # above methods may set it to dirty.
+        self.isdirty = 0
 
     security.declareProtected('Modify portal content', 'edit')
     def edit(self, attendees=None, from_date=None, to_date=None,
@@ -173,10 +176,8 @@ class Event(CPSBaseDocument):
         if event_type is not None and event_type != self.event_type:
             setdirty = 1
             self.event_type = event_type
-
         if transparent is not None:
             self.transparent = transparent
-
         if attendees is not None:
             self.setAttendees(attendees)
         if from_date is not None and self.from_date != from_date:
@@ -185,11 +186,10 @@ class Event(CPSBaseDocument):
         if to_date is not None and self.to_date != to_date:
             setdirty = 1
             self.to_date = to_date
-        self._normalize()
-        
         if document != self.document:
             setdirty = 1
             self.document = document
+        self._normalize()
 
         if setdirty:
             self.isdirty = 1
@@ -380,11 +380,11 @@ class Event(CPSBaseDocument):
         self.isdirty = self.notified_attendees != all_rpaths
 
     security.declareProtected('Add portal content', 'setAttendeeStatus')
-    def setAttendeeStatus(self, attendee, status):
+    def setAttendeeStatus(self, changed_attendee, status):
         """Set the attendee's status"""
         change = 0
         for attendee in self.attendees:
-            if attendee['rpath'] == attendee:
+            if attendee['rpath'] == changed_attendee:
                 attendee['status'] = status
                 change = 1
         if change:
@@ -403,6 +403,7 @@ class Event(CPSBaseDocument):
         """Set the status for the current calendar"""
         calendar = self.getCalendar()
         calendar_rpath = calendar.getRpath()
+        event_id = self.getId()
         (member, member_cn, dtstamp) = self._getRequestInformations()
         for attendee in self.attendees:
             if attendee['rpath'] == calendar_rpath:
@@ -414,19 +415,14 @@ class Event(CPSBaseDocument):
                     if old_status == 'decline':
                         calendar.unDeclineEvent(self)
                 self._p_changed = 1
-        org_calendar = self.getOrganizerCalendar()
-        if org_calendar is None:
-            LOG('NGCal', INFO, "Can't get calendar for %s" 
-                % (self.organizer['rpath'], ))
-            return
-        
+                
+        # Set up the dict for email notification
         mtool = getToolByName(calendar, 'portal_membership')
         userid = mtool.getAuthenticatedMember().getUserName()
         try:
             cn = self.getAttendeeInfo(calendar.getRpath()).get('cn', id)
         except AttributeError:
             cn = userid
-
         event_dict = {
             'id': userid,
             'request': 'status',
@@ -441,9 +437,35 @@ class Event(CPSBaseDocument):
                 'sender_cn': member_cn,
              },)
         }
-        org_calendar.addPendingEvent(event_dict)
-        org_calendar.notifyMembers(event_dict)
         
+        # Change the status for all attendees calendars.
+        # Get the attendeelist from the organizers calendar, 
+        # since new attendees may have been added or old removed.
+        org_calendar = self.getOrganizerCalendar()
+        org_event = org_calendar._getOb(event_id)
+        if org_event is None:
+            LOG('NGCal', INFO, "Can't find original event for %s/%s" 
+                % (calendar_rpath, event_id))
+            return
+        
+        ctool = getToolByName(self, 'portal_cpscalendar')
+        org_attendees = org_event.attendees
+        
+        for attendee in org_attendees:
+            apath = attendee['rpath']
+            # Skip this calendar
+            if apath == calendar_rpath:
+                continue
+            acal = ctool.getCalendarForPath(apath, unrestricted=1)
+            event = acal._getOb(event_id)
+            if event is None:
+                # TODO: Check the pending list.
+                continue
+            event.setAttendeeStatus(calendar_rpath, status)
+            # This needs some testing to see that it really does
+            # the correct thing.
+            acal.notifyMembers(event_dict)
+                
         if REQUEST is not None:
             REQUEST.RESPONSE.redirect(self.absolute_url())
 
@@ -660,10 +682,6 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
         pass # Reached when responding to an invitation
     ob = Event(id, organizer=organizer, attendees=attendees, **kw)
     calendar._setObject(id, ob)
-    ob = calendar._getOb(id)
-
-    # Automatically notify all attendees at creation time
-    ob.updateAttendeesCalendars(comment='')
 
     if REQUEST is not None:
         url = dispatcher.DestinationURL()

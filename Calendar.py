@@ -258,7 +258,7 @@ class Calendar(CPSBaseFolder):
     security.declarePublic('addPendingEvent')
     def addPendingEvent(self, event_dict):
         """Add an event request"""
-        # print event_dict
+        #import pdb;pdb.set_trace()
         if event_dict['request'] == 'status' and \
                 event_dict['id'] not in self.objectIds('Event'):
             # Status change lost because this event was once deleted
