@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2003-10-13 17:59default\n"
-"PO-Revision-Date: 2003-10-13 17:59+0200\n"
+"POT-Creation-Date: 2003-10-14 11:59default\n"
+"PO-Revision-Date: 2003-10-14 11:32+0200\n"
 "Last-Translator: DARCHE <madarche@nuxeio.com>\n"
 "Language-Team: Francais <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -73,12 +73,12 @@ msgstr ""
 #.   <span content="python:str(user_type['plural_title'])" class="calTitle">Ressources</span>
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 msgid "Ressources"
-msgstr ""
+msgstr "Resources"
 
 #.   <span content="python:type['title']" class="calTitle">Rooms</span>
 #: from ../skins/cps_calendar/calendars_contents.pt
 msgid "Rooms"
-msgstr ""
+msgstr "Rooms"
 
 #.   <option repeat="status python:['confirmed', 'tentative', 'decline']" attributes="value status;
 #.   				      selected python:status == mystatus" content="python:str('_cal_pending_%s_' % (status,))">
@@ -1033,6 +1033,48 @@ msgstr "November"
 
 msgid "label_month_long11"
 msgstr "December"
+
+msgid "cpscalendar_member"
+msgstr "Member"
+
+msgid "cpscalendar_members"
+msgstr "Members"
+
+msgid "cpscalendar_room"
+msgstr "Room"
+
+msgid "cpscalendar_rooms"
+msgstr "Rooms"
+
+#, fuzzy
+msgid "cpscalendar_resource"
+msgstr "Resource"
+
+#, fuzzy
+msgid "cpscalendar_resources"
+msgstr "Resources"
+
+msgid "cpscalendar_events_show"
+msgstr "Show events"
+
+msgid "cpscalendar_events_shows"
+msgstr "Events shows"
+
+msgid "cpscalendar_status_confirmed"
+msgstr "Confirmed"
+
+msgid "cpscalendar_status_decline"
+msgstr "Decline"
+
+msgid "cpscalendar_status_tentative"
+msgstr "Tentative"
+
+msgid "cpscalendar_status_unconfirmed"
+msgstr "Unconfirmed"
+
+#, fuzzy
+#~ msgid "cpscalendar_printable_view"
+#~ msgstr "Printable view"
 
 #~ msgid "Calendar"
 #~ msgstr "Calendar"

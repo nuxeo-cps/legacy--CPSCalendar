@@ -3,18 +3,18 @@
 return (
   {
     'id': 'confirmed',
-    'title': '_cal_status_confirmed_'
+    'title': 'cpscalendar_status_confirmed'
   },
   {
     'id': 'decline',
-    'title': '_cal_status_decline_'
+    'title': 'cpscalendar_status_decline'
   },
   {
     'id': 'tentative',
-    'title': '_cal_status_tentative_'
+    'title': 'cpscalendar_status_tentative'
   },
   {
     'id': 'unconfirmed',
-    'title': '_cal_status_unconfirmed_'
+    'title': 'cpscalendar_status_unconfirmed'
   },
 )

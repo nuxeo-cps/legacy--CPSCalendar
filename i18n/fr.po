@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2003-10-13 17:59default\n"
-"PO-Revision-Date: 2003-10-13 17:19+0200\n"
+"POT-Creation-Date: 2003-10-14 11:59default\n"
+"PO-Revision-Date: 2003-10-14 11:35+0200\n"
 "Last-Translator: DARCHE <madarche@nuxeio.com>\n"
 "Language-Team: Francais <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1045,6 +1045,48 @@ msgstr "Novembre"
 msgid "label_month_long11"
 msgstr "Décembre"
 
+msgid "cpscalendar_member"
+msgstr "Membre"
+
+msgid "cpscalendar_members"
+msgstr "Membres"
+
+msgid "cpscalendar_room"
+msgstr "Salle"
+
+msgid "cpscalendar_rooms"
+msgstr "Salles"
+
+msgid "cpscalendar_resource"
+msgstr "Ressource"
+
+msgid "cpscalendar_resources"
+msgstr "Ressources"
+
+msgid "cpscalendar_events_show"
+msgstr "Affichage des événements"
+
+msgid "cpscalendar_events_shows"
+msgstr "Affichages des événements"
+
+#, fuzzy
+msgid "cpscalendar_status_confirmed"
+msgstr "Confirmé"
+
+msgid "cpscalendar_status_decline"
+msgstr "Refusé"
+
+msgid "cpscalendar_status_tentative"
+msgstr "Invitation"
+
+#, fuzzy
+msgid "cpscalendar_status_unconfirmed"
+msgstr "Non confirmé"
+
+#, fuzzy
+#~ msgid "cpscalendar_printable_view"
+#~ msgstr "Version imprimable"
+
 #~ msgid "button_close_this_window"
 #~ msgstr "Fermer cette fenêtre"
 
@@ -1066,18 +1108,8 @@ msgstr "Décembre"
 #~ msgid "action_calendar"
 #~ msgstr "Consulter l'agenda"
 
-#, fuzzy
-#~ msgid "cpscalendar_action_delete"
-#~ msgstr "Date"
-
 #~ msgid "cpscalendar_option_eventstatus_${cpscalendar_eventstatus_type}"
 #~ msgstr "${cpscalendar_eventstatus_type}"
-
-#~ msgid "cpscalendar_option_eventstatus_confirmed"
-#~ msgstr "Confirmé"
-
-#~ msgid "cpscalendar_option_eventstatus_unconfirmed"
-#~ msgstr "Non confirmé"
 
 #~ msgid "cpscalendar_option_eventstatus_cancelled"
 #~ msgstr "Annulé"

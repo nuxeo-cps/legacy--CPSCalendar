@@ -7,20 +7,22 @@
                    end_time disp_infos/end_time;
                    events_desc python:here.getEventsDesc(start_time, end_time, calendar_disp);
                    member_id python:here.portal_membership.getAuthenticatedMember().getMemberId();"
-           i18n:domain="cpscalendar">
+           >
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="here/printing_template/macros/master">
+
 <metal:block fill-slot="css_slot">
   <link rel="stylesheet" type="text/css"
         tal:attributes="href string:${portal_url}/calendar_stylesheet.css" />
 </metal:block>
+
 <body>
 
-<metal:block fill-slot="main"
+<metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="can_add_evts python:mtool.checkPermission('Add portal content', here);
                          show_nav nothing">
-  <h1 tal:content="python:str(here.title_or_id())">
+  <h1 tal:content="here/title_or_id">
     Linus Torvalds (This is the name of calendar owner and we don't want it to be translated)
   </h1>
   <metal:block use-macro="here/calendar_view_macros/macros/?calendar_disp" />

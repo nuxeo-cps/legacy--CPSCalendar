@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-10-13 17:59default\n"
+"POT-Creation-Date: 2003-10-14 11:59default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -1026,4 +1026,40 @@ msgid "label_month_long10"
 msgstr ""
 
 msgid "label_month_long11"
+msgstr ""
+
+msgid "cpscalendar_member"
+msgstr ""
+
+msgid "cpscalendar_members"
+msgstr ""
+
+msgid "cpscalendar_room"
+msgstr ""
+
+msgid "cpscalendar_rooms"
+msgstr ""
+
+msgid "cpscalendar_resource"
+msgstr ""
+
+msgid "cpscalendar_resources"
+msgstr ""
+
+msgid "cpscalendar_events_show"
+msgstr ""
+
+msgid "cpscalendar_events_shows"
+msgstr ""
+
+msgid "cpscalendar_status_confirmed"
+msgstr ""
+
+msgid "cpscalendar_status_decline"
+msgstr ""
+
+msgid "cpscalendar_status_tentative"
+msgstr ""
+
+msgid "cpscalendar_status_unconfirmed"
 msgstr ""

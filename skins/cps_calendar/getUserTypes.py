@@ -3,22 +3,22 @@
 return [
     {
         'id': 'member',
-        'title': '_cal_Member_',
-        'plural_title': '_cal_Members_',
+        'title': 'cpscalendar_member',
+        'plural_title': 'cpscalendar_members',
     },
     {
         'id': 'room',
-        'title': '_cal_Room_',
-        'plural_title': '_cal_Rooms_',
+        'title': 'cpscalendar_room',
+        'plural_title': 'cpscalendar_rooms',
     },
     {
-        'id': 'ressource',
-        'title': '_cal_Ressource_',
-        'plural_title': '_cal_Ressources_',
+        'id': 'resource',
+        'title': 'cpscalendar_resource',
+        'plural_title': 'cpscalendar_resources',
     },
     {
         'id': 'events_show',
-        'title': "_cal_Events_show_",
-        'plural_title': "_cal_Events_shows_",
+        'title': "cpscalendar_events_show",
+        'plural_title': "cpscalendar_events_shows",
     }
 ]

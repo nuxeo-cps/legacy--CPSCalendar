@@ -1,15 +1,20 @@
-<html metal:define-macro="master"
+<html metal:define-macro="master" 
       tal:define="utool nocall:here/portal_url;
                   mtool here/portal_membership;
                   here_url python:'/'+here.absolute_url(relative=1);
                   rportal_url python:utool(relative=1);
-                  portal_url python:rportal_url and '/'+rportal_url or '';"
-      i18n:domain="cpscalendar">
+                  portal_url python:rportal_url and '/'+rportal_url or '';">
 <head>
+	<!--
   <title tal:content="here/expanded_title"
          i18n:translate="">
 	 Printing version of your calendar
   </title>
+	-->
+  <title i18n:translate="cpscalendar_printable_view">
+	 Printing version of your calendar
+  </title>
+
   <metal:block define-slot="base">
     <!-- Additional head elements -->
     <base tal:attributes="href string:${here/absolute_url}/">
