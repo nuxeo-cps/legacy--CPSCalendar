@@ -297,8 +297,8 @@ class Calendars(CPSBaseFolder):
         ttool = getToolByName(context, 'portal_types')
 
         members = dirtool.members
-        entry = members._getEntry(id)
-        
+        entry = members.getEntry(id)
+
         aclu = self.acl_users
         user = aclu.getUser(id).__of__(aclu)
 
@@ -306,7 +306,7 @@ class Calendars(CPSBaseFolder):
             # create this calendar for this member
             #ttool = getToolByName(context, 'portal_types')
             wtool = getToolByName(context, 'portal_workflow')
-            
+
             # Setup a temporary security manager so that creation is not
             # hampered by insufficient roles.
             old_user = getSecurityManager().getUser()
@@ -315,15 +315,17 @@ class Calendars(CPSBaseFolder):
                                            ['Manager', 'Member'], '')
             tmp_user = tmp_user.__of__(aclu)
             newSecurityManager(None, tmp_user)
-            
-            wtool.invokeFactoryFor(self, 'Calendar', id)
-            
+
+            wtool.invokeFactoryFor(self, 'Calendar', id,
+                                   title=entry['fullname'],
+                                   description='')
+
             calendar_type_info = ttool.getTypeInfo('Calendar')
 
             ob = self._getOb(id)
             ob._computedtitle = 1
             calendar_type_info._finishConstruction(ob)
-            
+ 
             # Grant ownership to Member
             try:
                 ob.changeOwnership(user)

@@ -151,8 +151,10 @@ class Calendar(CPSBaseFolder):
 
     def __init__(self, id, title='', description='', usertype='member'):
         # XXX: title and description not used. Why ?
-        #CPSBaseFolder.__init__(self, id, title, description)
-        CPSBaseFolder.__init__(self, id)
+        kw = {}
+        kw['title'] = title
+        kw['description'] = description
+        CPSBaseFolder.__init__(self, id, **kw)
         self.usertype = usertype
 
     security.declareProtected('Add portal content', 'getPendingEventsCount')
