@@ -14,6 +14,8 @@ Bug fixes:
 - The end date didn't follow the start date on standard even creation.
 - Pending events also needed upgrade.
 - The upgrade of events and calendars now tell you if it upgraded anything.
+- Rewrite of the date and time handling in the add and edit event forms
+  removed several bugs.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
