@@ -38,14 +38,6 @@ if to_date_day is not None:
     del kw['to_date_hour']
     del kw['to_date_minute']
 
-attendees = kw.get('attendees', [])
-attendees = [att for att in attendees if att]
-
-att = []
-for attendee in attendees:
-    att.append({'id': attendee, 'status': 'unconfirmed'})
-
-kw['attendees'] = att
 here.invokeFactory('Event', id, **kw)
 
 if REQUEST is not None:

@@ -35,25 +35,6 @@ if to_date_day is not None:
     del kw['to_date_hour']
     del kw['to_date_minute']
 
-attendees = kw.get('attendees', [])
-attendees = [att for att in attendees if att]
-
-old_attendees = []
-remove_attendees = []
-for att in here.attendees:
-    att_id = att['id']
-    old_attendees.append(att_id)
-    if att_id not in attendees:
-        remove_attendees.append(att_id)
-
-add_attendees = [att for att in attendees if att not in old_attendees]
-
-new_attendees = [att for att in here.attendees if att['id'] not in remove_attendees]
-
-for attendee in add_attendees:
-    new_attendees.append({'id': attendee, 'status': 'unconfirmed'})
-
-kw['attendees'] = new_attendees
 here.edit(**kw)
 
 if REQUEST is not None:

@@ -23,7 +23,7 @@
       Calendar of
     </tal:block>
     <tal:block
-      define="user_id member/getUserName; user_props python:dtool.getEntry(user_id); fullname python:user_props and user_props.get(dtool.display_prop, user_id) or user_id;"
+      define="user_id here/id; user_props python:dtool.getEntry(user_id); fullname python:user_props and user_props.get(dtool.display_prop, user_id) or user_id;"
       replace ="fullname">
       Fullname
     </tal:block>
@@ -36,7 +36,30 @@
 
 <metal:block fill-slot="header_plus"></metal:block>
 
-<metal:block fill-slot="main">
+<metal:block fill-slot="main"
+  tal:define="can_add_evts python:mtool.checkPermission('Add portal content', here)">
+  <tal:block condition="can_add_evts">
+    <tal:block define="ev_dict here/getDeclinedCanceledEvents">
+      <form name="calendar_delevents" method="POST"
+        tal:define="canceled ev_dict/canceled"
+        tal:condition="canceled">
+        <input type="hidden" name="ids:list"
+          tal:repeat="id canceled"
+          tal:attributes="value id" />
+        <input type="submit"
+          tal:attributes="value python:mcat('_button_Remove canceled events_')" />
+      </form>
+      <form name="calendar_delevents" method="POST"
+        tal:define="declined ev_dict/declined"
+        tal:condition="declined">
+        <input type="hidden" name="ids:list"
+          tal:repeat="id declined"
+          tal:attributes="value id" />
+        <input type="submit"
+          tal:attributes="value python:mcat('_button_Remove events you declined_')" />
+      </form>
+    </tal:block>
+  </tal:block>
   <tal:block condition="python:mtool.checkPermission('Add portal content', here)">
     <tal:block define="pendings_count here/getPendingEventsCount"
       condition="pendings_count">

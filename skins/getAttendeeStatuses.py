@@ -3,14 +3,18 @@
 return (
   {
     'id': 'confirm',
-    'title': 'Confirm'
+    'title': '_cal_status_confirmed_'
   },
   {
     'id': 'decline',
-    'title': 'Decline'
+    'title': '_cal_status_decline_'
   },
   {
     'id': 'tentative',
-    'title': 'Tentative'
+    'title': '_cal_status_tentative_'
+  },
+  {
+    'id': 'unconfirmed',
+    'title': '_cal_status_unconfirmed_'
   },
 )

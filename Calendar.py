@@ -20,6 +20,9 @@ from Products.CMFCore.CMFCorePermissions import \
 
 from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
 
+def cmp_ev(a, b):
+    return a['start'].__cmp__(b['start'])
+
 factory_type_information = (
     {'id': 'Calendar',
      'title': 'Calendar',
@@ -96,6 +99,8 @@ class Calendar(Workgroup):
     usertype = 'member'
 
     _pending_events = ()
+    _declined = ()
+    _canceled = ()
 
     def __init__(self, id, title='', description='', usertype='member'):
         Workgroup.__init__(self, id, title, description)
@@ -248,71 +253,9 @@ class Calendar(Workgroup):
               'hour_blocks': self._get_hour_block_cols(hour_cols)[0],
             }
         elif disp == 'week':
-            day_lines = []
-            day_ids = []
-            day_dict = {}
-            day_occupation = []
-            day_empty = []
-            hour_cols = []
-            i = 0
-            for slot in slot_list:
-                day_events = slot['day']
-                hour_cols.append(slot['hour'])
-                event_ids = [ev['event_id'] for ev in day_events]
-                remove_ids = [id for id in day_ids if id not in event_ids]
-                for id in remove_ids:
-                    line, colstart = day_dict[id]
-                    day_lines[line][-1]['colspan'] = i - colstart
-                    day_occupation[line] = None
-                    del day_dict[id]
-                    day_ids.remove(id)
-                    day_empty[line] = i
-                for ev in day_events:
-                    id = ev['event_id']
-                    if id not in day_ids:
-                        try:
-                            line = day_occupation.index(None)
-                        except ValueError:
-                            line = len(day_occupation)
-                            day_lines.append([])
-                            day_occupation.append(None)
-                            day_empty.append(0)
-                        day_occupation[line] = id
-                        day_ids.append(id)
-                        day_dict[id] = (line, i)
-                        empty_span = i - day_empty[line]
-                        if empty_span:
-                            day_lines[line].append(
-                                {
-                                    'event': None,
-                                    'colspan': empty_span,
-                                }
-                            )
-                        day_lines[line].append(
-                            {
-                                'event': ev['event'],
-                            }
-                        )
-                i += 1
-            i = 0
-            len_slots = len(slots)
-            for day_line in day_lines:
-                id = day_occupation[i]
-                if id is None:
-                    empty_span = len_slots - day_empty[i]
-                    if empty_span > 0:
-                        day_line.append(
-                            {
-                                'event': None,
-                                'colspan': empty_span,
-                            }
-                        )
-                else:
-                    line, colstart = day_dict[id]
-                    day_lines[line][-1]['colspan'] = len_slots - colstart
-                i += 1
-
-            LOG('NGC', DEBUG, 'day_lines=\n%s' % (day_lines, ))
+            day_events_list = [slot['day'] for slot in slot_list]
+            hour_cols = [slot['hour'] for slot in slot_list]
+            day_lines = self._get_day_lines(day_events_list, len(slots))
             hour_block_cols = self._get_hour_block_cols(hour_cols)
             return {
                 'slots': slots,
@@ -320,41 +263,119 @@ class Calendar(Workgroup):
                 'hour_block_cols': hour_block_cols,
             }
         elif disp == 'month':
-            day_lines = []
+            lines = []
             current_day = start_time.dow()
             if current_day == 0:
                 current_day = 7
             current_line = [None]*(current_day-1)
-            day_lines.append(current_line)
-            i = 1
+            current_dict = {
+              'hour_cols': current_line,
+            }
+            lines.append(current_dict)
+            day_events_list = [[]]*(current_day-1)
+            i = 0
             for slot in slot_list:
                 slot_day = slot['day']
+                day_events_list.append(slot_day)
                 slot_hour = slot['hour']
-                day_height = len(slot_day) + len(slot_hour)
+                slot_hour.sort(cmp_ev)
+                slot = slots[i]
+                i += 1
                 current_line.append({
-                    'day': slot_day,
                     'hour': slot_hour,
+                    'slot': slot,
                     'dom': i,
-                    'day_height': day_height,
+                    'day_height': len(slot_hour),
                 })
                 if current_day == 7:
+                    day_lines = self._get_day_lines(day_events_list, 7)
+                    current_dict['day_lines'] = day_lines
+                    day_events_list = []
                     current_day = 1
                     current_line = []
-                    day_lines.append(current_line)
+                    current_dict = {
+                        'hour_cols': current_line,
+                    }
+                    lines.append(current_dict)
                 else:
                     current_day += 1
-                i += 1
             if current_day > 1:
+                day_events_list.extend([[]]*(8-current_day))
+                day_lines = self._get_day_lines(day_events_list, 7)
+                current_dict['day_lines'] = day_lines
                 current_line.extend([None]*(8-current_day))
             return {
                 'slots': slots,
-                'day_lines': day_lines,
+                'lines': lines,
             }
+
+    def _get_day_lines(self, day_events_list, len_slots):
+        LOG('NGC', DEBUG, 'd_e_l:\n%s\nlen_slots: %s' % (day_events_list, len_slots))
+        day_lines = []
+        day_ids = []
+        day_dict = {}
+        day_occupation = []
+        day_empty = []
+        hour_cols = []
+        i = 0
+        for day_events in day_events_list:
+            event_ids = [ev['event_id'] for ev in day_events]
+            remove_ids = [id for id in day_ids if id not in event_ids]
+            for id in remove_ids:
+                line, colstart = day_dict[id]
+                day_lines[line][-1]['colspan'] = i - colstart
+                day_occupation[line] = None
+                del day_dict[id]
+                day_ids.remove(id)
+                day_empty[line] = i
+            for ev in day_events:
+                id = ev['event_id']
+                if id not in day_ids:
+                    try:
+                        line = day_occupation.index(None)
+                    except ValueError:
+                        line = len(day_occupation)
+                        day_lines.append([])
+                        day_occupation.append(None)
+                        day_empty.append(0)
+                    day_occupation[line] = id
+                    day_ids.append(id)
+                    day_dict[id] = (line, i)
+                    empty_span = i - day_empty[line]
+                    if empty_span:
+                        day_lines[line].append(
+                            {
+                                'event': None,
+                                'colspan': empty_span,
+                            }
+                        )
+                    day_lines[line].append(
+                        {
+                            'event': ev['event'],
+                        }
+                    )
+            i += 1
+        i = 0
+        for day_line in day_lines:
+            id = day_occupation[i]
+            if id is None:
+                empty_span = len_slots - day_empty[i]
+                if empty_span > 0:
+                    day_line.append(
+                        {
+                            'event': None,
+                            'colspan': empty_span,
+                        }
+                    )
+            else:
+                line, colstart = day_dict[id]
+                day_lines[line][-1]['colspan'] = len_slots - colstart
+            i += 1
+
+        return day_lines
 
     def _get_hour_block_cols(self, hour_cols):
         hour_block_cols = []
-        def cmp_ev(a, b):
-            return a['start'].__cmp__(b['start'])
         for col in hour_cols:
             blocks = []
             hour_block_cols.append(blocks)
@@ -605,6 +626,46 @@ class Calendar(Workgroup):
     security.declareProtected('View', 'getEvents')
     def getEvents(from_date, to_date):
         return ()
+
+    security.declarePrivate('addDeclinedEvent')
+    def addDeclinedEvent(self, event):
+        event_id = event.id
+        if event_id not in self._declined:
+            self._declined = self._declined + (event_id, )
+
+    security.declarePrivate('addCanceledEvent')
+    def addCanceledEvent(self, event):
+        event_id = event.id
+        if event_id not in self._canceled:
+            self._canceled = self._canceled + (event_id, )
+
+    security.declarePrivate('removeDeclinedEvent')
+    def removeDeclinedEvent(self, event):
+        event_id = event.id
+        if event_id in self._declined:
+            self._declined = tuple([id for id in self._declined if id != event_id])
+
+    security.declarePrivate('removeCanceledEvent')
+    def removeCanceledEvent(self, event):
+        event_id = event.id
+        if event_id in self._canceled:
+            self._canceled = tuple([id for id in self._canceled if id != event_id])
+
+    security.declareProtected('Add portal content', 'getDeclinedCanceledEvents')
+    def getDeclinedCanceledEvents(self):
+        """
+        """
+        return {
+            'canceled': self._canceled,
+            'declined': self._declined,
+        }
+
+    def manage_delObjects(self, ids, *args, **kw):
+        declined = [id for id in self._declined if id in ids]
+        canceled = [id for id in self._canceled if id in ids]
+        Workgroup.manage_delObjects(self, ids, *args, **kw)
+        self._declined = tuple(declined)
+        self._canceled = tuple(canceled)
 
 InitializeClass(Calendar)
 

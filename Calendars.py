@@ -118,6 +118,42 @@ class Calendars(Workgroup):
             return ob
         return None
 
+    security.declareProtected(View, 'getCalendarsDict')
+    def getCalendarsDict(self):
+        calendars_dict = {}
+        for ob in self.objectValues('Calendar'):
+            entry = calendars_dict.get(ob.usertype, None)
+            if entry is None:
+                calendars_dict[ob.usertype] = entry = []
+            entry.append({
+              'id': ob.id,
+              'cn': ob.title_or_id(),
+              'usertype': ob.usertype,
+            })
+        return calendars_dict
+
+    security.declareProtected(View, 'getAttendeeInfo')
+    def getAttendeeInfo(self, id, status=0):
+        if id in self.objectIds('Calendar'):
+            calendar = getattr(self, id)
+            info = {
+                'id': id,
+                'usertype': calendar.usertype,
+            }
+            if status:
+                info['status'] = 'unconfirmed'
+            if calendar.usertype != 'member':
+                info['cn'] = calendar.title_or_id()
+            else:
+                dirtool = getToolByName(self, 'portal_metadirectories')
+                members = dirtool.members
+                entry = members.getEntry(id)
+                if entry is None:
+                    info['cn'] = id
+                else:
+                    info['cn'] = entry.get(members.display_prop, id)
+            return info
+
     def __getitem__(self, name):
         LOG('NGCal', DEBUG, 'Calendars[%s]?' % (name, ))
         try:

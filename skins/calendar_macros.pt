@@ -20,7 +20,7 @@
             Organizer
           </metal:block>
           <metal:block fill-slot="content"
-            tal:content="organizer">
+            tal:content="organizer/cn|organizer/id">
             organizer
           </metal:block>
         </metal:block>
@@ -137,7 +137,40 @@
           </ul>
         </tal:block>
       </tal:block>
-      <input type="submit" tal:attributes="value python:mcat('_button_commit_')" />
+      <input type="submit" tal:attributes="value python:mcat('_button_validate_')" />
     </form>
+  </tal:block>
+</metal:block>
+
+<metal:block define-macro="notifyattendees">
+  <tal:block condition="python:mtool.checkPermission('Add portal content', here)">
+    <tal:block define="pendings here/getPendingEvents"
+      condition="pendings">
+      You have pending requests for this event:
+      <metal:block use-macro="here/calendar_macros/macros/pendings_view" />
+    </tal:block>
+    <tal:block condition="python:here.canEditThisEvent() and here.attendees and here.isdirty">
+      <h3
+        tal:content="python:mcat('_You have to notify other attendees of recent changes to this event_')">
+        You have to notify other attendees of recent changes to this event.
+      </h3>
+      <form action="updateAttendeesCalendars">
+        <metal:block use-macro="here/main_widgets/macros/form">
+          <metal:block fill-slot="content">
+            <metal:block use-macro="here/main_widgets/macros/form_property">
+              <metal:block fill-slot="title"
+                tal:content="python:mcat('_prop_comment_')">
+                Comment
+              </metal:block>
+              <metal:block fill-slot="content">
+                <textarea name="comment" cols="40" rows="4"></textarea>
+              </metal:block>
+            </metal:block>
+          </metal:block>
+        </metal:block>
+        <input type="submit"
+          tal:attributes="value python:mcat('_button_validate_')" />
+      </form>
+    </tal:block>
   </tal:block>
 </metal:block>

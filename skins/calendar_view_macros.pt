@@ -188,6 +188,8 @@
             event_src string:${portal_url}/cal_event;
             back_td1 string:${portal_url}/cal_line1.png;
             back_td2 string:${portal_url}/cal_line2.png;
+            add_src string:${portal_url}/img_box_addbox.png;
+            add_url string:${here_url}/calendar_addevent_form?selected_day=;
             slots events_desc/slots;
             day_lines events_desc/day_lines;
             hour_block_cols events_desc/hour_block_cols">
@@ -261,7 +263,7 @@
                         <a
                           tal:omit-tag="not:nocall:event"
                           tal:attributes="
-                            title python:event and '%s (%s -> %s)' % (event.title_or_id(), event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
+                            title python:event and '%s (%s - %s)' % (event.title_or_id(), event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
                             href python:event and event.absolute_url()">
                           <img
                             tal:define="
@@ -270,7 +272,7 @@
                               border border;
                               src src;
                               width python:59 - border*2;
-                              height python:info['height']/4 - border" />
+                              height python:info['height']/4 - 2*border" />
                         </a>
                       </tal:block>
                     </tal:block>
@@ -297,7 +299,7 @@
                                     border border;
                                     src src;
                                     width python:width - border*2;
-                                    height python:info['height']/4 - border" />
+                                    height python:info['height']/4 - 2*border" />
                               </a>
                             </tal:block>
                           </td>
@@ -308,6 +310,18 @@
                 </tal:block>
               </td>
             </tal:block>
+          </tr>
+          <tr tal:condition="can_add_evts">
+            <td>
+            </td>
+            <td tal:repeat="slot slots">
+              <a
+                tal:attributes="
+                  href python:add_url + str(int(slot[0]))">
+                <img border="0"
+                  tal:attributes="src add_src" />
+              </a>
+            </td>
           </tr>
         </table>
       </td>
@@ -354,9 +368,55 @@
               Mon
             </th>
           </tr>
-          <tal:block repeat="day_line events_desc/day_lines">
+          <tal:block repeat="line events_desc/lines">
             <tr>
-              <tal:block repeat="events day_line">
+              <tal:block repeat="events line/hour_cols">
+                <td width="59"
+                  tal:condition="not:events">
+                </td>
+                <tal:block condition="events">
+                  <td width="59" valign="top"
+                    tal:define="
+                        day_height events/day_height;
+                        slot events/slot;
+                        go_day python:int(slot[0]);
+                        odd repeat/events/odd"
+                    tal:attributes="
+                      bgcolor python:odd and '#EEEEFF' or nothing
+                      ">
+                      <a tal:attributes="
+                        href string:${here_url}?disp=day&viewed_day=${go_day}">
+                        <strong tal:content="events/dom">1</strong>
+                      </a>
+                  </td>
+                </tal:block>
+              </tal:block>
+            </tr>
+            <tr tal:condition="line/day_lines">
+              <td bgcolor="black" height="1" colspan="7">
+              </td>
+            </tr>
+            <tr tal:repeat="day_line line/day_lines">
+              <tal:block repeat="col day_line">
+                <td
+                  tal:attributes="
+                  colspan python:col['colspan'] > 1 and col['colspan'] or nothing;
+                  bgcolor python:col['event'] and '#DDDDDD'">
+                  <tal:block condition="nocall:col/event">
+                    <a
+                      tal:define="event nocall:col/event"
+                      tal:attributes="href event/absolute_url"
+                      tal:content="event/title_or_id" />
+                  </tal:block>
+                </td>
+              </tal:block>
+            </tr>
+            <tr tal:condition="line/day_lines">
+              <td bgcolor="black" height="1" colspan="7">
+              </td>
+            </tr>
+            <tr>
+              <tal:block repeat="events line/hour_cols">
                 <td width="59"
                   tal:condition="not:events">
                 </td>
@@ -368,27 +428,17 @@
                     tal:attributes="
                       bgcolor python:odd and '#EEEEFF' or nothing
                       ">
-                    <strong tal:content="events/dom">1</strong>
-                    <table width="59" cellspacing="1" cellpadding="0" border="0"
-                      tal:define="allday_events events/day"
-                      tal:condition="allday_events">
-                      <tr tal:repeat="allday_event allday_events">
-                        <td bgcolor="#DDDDDD">
-                          <a
-                            tal:define="event nocall:allday_event/event"
-                            tal:attributes="href event/absolute_url"
-                            tal:content="event/title_or_id">
-                            Event
-                          </a>
-                        </td>
-                      </tr>
-                    </table>
                     <li tal:repeat="hour_event events/hour">
                       <a
-                        tal:define="event nocall:hour_event/event"
+                        tal:define="
+                        event nocall:hour_event/event;
+                        title python:'%s (%s - %s)' % (event.title_or_id(), event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
+                        disp_title python:len(title) > 5 and (title[:5] + '...') or title;
+                        "
                         tal:attributes="
+                          title title;
                           href event/absolute_url"
-                        tal:content="event/title_or_id">
+                        tal:content="disp_title">
                         Event
                       </a>
                     </li>
@@ -402,8 +452,8 @@
                 </tal:block>
               </tal:block>
             </tr>
-            <tr tal:condition="not:repeat/day_line/end">
-              <td colspan="7" bgcolor="black" height="1">
+            <tr tal:condition="not:repeat/line/end">
+              <td colspan="7" bgcolor="black" height="2">
               </td>
             </tr>
           </tal:block>

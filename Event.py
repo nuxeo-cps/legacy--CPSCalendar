@@ -54,6 +54,14 @@ factory_type_information = (
                   'name': '_action_modify_',
                   'action': 'calendar_editevent_form',
                   'permissions': (ModifyPortalContent,)},
+                 {'id': 'attendees',
+                  'name': '_action_attendees_',
+                  'action': 'calendar_attendees_form',
+                  'permissions': (ModifyPortalContent,)},
+                 {'id': 'delete',
+                  'name': '_action_delete_',
+                  'action': 'calendar_delevent_form',
+                  'permissions': (ModifyPortalContent,)},
                  {'id': 'create',
                   'name': '_action_create_',
                   'action': 'calendar_eventcreate_form',
@@ -83,7 +91,7 @@ class Event(BaseDocument):
     # Content accessors
     #
 
-    organizer = ''
+    organizer = {}
     attendees = ()
     from_date = None
     to_date = None
@@ -93,16 +101,30 @@ class Event(BaseDocument):
 
     isdirty = 1
 
-    def __init__(self, id, organizer='', attendees=(), from_date=None, to_date=None, **kw):
+    def __init__(self, id, organizer={}, attendees=(), from_date=None, to_date=None, **kw):
         BaseDocument.__init__(self, id, organizer=organizer, **kw)
+        self.organizer = deepcopy(organizer)
         self.attendees = deepcopy(attendees)
         self.from_date = from_date
         self.to_date = to_date
         self._normalize()
 
     security.declareProtected('Modify portal content', 'edit')
-    def edit(self, attendees=None, from_date=None, to_date=None, **kw):
+    def edit(self, attendees=None, from_date=None, to_date=None, all_day=None, **kw):
+        old_status = self.event_status
         BaseDocument.edit(self, **kw)
+        new_status = self.event_status
+        if new_status != old_status:
+            if new_status == 'canceled':
+                calendar = self.getCalendar()
+                calendar.addCanceledEvent(self)
+            if old_status == 'canceled':
+                calendar = self.getCalendar()
+                calendar.removeCanceledEvent(self)
+
+        if all_day is not None:
+            self.all_day = all_day
+
         if attendees is not None:
             self.attendees = deepcopy(attendees)
         if from_date is not None:
@@ -154,8 +176,20 @@ class Event(BaseDocument):
         """
         calendar = self.getCalendar()
         calendars = aq_parent(aq_inner(calendar))
-        org_calendar = getattr(calendars, self.organizer, None)
+        org_calendar = getattr(calendars, self.organizer['id'], None)
         return org_calendar
+
+    security.declareProtected(View, 'getAttendeesDict')
+    def getAttendeesDict(self):
+        """
+        """
+        attendees_dict = {}
+        for attendee in self.attendees:
+            entry = attendees_dict.get(attendee['usertype'], None)
+            if entry is None:
+                attendees_dict[attendee['usertype']] = entry = []
+            entry.append(deepcopy(attendee))
+        return attendees_dict
 
     security.declareProtected('Add portal content', 'getPendingEvents')
     def getPendingEvents(self):
@@ -173,7 +207,7 @@ class Event(BaseDocument):
             'request': 'request',
             'event': {
                 'id': self.id,
-                'organizer': self.organizer,
+                'organizer': deepcopy(self.organizer),
                 'attendees': deepcopy(self.attendees),
                 'from_date': self.from_date,
                 'to_date': self.to_date,
@@ -192,7 +226,12 @@ class Event(BaseDocument):
     def canEditThisEvent(self):
         """
         """
-        return self.getCalendarUser() == self.organizer
+        return self.getCalendarUser() == self.organizer['id']
+
+    security.declareProtected('Add portal content', 'setAttendees')
+    def setAttendees(self, attendees):
+        self.attendees = deepcopy(attendees)
+        self.isdirty = 1
 
     security.declareProtected('Add portal content', 'setAttendeeStatus')
     def setAttendeeStatus(self, attendee, status):
@@ -215,11 +254,19 @@ class Event(BaseDocument):
         (member, dtstamp) = self._getRequestInformations()
         for attendee in self.attendees:
             if attendee['id'] == user_id:
+                old_status = attendee['status']
                 attendee['status'] = status
+                if status != old_status:
+                    if status == 'decline':
+                        calendar = self.getCalendar()
+                        calendar.addDeclinedEvent(self)
+                    if old_status == 'decline':
+                        calendar = self.getCalendar()
+                        calendar.removeDeclinedEvent(self)
                 self._p_changed = 1
         org_calendar = self.getOrganizerCalendar()
         if org_calendar is None:
-            LOG('NGCal', INFO, "Can't get calendar for %s" % (self.organizer, ))
+            LOG('NGCal', INFO, "Can't get calendar for %s" % (self.organizer['id'], ))
             return
         org_calendar.addPendingEvent({
             'id': self.id,
@@ -259,6 +306,14 @@ class Event(BaseDocument):
         self.isdirty = 0
         if REQUEST is not None:
             REQUEST.RESPONSE.redirect(self.absolute_url())
+
+    security.declareProtected(ModifyPortalContent, 'deleteEvent')
+    def deleteEvent(self, comment=''):
+        """
+        """
+        parent = self.getCalendar()
+        if parent is not None:
+            parent.manage_delObjects([self.id])
 
     security.declarePrivate('getEventInSlots')
     def getEventInSlots(self, start_time, end_time, slots):
@@ -305,7 +360,7 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
     if organizer is None:
         # by default, organizer is the current calendar user
 
-        organizer = calendar.id
+        organizer = calendar.getAttendeeInfo(calendar.id)
     ob = Event(id, organizer=organizer, attendees=attendees, **kw)
     calendar._setObject(id, ob)
     ob = getattr(calendar, id)
