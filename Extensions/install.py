@@ -3,14 +3,56 @@
 """ here we go
 """
 
-import os
-import sys
+import os, sys
 from AccessControl import getSecurityManager
 from zLOG import LOG, INFO, DEBUG
 
 import Products.CPSCalendar
 
+from Products.CPSDefault.Installer import BaseInstaller
+
+SKINS = (
+   ('cpscalendar_skins', 'Products/CPSCalendar/skins/cps_calendar'),
+   ('cpscalendar_images', 'Products/CPSCalendar/skins/cps_calendar_images'),
+)
+
+class CPSInstaller(BaseInstaller):
+    product_name = 'CPSCalendar'
+
+    def install(self):
+        self.log("Starting CPSCalendar install")
+        self.setupSkins(SKINS)
+        self.installTool()
+        self.log(old_update(self.portal))
+        self.addUidIndex()
+        self.log("End of specific CPSCalendar install")
+
+    def installTool(self):
+        # Install CPSCalendar Tool
+        self.log("Verifying CPS Advanced Calendar tool")
+        if not self.portalHas('portal_cpscalendar'):
+            self.log(" Creating CPS Advanced Calendar tool")
+            self.portal.manage_addProduct['CPSCalendar'].addCPSCalendarTool()
+
+    # XXX: make this more generic later
+    def addUidIndex(self):
+        ct = self.portal.portal_catalog
+        try:
+            ct.delIndex('uid')
+        except:
+            pass
+        ct.addIndex('uid', 'FieldIndex')
+        ct.manage_reindexIndex(ids=['uid'])
+
+
 def update(self):
+    installer = CPSInstaller(self)
+    installer.install()
+    return installer.logResult()
+
+
+# XXX: refactor the rest later
+def old_update(self):
     _log = []
     def pr(bla, _log=_log):
         if bla == 'flush':
@@ -29,54 +71,7 @@ def update(self):
     def portalhas(id, portal=portal):
         return id in portal.objectIds()
 
-    pr("Starting install")
-    pr("")
-    installername = getSecurityManager().getUser().getUserName()
-    pr("Current user: %s" % installername)
-
     workspaces_id = 'workspaces'
-
-    # Install skins
-    pr("Verifying skins")
-    skins = ('cpscalendar_skins', 'cpscalendar_images',)
-    paths = {
-        'cpscalendar_skins': 'Products/CPSCalendar/skins/cps_calendar',
-        'cpscalendar_images': 'Products/CPSCalendar/skins/cps_calendar_images',
-    }
-    for skin in skins:
-        path = paths[skin]
-        path = path.replace('/', os.sep)
-        pr(" FS Directory View '%s'" % skin)
-        if skin in portal.portal_skins.objectIds():
-            dv = portal.portal_skins[skin]
-            oldpath = dv.getDirPath()
-            if oldpath == path:
-                prok()
-            else:
-                pr("  Correctly installed, correcting path")
-                dv.manage_properties(dirpath=path)
-        else:
-            portal.portal_skins.manage_addProduct['CMFCore'].manage_addDirectoryView(filepath=path, id=skin)
-            pr("  Creating skin")
-    allskins = portal.portal_skins.getSkinPaths()
-    for skin_name, skin_path in allskins:
-        if skin_name != 'Basic':
-            continue
-        path = [x.strip() for x in skin_path.split(',')]
-        path = [x for x in path if x not in skins] # strip all
-        if path and path[0] == 'custom':
-            path = path[:1] + list(skins) + path[1:]
-        else:
-            path = list(skins) + path
-        npath = ', '.join(path)
-        portal.portal_skins.addSkinSelection(skin_name, npath)
-        pr(" Fixup of skin %s" % skin_name)
-
-    # Install CPSCalendar Tool
-    pr("Verifying CPS Advanced Calendar tool")
-    if not portalhas('portal_cpscalendar'):
-        pr(" Creating CPS Advanced Calendar tool")
-        portal.manage_addProduct['CPSCalendar'].addCPSCalendarTool()
 
 
     # Verification of the action and addinf if neccesarly 
@@ -108,7 +103,7 @@ def update(self):
             workspaceACT.append(ptype)
 
     ptypes = {
-        'CPSCalendar':(
+        'CPSCalendar': (
             'Calendar',
             'Event',
         ),
