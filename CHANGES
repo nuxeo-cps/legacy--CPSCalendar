@@ -3,26 +3,27 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- The confirmation workflow is simplified:
+  - Made the creator of an event automatically confirmed.
+  - Made notification on event creation automatic.
+  - The organizer doesn't need to approve his own meeting request.
+  - Confirmation of events now is done directly on all
+    attendees calendars, and not via the organizing calendar.
+  - Deleting events now cancels them, even in the deleters calendar.
+  - Verifying cancellations no longer sends new events to verify.
+  - Removing an attendee now sends a cancel to the attendee.
+  - The organizer is now always a participant (even if it is an event).
+  - Adding attendees now automatically sends a notification.
+  - Modifying the event now automatically sends a notification.
+   
 Bug fixes:
 ~~~~~~~~~~
 - With Zope 2.7.1 and later selected attendees was lost when creating meetings.
   (#1483)
-- Made the creator of an event automatically confirmed.
-- Made notification on event creation automatic.
-- The organizer doesn't need to approve his own meeting request.
-- Confirmation of events now is done directly on all
-  attendees calendars, and not via the organizing calendar.
+- You can no longer remove the organizer from the attendees list.
 - New events are not set to dirty.
 - A KeyError 'id' when running the installer was fixed.
 - The document link was lost when editing the document.
-- You can no longer remove the organizer from the attendees list.
-- Deleting events now cancels them, even in the deleters calendar.
-- Verifying cancellations no longer sends new events to verify.
-- Removing an attendee now sends a cancel to the attendee.
-- The organizer is now always a participant (even if it is an event).
-- Adding attendees now automatically sends a notification.
-- Modifying the event now automatically sends a notification.
 - The confirmation options are now radio buttons instead of a select list.
 - You can now only modify and delete events via the organizers calendar.
 - searchCalendars now only returns users if they have a calendar.
@@ -31,6 +32,7 @@ Bug fixes:
 - Some formatting errors in the pending events view was fixed.
 - Searching for calendars on the id field when restrictive user search was
   selected, returned all users with View-permission.
+- The "Delete" action now says "Cancel"
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
