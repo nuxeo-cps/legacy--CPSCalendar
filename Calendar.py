@@ -364,12 +364,12 @@ class Calendar(CPSBaseFolder):
             current_day = start_time.dow()
             if current_day == 0:
                 current_day = 7
-            current_line = [None]*(current_day-1)
+            current_line = [None] * (current_day - 1)
             current_dict = {
               'hour_cols': current_line,
             }
             lines.append(current_dict)
-            day_events_list = [[]]*(current_day-1)
+            day_events_list = [[]] * (current_day - 1)
             i = 0
             for slot in slot_list:
                 slot_day = slot['day']
@@ -397,10 +397,10 @@ class Calendar(CPSBaseFolder):
                 else:
                     current_day += 1
             if current_day > 1:
-                day_events_list.extend([[]]*(8-current_day))
+                day_events_list.extend([[]] * (8 - current_day))
                 day_lines = self._getDayLines(day_events_list, 7)
                 current_dict['day_lines'] = day_lines
-                current_line.extend([None]*(8-current_day))
+                current_line.extend([None] * (8 - current_day))
             return {
                 'slots': slots,
                 'lines': lines,
@@ -441,16 +441,14 @@ class Calendar(CPSBaseFolder):
                     pos = day_empty[line]
                     empty_span = i - pos
                     if empty_span:
-                        day_lines[line].append(
-                            {
-                                'event': None,
-                                'colspan': empty_span,
-                                'pos': pos,
-                            })
-                    day_lines[line].append(
-                        {
-                            'event': ev['event'],
+                        day_lines[line].append({
+                            'event': None,
+                            'colspan': empty_span,
+                            'pos': pos,
                         })
+                    day_lines[line].append({
+                        'event': ev['event'],
+                    })
             i += 1
         i = 0
         for day_line in day_lines:
@@ -459,12 +457,11 @@ class Calendar(CPSBaseFolder):
                 pos = day_empty[i]
                 empty_span = len_slots - pos
                 if empty_span > 0:
-                    day_line.append(
-                        {
-                            'event': None,
-                            'colspan': empty_span,
-                            'pos': pos,
-                        })
+                    day_line.append({
+                        'event': None,
+                        'colspan': empty_span,
+                        'pos': pos,
+                    })
             else:
                 line, colstart = day_dict[id]
                 day_lines[line][-1]['colspan'] = len_slots - colstart
@@ -795,8 +792,8 @@ class Calendar(CPSBaseFolder):
 
     security.declareProtected('Delete objects', 'manage_delObjects')
     def manage_delObjects(self, ids, *args, **kw):
-        """
-        """
+        """Override manage_delObjects to cleanup declined and canceled
+        events lists."""
         self._pending_events = tuple(
             [ev for ev in self._pending_events if ev['id'] not in ids])
         declined = [id for id in self._declined if id not in ids]
