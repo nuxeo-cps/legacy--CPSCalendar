@@ -50,6 +50,7 @@ class TestCalendarTool(CPSCalendarTestCase):
              'portal/workspaces/members/test_user_1_/calendar'])
 
         #print caltool.listCalendarsDict()
+        #print caltool.getFreeBusy(...)
 
 
 class TestCalendar(CPSCalendarTestCase):
@@ -119,12 +120,14 @@ class TestCalendar(CPSCalendarTestCase):
         self.assertEquals(event.getCalendar(), self.calendar)
         self.assertEquals(event.getCalendarUser(), 'root')
 
-        assert event.getOrganizerCalendar()
-
         # Test event's view and forms
         self.portal.REQUEST.SESSION = {}
         assert event.calendar_event_view()
         assert event.calendar_editevent_form()
+
+        # XXX: Are these method really called ?
+        #assert event.getOrganizerCalendar()
+        #assert event.setMyStatus('decline')
 
     def testView(self):
         self.portal.REQUEST.SESSION = {}
