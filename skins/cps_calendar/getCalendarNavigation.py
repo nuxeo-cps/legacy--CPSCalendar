@@ -13,14 +13,15 @@ if REQUEST and REQUEST.has_key('current_uid'):
 if not current_uid:
     current_uid = root_uid
 
-once = 0 # Python doesn't have an until statement. :-/
 next_uid = current_uid
-while not (once and doc and doc.meta_type == 'CPS Proxy Folder'):
-    once = 1
+while 1:
     current_uid = next_uid
     docurl = context.portal_url.getPortalPath() + '/' + current_uid
     doc = context.restrictedTraverse(docurl, None)
     next_uid = '/'.join(next_uid.split('/')[:-1])
+    if not (doc and doc.meta_type in ('CPS Proxy Folder',
+                                      'CPS Proxy Folderish Document')):
+        break
 
 # current_uid = context.portal_url.getRelativeContentURL(context)
 nav = CPSNavigation(root_uid=root_uid,
