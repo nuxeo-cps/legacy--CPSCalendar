@@ -133,7 +133,7 @@ Here is the mapping between roles and permissions on a calendar:
   o edit events
   o create events
   o delete events
-  o manage events (XXX what does it mean ???)
+  o manage events (XXX what does it mean ???) (I have no idea /LRE)
 - A member of the calendar will be able to:
   o view events
   o edit events
@@ -154,4 +154,12 @@ users directly on it, as on any workspace.
 --------------------------------------------------
 Code Overview
 --------------------------------------------------
+
+The modules included each provide the following:
+__init__.py:        Standard product initialization
+Calendar.py:        The Calendar object. Basically a contained for events, 
+                    with views to render the calendar per month, week and day.
+CPSCalendarTool.py: A portal tool that provides services such as to finding
+                    calendars and searching multiple calendars for free time.
+Event.py:           The event object.
 
