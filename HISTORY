@@ -1,4 +1,26 @@
 *******************************************
+** CPSCalendar V1.6.3 [R1 build 2004/06/14-09:09 by ben]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Now adds a "null_wf" that only has a create state, for objects that should 
+  not have any workflow actions, in this case calendars and events. 
+  This removes the "Checkout version" and "submit links" on events and the
+  "New" link on calendars.(Bug #978).
+- The organizer is now displayed with the full name for new events.
+  This solves bug #908.
+
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.6.2 [R1 build 2004/05/06-13:04 by ben]
 
 Requires:
