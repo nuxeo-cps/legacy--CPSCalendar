@@ -1,5 +1,8 @@
 <tal:block define="
-  cal_infos python:here.calendar_getSelectorInfos(**request.form)">
+  cal_infos python:here.calendar_getSelectorInfos(**request.form);
+  input_id request/form/input_id ;
+  date_disp_id request/form/date_disp_id ;
+  other_input request/form/other_input">
 <html metal:use-macro="here/selector_template/macros/master">
 
 <metal:block fill-slot="style_plus">
@@ -8,12 +11,12 @@
 </metal:block>
 
 <metal:block fill-slot="script_plus">
-  <script language="JavaScript" type="text/javascript"
-    tal:content='string:
-  var input_id = "${request/form/input_id}"
-  var date_disp_id = "${request/form/date_disp_id}"
-  var other_input = "${request/form/other_input}"
-  ' />
+  <script language="JavaScript" type="text/javascript" 
+    tal:content="python:'var input_id = %s \n 
+                         var date_disp_id = %s \n 
+                         var other_input = %s ' % 
+                         (input_id,date_disp_id,other_input) "/> 
+ 
 <script language="JavaScript" type="text/javascript"><!--
 function initAll() {
   return true
