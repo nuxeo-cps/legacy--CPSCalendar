@@ -457,11 +457,18 @@ class Event(CPSBaseDocument):
             if apath == calendar_rpath:
                 continue
             acal = ctool.getCalendarForPath(apath, unrestricted=1)
-            event = acal._getOb(event_id)
-            if event is None:
-                # TODO: Check the pending list.
-                continue
-            event.setAttendeeStatus(calendar_rpath, status)
+            event = acal._getOb(event_id, None)
+            if event is not None:
+                event.setAttendeeStatus(calendar_rpath, status)
+            else:
+                for event in acal._pending_events:
+                    if event['id'] != event_id:
+                        continue
+                    for att in event['event']['attendees']:
+                        if att['rpath'] == calendar_rpath:
+                            att['status'] = status
+                            acal._p_changed = 1
+                    
             # This needs some testing to see that it really does
             # the correct thing.
             acal.notifyMembers(event_dict)
