@@ -402,7 +402,7 @@
                   <tal:block define="props python:dtool.getEntry(user_id)">
                     <option
                       tal:define="path python:caltool.getCalendarPathForUser(user_id)"
-                      tal:condition="python:path and path not in current_list"
+                      tal:condition="python:this_user != user_id and path and path not in current_list"
                       tal:attributes="value path"
                       tal:content="python:props['fullname']">
                         Username
