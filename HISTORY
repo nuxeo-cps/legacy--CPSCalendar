@@ -1,4 +1,27 @@
 *******************************************
+** CPSCalendar V1.5.0 [R1 build 2004/04/01-20:41 by regebro]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- stringToDateTime now supports dates with no separator.
+- Recurring events now have end dates.
+- There is now a search form for which users you want when you create meetings.
+Bug fixes:
+~~~~~~~~~~
+- stringToDateTime required python2.2 or higher, now it also supports python2.1.
+- calendar_getPrevNext.py didn't handle year crossings.
+- The setting for duration when creating meetings was never used, so it's
+  removed.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Meetings and events are now the same thing, greatly simplyfying things.
+- When searching for users to add as attendees, the calendar owner no longer
+  appears.
+
+*******************************************
 ** CPSCalendar V1.4.0 [R1 build 2004/03/31-14:39 by ben]
 
 Requires:
