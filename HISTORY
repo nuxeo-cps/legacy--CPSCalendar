@@ -1,4 +1,20 @@
 *******************************************
+** CPSCalendar V1.9.1 [R1 build 2004/08/12-14:11 by regebro]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- The fullname is used instead of the ID when creating member calendars.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.9.0 [R1 build 2004/08/12-08:56 by regebro]
 
 Requires:
