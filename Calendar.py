@@ -59,9 +59,7 @@ factory_type_information = (
      'factory': 'addCalendar',
      'immediate_view': 'calendar_view',
      'filter_content_types': 1,
-     'allowed_content_types': (
-                               'Event',
-                               ),
+     'allowed_content_types': ('Event',),
      'actions': ({'id': 'view',
                   'name': 'action_view',
                   'action': 'string:${object_url}/calendar_view',
@@ -137,20 +135,17 @@ factory_type_information = (
 
 
 class Calendar(CPSBaseFolder):
-    """
-    """
-    meta_type = 'Calendar'
+    """A calendar contains events"""
 
+    meta_type = 'Calendar'
     security = ClassSecurityInfo()
 
-    _properties = ({'id':'title', 'type':'string'},
-                   {'id':'description', 'type':'text'},
-                   {'id':'usertype', 'type':'string'},
+    _properties = ({'id': 'title', 'type': 'string'},
+                   {'id': 'description', 'type': 'text'},
+                   {'id': 'usertype', 'type': 'string'},
                    )
 
     isDocumentContainer = 0
-    isCalendar = 1
-
     usertype = 'member'
 
     # Workgroup dynamic title
@@ -742,13 +737,13 @@ class Calendar(CPSBaseFolder):
 
     security.declareProtected('View', 'getEvents')
     def getEvents(self, from_date, to_date):
-        """Return an all events with from_date and to_date in the interval"""
+        """Return all events with from_date and to_date in the interval"""
         events = self.objectValues('Event')
         return [event for event in events 
                 if event.from_date >= from_date and event.to_date <= to_date]
 
-    security.declarePrivate('addDeclinedEvent')
-    def addDeclinedEvent(self, event):
+    security.declarePrivate('declineEvent')
+    def declineEvent(self, event):
         """Add the event id in the self._declined list"""
         event_id = event.id
         if event_id not in self._declined:
@@ -761,8 +756,8 @@ class Calendar(CPSBaseFolder):
         if event_id not in self._canceled:
             self._canceled = self._canceled + (event_id, )
 
-    security.declarePrivate('removeDeclinedEvent')
-    def removeDeclinedEvent(self, event):
+    security.declarePrivate('unDeclineEvent')
+    def unDeclinedEvent(self, event):
         """Remove event from declined events list"""
         event_id = event.id
         if event_id in self._declined:
@@ -787,10 +782,10 @@ class Calendar(CPSBaseFolder):
         }
 
     security.declareProtected('Add portal content', 'setAdditionalCalendars')
-    def setAdditionalCalendars(self, cals):
+    def setAdditionalCalendars(self, calendars):
         """
         """
-        self._additional_cals = tuple(cals)
+        self._additional_cals = tuple(calendars)
 
     security.declareProtected('Add portal content', 'getAdditionalCalendars')
     def getAdditionalCalendars(self):
