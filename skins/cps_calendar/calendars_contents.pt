@@ -38,7 +38,7 @@
   </tal:block>
   <tal:block condition="python:mtool.checkPermission('Add portal content', here)">
     <a href="calendar_create_form"
-       i18n:translate="_Create_a_calendar_">
+	  i18n:translate="cpscalendar_create_a_calendar">
       Create a calendar
     </a>
   </tal:block>

@@ -1,14 +1,14 @@
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="head_slot"
-             i18n:translate="_cal_del_Confirmation_">
+             i18n:translate="cpscalendar_heading_events_deletion_confirmation">
 </metal:block>
 
 <metal:block fill-slot="main">
-  <h3 i18n:translate="_You have to notify attendees that you will delete this events_">
-    You have to notify attendees that you will delete this events.
-  </h3>
-  <p i18n:translate="_Unselect events you don-t want to notify attendees_">
+  <strong i18n:translate="cpscalendar_message_notify_attendees_you_will_delete_events">
+    You have to notify attendees that you will delete those events.
+  </strong>
+  <p i18n:translate="cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees">
     Unselect events you don't want to notify attendees.
   </p>
   <form action="calendar_delevents" method="POST">
@@ -27,13 +27,14 @@
       <metal:block fill-slot="content">
         <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
-                       i18n:translate="_prop_comment_">
+                       i18n:translate="cpscalendar_label_comment">
             Comment
           </metal:block>
           <metal:block fill-slot="content">
             <textarea name="comment" cols="40" rows="4"></textarea>
             <br />
-            <small i18n:translate="_This message will be sent to attendees with a cancel notification_">
+            <small tal:condition="python:notify == 'cancel'"
+                   i18n:translate="cpscalendar_message_comment_for_attendees">
               This message will be sent to attendees with a cancel notification.
             </small>
           </metal:block>
@@ -41,7 +42,7 @@
       </metal:block>
     </metal:block>
     <input type="submit"
-           tal:attributes="value python:str('_button_validate_')"
+           value="button_validate"
            i18n:attributes="value" />
   </form>
 </metal:block>

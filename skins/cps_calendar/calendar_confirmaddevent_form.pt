@@ -2,7 +2,7 @@
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="head_sot"
-             i18n:translate="_Create_a_new_Event_">
+             i18n:translate="cpscalendar_description_create_a_new_event">
   Create a new event
 </metal:block>
 
@@ -14,7 +14,7 @@
                                        'location': options['location'],
                                        'event_status': options['event_status'],
                                        'attendees': options.get('attendees', []),}">
-  <p i18n:translate="_The end hour you specified was earlier than the start hour. Do you want to extend the event to the next day?_">
+  <p i18n:translate="cpscalendar_message_too_early_specified_hour">
     The end hour you specified was earlier than the start hour. Do you want
     to extend the event to the next day?
   </p>
@@ -33,10 +33,10 @@
       The event
     </metal:block>
     <input type="submit"
-           tal:attributes="value python:str('_button_validate_')"
+           value="button_validate"
            i18n:translate="" />
     <input type="button" onClick="history.back()"
-           tal:attributes="value python:str('_button_cancel_')"
+           value="button_cancel"
            i18n:translate="" />
   </form>
 </metal:block>

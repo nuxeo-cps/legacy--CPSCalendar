@@ -8,7 +8,7 @@
 </metal:block>
 
 <metal:block fill-slot="head_slot">
-  <span i18n:translate="_Create_a_new_Event_">
+  <span i18n:translate="cpscalendar_description_create_a_new_event">
     Create a new event
   </span>
 </metal:block>
@@ -34,18 +34,18 @@
         <metal:block fill-slot="content">
           <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
-                         i18n:translate="_cal_prop_summary_">
-              Summary
+                         i18n:translate="cpscalendar_label_title">
+              Title
             </metal:block>
             <metal:block fill-slot="content">
               <input name="title" size="40"
-                     tal:attributes="value title" 
+                     tal:attributes="value title"
                      i18n:attributes="value" />
             </metal:block>
           </metal:block>
           <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
-                         i18n:translate="_cal_prop_date_">
+                         i18n:translate="cpscalendar_label_date">
               Date
             </metal:block>
             <metal:block fill-slot="content">
@@ -77,20 +77,20 @@
                 <input type="hidden" id="from_date_minute"
                   name="from_date_minute:int"
                   tal:attributes="value from_date_minute" />
-                <span i18n:translate="_cal_At_">
+                <span i18n:translate="cpscalendar_label_at">
                   At
                 </span>
                 <span id="from_date_hour_s" tal:content="from_date_hour">
                   10
                 </span>
-                <span i18n:translate="_cal_hour_sep_" />
+                <span i18n:translate="cpscalendar_hour_sep" />
                 <span id="from_date_minute_s"
                       tal:content="python:from_date_minute and from_date_minute or '00'">
                   00
                 </span>
-                <span i18n:translate="_(Duration: ">(Duration: </span>
-                <tal:block replace="duration_hour" /><span i18n:translate="_aa_h_">h </span>
-                <tal:block replace="duration_minute" /><span i18n:translate="_aa_m)_"> minute)</span>
+                <span i18n:translate="cpscalendar_label_duration">Duration</span>:
+                <tal:block replace="duration_hour" /><span i18n:translate="cpscalendar_label_h">h</span>
+                <tal:block replace="duration_minute" /><span i18n:translate="cpscalendar_label_m">min</span>
                 <a tal:attributes="href string:javascript:open_interval_selector(${start}, ${end}, ${duration_q}, ${first}, ${last})">
                   <img border="0"
                        tal:attributes="src string:${portal_url}/interval_selector_icon.png" />
@@ -100,7 +100,7 @@
           </metal:block>
           <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
-                         i18n:translate="_cal_prop_location_">
+                         i18n:translate="cpscalendar_label_location">
               Location
             </metal:block>
             <metal:block fill-slot="content">
@@ -109,7 +109,7 @@
           </metal:block>
           <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
-                         i18n:translate="_cal_prop_eventstatus_">
+                         i18n:translate="cpscalendar_label_eventstatus">
               Event status
             </metal:block>
             <metal:block fill-slot="content">
@@ -127,7 +127,7 @@
           </metal:block>
           <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
-                         i18n:translate="_cal_prop_category_">
+                         i18n:translate="cpscalendar_label_category">
             </metal:block>
             <metal:block fill-slot="content">
               <table width="100%" cellspacing="2" cellpadding="0" border="0">
@@ -158,7 +158,7 @@
           </metal:block>
           <metal:block use-macro="here/calendar_macros/macros/form_property">
             <metal:block fill-slot="title"
-                         i18n:translate="_cal_prop_attendees_">
+                         i18n:translate="cpscalendar_label_attendees">
               Attendees
             </metal:block>
             <metal:block fill-slot="content">
@@ -177,10 +177,10 @@
         </metal:block>
       </metal:block>
       <input type="submit"
-             tal:attributes="value python:str('_button_create_')"
+             value="button_create"
              i18n:attributes="value" />
       <input type="button" onClick="history.back()"
-             tal:attributes="value python:str('_button_cancel_')" 
+             value="button_cancel"
              i18n:attributes="value"/>
     </form>
 </metal:block>

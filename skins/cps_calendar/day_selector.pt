@@ -11,11 +11,11 @@
 </metal:block>
 
 <metal:block fill-slot="javascript_head_slot">
-  <script language="JavaScript" type="text/javascript" 
-          tal:content="python:str('var input_id = %s \n 
-                               var date_disp_id = %s \n 
-                               var other_input = %s ' % 
-                               (input_id,date_disp_id,other_input))"/> 
+  <script language="JavaScript" type="text/javascript"
+          tal:content="python:str('var input_id = %s \n
+                               var date_disp_id = %s \n
+                               var other_input = %s ' %
+                               (input_id,date_disp_id,other_input))"/>
 
 <script language="JavaScript" type="text/javascript"><!--
 function initAll() {
@@ -28,9 +28,9 @@ function set_input(element_id, value) {
 }
 
 function set_form(element_id, day, month, year) {
-  set_input(element_id + '_day', day)  
-  set_input(element_id + '_month', month)  
-  set_input(element_id + '_year', year)  
+  set_input(element_id + '_day', day)
+  set_input(element_id + '_month', month)
+  set_input(element_id + '_year', year)
 }
 
 function select_day(day, month, year, day_disp) {
@@ -57,13 +57,13 @@ function select_day(day, month, year, day_disp) {
             <td width="30" class="calLeftTab">
               <a class="calEvent"
                 tal:attributes="href cal_infos/prev_url">
-                <<
+                &lt;&lt;
               </a>
             </td>
             <td width="30" class="calRightTab">
               <a class="calEvent"
                 tal:attributes="href cal_infos/next_url">
-                >>
+                &gt;&gt;
               </a>
             </td>
           </tr>

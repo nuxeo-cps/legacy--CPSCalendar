@@ -11,8 +11,8 @@
 
 <metal:block fill-slot="head_slot">
   <tal:block condition="create"
-             i18n:translate="_Create_a_Calendar_">
-    Create a Calendar 
+             i18n:translate="cpscalendar_create_a_calendar">
+    Create a Calendar
   </tal:block>
   <tal:block condition="not:create">
     <span i18n:translate="_Modify_(object name)_">
@@ -46,7 +46,7 @@
       </metal:block>
       <metal:block use-macro="here/calendar_macros/macros/form_property">
         <metal:block fill-slot="title"
-                     i18n:translate="_prop_description_">
+                     i18n:translate="cpscalendar_label_description">
           Description
         </metal:block>
         <metal:block fill-slot="content">
@@ -57,7 +57,7 @@
       <tal:block condition="python:usertype != 'member'">
         <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
-                     i18n:translate="_prop_cal_usertype_">
+                     i18n:translate="cpscalendar_label_calendar_type">
             Calendar type
           </metal:block>
           <metal:block fill-slot="content">
@@ -80,7 +80,7 @@
     <input type="hidden" name="default_id_from" value="title" />
     <input type="hidden" name="default_title_from" value="description" />
   </tal:block>
-  <input type="submit" value="value" tal:attributes="value submitvalue"
+  <input type="submit" tal:attributes="value submitvalue"
          i18n:attributes="value" />
 
   </form>

@@ -2,14 +2,14 @@
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="head_slot"
-  tal:content="python:str('_Meeting creation helper_')">
+             i18n:translate="cpscalendar_heading_meeting_creation_helper">
   Meeting creation helper
 </metal:block>
 
 <metal:block fill-slot="main">
-  <span class="calTitle" i18n:translate="_Your request for a meeting has errors:">
-    Your request for a meeting has errors:
-  </span>
+  <span class="calTitle" i18n:translate="cpscalendar_message_your_meeting_request_has_errors">
+    Your request for a meeting has errors
+  </span>:
   <ul>
     <li tal:repeat="error options/errors"
         tal:content="python:str(error)">
@@ -17,7 +17,7 @@
     </li>
   </ul>
   <input type="button" onClick="history.back()"
-         tal:attributes="value python:str('_button_back_')"
+         value="button_back"
          i18n:attributes="value" />
 </metal:block>
 

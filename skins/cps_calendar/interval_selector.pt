@@ -171,18 +171,18 @@ document.onmouseup = MU;
     <td colspan="2">
       <table cellspacing="0" cellpadding="0" width="135" border="0">
         <tr tal:repeat="i python:range(-2, first)">
-          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"><tal:block replace="python:str((i+2)/4 % 24)" /><span i18n:translate="_cal_hour_sep_" />00</td>
+          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"><tal:block replace="python:str((i+2)/4 % 24)" /><span i18n:translate="cpscalendar_hour_sep">:</span>00</td>
           <td height="3" bgcolor="white" width="100">
           </td>
         </tr>
         <tr tal:repeat="i python:range(first, last)">
-          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"><tal:block replace="python:str((i+2)/4 % 24)" /><span i18n:translate="_cal_hour_sep_" />00</td>
+          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"><tal:block replace="python:str((i+2)/4 % 24)" /><span i18n:translate="cpscalendar_hour_sep">:</span>00</td>
           <td height="3" bgcolor="#DDDDDD" width="100"
             tal:attributes="id i">
           </td>
         </tr>
         <tr tal:repeat="i python:range(last, 98)">
-          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"><tal:block replace="python:str((i+2)/4 % 24)" /><span i18n:translate="_cal_hour_sep_" />00</td>
+          <td valign="top" rowspan="8" tal:condition="python:not ((i+2) % 8)"><tal:block replace="python:str((i+2)/4 % 24)" /><span i18n:translate="cpscalendar_hour_sep">:</span>00</td>
           <td height="3" bgcolor="white" width="100">
           </td>
         </tr>
@@ -191,9 +191,13 @@ document.onmouseup = MU;
   </tr>
   <tr>
     <td class="centered">
-      <span id="start_h"></span><span i18n:translate="_cal_hour_sep_" /><span id="start_m"></span>
+      <span id="start_h"></span>
+      <span i18n:translate="cpscalendar_hour_sep"></span>
+      <span id="start_m"></span>
       -
-      <span id="end_h"></span><span i18n:translate="_cal_hour_sep_" /><span id="end_m"></span>
+      <span id="end_h"></span>
+      <span i18n:translate="cpscalendar_hour_sep"></span>
+      <span id="end_m"></span>
     </td>
   </tr>
 </table>

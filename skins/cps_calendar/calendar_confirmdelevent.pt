@@ -3,19 +3,19 @@
       i18n:domain="cpscalendar">
 
 <metal:block fill-slot="head_slot"
-             i18n:translate="_cal_del_Confirmation_">
+             i18n:translate="cpscalendar_heading_event_deletion_confirmation">
 </metal:block>
 
 <metal:block fill-slot="main"
              tal:define="notify options/notify">
-  <h3 tal:condition="python:notify == 'cancel'"
-      i18n:translate="_You have to notify attendees that you will delete this event_">
+  <strong tal:condition="python:notify == 'cancel'"
+      i18n:translate="cpscalendar_message_notify_attendees_you_will_delete_event">
     You have to notify attendees that you will delete this event.
-  </h3>
-  <h3 tal:condition="python:notify == 'decline'"
-      i18n:translate="_You have to notify event-s organizer that you will delete this event_">
+  </strong>
+  <strong tal:condition="python:notify == 'decline'"
+      i18n:translate="cpscalendar_message_notify_organizer_you_will_delete_event">
       You have to notify event's organizer that you will delete this event.
-  </h3>
+  </strong>
   <form action="calendar_delevent" method="POST">
     <input type="hidden" name="notify"
            tal:attributes="value notify" />
@@ -23,18 +23,18 @@
       <metal:block fill-slot="content">
         <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
-                       i18n:translate="_prop_comment_">
+                       i18n:translate="cpscalendar_label_comment">
             Comment
           </metal:block>
           <metal:block fill-slot="content">
             <textarea name="comment" cols="40" rows="4"></textarea>
             <br />
             <small tal:condition="python:notify == 'cancel'"
-                   i18n:translate="_This message will be sent to attendees with a cancel notification_">
+                   i18n:translate="cpscalendar_message_comment_for_attendees">
               This message will be sent to attendees with a cancel notification.
             </small>
             <small tal:condition="python:notify == 'decline'"
-                   i18n:translate="_This message will be sent to the event-s organizer_">
+                   i18n:translate="cpscalendar_message_comment_for_organizer">
               This message will be sent to the event's organizer.
             </small>
           </metal:block>
@@ -42,16 +42,16 @@
       </metal:block>
     </metal:block>
     <input type="submit"
-           tal:attributes="value python:str('_button_validate_')"
+           value="button_validate"
            i18n:attributes="value" />
   </form>
   <form action="calendar_delevent" method="POST">
     <input type="hidden" name="comment" value="" />
     <input type="submit"
-           tal:attributes="value python:str('_button_delete_with_no_notification_')"
+           value="cpscalendar_button_delete_with_no_notification"
            i18n:attributes="value" />
     <input type="button" onClick="history.back()"
-           tal:attributes="value python:str('_button_cancel_')"
+           value="button_cancel"
            i18n:attributes="value" />
   </form>
 </metal:block>

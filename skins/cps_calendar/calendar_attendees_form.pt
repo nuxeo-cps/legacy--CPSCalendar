@@ -3,7 +3,7 @@
       i18n:domain="cpscalendar">
 
 <metal:block fill-slot="head_slot">
-  <span i18n:translate="_cal_Attendees_for_event_">
+  <span i18n:translate="cpscalendar_heading_event_attendees">
     Attendees for event
   </span>
   «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
@@ -12,7 +12,7 @@
 <metal:block fill-slot="main"
              tal:define="this_user here/getCalendarUser;
                          user_types here/getUserTypes;
-                         attendees_dict here/getAttendeesDict; 
+                         attendees_dict here/getAttendeesDict;
                          dtool here/portal_metadirectories/members;
                          decline_attendees python:[att for att in here.attendees if att['status'] == 'decline'];
                          all_attendees here/getCalendarsDict;
@@ -23,7 +23,7 @@
         tal:repeat="att decline_attendees"
         tal:attributes="value att/id" />
       <input type="submit"
-             tal:attributes="value python:str('_button_Remove all attendees that declined this event_')"
+             value="button_remove_all_attendees_who_declined"
              i18n:attributes="value" />
     </form>
   </tal:block>
@@ -50,7 +50,7 @@
             </li>
           </ul>
           <input type="submit"
-                 tal:attributes="value python:str('_button_delete_')" 
+                 value="button_delete"
                  i18n:attributes="value" />
         </form>
       </tal:block>
@@ -73,7 +73,7 @@
             <tal:block condition="python: not searching">
               <form method="post" action="calendar_attendees_form">
                 <p>
-                  <span i18n:translate="_Add a user whose_">
+                  <span i18n:translate="cpscalendar_label_add_a_user_whose">
                     Add a user whose
                   </span>
                   <select name="search_param">
@@ -82,12 +82,12 @@
                            tal:content="python:str(schema_dict[propid].title)"
                            i18n:translate="">option1</option>
                   </select>
-                  <span i18n:translate="_(Add a user whose ...)_is:">
-                    is:
-                  </span>
+                  <span i18n:translate="cpscalendar_label_(add_a_user_whose_)is">
+                    is
+                  </span>:
                   <input type="text" name="search_term" size="10">
                   <input class="mainbutton" type="submit" name="role_submit"
-                         tal:attributes="value python:str('_button_search_')"
+                         value="button_search"
                          i18n:attributes="value">
                 </p>
               </form>
@@ -100,7 +100,7 @@
                 <tal:block condition="found">
                   <form method="post" action="calendar_addattendee">
                     <p>
-                      <span i18n:translate="_cal_Add_attendee:">
+                      <span i18n:translate="cpscalendar_label_add_attendee">
                         Add
                       </span>
                       <br>
@@ -114,14 +114,14 @@
                       </select>
                       <br>
                       <input class="mainbutton" type="submit"
-                             tal:attributes="value python:str('_button_add_')"
+                             value="button_add"
                              i18n:attributes="value">
                     </p>
                   </form>
                 </tal:block>
                 <p tal:condition="python: not found"
-                   i18n:translate="_Sorry, no user match your query_">
-                    Sorry, no user match your query
+                   i18n:translate="cpscalendar_message_no_user_matching">
+                    Sorry, there isn't any user matching your query
                 </p>
               </tal:block>
             </tal:block>
@@ -133,7 +133,7 @@
                              addable_attendees python:[att for att in addable_attendees if (att['id'] not in attendees_ids) and att['id'] != this_user]">
             <form action="calendar_addattendee"
               tal:condition="addable_attendees">
-              <span i18n:translate="_cal_Add_attendee:">
+              <span i18n:translate="cpscalendar_label_add_attendee">
                 Add
               </span>
               <select name="id">
@@ -142,7 +142,7 @@
                   tal:content="attendee/cn">Ressource</option>
               </select>
               <input type="submit"
-                     tal:attributes="value python:str('_button_add_')"
+                     value="button_add"
                      i18n:attributes="value" />
             </form>
           </tal:block>

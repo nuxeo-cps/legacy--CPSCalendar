@@ -2,16 +2,17 @@
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="head_slot"
-             i18n:translate="_Meeting creation helper_">
+             i18n:translate="cpscalendar_heading_meeting_creation_helper">
   Meeting creation helper
 </metal:block>
 
 <metal:block fill-slot="main">
-  <span class="calTitle" i18n:translate="_Select at least one attendee_">
+  <span class="calTitle" i18n:translate="cpscalendar_message_select_at_least_one_attendee">
     Select at least one attendee.
   </span>
   <input type="button" onClick="history.back()"
-    tal:attributes="value python:str('_button_back_')" />
+         value="button_back"
+         i18n:attributes="value" />
 </metal:block>
 
 </html>

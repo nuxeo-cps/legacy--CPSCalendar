@@ -6,7 +6,7 @@
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
       target="_new"
-      i18n:translate="_cal_Printable_view_">
+      i18n:translate="cpscalendar_link_printable_view">
       Printable view
     </a>]
   </tal:block>
@@ -30,7 +30,7 @@
                   today python:int(DateTime());"
                 tal:attributes="
                   href string:${here_url}?viewed_day=${today}"
-                i18n:translate="_cal_Today_">
+                i18n:translate="cpscalendar_link_today">
                 Today
               </a>
             </td>
@@ -241,7 +241,7 @@
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
       target="_new"
-      i18n:translate="_cal_Printable_view_">
+      i18n:translate="cpscalendar_link_printable_view">
       Printable view
     </a>]
   </tal:block>
@@ -263,7 +263,7 @@
                   today python:int(DateTime());"
                 tal:attributes="
                   href string:${here_url}?viewed_day=${today}"
-                i18n:translate="_cal_Today_">
+                i18n:translate="cpscalendar_link_today">
                 Today
               </a>
             </td>
@@ -496,7 +496,7 @@
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
       target="_new"
-      i18n:translate="_cal_Printable_view_">
+      i18n:translate="cpscalendar_link_printable_view">
       Printable view
     </a>]
   </tal:block>
@@ -520,7 +520,7 @@
                   today python:int(DateTime());"
                 tal:attributes="
                 href string:${here_url}?viewed_day=${today}"
-                i18n:translate="_cal_Today_">
+                i18n:translate="cpscalendar_link_today">
                 Today
               </a>
             </td>

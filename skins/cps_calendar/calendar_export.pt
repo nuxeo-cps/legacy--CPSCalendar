@@ -6,21 +6,21 @@
              tal:define="here_url python:'/'+here.absolute_url(relative=1);
                          total_url here/absolute_url;">
   <p>
-    <span i18n:translate="_cal_You can download_">
+    <span i18n:translate="cpscalendar_message_you_can_download">
       You can download
     </span>
     <a tal:attributes="href string:${here_url}/calendar.ics"
-       i18n:translate="_cal_the iCalendar version of this calendar.">
+       i18n:translate="cpscalendar_message_the_iCalendar_version_of_this_calendar">
       the iCalendar version of this calendar.
     </a>
   </p>
   <p tal:define="webcal_url python:total_url.startswith('http:') and 'webcal%s/calendar.ics' % (total_url[4:])"
      tal:condition="webcal_url">
-    <span i18n="_cal_If you have a calendar application that supports it, you can also_">
-      If you have a calendar application that supports it, you can also
+    <span i18n="cpscalendar_message_if_you_have_an_application_that_supports_it_you_can">
+      If you have an application that supports it, you can also
     </span>
     <a tal:attributes="href webcal_url"
-       i18n:translate="_cal_subscribe to this calendar.">
+       i18n:translate="cpscalendar_message_subscribe_to_this_calendar">
       subscribe to this calendar.
     </a>
   </p>
