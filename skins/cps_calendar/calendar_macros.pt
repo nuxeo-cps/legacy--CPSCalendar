@@ -47,10 +47,11 @@
              cat_def_title categories/?cat_default/title;
              category event/category|nothing;
              recurrence_period event/recurrence_period|nothing;">
+
+<h1 tal:content="title">Title</h1>
+
     <metal:block use-macro="here/calendar_macros/macros/form">
       <metal:block fill-slot="content">
-
-    <h1 tal:content="title">Title</h1>
 
     <tal:block condition="organizer">
       <metal:block use-macro="here/calendar_macros/macros/form_property">
