@@ -16,6 +16,9 @@ from Acquisition import aq_parent, aq_inner
 from DateTime import DateTime
 
 from AccessControl import ClassSecurityInfo
+from AccessControl.SecurityManagement import getSecurityManager
+from AccessControl.SecurityManagement import newSecurityManager
+from AccessControl.User import UnrestrictedUser
 from Globals import InitializeClass
 
 from Products.CMFCore.CMFCorePermissions import setDefaultRoles, View
@@ -186,7 +189,7 @@ class Calendars(CPSBaseFolder):
                     to_time_hour, to_time_minute):
         """Gets free/busy informations on attendees calendars"""
         # normalize
-        start_time = DateTime(from_date.year(), from_date.month(), 
+        start_time = DateTime(from_date.year(), from_date.month(),
                               from_date.day())
         to_date = to_date + 1
         end_time = DateTime(to_date.year(), to_date.month(), to_date.day())
@@ -195,7 +198,7 @@ class Calendars(CPSBaseFolder):
         while slot_start.lessThan(end_time):
             slots.append((slot_start, slot_start+1))
             slot_start += 1
-            slot_start = DateTime(slot_start.year(), slot_start.month(), 
+            slot_start = DateTime(slot_start.year(), slot_start.month(),
                                   slot_start.day())
 
         length = len(slots)
@@ -216,7 +219,7 @@ class Calendars(CPSBaseFolder):
             month = date.month()
             day = date.day()
             if from_time_hour or from_time_minute:
-                mask_from = DateTime(year, month, day, 
+                mask_from = DateTime(year, month, day,
                                      from_time_hour, from_time_minute)
                 this_day.append({
                     'start': date,
@@ -224,7 +227,7 @@ class Calendars(CPSBaseFolder):
                 })
 
             if to_time_hour or to_time_minute:
-                mask_to = DateTime(year, month, day, 
+                mask_to = DateTime(year, month, day,
                                    to_time_hour, to_time_minute)
                 this_day.append({
                     'start': mask_to,
@@ -260,7 +263,7 @@ class Calendars(CPSBaseFolder):
                             }
                         else:
                             calendar_slots[i].append({
-                                'start': event_slot['start'], 
+                                'start': event_slot['start'],
                                 'stop': event_slot['stop']
                             })
                     i += 1
@@ -272,7 +275,7 @@ class Calendars(CPSBaseFolder):
                 else:
                     list.append(_slotUnion(cal_slot))
                 i += 1
-            
+
         return {
             'cal_users': cal_users,
             'cals_dict': cals_dict,
@@ -287,11 +290,11 @@ class Calendars(CPSBaseFolder):
         ids = self.objectIds('Calendar')
         if id in ids:
             return getattr(self, id)
-        
+
         context = aq_parent(aq_inner(self))
         dirtool = getToolByName(context, 'portal_metadirectories')
         mtool = getToolByName(context, 'portal_membership')
-        
+
         mtool.checkPermission('Modify portal content', self)
         current_user = mtool.getAuthenticatedMember().getUserName()
         members = dirtool.members
@@ -306,7 +309,7 @@ class Calendars(CPSBaseFolder):
             wtool.invokeFactoryFor(self, 'Calendar', id)
             self.manage_delLocalGroupRoles(['role:Anonymous'])
             calendar_type_info = ttool.getTypeInfo('Calendar')
-            
+
             ob = self._getOb(id)
             ob._computedtitle = 1
             calendar_type_info._finishConstruction(ob)
