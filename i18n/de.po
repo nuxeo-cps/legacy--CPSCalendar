@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2004-07-23 10:35default\n"
+"POT-Creation-Date: 2004-07-23 10:47default\n"
 "PO-Revision-Date: 2004-07-12 18:37+0200\n"
 "Last-Translator: Georg Hennemann <georg.hennemann@dhl.com>\n"
 "Language-Team: German <reinland@dzug.org>\n"
@@ -918,18 +918,6 @@ msgstr "Status"
 msgid "week day"
 msgstr "Wochen Tag"
 
-msgid "portal_type_Calendar_title"
-msgstr "Kalender"
-
-msgid "portal_type_Calendar_description"
-msgstr ""
-
-msgid "portal_type_Calendar_Event_title"
-msgstr "Event"
-
-msgid "portal_type_Calendar_Event_description"
-msgstr "... Ereignisse portalweit ankündigen"
-
 msgid "cpscalendar_user_calendar_name_beg"
 msgstr "Kalender von "
 
@@ -1243,6 +1231,15 @@ msgstr "Events in dieser Woche"
 
 msgid "cpscalendar_event_viewer_month"
 msgstr "Events für diesen Monat"
+
+#~ msgid "portal_type_Calendar_title"
+#~ msgstr "Kalender"
+
+#~ msgid "portal_type_Calendar_Event_title"
+#~ msgstr "Event"
+
+#~ msgid "portal_type_Calendar_Event_description"
+#~ msgstr "... Ereignisse portalweit ankündigen"
 
 #~ msgid "User type"
 #~ msgstr "User Typ"

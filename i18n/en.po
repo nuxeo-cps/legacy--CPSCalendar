@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2004-07-23 10:35default\n"
+"POT-Creation-Date: 2004-07-23 10:47default\n"
 "PO-Revision-Date: 2004-04-19 11:37+0200\n"
 "Last-Translator: Lennart Regebro <rgebro@nuxeo.com>\n"
 "Language-Team: \n"
@@ -928,18 +928,6 @@ msgstr "status"
 msgid "week day"
 msgstr "week day"
 
-msgid "portal_type_Calendar_title"
-msgstr "Calendar"
-
-msgid "portal_type_Calendar_description"
-msgstr ""
-
-msgid "portal_type_Calendar_Event_title"
-msgstr "Event"
-
-msgid "portal_type_Calendar_Event_description"
-msgstr "An calendar'event"
-
 msgid "cpscalendar_user_calendar_name_beg"
 msgstr "Calendar of "
 
@@ -1253,6 +1241,15 @@ msgstr "Event for this week"
 
 msgid "cpscalendar_event_viewer_month"
 msgstr "Event for this month"
+
+#~ msgid "portal_type_Calendar_title"
+#~ msgstr "Calendar"
+
+#~ msgid "portal_type_Calendar_Event_title"
+#~ msgstr "Event"
+
+#~ msgid "portal_type_Calendar_Event_description"
+#~ msgstr "An calendar'event"
 
 #, fuzzy
 #~ msgid "portal_type_Event_description"

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pt-BR\n"
-"POT-Creation-Date: 2004-07-23 10:35default\n"
+"POT-Creation-Date: 2004-07-23 10:47default\n"
 "PO-Revision-Date: 2004-06-07 20:02-0300\n"
 "Last-Translator: Mario Olimpio de Menezes <mario@curiango.ipen.br>\n"
 "Language-Team: Português do Brasil <pt@li.org>\n"
@@ -967,18 +967,6 @@ msgstr "Estado"
 msgid "week day"
 msgstr ""
 
-msgid "portal_type_Calendar_title"
-msgstr "Agenda"
-
-msgid "portal_type_Calendar_description"
-msgstr ""
-
-msgid "portal_type_Calendar_Event_title"
-msgstr "Evento"
-
-msgid "portal_type_Calendar_Event_description"
-msgstr "Um evento"
-
 msgid "cpscalendar_user_calendar_name_beg"
 msgstr "Agenda de "
 
@@ -1290,6 +1278,15 @@ msgstr "Visualização da Semana"
 
 msgid "cpscalendar_event_viewer_month"
 msgstr "Visualização do Mês"
+
+#~ msgid "portal_type_Calendar_title"
+#~ msgstr "Agenda"
+
+#~ msgid "portal_type_Calendar_Event_title"
+#~ msgstr "Evento"
+
+#~ msgid "portal_type_Calendar_Event_description"
+#~ msgstr "Um evento"
 
 #, fuzzy
 #~ msgid "portal_type_Event_description"

@@ -16,18 +16,6 @@ msgstr ""
 "Preferred-encodings: utf-8 latin1\n"
 "Domain: default\n"
 
-msgid "portal_type_Calendar_title"
-msgstr ""
-
-msgid "portal_type_Calendar_description"
-msgstr ""
-
-msgid "portal_type_Calendar_Event_title"
-msgstr ""
-
-msgid "portal_type_Calendar_Event_description"
-msgstr ""
-
 msgid "cpscalendar_user_calendar_name_beg"
 msgstr ""
 

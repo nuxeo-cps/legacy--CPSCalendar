@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2004-07-23 10:35default\n"
+"POT-Creation-Date: 2004-07-23 10:47default\n"
 "PO-Revision-Date: 2004-05-10 15:04+0100\n"
 "Last-Translator: Paolo Dina <paolo@php3.it>\n"
 "Language-Team: \n"
@@ -1279,18 +1279,6 @@ msgstr "Stato"
 msgid "week day"
 msgstr ""
 
-msgid "portal_type_Calendar_title"
-msgstr "Ordine del giorno"
-
-msgid "portal_type_Calendar_description"
-msgstr ""
-
-msgid "portal_type_Calendar_Event_title"
-msgstr "Evento"
-
-msgid "portal_type_Calendar_Event_description"
-msgstr "Un evento"
-
 msgid "cpscalendar_user_calendar_name_beg"
 msgstr "Calendario di"
 
@@ -1606,6 +1594,15 @@ msgstr "Eventi della settimana"
 
 msgid "cpscalendar_event_viewer_month"
 msgstr "Eventi del mese"
+
+#~ msgid "portal_type_Calendar_title"
+#~ msgstr "Ordine del giorno"
+
+#~ msgid "portal_type_Calendar_Event_title"
+#~ msgstr "Evento"
+
+#~ msgid "portal_type_Calendar_Event_description"
+#~ msgstr "Un evento"
 
 #    <block fill-slot="title">
 #              Description
