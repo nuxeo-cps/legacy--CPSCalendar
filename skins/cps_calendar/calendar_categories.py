@@ -10,10 +10,10 @@ return {
             'title': 'cpscalendar_category_work',
             'color': '#770000',
         },
-        'other': {
-            'title': 'cpscalendar_category_others',
-            'color': '#007700',
-        },
+#         'other': {
+#             'title': 'cpscalendar_category_others',
+#             'color': '#007700',
+#         },
     },
-    'default': 'private',
+    'default': 'work',
 }
