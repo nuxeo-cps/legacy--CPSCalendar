@@ -59,7 +59,9 @@ del kw['to_date_minute']
 # if we are called by a form request, we have to be sure that
 # from_date < to_date. For an all_day event, from_date and to_date
 # will be switched
-ok = REQUEST is None or all_day or from_date < to_date
+from_date_short = context.getDateStr(from_date, fmt='short')
+to_date_short = context.getDateStr(to_date, fmt='short')
+ok = REQUEST is None or all_day or from_date_short < to_date_short
 
 if ok:
     # TODO: add repeated event add manage
