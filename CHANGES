@@ -8,7 +8,8 @@ New features:
 
 Bug fixes:
 ~~~~~~~~~~
--
+- The labels of days and Months started with 0, while most usage
+  usage expected them to start with 1.
 
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
