@@ -1,7 +1,8 @@
 <tal:block define="cal_infos python:here.calendar_getSelectorInfos(**request.form);
                    input_id request/form/input_id ;
                    date_disp_id request/form/date_disp_id ;
-                   other_input request/form/other_input">
+                   other_input request/form/other_input"
+           i18n:domain="cpscalendar">
 <html metal:use-macro="here/selector_template/macros/master">
 
 <metal:block fill-slot="css_slot">

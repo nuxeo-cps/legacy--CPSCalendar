@@ -2,7 +2,8 @@
 <tal:block define="calendars here/calendars_get">
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      metal:use-macro="here/main_template/macros/master">
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cpscalendar">
 <metal:block fill-slot="base">
   <base href="." tal:attributes="href string:${here/absolute_url}/" />
 </metal:block>

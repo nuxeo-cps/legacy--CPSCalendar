@@ -1,12 +1,11 @@
-<tal:block define="
-    first request/form/first;
-    last request/form/last;
-    should_validate python:1;
-">
+<tal:block define="first request/form/first;
+                   last request/form/last;
+                   should_validate python:1;"
+           i18n:domain="cpscalendar">
 <html metal:use-macro="here/selector_template/macros/master">
 <metal:block fill-slot="javascript_head_slot">
 <script language="JavaScript" type="text/javascript"
-  tal:content="string:
+        tal:content="string:
 var first = ${first}
 var last = ${last}
 var start = ${request/form/start}

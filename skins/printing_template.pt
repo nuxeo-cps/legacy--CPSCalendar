@@ -3,7 +3,8 @@
                   mtool here/portal_membership;
                   here_url python:'/'+here.absolute_url(relative=1);
                   rportal_url python:utool(relative=1);
-                  portal_url python:rportal_url and '/'+rportal_url or '';">
+                  portal_url python:rportal_url and '/'+rportal_url or '';"
+      i18n:domain="cpscalendar">
 <head>
   <title tal:content="here/expanded_title"
          i18n:translate=""> 

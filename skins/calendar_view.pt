@@ -8,7 +8,7 @@
                    start_time disp_infos/start_time;
                    end_time disp_infos/end_time;
                    events_desc python:here.getEventsDesc(start_time, end_time, calendar_disp);"
- i18n:domain="cpscalendar">
+           i18n:domain="cpscalendar">
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="here/main_template/macros/master">
@@ -20,7 +20,7 @@
 <body>
 
 <metal:block fill-slot="main"
-  tal:define="can_add_evts python:mtool.checkPermission('Add portal content', here)">
+             tal:define="can_add_evts python:mtool.checkPermission('Add portal content', here)">
   <tal:block condition="can_add_evts">
     <tal:block define="ev_dict here/getDeclinedCancelledEvents">
       <form action="calendar_delevents" method="POST"
@@ -46,16 +46,14 @@
       condition="pendings_count">
       <h3>
         <a href="calendar_pending_events"
-          tal:condition="python:pendings_count > 1"
-          tal:content="
-            string:_You have ${pending_count} pending requests_">
-          You have 2 pending requests.
+           tal:condition="python:pendings_count > 1"
+           tal:content="string:_You have ${pending_count} pending requests_">
+           You have 2 pending requests.
         </a>
         <a href="calendar_pending_events"
-          tal:condition="python:pendings_count == 1"
-          tal:content="
-            string:_You have one pending request_">
-          You have one pending request.
+           tal:condition="python:pendings_count == 1"
+           i18n:translate="_You have one pending request_">
+           You have one pending request.
         </a>
       </h3>
     </tal:block>
