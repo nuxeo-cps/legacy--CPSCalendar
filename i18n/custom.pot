@@ -16,10 +16,19 @@ msgstr ""
 "Preferred-encodings: utf-8 latin1\n"
 "Domain: default\n"
 
+msgid "cpscalendar_create_all_day_event"
+msgstr ""
+
+msgid "cpscalendar_create_not_all_day_event"
+msgstr ""
+
 msgid "cpscalendar_change_event_to_all_day"
 msgstr ""
 
 msgid "cpscalendar_change_event_to_not_all_day"
+msgstr ""
+
+msgid "cpscalendar_untitled_(document)"
 msgstr ""
 
 msgid "confirmed"

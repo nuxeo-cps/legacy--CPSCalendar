@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2003-10-14 14:01default\n"
+"POT-Creation-Date: 2003-10-15 10:18default\n"
 "PO-Revision-Date: 2003-10-14 13:45+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <C@li.org>\n"
@@ -152,11 +152,13 @@ msgstr "Retour"
 
 #.   <input onclick="history.back()" type="button" value="button_cancel" />
 #.   <input value="button_cancel" name="calendar_meeting_cancel:method" type="submit" />
+#.   <input onclick="window.close()" type="button" value="button_cancel" />
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_form.pt
 #: ../skins/cps_calendar/create_meeting_form.pt
+#: ../skins/cps_calendar/selector_template.pt
 msgid "button_cancel"
 msgstr "Annuler"
 
@@ -197,11 +199,13 @@ msgstr "Rechercher"
 
 #.   <input value="button_validate" type="submit" />
 #.   <input value="button_validate" name="confirmPendingEvent:method" type="submit" />
+#.   <input condition="should_validate|nothing" onclick="validateSelector()" type="button" value="button_validate" />
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_confirmdelevents.pt
 #: ../skins/cps_calendar/calendar_display_form.pt
 #: ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_macros.pt
+#: ../skins/cps_calendar/selector_template.pt
 msgid "button_validate"
 msgstr "Valider"
 
@@ -896,11 +900,21 @@ msgstr "Statut"
 msgid "week day"
 msgstr ""
 
+msgid "cpscalendar_create_all_day_event"
+msgstr "Créer un événement sur plusieurs jours"
+
+msgid "cpscalendar_create_not_all_day_event"
+msgstr "Créer un événement ponctuel"
+
 msgid "cpscalendar_change_event_to_all_day"
 msgstr "Changer pour un événement sur plusieurs jours"
 
 msgid "cpscalendar_change_event_to_not_all_day"
 msgstr "Changer pour un événement ponctuel"
+
+#, fuzzy
+msgid "cpscalendar_untitled_(document)"
+msgstr "Sans titre"
 
 msgid "confirmed"
 msgstr "Confirmé"
@@ -1084,16 +1098,6 @@ msgstr "Non confirmé"
 
 #~ msgid "button_close_this_window"
 #~ msgstr "Fermer cette fenêtre"
-
-#~ msgid "cpscalendar_create_all_day_event"
-#~ msgstr "Créer un événement sur plusieurs jours"
-
-#~ msgid "cpscalendar_create_not_all_day_event"
-#~ msgstr "Créer un événement ponctuel"
-
-#, fuzzy
-#~ msgid "cpscalendar_untitled_(document)"
-#~ msgstr "Sans titre"
 
 #, fuzzy
 #~ msgid "action_attendees"

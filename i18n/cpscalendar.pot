@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-10-14 14:01default\n"
+"POT-Creation-Date: 2003-10-15 10:18default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -150,11 +150,13 @@ msgstr ""
 
 #.   <input onclick="history.back()" type="button" value="button_cancel" />
 #.   <input value="button_cancel" name="calendar_meeting_cancel:method" type="submit" />
+#.   <input onclick="window.close()" type="button" value="button_cancel" />
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_form.pt
 #: ../skins/cps_calendar/create_meeting_form.pt
+#: ../skins/cps_calendar/selector_template.pt
 msgid "button_cancel"
 msgstr ""
 
@@ -195,11 +197,13 @@ msgstr ""
 
 #.   <input value="button_validate" type="submit" />
 #.   <input value="button_validate" name="confirmPendingEvent:method" type="submit" />
+#.   <input condition="should_validate|nothing" onclick="validateSelector()" type="button" value="button_validate" />
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_confirmdelevents.pt
 #: ../skins/cps_calendar/calendar_display_form.pt
 #: ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_macros.pt
+#: ../skins/cps_calendar/selector_template.pt
 msgid "button_validate"
 msgstr ""
 
@@ -881,10 +885,19 @@ msgstr ""
 msgid "week day"
 msgstr ""
 
+msgid "cpscalendar_create_all_day_event"
+msgstr ""
+
+msgid "cpscalendar_create_not_all_day_event"
+msgstr ""
+
 msgid "cpscalendar_change_event_to_all_day"
 msgstr ""
 
 msgid "cpscalendar_change_event_to_not_all_day"
+msgstr ""
+
+msgid "cpscalendar_untitled_(document)"
 msgstr ""
 
 msgid "confirmed"
