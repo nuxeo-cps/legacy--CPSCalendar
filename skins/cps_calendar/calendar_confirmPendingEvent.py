@@ -1,5 +1,7 @@
 ##parameters=event_id, comment, status, REQUEST=None
 
+# $Id$
+
 if status == 'decline_and_delete':
     delete = 1
     status = 'decline'
@@ -19,5 +21,5 @@ else:
     else:
         url = event.absolute_url()
 
-if REQUEST:
+if REQUEST is not None:
     REQUEST.RESPONSE.redirect(url)
