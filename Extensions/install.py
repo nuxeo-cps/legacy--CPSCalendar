@@ -109,14 +109,12 @@ def update(self):
 
     ptypes = {
         'CPSCalendar':(
-            #'Calendars',
             'Calendar',
             'Event',
         ),
     }
 
     allowed_content_type = {
-        #'Calendars' : ('Calendar',),
         'Calendar' : ('Event',),
         'Event' : (),
         'Workspace' : workspaceACT
@@ -144,7 +142,6 @@ def update(self):
     pr("Setup workflow shemas")
     wftool = portal.portal_workflow
     wfs = {
-        #'Calendars': 'workspace_folder_wf',
         'Calendar': 'workspace_folder_wf',
         'Event': 'workspace_content_wf',
     }

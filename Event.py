@@ -466,15 +466,18 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
     calendar = dispatcher.Destination()
     if organizer is None:
         # By default, organizer is the current calendar user
+        print calendar.rpath
         try:
-            organizer = calendar.getAttendeeInfo(calendar.id)
+            organizer = calendar.getAttendeeInfo(calendar.rpath)
         except AttributeError:
             mtool = getToolByName(calendar, 'portal_membership')
             organizer = {
                 'id': mtool.getAuthenticatedMember().getId(),
                 'usertype': calendar.usertype,
                 'cn': mtool.getAuthenticatedMember().getUserName(),
-                }
+            }
+    else:
+        raise "XXX: Is this line ever reached ???"
     ob = Event(id, organizer=organizer, attendees=attendees, **kw)
     calendar._setObject(id, ob)
     ob = getattr(calendar, id)

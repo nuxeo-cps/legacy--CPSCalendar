@@ -125,7 +125,7 @@ def _slotUnion(cal_slot, with_free=0):
 
 class CPSCalendarTool(UniqueObject, PortalFolder):
     """
-    This tool give the access to the collaborative side of CPSCalendar.
+    This tool gives access to the collaborative side of CPSCalendar.
     
     It contains all the methods needed by Calendars object to find the others
     and process meeting or superpose calendars.
@@ -333,16 +333,19 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         """Create a calendar in the home folder of a member
 
         member_id: member's id for which we create this calendar
+
+        Precondition: member_id must be a valid user id
         """
+        # XXX: is member_id really necessary here ?
         mtool = getToolByName(self, 'portal_membership')
         ttool = getToolByName(self, 'portal_types')
         mcat = self.Localizer.cpscalendar
-        context = mtool.getHomeFolder()
+        context = mtool.getHomeFolder(member_id)
 
         aclu = self.acl_users
         user = aclu.getUser(member_id)
-        if user is not None:
-            user = user.__of__(aclu)
+        assert user
+        user = user.__of__(aclu)
 
         # create this calendar for this member
         title = mcat('cpscalendar_user_calendar_name_beg').encode('ISO-8859-15',
@@ -361,6 +364,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         ob = context._getOb('calendar')
         calendar_type_info._finishConstruction(ob)
  
+        # XXX: is this necessay ?
         # Grant ownership to Member
         try:
             ob.changeOwnership(user)
@@ -380,7 +384,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         """Get info from others attendees of one event.
         attendees are other calendars.
 
-        return a dictionnary with cn, id, usertype and status.
+        Return a dictionnary with cn, id, usertype and status.
         """
         id = rpath.split('/')[-1]
         if rpath in self.getCalendarPaths():
