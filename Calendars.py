@@ -208,6 +208,7 @@ class Calendars(Workgroup):
             
             m(*args, **kw)
             ob = self._getOb(id)
+            ob._computedtitle = 1
             ti._finishConstruction(ob)
 
             mtool = getToolByName(context, 'portal_membership')
@@ -282,7 +283,6 @@ class Calendars(Workgroup):
         raise KeyError, name
 
 InitializeClass(Calendars)
-
 
 def addCalendars(dispatcher, id,
                  title='',

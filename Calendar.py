@@ -100,6 +100,9 @@ class Calendar(Workgroup):
 
     usertype = 'member'
 
+    # Workgroup dynamic title
+    _basetitle = '_cal_Calendar_of_%s_'
+
     _pending_events = ()
     _declined = ()
     _canceled = ()
@@ -672,25 +675,6 @@ class Calendar(Workgroup):
         Workgroup.manage_delObjects(self, ids, *args, **kw)
         self._declined = tuple(declined)
         self._canceled = tuple(canceled)
-
-    security.declareProtected('View', 'title_or_id')
-    def title_or_id(self):
-        """
-        """
-        if self.usertype == 'member':
-            dirtool = getToolByName(self, 'portal_metadirectories')
-            mcat = getToolByName(self, 'portal_messages')
-            members = dirtool.members
-            title = None
-            entry = members.getEntry(self.id)
-            if entry is not None:
-                title = entry.get(members.display_prop)
-            if title is None:
-                return Workgroup.title_or_id(self)
-            title = mcat('_cal_Calendar_of_%s_') % (title, )
-            return title
-        else:
-            return Workgroup.title_or_id(self)
 
 InitializeClass(Calendar)
 
