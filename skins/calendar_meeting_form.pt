@@ -1,6 +1,11 @@
 <tal:block define="global current_action string:meeting" />
 <html metal:use-macro="here/main_template/macros/master">
 
+<metal:block fill-slot="script_plus"
+  tal:content="structure here/day_selector_popup.js">
+  Day selector popup script
+</metal:block>
+
 <metal:block fill-slot="header"
   tal:content="python:mcat('_Meeting creation helper_')">
   Meeting creation helper
@@ -20,6 +25,8 @@
     to_date_year python:edit and int(args['to_date_year']) or selected_day.year();
     to_date_month python:edit and int(args['to_date_month']) or selected_day.month();
     to_date_day python:edit and int(args['to_date_day']) or selected_day.day();
+    from_date python:DateTime(from_date_year, from_date_month, from_date_day);
+    to_date python:DateTime(to_date_year, to_date_month, to_date_day);
     from_date_hour python:(edit and [int(args['from_date_hour'])] or [9])[0];
     from_date_minute python:(edit and [int(args['from_date_minute'])] or [0])[0];
     to_date_hour python:(edit and [int(args['to_date_hour'])] or [17])[0];
@@ -29,6 +36,7 @@
     user_types here/getUserTypes;
     all_calendars python:here.getCalendarsDict(exclude=my_id);"
   tal:on-error="python:request.RESPONSE.redirect('%s/calendar_meeting_expired' % (here.absolute_url(), ))">
+
   <form action="calendar_begin_meeting" method="POST">
     <h2
       tal:content="python:mcat('_Select the attendees you want for your meeting:')">
@@ -74,42 +82,55 @@
       Select the time interval you want for your meeting:
     </h2>
     <p>
+      <input type="hidden" id="from_date_day" name="from_date_day"
+        tal:attributes="value from_date_day" />
+      <input type="hidden" id="from_date_month" name="from_date_month"
+        tal:attributes="value from_date_month" />
+      <input type="hidden" id="from_date_year" name="from_date_year"
+        tal:attributes="value from_date_year" />
+      <input type="hidden" id="to_date_day" name="to_date_day"
+        tal:attributes="value to_date_day" />
+      <input type="hidden" id="to_date_month" name="to_date_month"
+        tal:attributes="value to_date_month" />
+      <input type="hidden" id="to_date_year" name="to_date_year"
+        tal:attributes="value to_date_year" />
       <tal:block replace="python:mcat('_cal_date_From_')">
         From
       </tal:block>
-      <select name="from_date_day">
-        <option tal:repeat="day python:range(1,32)"
-          tal:content="day" tal:attributes="value day;
-            selected python:day == from_date_day or nothing" />
-      </select>
-      <select name="from_date_month">
-        <option tal:repeat="month python:range(1,13)"
-          tal:content="
-            python:mcat('_cal_Month%s' % (month, ));"
-          tal:attributes="
-            value month;
-            selected python:month == from_date_month or nothing"/>
-        </select>
-        <input name="from_date_year" size="4"
-        tal:attributes="value from_date_year" />
+      <span id="from_date_string">
+        <tal:block replace="python:mcat('_cal_Day_long%s' % (from_date.dow(), ))" />
+        <tal:block replace="from_date_day" />
+        <tal:block replace="python:mcat('_cal_Month%s' % (from_date_month, ))" />
+        <tal:block replace="from_date_year" />
+      </span>
+      <a
+        tal:define="
+          int_date python:int(from_date);
+        "
+        tal:attributes="
+          href string:javascript:open_day_selector('${int_date}', 'from_date', 'from_date_string', '')
+          ">
+        <img tal:attributes="src string:${portal_url}/day_selector_icon.png" />
+      </a>
+      <br />
       <tal:block replace="python:mcat('_cal_date_To_')">
         To
       </tal:block>
-      <select name="to_date_day">
-        <option tal:repeat="day python:range(1,32)"
-          tal:content="day" tal:attributes="value day;
-            selected python:day == to_date_day or nothing" />
-      </select>
-      <select name="to_date_month">
-        <option tal:repeat="month python:range(1,13)"
-          tal:content="
-            python:mcat('_cal_Month%s' % (month, ));"
-          tal:attributes="
-            value month;
-            selected python:month == to_date_month or nothing"/>
-      </select>
-      <input name="to_date_year" size="4"
-        tal:attributes="value to_date_year" />
+      <span id="to_date_string">
+        <tal:block replace="python:mcat('_cal_Day_long%s' % (to_date.dow(), ))" />
+        <tal:block replace="to_date_day" />
+        <tal:block replace="python:mcat('_cal_Month%s' % (to_date_month, ))" />
+        <tal:block replace="to_date_year" />
+      </span>
+      <a
+        tal:define="
+          int_date python:int(to_date);
+        "
+        tal:attributes="
+          href string:javascript:open_day_selector('${int_date}', 'to_date', 'to_date_string', '')
+          ">
+        <img tal:attributes="src string:${portal_url}/day_selector_icon.png" />
+      </a>
     </p>
     <p>
       <tal:block replace="python:mcat('_cal_Between_')">

@@ -6,6 +6,7 @@
   tal:content="structure here/day_selector_popup.js">
   Day selector popup script
 </metal:block>
+
 <metal:block fill-slot="header">
   <tal:block condition="create"
     tal:replace="python:mcat('_Create_a_new_Event_')">
@@ -127,7 +128,7 @@
                   tal:attributes="
                     href string:javascript:open_day_selector('${int_date}', 'from_date', 'from_date_string', '')
                     ">
-                  Edit
+                  <img border="0" tal:attributes="src string:${portal_url}/day_selector_icon.png" />
                 </a>
                 <br />
                 <tal:block replace="python:mcat('_cal_date_To_')">
@@ -146,7 +147,7 @@
                   tal:attributes="
                     href string:javascript:open_day_selector('${int_date}', 'to_date', 'to_date_string', '')
                     ">
-                  Edit
+                  <img border="0" tal:attributes="src string:${portal_url}/day_selector_icon.png" />
                 </a>
               </tal:block>
               <tal:block condition="not:all_day"
@@ -180,7 +181,7 @@
                     tal:attributes="
                       href string:javascript:open_day_selector('${int_date}', 'from_date', 'date_string', 'to_date')
                       ">
-                    Edit
+                    <img border="0" tal:attributes="src string:${portal_url}/day_selector_icon.png" />
                   </a>
                 </h3>
 
