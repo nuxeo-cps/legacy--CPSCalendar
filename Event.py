@@ -383,7 +383,6 @@ class Event(CPSBaseDocument):
         notified_attendees = []
         all_attendees = []
         event_dict = self.getEventDict(comment=comment)
-        calendar = self.getCalendar()
         caltool = getToolByName(self, 'portal_cpscalendar')
         for attendee in self.attendees:
             attendee_rpath = attendee['rpath']
@@ -393,7 +392,7 @@ class Event(CPSBaseDocument):
             attendee_calendar = caltool.getCalendarForPath(attendee_rpath)
             if attendee_calendar is None:
                 LOG('CPSCalendar', INFO, "Can't get calendar for %s" 
-                    % (attendee_id, ))
+                    % (attendee_rpath, ))
                 continue
             attendee_calendar.addPendingEvent(event_dict)
             notified_attendees.append(attendee_id)
