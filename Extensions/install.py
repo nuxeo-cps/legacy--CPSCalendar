@@ -23,7 +23,7 @@ from Products.CPSCore.CPSWorkflow import \
 from Products.DCWorkflow.Transitions import TRIGGER_USER_ACTION
 import Products.CPSCalendar
 
-def groupcalendarinstall(self):
+def cpscalendarinstall(self):
     _log = []
     def pr(bla, _log=_log):
         if bla == 'flush':
@@ -241,6 +241,7 @@ def groupcalendarinstall(self):
     # check workflow association
     pr("Verifying workflow schemas")
     wfs = {
+        'Calendars': 'calendar_folder_wf',
         'Calendar': 'calendar_folder_wf',
         }
     wftool = portal.portal_workflow
@@ -249,6 +250,8 @@ def groupcalendarinstall(self):
         wftool.setChainForPortalTypes([pt], chain)
     wftool.setDefaultChain('')
 
+    #if 1:
+    #    return 'stop'
     # check site and calendars proxies
     calendars_id = 'Calendars'
     pr("Verifying roots: %s " % (calendars_id))
