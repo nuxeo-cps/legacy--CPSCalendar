@@ -89,31 +89,30 @@ class TestCalendarTool(CPSCalendarTestCase):
 
         freebusy_info = self.caltool.getFreeBusy([], 
             DateTime('2004/01/15'), DateTime('2004/01/15'), 8, 0, 19, 0)
-        self.assertEquals(freebusy_info['cals_dict'], {})
         self.assertEquals(freebusy_info['cal_users'], {})
-        self.assertEquals(freebusy_info['slots'], 
+        self.assertEquals(freebusy_info['slots'],
             [(DateTime('2004/01/15'), DateTime('2004/01/16'))])
-        self.assertEquals(freebusy_info['mask_cal'], 
-            [[{'start': DateTime('2004/01/15'), 
-               'stop': DateTime('2004/01/15 08:00:00')},
-              {'start': DateTime('2004/01/15 19:00:00'), 
-               'stop': DateTime('2004/01/16')}]])
+        eventinfo = freebusy_info['hour_block_cols'][0][0][0][0]
+        self.assertEquals(eventinfo['start'], DateTime('2004/01/15 08:00:00'))
+        self.assertEquals(eventinfo['height'], (19-8)*60)
+        event = eventinfo['event']
+        self.assertEquals(event.from_date, DateTime('2004/01/15 08:00:00'))
+        self.assertEquals(event.to_date, DateTime('2004/01/15 19:00:00'))
 
         freebusy_info = self.caltool.getFreeBusy(
-            ['workspaces/members/root/calendar'], 
+            ['/portal/workspaces/members/root/calendar'],
             DateTime('2004/01/15'), DateTime('2004/01/15'), 8, 0, 19, 0)
-        self.assertEquals(freebusy_info['cals_dict'], 
-            {'workspaces/members/root/calendar': [[]]})
-        # XXX: don't think that that's the right result
         self.assertEquals(freebusy_info['cal_users'],
-            {'workspaces/members/root/calendar': 'root'})
-        self.assertEquals(freebusy_info['slots'], 
+            {'/portal/workspaces/members/root/calendar': 'root'})
+        self.assertEquals(freebusy_info['slots'],
             [(DateTime('2004/01/15'), DateTime('2004/01/16'))])
-        self.assertEquals(freebusy_info['mask_cal'], 
-            [[{'start': DateTime('2004/01/15'), 
-               'stop': DateTime('2004/01/15 08:00:00')},
-              {'start': DateTime('2004/01/15 19:00:00'), 
-               'stop': DateTime('2004/01/16')}]])
+        eventinfo = freebusy_info['hour_block_cols'][0][0][0][0]
+        self.assertEquals(eventinfo['start'], DateTime('2004/01/15 08:00:00'))
+        self.assertEquals(eventinfo['height'], (19-8)*60)
+        event = eventinfo['event']
+        self.assertEquals(event.from_date, DateTime('2004/01/15 08:00:00'))
+        self.assertEquals(event.to_date, DateTime('2004/01/15 19:00:00'))
+        # XXX make tests for calendars that actually have events.
 
 class TestCalendar(CPSCalendarTestCase):
 
