@@ -306,8 +306,6 @@ class Event(CPSBaseDocument):
         user = self.REQUEST.AUTHENTICATED_USER
         return user.has_permission('Modify portal content', self)
         
-        return self.getCalendarUser() == self.organizer['id']
-
     security.declareProtected('Add portal content', 'isDirty')
     def isDirty(self):
         """Check if we can edit the event"""
