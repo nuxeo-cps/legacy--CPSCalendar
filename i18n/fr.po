@@ -285,7 +285,7 @@ msgstr "Nouvel événement"
 #.         </h3>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_heading_status_update"
-msgstr "Mise-à-jour du statut"
+msgstr "Mise à jour du statut"
 
 #.   <span>:</span>
 #.   <span />
