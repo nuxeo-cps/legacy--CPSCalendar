@@ -276,13 +276,9 @@ class Calendars(Workgroup):
             return default
 
     def __getitem__(self, name):
-        try:
-            ob = Workgroup[name]
+        ob = self.getCalendarForId(name)
+        if ob is not None:
             return ob
-        except KeyError:
-            ob = self.getCalendarForId(name)
-            if ob is not None:
-                return ob
         raise KeyError, name
 
 InitializeClass(Calendars)
