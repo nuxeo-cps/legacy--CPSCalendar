@@ -72,6 +72,10 @@ class CalendarInstaller(CPSInstaller):
             if ttool['Event'].content_meta_type == 'CMF Event':
                 ttool.manage_delObjects(['Event'])
             self.removeCalendarTypes(['Event'])
+            
+        # Temporary fix to force reinstall of types. This should be tested
+        # to see if it's needed, or a isUserModified() should be called.
+        ttool.manage_delObjects(['Event', 'Calendar'])
 
         ptypes = {'Calendar':{'allowed_content_types':('Event',),
                               'typeinfo_name':'CPSCalendar: Calendar',
