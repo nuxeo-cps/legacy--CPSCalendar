@@ -62,7 +62,8 @@
             <select name="usertype"
               tal:define="usertypes here/getUserTypes">
               <tal:block repeat="type usertypes">
-                <option tal:attributes="value type/id;
+                <option tal:condition="python:type['id'] != 'member'"
+                        tal:attributes="value type/id;
                                         selected python:type['id'] == usertype"
                         tal:content="python:str(type['title'])"
                         i18n:translate="" />
