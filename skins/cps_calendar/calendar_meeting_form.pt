@@ -63,10 +63,30 @@
     Meeting creation helper
   </h1>
   <form method="POST" tal:attributes="action here/REQUEST/URL1">
-  <metal:block use-macro="here/calendar_macros/macros/searchwidgets">
+    <metal:block use-macro="here/calendar_macros/macros/searchwidgets">
     the searchform
   </metal:block>
   <hr/>
+    <p class="calTitle">
+      <span i18n:translate="cpscalendar_message_select_the_attendees_you_want_for_your_meeting">
+        Select the attendees you want for your meeting
+      </span>:
+    </p>
+    <p tal:repeat="cal cal_ids">
+        <input type="checkbox" name="cal_ids:list" checked
+          tal:attributes="value cal" />
+        <span tal:define="calob python:caltool.getCalendarForPath(cal, unrestricted=1);
+          userid calob/getCalendarUser;
+          user python:dtool.getEntry(userid);
+          "
+          tal:replace="user/?title_field">
+          calendarid
+        </span>
+    </p>
+    <input type="submit" name="calendar_meeting_form:method"
+      i18n:attributes="value" value="cpscalendar_button_validate"/>
+  </form>
+    <hr/>
     <p>
       <strong>
       <span i18n:translate="cpscalendar_label_from_day">
@@ -169,25 +189,6 @@ range       : [2000, 2049]
     <input type="button" onClick="history.back()"
            value="cpscalendar_button_cancel"
            i18n:attributes="value" />
-    <hr/>
-    <p class="calTitle">
-      <span i18n:translate="cpscalendar_message_select_the_attendees_you_want_for_your_meeting">
-        Select the attendees you want for your meeting
-      </span>:
-    </p>
-    <p tal:repeat="cal cal_ids">
-        <input type="checkbox" name="cal_ids:list" checked
-          tal:attributes="value cal" />
-        <span tal:define="calob python:caltool.getCalendarForPath(cal, unrestricted=1);
-          userid calob/getCalendarUser;
-          user python:dtool.getEntry(userid);
-          "
-          tal:replace="user/?title_field">
-          calendarid
-        </span>
-    </p>
-    <input type="submit" name="calendar_meeting_form:method"
-      i18n:attributes="value" value="cpscalendar_button_validate"/>
-  </form>
+
 </metal:block>
 </html>
