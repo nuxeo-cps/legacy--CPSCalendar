@@ -1,4 +1,23 @@
 *******************************************
+** CPSCalendar V1.7.2 [R1 build 2004/07/30-10:05 by ben]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Browse button for document link event widget looks like a button
+- Event title is now displayed on same line as ? icon (thus removing the
+  event rectangle offset)
+
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- some XHTMLization
+
+*******************************************
 ** CPSCalendar V1.7.1 [R1 build 2004/07/07-17:07 by madarche]
 
 Requires:

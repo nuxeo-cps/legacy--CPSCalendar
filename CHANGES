@@ -6,10 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- Browse button for document link event widget looks like a button
-- Event title is now displayed on same line as ? icon (thus removing the
-  event rectangle offset)
-
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
-- some XHTMLization
+-
