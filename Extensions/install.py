@@ -40,9 +40,10 @@ def update(self):
 
     # skins
     pr("Verifying skins")
-    skins = ('cpscalendar',)
+    skins = ('cpscalendar_skins', 'cpscalendar_images',)
     paths = {
-        'cpscalendar': 'Products/CPSCalendar/skins',
+        'cpscalendar_skins': 'Products/CPSCalendar/skins/cps_calendar',
+        'cpscalendar_images': 'Products/CPSCalendar/skins/images',
     }
     for skin in skins:
         path = paths[skin]
@@ -196,66 +197,66 @@ def update(self):
     
     trtool[workspaces_id].manage_rebuild()
 
-    # i18n
-    pr(" Adding i18n support")
-    calendar_catalog_id='cpscalendar'
+##    # i18n
+##    pr(" Adding i18n support")
+##    calendar_catalog_id='cpscalendar'
 
-    Localizer = portal['Localizer']
-    # languages
-    languages = Localizer.get_supported_languages()
+##    Localizer = portal['Localizer']
+##    # languages
+##    languages = Localizer.get_supported_languages()
 
-    # MessageCatalog
-    if calendar_catalog_id in Localizer.objectIds():
-        Localizer.manage_delObjects([calendar_catalog_id])
-        pr("  previous default MessageCatalog deleted")
-    Localizer.manage_addProduct['Localizer'].manage_addMessageCatalog(
-        id=calendar_catalog_id,
-        title='CPSCalendar messages',
-        languages=languages,
-        )
-    pr("  cpscalendar MessageCatalogCreated")
-    defaultCatalog = Localizer.cpscalendar
+##    # MessageCatalog
+##    if calendar_catalog_id in Localizer.objectIds():
+##        Localizer.manage_delObjects([calendar_catalog_id])
+##        pr("  previous default MessageCatalog deleted")
+##    Localizer.manage_addProduct['Localizer'].manage_addMessageCatalog(
+##        id=calendar_catalog_id,
+##        title='CPSCalendar messages',
+##        languages=languages,
+##        )
+##    pr("  cpscalendar MessageCatalogCreated")
+##    defaultCatalog = Localizer.cpscalendar
 
-    # computing po files' system directory
-    product_path = sys.modules['Products.CPSCalendar'].__path__[0]
-    i18n_path = os.path.join(product_path, 'i18n')
-    pr("   po files are searched in %s" % i18n_path)
-    pr("   po files for %s are expected" % str(languages))
+##    # computing po files' system directory
+##    product_path = sys.modules['Products.CPSCalendar'].__path__[0]
+##    i18n_path = os.path.join(product_path, 'i18n')
+##    pr("   po files are searched in %s" % i18n_path)
+##    pr("   po files for %s are expected" % str(languages))
 
-    # loading po files
-    for lang in languages:
-        if lang == 'en':
-            po_filename = 'locale.pot'
-        else:
-            po_filename = lang + '.po'
-        pr("   importing %s file" % po_filename)
-        po_path = os.path.join(i18n_path, po_filename)
-        try:
-            po_file = open(po_path)
-        except NameError:
-            pr("    %s file not found" % po_path)
-        else:
-            pr("  before  %s file imported" % po_path)
-            defaultCatalog.manage_import(lang, po_file)
-            pr("    %s file imported" % po_path)
+##    # loading po files
+##    for lang in languages:
+##        if lang == 'en':
+##            po_filename = 'locale.pot'
+##        else:
+##            po_filename = lang + '.po'
+##        pr("   importing %s file" % po_filename)
+##        po_path = os.path.join(i18n_path, po_filename)
+##        try:
+##            po_file = open(po_path)
+##        except NameError:
+##            pr("    %s file not found" % po_path)
+##        else:
+##            pr("  before  %s file imported" % po_path)
+##            defaultCatalog.manage_import(lang, po_file)
+##            pr("    %s file imported" % po_path)
 
 
-    # translation_service
-    if portalhas('translation_service'):
-        translation_service = portal.translation_service
+##    # translation_service
+##    if portalhas('translation_service'):
+##        translation_service = portal.translation_service
 
-        # how to test which domain is define in translation_service?
-        try:
-            translation_service.cpscalendar
-        except AttributeError, cpscalendar:
-            translation_service.manage_addDomainInfo(calendar_catalog_id,
-                                                     'Localizer/'+calendar_catalog_id)
-        pr("   cpscalendar domain set to Localizer/cpscalendar")
+##        # how to test which domain is define in translation_service?
+##        try:
+##            translation_service.cpscalendar
+##        except AttributeError, cpscalendar:
+##            translation_service.manage_addDomainInfo(calendar_catalog_id,
+##                                                     'Localizer/'+calendar_catalog_id)
+##        pr("   cpscalendar domain set to Localizer/cpscalendar")
 
-        pr(" Reindexing catalog")
-        portal.portal_catalog.refreshCatalog(clear=1)
-    else:
-        raise str('DependanceError'), 'translation_service'
+##        pr(" Reindexing catalog")
+##        portal.portal_catalog.refreshCatalog(clear=1)
+##    else:
+##        raise 'Dependance Error', 'translation_service'
 
     pr("Update Done")
     return pr('flush')
