@@ -6,8 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- Title of default users calendars is now computed correctly
-- The unused uid attribute was removed.
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

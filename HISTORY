@@ -1,4 +1,21 @@
 *******************************************
+** CPSCalendar V1.11.2 [R1 build 2004/09/03-13:05 by ben]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Title of default users calendars is now computed correctly
+- The unused uid attribute was removed.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.11.1 [R1 build 2004/08/23-05:39 by fermigier]
 
 Requires:
