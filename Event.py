@@ -396,12 +396,14 @@ class Event(CPSBaseDocument):
     def removeAttendees(self, attendees):
         """Removes attendees from attendee-list"""
         self._removeAttendees(attendees)
-        
+
+        # Change amongst the attendees too:        
+        event_id = self.getId()
         ctool = getToolByName(self, 'portal_cpscalendar')
         for attendee in self.attendees:
             apath = attendee['rpath']
             acal = ctool.getCalendarForPath(apath, unrestricted=1)
-            event = acal._getOb(self.getId(), None)
+            event = acal._getOb(event_id, None)
             if event is not None:
                 event._removeAttendees(attendees)
             
