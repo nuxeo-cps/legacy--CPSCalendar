@@ -8,6 +8,7 @@ td.eventHeader {
 
 td.eventHeader a {
   color: white;
+  white-space: nowrap;
 }
 
 .calMaigre {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 75%; color: #000000; text-decoration: none}
