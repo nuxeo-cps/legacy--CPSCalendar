@@ -254,10 +254,10 @@ class Calendar(CPSBaseFolder):
     def getEventsDesc(self, start_time, end_time, disp, additional=1):
         """Return events between start_time and end_time formatted according
         for a disp display type.
-
-        disp can be 'day', 'month', 'view'
+        
+        disp can be 'day', 'month', 'week'
         """
-        assert disp in ('day', 'month', 'view')
+        assert disp in ('day', 'month', 'week')
 
         mtool = getToolByName(self, 'portal_membership')
         show_dirty = mtool.checkPermission('Add portal content', self)
