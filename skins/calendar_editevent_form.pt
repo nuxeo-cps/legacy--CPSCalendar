@@ -2,7 +2,7 @@
   current_action python:create and 'addevent' or 'edit'">
 <html metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="script_plus"
+<metal:block fill-slot="javascript_head_slot"
   tal:content="structure here/day_selector_popup.js">
   Day selector popup script
 </metal:block>
