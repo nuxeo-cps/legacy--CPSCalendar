@@ -217,7 +217,6 @@
         <table width="445" cellspacing="2" cellpadding="0" border="0"
           tal:define="
             empty_src string:${portal_url}/cal_empty.gif;
-            event_src string:${portal_url}/cal_event;
             back_td1 string:${portal_url}/cal_line1.png;
             back_td2 string:${portal_url}/cal_line2.png;
             add_src string:${portal_url}/img_box_addbox.png;
@@ -302,63 +301,70 @@
                 tal:define="even repeat/col/even"
                 tal:attributes="
                 background python:even and back_td2 or back_td1">
-                <tal:block repeat="block col">
-                  <tal:block
-                    define="conf_len python:len(block)">
-                    <tal:block condition="python:conf_len == 1">
-                      <tal:block define="
-                        info python:block[0];
-                        event nocall:info/event;
-                        src python:event and ('%s_%s.png' % (event_src, event.event_status)) or empty_src;
-                        ">
-                        <a
-                          tal:omit-tag="not:nocall:event"
-                          tal:attributes="
-                            title python:event and '%s (%s - %s)' % (event.title_or_id(), event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
-                            href python:event and event.absolute_url()">
-                          <img
-                            tal:define="
-                              border python:not not event;"
-                            tal:attributes="
-                              border border;
-                              src src;
-                              width python:59 - border*2;
-                              height python:info['height']/4 - 2*border" />
-                        </a>
-                      </tal:block>
-                    </tal:block>
-                    <tal:block condition="python:conf_len > 1">
+                <table cellspacing="0" cellpadding="0" width="59" border="0">
+                  <tr tal:repeat="block col">
+                    <td valign="top">
                       <table cellpadding="0" cellspacing="0"
                         width="59" border="0"
-                        tal:define="width python:59/conf_len">
+                        tal:define="width python:59/len(block)">
                         <tr>
                           <td valign="top" tal:repeat="block_col block">
-                            <tal:block repeat="info block_col">
-                              <a
-                                tal:define="
-                                  event nocall:info/event;
-                                  src python:event and ('%s_%s.png' % (event_src, event.event_status)) or empty_src;
-                                  "
-                                tal:omit-tag="not:nocall:event"
-                                tal:attributes="
-                                title python:event and '%s (%s -> %s)' % (event.title_or_id(), event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
-                                  href python:event and event.absolute_url()">
-                                <img
-                                  tal:define="
-                                    border python:not not event;"
-                                  tal:attributes="
-                                    border border;
-                                    src src;
-                                    width python:width - border*2;
-                                    height python:info['height']/4 - 2*border" />
-                              </a>
-                            </tal:block>
+                            <table cellspacing="0" cellpadding="0" border="0">
+                              <tr tal:repeat="info block_col">
+                                <tal:block
+                                  define="
+                                    event nocall:info/event;
+                                    height python:info['height']/4;
+                                  ">
+                                  <td tal:condition="not:nocall:event"
+                                    tal:attributes="
+                                      height height;
+                                      width width;">
+                                  </td>
+                                  <tal:block condition="nocall:event">
+                                    <td bgcolor="#0000FF"
+                                      tal:define="
+                                        base_class python:event.attendees and 'week_att_' or 'week_';"
+                                      tal:attributes="
+                                      width width;
+                                      height height;
+                                      class string:${base_class}${event/event_status};
+                                      ">
+                                      <a
+                                        tal:define="
+                                          event_title event/title_or_id;"
+                                        tal:attributes="
+                                          title python:'%s (%s -> %s)' % (event, event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
+                                          href event/absolute_url">
+                                        <img border="0"
+                                          tal:condition="
+                                            python:height<30"
+                                          tal:attributes="
+                                            src empty_src;
+                                            width width;
+                                            height height" />
+                                        <tal:block
+                                          condition="python:height>=30">
+                                          <img border="0" height="10"
+                                            tal:attributes="
+                                            src empty_src;
+                                            width width;" />
+                                          <small
+                                            tal:content="
+                                            python:(width<59 and '...') or (len(event_title)>10 and event_title[:8]+'...') or event_title" />
+                                        </tal:block>
+                                      </a>
+                                    </td>
+                                  </tal:block>
+                                </tal:block>
+                              </tr>
+                            </table>
                           </td>
                         </tr>
                       </table>
-                    </tal:block>
-                  </tal:block>
-                </tal:block>
+                    </td>
+                  </tr>
+                </table>
               </td>
             </tal:block>
           </tr>

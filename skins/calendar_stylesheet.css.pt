@@ -1,0 +1,10 @@
+<tal:block define="portal_url python:here.portal_url(relative=1)">
+  <tal:block repeat="att python:['', 'att_']">
+    <tal:block repeat="status python:['confirmed', 'unconfirmed', 'canceled']">
+td.week_<tal:block replace="att" /><tal:block replace="status" /> {
+  background-image: url(<tal:block replace="portal_url" />/cal_week_<tal:block replace="att" /><tal:block replace="status" />.png);
+  background-repeat: no-repeat;
+}
+    </tal:block>
+  </tal:block>
+</tal:block>

@@ -1,6 +1,9 @@
 <tal:block define="current_action string:view">
 <html metal:use-macro="here/main_template/macros/master">
 
+<metal:block fill-slot="header">
+</metal:block>
+
 <metal:block fill-slot="header_plus" />
 
 <metal:block fill-slot="main">
@@ -9,6 +12,7 @@
     <metal:block use-macro="here/calendar_macros/macros/event_view">
     </metal:block>
   </tal:block>
+  Move event 
   <metal:block use-macro="here/calendar_macros/macros/notifyattendees" />
 </metal:block>
 
