@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- The default for search fields now include groups.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

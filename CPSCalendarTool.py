@@ -269,7 +269,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                     'mode': 'w', 'select_variable':'getSearchFields'},
                    )
 
-    search_fields = ['id', 'sn', 'email']
+    search_fields = ['id', 'sn', 'email', 'groups']
 
     def __init__(self):
         PortalFolder.__init__(self, self.id)
