@@ -7,6 +7,7 @@ mtool = context.portal_membership
 mcat = context.portal_messages
 
 calendars = { 'private': [], 'others': [], 'rooms': [], 'ressources': [] }
+isAnon = mtool.isAnonymousUser()
 user_id = mtool.getAuthenticatedMember().getUserName()
 has_private = 0
 
@@ -37,7 +38,7 @@ for calid in all_calendars:
         'url': cal.absolute_url(),
     })
 
-if not has_private:
+if not has_private and not isAnon:
     calendars['private'].append({
         'id': user_id,
         'title': 'Calendar of %s' % (user_id, ),
