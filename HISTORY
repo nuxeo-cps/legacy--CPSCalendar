@@ -1,4 +1,30 @@
 *******************************************
+** CPSCalendar V1.9.0 [R1 build 2004/08/12-08:56 by regebro]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- A new setting in the portal_cpscalendar tool decides if user searches in the
+  personal calendars should be limited to user with a View permission. This is
+  default to off, but should be set to on if you have very large or slow 
+  directories. Setting it to on requires every user to give a View permission
+  to any users they want to able to invite to events created in their
+  personal calendar.
+Bug fixes:
+~~~~~~~~~~
+- The Directory search for users is now limited to only include those users
+  who have the View permission on the calendar, to speed up the search with
+  large LDAP directories.
+- An intermittent session problem which caused the attendees to be dropped
+  when creating a meeting was maybe fixed. (As it is intermittent, it's hard
+  to be sure).
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.8.0 [R1 build 2004/08/11-10:44 by regebro]
 
 Requires:
