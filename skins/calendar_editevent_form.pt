@@ -1,5 +1,6 @@
 <tal:block define="create options/create|nothing;
-  current_action python:create and 'addevent' or 'edit'">
+                   current_action python:create and 'addevent' or 'edit'"
+           i18n:domain="cpscalendar">
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="javascript_head_slot"

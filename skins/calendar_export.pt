@@ -1,5 +1,6 @@
 <tal:block define="global current_action string:export" />
-<html metal:use-macro="here/main_template/macros/master">
+<html metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cpscalendar">
 
 <metal:block fill-slot="main"
              tal:define="here_url python:'/'+here.absolute_url(relative=1);

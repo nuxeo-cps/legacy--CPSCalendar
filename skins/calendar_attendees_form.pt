@@ -1,14 +1,13 @@
 <tal:block define="global current_action string:attendees" />
-<html metal:use-macro="here/main_template/macros/master">
+<html metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cpscalendar">
 
-<metal:block fill-slot="header">
+<metal:block fill-slot="head_slot">
   <span i18n:translate="_cal_Attendees_for_event_">
     Attendees for event
   </span>
   «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
 </metal:block>
-
-<metal:block fill-slot="header_plus" />
 
 <metal:block fill-slot="main"
              tal:define="this_user here/getCalendarUser;

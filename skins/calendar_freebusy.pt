@@ -1,6 +1,7 @@
 <tal:block define="global portal_url python:here.portal_url(relative=1);
                    global current_action string:meeting" />
-<html metal:use-macro="here/main_template/macros/master">
+<html metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cpscalendar">
 
 <metal:block fill-slot="css_slot">
   <link rel="stylesheet" type="text/css"
