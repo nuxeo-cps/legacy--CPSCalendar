@@ -49,7 +49,7 @@ class CPSInstaller(BaseInstaller):
         events = self.portal.portal_catalog(portal_type='Event')
         for event in events:
             ob = event.getObject()
-            self.log(ob.upgradeEventType())
+            ob.upgradeEventType()
         self.log("  Done.")
 
 
