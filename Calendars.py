@@ -331,7 +331,7 @@ class Calendars(CPSBaseFolder):
                 })
         return calendars_dict
 
-    security.declarePublic(View, 'getAttendeeInfo')
+    security.declareProtected(View, 'getAttendeeInfo')
     def getAttendeeInfo(self, id, status=0):
         if id in self.objectIds('Calendar'):
             calendar = getattr(self, id)
