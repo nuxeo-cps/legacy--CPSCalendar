@@ -348,13 +348,12 @@ class Calendar(CPSBaseFolder):
         elif disp == 'week':
             slot_start = start_time
             for i in range(0, 7):
-                slots.append((slot_start, slot_start+1))
+                slots.append((slot_start+i, slot_start+i+1))
                 slot_list.append({
                   'desc': slot_start,
                   'day': [],
                   'hour': [],
                 })
-                slot_start += 1
         elif disp == 'month':
             slot_start = start_time
             while slot_start.lessThan(end_time):
@@ -824,11 +823,26 @@ class Calendar(CPSBaseFolder):
                     error = sys.exc_info())
 
     security.declareProtected('View', 'getEvents')
-    def getEvents(self, from_date, to_date):
-        """Return all events with from_date and to_date in the interval"""
+    def getEvents(self, from_date, to_date, by_days = 0):
+        """Return all events with from_date and to_date in the interval
+            by_days option make it return events in a list of days
+        """
         events = self.objectValues('Event')
-        return [event for event in events
-                if event.matchesTime(from_date, to_date)]
+        if by_days:
+            days = int(to_date-from_date)
+            events_list = []
+            for i in range(0, days):
+                day_list = []
+                start = from_date + i
+                end = from_date + i + 1
+                for event in events:
+                    if event.matchesTime(start, end):
+                        day_list.append(event)
+                events_list.append(day_list)
+            return events_list
+        else:
+            return [event for event in events
+                    if event.matchesTime(from_date, to_date)]
 
     security.declarePrivate('declineEvent')
     def declineEvent(self, event):
