@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2004-04-12 16:48default\n"
+"POT-Creation-Date: 2004-04-19 11:36default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -26,15 +26,15 @@ msgstr ""
 msgid "Calendar of the <span replace=\"calendar_disp\" />"
 msgstr ""
 
-#.   <td content="python:str(cat[1]['title'])" valign="middle">
+#.   <td valign="middle" content="python:str(cat[1]['title'])">
 #.                       Category
 #.                     </td>
 #: from ../skins/cps_calendar/create_meeting_form.pt
 msgid "Category"
 msgstr ""
 
-#.   <option repeat="status statuses" attributes="value status;
-#.                       selected python:status == selected" content="python:str('cpscalendar_pending_%s' % (status, ))">
+#.   <option content="python:str('cpscalendar_pending_%s' % (status, ))" attributes="value status;
+#.                       selected python:status == selected" repeat="status statuses">
 #.             Confirm
 #.           </option>
 #: from ../skins/cps_calendar/calendar_macros.pt
@@ -52,7 +52,7 @@ msgstr ""
 msgid "Confirmed"
 msgstr ""
 
-#.   <li repeat="error options/errors" content="python:str(error)">
+#.   <li content="python:str(error)" repeat="error options/errors">
 #.         Error
 #.       </li>
 #: from ../skins/cps_calendar/calendar_meeting_error.pt
@@ -64,8 +64,8 @@ msgstr ""
 msgid "January 2003"
 msgstr ""
 
-#.   <option repeat="status python:['confirmed', 'tentative', 'decline']" attributes="value status;
-#.                           selected python:status == mystatus" content="python:str('cpscalendar_pending_%s' % (status,))">
+#.   <option content="python:str('cpscalendar_pending_%s' % (status,))" attributes="value status;
+#.                           selected python:status == mystatus" repeat="status python:['confirmed', 'tentative', 'decline']">
 #.               Status
 #.               </option>
 #.   <td content="string:cpscalendar_option_status_${event/event_status}">Status</td>
@@ -74,15 +74,15 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#.   <option repeat="choice choices" attributes="value choice/id;
-#.                            selected python:transparent == choice['id']" content="python:str(choice['title'])">
+#.   <option content="python:str(choice['title'])" attributes="value choice/id;
+#.                            selected python:transparent == choice['id']" repeat="choice choices">
 #.                   Yes
 #.                 </option>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "Yes"
 msgstr ""
 
-#.   <a condition="python:pendings_count > 1" attributes="href string:${context_url}/calendar_pending_events" href="calendar_pending_events">
+#.   <a href="calendar_pending_events" attributes="href string:${context_url}/calendar_pending_events" condition="python:pendings_count > 1">
 #.              You have ${pendings_count (tal replace="pendings_count")}
 #.              pending requests.
 #.           </a>
@@ -100,15 +100,15 @@ msgstr ""
 msgid "action_export"
 msgstr ""
 
-#.   <input value="button_cpscalendar_remove_all_attendees_who_declined" type="submit" />
+#.   <input type="submit" value="button_cpscalendar_remove_all_attendees_who_declined" />
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 msgid "button_cpscalendar_remove_all_attendees_who_declined"
 msgstr ""
 
-#.   <td content="python:str(cat[1]['title'])" valign="middle">
+#.   <td valign="middle" content="python:str(cat[1]['title'])">
 #.                     category
 #.                   </td>
-#.   <metal:block fill-slot="content" define="cat_title categories/?category/title|cat_def_title" content="python:str(cat_title)">
+#.   <metal:block content="python:str(cat_title)" define="cat_title categories/?category/title|cat_def_title" fill-slot="content">
 #.             category
 #.           </metal:block>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
@@ -122,15 +122,15 @@ msgstr ""
 msgid "cpscalendar_attendees_management"
 msgstr ""
 
-#.   <input value="cpscalendar_button_add" type="submit" />
-#.   <input attributes="name python:addaction+':method'" value="cpscalendar_button_add" class="mainbutton" type="submit">
+#.   <input type="submit" value="cpscalendar_button_add" />
+#.   <input type="submit" class="mainbutton" value="cpscalendar_button_add" attributes="name python:addaction+':method'">
 #.               </input>
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_button_add"
 msgstr ""
 
-#.   <input onclick="history.back()" type="button" value="cpscalendar_button_back" />
+#.   <input type="button" onclick="history.back()" value="cpscalendar_button_back" />
 #: from ../skins/cps_calendar/calendar_meeting_empty.pt
 #: ../skins/cps_calendar/calendar_meeting_error.pt
 #: ../skins/cps_calendar/calendar_meeting_expired.pt
@@ -138,8 +138,8 @@ msgstr ""
 msgid "cpscalendar_button_back"
 msgstr ""
 
-#.   <input onclick="history.back()" type="button" value="cpscalendar_button_cancel" />
-#.   <input onclick="window.close()" type="button" value="cpscalendar_button_cancel" />
+#.   <input type="button" onclick="history.back()" value="cpscalendar_button_cancel" />
+#.   <input type="button" onclick="window.close()" value="cpscalendar_button_cancel" />
 #: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
 #: ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_editevent_form.pt
@@ -149,22 +149,22 @@ msgstr ""
 msgid "cpscalendar_button_cancel"
 msgstr ""
 
-#.   <input value="cpscalendar_button_create" type="submit" />
+#.   <input type="submit" value="cpscalendar_button_create" />
 #: from ../skins/cps_calendar/create_meeting_form.pt
 msgid "cpscalendar_button_create"
 msgstr ""
 
-#.   <input value="cpscalendar_button_delete" type="submit" />
+#.   <input type="submit" value="cpscalendar_button_delete" />
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 msgid "cpscalendar_button_delete"
 msgstr ""
 
-#.   <input value="cpscalendar_button_delete_with_no_notification" type="submit" />
+#.   <input type="submit" value="cpscalendar_button_delete_with_no_notification" />
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_button_delete_with_no_notification"
 msgstr ""
 
-#.   <input value="cpscalendar_button_modify" type="submit" />
+#.   <input type="submit" value="cpscalendar_button_modify" />
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_button_modify"
 msgstr ""
@@ -174,17 +174,17 @@ msgstr ""
 msgid "cpscalendar_button_no"
 msgstr ""
 
-#.   <input attributes="name python:searchaction+':method'" value="cpscalendar_button_search" class="mainbutton" type="submit">
+#.   <input type="submit" class="mainbutton" value="cpscalendar_button_search" attributes="name python:searchaction+':method'">
 #.           </input>
-#.   <input attributes="name string:calendar_begin_meeting:method" value="cpscalendar_button_search" type="submit" />
+#.   <input type="submit" value="cpscalendar_button_search" attributes="name string:calendar_begin_meeting:method" />
 #: from ../skins/cps_calendar/calendar_macros.pt
 #: ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_button_search"
 msgstr ""
 
-#.   <input value="cpscalendar_button_validate" type="submit" />
-#.   <input value="cpscalendar_button_validate" name="confirmPendingEvent:method" type="submit" />
-#.   <input value="cpscalendar_button_validate" name="calendar_meeting_form:method" type="submit" />
+#.   <input type="submit" value="cpscalendar_button_validate" />
+#.   <input type="submit" name="confirmPendingEvent:method" value="cpscalendar_button_validate" />
+#.   <input type="submit" name="calendar_meeting_form:method" value="cpscalendar_button_validate" />
 #: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
 #: ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_confirmdelevents.pt
@@ -329,6 +329,13 @@ msgstr ""
 msgid "cpscalendar_label_at"
 msgstr ""
 
+#.   <span condition="python:event_type == 'event_tofrom'">
+#.                   From the
+#.                 </span>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+msgid "cpscalendar_label_at_day"
+msgstr ""
+
 #.   <th>Participants</th>
 #.   <metal:block fill-slot="title">
 #.               Attendees
@@ -377,7 +384,7 @@ msgstr ""
 msgid "cpscalendar_label_category"
 msgstr ""
 
-#.   <input value="cpscalendar_label_change_type" name="calendar_editevent_form:method" type="submit" />
+#.   <input type="submit" name="calendar_editevent_form:method" value="cpscalendar_label_change_type" />
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_change_type"
 msgstr ""
@@ -470,7 +477,7 @@ msgstr ""
 msgid "cpscalendar_label_from_(day)"
 msgstr ""
 
-#.   <span>
+#.   <span condition="python:event_type in ('event_recurring', 'event_allday')">
 #.                   From the
 #.                 </span>
 #.   <span>

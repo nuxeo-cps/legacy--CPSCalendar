@@ -148,8 +148,13 @@
                 </select>
                 <br/>
               </tal:block> 
-              <span i18n:translate="cpscalendar_label_from_day">
+              <span tal:condition="python:event_type in ('event_recurring', 'event_allday')"
+                    i18n:translate="cpscalendar_label_from_day">
                 From the
+              </span>
+              <span tal:condition="python:event_type == 'event_tofrom'"
+                    i18n:translate="cpscalendar_label_at_day">
+                At the
               </span>
               <input type="text" size="11" maxlength="22"
                 tal:attributes="name string:from_date_string;
@@ -373,6 +378,7 @@ range       : [2000, 2049]
       </metal:block>
     </metal:block>
     <tal:block condition="meeting">
+      <h2 i18n:translate="cpscalendar_label_attendees">participants</h2> 
       <tal:block define="cal_users meeting/cal_users">
       <p tal:repeat="user cal_users/items">
         <input type="checkbox" name="cal_ids:list" checked

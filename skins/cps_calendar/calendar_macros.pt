@@ -228,8 +228,6 @@
         sender
           </tal:block>
         </p>
-        <metal:block use-macro="here/calendar_macros/macros/event_view">
-        </metal:block>
         <input type="submit" name="confirmPendingEvent:method"
           tal:condition="nocall:real_event"
           tal:attributes="value python:str('cpscalendar_button_validate')"
