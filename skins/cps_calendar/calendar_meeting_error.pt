@@ -1,5 +1,6 @@
 <tal:block define="global current_action string:meeting" />
-<html metal:use-macro="here/main_template/macros/master">
+<html metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cpscalendar">
 
 <metal:block fill-slot="head_slot"
              i18n:translate="cpscalendar_heading_meeting_creation_helper">
@@ -7,12 +8,14 @@
 </metal:block>
 
 <metal:block fill-slot="main">
-  <span class="calTitle" i18n:translate="cpscalendar_message_your_meeting_request_has_errors">
+  <span class="calTitle"
+        i18n:translate="cpscalendar_message_your_meeting_request_has_errors">
     Your request for a meeting has errors
   </span>:
   <ul>
     <li tal:repeat="error options/errors"
-        tal:content="python:str(error)">
+        tal:content="python:str(error)"
+        i18n:translate="">
       Error
     </li>
   </ul>

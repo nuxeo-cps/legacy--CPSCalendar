@@ -1,17 +1,18 @@
 <tal:block define="global current_action string:meeting" />
-<html metal:use-macro="here/main_template/macros/master">
+<html metal:use-macro="here/content_lib/macros/master">
 
-<metal:block fill-slot="javascript_head_slot"
-             tal:content="structure here/day_selector_popup.js">
-  Day selector popup script
+<metal:block fill-slot="css_slot">
+  <style type="text/css"
+    tal:content="string:@import url(${base_url}calendar-win2k-1.css);"></style>
+  <script type="text/javascript" src="calendar.js"
+    tal:attributes="src string:${base_url}calendar.js"></script>
+
+  <script type="text/javascript" src="lang/calendar-en.js"
+    tal:define="local cpsmcat/get_selected_language"
+    tal:attributes="src string:${base_url}lang/calendar-${local}.js"></script>
+  <script type="text/javascript" src="calendar-setup.js"
+    tal:attributes="src string:${base_url}calendar-setup.js"></script>
 </metal:block>
-
-<metal:block fill-slot="head_slot" i18n:domain="cpscalendar"
-             i18n:translate="cpscalendar_heading_meeting_creation_helper">
-  Meeting creation helper
-</metal:block>
-
-<metal:block fill-slot="header_plus" />
 
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="portal_url python:here.portal_url(relative=1);
@@ -27,18 +28,21 @@
                          to_date_day python:edit and int(args['to_date_day']) or selected_day.day();
                          from_date python:DateTime(from_date_year, from_date_month, from_date_day);
                          to_date python:DateTime(to_date_year, to_date_month, to_date_day);
-                         from_date_hour python:(edit and [int(args['from_date_hour'])] or [9])[0];
+                         from_date_hour python:(edit and [int(args['from_date_hour'])] or [8])[0];
                          from_date_minute python:(edit and [int(args['from_date_minute'])] or [0])[0];
-                         to_date_hour python:(edit and [int(args['to_date_hour'])] or [17])[0];
+                         to_date_hour python:(edit and [int(args['to_date_hour'])] or [19])[0];
                          to_date_minute python:(edit and [int(args['to_date_minute'])] or [0])[0];
                          my_id here/id;
                          cal_ids python:edit and args['cal_ids'] or [my_id];
                          user_types here/getUserTypes;
                          all_calendars python:hasattr(here, 'getCalendarsDict') 
                                               and here.getCalendarsDict(exclude=my_id)
-                                              or {};"
-             tal:on-error="python:request.RESPONSE.redirect('%s/calendar_meeting_expired' % (here.absolute_url(), ))">
+                                              or {};">
 
+  <span i18n:domain="cpscalendar"
+        i18n:translate="cpscalendar_heading_meeting_creation_helper">
+    Meeting creation helper
+  </span>
   <form action="calendar_begin_meeting" method="POST">
     <p>
     <span clss="calTitle" i18n:translate="cpscalendar_message_select_the_attendees_you_want_for_your_meeting">
@@ -74,59 +78,50 @@
         </span>
       </small>
     </p>
-    <span class="calTitle" i18n:translate="cpscalendar_message_select_the_time_interval_you_want_for_your_meeting">
-      Select the time interval you want for your meeting
-    </span> :
-    <input type="hidden" id="from_date_day" name="from_date_day"
-      tal:attributes="value from_date_day" />
-    <input type="hidden" id="from_date_month" name="from_date_month"
-      tal:attributes="value from_date_month" />
-    <input type="hidden" id="from_date_year" name="from_date_year"
-      tal:attributes="value from_date_year" />
-    <input type="hidden" id="to_date_day" name="to_date_day"
-      tal:attributes="value to_date_day" />
-    <input type="hidden" id="to_date_month" name="to_date_month"
-      tal:attributes="value to_date_month" />
-    <input type="hidden" id="to_date_year" name="to_date_year"
-      tal:attributes="value to_date_year" />
     <p>
       <strong>
       <span i18n:translate="cpscalendar_label_from_day">
         From
       </span>
-      <span id="from_date_string">
-        <tal:block content="python:str('cpscalendar_label_day_long%s' % (from_date.dow(), ))"
-                   i18n:translate="" />
-        <tal:block replace="from_date_day" />
-        <tal:block content="python:str('cpscalendar_label_month_long%s' % (from_date_month, ))"
-                   i18n:translate="" />
-        <tal:block replace="from_date_year" />
-      </span>
-      <a tal:define="int_date python:int(from_date);"
-         tal:attributes="href string:javascript:open_day_selector('${int_date}', '\'from_date\'', '\'from_date_string\'', '\'\'')">
-        <img border="0"
-             tal:attributes="src string:${portal_url}/day_selector_icon.png" />
-      </a>
-      </strong>
-    </p>
-    <p>
-      <strong>
+  <input type="text" size="11" maxlength="22"
+    tal:attributes="name string:from_date;
+                    id string:from_date;
+                    value python:here.getDateStr(from_date, fmt='short')" />
+  <button id="trigger"
+    tal:attributes="id string:trigger_from_date">...</button>
+  <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
+    replace="structure string:<script type='text/javascript'>
+    Calendar.setup(
+      {
+        inputField  : 'from_date',
+        ifFormat    : 'd/m/y',
+        button      : 'trigger_from_date',
+        mondayFirst : true,
+        range       : [2000, 2049]
+      }
+    );
+  </script>" />
       <span i18n:translate="cpscalendar_label_to_day">
-        To
+        to
       </span>
-      <span id="to_date_string">
-        <tal:block content="python:str('cpscalendar_label_day_long%s' % (to_date.dow(), ))"
-                   i18n:translate="" />
-        <tal:block replace="to_date_day" />
-        <tal:block content="python:str('cpscalendar_label_month_long%s' % (to_date_month, ))"
-                   i18n:translate="" />
-        <tal:block replace="to_date_year" />
-      </span>
-      <a tal:define="int_date python:int(to_date);"
-         tal:attributes="href string:javascript:open_day_selector('${int_date}', '\'to_date\'', '\'to_date_string\'', '\'\'')">
-        <img border="0"
-             tal:attributes="src string:${portal_url}/day_selector_icon.png" />
-      </a>
+  <input type="text" size="11" maxlength="22"
+    tal:attributes="name string:to_date;
+                    id string:to_date;
+                    value python:here.getDateStr(to_date, fmt='short')" />
+  <button id="trigger"
+    tal:attributes="id string:trigger_to_date">...</button>
+  <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
+    replace="structure string:<script type='text/javascript'>
+    Calendar.setup(
+      {
+        inputField  : 'to_date',
+        ifFormat    : 'd/m/y',
+        button      : 'trigger_to_date',
+        mondayFirst : true,
+        range       : [2000, 2049]
+      }
+    );
+  </script>" />
       </strong>
     </p>
     <p>
@@ -138,28 +133,28 @@
         <option tal:repeat="hour python:range(0,24)"
                 tal:content="hour"
                 tal:attributes="value hour;
-                                selected python:hour == 8 or nothing;" />
+                                selected python:hour == from_date_hour;" />
       </select>
       <span i18n:translate="cpscalendar_hour_sep">:</span>
       <select name="from_date_minute:int">
         <option tal:repeat="minute python:range(0,60,5)"
                 tal:content="minute"
                 tal:attributes="value minute;
-                                selected python:minute == 0 or nothing;" />
+                                selected python:minute == from_date_minute;" />
       </select>
       <span i18n:translate="cpscalendar_label_and">and</span>
       <select name="to_date_hour:int">
         <option tal:repeat="hour python:range(0,24)"
                 tal:content="hour"
                 tal:attributes="value hour;
-                                selected python:hour == 19 or nothing;" />
+                                selected python:hour == to_date_hour;" />
       </select>
       <span i18n:translate="cpscalendar_hour_sep">:</span>
       <select name="to_date_minute:int">
         <option tal:repeat="minute python:range(0,60,5)"
                 tal:content="minute"
                 tal:attributes="value minute;
-                                selected python:minute == 0 or nothing;" />
+                                selected python:minute == to_date_minute;" />
       </select>
       </strong>
     </p>
