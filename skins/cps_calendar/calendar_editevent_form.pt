@@ -31,6 +31,7 @@
     recurrence_period python:create and recurrence_period or here.recurrence_period;
     location python:(not create) and here.location or '';
     event_status python:create and 'unconfirmed' or here.event_status;
+    document_link python:(not create and here.document) or '';
     dateinfo python:here.calendar_getFromToDate(create, here, request);
     frominfo python:dateinfo[0];
     toinfo python:dateinfo[1];
@@ -340,7 +341,7 @@ range       : [2000, 2049]
           <metal:block fill-slot="content">
               <p>
               <input type="text" id="document_field" size=42 name="document"
-                tal:attributes="value here/document" >
+                tal:attributes="value document_link" >
               <a class=".button"
                  onClick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')"
                  i18n:translate="cpscalendar_label_browse">
