@@ -25,20 +25,31 @@ class TestCalendarTool(CPSCalendarTestCase):
         self.member = dtool.members.getEntry(self.user_id)
         assert self.member
         self.user_home = mtool.getHomeFolder(self.user_id)
-        assert self.user_home
+        self.assertEquals(self.user_home, self.portal.workspaces.members.root)
         self.user_home_url = mtool.getHomeUrl(self.user_id)
-        assert self.user_home_url
+        self.assertEquals(self.user_home_url, 
+                          "http://nohost/portal/workspaces/members/root")
+        self.caltool = self.portal.portal_cpscalendar
+        assert self.caltool 
 
     def beforeTearDown(self):
         self.logout()
 
     def testCalendarTool(self):
-        caltool = self.portal.portal_cpscalendar
-        assert(caltool)
+        caltool = self.caltool
 
-        cal = caltool.getCalendarForPath(self.user_home_url)
-        raise "DEBUG", str(self.user_home.absolute_path(relative=1))
-        assert(cal)
+        rpath = self.user_home.absolute_url(relative=1)
+        cal = caltool.getCalendarForPath(rpath)
+        self.assertEquals(cal, self.user_home.calendar)
+
+        #print caltool.listCalendars()
+        l = caltool.listCalendarPaths()
+        l.sort()
+        self.assertEquals(l, [
+             'portal/workspaces/members/root/calendar',
+             'portal/workspaces/members/test_user_1_/calendar'])
+
+        #print caltool.listCalendarsDict()
 
 
 class TestCalendar(CPSCalendarTestCase):
