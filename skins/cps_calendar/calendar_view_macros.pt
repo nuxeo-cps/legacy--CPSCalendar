@@ -1,6 +1,7 @@
 <metal:block define-macro="day">
   <tal:block define="global non_local string:#777777;
-                     global my_id here/id;" />
+                     global my_id python:here.portal_membership.getAuthenticatedMember().getMemberId();
+    "/>
   <tal:block
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
@@ -234,7 +235,8 @@
 
 <metal:block define-macro="week">
   <tal:block define="global non_local string:#777777;
-                     global my_id here/id;" />
+                     global my_id python:here.portal_membership.getAuthenticatedMember().getMemberId();
+    "/>
   <tal:block
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
@@ -411,8 +413,8 @@
                                             tal:define="
                                               base_class python:event.attendees and (info['isdirty'] and 'weekDirty' or 'weekAtt') or 'week';
                                               local_event python:my_id == event.getCalendarUser();
-                                              bgcolor categories/?category/color|def_color;
                                               category event/category;
+                                              bgcolor categories/?category/color|def_color;
                                               tdclass string:${base_class}${event/event_status};"
                                             tal:attributes="
                                               width width;
@@ -483,7 +485,8 @@
 
 <metal:block define-macro="month">
   <tal:block define="global non_local string:#777777;
-                     global my_id here/id;" />
+                     global my_id python:here.portal_membership.getAuthenticatedMember().getMemberId();
+    "/>
   <span class="calTitle">
     <span tal:content="python:str('_cal_Month%s' % (viewed_day.month(), ))" 
           i18n:translate="" />
