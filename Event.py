@@ -87,6 +87,7 @@ class Event(BaseDocument):
         {'id':'transparent', 'type':'boolean', 'mode':'w', 'label':'Transparent Event'},
         {'id':'location', 'type':'text', 'mode':'w', 'label':'Location'},
         {'id':'event_status', 'type':'text', 'mode':'w', 'label':'Event Status'},
+        {'id':'category', 'type':'text', 'mode':'w', 'label':'Category'},
         )
 
     #
@@ -100,6 +101,7 @@ class Event(BaseDocument):
     all_day = 0
     location = ''
     event_status = 'unconfirmed'
+    category = ''
     transparent = 0
 
     isdirty = 1
@@ -228,6 +230,7 @@ class Event(BaseDocument):
                 'attendees': deepcopy(self.attendees),
                 'from_date': self.from_date,
                 'to_date': self.to_date,
+                'category': self.category,
                 'all_day': self.all_day,
                 'title': self.title,
                 'description': self.description,
