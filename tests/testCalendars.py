@@ -12,15 +12,33 @@ from DateTime.DateTime import DateTime
 class TestCalendarTool(CPSCalendarTestCase):
 
     def afterSetUp(self):
-        self.login('root')
+        self.user_id = 'root'
+        self.login(self.user_id)
+
+        # This actually creates an entry for root in portal_memberdata
+        mtool = self.portal.portal_membership
+        m = mtool.getAuthenticatedMember()
+        m.setProperties(toto='toto')
+
+        # If there is no entry for user, getCalendarForPath will return None
+        dtool = self.portal.portal_metadirectories
+        self.member = dtool.members.getEntry(self.user_id)
+        assert self.member
+        self.user_home = mtool.getHomeFolder(self.user_id)
+        assert self.user_home
+        self.user_home_url = mtool.getHomeUrl(self.user_id)
+        assert self.user_home_url
 
     def beforeTearDown(self):
         self.logout()
 
-    def testCalendars(self):
+    def testCalendarTool(self):
         caltool = self.portal.portal_cpscalendar
         assert(caltool)
-        #XXX
+
+        cal = caltool.getCalendarForPath(self.user_home_url)
+        raise "DEBUG", str(self.user_home.absolute_path(relative=1))
+        assert(cal)
 
 
 class TestCalendar(CPSCalendarTestCase):
@@ -31,17 +49,11 @@ class TestCalendar(CPSCalendarTestCase):
 
         # This actually creates an entry for root in portal_memberdata
         mtool = self.portal.portal_membership
-        m = mtool.getAuthenticatedMember()
-        m.setProperties(toto='toto')
+        self.member = mtool.getAuthenticatedMember()
 
-        # If there is no entry for user, getCalendarForId will return None
-        dtool = self.portal.portal_metadirectories
-        member = dtool.members.getEntry(self.user_id)
-        assert member
         member_home = mtool.getHomeFolder(self.user_id)
         assert member_home
 
-        caltool = self.portal.portal_cpscalendar
         self.calendar = getattr(member_home, 'calendar')
         assert self.calendar
 
