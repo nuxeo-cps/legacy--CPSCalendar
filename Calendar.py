@@ -17,6 +17,7 @@ from Acquisition import aq_inner, aq_parent
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.CMFCorePermissions import setDefaultRoles, View
+from Products.CMFCore.CMFCorePermissions import ChangePermissions
 
 from Products.CPSCore.CPSBase import CPSBaseFolder#, CPSBase_adder
 #from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
@@ -49,7 +50,7 @@ factory_type_information = (
                                ),
      'actions': ({'id': 'view',
                   'name': '_action_view_',
-                  'action': 'string:calendar_view',
+                  'action': 'string:${object_url}/calendar_view',
                   'condition': '',
                   'permissions': (View,),
                   'category': 'object',
@@ -57,62 +58,63 @@ factory_type_information = (
                   },
                  {'id': 'month_view',
                   'name': '_action_month_view_',
-                  'action': 'string:calendar_view?disp=month',
+                  'action': 'string:${object_url}/calendar_view?disp=month',
                   'condition': '',
                   'permissions': (View,),
                   'category': 'object'
                   },
                  {'id': 'week_view',
                   'name': '_action_week_view_',
-                  'action': 'string:calendar_view?disp=week',
+                  'action': 'string:${object_url}/calendar_view?disp=week',
                   'condition': '',
                   'permissions': (View,),
                   'category': 'object'
                   },
                  {'id': 'day_view',
                   'name': '_action_day_view_',
-                  'action': 'string:calendar_view?disp=day',
+                  'action': 'string:${object_url}/calendar_view?disp=day',
                   'condition': '',
                   'permissions': (View,),
                   'category': 'object'
                   },
                  {'id': 'addevent',
                   'name': '_action_addevent_',
-                  'action': 'string:calendar_addevent_form?all_day=1',
+                  'action': 'string:${object_url}/calendar_addevent_form?all_day=1',
                   'condition': '',
                   'permissions': ("Add portal content",),
                   'category': 'object'
                   },
                  {'id': 'meeting',
                   'name': '_action_meeting_',
-                  'action': 'string:calendar_meeting_form',
+                  'action': 'string:${object_url}/calendar_meeting_form',
                   'condition': '',
                   'permissions': ("Add portal content",),
                   'category': 'object'
                   },
                  {'id': 'display',
                   'name': '_action_display_',
-                  'action': 'calendar_display_form',
+                  'action': 'string:${object_url}/calendar_display_form',
                   'condition': '',
                   'permissions': ("Add portal content",),
                   'category': 'object'
                   },
                  {'id': 'export',
                   'name': '_action_export_',
-                  'action': 'string:calendar_export',
+                  'action': 'string:${object_url}/calendar_export',
                   'condition': '',
                   'permissions': (View,),
                   'category': 'object'
                   },
                  {'id': 'localroles',
                   'name': '_action_access_rights_',
-                  'action': 'string:folder_localrole_form',
-                  'permissions': (ManageWorkgroups,),
+                  'action': 'string:${object_url}/folder_localrole_form',
+                  'condition': '',
+                  'permissions': (ChangePermissions,),
                   'category': 'object'
                   },
                  {'id': 'create',
                   'name': '_action_create_',
-                  'action': 'string:calendar_create_form',
+                  'action': 'string:${object_url}/calendar_create_form',
                   'condition': '',
                   'permissions': (),
                   'visible': 0,},

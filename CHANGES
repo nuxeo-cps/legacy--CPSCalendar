@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- P2 #132: user cannot set local roles on its own calendar
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - sf code cleaning
