@@ -44,9 +44,15 @@ WorkspaceVisitorRoles = (WorkspaceVisitor,)
 
 
 def _cmpEv(a, b):
+    """ Compare cal_slot by start date
+    """
     return cmp(b['start'], a['start'])
 
 def _slotUnion(cal_slot, with_free=0):
+    """ Calculate and fusion events' display information from cal_slot.
+
+    with_free: give only free time
+    """
     result = []
     if not cal_slot:
         return []
@@ -152,27 +158,23 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         """ return all available Calendar objects in a list
         """
         brains = self.portal_catalog.searchResults(meta_type='Calendar')
-        result = []
-        if brains == None:
-            return result
-        for brain in brains:
-            result.append(brain.getObject())
-        return result
+        if brains:
+            return [brain.getObject() for brain in brains]
+        else:
+            return []
 
     security.declareProtected('View', 'listCalendarPaths')
     def listCalendarPaths(self):
-        """ return all available Calendars' path in a list
+        """ Return all available Calendars' path in a list
         """
-        brains = self.portal_catalog.searchResults(meta_type='Calendar')
-        result = []
-        if brains == None:
-            return result
-        for brain in brains:
-            result.append(brain.getId())
-        return result
+        cals = self.listCalendars()
+        if cals:
+            return [cal.absolute_url(relative=1) for cal in cals]
+        else:
+            return []
 
     security.declareProtected(View, 'listCalendarsDict')
-    def listCalendarsDict(self, exclude=None):
+    def listCalendarsDict(self, exclude=''):
         """ Return a short summary of all calendars
             It's used in meeting preparation to have all possibles attendees
 
@@ -182,7 +184,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         for ob in self.listCalendars():
             entry = calendars_dict.setdefault(ob.usertype, [])
             rpath = ob.absolute_url(relative=1)
-            if exclude is None or exclude != rpath:
+            if exclude != rpath:
                 entry.append({
                   'id': ob.id,
                   'cn': ob.title_or_id(),
@@ -192,21 +194,31 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 })
         return calendars_dict
 
-    security.declareProtected('View', 'getCalendarForId')
-    def getCalendarForId(self, id):
-        """ return all available Calendar ids in a list
+    security.declareProtected('View', 'getCalendarPath')
+    def getCalendarForPath(self, rpath):
+        """ Return a calendar
+
+        rpath: relative path for the calendar
         """
-        raise "Deprecated", "Bug to fix"
+        if not rpath:
+            return None
+        query = {'meta_type': 'Calendar', 'path': rpath}
+        brains = self.portal_catalog(**query)
+        if len(brains) == 1:
+            return brains[0].getObject()
+        else:
+            return None
 
     # XXX use a special permission here
     security.declareProtected('View', 'unionCals')
-    def unionCals(self, *cals, **kw):
+    def unionCals(self, with_free=0, *cals):
+        """ Return the list of free slot for the list cals
+
+        *cals: list of calendar
+        with_free: binary, calculate free time slot
+        """
         if not cals:
             return []
-        if kw.get('with_free'):
-            with_free = 1
-        else:
-            with_free = 0 # XXX: is with_free always set to 1 ?
         result = []
         length = len(cals[0])
         for i in range(length):
@@ -220,7 +232,10 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     def getFreeBusy(self, attendees, from_date, to_date,
                     from_time_hour, from_time_minute,
                     to_time_hour, to_time_minute):
-        """Gets free/busy informations on attendees calendars"""
+        """Gets free/busy informations on attendees calendars
+
+        attendees: list of calendars
+        """
         # normalize
         start_time = DateTime(from_date.year(), from_date.month(),
                               from_date.day())
@@ -268,11 +283,12 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 })
             mask_cal.append(this_day)
 
-        calendars = self.getCalendarObjects()
-        ids = [id for id in attendees if id in ids]
+        calendars = self.getCalendarsDict()
         cals_dict = {}
         cal_users = {}
         for calendar in calendars:
+            if calendar['rpath'] not in attendees:
+                continue
             id = calendar.id
             cal_users[id] = self.getAttendeeInfo(id)['cn']
             calendar_slots = []
@@ -364,15 +380,18 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         portal_eventservice.notify('sys_modify_security', ob, {})
 
     security.declareProtected(View, 'getAttendeeInfo')
-    def getAttendeeInfo(self, id, status=0):
+    def getAttendeeInfo(self, rpath, status=0):
         """ get info from others attendees of one event.
         attendees are other calendars.
 
         return a dictionnary with cn, id, usertype and status.
         """
-        if id in self.getCalendarIds():
+        id = rpath.split('/')[-1]
+        if rpath in self.getCalendarPaths():
+            calendar = self.getCalendarFromPath('rpath')
             info = {
                 'id': id,
+                'rpath': rpath,
                 'usertype': calendar.usertype,
             }
             if calendar.usertype != 'member':
@@ -395,6 +414,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             else:
                 info = {
                     'id': id,
+                    'rpath': rpath,
                     'usertype': 'member',
                     'cn': entry.get(members.display_prop, id),
                 }
