@@ -158,7 +158,7 @@ def update(self):
     if calendars_id not in portal[workspace_id].objectIds():
         portal[workspace_id].portal_workflow.invokeFactoryFor(portal[workspace_id].this(), 'Calendars',
                                                 calendars_id)
-        portal[workspace_id].calendars.getContent().setTitle('Root of calendars') # XXX L10N
+        portal[workspace_id].calendars.getContent().setTitle('Calendars Areas') # XXX L10N
         portal[workspace_id].calendars.reindexObject()
         pr("  Adding %s Folder" % calendars_id)
         
