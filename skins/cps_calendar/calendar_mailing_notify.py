@@ -20,9 +20,9 @@ Mime-Version: 1.0
 
 if request == 'request':
     if new_event:
-        message = mcat('cpscalendar_mailnotify_request')
+        message = mcat('cpscalendar_mailnotify_request').encode("ISO-8859-15", 'ignore')
     else:
-        message = mcat('cpscalendar_mailnotify_update')
+        message = mcat('cpscalendar_mailnotify_update').encode("ISO-8859-15", 'ignore')
 
     message = message % {
         'calendar_title': calendar_title,
@@ -30,11 +30,11 @@ if request == 'request':
     }
     comment = event_dict['event']['comment'].strip()
     if comment:
-        message += '\n' + mcat('cpscalendar_mailnotify_comment') + '\n' + comment
+        message += '\n' + mcat('cpscalendar_mailnotify_comment').encode("ISO-8859-15", 'ignore') + '\n' + comment
 
 elif request == 'status':
     attendees = event_dict['change']
-    message = mcat('cpscalendar_mailnotify_status_update')
+    message = mcat('cpscalendar_mailnotify_status_update').encode("ISO-8859-15", 'ignore')
     message = message % {
         'calendar_title': calendar_title,
         'event_title': event_title,
@@ -43,8 +43,8 @@ elif request == 'status':
         message += ("\n  - %s (%s)" % (att.get('cn', att['attendee']), att['status']))
         comment = att['comment'].strip()
         if comment:
-            message += '\n' + mcat('cpscalendar_mailnotify_comment') + '\n' + comment
+            message += '\n' + mcat('cpscalendar_mailnotify_comment').encode("ISO-8859-15", 'ignore') + '\n' + comment
 
-message += '\n' + mcat('cpscalendar_mailnotify_confirm_here') + '\n' + confirm_url
+message += '\n' + mcat('cpscalendar_mailnotify_confirm_here').encode("ISO-8859-15", 'ignore') + '\n' + confirm_url
 
 return header+str(message)
