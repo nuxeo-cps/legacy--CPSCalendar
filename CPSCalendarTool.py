@@ -360,10 +360,14 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                                 slot_start.day(),
                                 8,0)
 
+            # Stores the difference between displayed hight and real height.
+            accumulator = 0
             for event in freetimes:
                 # First check the diff between the previous time (or the
                 # start of the day for the first event)
-                diff = (int(event.from_date) - int(cal_time))/60
+                # The accumulator is subtracted to make up for lost space.
+                diff = ((int(event.from_date) - int(cal_time))/60) - accumulator
+                accumulator = 0 # We can reset it now..
                 if diff>0:
                     # There is space between the two events, we need a
                     # "NullEvent" to fill it up:
@@ -379,8 +383,11 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 desc = {}
                 desc['event'] = event
                 desc['start'] = event.from_date
-                diff = int(event.to_date) - int(event.from_date)
-                desc['height'] = diff/60
+                diff = (int(event.to_date) - int(event.from_date))/60
+                if diff < 50:
+                    accumulator += 50 - diff
+                    diff = 50 # The minimum display height.
+                desc['height'] = diff
                 slot_events.append(desc)
                 # And go on the the next event:
                 cal_time = event.to_date

@@ -505,6 +505,7 @@ class Calendar(CPSBaseFolder):
     def _getHourBlockCols(self, hour_cols, show):
         """
         """
+        import pdb;pdb.set_trace()
         hour_block_cols = []
         for col in hour_cols:
             blocks = []
@@ -545,10 +546,14 @@ class Calendar(CPSBaseFolder):
                         if len(conflict) == 1:
                             # just a simple event
                             the_event = conflict[0]['ev']['event']
+                            height = conflict[0]['stop_min'] - \
+                                     conflict[0]['start_min']
+                            if height < 50:
+                                conflict[0]['stop_min'] += 50 - height
+                                height = 50
                             blocks.append([[{
                               'event': the_event,
-                              'height': conflict[0]['stop_min']
-                                        - conflict[0]['start_min'],
+                              'height': height,
                               'isdirty': show and the_event.isDirty()
                             }]])
                         else:
@@ -579,9 +584,13 @@ class Calendar(CPSBaseFolder):
                                         'height': conf_start - correct_stop
                                     })
                                 the_event = c_ev['event']
+                                height = conf_stop - conf_start
+                                if height < 50:
+                                    conf_stop += 50 - height
+                                    height = 50
                                 correct_col.append({
                                     'event': the_event,
-                                    'height': conf_stop - conf_start,
+                                    'height': height,
                                     'isdirty': \
                                         show and the_event.isDirty(),
                                 })
@@ -615,10 +624,13 @@ class Calendar(CPSBaseFolder):
             if conflict:
                 if len(conflict) == 1:
                     the_event = conflict[0]['ev']['event']
+                    height = conflict[0]['stop_min'] - conflict[0]['start_min']
+                    if height < 50:
+                        conflict[0]['stop_min'] += 50 - height
+                        height = 50
                     blocks.append([[{
                       'event': the_event,
-                      'height': conflict[0]['stop_min']
-                                - conflict[0]['start_min'],
+                      'height': height,
                       'isdirty': show and the_event.isDirty(),
                     }]])
                 else:
@@ -649,9 +661,13 @@ class Calendar(CPSBaseFolder):
                                 'height': conf_start - correct_stop
                             })
                         the_event = ev['event']
+                        height = conf_stop - conf_start
+                        if height < 50:
+                            conf_stop += 50 - height
+                            height = 50
                         correct_col.append({
                             'event': the_event,
-                            'height': conf_stop - conf_start,
+                            'height': height,
                             'isdirty': show and the_event.isDirty(),
                         })
                         block_stops[i] = conf_stop
