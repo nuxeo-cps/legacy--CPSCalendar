@@ -774,11 +774,12 @@ class Calendar(CPSBaseFolder):
                     mails[email] = None
                 done[id] = None
 
-        for attendee in event_dict['event']['attendees']:
-            if attendee['status'] == 'unconfirmed':
-                email = self.getEmail(attendee['cn'], mdir)
-                if email is not None:
-                    mails[email] = None
+        if event_dict.has_key('event'):
+            for attendee in event_dict['event']['attendees']:
+                if attendee['status'] == 'unconfirmed':
+                    email = self.getEmail(attendee['cn'], mdir)
+                    if email is not None:
+                        mails[email] = None
 
         mails = mails.keys()
 
