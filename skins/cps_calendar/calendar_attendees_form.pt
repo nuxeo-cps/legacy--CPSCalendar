@@ -11,10 +11,10 @@
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="this_user here/getCalendarUser;
                          user_types here/getUserTypes;
-                         attendees_dict here/getAttendeesDict|{};
+                         attendees_dict here/getAttendeesDict|python:{};
                          dtool here/portal_metadirectories/members;
                          decline_attendees python:[att for att in here.attendees if att['status'] == 'decline'];
-                         all_attendees here/getCalendarsDict|{};
+                         all_attendees here/getCalendarsDict|python:{};
                          can_edit python:here.canEditThisEvent();">
   <tal:block condition="python:decline_attendees and can_edit">
     <form action="calendar_removeattendee" method="POST">
