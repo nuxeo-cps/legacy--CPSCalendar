@@ -330,7 +330,7 @@
     <tal:block define="pendings here/getPendingEvents;
                        show_event_details nothing;"
       condition="pendings">
-      You have pending requests for this event:
+      <span i18n:translate="">You have pending requests for this event:</span>
       <metal:block use-macro="here/calendar_macros/macros/pendings_view" />
     </tal:block>
     <tal:block condition="python:here.canEditThisEvent() and here.attendees and here.isdirty">

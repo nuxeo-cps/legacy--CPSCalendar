@@ -1,6 +1,7 @@
 # translation of en.po to 
 # translation of en.po to
 # translation of en.po to
+# translation of en.po to
 # translation of en.po to ben
 # translation of en.po to French
 # translation of en.po to
@@ -13,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2004-07-23 10:47default\n"
-"PO-Revision-Date: 2004-04-19 11:37+0200\n"
+"POT-Creation-Date: 2004-08-10 12:16default\n"
+"PO-Revision-Date: 2004-08-10 12:17+0200\n"
 "Last-Translator: Lennart Regebro <rgebro@nuxeo.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -98,6 +99,11 @@ msgstr "Yes"
 msgid "You have ${pendings_count} pending requests."
 msgstr "You have ${pendings_count} pending requests."
 
+#.   <span>You have pending requests for this event:</span>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "You have pending requests for this event:"
+msgstr "You have pending requests for this event:"
+
 #.   <h1>Calendars supersposing</h1>
 #: from ../skins/cps_calendar/calendar_display_form.pt
 msgid "action_display"
@@ -112,6 +118,12 @@ msgstr ""
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 msgid "button_cpscalendar_remove_all_attendees_who_declined"
 msgstr "Remove all attendees who declined"
+
+#.   <input type="submit" class="standalone" value="button_update" onclick="updateParent();">
+#.       </input>
+#: from ../skins/cps_calendar/popup_attachedfile_navigation.pt
+msgid "button_update"
+msgstr ""
 
 #.   <td valign="middle" content="python:str(cat[1]['title'])">
 #.                     category
@@ -138,7 +150,7 @@ msgstr "attendees management"
 msgid "cpscalendar_button_add"
 msgstr "Add"
 
-#.   <input name="javascript:history.go(-1)" onclick="javascript:history.go(-1)" type="submit" value="cpscalendar_button_back" />
+#.   <input type="submit" name="javascript:history.go(-1)" value="cpscalendar_button_back" onclick="javascript:history.go(-1)" />
 #.   <input type="button" onclick="history.back()" value="cpscalendar_button_back" />
 #: from ../skins/cps_calendar/calendar_macros.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
@@ -371,7 +383,7 @@ msgstr "Attendees"
 msgid "cpscalendar_label_between"
 msgstr "Between"
 
-#.   <a class=".button" onclick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')">
+#.   <a style="text-decoration:none;border:1px solid black;padding:0.2em 0.3em;" onclick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')">
 #.                      Browse
 #.                 </a>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
@@ -1275,3 +1287,4 @@ msgstr "Event for this month"
 
 #~ msgid "cpscalendar_option"
 #~ msgstr "option"
+

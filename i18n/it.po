@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2004-07-23 10:47default\n"
+"POT-Creation-Date: 2004-08-10 12:16default\n"
 "PO-Revision-Date: 2004-05-10 15:04+0100\n"
 "Last-Translator: Paolo Dina <paolo@php3.it>\n"
 "Language-Team: \n"
@@ -122,6 +122,11 @@ msgstr "Sì"
 msgid "You have ${pendings_count} pending requests."
 msgstr "Hai ${pendings_count} richieste in attesa di valutazione."
 
+#.   <span>You have pending requests for this event:</span>
+#: from ../skins/cps_calendar/calendar_macros.pt
+msgid "You have pending requests for this event:"
+msgstr ""
+
 #.   <h1>Calendars supersposing</h1>
 #: from ../skins/cps_calendar/calendar_display_form.pt
 msgid "action_display"
@@ -137,6 +142,12 @@ msgstr ""
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 msgid "button_cpscalendar_remove_all_attendees_who_declined"
 msgstr "Elimina tutti i partecipanti che hanno rifiutato la riunione"
+
+#.   <input type="submit" class="standalone" value="button_update" onclick="updateParent();">
+#.       </input>
+#: from ../skins/cps_calendar/popup_attachedfile_navigation.pt
+msgid "button_update"
+msgstr ""
 
 #    <td valign="middle" content="python:str(cat[1]['title'])">
 #                      category
@@ -175,7 +186,7 @@ msgid "cpscalendar_button_add"
 msgstr "Aggiungi"
 
 #    <input type="button" onclick="history.back()" value="cpscalendar_button_back" />
-#.   <input name="javascript:history.go(-1)" onclick="javascript:history.go(-1)" type="submit" value="cpscalendar_button_back" />
+#.   <input type="submit" name="javascript:history.go(-1)" value="cpscalendar_button_back" onclick="javascript:history.go(-1)" />
 #.   <input type="button" onclick="history.back()" value="cpscalendar_button_back" />
 #: from ../skins/cps_calendar/calendar_macros.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
@@ -490,7 +501,7 @@ msgstr "Tra"
 #    <span>
 #            Between
 #          </span>
-#.   <a class=".button" onclick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')">
+#.   <a style="text-decoration:none;border:1px solid black;padding:0.2em 0.3em;" onclick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')">
 #.                      Browse
 #.                 </a>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt

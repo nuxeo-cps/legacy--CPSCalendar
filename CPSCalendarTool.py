@@ -29,6 +29,7 @@ from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.utils import _getAuthenticatedUser, _checkPermission
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
 from Products.CPSCalendar.Event import VirtualEvent
+from Products.ZCatalog.ZCatalog import ZCatalog
 
 from AccessControl import ClassSecurityInfo
 
@@ -339,7 +340,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     security.declareProtected('View', 'listCalendars')
     def listCalendars(self):
         """Return all available Calendar objects in a list"""
-        brains = self.portal_catalog.searchResults(meta_type='Calendar')
+        brains = ZCatalog.searchResults(self.portal_catalog,
+                 meta_type='Calendar')
         if brains:
             return [brain.getObject() for brain in brains]
         else:

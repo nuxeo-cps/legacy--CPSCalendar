@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- The listCalendars method now uses a calendar search unrestricted by rights.(#1437)
+- A missing translation was added. (#1438)
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
