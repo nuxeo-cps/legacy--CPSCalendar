@@ -347,8 +347,6 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         
         if self.getHomeCalendarObject().getRpath() != calendar.getRpath():
             # Filter out users with view permission:
-            
-            #import pdb;pdb.set_trace()
             local_users = []
             allowed = _allowedRolesAndUsers(calendar)
             for user in users:
