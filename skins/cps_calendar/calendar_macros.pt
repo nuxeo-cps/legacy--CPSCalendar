@@ -171,8 +171,12 @@
                        i18n:translate="cpscalendar_description">
             Description
           </metal:block>
-            <metal:block fill-slot="content"
-              tal:content="description">
+            <metal:block fill-slot="content">
+              <p>
+                <textarea rows="6" cols="40" disabled="disabled" 
+                          name="description" 
+                          tal:content="description">description</textarea>
+              </p>
             </metal:block>
         </metal:block>
       </metal:block>
