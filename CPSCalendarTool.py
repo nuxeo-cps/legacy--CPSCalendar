@@ -585,7 +585,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 i = 0
                 for event_slot in event_slots:
                     if event_slot is not None and slots_done[i] is None:
-                        if event.all_day:
+                        if self.event_type == 'event_allday':
                             slots_done[i] = {
                                 'start': event_slot['start'],
                                 'stop': event_slot['stop'],

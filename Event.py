@@ -224,7 +224,7 @@ class Event(CPSBaseDocument):
             self.to_date = self.from_date
             self.from_date = to_date
 
-            if self.all_day:
+            if self.event_type == 'event_allday':
                 self._normalize()
 
     security.declareProtected(View, 'SearchableText')
