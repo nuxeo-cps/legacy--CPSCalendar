@@ -31,10 +31,14 @@ else:
         viewed_day = DateTime()
 
 # determine current selected day
+from_date = REQUEST.form.get('from_date')
 selected_day = REQUEST.form.get('selected_day')
-if selected_day is not None:
+if from_date is not None:
+    selected_day = DateTime(int(from_date))
+    LOG('CPSCAL', DEBUG, "selected_day from from_date = %s" % selected_day)
+elif selected_day is not None:
     selected_day = DateTime(int(selected_day))
-    LOG('CPSCAL', DEBUG, "selected_day not None = %s" % selected_day)
+    LOG('CPSCAL', DEBUG, "selected_day from selected_day = %s" % selected_day)
 else:
     selected_day = viewed_day
     LOG('CPSCAL', DEBUG, "selected_day defaulting to viewed_day = %s" % selected_day)

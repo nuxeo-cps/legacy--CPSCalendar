@@ -20,8 +20,7 @@
     «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
   </tal:block>
 </metal:block>
-    <!--                          all_day python:(create and [request.form.get('all_day')] or [here.all_day])[0];  -->
-    <!--                          all_day python:test(create, request.form.get('all_day'), here.all_day); -->
+
 <metal:block fill-slot="main"
              tal:define="portal_url here/portal_url;
                          disp_infos python:here.calendar_getDispInformations(request);
@@ -34,7 +33,7 @@
                          event_status python:create and 'unconfirmed' or here.event_status;
                          here_all_day here/all_day|python:0;
                          all_day python:test(create, request.form.get('all_day', 0), here_all_day);
-                         from_date python:create and disp_infos['selected_day'] or here.from_date;
+                         from_date here/from_date|python:disp_infos['selected_day'];
                          from_date_day from_date/day;
                          from_date_month from_date/month;
                          from_date_year from_date/year;
@@ -58,6 +57,14 @@
                          cat_default cat_info/default;
                          category python:create and cat_default or here.category;">
 
+      <tal:block tal:condition="nothing">
+	<!-- Debug block that doesn't appear in the output -->
+	<hr/>
+	here/all_day = <tal:block tal:condition="exists:here/all_day" tal:replace="here/all_day"/><br/>
+	form.get('all_day') = <tal:block tal:replace="python:request.form.get('all_day')"/><br/>
+	<hr/>
+      </tal:block>
+
   <tal:block condition="not:editevent" define="event nocall:here">
     <metal:block use-macro="here/calendar_macros/macros/event_view" />
   </tal:block>
@@ -67,6 +74,8 @@
     <form action="calendar_addevent_form" tal:condition="create">
       <input type="hidden" name="all_day:int"
              tal:attributes="value not:all_day" />
+      <input type="hidden" name="from_date:int"
+             tal:attributes="value python:from_date.timeTime()" />
       <input type="submit"
              tal:attributes="value python:
 	                     all_day and str('_Create an all day_') 
