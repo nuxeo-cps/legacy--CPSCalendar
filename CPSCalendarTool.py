@@ -280,6 +280,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     def __init__(self):
         PortalFolder.__init__(self, self.id)
 
+    security.declarePublic('getHomeCalendarObject')
     def getHomeCalendarObject(self, id=None, verifyPermission=0):
         """Return a member's home calendar object, or None."""
         mtool = getToolByName(self, 'portal_membership')
@@ -303,6 +304,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 pass
         return None
 
+    security.declarePublic('getHomeCalendarUrl')
     def getHomeCalendarUrl(self, id=None, verifyPermission=0):
         """Return a member's home calendar url, or None."""
         calendar = self.getHomeCalendarObject(id, verifyPermission)
