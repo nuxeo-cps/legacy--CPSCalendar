@@ -398,12 +398,12 @@ class Event(CPSBaseDocument):
             LOG('NGCal', INFO, "Can't get calendar for %s" 
                 % (self.organizer['rpath'], ))
             return
-
+        
+        mtool = getToolByName(calendar, 'portal_membership')
         userid = mtool.getAuthenticatedMember().getUserName()
         try:
             cn = self.getAttendeeInfo(calendar.getRpath()).get('cn', id)
         except AttributeError:
-            mtool = getToolByName(calendar, 'portal_membership')
             cn = userid
 
         event_dict = {
