@@ -21,12 +21,10 @@
              tal:define="can_add_evts python:mtool.checkPermission('Add portal content', here);
                          show_nav nothing">
   <h1 tal:content="python:str(here.title_or_id())"
-      i18n:translate="">
-    Calendar
+    Linus Torvalds (This is the name of calendar owner and we don't want it to be translated)
   </h1>
   <metal:block use-macro="here/calendar_view_macros/macros/?calendar_disp" />
 </metal:block>
-
 
 </body>
 </html>
