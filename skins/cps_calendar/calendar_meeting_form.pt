@@ -17,6 +17,9 @@
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="portal_url python:here.portal_url(relative=1);
                          edit request/form/edit|nothing;
+                         caltool here/portal_cpscalendar;
+                         dtool here/portal_directories/members;
+                         title_field dtool/title_field;
                          disp_infos python:here.calendar_getDispInformations(request);
                          selected_day disp_infos/selected_day;
                          args python:edit and request.SESSION['meeting']['args'];
@@ -32,51 +35,44 @@
                          from_date_minute python:(edit and [int(args['from_date_minute'])] or [0])[0];
                          to_date_hour python:(edit and [int(args['to_date_hour'])] or [19])[0];
                          to_date_minute python:(edit and [int(args['to_date_minute'])] or [0])[0];
-                         my_id python:'/'.join(here.getPhysicalPath());
-                         cal_ids python:edit and args['cal_ids'] or [my_id];
+                         my_id here/getRpath;
+                         cal_ids here/REQUEST/cal_ids|python:[my_id];
+                         new_cal_ids here/REQUEST/ids|python:[];
+                         cal_ids python:cal_ids + new_cal_ids;
+                         del_cal_ids here/REQUEST/del_cal_ids|python:[];
+                         cal_ids python:[c for c in cal_ids if not c in del_cal_ids];
+                         current_list cal_ids;
                          user_types here/getUserTypes;
                          all_calendars here/portal_cpscalendar/getCalendarsDict;
+                         addaction string:calendar_meeting_form;
+                         searchaction string:calendar_meeting_form; 
                          ">
 
   <h1 i18n:domain="cpscalendar"
       i18n:translate="cpscalendar_heading_meeting_creation_helper">
     Meeting creation helper
   </h1>
-
-  <form action="calendar_begin_meeting" method="POST">
+  <form method="POST" tal:attributes="action here/REQUEST/URL1">
     <p>
     <span clss="calTitle" i18n:translate="cpscalendar_message_select_the_attendees_you_want_for_your_meeting">
       Select the attendees you want for your meeting
-    </span> :
+    </span>:
     </p>
-    <tal:block repeat="user_type user_types">
-      <tal:block define="type_id user_type/id;
-                         calendars all_calendars/?type_id|nothing"
-                 condition="calendars">
-        <p tal:content="user_type/plural_title"
-            i18n:translate="">User type</p>
-        <ul>
-          <li tal:repeat="cal calendars">
-            <input type="checkbox" name="cal_ids:list"
-                   tal:define="id cal/id;"
-                   tal:attributes="value id;
-                                   checked python:id in cal_ids;" />
-            <tal:block replace="cal/cn">
-              Calendar
-            </tal:block>
-          </li>
-        </ul>
-      </tal:block>
-    </tal:block>
-    <p>
-      <small tal:condition="nothing">
-        <input type="checkbox" name="cal_ids:list"
-          tal:attributes="value my_id;
-                          checked python:my_id in cal_ids;" />
-        <span i18n:translate="cpscalendar_label_include_this_calendar">
-          Include this calendar
+    <metal:block use-macro="here/calendar_macros/macros/searchform">
+      the searchform
+    </metal:block>
+    <p tal:repeat="cal cal_ids">
+        <input type="hidden" name="cal_ids:list"
+          tal:attributes="value cal" />
+        <input type="checkbox" name="del_cal_ids:list"
+          tal:attributes="value cal" />
+        <span tal:define="calob python:caltool.getCalendarForPath(cal);
+          userid calob/getCalendarUser;
+          user python:dtool.getEntry(userid);
+          "
+          tal:replace="user/?title_field">
+          calendarid
         </span>
-      </small>
     </p>
     <p>
       <strong>
@@ -179,7 +175,8 @@ range       : [2000, 2049]
     </p>
     <input type="submit"
            value="cpscalendar_button_search"
-           i18n:attributes="value" />
+           i18n:attributes="value" 
+           tal:attributes="name string:calendar_begin_meeting:method" />
     <input type="button" onClick="history.back()"
            value="cpscalendar_button_cancel"
            i18n:attributes="value" />

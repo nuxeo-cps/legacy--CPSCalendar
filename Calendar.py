@@ -211,10 +211,13 @@ class Calendar(CPSBaseFolder):
         # getOwner() is part of the Zope API
         return self.getOwner(1)[1]
     
+    security.declarePublic('getCalendarUser')
     def getCalendarUser(self):
         """Return the id of the calendar instead of the user"""
         # XXX: we assume that calendar are directly stored on the
         # user's workspace
+        # In almost all cases this will return the same as getOwnerId, 
+        # so it's a bit of rendundancy, but some scripts use this one,
         return aq_parent(self).getOwner(1)[1]
 
     security.declarePublic('getRpath')

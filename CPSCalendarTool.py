@@ -346,7 +346,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 })
         return calendars_dict
 
-    security.declarePrivate('getCalendarForPath')
+    security.declarePublic('getCalendarForPath')
     def getCalendarForPath(self, rpath, unrestricted=0):
         """Return a calendar
 
@@ -356,6 +356,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         utool = getToolByName(self, 'portal_url')
         portal = utool.getPortalObject()
         try:
+            # What would the use of doing an unrestricted traverse be?
+            # It never seems to be used. //lennart
             if unrestricted:
                 calendar = portal.unrestrictedTraverse(rpath)
             else:
@@ -449,7 +451,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         calendars = []
         cal_users = {}
         for calendar in self.listCalendars():
-            rpath = '/'.join(calendar.getPhysicalPath())
+            rpath = calendar.getRpath()
             if rpath in attendees:
                 calendars.append(calendar)
                 cal_users[rpath] = self.getAttendeeInfo(rpath)['cn']
