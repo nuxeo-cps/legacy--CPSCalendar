@@ -1,4 +1,27 @@
 *******************************************
+** CPSCalendar V1.3.2 [R1 build 2004/03/19-10:35 by regebro]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Reccuring and all-day events now properly block times in the
+  meeting helper screen.
+- The installer now upgrades old events.
+- The navigation tabs moved only one day even in the week and month
+  view. (Mantis #469)
+- The print view is now deprecated in favour for the standard print view.
+- One of the meeting helper screens had two buttons that did nothing.
+  It also did not have a proper heading.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.3.1 [R1 build 2004/03/09-11:37 by ben]
 
 Requires:
