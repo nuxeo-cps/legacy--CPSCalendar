@@ -35,7 +35,7 @@ PRODID:-//Nuxeo//NuxGroupCalendar 0.1//EN
 X-WR-CALNAME;VALUE=TEXT:%s
 X-WR-RELCALID;VALUE=TEXT:%s
 VERSION:2.0
-""" % (icalvalue(mcat(context.title_or_id())), context.id)
+""" % (icalvalue(mcat(context.title_or_id())), context.absolute_url())
 
 footer = """\
 END:VCALENDAR
@@ -62,7 +62,7 @@ for event in events:
     message += """\
 SUMMARY:%s
 UID:%s
-""" % (icalvalue(mcat(event.title_or_id())), event.id)
+""" % (icalvalue(mcat(event.title_or_id())), event.absolute_url())
 
     if event.location:
         message += """\
