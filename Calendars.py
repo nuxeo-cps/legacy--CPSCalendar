@@ -70,13 +70,13 @@ def slot_union(cal_slot, with_free=0):
     start = ev['start']
     stop = ev['stop']
     if with_free:
-        y, m, d, h, m, x, x = start.parts()
+        y, mo, d, h, m, x, x = start.parts()
         start_height = h*60 + m
         if start_height:
             result.append({
                 'busy': 0,
                 'height': start_height,
-                'start': DateTime(y, m, d),
+                'start': DateTime(y, mo, d),
             })
     while cal_slot:
         ev = cal_slot.pop()
