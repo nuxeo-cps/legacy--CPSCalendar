@@ -30,7 +30,12 @@
       &gt;&gt;
     </a>
   </tal:block>
-  <table cellspacing="0" cellpadding="0" border="1">
+  <table cellspacing="0" cellpadding="0" border="1"
+    tal:define="
+      cat_info here/calendar_categories;
+      categories cat_info/categories;
+      cat_default cat_info/default;
+      def_color categories/?cat_default/color;">
     <tr>
       <td>
         <table width="445" cellspacing="2" cellpadding="0" border="0"
@@ -54,9 +59,13 @@
           <tr tal:repeat="day_event day_events">
             <td>
             </td>
-            <td bgcolor="#DDDDDD"
-              tal:define="event nocall:day_event/event">
-              <a
+            <td
+              tal:define="
+                event nocall:day_event/event;
+                category event/category;"
+              tal:attributes="
+                bgcolor categories/?category/color">
+              <a class="cal_event"
                 tal:attributes="href event/absolute_url"
                 tal:content="event/title_or_id" />
             </td>
@@ -109,7 +118,11 @@
                               tal:condition="nocall:event">
                               <tal:block condition="python:height<20">
                                 <tr>
-                                  <td bgcolor="#0000FF">
+                                  <td
+                                    tal:define="
+                                      category event/category"
+                                    tal:attributes="
+                                      bgcolor categories/?category/color|def_color">
                                     <a class="cal_event"
                                       tal:attributes="
                                         href event/absolute_url">
@@ -127,28 +140,33 @@
                                 <tr>
                                   <th valign="top" class="day_event"
                                     height="15">
-                                    <img class="day_icon"
-                                      tal:attributes="
-                                        src string:${portal_url}/cal_day_${event/event_status}.png" />
-                                    <tal:block condition="event/attendees">
-                                      <img class="day_icon"
-                                        tal:define="
-                                          icon python:info['isdirty'] and 'cal_day_dirty' or 'cal_day_att';"
-                                        tal:attributes="
-                                          src string:${portal_url}/${icon}.png"
-                                        />
-                                    </tal:block>
                                     <a class="cal_event"
                                       tal:attributes="
-                                        href event/absolute_url"
-                                      tal:content="event/title_or_id">
-                                      Event
+                                        href event/absolute_url">
+                                      <img class="day_icon"
+                                        tal:attributes="
+                                          src string:${portal_url}/cal_day_${event/event_status}.png" />
+                                      <tal:block condition="event/attendees">
+                                        <img class="day_icon"
+                                          tal:define="
+                                            icon python:info['isdirty'] and 'cal_day_dirty' or 'cal_day_att';"
+                                          tal:attributes="
+                                            src string:${portal_url}/${icon}.png"
+                                          />
+                                      </tal:block>
+                                      <tal:block
+                                        replace="event/title_or_id">
+                                        Event
+                                      </tal:block>
                                     </a>
                                   </th>
                                 </tr>
                                 <tr>
-                                  <td bgcolor="#0000FF"
+                                  <td
+                                    tal:define="
+                                      category event/category"
                                     tal:attributes="
+                                      bgcolor categories/?category/color|def_color;
                                       height python:height-15">
                                   </td>
                                 </tr>
@@ -215,7 +233,13 @@
       &gt;&gt;
     </a>
   </tal:block>
-  <table cellspacing="0" cellpadding="0" border="1">
+  <table cellspacing="0" cellpadding="0" border="1"
+    tal:define="
+      cat_info here/calendar_categories;
+      categories cat_info/categories;
+      cat_default cat_info/default;
+      def_color categories/?cat_default/color;">
+    <tr>
     <tr>
       <td>
         <table width="445" cellspacing="2" cellpadding="0" border="0"
@@ -252,22 +276,26 @@
               <tal:block define="
                 colspan col/colspan;
                 event nocall:col/event;">
-                <td bgcolor="#CCCCCC"
-                  tal:condition="nocall:event"
-                  tal:attributes="
-                    colspan python:colspan> 1 and colspan or nothing;">
-                  <a
-                    tal:define="
-                      event nocall:col/event;
-                      title event/title_or_id;
-                      max_chars python:10*colspan-1;
-                      disp_title python:len(title)>max_chars and
-                        title[:max_chars].strip()+'...' or title"
-                      tal:attributes="
-                        href event/absolute_url;
-                        title title;"
-                        tal:content="disp_title" />
-                </td>
+                <tal:block
+                  tal:condition="nocall:event">
+                  <td
+                    tal:define="category event/category"
+                    tal:attributes="
+                      bgcolor categories/?category/color|def_color;
+                      colspan python:colspan> 1 and colspan or nothing;">
+                    <a class="cal_event"
+                      tal:define="
+                        event nocall:col/event;
+                        title event/title_or_id;
+                        max_chars python:10*colspan-1;
+                        disp_title python:len(title)>max_chars and
+                          title[:max_chars].strip()+'...' or title"
+                        tal:attributes="
+                          href event/absolute_url;
+                          title title;"
+                          tal:content="disp_title" />
+                  </td>
+                </tal:block>
                 <tal:block condition="not:nocall:event">
                   <tal:block
                     repeat="i python:range(col['pos'], col['pos']+colspan)">
@@ -326,20 +354,22 @@
                                       width width;">
                                   </td>
                                   <tal:block condition="nocall:event">
-                                    <td bgcolor="#0000FF" valign="top"
+                                    <td valign="top"
                                       tal:define="
                                         base_class python:event.attendees and (info['isdirty'] and 'week_dirty_' or 'week_att_') or 'week_';
+                                        category event/category;
                                         tdclass string:${base_class}${event/event_status};"
                                       tal:attributes="
                                         width width;
                                         height height;
+                                        bgcolor categories/?category/color|def_color;
                                         class python:height>12 and tdclass or nothing;
                                       ">
                                       <a
                                         tal:define="
                                             event_title event/title_or_id;"
                                         tal:attributes="
-                                          title python:'%s (%s -> %s)' % (event_title, event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
+                                          title python:'%s (%s - %s)' % (event_title, event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
                                           href event/absolute_url">
                                         <img border="0"
                                           tal:condition="
@@ -430,7 +460,12 @@
       &gt;&gt;
     </a>
   </tal:block>
-  <table width="445" cellspacing="0" cellpadding="0" border="1">
+  <table width="445" cellspacing="0" cellpadding="0" border="1"
+    tal:define="
+      cat_info here/calendar_categories;
+      categories cat_info/categories;
+      cat_default cat_info/default;
+      def_color categories/?cat_default/color;">
     <tr>
       <td>
         <table width="445" cellspacing="2" cellpadding="0" border="0">
@@ -492,22 +527,26 @@
                       </tal:block>
                     </tal:block>
                   </tal:block>
-                  <td bgcolor="#CCCCCC"
-                    tal:condition="nocall:event"
-                    tal:attributes="
-                      colspan python:colspan > 1 and colspan or nothing;">
-                    <a
+                  <tal:block condition="nocall:event">
+                    <td
                       tal:define="
-                      event nocall:col/event;
-                      title event/title_or_id;
-                      max_chars python:10*colspan-1;
-                      disp_title python:len(title)>max_chars and
-                        title[:max_chars].strip()+'...' or title"
+                        category event/category"
                       tal:attributes="
-                      href event/absolute_url;
-                      title title"
-                      tal:content="disp_title" />
-                  </td>
+                        bgcolor categories/?category/color|def_color;
+                        colspan python:colspan > 1 and colspan or nothing;">
+                      <a class="cal_event"
+                        tal:define="
+                        event nocall:col/event;
+                        title event/title_or_id;
+                        max_chars python:10*colspan-1;
+                        disp_title python:len(title)>max_chars and
+                          title[:max_chars].strip()+'...' or title"
+                        tal:attributes="
+                        href event/absolute_url;
+                        title title"
+                        tal:content="disp_title" />
+                    </td>
+                  </tal:block>
                 </tal:block>
               </tal:block>
             </tr>
@@ -532,14 +571,19 @@
                       <a
                         tal:define="
                         event nocall:hour_event/event;
+                        category event/category;
                         title python:'%s (%s - %s)' % (event.title_or_id(), event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
                         disp_title python:len(title) > 5 and (title[:5] + '...') or title;
                         "
                         tal:attributes="
                           title title;
-                          href event/absolute_url"
-                        tal:content="disp_title">
-                        Event
+                          href event/absolute_url">
+                        <font
+                          tal:content="disp_title"
+                          tal:attributes="
+                            color categories/?category/color|def_color">
+                          Event
+                        </font>
                       </a>
                     </li>
                     <br

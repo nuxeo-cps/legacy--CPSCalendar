@@ -13,6 +13,11 @@
       date_fmt python:all_day and mcat('_cal_%m/%d/%Y_')
         or mcat('_cal_%m/%d/%Y at %H:%M_');
       attendees event/attendees;
+      cat_infos here/calendar_categories;
+      categories cat_infos/categories;
+      cat_default cat_infos/default;
+      cat_def_title categories/?cat_default/title;
+      category event/category|nothing;
     ">
     <metal:block use-macro="here/main_widgets/macros/form">
       <metal:block fill-slot="content">
@@ -99,6 +104,20 @@
                   </tal:block>)
                 </li>
               </ul>
+            </metal:block>
+          </metal:block>
+        </tal:block>
+        <tal:block condition="category">
+          <metal:block use-macro="here/main_widgets/macros/form_property">
+            <metal:block fill-slot="title"
+              tal:content="python:mcat('_cal_prop_category_')">
+              Category
+            </metal:block>
+            <metal:block fill-slot="content"
+              tal:define="
+              cat_title categories/?category/title|cat_def_title"
+              tal:content="python:mcat(cat_title)">
+              Category
             </metal:block>
           </metal:block>
         </tal:block>
