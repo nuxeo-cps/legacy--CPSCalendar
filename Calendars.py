@@ -283,9 +283,11 @@ class Calendars(CPSBaseFolder):
         ids = self.objectIds('Calendar')
         if id in ids:
             return getattr(self, id)
+        
         context = aq_parent(aq_inner(self))
         dirtool = getToolByName(context, 'portal_metadirectories')
         mtool = getToolByName(context, 'portal_membership')
+        
         mtool.checkPermission('Modify portal content', self)
         current_user = mtool.getAuthenticatedMember().getUserName()
         members = dirtool.members
@@ -297,36 +299,20 @@ class Calendars(CPSBaseFolder):
             # create this calendar for this member
             ttool = getToolByName(context, 'portal_types')
             wtool = getToolByName(context, 'portal_workflow')
-            LOG(' Calendar automatic: ', DEBUG, repr(wtool))
-            LOG(' Calendar automatic: ', DEBUG, repr(self))
-            LOG(' Calendar automatic: ', DEBUG, current_user)
             self.manage_setLocalGroupRoles('role:Anonymous',
                                            ['WorkspaceManager'] )
             wtool.invokeFactoryFor(self, 'Calendar', id)
-            selfmanage_delLocalGroupRoles( ['role:Anonymous'])
-##            calendar_type_info = ttool.getTypeInfo('Calendar')
-##            # do ti.constructInstance(self, id) without permission checks
-##            product = self.manage_addProduct[calendar_type_info.product]
-##            method = getattr(product, calendar_type_info.factory)
-##            kw = {}
-##            if getattr(method, 'isDocTemp', 0):
-##                args = (method.aq_parent, self.REQUEST)
-##                kw['id'] = id
-##            else:
-##                args = (id, )
-
-##            kw['title'] = 'Calendar of %s' % (id, )
+            self.manage_delLocalGroupRoles( ['role:Anonymous'])
+            calendar_type_info = ttool.getTypeInfo('Calendar')
             
-##            method(*args, **kw)
-##            ob = self._getOb(id)
-##            ob._computedtitle = 1
-##            calendar_type_info._finishConstruction(ob)
+            ob = self._getOb(id)
+            ob._computedtitle = 1
+            calendar_type_info._finishConstruction(ob)
 
             if not mtool.isAnonymousUser():
                 ob.manage_delLocalRoles(userids=[current_user])
             ob.manage_setLocalRoles(id, ['WorkspaceManager', 'WorkspaceMember', 'WorkspaceReader'])
             ob.reindexObject()
-            #LOG(' Calendar automatic: ', DEBUG, )
             return ob
         return None
 
@@ -411,12 +397,6 @@ def addCalendars(dispatcher, id,
     """Adds a Calendars container."""
     ob = Calendars(id)#, title, description)
     container = dispatcher.Destination()
-    # useless
-    #container._setObject(id, ob)
-    #ob = container._getOb(id)
-    #if REQUEST is not None:
-    #    url = dispatcher.DestinationURL()
-    #    REQUEST.RESPONSE.redirect('%s/manage_main' % url)
     return CPSBase_adder(container, ob, REQUEST=REQUEST)
 
 # This program is free software; you can redistribute it and/or modify
