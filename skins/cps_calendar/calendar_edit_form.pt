@@ -33,15 +33,17 @@
 
   <metal:block use-macro="here/calendar_macros/macros/form">
     <metal:block fill-slot="content">
-      <metal:block tal:condition="create" use-macro="here/calendar_macros/macros/form_property">
+      <metal:block use-macro="here/calendar_macros/macros/form_property">
         <metal:block fill-slot="title"
                      i18n:translate="cpscalendar_label_title">
           Title
         </metal:block>
         <metal:block fill-slot="content">
-          <input type="text" name="title" value="" />
+          <input type="text" name="title" 
+                 tal:attributes="value here/Title"/>
         </metal:block>
       </metal:block>
+
       <metal:block use-macro="here/calendar_macros/macros/form_property">
         <metal:block fill-slot="title"
                      i18n:translate="cpscalendar_label_description">
@@ -52,7 +54,8 @@
            tal:content="description"></textarea>
         </metal:block>
       </metal:block>
-      <tal:block condition="python:usertype != 'member'">
+
+      <tal:block>
         <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
                      i18n:translate="cpscalendar_label_calendar_type">
@@ -62,8 +65,7 @@
             <select name="usertype"
               tal:define="usertypes here/getUserTypes">
               <tal:block repeat="type usertypes">
-                <option tal:condition="python:type['id'] != 'member'"
-                        tal:attributes="value type/id;
+                <option tal:attributes="value type/id;
                                         selected python:type['id'] == usertype"
                         tal:content="python:str(type['title'])"
                         i18n:translate="" />
@@ -72,6 +74,7 @@
           </metal:block>
         </metal:block>
       </tal:block>
+
     </metal:block>
   </metal:block>
 
