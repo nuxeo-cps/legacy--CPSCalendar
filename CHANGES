@@ -8,6 +8,7 @@ Bug fixes:
 ~~~~~~~~~~
 - A dollar had fallen away in an action.
 - The recurrence upgrade removed the new attribute as well as the old.
+- In french Locale, date and month got flipped when type was changed.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
