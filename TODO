@@ -1,15 +1,15 @@
 P1:
-- move hour events interface (18/12/2003)
-
 - add a searching interface more improved for rendez-vous interface.
 
 P2: 
-- Suppress Calendars class and create portal_calendars tool (10/12/2003)
+- Suppress Calendars class and create portal_cpscalendar tool (10/12/2003)
 
 - recurring events (10/12/2003)
 
 
 P3:
+- create a management screen for Calendar (Title, and other things)
+
 - smarter notifications
 
 - show today with a different color
