@@ -1,20 +1,16 @@
 BUGS:
-
-- Fix bogus pages
-
-- make description field editable
-
-- suppress workflow links
-
+- Earlier, if start was later then end, a page for asking if the event 
+  should be extended popped up. That is completely unintuitive and strange.
+  If you want to create a multi-day event, you select that. Multi-day events
+  do not have hours. 
+  
+  Change that page to "Should the times be switched" and make it work,
+  or simply just switch the times. You can edit it afterwards.
 
 P1:
-- add a searching interface more improved for rendez-vous interface.
 
 
 P2: 
-- Suppress Calendars class and create portal_cpscalendar tool (10/12/2003)
-
-- recurring events (10/12/2003)
 
 
 P3:
@@ -35,10 +31,8 @@ P3:
 
 - add WebDav interface for global import
 
-- add 
-
 
 Cleanup / refactoring:
 
-- suppress "string:en" in the forms.
+- suppress "string:en" in the forms. (Why? /Lennart)
 
