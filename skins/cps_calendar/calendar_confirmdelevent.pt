@@ -42,14 +42,12 @@
       </metal:block>
     </metal:block>
     <input type="submit"
-           value="cpscalendar_button_validate"
+           value="cpscalendar_button_delete"
            i18n:attributes="value" />
-  </form>
-  <form action="calendar_delevent" method="POST">
-    <input type="hidden" name="comment" value="" />
     <input type="submit"
            value="cpscalendar_button_delete_with_no_notification"
-           i18n:attributes="value" />
+           i18n:attributes="value"
+           tal:condition="nothing" />
     <input type="button" onClick="history.back()"
            value="cpscalendar_button_cancel"
            i18n:attributes="value" />
