@@ -509,8 +509,7 @@
     <tr><td class="eventHeader">
         <a tal:attributes="
              title python:'%s (%s - %s)' % (event_title, event.from_date.strftime('%H:%M'), event.to_date.strftime('%H:%M'));
-             href event/absolute_url"
-           tal:condition="view_private|python:1">
+             href event/absolute_url">
           <img border="0" width="10" height="10" tal:attributes="
               src string:${portal_url}/cal_event_${event/event_status}.png;" />
           <img border="0" width="10" height="10"
@@ -520,7 +519,6 @@
                   src string:${portal_url}/cal_event_${status}.png;" />
           <tal:block replace="short_title" />
         </a>
-        <tal:block condition="not:view_private">&nbsp;</tal:block>
     </td></tr>
     <tr tal:condition="python:height>13">
       <td class="eventBody" tal:attributes="bgcolor python:local_event and bgcolor or non_local;

@@ -11,6 +11,9 @@ Bug fixes:
 - The search form now uses the first field in the "fields" property
   of the widget, and not the widget id as the search field (#1378).
 - The new file 'popup_attachedfile_navigation.pt' was missing (#1313).
+- A javascript error occured on IE if you changed the title.
+- Unless you were the calendar owner, you could not see the events in
+  day and week-view. 
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

@@ -99,9 +99,7 @@
             </metal:block>
             <metal:block fill-slot="content">
               <input name="title" size="40" i18n:attributes="value"
-                     tal:attributes="value title;
-                       onchange string:document.getElementById('rememberTitle'
-                       ).value = this.value"
+                     tal:attributes="value title;"
               />
             </metal:block>
           </metal:block>

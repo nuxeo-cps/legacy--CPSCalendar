@@ -10,7 +10,6 @@
                    end_time disp_infos/end_time;
                    events_desc python:here.getEventsDesc(start_time, end_time, calendar_disp);
                    member_id python:here.portal_membership.getAuthenticatedMember().getMemberId();
-                   view_private python:here.getCalendarUser() == member_id;
                    ">
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
