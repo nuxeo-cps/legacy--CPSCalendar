@@ -49,6 +49,13 @@ WorkgroupManagerRoles = (WorkgroupManager, WorkgroupMember, WorkgroupVisitor,)
 WorkgroupMemberRoles = (WorkgroupMember, WorkgroupVisitor,)
 WorkgroupVisitorRoles = (WorkgroupVisitor,)
 
+ACCESS_CONTENTS_INFO_ROLES = ['Manager', 'WorkspaceManager', 'WorkspaceMember',
+                              'WorkspaceReader']
+VIEW_ROLES = ['Manager', 'WorkspaceManager', 'WorkspaceMember',
+               'WorkspaceReader']
+ADD_PORTAL_CONTENT_ROLES = ['Manager', 'WorkspaceManager', 'WorkspaceMember']
+MODIFY_PORTAL_CONTENT_ROLES = ['Manager', 'WorkspaceManager', 'WorkspaceMember']
+
 def cmpEv(a, b):
     return a['start'].__cmp__(b['start'])
 
@@ -850,23 +857,22 @@ def addCalendar(dispatcher, id,
     # sets correct permissions on ob
     ob.manage_permission(
         permission_to_manage='Access contents information',
-        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember',
-               'WorkspaceReader'],
+        roles=ACCESS_CONTENTS_INFO_ROLES,
         acquire=0)
     ob.manage_permission(
         permission_to_manage='View',
-        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember',
-               'WorkspaceReader'],
+        roles=VIEW_ROLES,
         acquire=0)
     ob.manage_permission(
         permission_to_manage='Add portal content',
-        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember'],
+        roles=ADD_PORTAL_CONTENT_ROLES,
         acquire=0)
     ob.manage_permission(
         permission_to_manage='Modify portal content',
-        roles=['Manager', 'WorkspaceManager', 'WorkspaceMember'],
+        roles=MODIFY_PORTAL_CONTENT_ROLES,
         acquire=0)
 
     if REQUEST is not None:
         url = dispatcher.DestinationURL()
         REQUEST.RESPONSE.redirect('%s/manage_main' % url)
+
