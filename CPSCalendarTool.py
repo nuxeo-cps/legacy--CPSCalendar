@@ -280,6 +280,37 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     def __init__(self):
         PortalFolder.__init__(self, self.id)
 
+    def getHomeCalendarObject(self, id=None, verifyPermission=0):
+        """Return a member's home calendar object, or None."""
+        mtool = getToolByName(self, 'portal_membership')
+        member = mtool.getAuthenticatedMember()
+        if not hasattr(member, 'getMemberId'):
+            return None
+
+        member_id = member.getMemberId()
+        if id is None:
+            id = member_id
+
+        member_home = mtool.getHomeFolder(id, verifyPermission)
+        if member_home:
+            try:
+                calendar = member_home._getOb('calendar')
+                if verifyPermission and not _checkPermission('View', calendar):
+                    # Don't return the folder if the user can't get to it.
+                    return None
+                return calendar
+            except AttributeError:
+                pass
+        return None
+
+    def getHomeCalendarUrl(self, id=None, verifyPermission=0):
+        """Return a member's home calendar url, or None."""
+        calendar = self.getHomeCalendarObject(id, verifyPermission)
+        if calendar is not None:
+            return calendar.absolute_url()
+        else:
+            return None
+
     def getSearchLayout(self):
         memberdir = getToolByName(self,'portal_directories')['members']
         search_layout = memberdir.layout_search
