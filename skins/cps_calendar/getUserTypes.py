@@ -2,15 +2,17 @@
 
 return [
     {
+        'id': 'workspace',
+        'title': 'cpscalendar_workspace',
+        'plural_title': 'cpscalendar_workspacess',
+     }, {
         'id': 'member',
         'title': 'cpscalendar_member',
         'plural_title': 'cpscalendar_members',
-        'path': '/workspaces/members',
      }, {
         'id': 'room',
         'title': 'cpscalendar_room',
         'plural_title': 'cpscalendar_rooms',
-        'path': '/workspaces/rooms',
      }, {
          'id': 'resource',
          'title': 'cpscalendar_resource',

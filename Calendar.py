@@ -958,7 +958,7 @@ InitializeClass(Calendar)
 def addCalendar(dispatcher, id,
                  title='',
                  description='',
-                 usertype='member',
+                 usertype='workspace',
                  REQUEST=None, **kw):
     """Adds an Events container."""
     ob = Calendar(id, title, description, usertype)

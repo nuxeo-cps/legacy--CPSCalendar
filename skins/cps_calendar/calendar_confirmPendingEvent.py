@@ -13,8 +13,9 @@ if status == 'ignore':
     url = context.absolute_url()
 else:
     context.confirmPendingEvent(event_id)
-    event = getattr(context, event_id)
-    event.setMyStatus(status, comment=comment)
+    event = getattr(context, event_id, None)
+    if event is not None:
+        event.setMyStatus(status, comment=comment)
     if delete:
         context.manage_delObjects([event_id])
 

@@ -835,7 +835,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         wtool = getToolByName(self, 'portal_workflow')
         wtool.invokeFactoryFor(context, 'Calendar', CALENDAR_ID,
                                title=title,
-                               description='')
+                               description='',
+                               usertype='member')
 
         calendar_type_info = ttool.getTypeInfo('Calendar')
 
