@@ -28,6 +28,7 @@ from Products.CMFCore.CMFCorePermissions import ManagePortal, AddPortalContent
 from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.utils import _getAuthenticatedUser, _checkPermission
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
+from Products.CPSCalendar.Event import VirtualEvent
 
 from AccessControl import ClassSecurityInfo
 
@@ -256,7 +257,6 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         attendees: list of calendars
         """
         # Some support methods:
-        from Products.CPSCalendar.Event import VirtualEvent
         def eventMask(event, mask):
             if event is None or mask is None:
                 return [event]
@@ -390,7 +390,6 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             events_desc.append([[slot_events]])
             slot_start = slot_end
 
-        length = len(slots)
         res = {}
         res['slots'] = slots
         res['hour_block_cols'] = events_desc
@@ -548,8 +547,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
         # Check that the user has the permissions.
         if not _checkPermission(AddPortalContent, context):
-                raise 'Unauthorized', CreatePortalContent
-        
+                raise 'Unauthorized', AddPortalContent
+
         aclu = self.acl_users
         user = aclu.getUser(member_id)
         assert user

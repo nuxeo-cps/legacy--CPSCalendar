@@ -204,7 +204,7 @@ class Calendar(CPSBaseFolder):
         event = Event(id=uid, **kw)
         self._setObject(uid, event)
         return uid
-        
+
 
     security.declarePrivate('getOwnerId')
     def getOwnerId(self):
@@ -774,6 +774,7 @@ class Calendar(CPSBaseFolder):
             mailhost.send(mailing, mto=mails, mfrom=mail_from,
                 subject="[CAL] %s" % event_title, encode='8bit')
         except:
+            # XXX At least log WHAT error...
             LOG('NGCal', INFO, "Error while sending notification email")
 
     security.declareProtected('View', 'getEvents')
