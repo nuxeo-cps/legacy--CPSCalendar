@@ -256,9 +256,10 @@
                   </td>
                   <th width="59" tal:repeat="i python:range(0,7)">
                     <a tal:define="date python:slots[i][0];
-                                   go_day python:int(date);"
+                                   go_day python:int(date);
+                                   j python:i+1;"
                        tal:attributes="href string:${here_url}?disp=day&viewed_day=${go_day}">
-                        <span tal:content="string:cpscalendar_label_day$${i+1}"
+                        <span tal:content="string:cpscalendar_label_day${j}"
                               i18n:translate="" />
                         <span tal:replace="date/day"/> 
                         <span tal:content="string:cpscalendar_label_month${date/month}"
