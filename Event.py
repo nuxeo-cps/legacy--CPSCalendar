@@ -145,6 +145,7 @@ class Event(CPSBaseDocument):
         self.event_status = kw.get('event_status')
         self.category = kw.get('category')
         self.transparent = kw.get('transparent')
+        self.recurrance_period = kw.get('recurrance_period')
         self._normalize()
 
     security.declareProtected('Modify portal content', 'edit')
