@@ -162,6 +162,17 @@
               <small i18n:translate="_Transparent events mean that you-re not busy during this event_">
                 Transparent events mean that you're not busy during this event.
               </small>
+	    </p>
+          </metal:block>
+        </metal:block>
+        <metal:block use-macro="here/calendar_macros/macros/form_property">
+          <metal:block fill-slot="title"
+                       i18n:translate="_cal_prop_transparent_">
+            Description
+          </metal:block>
+          <metal:block fill-slot="content">
+            <p tal:condition="transparent" i18n:translate="_Yes_">Yes</p>
+            <p tal:condition="not:transparent" i18n:translate="_No_">No</p>
           </metal:block>
         </metal:block>
       </metal:block>
