@@ -1,15 +1,16 @@
+# translation of nl.po to French
 # translation of en.po to French
 # translation of en.po to
 # translation of en.po to Francais
 # Gettext Message File for default.
-# Encolpe DEGOUTE <ed@nuxeo.com>, 2003.
+# Encolpe DEGOUTE <ed@nuxeo.com>, 2003, 2004.
 # DARCHE <madarche@nuxeo.com>, 2003.
 # Lennart Regebro <rgebro@nuxeo.com>, 2003.
 msgid ""
 msgstr ""
-"Project-Id-Version: en\n"
-"POT-Creation-Date: 2003-12-17 17:01default\n"
-"PO-Revision-Date: 2003-12-08 14:31+0100\n"
+"Project-Id-Version: nl\n"
+"POT-Creation-Date: 2004-01-08 16:32default\n"
+"PO-Revision-Date: 2004-01-09 02:26+0100\n"
 "Last-Translator: Encolpe DEGOUTE <ed@nuxeo.com>\n"
 "Language-Team: French <cantact@nuxeo.com>\n"
 "MIME-Version: 1.0\n"
@@ -56,11 +57,6 @@ msgstr ""
 msgid "January 2003"
 msgstr "January 2003"
 
-#.   <span content="python:type['title']" class="calTitle">Rooms</span>
-#: from ../skins/cps_calendar/calendars_contents.pt
-msgid "Rooms"
-msgstr "Rooms"
-
 #.   <option repeat="status python:['confirmed', 'tentative', 'decline']" attributes="value status;
 #.                         selected python:status == mystatus" content="python:str('cpscalendar_pending_%s' % (status,))">
 #.            Status
@@ -68,6 +64,11 @@ msgstr "Rooms"
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "Status"
 msgstr "Status"
+
+#.   <span content="python:type['title']" class="calTitle">Type title</span>
+#: from ../skins/cps_calendar/calendars_contents.pt
+msgid "Type title"
+msgstr ""
 
 #.   <p content="python:str(user_type['plural_title'])">User type</p>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
@@ -131,7 +132,8 @@ msgstr "Back"
 #.   <input onclick="history.back()" type="button" value="cpscalendar_button_cancel" />
 #.   <input value="cpscalendar_button_cancel" name="calendar_meeting_cancel:method" type="submit" />
 #.   <input onclick="window.close()" type="button" value="cpscalendar_button_cancel" />
-#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
+#: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
+#: ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_form.pt
@@ -178,7 +180,8 @@ msgstr "Search"
 #.   <input value="cpscalendar_button_validate" type="submit" />
 #.   <input value="cpscalendar_button_validate" name="confirmPendingEvent:method" type="submit" />
 #.   <input condition="should_validate|nothing" onclick="validateSelector()" type="button" value="cpscalendar_button_validate" />
-#: from ../skins/cps_calendar/calendar_confirmdelevent.pt
+#: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
+#: ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_confirmdelevents.pt
 #: ../skins/cps_calendar/calendar_display_form.pt
 #: ../skins/cps_calendar/calendar_freebusy.pt
@@ -208,17 +211,13 @@ msgstr "Confirmed"
 msgid "cpscalendar_create_a_calendar"
 msgstr "Create a calendar"
 
-#.   <block fill-slot="head_sot">
-#.     Create a new event
-#.   </block>
 #.   <block condition="create">
 #.            Create a new event
 #.          </block>
 #.   <span>
 #.       Create a new event
 #.     </span>
-#: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
-#: ../skins/cps_calendar/calendar_editevent_form.pt
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/create_meeting_form.pt
 msgid "cpscalendar_description_create_a_new_event"
 msgstr "Create a new event"
@@ -337,12 +336,7 @@ msgstr "and"
 msgid "cpscalendar_label_at"
 msgstr "at"
 
-#.   <span>
-#.           at
-#.           </span>
-#.   <span>
-#.               at
-#.           </span>
+#.   <span>at</span>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_at_(hour)"
 msgstr "at"
@@ -466,16 +460,14 @@ msgstr "Status"
 msgid "cpscalendar_label_free_time_you_can_use"
 msgstr "Free time"
 
-#.   <span>
-#.           From the
-#.             </span>
+#.   <span>From the</span>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_from_(day)"
 msgstr "From"
 
 #.   <span>
-#.             From the
-#.           </span>
+#.               From the
+#.             </span>
 #.   <span>
 #.           From
 #.         </span>
@@ -484,10 +476,10 @@ msgstr "From"
 msgid "cpscalendar_label_from_day"
 msgstr "From"
 
-#.   <span>
-#.               From
-#.             </span>
+#.   <span>From</span>
+#.   <span>at</span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_from_hour"
 msgstr "From"
 
@@ -594,9 +586,6 @@ msgstr "Status"
 #.   <block fill-slot="title">
 #.             Title
 #.           </block>
-#.   <block fill-slot="title">
-#.                 Title
-#.           </block>
 #.   <metal:block fill-slot="title">
 #.           Title
 #.         </metal:block>
@@ -610,16 +599,14 @@ msgstr "Status"
 msgid "cpscalendar_label_title"
 msgstr "Title"
 
-#.   <span>
-#.           To the
-#.             </span>
+#.   <span>To the</span>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_to_(day)"
 msgstr "To"
 
 #.   <span>
-#.             to
-#.           </span>
+#.                 to
+#.               </span>
 #.   <span>
 #.           to
 #.         </span>
@@ -628,10 +615,10 @@ msgstr "To"
 msgid "cpscalendar_label_to_day"
 msgstr "to"
 
-#.   <span>
-#.               to
-#.             </span>
+#.   <span>to</span>
+#.   <span>at</span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_to_hour"
 msgstr "at"
 
@@ -664,16 +651,8 @@ msgstr "Transparent events mean that you're not busy during this event."
 msgid "cpscalendar_link_printable_view"
 msgstr "Printable view"
 
-#.   <a define="
-#.                     today python:int(DateTime());" attributes="
-#.                     href string:${here_url}?viewed_day=${today}" class="calEvent">
-#.                   Today
-#.                 </a>
-#.   <a define="
-#.                     today python:int(DateTime());" attributes="
-#.                   href string:${here_url}?viewed_day=${today}" class="calEvent">
-#.                   Today
-#.                 </a>
+#.   <a define="today python:int(DateTime());" attributes="href string:${here_url}?viewed_day=${today}" class="default">Today</a>
+#.   <a define="today python:int(DateTime());" attributes="href string:${here_url}?viewed_day=${today};" class="default">Today</a>
 #: from ../skins/cps_calendar/calendar_view_macros.pt
 msgid "cpscalendar_link_today"
 msgstr "Today"
@@ -892,16 +871,22 @@ msgid "cpscalendar_status"
 msgstr "Status"
 
 #.   <span content="string:cpscalendar_option_status_${event_status}">status</span>
-#.   <span content="status">status</span>
+#.   <span content="string:cpscalendar_option_status_${status}">status</span>
 #: from ../skins/cps_calendar/calendar_macros.pt
 #: ../skins/cps_calendar/create_meeting_form.pt
 msgid "status"
 msgstr "status"
 
-#.   <span content="python:str('cpscalendar_label_day_long%s' % str(i))">week day</span>
+#.   <span content="string:cpscalendar_label_day_long${i}">week day</span>
 #: from ../skins/cps_calendar/calendar_view_macros.pt
 msgid "week day"
 msgstr "week day"
+
+msgid "cpscalendar_user_calendar_name_beg"
+msgstr "Calendar of "
+
+msgid "cpscalendar_user_calendar_name_end"
+msgstr " "
 
 msgid "cpscalendar_create_all_day_event"
 msgstr "Create an event during many days"
@@ -1160,3 +1145,4 @@ msgstr "you cannot select a time interval larger than a month"
 
 msgid "cpscalendar_create_the_meeting_here"
 msgstr "Create the meeting here"
+

@@ -16,6 +16,12 @@ msgstr ""
 "Preferred-encodings: utf-8 latin1\n"
 "Domain: default\n"
 
+msgid "cpscalendar_user_calendar_name_beg"
+msgstr ""
+
+msgid "cpscalendar_user_calendar_name_end"
+msgstr ""
+
 msgid "cpscalendar_create_all_day_event"
 msgstr ""
 
