@@ -34,21 +34,15 @@
   </span>
   <table cellspacing="0" cellpadding="0" border="0">
     <tr>
-      <td align="right">
-        <div class="contentTabs">
-            <span class="opentab">&nbsp;</span><a class="calEvent"
-                  tal:condition="python:disp_start > 0"
-                  tal:define="prev python:disp_start - 7;"
-                  tal:attributes="href string:calendar_go_freebusy?start=${prev}">
-                  &lt;&lt;
-                </a><a class="calEvent"
-                   tal:condition="python:disp_end < len_slots"
-                  tal:define="next python:disp_start + 7;"
-                  tal:attributes="href string:calendar_go_freebusy?start=${next}">
-                  &gt;&gt;
-                </a><span class="closetab">&nbsp;</span>
-        </div>
-      </td>
+      <td align="right"><div class="contentTabs"><span class="opentab">&nbsp;</span><a
+               class="default"
+               tal:condition="python:disp_start > 0"
+               tal:define="prev python:disp_start - 7;"
+               tal:attributes="href string:calendar_go_freebusy?start=${prev}">&lt;&lt;</a><a
+               class="default"
+               tal:condition="python:disp_end < len_slots"
+               tal:define="next python:disp_start + 7;"
+               tal:attributes="href string:calendar_go_freebusy?start=${next}">&gt;&gt;</a><span class="closetab">&nbsp;</span></div></td>
     </tr>
     <tr>
       <td>

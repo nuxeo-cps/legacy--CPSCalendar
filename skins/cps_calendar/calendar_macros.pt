@@ -23,14 +23,17 @@
 
 
 <metal:block define-macro="event_view"
-         i18n:domain="cpscalendar">
+             i18n:domain="cpscalendar">
   <tal:block define="organizer event/organizer|nothing;
+             fmt string:short;
              title event/title;
              id event/id|nothing;
              title python:title or id;
              description event/description;
              from_date event/from_date;
+             from_date_string python:here.getDateStr(from_date, fmt=fmt);
              to_date event/to_date;
+             to_date_string python:here.getDateStr(to_date, fmt=fmt);
              all_day event/all_day;
              location event/location;
              event_status event/event_status;
@@ -62,45 +65,36 @@
         Title
       </metal:block>
       <metal:block fill-slot="content"
-        tal:content="title">
+                   tal:content="title">
         title
       </metal:block>
     </metal:block>
     <metal:block use-macro="here/calendar_macros/macros/form_property">
       <metal:block fill-slot="title"
-               i18n:translate="cpscalendar_label_date">
+                   i18n:translate="cpscalendar_label_date">
         Date
       </metal:block>
-      <metal:block fill-slot="content"
-               tal:define="one_date python:from_date == to_date;">
-            <strong>
-        <tal:block condition="python:one_date and here.get('from_date_str', 0)"
-               tal:content="from_date_str">
+      <metal:block fill-slot="content">
+        <strong>
+        <tal:block condition="not:all_day">
+          <span tal:replace="from_date_string" /><br>
+          <span i18n:translate="cpscalendar_label_from_hour">at</span>
+          <span tal:replace="python:from_date.strftime(' %H:%M')" />
+          <span i18n:translate="cpscalendar_label_to_hour">at</span>
+          <span tal:replace="python:to_date.strftime(' %H:%M')" />
         </tal:block>
-        <tal:block condition="not:one_date">
-          <span i18n:translate="cpscalendar_label_from_(day)">
-        From the
-          </span>
-          <tal:block replace="python:from_date.strftime('%m/%d/%Y ')" />
-          <tal:block condition="not:all_day">
-        <span i18n:translate="cpscalendar_label_at_(hour)">
-        at
-        </span>
-        <tal:block replace="python:from_date.strftime(' %H:%M')" />
-          </tal:block>
+        <tal:block condition="all_day">
+          <span i18n:translate="cpscalendar_label_from_(day)">From the</span>
+          <span tal:replace="from_date_string" />
+          <span i18n:translate="cpscalendar_label_at_(hour)">at</span>
+          <span tal:replace="python:from_date.strftime(' %H:%M')" />
           <br>
-          <span i18n:translate="cpscalendar_label_to_(day)">
-        To the
-          </span>
-          <tal:block replace="python:to_date.strftime('%m/%d/%Y ')" />
-          <tal:block condition="not:all_day">
-        <span i18n:translate="cpscalendar_label_at_(hour)">
-            at
-        </span>
-        <tal:block replace="python:to_date.strftime(' %H:%M')" />
-          </tal:block>
+          <span i18n:translate="cpscalendar_label_to_(day)">To the</span>
+          <span tal:replace="to_date_string" />
+          <span i18n:translate="cpscalendar_label_at_(hour)">at</span>
+          <span tal:replace="python:to_date.strftime(' %H:%M')" />
         </tal:block>
-            </strong>
+        </strong>
       </metal:block>
     </metal:block>
     <tal:block condition="location">

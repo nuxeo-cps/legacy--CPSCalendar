@@ -6,7 +6,8 @@
     Day selector popup script
 </metal:block>
 
-<metal:block fill-slot="head_slot">
+<metal:block fill-slot="header"
+             i18n:domain="cpscalendar">
   <span i18n:translate="cpscalendar_description_create_a_new_event">
     Create a new event
   </span>
@@ -46,12 +47,12 @@
             </metal:block>
             <metal:block fill-slot="content">
               <h3>
-                <tal:block content="python:str('cpscalendar_label_day_long%s' % (from_date.dow(), ))"
+                <tal:block content="string:cpscalendar_label_day_long${from_date/dow}"
                            i18n:translate="" />
-                <tal:block replace="python:from_date.day()" />
-                <tal:block content="python:str('cpscalendar_label_month_long%s' % (from_date.month(), ))"
+                <tal:block replace="from_date/day" />
+                <tal:block content="string:cpscalendar_label_month_long${from_date/month}"
                            i18n:translate="" />
-                <tal:block replace="python:from_date.year()" />
+                <tal:block replace="from_date/year" />
               </h3>
               <h3 tal:define="from_date meeting_infos/from_date;
                               from_date_hour meeting_infos/from_date_hour;
@@ -64,15 +65,15 @@
                               first start;
                               last python:start+(window/15);">
                 <input type="hidden" name="duration:int"
-                  tal:attributes="value duration" />
+                       tal:attributes="value duration" />
                 <input type="hidden" name="from_date:int"
-                  tal:attributes="value python:int(from_date)" />
+                       tal:attributes="value python:int(from_date)" />
                 <input type="hidden" id="from_date_hour"
-                  name="from_date_hour:int"
-                  tal:attributes="value from_date_hour" />
+                       name="from_date_hour:int"
+                       tal:attributes="value from_date_hour" />
                 <input type="hidden" id="from_date_minute"
-                  name="from_date_minute:int"
-                  tal:attributes="value from_date_minute" />
+                       name="from_date_minute:int"
+                       tal:attributes="value from_date_minute" />
                 <span i18n:translate="cpscalendar_label_at">
                   At
                 </span>
@@ -114,7 +115,8 @@
                 <option tal:repeat="status statuses"
                         tal:attributes="value status;
                                         selected python:status == 'unconfirmed';">
-              <span i18n:translate="" tal:content="status" >status</span>
+              <span tal:content="string:cpscalendar_option_status_${status}"
+                    i18n:translate="">status</span>
                 </option>
               </select>
             </metal:block>

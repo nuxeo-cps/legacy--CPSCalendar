@@ -10,68 +10,43 @@
   </tal:block>
   <table cellspacing="0" cellpadding="0" border="0">
     <tr>
-      <td>
-        <table cellspacing="0" cellpadding="0" border="0" align="right">
-          <tr>
-            <td width="30" class="calLeftTab">
-              <a class="calEvent"
-                tal:define="
-                prev_day python:int(viewed_day-1);"
-                tal:attributes="
-                href string:${here_url}?viewed_day=${prev_day}">
-                &lt;&lt;
-              </a>
-            </td>
-            <td class="calCenterTab">
-              <a class="calEvent"
-                tal:define="
-                  today python:int(DateTime());"
-                tal:attributes="
-                  href string:${here_url}?viewed_day=${today}"
-                i18n:translate="cpscalendar_link_today">
-                Today
-              </a>
-            </td>
-            <td width="30" class="calRightTab">
-              <a class="calEvent"
-                tal:define="
-                next_day python:int(viewed_day+1);"
-                tal:attributes="
-                href string:${here_url}?viewed_day=${next_day}">
-                &gt;&gt;
-              </a>
-            </td>
-          </tr>
-        </table>
-      </td>
+      <td align="right"><div class="contentTabs"><span class="opentab">&nbsp;</span><a
+                class="default"
+                tal:define="prev_day python:int(viewed_day-1);"
+                tal:attributes="href string:${here_url}?viewed_day=${prev_day}">&lt;&lt;</a><a
+                class="default"
+                tal:define="today python:int(DateTime());"
+                tal:attributes="href string:${here_url}?viewed_day=${today}"
+                i18n:translate="cpscalendar_link_today">Today</a><a
+                class="default"
+                tal:define="next_day python:int(viewed_day+1);"
+                tal:attributes="href string:${here_url}?viewed_day=${next_day}">&gt;&gt;</a><span class="closetab">&nbsp;</span></div></td>
     </tr>
     <tr>
       <td>
         <table cellspacing="0" cellpadding="0" border="1"
-          tal:define="
-            cat_info here/calendar_categories;
-            categories cat_info/categories;
-            cat_default cat_info/default;
-            def_color categories/?cat_default/color;">
+               tal:define="cat_info here/calendar_categories;
+                           categories cat_info/categories;
+                           cat_default cat_info/default;
+                           def_color categories/?cat_default/color;">
           <tr>
             <td>
               <table width="445" cellspacing="2" cellpadding="0" border="0"
-                tal:define="
-                  empty_src string:${portal_url}/cal_empty.gif;
-                  slots events_desc/slots;
-                  date python:slots[0][0];
-                  day_events events_desc/day_events;
-                  hour_blocks events_desc/hour_blocks">
+                     tal:define="empty_src string:${portal_url}/cal_empty.gif;
+                                 slots events_desc/slots;
+                                 date python:slots[0][0];
+                                 day_events events_desc/day_events;
+                                 hour_blocks events_desc/hour_blocks;">
                 <tr>
                   <td>
                   </td>
                   <th>
-                    <span tal:content="python:str('cpscalendar_label_day_long%s' % date.dow())"
+                    <span tal:content="string:cpscalendar_label_day_long${date/dow}"
                           i18n:translate="" />
-                    <span tal:replace="string:${date/day}"/> 
-                    <span tal:content="python:str('cpscalendar_label_month_long%s' % date.month())"
+                    <span tal:replace="date/day"/> 
+                    <span tal:content="string:cpscalendar_label_month_long${date/month}"
                           i18n:translate="" />
-                    <span tal:replace="string:${date/year}"/>
+                    <span tal:replace="date/year"/>
                   </th>
                 </tr>
                 <tr tal:repeat="day_event day_events">
@@ -243,38 +218,17 @@
   </tal:block>
   <table cellspacing="0" cellpadding="0" border="0">
     <tr>
-      <td>
-        <table cellspacing="0" cellpadding="0" border="0" align="right">
-          <tr>
-            <td width="30" class="calLeftTab">
-              <a class="calEvent"
-                 tal:define="prev_week python:int(viewed_day-7);"
-                 tal:attributes="href string:${here_url}?viewed_day=${prev_week}">
-                &lt;&lt;
-              </a>
-            </td>
-            <td class="calCenterTab">
-              <a class="calEvent"
-                tal:define="
-                  today python:int(DateTime());"
-                tal:attributes="
-                  href string:${here_url}?viewed_day=${today}"
-                i18n:translate="cpscalendar_link_today">
-                Today
-              </a>
-            </td>
-            <td width="30" class="calRightTab">
-              <a class="calEvent"
-                tal:define="
-                next_week python:int(viewed_day+7);"
-                tal:attributes="
-                href string:${here_url}?viewed_day=${next_week}">
-                &gt;&gt;
-              </a>
-            </td>
-          </tr>
-        </table>
-      </td>
+      <td align="right"><div class="contentTabs"><span class="opentab">&nbsp;</span><a
+               class="default"
+               tal:define="prev_week python:int(viewed_day-7);"
+               tal:attributes="href string:${here_url}?viewed_day=${prev_week}">&lt;&lt;</a><a
+               class="default"
+               tal:define="today python:int(DateTime());"
+               tal:attributes="href string:${here_url}?viewed_day=${today}"
+               i18n:translate="cpscalendar_link_today">Today</a><a
+               class="default"
+               tal:define="next_week python:int(viewed_day+7);"
+               tal:attributes="href string:${here_url}?viewed_day=${next_week}">&gt;&gt;</a><span class="closetab">&nbsp;</span></div></td>
     </tr>
     <tr>
       <td>
@@ -301,16 +255,13 @@
                   <td>
                   </td>
                   <th width="59" tal:repeat="i python:range(0,7)">
-                    <a
-                      tal:define="
-                        date python:slots[i][0];
-                        go_day python:int(date);"
-                      tal:attributes="
-                        href string:${here_url}?disp=day&viewed_day=${go_day}">
-                        <span tal:content="python:str('cpscalendar_label_day%s' % str(i+1))"
+                    <a tal:define="date python:slots[i][0];
+                                   go_day python:int(date);"
+                       tal:attributes="href string:${here_url}?disp=day&viewed_day=${go_day}">
+                        <span tal:content="string:cpscalendar_label_day$${i+1}"
                               i18n:translate="" />
-                        <span tal:replace="string:${date/day}"/> 
-                        <span tal:content="python:str('cpscalendar_label_month%s' % date.month())"
+                        <span tal:replace="date/day"/> 
+                        <span tal:content="string:cpscalendar_label_month${date/month}"
                               i18n:translate="" />
                       </a>
                   </th>
@@ -496,56 +447,32 @@
   </tal:block>
   <table cellspacing="0" cellpadding="0" border="0">
     <tr>
-      <td>
-        <table cellspacing="0" cellpadding="0" border="0" align="right">
-          <tr>
-            <td width="30" class="calLeftTab">
-              <a class="calEvent"
-                tal:define="
-                prev_month python:int(start_time-5);"
-                tal:attributes="
-                href string:${here_url}?viewed_day=${prev_month}">
-                &lt;&lt;
-              </a>
-            </td>
-            <td class="calCenterTab">
-              <a class="calEvent"
-                tal:define="
-                  today python:int(DateTime());"
-                tal:attributes="
-                href string:${here_url}?viewed_day=${today}"
-                i18n:translate="cpscalendar_link_today">
-                Today
-              </a>
-            </td>
-            <td width="30" class="calRightTab">
-              <a class="calEvent"
-                tal:define="
-                next_month python:int(end_time+7);"
-                tal:attributes="
-                href string:${here_url}?viewed_day=${next_month}">
-                &gt;&gt;
-              </a>
-            </td>
-          </tr>
-        </table>
-      </td>
+      <td align="right"><div class="contentTabs"><span class="opentab">&nbsp;</span><a
+                class="default"
+                tal:define="prev_month python:int(start_time-5);"
+                tal:attributes="href string:${here_url}?viewed_day=${prev_month};">&lt;&lt;</a><a
+                class="default"
+                tal:define="today python:int(DateTime());"
+                tal:attributes="href string:${here_url}?viewed_day=${today};"
+                i18n:translate="cpscalendar_link_today">Today</a><a
+                class="default"
+                tal:define="next_month python:int(end_time+7);"
+                tal:attributes="href string:${here_url}?viewed_day=${next_month};">&gt;&gt;</a><span class="closetab">&nbsp;</span></div></td>
     </tr>
     <tr>
       <td>
         <table width="445" cellspacing="0" cellpadding="0" border="1"
-          tal:define="
-            cat_info here/calendar_categories;
-            categories cat_info/categories;
-            cat_default cat_info/default;
-            def_color categories/?cat_default/color;">
+               tal:define="cat_info here/calendar_categories;
+                           categories cat_info/categories;
+                           cat_default cat_info/default;
+                           def_color categories/?cat_default/color;">
           <tr>
             <td>
               <table width="445" cellspacing="2" cellpadding="0" border="0">
                 <tr>
                   <th
                     tal:repeat="i python:[1,2,3,4,5,6,7]">
-                    <span tal:content="python:str('cpscalendar_label_day_long%s' % str(i))"
+                    <span tal:content="string:cpscalendar_label_day_long${i}"
                           i18n:translate="">week day</span>
                   </th>
                 </tr>

@@ -1,6 +1,7 @@
 ##parameters=cal_ids=[], REQUEST=None, **kw
 
 errors = []
+locale = context.Localizer.default.get_selected_language()
 
 pr = errors.append
 
@@ -13,38 +14,28 @@ if not cal_ids:
 meeting = {}
 meeting['args'] = kw
 
-try:
-    from_date_string = str(kw.get('from_date','')).split('/')
-    from_date_year = int(from_date_string[2])
-    from_date_month = int(from_date_string[1])
-    from_date_day = int(from_date_string[0])
-except (ValueError, IndexError):
-    pr('cpscalendar_from_incorrect_date')
-ok = 0
-if not errors:
-    while not ok:
-        try:
-            from_date = DateTime(from_date_year, from_date_month, from_date_day)
-            ok = 1
-        except 'DateTimeError':
-            from_date_day -= 1
 
-try:
-    to_date_string = str(kw.get('to_date','')).split('/')
-    to_date_year = int(to_date_string[2])
-    to_date_month = int(to_date_string[1])
-    to_date_day = int(to_date_string[0])
-except (ValueError, IndexError,):
-    pr('cpscalendar_to_incorrect_date')
+from_date_string = kw.get('from_date','')
+if locale in ('en', 'hu', ):
+    from_date_month, from_date_day, from_date_year = from_date_string.split('/')
+else:
+    from_date_day, from_date_month, from_date_year = from_date_string.split('/')
 
-ok = 0
-if not errors:
-    while not ok:
-        try:
-            to_date = DateTime(to_date_year, to_date_month, to_date_day)
-            ok = 1
-        except 'DateTimeError':
-            to_date_day -= 1
+from_date_day = int(from_date_day)
+from_date_month = int(from_date_month)
+from_date_year = int(from_date_year)
+from_date = DateTime(from_date_year, from_date_month, from_date_day)
+
+to_date_string = kw.get('to_date','')
+if locale in ('en', 'hu', ):
+    to_date_month, to_date_day, to_date_year = to_date_string.split('/')
+else:
+    to_date_day, to_date_month, to_date_year = to_date_string.split('/')
+
+to_date_day = int(to_date_day)
+to_date_month = int(to_date_month)
+to_date_year = int(to_date_year)
+to_date = DateTime(to_date_year, to_date_month, to_date_day)
 
 if not errors:
     days = from_date - to_date
