@@ -46,10 +46,10 @@
             </metal:block>
             <metal:block fill-slot="content">
               <h3>
-                <tal:block content="python:str('label_day_long%s' % (from_date.dow(), ))"
+                <tal:block content="python:str('cpscalendar_label_day_long%s' % (from_date.dow(), ))"
                            i18n:translate="" />
                 <tal:block replace="python:from_date.day()" />
-                <tal:block content="python:str('label_month_long%s' % (from_date.month(), ))"
+                <tal:block content="python:str('cpscalendar_label_month_long%s' % (from_date.month(), ))"
                            i18n:translate="" />
                 <tal:block replace="python:from_date.year()" />
               </h3>
@@ -171,10 +171,10 @@
         </metal:block>
       </metal:block>
       <input type="submit"
-             value="button_create"
+             value="cpscalendar_button_create"
              i18n:attributes="value" />
       <input type="button" onClick="history.back()"
-             value="button_cancel"
+             value="cpscalendar_button_cancel"
              i18n:attributes="value"/>
     </form>
 </metal:block>

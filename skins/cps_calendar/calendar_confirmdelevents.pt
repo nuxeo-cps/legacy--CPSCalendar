@@ -43,7 +43,7 @@
       </metal:block>
     </metal:block>
     <input type="submit"
-           value="button_validate"
+           value="cpscalendar_button_validate"
            i18n:attributes="value" />
   </form>
 </metal:block>

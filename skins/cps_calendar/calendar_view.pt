@@ -30,7 +30,8 @@
           tal:repeat="id cancelled"
           tal:attributes="value id" />
         <input type="submit"
-          tal:attributes="value string:_button_Remove cancelled events_" />
+               tal:attributes="value string:cpscalendar_button_remove_cancelled_events"
+               i18n:attributes="value"/>
       </form>
       <form action="calendar_delevents" method="POST"
         tal:define="declined ev_dict/declined"
@@ -39,7 +40,8 @@
           tal:repeat="id declined"
           tal:attributes="value id" />
         <input type="submit"
-          tal:attributes="value string:_button_Remove events you declined_" />
+               tal:attributes="value string:cpscalendar_button_remove_events_you_declined"
+               i18n:attributes="value"/>
       </form>
     </tal:block>
     <tal:block define="pendings_count here/getPendingEventsCount"
@@ -48,13 +50,14 @@
         <a href="calendar_pending_events"
            tal:attributes="href string:${context_url}/calendar_pending_events"
            tal:condition="python:pendings_count > 1"
-           tal:content="string:_You have ${pending_count} pending requests_">
+           tal:content="string:cpscalendar_have ${pending_count} pending requests_"
+           i18n:translate="">
            You have 2 pending requests.
         </a>
         <a href="calendar_pending_events"
            tal:attributes="href string:${context_url}/calendar_pending_events"
            tal:condition="python:pendings_count == 1"
-           i18n:translate="_You have one pending request_">
+           i18n:translate="cpscalendar_one_pending_request">
            You have one pending request.
         </a>
       </h3>

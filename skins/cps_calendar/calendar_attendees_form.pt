@@ -3,7 +3,7 @@
 
 <metal:block fill-slot="head_slot" i18n:domain="cpscalendar">
   <span i18n:translate="cpscalendar_heading_event_attendees">
-    Attendees for event
+    cpscalendar_attendees_for_event
   </span>
   «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
 </metal:block>
@@ -22,20 +22,20 @@
         tal:repeat="att decline_attendees"
         tal:attributes="value att/id" />
       <input type="submit"
-             value="button_remove_all_attendees_who_declined"
+             value="button_cpscalendar_remove_all_attendees_who_declined"
              i18n:attributes="value" />
     </form>
   </tal:block>
   <metal:block use-macro="here/calendar_macros/macros/notifyattendees" />
   <tal:block repeat="user_type user_types">
     <span class="calTitle" tal:content="python:str(user_type['plural_title'])"
-        i18n:translate="">Ressources</span>
+        i18n:translate="">cpscalendar_ressources</span>
     <tal:block define="type user_type/id;
                        attendees attendees_dict/?type|python:[]">
       <p tal:condition="not:attendees"
          tal:content="python:str('cpscalendar_no_attendee_of_type_%s' % type)"
          i18n:translate="">
-        No ressources selected
+        cpscalendar_no_ressources_selected
       </p>
       <tal:block condition="python:can_edit and attendees">
         <form action="calendar_removeattendee" method="POST">
@@ -45,11 +45,11 @@
                 tal:attributes="value string:${attendee/id}" />
               <tal:block replace="attendee/cn|attendee/id" />
               (<tal:block content="python:str('cpscalendar_status_%s' % (attendee['status'], ))"
-                          i18n:translate="">Confirmed</tal:block>)
+                          i18n:translate="">cpscalendar_confirmed</tal:block>)
             </li>
           </ul>
           <input type="submit"
-                 value="button_delete"
+                 value="cpscalendar_button_delete"
                  i18n:attributes="value" />
         </form>
       </tal:block>
@@ -58,7 +58,7 @@
           <li tal:repeat="attendee attendees">
             <tal:block replace="attendee/cn|attendee/id" />
             (<tal:block content="python:str('cpscalendar_status_%s' % (attendee['status'], ))"
-                        i18n:translate="">Confirmed</tal:block>)
+                        i18n:translate="">cpscalendar_confirmed</tal:block>)
           </li>
         </ul>
       </tal:block>
@@ -79,14 +79,14 @@
                    <option tal:repeat="propid searchable_keys"
                            tal:attributes="value propid"
                            tal:content="python:str(schema_dict[propid].title)"
-                           i18n:translate="">option1</option>
+                           i18n:translate="">cpscalendar_option</option>
                   </select>
-                  <span i18n:translate="cpscalendar_label_(add_a_user_whose_)is">
+                  <span i18n:translate="cpscalendar_label_add_a_user_whose_is">
                     is
                   </span> :
                   <input type="text" name="search_term" size="10">
                   <input class="mainbutton" type="submit" name="role_submit"
-                         value="button_search"
+                         value="cpscalendar_button_search"
                          i18n:attributes="value">
                 </p>
               </form>
@@ -113,7 +113,7 @@
                       </select>
                       <br>
                       <input class="mainbutton" type="submit"
-                             value="button_add"
+                             value="cpscalendar_button_add"
                              i18n:attributes="value">
                     </p>
                   </form>
@@ -141,7 +141,7 @@
                   tal:content="attendee/cn">Ressource</option>
               </select>
               <input type="submit"
-                     value="button_add"
+                     value="cpscalendar_button_add"
                      i18n:attributes="value" />
             </form>
           </tal:block>

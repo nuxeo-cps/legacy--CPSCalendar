@@ -11,7 +11,7 @@
 	     tal:define="portal_url here/portal_url;
 			 disp_infos python:here.calendar_getDispInformations(request);
 			 action python:create and 'calendar_addevent' or 'calendar_editevent';
-			 submit_value python:create and str('button_create') or str('button_modify');
+			 submit_value python:create and str('cpsclendar_button_create') or str('cpscalendar_button_modify');
 			 editevent python:create or here.canEditThisEvent();
 			 title python:create
                                       and request.form.get('title',
@@ -116,14 +116,14 @@
 	    </metal:block>
 	    <metal:block fill-slot="content">
 	      <input name="title" size="40"
-		     tal:attributes="value title;
+               tal:attributes="value title;
 				     onchange string:document.getElementById('rememberTitle').value = this.value"
-                     i18n:attributes="value">
+               i18n:attributes="value">
 	    </metal:block>
 	  </metal:block>
 	  <metal:block use-macro="here/calendar_macros/macros/form_property">
 	    <metal:block fill-slot="title"
-			 i18n:translate="cpscalendar_label_date">
+			             i18n:translate="cpscalendar_label_date">
 	      Date
 	    </metal:block>
 	    <metal:block fill-slot="content">
@@ -150,14 +150,14 @@
 		       tal:attributes="value to_date_month" />
 		<input type="hidden" id="to_date_year" name="to_date_year"
 		       tal:attributes="value to_date_year" />
-		<span i18n:translate="cpscalendar_label_from_(day)">
+		<span i18n:translate="cpscalendar_label_from_day">
 		  From the
 		</span>
 		<span id="from_date_string">
-		  <tal:block content="python:str('label_day_long%s' % (from_date.dow(), ))"
+		  <tal:block content="python:str('cpscalendar_label_day_long%s' % (from_date.dow(), ))"
 			     i18n:translate="" />
 		  <tal:block replace="from_date_day" />
-		  <tal:block content="python:str('label_month_long%s' % (from_date_month, ))"
+		  <tal:block content="python:str('cpscalendar_label_month_long%s' % (from_date_month, ))"
 			     i18n:translate="" />
 		  <tal:block replace="from_date_year" />
 		</span>
@@ -166,14 +166,14 @@
 		  <img border="0"
 		       tal:attributes="src string:${portal_url}/day_selector_icon.png" /></a>
 		<br>
-		<span i18n:translate="cpscalendar_label_to_(day)">
+		<span i18n:translate="cpscalendar_label_to_day">
 		  to
 		</span>
 		<span id="to_date_string">
-		  <tal:block content="python:str('label_day_long%s' % (to_date.dow(), ))"
+		  <tal:block content="python:str('cpscalendar_label_day_long%s' % (to_date.dow(), ))"
 			     i18n:translate="" />
 		  <tal:block replace="to_date_day" />
-		  <tal:block content="python:str('label_month_long%s' % (to_date_month, ))"
+		  <tal:block content="python:str('cpscalendar_label_month_long%s' % (to_date_month, ))"
 			     i18n:translate="" />
 		  <tal:block replace="to_date_year" />
 		</span>
@@ -201,10 +201,10 @@
 		       tal:attributes="value to_date_year" />
 
 		  <span id="date_string">
-		    <tal:block content="python:str('label_day_long%s' % (from_date.dow(), ))"
+		    <tal:block content="python:str('cpscalendar_label_day_long%s' % (from_date.dow(), ))"
 			       i18n:translate="" />
 		    <tal:block replace="from_date_day" />
-		    <tal:block content="python:str('label_month_long%s' % (from_date_month, ))"
+		    <tal:block content="python:str('cpscalendar_label_month_long%s' % (from_date_month, ))"
 			       i18n:translate="" />
 		    <tal:block replace="from_date_year" />
 		  </span>
@@ -223,7 +223,7 @@
 		<input type="hidden" name="to_date_minute" id="to_date_minute"
 		       tal:attributes="value to_date_minute" />
 
-		  <span i18n:translate="cpscalendar_label_from_(hour)">
+		  <span i18n:translate="cpscalendar_label_from_hour">
 		    From
 		  </span>
 		  <span id="from_date_hour_s"
@@ -231,7 +231,7 @@
 		    <span i18n:translate="cpscalendar_hour_sep">:</span>
 		    <span id="from_date_minute_s"
 			  tal:content="python:from_date_minute == 0 and '00' or from_date_minute">10</span>
-		  <span i18n:translate="cpscalendar_label_to_(hour)">
+		  <span i18n:translate="cpscalendar_label_to_hour">
 		    to
 		  </span>
 		  <span id="to_date_hour_s" tal:content="to_date_hour">10</span>
@@ -245,10 +245,10 @@
 			 tal:attributes="src string:${portal_url}/interval_selector_icon.png" /></a>
 
 		  <tal:block condition="nothing">
-		    (<tal:block content="python:str('label_day_long%s' % (to_date.dow(), ))"
+		    (<tal:block content="python:str('cpscalendar_label_day_long%s' % (to_date.dow(), ))"
 				i18n:translate="" />
 		    <tal:block replace="to_date_day" />
-		    <tal:block content="python:str('label_month_long%s' % (to_date_month, ))"
+		    <tal:block content="python:str('cpscalendar_label_month_long%s' % (to_date_month, ))"
 				i18n:translate="" />
 		    <tal:block replace="to_date_year" />)
 		  </tal:block>
@@ -278,7 +278,7 @@
 		<option tal:repeat="status statuses"
 			tal:attributes="value status;
 			selected python:status == event_status;">
-		      <span i18n:translate="" tal:content="status" >status</span>
+		      <span i18n:translate="" tal:content="status" >cpscalendar_status</span>
 		</option>
 	      </select>
 	    </metal:block>
@@ -307,8 +307,8 @@
 		    </table>
 		  </td>
 		  <td valign="middle"
-		       tal:content="python:str(cat[1]['title'])"
-		       i18n:translate="">
+          tal:content="python:str(cat[1]['title'])"
+          i18n:translate="">
 		    category
 		  </td>
 		</tr>
@@ -323,7 +323,7 @@
 	    </metal:block>
 	    <metal:block fill-slot="content">
 	      <select name="transparent:int"
-		      tal:define="choices python:[{'id': 1, 'title': 'option_yes'}, {'id':0, 'title': 'option_no'}]">
+		      tal:define="choices python:[{'id': 1, 'title': 'cpscalendar_option_yes'}, {'id':0, 'title': 'cpscalendar_option_no'}]">
 		<option tal:repeat="choice choices"
 			tal:attributes="value choice/id;
 					selected python:transparent == choice['id']"
@@ -389,7 +389,7 @@
 	     tal:attributes="value submit_value"
 	     i18n:attributes="value"/>
       <input type="button" onClick="history.back()"
-	     value="button_cancel"
+	     value="cpscalendar_button_cancel"
 	     i18n:attributes="value"/>
     </form>
   </tal:block>
@@ -411,7 +411,7 @@
 	      <option tal:repeat="status python:['confirmed', 'tentative', 'decline']"
 		      tal:attributes="value status;
 				      selected python:status == mystatus"
-		      tal:content="python:str('_cal_pending_%s_' % (status,))"
+		      tal:content="python:str('cpscalendar_pending_%s' % (status,))"
 		      i18n:translate="">
 		 Status
 	       </option>
@@ -430,10 +430,10 @@
       </metal:block>
     </metal:block>
     <input type="submit"
-	   value="button_modify"
+	   value="cpscalendar_button_modify"
 	   i18n:attributes="value" />
     <input type="button" onClick="history.back()"
-	   value="button_cancel"
+	   value="cpscalendar_button_cancel"
 	   i18n:attributes="value" />
   </form>
 </metal:block>

@@ -5,12 +5,6 @@
                   rportal_url python:utool(relative=1);
                   portal_url python:rportal_url and '/'+rportal_url or '';">
 <head>
-	<!--
-  <title tal:content="here/expanded_title"
-         i18n:translate="">
-	 Printing version of your calendar
-  </title>
-	-->
   <title i18n:translate="cpscalendar_printable_view">
 	 Printing version of your calendar
   </title>
@@ -31,7 +25,7 @@
 
 <body bgcolor="white">
   <input type="button" onclick="history.back()"
-         value="button_back"
+         value="cpscalendar_button_back"
          i18n:attributes="value" />
   <table cellspacing="0" border="1" cellpadding="5" width="465">
     <tr>
@@ -43,7 +37,7 @@
     </tr>
   </table>
   <input type="button" onclick="history.back()"
-         value="button_back"
+         value="cpscalendar_button_back"
          i18n:attributes="value" />
 </body>
 

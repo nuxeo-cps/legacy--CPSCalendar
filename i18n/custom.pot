@@ -31,13 +31,13 @@ msgstr ""
 msgid "cpscalendar_untitled_(document)"
 msgstr ""
 
-msgid "confirmed"
+msgid "cpscalendar_option_status_confirmed"
 msgstr ""
 
-msgid "unconfirmed"
+msgid "cpscalendar_option_status_unconfirmed"
 msgstr ""
 
-msgid "cancelled"
+msgid "cpscalendar_option_status_cancelled"
 msgstr ""
 
 msgid "cpscalendar_category_private"
@@ -46,127 +46,148 @@ msgstr ""
 msgid "cpscalendar_category_work"
 msgstr ""
 
-msgid "cpscalendar_category_other"
+msgid "cpscalendar_category_others"
 msgstr ""
 
-msgid "option_no"
+msgid "cpscalendar_category_events_shows"
 msgstr ""
 
-msgid "option_yes"
+msgid "cpscalendar_category_rooms"
 msgstr ""
 
-msgid "label_day0"
+msgid "cpscalendar_category_ressources"
 msgstr ""
 
-msgid "label_day1"
+msgid "cpscalendar_option_no"
 msgstr ""
 
-msgid "label_day2"
+msgid "cpscalendar_option_yes"
 msgstr ""
 
-msgid "label_day3"
+msgid "cpscalendar_label_day0"
 msgstr ""
 
-msgid "label_day4"
+msgid "cpscalendar_label_day1"
 msgstr ""
 
-msgid "label_day5"
+msgid "cpscalendar_label_day2"
 msgstr ""
 
-msgid "label_day6"
+msgid "cpscalendar_label_day3"
 msgstr ""
 
-msgid "label_day_long0"
+msgid "cpscalendar_label_day4"
 msgstr ""
 
-msgid "label_day_long1"
+msgid "cpscalendar_label_day5"
 msgstr ""
 
-msgid "label_day_long2"
+msgid "cpscalendar_label_day6"
 msgstr ""
 
-msgid "label_day_long3"
+msgid "cpscalendar_label_day7"
 msgstr ""
 
-msgid "label_day_long4"
+msgid "cpscalendar_label_day_long0"
 msgstr ""
 
-msgid "label_day_long5"
+msgid "cpscalendar_label_day_long1"
 msgstr ""
 
-msgid "label_day_long6"
+msgid "cpscalendar_label_day_long2"
 msgstr ""
 
-msgid "label_month0"
+msgid "cpscalendar_label_day_long3"
 msgstr ""
 
-msgid "label_month1"
+msgid "cpscalendar_label_day_long4"
 msgstr ""
 
-msgid "label_month2"
+msgid "cpscalendar_label_day_long5"
 msgstr ""
 
-msgid "label_month3"
+msgid "cpscalendar_label_day_long6"
 msgstr ""
 
-msgid "label_month4"
+msgid "cpscalendar_label_day_long7"
 msgstr ""
 
-msgid "label_month5"
+msgid "cpscalendar_label_month0"
 msgstr ""
 
-msgid "label_month6"
+msgid "cpscalendar_label_month1"
 msgstr ""
 
-msgid "label_month7"
+msgid "cpscalendar_label_month2"
 msgstr ""
 
-msgid "label_month8"
+msgid "cpscalendar_label_month3"
 msgstr ""
 
-msgid "label_month9"
+msgid "cpscalendar_label_month4"
 msgstr ""
 
-msgid "label_month10"
+msgid "cpscalendar_label_month5"
 msgstr ""
 
-msgid "label_month11"
+msgid "cpscalendar_label_month6"
 msgstr ""
 
-msgid "label_month_long0"
+msgid "cpscalendar_label_month7"
 msgstr ""
 
-msgid "label_month_long1"
+msgid "cpscalendar_label_month8"
 msgstr ""
 
-msgid "label_month_long2"
+msgid "cpscalendar_label_month9"
 msgstr ""
 
-msgid "label_month_long3"
+msgid "cpscalendar_label_month10"
 msgstr ""
 
-msgid "label_month_long4"
+msgid "cpscalendar_label_month11"
 msgstr ""
 
-msgid "label_month_long5"
+msgid "cpscalendar_label_month12"
 msgstr ""
 
-msgid "label_month_long6"
+msgid "cpscalendar_label_month_long0"
 msgstr ""
 
-msgid "label_month_long7"
+msgid "cpscalendar_label_month_long1"
 msgstr ""
 
-msgid "label_month_long8"
+msgid "cpscalendar_label_month_long2"
 msgstr ""
 
-msgid "label_month_long9"
+msgid "cpscalendar_label_month_long3"
 msgstr ""
 
-msgid "label_month_long10"
+msgid "cpscalendar_label_month_long4"
 msgstr ""
 
-msgid "label_month_long11"
+msgid "cpscalendar_label_month_long5"
+msgstr ""
+
+msgid "cpscalendar_label_month_long6"
+msgstr ""
+
+msgid "cpscalendar_label_month_long7"
+msgstr ""
+
+msgid "cpscalendar_label_month_long8"
+msgstr ""
+
+msgid "cpscalendar_label_month_long9"
+msgstr ""
+
+msgid "cpscalendar_label_month_long10"
+msgstr ""
+
+msgid "cpscalendar_label_month_long11"
+msgstr ""
+
+msgid "cpscalendar_label_month_long12"
 msgstr ""
 
 msgid "cpscalendar_member"

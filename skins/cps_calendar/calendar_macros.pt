@@ -106,7 +106,7 @@
 	<tal:block condition="location">
 	  <metal:block use-macro="here/calendar_macros/macros/form_property">
 	    <metal:block fill-slot="title"
-			 i18n:translate="cpscalendar_label_location">
+                   i18n:translate="cpscalendar_label_location">
 	      Location
 	    </metal:block>
 	    <metal:block fill-slot="content"
@@ -120,7 +120,7 @@
 	    Event status
 	  </metal:block>
 	  <metal:block fill-slot="content" i18n:translate="">
-              <span tal:replace="event_status">status</span>
+       <span tal:replace="event_status">status</span>
 	  </metal:block>
 
 	</metal:block>
@@ -134,7 +134,7 @@
 	      <ul tal:condition="attendees">
 		<li tal:repeat="att attendees">
 		  <strong tal:content="att/cn|att/id">attendee</strong>
-		  (<tal:block content="python:str('cpscalendar_option_status_%s_' % (att['status'], ))"
+		  (<tal:block content="python:str('cpscalendar_option_status_%s' % (att['status'], ))"
 			      i18n:translate="">
 		    Confirmed
 		  </tal:block>)
@@ -163,8 +163,8 @@
 	    Transparent
 	  </metal:block>
 	  <metal:block fill-slot="content">
-	    <p tal:condition="transparent" i18n:translate="button_yes">Yes</p>
-	    <p tal:condition="not:transparent" i18n:translate="button_no">No</p>
+	    <p tal:condition="transparent" i18n:translate="cpscalendar_button_yes">Yes</p>
+	    <p tal:condition="not:transparent" i18n:translate="cpscalendar_button_no">No</p>
 	    <p>
 	      <small i18n:translate="cpscalendar_legend_transparent">
 		Transparent events mean that you're not busy during this event.
@@ -274,7 +274,7 @@
 	  <ul>
 	    <li tal:repeat="attendee pending/change">
 	      <strong tal:content="attendee/cn|attendee/id">Attendee</strong>
-	      (<tal:block content="python:str('cpscalendar_option_status_%s_' % (attendee['status'], ))"
+	      (<tal:block content="python:str('cpscalendar_option_status_%s' % (attendee['status'], ))"
 			  i18n:translate="" />)
 	      <p tal:condition="attendee/comment|nothing">
 		<strong tal:content="attendee/sender_cn|attendee/sender|nothing">
@@ -293,7 +293,7 @@
 	    </li>
 	  </ul>
 	  <input type="submit" name="confirmPendingEvent:method"
-		 value="button_validate"
+		 value="cpscalendar_button_validate"
 		 i18n:attributes="value" />
 	</tal:block>
       </tal:block>
@@ -338,7 +338,7 @@
 	  </metal:block>
 	</metal:block>
 	<input type="submit"
-	       value="button_validate"
+	       value="cpscalendar_button_validate"
 	       i18n:attributes="value" />
       </form>
     </tal:block>

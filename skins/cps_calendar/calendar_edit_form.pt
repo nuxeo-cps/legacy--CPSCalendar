@@ -13,7 +13,7 @@
     Create a Calendar
   </tal:block>
   <tal:block condition="not:create">
-    <span i18n:translate="_Modify_(object name)_">
+    <span i18n:translate="cpscalendar_modify_object_name">
       Modify
     </span>
     «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
@@ -25,7 +25,7 @@
              tal:define="title python:create and '' or here.Title();
                          description python:(create and [''] or [here.Description()])[0];
                          usertype python:create and 'ressources' or here.usertype;
-                         submitvalue python:create and str('button_create') or str('button_modify');
+                         submitvalue python:create and str('cpscalendar_button_create') or str('cpscalendar_button_modify');
                          action python:create and 'calendar_create' or 'folder_edit';">
 
   <form action="." method="post" enctype="multipart/form-data"

@@ -20,7 +20,7 @@
       </li>
     </ul>
     <input type="submit"
-           value="button_validate"
+           value="cpscalendar_button_validate"
            i18n:attributes="value"/>
   </form>
   <tal:block condition="not:cals">

@@ -81,10 +81,10 @@
                   <th width="59"
                       tal:repeat="i python:range(slot_start, slot_end)">
                     <tal:block define="date python:slots[i][0];">
-                      <span tal:content="python:str('label_day%s' % (i - slot_start + first_dow - 1))"
+                      <span tal:content="python:str('cpscalendar_label_day_long%s' % (i - slot_start + first_dow - 1))"
                             i18n:translate="" />
                       <span tal:replace="string:${date/day}"/> 
-                      <span tal:content="python:str('label_month_long%s' % date.month())"
+                      <span tal:content="python:str('cpscalendar_label_month_long%s' % date.month())"
                             i18n:translate="" />
                     </tal:block>
                   </th>
@@ -182,17 +182,17 @@
       </li>
     </ul>
     <input type="submit"
-           value="button_validate"
+           value="cpscalendar_button_validate"
            i18n:attributes="value" />
   </form>
   <form method="POST"
         tal:attributes="action here/absolute_url">
     <input type="hidden" name="edit" value="1" />
     <input type="submit" name="calendar_meeting_form:method"
-           value="button_modify"
+           value="cpscalendar_button_modify"
            i18n:attributes="value" />
     <input type="submit" name="calendar_meeting_cancel:method"
-           value="button_cancel"
+           value="cpscalendar_button_cancel"
            i18n:attributes="value" />
   </form>
 </metal:block>

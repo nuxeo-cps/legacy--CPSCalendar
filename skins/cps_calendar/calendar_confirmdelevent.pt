@@ -42,7 +42,7 @@
       </metal:block>
     </metal:block>
     <input type="submit"
-           value="button_validate"
+           value="cpscalendar_button_validate"
            i18n:attributes="value" />
   </form>
   <form action="calendar_delevent" method="POST">
@@ -51,7 +51,7 @@
            value="cpscalendar_button_delete_with_no_notification"
            i18n:attributes="value" />
     <input type="button" onClick="history.back()"
-           value="button_cancel"
+           value="cpscalendar_button_cancel"
            i18n:attributes="value" />
   </form>
 </metal:block>

@@ -66,10 +66,10 @@
                   <td>
                   </td>
                   <th>
-                    <span tal:content="python:str('label_day_long%s' % date.dow())"
+                    <span tal:content="python:str('cpscalendar_label_day_long%s' % date.dow())"
                           i18n:translate="" />
                     <span tal:replace="string:${date/day}"/> 
-                    <span tal:content="python:str('label_month_long%s' % date.month())"
+                    <span tal:content="python:str('cpscalendar_label_month_long%s' % date.month())"
                           i18n:translate="" />
                     <span tal:replace="string:${date/year}"/>
                   </th>
@@ -307,10 +307,10 @@
                         go_day python:int(date);"
                       tal:attributes="
                         href string:${here_url}?disp=day&viewed_day=${go_day}">
-                        <span tal:content="python:str('label_day%s' % str(i+1))"
+                        <span tal:content="python:str('cpscalendar_label_day%s' % str(i+1))"
                               i18n:translate="" />
                         <span tal:replace="string:${date/day}"/> 
-                        <span tal:content="python:str('label_month%s' % date.month())"
+                        <span tal:content="python:str('cpscalendar_label_month%s' % date.month())"
                               i18n:translate="" />
                       </a>
                   </th>
@@ -483,7 +483,7 @@
   <tal:block define="global non_local string:#777777;
     "/>
   <span class="calTitle">
-    <span tal:content="python:str('label_month_long%s' % (viewed_day.month(), ))"
+    <span tal:content="python:str('cpscalendar_label_month_long%s' % (viewed_day.month(), ))"
           i18n:translate="" />
     <span tal:replace="viewed_day/year"/>
   </span>
@@ -545,7 +545,7 @@
                 <tr>
                   <th
                     tal:repeat="i python:[1,2,3,4,5,6,7]">
-                    <span tal:content="python:str('label_day_long%s' % str(i))"
+                    <span tal:content="python:str('cpscalendar_label_day_long%s' % str(i))"
                           i18n:translate="">week day</span>
                   </th>
                 </tr>

@@ -17,7 +17,7 @@
     </li>
   </ul>
   <input type="button" onClick="history.back()"
-         value="button_back"
+         value="cpscalendar_button_back"
          i18n:attributes="value" />
 </metal:block>
 

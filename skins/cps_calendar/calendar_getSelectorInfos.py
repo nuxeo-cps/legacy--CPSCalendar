@@ -12,7 +12,7 @@ next_date = curr_date + 32
 prev_date = curr_date - 1
 prev_url = base_url + str(int(prev_date))
 next_url = base_url + str(int(next_date))
-base_disp = mcat('label_month_long%s' % (month, )) + ' ' + str(year)
+base_disp = mcat('cpscalendar_label_month_long%s' % (month, )) + ' ' + str(year)
 base_js = "javascript:select_day('%%s', '%(month)s', '%(year)s', '%%s %(base_disp)s')" % {'month': month, 'year': year, 'base_disp': base_disp}
 dow = curr_date.dow()
 lines = []
@@ -27,7 +27,7 @@ for day in range(1, days_in_month+1):
         dow = 1
         current_line = []
         lines.append(current_line)
-    day_str = mcat('label_day_long%s' % (dow%7, )) + ' ' + str(day)
+    day_str = mcat('cpscalendar_label_day_long%s' % (dow%7, )) + ' ' + str(day)
     js = base_js % (day, day_str)
     current_line.append({
       'js': js,

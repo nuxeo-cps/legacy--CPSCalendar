@@ -33,10 +33,10 @@
       The event
     </metal:block>
     <input type="submit"
-           value="button_validate"
+           value="cpscalendar_button_validate"
            i18n:translate="" />
     <input type="button" onClick="history.back()"
-           value="button_cancel"
+           value="cpscalendar_button_cancel"
            i18n:translate="" />
   </form>
 </metal:block>

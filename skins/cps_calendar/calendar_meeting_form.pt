@@ -91,14 +91,14 @@
       tal:attributes="value to_date_year" />
     <p>
       <strong>
-      <span i18n:translate="cpscalendar_label_from_(day)">
+      <span i18n:translate="cpscalendar_label_from_day">
         From
       </span>
       <span id="from_date_string">
-        <tal:block content="python:str('label_day_long%s' % (from_date.dow(), ))"
+        <tal:block content="python:str('cpscalendar_label_day_long%s' % (from_date.dow(), ))"
                    i18n:translate="" />
         <tal:block replace="from_date_day" />
-        <tal:block content="python:str('label_month_long%s' % (from_date_month, ))"
+        <tal:block content="python:str('cpscalendar_label_month_long%s' % (from_date_month, ))"
                    i18n:translate="" />
         <tal:block replace="from_date_year" />
       </span>
@@ -111,14 +111,14 @@
     </p>
     <p>
       <strong>
-      <span i18n:translate="cpscalendar_label_to_(day)">
+      <span i18n:translate="cpscalendar_label_to_day">
         To
       </span>
       <span id="to_date_string">
-        <tal:block content="python:str('label_day_long%s' % (to_date.dow(), ))"
+        <tal:block content="python:str('cpscalendar_label_day_long%s' % (to_date.dow(), ))"
                    i18n:translate="" />
         <tal:block replace="to_date_day" />
-        <tal:block content="python:str('label_month_long%s' % (to_date_month, ))"
+        <tal:block content="python:str('cpscalendar_label_month_long%s' % (to_date_month, ))"
                    i18n:translate="" />
         <tal:block replace="to_date_year" />
       </span>
@@ -174,10 +174,10 @@
       </select>
     </p>
     <input type="submit"
-           value="button_search"
+           value="cpscalendar_button_search"
            i18n:attributes="value" />
     <input type="button" onClick="history.back()"
-           value="button_cancel"
+           value="cpscalendar_button_cancel"
            i18n:attributes="value" />
   </form>
 </metal:block>

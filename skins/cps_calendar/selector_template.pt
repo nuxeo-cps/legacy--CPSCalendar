@@ -27,11 +27,11 @@
     </tr>
   </table>
   <input type="button" onclick="validateSelector()"
-         value="button_validate"
+         value="cpscalendar_button_validate"
          tal:condition="should_validate|nothing"
          i18n:attributes="value" />
   <input type="button" onclick="window.close()"
-         value="button_cancel"
+         value="cpscalendar_button_cancel"
          i18n:attributes="value" />
 </body>
 
