@@ -8,6 +8,8 @@ Bug fixes:
 ~~~~~~~~~~
 - The printable view now shows the same day as you were looking at, and
   not today. It pops up in a separate window.
+- no l10n for en and fr
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- indexing is not any more done by calendar installer, this is
+  done by the cpsdefault installer
