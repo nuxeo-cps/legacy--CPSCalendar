@@ -234,7 +234,7 @@ class Event(BaseDocument):
         calendars = aq_parent(aq_inner(calendar))
         for attendee in self.attendees:
             attendee_id = attendee['id']
-            attendee_calendar = getattr(calendars, attendee_id, None)
+            attendee_calendar = calendars.getCalendarForId(attendee_id)
             if attendee_calendar is None:
                 LOG('NGCal', INFO, "Can't get calendar for %s" % (attendee_id, ))
                 continue
