@@ -201,9 +201,13 @@ class Event(CPSBaseDocument):
                                                   self.event_type))
         elif hasattr(aq_base(self), 'recurrance_period'):
             # Upgrade from earlier bad spelling
-            self.recurrence_period = self.recurrance_period[:]
+            try:
+                self.recurrence_period = self.recurrance_period[:]
+            except TypeError:
+                # version before 1.0, do not upgrade
+                pass
             delattr(self, 'recurrance_period')
-            msg.append("%s upgraded to 1.6.1" % self.absolute_url())
+            msg.append("%s upgraded to 1.6.4" % self.absolute_url())
         
         attendee_upgrade = 0
         new_attendees = []
