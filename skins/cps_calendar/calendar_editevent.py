@@ -2,6 +2,7 @@
 # $Id$
 
 locale = context.Localizer.default.get_selected_language()
+ctool = context.portal_cpscalendar
 
 if REQUEST:
     kw.update(REQUEST.form)

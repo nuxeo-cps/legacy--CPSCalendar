@@ -244,10 +244,33 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
     _properties = ({'id':'title', 'type':'string'},
                    {'id':'description', 'type':'text'},
+                   {'id':'search_fields', 'type':'multiple selection',
+                    'mode': 'w', 'select_variable':'getSearchFields'},
                    )
+
+    search_fields = ['id', 'sn', 'email']
 
     def __init__(self):
         PortalFolder.__init__(self, self.id)
+
+    def getSearchLayout(self):
+        memberdir = getToolByName(self,'portal_directories')['members']
+        search_layout = memberdir.layout_search
+        return getToolByName(self, 'portal_layouts')[search_layout]
+
+    security.declarePublic('getSearchFields')
+    def getSearchFields(self):
+        layout = self.getSearchLayout()
+        widgets = [w.getWidgetId() for w in layout.objectValues()]
+        return widgets
+
+    security.declarePublic('getSearchFields')
+    def getSearchWidgets(self):
+        layout = self.getSearchLayout()
+        widgets = [w for w in layout.objectValues()
+                   if w.getWidgetId() in self.search_fields]
+        print widgets
+        return widgets
 
     security.declareProtected('View', 'listCalendars')
     def listCalendars(self):

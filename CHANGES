@@ -9,6 +9,7 @@ New features:
   intelligently, both according to what is possible, and with regards to
   the locale you have (i.e, selected language). The utilisation of this
   solves Mantis bug #652.
+- Which fields should be searchable is now configurable in the tool.
 Bug fixes:
 ~~~~~~~~~~
 - It was impossible to change the event type after creation.
