@@ -34,6 +34,21 @@ msgstr ""
 msgid "cpscalendar_change_event_to_not_all_day"
 msgstr ""
 
+msgid "cpscalendar_option_event_tofrom"
+msgstr ""
+
+msgid "cpscalendar_option_event_allday"
+msgstr ""
+
+msgid "cpscalendar_option_event_recurring"
+msgstr ""
+
+msgid "cpscalendar_label_change_type"
+msgstr ""
+
+msgid "cpscalendar_label_period_daily"
+msgstr ""
+
 msgid "cpscalendar_untitled_(document)"
 msgstr ""
 
@@ -279,4 +294,17 @@ msgstr ""
 
 msgid "cpscalendar_create_the_meeting_here"
 msgstr ""
+
+msgid "cpscalendar_label_period_weekly"
+msgstr ""
+
+msgid "cpscalendar_label_period_monthly"
+msgstr ""
+
+msgid "cpscalendar_label_period_quarterly"
+msgstr ""
+
+msgid "cpscalendar_label_period_yearly"
+msgstr ""
+
 
