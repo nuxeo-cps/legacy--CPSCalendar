@@ -167,7 +167,7 @@ document.onmouseup = MU;
 </metal:block>
 <metal:block fill-slot="main">
 <table cellspacing="0" cellpadding="0" border="1"
-  tal:define="h00 python:mcat('_cal_hour_sep_')+'00'">
+  tal:define="h00 python:str('_cal_hour_sep_')+'00'">
   <tr>
     <td colspan="2">
       <table cellspacing="0" cellpadding="0" width="135" border="0">
@@ -201,9 +201,9 @@ document.onmouseup = MU;
   </tr>
   <tr>
     <td class="centered">
-      <span id="start_h"></span><tal:block replace="python:mcat('_cal_hour_sep_')" /><span id="start_m"></span>
+      <span id="start_h"></span><tal:block replace="python:str('_cal_hour_sep_')" /><span id="start_m"></span>
       -
-      <span id="end_h"></span><tal:block replace="python:mcat('_cal_hour_sep_')" /><span id="end_m"></span>
+      <span id="end_h"></span><tal:block replace="python:str('_cal_hour_sep_')" /><span id="end_m"></span>
     </td>
   </tr>
 </table>

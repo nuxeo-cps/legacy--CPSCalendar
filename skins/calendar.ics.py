@@ -24,18 +24,17 @@ You are not authorized to access this ressource
 ical_conv = '%Y%m%dT%H%M%S'
 ical_date_conv = '%Y%m%d'
 
-mcat = context.portal_messages
 def icalvalue(s):
     return unicode('\\,'.join(s.split(',')), 'latin1').encode('UTF-8')
 
 header="""BEGIN:VCALENDAR
 CALSCALE:GREGORIAN
 X-WR-TIMEZONE;VALUE=TEXT:Europe/Paris
-PRODID:-//Nuxeo//NuxGroupCalendar 0.1//EN
+PRODID:-//Nuxeo//CPSCalendar 0.1//EN
 X-WR-CALNAME;VALUE=TEXT:%s
 X-WR-RELCALID;VALUE=TEXT:%s
 VERSION:2.0
-""" % (icalvalue(mcat(context.title_or_id())), context.absolute_url())
+""" % (icalvalue(str(context.title_or_id())), context.absolute_url())
 
 footer = """\
 END:VCALENDAR
@@ -62,7 +61,7 @@ for event in events:
     message += """\
 SUMMARY:%s
 UID:%s
-""" % (icalvalue(mcat(event.title_or_id())), event.absolute_url())
+""" % (icalvalue(str(event.title_or_id())), event.absolute_url())
 
     if event.location:
         message += """\

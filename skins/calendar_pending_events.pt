@@ -5,7 +5,7 @@
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="header">
-  <tal:block replace="python:mcat('_cal_Pending_events_for_')">
+  <tal:block replace="python:str('_cal_Pending_events_for_')">
     Pending events for
   </tal:block>
   «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»

@@ -1,7 +1,7 @@
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="header"
-    tal:content="python:mcat('_cal_del_Confirmation_')">
+    tal:content="python:str('_cal_del_Confirmation_')">
 </metal:block>
 
 <metal:block fill-slot="header_plus" />
@@ -9,12 +9,12 @@
 <metal:block fill-slot="main">
   <h3
     tal:content="
-      python:mcat('_You have to notify attendees that you will delete this events_')">
+      python:str('_You have to notify attendees that you will delete this events_')">
     You have to notify attendees that you will delete this events.
   </h3>
   <p
     tal:content="
-      python:mcat('_Unselect events you don-t want to notify attendees_')">
+      python:str('_Unselect events you don-t want to notify attendees_')">
     Unselect events you don't want to notify attendees.
   </p>
   <form action="calendar_delevents" method="POST">
@@ -29,18 +29,18 @@
         </tal:block>
       </li>
     </ul>
-    <metal:block use-macro="here/main_widgets/macros/form">
+    <metal:block use-macro="here/generic_lib/macros/form">
       <metal:block fill-slot="content">
-        <metal:block use-macro="here/main_widgets/macros/form_property">
+        <metal:block use-macro="here/generic_lib/macros/form_property">
           <metal:block fill-slot="title"
-            tal:content="python:mcat('_prop_comment_')">
+            tal:content="python:str('_prop_comment_')">
             Comment
           </metal:block>
           <metal:block fill-slot="content">
             <textarea name="comment" cols="40" rows="4"></textarea>
             <br />
             <small tal:content="
-              python:mcat('_This message will be sent to attendees with a cancel notification_')">
+              python:str('_This message will be sent to attendees with a cancel notification_')">
               This message will be sent to attendees with a cancel notification.
             </small>
           </metal:block>
@@ -48,7 +48,7 @@
       </metal:block>
     </metal:block>
     <input type="submit"
-      tal:attributes="value python:mcat('_button_validate_')" />
+      tal:attributes="value python:str('_button_validate_')" />
   </form>
 </metal:block>
 

@@ -11,7 +11,7 @@
   cals python:[cal for cal in cals if cal.id != here.id]">
   <p
     tal:content="
-      python:mcat('_Select the calendars you want to display with this calendar:')">
+      python:str('_Select the calendars you want to display with this calendar:')">
     Select the calendars you want to display with this calendar:
   </p>
   <form action="calendar_display">
@@ -24,7 +24,7 @@
       </li>
     </ul>
     <input type="submit"
-      tal:attributes="value python:mcat('_button_validate_')" />
+      tal:attributes="value python:str('_button_validate_')" />
   </form>
 </metal:block>
 

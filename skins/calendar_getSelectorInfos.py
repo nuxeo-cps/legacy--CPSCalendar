@@ -1,6 +1,5 @@
 ##parameters=date=None,input_id=None,date_disp_id=None,other_input=None
 
-mcat = context.portal_messages
 base_url = 'day_selector?input_id=%s&date_disp_id=%s&other_input=%s&date:int='\
     % (input_id, date_disp_id, other_input)
 
@@ -12,7 +11,7 @@ next_date = curr_date + 32
 prev_date = curr_date - 1
 prev_url = base_url + str(int(prev_date))
 next_url = base_url + str(int(next_date))
-base_disp = mcat('_cal_Month%s' % (month, )) + ' ' + str(year)
+base_disp = str('_cal_Month%s' % (month, )) + ' ' + str(year)
 base_js = "javascript:select_day('%%s', '%(month)s', '%(year)s', '%%s %(base_disp)s')" % {'month': month, 'year': year, 'base_disp': base_disp}
 dow = curr_date.dow()
 lines = []
@@ -27,7 +26,7 @@ for day in range(1, days_in_month+1):
         dow = 1
         current_line = []
         lines.append(current_line)
-    day_str = mcat('_cal_Day_long%s' % (dow%7, )) + ' ' + str(day)
+    day_str = str('_cal_Day_long%s' % (dow%7, )) + ' ' + str(day)
     js = base_js % (day, day_str)
     current_line.append({
       'js': js,

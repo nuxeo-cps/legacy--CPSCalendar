@@ -34,14 +34,14 @@ from AccessControl import ClassSecurityInfo
 from Products.CMFCore.CMFCorePermissions import View, ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
 
-from Products.NuxCPSDocuments.BaseDocument import BaseDocument, BaseDocument_adder
+from Products.CPSCore.CPSBase import CPSBaseDocument, CPSBase_adder
 
 
 factory_type_information = (
     {'id': 'Event',
      'title': 'Event',
      'content_icon': 'event_icon.gif',
-     'product': 'NuxGroupCalendar',
+     'product': 'CPSCalendar',
      'factory': 'addEvent',
      'meta_type': 'Event',
      'immediate_view': 'event_edit_form',
@@ -77,7 +77,7 @@ factory_type_information = (
     )
 
 
-class Event(BaseDocument):
+class Event(CPSBaseDocument):
     """
     Event
     """
@@ -85,7 +85,7 @@ class Event(BaseDocument):
 
     security = ClassSecurityInfo()
 
-    _properties = BaseDocument._properties + (
+    _properties = CPSBaseDocument._properties + (
         {'id':'organizer', 'type':'text', 'mode':'w', 'label':'Organizer'},
         {'id':'all_day', 'type':'boolean', 'mode':'w', 'label':'All Day Event'},
         {'id':'transparent', 'type':'boolean', 'mode':'w', 'label':'Transparent Event'},
@@ -112,7 +112,7 @@ class Event(BaseDocument):
     notified_attendees = ()
 
     def __init__(self, id, organizer={}, attendees=(), from_date=None, to_date=None, **kw):
-        BaseDocument.__init__(self, id, organizer=organizer, **kw)
+        CPSBaseDocument.__init__(self, id, organizer=organizer, **kw)
         self.organizer = deepcopy(organizer)
         if attendees is not None:
             self.setAttendees(attendees)
@@ -124,7 +124,7 @@ class Event(BaseDocument):
     def edit(self, attendees=None, from_date=None, to_date=None, all_day=None, transparent=None, **kw):
         setdirty = 0
         old_status = self.event_status
-        BaseDocument.edit(self, **kw)
+        CPSBaseDocument.edit(self, **kw)
         new_status = self.event_status
         if new_status != old_status:
             if new_status == 'cancelled':
@@ -423,7 +423,7 @@ class Event(BaseDocument):
     def manage_afterAdd(self, item, container):
         """
         """
-        BaseDocument.manage_afterAdd(self, item, container)
+        CPSBaseDocument.manage_afterAdd(self, item, container)
         if aq_base(item) is aq_base(self):
             if self.event_status == 'cancelled':
                 calendar = self.getCalendar()

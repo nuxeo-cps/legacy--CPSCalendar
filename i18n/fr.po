@@ -1,0 +1,2983 @@
+msgid ""
+msgstr "Project-Id-Version: CPSCalendar messages\n"
+"POT-Creation-Date: 2003-06-16 14:06+CET\n"
+"PO-Revision-Date: 2003-06-16 14:06+CET\n"
+"Last-Translator:  Encolpe DEGOUTE <ed@nuxeo.com>\n"
+"Language-Team: fr <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "_prop_cal_usertype_"
+msgstr "Type d'Agenda"
+
+msgid "_daily_"
+msgstr "Quotidienne"
+
+msgid "_Show_box_"
+msgstr "Afficher la boîte"
+
+msgid "_forum_prop_sorton_"
+msgstr "Trier sur"
+
+msgid "_No_entry_matches_your_request_"
+msgstr "Aucune entrée ne répond à votre demande."
+
+msgid "_(Duration: %s:%s)_"
+msgstr ""
+
+msgid "_wfs_prop_Publication_Event_"
+msgstr ""
+
+msgid "_Delete box."
+msgstr "Détruire la boîte."
+
+msgid "_cal_status_tentative_"
+msgstr "Sous réserve"
+
+msgid "_contact_description_"
+msgstr ""
+
+msgid "_cal_Calendar_of_Root CPS_"
+msgstr ""
+
+msgid "_prop_login_"
+msgstr "Login"
+
+msgid "_Messages_from_"
+msgstr "Messages de"
+
+msgid "_prop_customermail_"
+msgstr "E-mail"
+
+msgid "_right_slot_"
+msgstr "emplacement droit"
+
+msgid "_Minimize/Unminimize box (if supported)."
+msgstr "Minimiser/Agrandir la boîte (si cela est supporté)."
+
+msgid "_cal_task_priority_2_"
+msgstr ""
+
+msgid "_Unselect events you don-t want to notify attendees_"
+msgstr "Décochez les événements dont vous ne voulez pas notifier les participants."
+
+msgid "_workgroup_Members_"
+msgstr "Membres"
+
+msgid "_prop_Comment_"
+msgstr ""
+
+msgid "_April_"
+msgstr "Avril"
+
+msgid "_Send/Continue_a_mail"
+msgstr "Envoyer/Continuer un message"
+
+msgid "_Remove_"
+msgstr "Supprimer"
+
+msgid "_Private_Areas_"
+msgstr "Espaces privés"
+
+msgid "_button_cancel_"
+msgstr "Annuler"
+
+msgid "_cal_date_To_"
+msgstr "au"
+
+msgid "_forum_attachment_"
+msgstr "pièce jointe"
+
+msgid "__Inbox_Folder_"
+msgstr ""
+
+msgid "_fd_block_spacer_"
+msgstr "Espace vertical"
+
+msgid "_Are_you_sure?_"
+msgstr "Êtes-vous certain ?"
+
+msgid "_cal_status_unconfirmed_"
+msgstr "Non-confirmé"
+
+msgid "_archived_versions_"
+msgstr "Versions archivées "
+
+msgid "_cal_task_prop_title_"
+msgstr ""
+
+msgid "_all/None_"
+msgstr ""
+
+msgid "_wfs_prop_message_body_"
+msgstr "Corps"
+
+msgid "_private_area_of_%s_"
+msgstr "Espace de %s"
+
+msgid "_Change_list_to"
+msgstr "Changer la liste pour :"
+
+msgid "_pub_title_reject_"
+msgstr "Rejeter"
+
+msgid "_cal_hour_sep_"
+msgstr "h"
+
+msgid "_(Duration: %sh %sm)_"
+msgstr "(Durée : %sh %sm)"
+
+msgid "_value_Reader_"
+msgstr "Lecteur"
+
+msgid "_Trash_folder_"
+msgstr "Corbeille"
+
+msgid "_column_Pending"
+msgstr "En attente"
+
+msgid "_wfs_outgoing_events_"
+msgstr "Événements sortant"
+
+msgid "_Address_book_"
+msgstr "Carnet d'adresses"
+
+msgid "_action_reject_"
+msgstr "Rejeter..."
+
+msgid "_%s_wrote:"
+msgstr "%s a écrit:"
+
+msgid "_box_Detailed_display_"
+msgstr "Détaillé"
+
+msgid "_Create_a_Flexible_Document_"
+msgstr "Créer un Document structuré"
+
+msgid "_str_Calendars_"
+msgstr "Agendas"
+
+msgid "_You have to notify event-s organizer that you will delete this event_"
+msgstr "Vous devez notifier à l'organisateur de l'événement que vous allez détruire cet événement."
+
+msgid "_March_"
+msgstr "Mars"
+
+msgid "_cal_Month2"
+msgstr "Février"
+
+msgid "_cal_Month3"
+msgstr "Mars"
+
+msgid "_action_reply_"
+msgstr "Répondre"
+
+msgid "_cal_Month1"
+msgstr "Janvier"
+
+msgid "_cal_Month6"
+msgstr "Juin"
+
+msgid "_cal_Month7"
+msgstr "Juillet"
+
+msgid "_cal_Month4"
+msgstr "Avril"
+
+msgid "_cal_Month5"
+msgstr "Mai"
+
+msgid "_pub_title_retract_"
+msgstr "Retirer"
+
+msgid "_Existing_IMAP_folders:_"
+msgstr "Dossiers IMAP déjà existant :"
+
+msgid "_cal_Month9"
+msgstr "Septembre"
+
+msgid "_This message will be sent to the event-s organizer_"
+msgstr "Ce message sera envoyé à l'organisateur de l'événement."
+
+msgid "_Adressbook_"
+msgstr ""
+
+msgid "_compose_"
+msgstr ""
+
+msgid "_Create_a_new_Event_"
+msgstr "Créer un nouvel événement"
+
+msgid "_action_mycalendar_"
+msgstr "Mon Agenda"
+
+msgid "_Move_box_down_"
+msgstr "Déplacer la boîte vers le bas"
+
+msgid "_wfs_New_Schema_"
+msgstr "Nouveau Schéma"
+
+msgid "_Your login or password is incorrect. Please retry_"
+msgstr "Votre login ou mot de passe est incorrect. Réessayez."
+
+msgid "_versionstate_initial"
+msgstr "initiale"
+
+msgid "_Minimize_box_"
+msgstr "Minimiser la boîte"
+
+msgid "_wfs_DTML_allowed_"
+msgstr "DTML autorisé"
+
+msgid "_wfs_incoming_events_"
+msgstr "Événements entrant"
+
+msgid "_wfs_signature_condition_description_"
+msgstr "Cette condition sera vérifiée si toutes les personnes requises ont signé le document."
+
+msgid "_wfs_Substate_Condition_"
+msgstr "Condition de Sous-État"
+
+msgid "_Configure_Portal_"
+msgstr "Configurer le Portail"
+
+msgid "_Select_all_"
+msgstr ""
+
+msgid "_Change event to all day_"
+msgstr "Transformer cet événement en événement sur plusieurs jours"
+
+msgid "_mailing_Other_emails_"
+msgstr "Autres E-mails"
+
+msgid "_password_mail_Portal_url:"
+msgstr "URL du portail :"
+
+msgid "_BCC:_"
+msgstr "Bcc :"
+
+msgid "_Document_number:_"
+msgstr "Numero du document :"
+
+msgid "_prop_frequency_"
+msgstr "Périodicité"
+
+msgid "_Portal title_"
+msgstr "Titre du Portail"
+
+msgid "_Creation_date:_"
+msgstr "Date de création :"
+
+msgid "_wfs_Schema_created_"
+msgstr "Schéma créé"
+
+msgid "_str_All_Workgroups_"
+msgstr "Racine des Espaces"
+
+msgid "_Hide_box_"
+msgstr "Cacher la boîte"
+
+msgid "_Message:_"
+msgstr ""
+
+msgid "_pub_history_rejected_from_"
+msgstr "Rejet de"
+
+msgid "_cal_the iCalendar version of this calendar"
+msgstr ""
+
+msgid "_Move_to_"
+msgstr ""
+
+msgid "_Show/Hide box."
+msgstr "Afficher/Cacher la boîte."
+
+msgid "_workgroup_Managers_"
+msgstr "Responsables"
+
+msgid "_reviewstate_None"
+msgstr ""
+
+msgid "_button_delete_with_no_notification_"
+msgstr "Supprimer sans notifier"
+
+msgid "_Unminimize_box_"
+msgstr "Agrandir la boîte"
+
+msgid "_action_abandon_draft_"
+msgstr "Abandonner le brouillon"
+
+msgid "_portal_type__portal_type_Contact"
+msgstr ""
+
+msgid "_cal_Status_update_"
+msgstr "Mise à jour du statut d'un ou plusieurs participants"
+
+msgid "_wfs_Mail_Event_"
+msgstr "Événement Mail"
+
+msgid "_fd_block_image_"
+msgstr "Image"
+
+msgid "_cal_task_prop_client_"
+msgstr ""
+
+msgid "_cal_Mo1"
+msgstr "Jan"
+
+msgid "_New_list_"
+msgstr "Nouvelle liste"
+
+msgid "_action_display_"
+msgstr "Affichage"
+
+msgid "_unversionned_actions"
+msgstr "actions"
+
+msgid "_Create_a_Mailing-list_"
+msgstr "Créer une liste de diffusion"
+
+msgid "_linksrender_Related_links_"
+msgstr "En savoir plus..."
+
+msgid "_header_mail_size_0.73 KB"
+msgstr ""
+
+msgid "_(deleted_hierarchy)_"
+msgstr "(Rubrique supprimée)"
+
+msgid "_Edit box."
+msgstr "Editer la boîte."
+
+msgid "_cal_prop_attendees_"
+msgstr "Participants"
+
+msgid "_prop_text_"
+msgstr "Texte"
+
+msgid "_wfs_Conditions_deleted_"
+msgstr "Conditions suprrimées"
+
+msgid "_action_directories_"
+msgstr "Annuaires"
+
+msgid "_Subject_message_title_"
+msgstr "Sujet du message :"
+
+msgid "_Help files not installed_"
+msgstr "Fichiers d'aide non installés"
+
+msgid "_Create an all day_"
+msgstr "Créer un événement sur plusieurs jours"
+
+msgid "_cal_Others_"
+msgstr "Autres"
+
+msgid "_prop_box_type_"
+msgstr "Type de boîte"
+
+msgid "_you're logged out_"
+msgstr "Vous êtes déconnecté."
+
+msgid "_search_pubstate_published_"
+msgstr "Documents publiés"
+
+msgid "_forum_col_author_"
+msgstr "Auteur"
+
+msgid "_fd_Change_image:"
+msgstr "Changer l'image :"
+
+msgid "_search_prop_document_type"
+msgstr "Type de Document"
+
+msgid "_versionstate_draft"
+msgstr "brouillon"
+
+msgid "_filedocument_Downlad_"
+msgstr "Télécharger"
+
+msgid "_If you have problems authentifying, verify that your browser accepts cookies_"
+msgstr "Si vous avez des problèmes pour vous authentifier, vérifiez que votre navigateur accept les cookies."
+
+msgid "_IMAP_Access_Error_note"
+msgstr ""
+
+msgid "_portal_type_Skinner Document"
+msgstr "Habillage générique"
+
+msgid "_cal_status_decline_"
+msgstr "décline l'invitation"
+
+msgid "_button_commit_"
+msgstr ""
+
+msgid "_filedocument_(Download)_document_"
+msgstr "le document"
+
+msgid "_Edit_box_"
+msgstr "Editer la boîte"
+
+msgid "_cal_pending_decline_and_delete_"
+msgstr "Décliner et supprimer"
+
+msgid "_mail_size_header_2.04 KB"
+msgstr ""
+
+msgid "_cal_Events_show_"
+msgstr "Agenda d'Événements"
+
+msgid "_fg_block_image_text_"
+msgstr ""
+
+msgid "_Import_from_MSOutlook_address_book_"
+msgstr "Importer à partir d'un carnet d'adresses MSOutlook"
+
+msgid "_Create_a_News_"
+msgstr "Créer une Nouvelle"
+
+msgid "_TO:_"
+msgstr "À :"
+
+msgid "_Change_list_to_"
+msgstr "Changer la liste pour :"
+
+msgid "_str_AddressBook_"
+msgstr "Carnet d'Adresses"
+
+msgid "_folder_content_of_"
+msgstr "Contenu de"
+
+msgid "_search_pubstate_all_documents_"
+msgstr "Tous les documents"
+
+msgid "_Create_a_Calendar_"
+msgstr "Créer un Agenda"
+
+msgid "_wfs_button_addstate__"
+msgstr ""
+
+msgid "_portal_type_CatNav Box"
+msgstr "Boîte de Navigation"
+
+msgid "__welcome_textbox__"
+msgstr "<table cellpadding=0 cellspacing=2 border=0> <tr> <td width=200><img src="$portal_url$/logoCPS_full.png" border=0 width=200></td> <td>&nbsp;</td> <td><p> Bienvenue sur CPS.  </p> </td> </tr> <tr><td colspan=3> <p> N'hésitez pas à créer des <a href="$portal_url$/Public/">rubriques</a>, de <a href="$portal_url$/Groups/">espaces de travail</a> (Si vous en avez les droits), puis des documents que vous pourrez publier dans les rubriques.  Pour toute demande d'information, contactez-nous&nbsp;: <a href="mailto:contact@nuxeo.com?Subject=[Information CPS]">contact@nuxeo.com</a>.  </p> <br> <p> Si vous rencontrez un quelconque problème, contactez <a href="mailto:contact@nuxeo.com?Subject=[Probleme CPS Demo]">nous</a>.  <br> Release&nbsp;: $Date$ </p> </td></tr> </table>"
+
+msgid "_Add_users_"
+msgstr "Ajouter des utilisateurs"
+
+msgid "_mailing_Send_to_members_"
+msgstr "Envoyer aux membres (pour les Espaces de travail)"
+
+msgid "_prop_box_wg_paths_"
+msgstr "Espaces à afficher"
+
+msgid "_Create_a_calendar_"
+msgstr "Créer un agenda"
+
+msgid "_(Add users ...) as_"
+msgstr "comme"
+
+msgid "_Add a new box."
+msgstr "Ajouter une nouvelle boîte."
+
+msgid "_fd_block_file_"
+msgstr "Fichier"
+
+msgid "_create_a_new_document_:"
+msgstr "Créer un nouveau document :"
+
+msgid "_Item(s) cut_"
+msgstr "Document(s) coupé(s)"
+
+msgid "_date_on_%m/%d/%Y at %H:%M_"
+msgstr "le %d/%m/%Y à %Hh%M"
+
+msgid "_Copy or cut at least one document_"
+msgstr "Copiez ou coupez au moins un document."
+
+msgid "_Select at least one attendee_"
+msgstr "Choisissez au moins un participant."
+
+msgid "_binaryinput_Change:_"
+msgstr "Modifier :"
+
+msgid "_prop_customeraddress_"
+msgstr "Adresse"
+
+msgid "_contact_roomNumber_"
+msgstr "Pièce ou Bureau"
+
+msgid "_prop_customerthema_"
+msgstr "Thème"
+
+msgid "_You have to notify attendees that you will delete this event_"
+msgstr "Vous devez notifier les participants que vous allez détruire cet événement."
+
+msgid "_mailing_Effective_emails_in_this_context_"
+msgstr "E-mails effectifs dans ce contexte"
+
+msgid "_Size_"
+msgstr "Taille"
+
+msgid "_forum_next_%s_message(s)_"
+msgstr "Suivants (%s)"
+
+msgid "_cal_Day_long0"
+msgstr "Dimanche"
+
+msgid "_Calendar selection_"
+msgstr "Sélection d'agenda"
+
+msgid "_cal_Day_long2"
+msgstr "Mardi"
+
+msgid "_cal_Day_long3"
+msgstr "Mercredi"
+
+msgid "_cal_Day_long4"
+msgstr "Jeudi"
+
+msgid "_cal_Day_long5"
+msgstr "Vendredi"
+
+msgid "_cal_Day_long6"
+msgstr "Samedi"
+
+msgid "_customer_thema_"
+msgstr ""
+
+msgid "_button_unlock_thread_"
+msgstr "Déverrouiller le fil"
+
+msgid "_Create_a_Flexible_Document_base_news_item"
+msgstr "Créer une nouvelle"
+
+msgid "_upper_left_slot_"
+msgstr "emplacement haut gauche"
+
+msgid "_action_signatures_"
+msgstr "Signatures"
+
+msgid "_cal_cat_Personal_"
+msgstr ""
+
+msgid "_Cc:_"
+msgstr "Cc : "
+
+msgid "_Change event to not all day_"
+msgstr "Transformer cet événement en événement de journée"
+
+msgid "_(consult)_an_other_directory_"
+msgstr "un autre annuaire."
+
+msgid "_cal_Events_shows_"
+msgstr "Agendas d'Événements"
+
+msgid "_hierarchy_Created_"
+msgstr "Rubrique créée"
+
+msgid "_cal_eventstatus_canceled_"
+msgstr "Annulé"
+
+msgid "_button_search_"
+msgstr "Rechercher"
+
+msgid "_Votre courrier"
+msgstr ""
+
+msgid "_(Between date)_and_"
+msgstr "et"
+
+msgid "_If you forgot your password, try our_"
+msgstr "Si vous avez oublié votre mot de passe, essayez notre"
+
+msgid "_In_subject_"
+msgstr "Dans le sujet"
+
+msgid "_linkswidget_Related_links_"
+msgstr "Liens connexes"
+
+msgid "_Addresses_"
+msgstr "Adresses"
+
+msgid "_cal_pending_ignore_"
+msgstr "Ignorer"
+
+msgid "_header_mail_size_%s"
+msgstr "%s"
+
+msgid "_versionstate_archive"
+msgstr "archive"
+
+msgid "_wfs_publication_event_description_"
+msgstr "Cet événement autorise ou inhibe le workflow normal de publication. Il est aussi possible de spécifier si ce Schéma sera ou non retiré de la chaîne de workflow du document."
+
+msgid "_cal_cat_Work_"
+msgstr "Travail"
+
+msgid "_Deleted_"
+msgstr "Effacé"
+
+msgid "_standard_unpredicted_error_"
+msgstr "<p>Erreur anormale.</p><p>Contactez l'administrateur de ce site.</p>"
+
+msgid "_From_date_is_incorrect_"
+msgstr "La date de début est incorrecte."
+
+msgid "_button_validate"
+msgstr ""
+
+msgid "_fd_base_empty_"
+msgstr "Vide"
+
+msgid "_contact_mail_"
+msgstr "E-mail"
+
+msgid "_Modify_my_boxes_"
+msgstr "Modifier mes boîtes"
+
+msgid "_Move_box_up_"
+msgstr "Déplacer la boîte vers le haut"
+
+msgid "_mailinglist_other_"
+msgstr "Autre"
+
+msgid "_box_prop_delete_"
+msgstr "Détruire"
+
+msgid "_Attachments_list_"
+msgstr "Liste des fichiers attachés :"
+
+msgid "_Add_a_comment_"
+msgstr "Ajouter un commentaire"
+
+msgid "_prop_box_docstate_"
+msgstr "État du document"
+
+msgid "_center_slot_"
+msgstr "emplacement central"
+
+msgid "_wfs_publication_event_description"
+msgstr ""
+
+msgid "_forum_Name_"
+msgstr "Nom"
+
+msgid "_contact_labeledURI_"
+msgstr "Site Web"
+
+msgid "_cal_pending_confirm_"
+msgstr ""
+
+msgid "_folderish_actions"
+msgstr "actions"
+
+msgid "_contact_telephoneNumber_"
+msgstr ""
+
+msgid "_prop_customerphone_"
+msgstr "Téléphone"
+
+msgid "_box_prop_line_"
+msgstr "Ligne"
+
+msgid "_May_"
+msgstr "Mai"
+
+msgid "_cal_prop_description_"
+msgstr ""
+
+msgid "_fd_block_two_images_"
+msgstr "Deux images"
+
+msgid "_dir_prop_Password_"
+msgstr "Mot de passe"
+
+msgid "_wfs_event_mail_description_"
+msgstr ""
+
+msgid "_button_close_this_window_"
+msgstr "Fermer cette fenêtre"
+
+msgid "_dir_Groups_"
+msgstr "Groupes"
+
+msgid "_forum_Replies_"
+msgstr "Réponses"
+
+msgid "_header_mail_size_0.75 KB"
+msgstr ""
+
+msgid "_fd_block_section_"
+msgstr "Section"
+
+msgid "_multitab_Pending_Documents_"
+msgstr "Documents en attente"
+
+msgid "_button_create_"
+msgstr "Créer"
+
+msgid "_reviewstate_private"
+msgstr "privé"
+
+msgid "_Hierarchy_Rights_updated_"
+msgstr "Droits d'accès modifiés"
+
+msgid "_No_news_here_"
+msgstr "Pas de nouvelle ici."
+
+msgid "_header_mail_size_3.16 KB"
+msgstr ""
+
+msgid "_file_list_No_document"
+msgstr "Pas de document"
+
+msgid "_In_from_field_"
+msgstr "Dans le champ 'De'"
+
+msgid "_cal_prop_title_"
+msgstr ""
+
+msgid "_str_Members_"
+msgstr "Membres"
+
+msgid "_mailing_Other_members_"
+msgstr "Autres membres"
+
+msgid "_str_Drafts_"
+msgstr "Brouillons"
+
+msgid "_filedocument_(You_can_also_get_a_preview)_if_this_document_type_is_supported_by_CPS_"
+msgstr "si ce type de document est supporté par CPS."
+
+msgid "_cal_Month8"
+msgstr "Août"
+
+msgid "_New_contact_"
+msgstr "Nouveau contact"
+
+msgid "_document_%(title)s_was_created_in_%(wgtitle)s_"
+msgstr "Le document « %(title)s » a été créé dans « %(wgtitle)s »"
+
+msgid "_action_modify_"
+msgstr "Modifier"
+
+msgid "_action_workgroup_contents_"
+msgstr "Espace de travail"
+
+msgid "_mailing_Send_an_E-mail_to_"
+msgstr "Envoyer un E-mail à"
+
+msgid "_fd_block_related_links_"
+msgstr "Liens connexes"
+
+msgid "_Move_To_"
+msgstr "Déplacer Vers"
+
+msgid "_Publication_state_of_"
+msgstr "État de publication de"
+
+msgid "_You entered an invalid login or you don't have a valid email address._"
+msgstr "Vous avez entré un login non valide ou vous n'avez pas d'adresse E-mail valable."
+
+msgid "_cal_At_"
+msgstr "à"
+
+msgid "_cal_status_confirmed_"
+msgstr "Confirmé"
+
+msgid "_contact_personalTitle_"
+msgstr "Civilité"
+
+msgid "_workgroup_Current_view:"
+msgstr "Vue actuelle :"
+
+msgid "_Cancel_"
+msgstr "Annuler"
+
+msgid "_cal_Month12"
+msgstr "Décembre"
+
+msgid "_Inbox_Folder_"
+msgstr "Boîte de réception"
+
+msgid "_Modify_(object name)_"
+msgstr "Modifier"
+
+msgid "_Enter your login below and click <em>Send</em>, and your password will be emailed to you if you have a valid email address._"
+msgstr "Entrez votre login puis cliquez sur <em>Envoyer</em> et votre mot de passe vous sera envoyé par mail si vous avez une adresse E-mail valable."
+
+msgid "_button_select/deselect_all_"
+msgstr "Tous sélectionner/déselectionner"
+
+msgid "_This document is pending in no hierarchy_"
+msgstr "Ce document n'est en attente dans aucune rubrique."
+
+msgid "_nuxdocument_unsupported_document_type_"
+msgstr "Ce type de document ne peut être traduit en un texte simple afin d'être affiché dans votre navigateur. Ce serveur n'a peut-être pas les bons plug-ins."
+
+msgid "_header_mail_size_%s KB"
+msgstr "- %s"
+
+msgid "_Delete_"
+msgstr "Effacer"
+
+msgid "_button_preview_"
+msgstr "Previsualiser"
+
+msgid "_header_mail_size_5.46 KB"
+msgstr ""
+
+msgid "_standard_error_message_"
+msgstr "<h1>CPS a rencontré une erreur.</h1>"
+
+msgid "_lastdocs_"
+msgstr "Derniers documents"
+
+msgid "_date_%m/%d/%Y %H:%M"
+msgstr "%d/%m/%Y %Hh%M"
+
+msgid "_forum_prop_attachments_allowed_"
+msgstr "Pièces jointes autorisées"
+
+msgid "_No_FAQ_here_"
+msgstr "Pas de FAQ ici."
+
+msgid "_Transparent events mean that you're not busy during this event_"
+msgstr "Les événements transparents sont les événements durant lesquels vous n'êtes pas considéré comme occupé."
+
+msgid "_wfs_Title_modified_"
+msgstr "Titre modifié"
+
+msgid "_cal_Mo11"
+msgstr "Nov"
+
+msgid "_cal_Mo10"
+msgstr "Oct"
+
+msgid "_contact_mobile_"
+msgstr "Mobile"
+
+msgid "_cal_Mo12"
+msgstr "Déc"
+
+msgid "_hierarchies_"
+msgstr "Rubriques"
+
+msgid "_Existing_IMAP_folders_"
+msgstr ""
+
+msgid "_cal_del_Confirmation_"
+msgstr "Confirmation"
+
+msgid "_wfs_State_deleted_"
+msgstr "État supprimé"
+
+msgid "_Comment_deleted_"
+msgstr "Commentaire supprimé"
+
+msgid "_Compose_"
+msgstr "Composer"
+
+msgid "_CC:_"
+msgstr "Cc :"
+
+msgid "_wfs_State_"
+msgstr "État"
+
+msgid "_Select the time interval you want for your meeting:"
+msgstr "Choisissez l'intervalle de temps pour rechercher un créneau :"
+
+msgid "_cal_prop_summary_"
+msgstr "Résumé"
+
+msgid "_box_prop_title_"
+msgstr "Titre"
+
+msgid "_multitab_Private_Documents_"
+msgstr "Documents privés"
+
+msgid "_February_"
+msgstr "Février"
+
+msgid "_header_mail_size_3.50 KB"
+msgstr ""
+
+msgid "_binaryinput_Do_not_change_"
+msgstr "Ne pas modifier"
+
+msgid "_contact_postalAddress_"
+msgstr "Adresse"
+
+msgid "_forum_col_subject_"
+msgstr "Sujet"
+
+msgid "_action_(un)subscribe/_"
+msgstr "Abonnement/désabonnement"
+
+msgid "_cpsdocuments_Submit_"
+msgstr "Soumission"
+
+msgid "_Meeting creation helper_"
+msgstr "Assistant de création de Rendez-vous"
+
+msgid "_contact_sn_"
+msgstr "Nom"
+
+msgid "_prop_customersociety_"
+msgstr "Société"
+
+msgid "_quicklinks_"
+msgstr "Liens rapides"
+
+msgid "_mail_size_header_5.46 KB"
+msgstr ""
+
+msgid "_Jun_"
+msgstr "Juin"
+
+msgid "_pub_history_depublished_from_"
+msgstr "Dépublication de"
+
+msgid "_Edit_hierarchy_"
+msgstr "Modifier la rubrique"
+
+msgid "_News_"
+msgstr ""
+
+msgid "_cal_task_priority_-2_"
+msgstr ""
+
+msgid "_pub_title_accept_"
+msgstr "Accepter"
+
+msgid "_cal_prop_status_"
+msgstr "Statut"
+
+msgid "_workgroup_Visitors_"
+msgstr "Visiteurs"
+
+msgid "_CC_"
+msgstr ""
+
+msgid "_Administrator Name_"
+msgstr "Nom de l'Administrateur"
+
+msgid "_wfs_DTML_allowed"
+msgstr ""
+
+msgid "_Create_a_Generic_Skinner_"
+msgstr "Créer un Habillage générique"
+
+msgid "_prop_contactphoto_"
+msgstr "Photo"
+
+msgid "_forum_preview_"
+msgstr "prévisualisation"
+
+msgid "_(Try_an)_other_search_(in_this_directory)_"
+msgstr "autre recherche"
+
+msgid "_dir_prop_groupName_"
+msgstr "Nom du Groupe"
+
+msgid "_button_copy_"
+msgstr "Copier"
+
+msgid "_pub_history_new_version_"
+msgstr "Nouvelle version"
+
+msgid "_prop_box_contextual_"
+msgstr "Contextuelle"
+
+msgid "_wfs_prop_object_types_"
+msgstr "Types d'Objet"
+
+msgid "_December_"
+msgstr "Décembre"
+
+msgid "_Create_a_Flexible_Document_base_pv"
+msgstr "Créer un procés verbal"
+
+msgid "_cal_Members_"
+msgstr "Membres"
+
+msgid "_Reference:_"
+msgstr "Réference :"
+
+msgid "_wfs_Condition_added_"
+msgstr "Condition ajoutée"
+
+msgid "_to_"
+msgstr "à"
+
+msgid "_mailinglist_notifications of submissions_"
+msgstr "Notifications de soumissions"
+
+msgid "_Draft_folder_"
+msgstr "Brouillons"
+
+msgid "_Other_Documents_"
+msgstr "Autres Documents"
+
+msgid "_workgroup_Manager_"
+msgstr "Responsable"
+
+msgid "_welcome_"
+msgstr "Bienvenue"
+
+msgid "_Select the calendars you want to display with this calendar:"
+msgstr "Sélectionnez les agendas à afficher avec cet agenda :"
+
+msgid "_base_textoff_"
+msgstr "Texte officiel"
+
+msgid "_fd_block_two_cols_"
+msgstr "Deux colonnes"
+
+msgid "_dir_prop_Login_"
+msgstr "Login"
+
+msgid "_next_%s_"
+msgstr "%s suivants"
+
+msgid "_comment_preview_"
+msgstr "Prévisualisation du commentaire"
+
+msgid "_password_mail_Your_login:"
+msgstr "Votre login :"
+
+msgid "_Hierarchy_Changed_"
+msgstr "Rubrique modifiée"
+
+msgid "_action_edit_"
+msgstr ""
+
+msgid "_Address_"
+msgstr ""
+
+msgid "_Workgroup:"
+msgstr "Espace de travail :"
+
+msgid "_action_depublish_"
+msgstr "Dépublier..."
+
+msgid "_Name_"
+msgstr "Nom"
+
+msgid "_wfs_Add_a_Condition_"
+msgstr "Ajouter une Condition"
+
+msgid "_fd_Fig._%s"
+msgstr "Fig. %s"
+
+msgid "_(document)_Untitled_"
+msgstr "Sans titre"
+
+msgid "_mail_size_header_0.73 KB"
+msgstr ""
+
+msgid "_password_mail_Password_reminder_for:"
+msgstr "Rappel de mot de passe pour :"
+
+msgid "_cal_prop_eventstatus_"
+msgstr "Statut de l'événement"
+
+msgid "_prop_photo_"
+msgstr "Photo liée"
+
+msgid "_header_date_maillist_on_%m/%d/%Y at %H:%M"
+msgstr "%d/%m/%Y %H:%M"
+
+msgid "_prop_customerfax_"
+msgstr "Fax"
+
+msgid "_wfs_Add_an_event_"
+msgstr "Ajouter un Événement"
+
+msgid "_forum_sorton_author_"
+msgstr "Auteur"
+
+msgid "_pub_transition_submit_"
+msgstr "Soumettre pour validation dans"
+
+msgid "_action_personalboxes_"
+msgstr "Mes boites"
+
+msgid "_Move box to %s_"
+msgstr "Déplace la boîte vers %s"
+
+msgid "_(Create_an_entry)_in_this_directory_"
+msgstr "dans cet annuaire."
+
+msgid "_header_Creator:"
+msgstr "Créateur :"
+
+msgid "_(Duration: %s hour(s) %s minute(s))_"
+msgstr ""
+
+msgid "_action_check_out_"
+msgstr "Créer un brouillon"
+
+msgid "_fd_Fig.:"
+msgstr "Fig. :"
+
+msgid "_forum_E-mail_"
+msgstr "E-mail"
+
+msgid "_contact_homePhone_"
+msgstr "Téléphone personnel"
+
+msgid "_Create_an_entry_"
+msgstr "Créer une entrée"
+
+msgid "_forum_sorton_date_"
+msgstr "Date"
+
+msgid "_wgnav_"
+msgstr "Travail"
+
+msgid "_header_date_mail_on_%m/%d/%Y at %H:%M"
+msgstr "%d/%m/%Y à %H:%M"
+
+msgid "_No directory available_"
+msgstr "Pas d'annuaire disponible"
+
+msgid "_cal_If you have a calendar application that supports it, you can also_"
+msgstr "Si vous possédez une application d'agenda qui le supporte, vous pouvez aussi"
+
+msgid "_lastnews_"
+msgstr "Dernières nouvelles"
+
+msgid "_portal_type_Mailing-list"
+msgstr "Mailing-list"
+
+msgid "_wfs_State_created_"
+msgstr "État créé"
+
+msgid "_Calendar_of_"
+msgstr ""
+
+msgid "_forum_col_last_post_"
+msgstr "Dernier"
+
+msgid "_header_mail_size_%f KB"
+msgstr "%f Ko"
+
+msgid "_template_News_"
+msgstr "Nouvelles"
+
+msgid "_button_move_up_"
+msgstr "Monter"
+
+msgid "_wfs_prop_subject_"
+msgstr "Sujet"
+
+msgid "_contact_photo_"
+msgstr ""
+
+msgid "_contact_givenName_"
+msgstr "Prénom"
+
+msgid "_button_Remove all attendees that declined this event_"
+msgstr "Supprimer tous les participants qui ont décliné l'invitation"
+
+msgid "_cal_eventstatus_cancelled_"
+msgstr "Annulé"
+
+msgid "_cal_pending_tentative_"
+msgstr "Accepter sour réserve"
+
+msgid "_fd_Change_to_type_"
+msgstr "Changer en"
+
+msgid "_Our_references:_"
+msgstr "Nos références: "
+
+msgid "_You're logged in outside the portal. You may need to_"
+msgstr "Vous êtes connecté depuis l'extérieur du portail. Peut-être devriez-vous vous"
+
+msgid "_New_contact"
+msgstr "Nouveau contact"
+
+msgid "_action_week_view_"
+msgstr "Vue hebdomadaire"
+
+msgid "_action_check_in_and_republish_"
+msgstr "Valider le brouillon et republier"
+
+msgid "_Sorry, no user match your query_"
+msgstr "Désolé, aucun utilisateur ne correspond à votre requête."
+
+msgid "_faq_Short_Question_"
+msgstr "Question courte"
+
+msgid "_pub_transition_retract_"
+msgstr "Retirer de"
+
+msgid "_Create_a_Workgroup_"
+msgstr "Créer un Espace de travail"
+
+msgid "_filedocument_You_can_also_get_"
+msgstr "Vous pouvez aussi obtenir"
+
+msgid "_fd_block_image_text_"
+msgstr "Deux colonnes - image à gauche"
+
+msgid "_cal_prop_date_"
+msgstr "Date"
+
+msgid "_button_Remove canceled events_"
+msgstr "Supprimer les événements annulés"
+
+msgid "_publish_attachment_"
+msgstr ""
+
+msgid "_pub_history_retracted_from_"
+msgstr "Retrait de"
+
+msgid "_forum_Threads in this forum:"
+msgstr "Fils de discussion dans ce forum :"
+
+msgid "_prop_comment_"
+msgstr "Commentaire"
+
+msgid "_str_Archives_"
+msgstr "Archives"
+
+msgid "_Your request has expired_"
+msgstr "Votre requête a expiré."
+
+msgid "_Calendar_of_ Root CPS"
+msgstr ""
+
+msgid "_This document is published in no hierarchy_"
+msgstr "Ce document n'est publié dans aucune rubrique."
+
+msgid "_contact_phoneNumber_"
+msgstr "Téléphone"
+
+msgid "_cpsdocuments_Problem_while_sending_email_"
+msgstr "Problème lors de l'envoi d'E-mail"
+
+msgid "_action_portalconfiguration_"
+msgstr "Configuration"
+
+msgid "_Item(s) renamed_"
+msgstr "Objet(s) renommé(s)"
+
+msgid "_Select_All_"
+msgstr ""
+
+msgid "_action_draft_"
+msgstr "Brouillon"
+
+msgid "_Size"
+msgstr ""
+
+msgid "_Go_"
+msgstr "Valider"
+
+msgid "_Signers:_"
+msgstr "Signataires :"
+
+msgid "_prop_box_dynamic_title_"
+msgstr "Titre dynamique"
+
+msgid "_forum_discussion:"
+msgstr "Discussion :"
+
+msgid "_action_current_version_"
+msgstr "Version courante"
+
+msgid "_wfs_Schema_deleted_"
+msgstr "Schéma supprimé"
+
+msgid "_portal_type_Post"
+msgstr "Message de Forum"
+
+msgid "_add_"
+msgstr ""
+
+msgid "_Search_(in_this_directory_)_"
+msgstr "Chercher"
+
+msgid "_your_mail_"
+msgstr ""
+
+msgid "_multitab_Published_Documents_"
+msgstr "Documents publiés"
+
+msgid "_Your_references:_"
+msgstr "Vos réferences: "
+
+msgid "_portal_type_Text Box"
+msgstr "Boîte de Texte"
+
+msgid "_box_prop_hierarchies_depth_"
+msgstr "Profondeur"
+
+msgid "_All/None_"
+msgstr "Tous/Aucun"
+
+msgid "_This type of box is used to display documents filtered with some criteria_"
+msgstr "Ce type de boîte est utilisé pour afficher des documents filtrés par certains critères."
+
+msgid "_cal_task_priority_0_"
+msgstr ""
+
+msgid "_action_meeting_"
+msgstr "Création de RDV"
+
+msgid "_str_Published_"
+msgstr "Publié"
+
+msgid "_Folders_"
+msgstr "Dossiers"
+
+msgid "_Searching_interface_"
+msgstr ""
+
+msgid "_Your request for a meeting has errors:"
+msgstr "Votre requête contient des erreurs :"
+
+msgid "_acknowledgement_of_read_"
+msgstr ""
+
+msgid "_action_comment_"
+msgstr "Commenter..."
+
+msgid "_SMTP Server_"
+msgstr "Serveur SMTP"
+
+msgid "_cal_subscribe to this calendar."
+msgstr "souscrire à cet agenda."
+
+msgid "_dir_prop_Id_"
+msgstr "Identifiant"
+
+msgid "_Keep my login in a cookie_"
+msgstr "Garder mon login dans un cookie"
+
+msgid "_Select_"
+msgstr "Selectionner"
+
+msgid "_Help_"
+msgstr "Aide"
+
+msgid "_forum_Post a new message_"
+msgstr "Poster un nouveau message"
+
+msgid "_cal_%m/%d/%Y at %H:%M_"
+msgstr "%d/%m/%Y à %Hh%M"
+
+msgid "_search_pubstate_private_"
+msgstr "Documents privés"
+
+msgid "_Author:_"
+msgstr "Autheur : "
+
+msgid "_You have one pending request_"
+msgstr "Vous avez une requête en attente."
+
+msgid "_monthly_"
+msgstr "Mensuelle"
+
+msgid "_action_download_"
+msgstr "Télécharger"
+
+msgid "_portal_type__portal_type_File Document"
+msgstr ""
+
+msgid "_fd_Add_a_new_block_of_type_"
+msgstr "Ajouter un nouveau bloc de type"
+
+msgid "_wfs_prop_required_value_"
+msgstr "Valeur requise"
+
+msgid "_cpsdocuments_Modification_done_"
+msgstr "Modification effectuée."
+
+msgid "_No_document_in_this_hierarchy"
+msgstr "Pas de document dans cette rubrique."
+
+msgid "_action_login_"
+msgstr "Authentification"
+
+msgid "_prop_customergivenname_"
+msgstr "Prénom"
+
+msgid "_template_FAQs"
+msgstr "FAQs"
+
+msgid "_forum_Subject_"
+msgstr "Sujet"
+
+msgid "_prop_password_"
+msgstr "Mot de passe"
+
+msgid "_Folder_creation_caution_"
+msgstr "Attention: le point . sert à la création de sous-dossiers. exemple: pour avoir les sous dossiers 'jaune' et 'rouge' du dossier 'couleurs', vous n'avez qu'à l'appeler 'couleurs.jaune' et 'colors.rouge' à condition que le dossier 'couleurs' existe. Attentions a la case"
+
+msgid "_str_History_"
+msgstr "Historique"
+
+msgid "_Add the group (... as ...)_"
+msgstr "Ajouter le groupe"
+
+msgid "_cal_Ressource_"
+msgstr "Ressource"
+
+msgid "_cal_Pending_events_for_"
+msgstr "Événements en attente pour"
+
+msgid "_cal_cat_Other_"
+msgstr "Autre"
+
+msgid "_cal_no_attendee_of_type_room_"
+msgstr "Pas de salle sélectionnée"
+
+msgid "_Reply_"
+msgstr "Répondre"
+
+msgid "_Advanced_Search_"
+msgstr "Recherche avancée"
+
+msgid "_cal_hour_to_"
+msgstr "à"
+
+msgid "_lang_French"
+msgstr "Français"
+
+msgid "_forum_col_replies_"
+msgstr "Réponses"
+
+msgid "_action_archived_versions_"
+msgstr "Versions archivées"
+
+msgid "_searchbox_Search_"
+msgstr "Recherche"
+
+msgid "_Message_title_"
+msgstr ""
+
+msgid "_Change_folder_to_"
+msgstr "Changer de dossier pour"
+
+msgid "_IMAP_Access_Error_Caution_"
+msgstr "Vérifiez les paramètres de compte IMAP sur votre page d'"
+
+msgid "_Add a user whose_"
+msgstr "Ajouter un utilisateur tel que"
+
+msgid "_add_contact_"
+msgstr ""
+
+msgid "_action_addevent_"
+msgstr "Ajouter événement"
+
+msgid "_wfs_Associated_types_modified_"
+msgstr "Types associés modifiés"
+
+msgid "_box_prop_visible_"
+msgstr "Visible"
+
+msgid "_Add users (... as ...)_"
+msgstr "Ajouter"
+
+msgid "_create_a_new:"
+msgstr "Créer :"
+
+msgid "_versionstate_None"
+msgstr ""
+
+msgid "_mail_size_header_1.78 KB"
+msgstr ""
+
+msgid "_Create_an_entry_(in_this_directory)_"
+msgstr "Créer une entrée"
+
+msgid "_cal_Day4"
+msgstr "Ve"
+
+msgid "_cal_Day5"
+msgstr "Sa"
+
+msgid "_Department:_"
+msgstr "Service : "
+
+msgid "_cal_Day7"
+msgstr ""
+
+msgid "_cal_Day0"
+msgstr "Lu"
+
+msgid "_Administrator E-mail_"
+msgstr "E-mail de l'Administrateur"
+
+msgid "_cal_Day2"
+msgstr "Me"
+
+msgid "_cal_Day3"
+msgstr "Je"
+
+msgid "_Create_a_FAQ_"
+msgstr "Créer une FAQ"
+
+msgid "_Execution_date:_"
+msgstr "Date exécutoire :"
+
+msgid "_forum_Attachment_"
+msgstr "Pièce jointe"
+
+msgid "_cal_Event_update_"
+msgstr "M-à-j d'un événement"
+
+msgid "_(comment)_by_"
+msgstr "par"
+
+msgid "_filesize_byte_"
+msgstr "o"
+
+msgid "_str_Portal_"
+msgstr "Portail"
+
+msgid "_header_mail_size_4.47 KB"
+msgstr ""
+
+msgid "_Phone:_"
+msgstr "Phone: "
+
+msgid "_Subject:_"
+msgstr "Objet : "
+
+msgid "_workgroup_current_view:"
+msgstr "Vue actuelle :"
+
+msgid "_login_successfull_"
+msgstr "Authentification réussie"
+
+msgid "_workgroup_Visitor_"
+msgstr "Visiteur"
+
+msgid "_Read_messages_"
+msgstr "Lire les messages"
+
+msgid "_Portal_configured_"
+msgstr "Portail configuré."
+
+msgid "_Searching_in_"
+msgstr "Rechercher dans :"
+
+msgid "_Search_in_(directory_name)_"
+msgstr "Rechercher dans"
+
+msgid "_action_retract_"
+msgstr "Retirer..."
+
+msgid "_forum_In reply to_"
+msgstr "En réponse à"
+
+msgid "_Period of free time you can use to create your meeting_"
+msgstr "Période de temps libre où vous pouvez créer votre Rendez-vous"
+
+msgid "_Acknowledgement_of_read_"
+msgstr "Accusé de lecture"
+
+msgid "_dir_prop_E-mail_"
+msgstr "E-mail"
+
+msgid "_str_Pending_"
+msgstr "En attente"
+
+msgid "_Fig_%s"
+msgstr ""
+
+msgid "_cal_task_priority_-1_"
+msgstr ""
+
+msgid "_CPS Home_"
+msgstr "Accueil CPS"
+
+msgid "_Email:_"
+msgstr "Email : "
+
+msgid "_role_Member_"
+msgstr "Membre"
+
+msgid "_Try_an_(search_in_this_directory)_"
+msgstr "Essayer une"
+
+msgid "_cal_prop_location_"
+msgstr "Endroit"
+
+msgid "_forum_previous_%s_message(s)_"
+msgstr "Précédents (%s)"
+
+msgid "_base_news_item_"
+msgstr "Nouvelle"
+
+msgid "_cpsdocuments_Document_modified_"
+msgstr "Document modifié"
+
+msgid "_base_letter_"
+msgstr "Lettre"
+
+msgid "_forum_prop_moderation_"
+msgstr "Modération"
+
+msgid "_Selected_messages"
+msgstr ""
+
+msgid "_cal_prop_transparent_"
+msgstr "Transparent"
+
+msgid "_wfs_prop_associated_types_"
+msgstr "Types associés"
+
+msgid "_Delete_box_"
+msgstr "Détruire la boîte"
+
+msgid "_cal_prop_priority_"
+msgstr ""
+
+msgid "_Suvject:_"
+msgstr ""
+
+msgid "_Modify your request_"
+msgstr "Modifier votre requête"
+
+msgid "_Forward_"
+msgstr "Faire suivre"
+
+msgid "_Recipient_"
+msgstr "Emeteur : "
+
+msgid "_You can unselect some calendars if you want_"
+msgstr "Vous pouvez déselectionner certains agendas si vous le désirez."
+
+msgid "_You can't select a time interval larger than a month_"
+msgstr "Vous ne pouvez sélectionner un intervalle de temps supérieur à un mois."
+
+msgid "_cal_task_prop_priority_"
+msgstr ""
+
+msgid "_Title:_"
+msgstr "Titre : "
+
+msgid "_%s minute (single)_"
+msgstr ""
+
+msgid "_Save_as_draft_"
+msgstr "Sauver en tant que brouillon"
+
+msgid "_Type_"
+msgstr "Type"
+
+msgid "_action_notification_"
+msgstr "Notification"
+
+msgid "_Add_a_box_with_type:"
+msgstr "Ajouter une boîte de type :"
+
+msgid "_Modify_the_box_"
+msgstr "Modifier la boîte"
+
+msgid "_mail_size_header_0.75 KB"
+msgstr ""
+
+msgid "_cal_status_confirm_"
+msgstr ""
+
+msgid "_portal_type_Flexible Document"
+msgstr "Document structuré"
+
+msgid "_wfs_prop_from_address_"
+msgstr "Adresse de l'Expéditeur"
+
+msgid "_cal_Between_"
+msgstr "Entre"
+
+msgid "_header_date_Modified_on_%m/%d/%Y at %H:%M"
+msgstr "Modifié le %d/%m/%Y à %Hh%M"
+
+msgid "_Create_a_new_Task_"
+msgstr "Créer une nouvelle Tâche"
+
+msgid "_pub_history_published_in_"
+msgstr "Publication dans"
+
+msgid "_TO_"
+msgstr ""
+
+msgid "_portal_type__portal_type_FAQ"
+msgstr ""
+
+msgid "_(or consult)_an_other_directory_"
+msgstr "un autre annuaire."
+
+msgid "_dir_prop_givenName_"
+msgstr "Prénom"
+
+msgid "_private_area_"
+msgstr "Espace privé"
+
+msgid "_mail_password_Password_reminder_"
+msgstr "Rappel de mot de passe"
+
+msgid "_wfs_Events_deleted_"
+msgstr "Événements supprimés"
+
+msgid "_Create_a_Text_Document_"
+msgstr "Créer une Note"
+
+msgid "_docsapprove_"
+msgstr "Documents à valider"
+
+msgid "_Edit_"
+msgstr "Modifier"
+
+msgid "_pub_transition_accept_"
+msgstr "Accepter dans"
+
+msgid "_wfs_Workflow_Schema_"
+msgstr "Schéma de Workflow"
+
+msgid "_mail_size_header_3.16 KB"
+msgstr ""
+
+msgid "_sortby_ModificationDate"
+msgstr "Date de modification"
+
+msgid "_Searching_tool_"
+msgstr "Interface de recherche"
+
+msgid "_forum_sorton_subject_"
+msgstr "Sujet"
+
+msgid "_header_mail_size_3.85 KB"
+msgstr ""
+
+msgid "_prop_box_sortby_"
+msgstr "Trier selon"
+
+msgid "_In_to_field_"
+msgstr "Dans le champ 'À'"
+
+msgid "_button_validate_"
+msgstr "Valider"
+
+msgid "_rename_to_"
+msgstr "en"
+
+msgid "_Search_Results_"
+msgstr "Résultats de la Recherche"
+
+msgid "_prop_id_"
+msgstr "Identifiant"
+
+msgid "_wfs_prop_workflow_variable_"
+msgstr "Variable de Workflow"
+
+msgid "_version_current_"
+msgstr "courante"
+
+msgid "_action_calendar_"
+msgstr "Retour à l'Agenda"
+
+msgid "_No_"
+msgstr "Non"
+
+msgid "_action_subhierachies_"
+msgstr "Sous-rubriques/Objets"
+
+msgid "_button_cut_"
+msgstr "Couper"
+
+msgid "_button_login_"
+msgstr "Valider"
+
+msgid "_base_pv_"
+msgstr "Proce verbal"
+
+msgid "_multitab_All_Documents_"
+msgstr "Tous les Documents"
+
+msgid "_cal_Add_attendee:"
+msgstr "Ajouter"
+
+msgid "_prop_mailinglist_type_"
+msgstr "Type de Mailing-list"
+
+msgid "_button_add_"
+msgstr "Ajouter"
+
+msgid "_cal_no_attendee_of_type_%s_"
+msgstr ""
+
+msgid "_cpsdocuments_Creation_"
+msgstr "Création"
+
+msgid "_Modify_(entry)_"
+msgstr "Modifier"
+
+msgid "_action_attendees_"
+msgstr "Participants"
+
+msgid "_Day_long3"
+msgstr ""
+
+msgid "_header_mail_size_2.83 KB"
+msgstr ""
+
+msgid "_dir_prop_Groups_"
+msgstr "Groupes"
+
+msgid "_IMAP_Access_Error_note_"
+msgstr "bCes paramètres ne sont visibles et modifiables que par vous-même."
+
+msgid "_Object:_"
+msgstr ""
+
+msgid "_mailinglist_notifications of created documents_"
+msgstr "Notifications de création de document"
+
+msgid "_header_mail_size_2.04 KB"
+msgstr ""
+
+msgid "_Unselect_"
+msgstr "Déselectionner"
+
+msgid "_cal_cat_Private_"
+msgstr "Privé"
+
+msgid "_If this does not work for you (for example, if you forgot your member name or didn't have a valid email address), send email to_"
+msgstr "Si cela ne marche pas (par exemple, parce que vous avez oublié votre login ou vous n'avez pas d'adresse E-mail valable), écrivez à"
+
+msgid "_cpsdocuments_Document_created_"
+msgstr "Document créé"
+
+msgid "_header_mail_size_2.67 KB"
+msgstr ""
+
+msgid "_cal_Ressources_"
+msgstr "Ressources"
+
+msgid "_Publication_date:_"
+msgstr "Date de publication :"
+
+msgid "_pub_title_publish_"
+msgstr "Publier"
+
+msgid "_pub_transition_reject_"
+msgstr "Rejeter de"
+
+msgid "_forum_prop_messages_per_page_"
+msgstr "Messages par page"
+
+msgid "_mail_size_header_2.67 KB"
+msgstr ""
+
+msgid "_contact_jobTitle_"
+msgstr "Titre"
+
+msgid "_fd_base_article_"
+msgstr "Article"
+
+msgid "_to"
+msgstr ""
+
+msgid "_Portal description_"
+msgstr "Description du Portail"
+
+msgid "_Actual_boxes_"
+msgstr "Boîtes actuelles"
+
+msgid "_portal_type_Doc Filter Box"
+msgstr "Boîte de Documents"
+
+msgid "_binaryinput_Delete_"
+msgstr "Enlever"
+
+msgid "_forum_No reply for this message_"
+msgstr "Pas de réponse à ce message"
+
+msgid "_wfs_prop_quit_schema_"
+msgstr "Quitter le Schéma"
+
+msgid "_cal_Day_long1"
+msgstr "Lundi"
+
+msgid "_fd_Insert_a_block_of_type_"
+msgstr "Insérer un block de type"
+
+msgid "_Create_an_URL_link_"
+msgstr "Créer un lien URL"
+
+msgid "_action_send_email_"
+msgstr "Envoyer un email"
+
+msgid "_Your_mail_"
+msgstr "Votre courrier :"
+
+msgid "_workgroup_Access_rights_changed_"
+msgstr "Droits d'accès modifiés."
+
+msgid "_filedocument_Document_"
+msgstr "Document"
+
+msgid "_subscribers_"
+msgstr "Abonnés"
+
+msgid "_Choose a directory_"
+msgstr "Choisissez un annuaire"
+
+msgid "_Type:_"
+msgstr "Type :"
+
+msgid "_lang_French/France"
+msgstr "Français (France)"
+
+msgid "_portal_type_Text Document"
+msgstr "Note"
+
+msgid "_Log in_"
+msgstr "Authentification"
+
+msgid "_ack_confirmation"
+msgstr "L'émetteur demande un accusé de lecture de ce message. Voulez vous lui transmettre un accusé de réception ?"
+
+msgid "_mail_size_header_0.74 KB"
+msgstr ""
+
+msgid "_Advandec_search_"
+msgstr ""
+
+msgid "_Busy time_"
+msgstr "Occupé"
+
+msgid "_Folders"
+msgstr ""
+
+msgid "_export_to_private_"
+msgstr "Exporter vers mon espace"
+
+msgid "_Add_a_new_box_"
+msgstr "Ajouter une nouvelle boîte"
+
+msgid "_wfs_substate_condition_description_"
+msgstr "Cette condition vérifie que les objets du type sélectionné ont une variable de Workflow avec une valeur spécifique"
+
+msgid "_BCC_"
+msgstr ""
+
+msgid "_Enter words you're looking for_"
+msgstr "Entrez les mots que vous recherchez."
+
+msgid "_portal_type__portal_type_Text Document"
+msgstr ""
+
+msgid "_action_members_"
+msgstr "Membres"
+
+msgid "_searchbox_Advanced_search"
+msgstr "Recherche avancée"
+
+msgid "_cpsdocuments_No_mail_sent_"
+msgstr "Pas d'E-mail envoyé"
+
+msgid "_template_FirstNews+Document_"
+msgstr "Une+Documents"
+
+msgid "_hierarchy_Readers_"
+msgstr "Lecteurs"
+
+msgid "_This message will be sent to attendees with a cancel notification_"
+msgstr "Ce message sera envoyé aux pariticpants avec une notification d'annulation de l'événement."
+
+msgid "_Cancel your request_"
+msgstr "Annuler votre requête"
+
+msgid "_base_note_de_service_"
+msgstr "Note de service"
+
+msgid "_Item(s) pasted_"
+msgstr "Document(s) collé(s)"
+
+msgid "_mailing_Subject_"
+msgstr "Objet"
+
+msgid "_str_Hierarchies_"
+msgstr "Rubriques"
+
+msgid "_action_access_rights_"
+msgstr "Gestion des droits"
+
+msgid "_You have %s pending requests_"
+msgstr "Vous avez %s requêtes en attente."
+
+msgid "_cal_Day6"
+msgstr "Di"
+
+msgid "_Upload_a_File_"
+msgstr "Télécharger un Fichier"
+
+msgid "_action_help_"
+msgstr "Aide"
+
+msgid "_Back_to_messages_list_"
+msgstr "Retour à la liste des messages"
+
+msgid "_customer_allnames_"
+msgstr "Client"
+
+msgid "_cal_prop_category_"
+msgstr "Categorie"
+
+msgid "_cal_Day1"
+msgstr "Ma"
+
+msgid "_search_prop_text"
+msgstr "Texte libre"
+
+msgid "_Home_"
+msgstr "Accueil"
+
+msgid "_prop_box_maxnum_"
+msgstr "Nombre maximum"
+
+msgid "_dir_prop_Name_"
+msgstr "Nom"
+
+msgid "_You password has been mailed. It should arrive in your mailbox momentarily._"
+msgstr "Votre mot de passe vient d'être envoyé. Il devrait arriver dans votre boite aux lettres incessamment."
+
+msgid "_forum_No message here"
+msgstr "Pas de message"
+
+msgid "_prop_customername_"
+msgstr "Nom"
+
+msgid "_button_Remove cancelled events_"
+msgstr "Supprimer les événements annulés"
+
+msgid "_box_prop_hierarchies_paths_"
+msgstr "Rubriques à afficher"
+
+msgid "_(other_search)_in_this_directory_or_consult_"
+msgstr "dans cet annuaire ou consulter"
+
+msgid "_export_notice_"
+msgstr ""
+
+msgid "_pub_history_created_"
+msgstr "Création"
+
+msgid "_cpsdocuments_email_sent_"
+msgstr "E-mail envoyé"
+
+msgid "_pub_history_submitted_in_"
+msgstr "Soumission dans"
+
+msgid "_Address:_"
+msgstr "Adresse : "
+
+msgid "_forum_Reply to_"
+msgstr "Répondre à"
+
+msgid "_Calendar selection"
+msgstr "Sélection d'agenda"
+
+msgid "_action_delete_"
+msgstr "Supprimer"
+
+msgid "_customer_society_"
+msgstr ""
+
+msgid "_action_accept_"
+msgstr "Accepter..."
+
+msgid "_box_Compact_display_"
+msgstr "Compact"
+
+msgid "_In_"
+msgstr "Dans"
+
+msgid "_cal_hour_To_"
+msgstr "à"
+
+msgid "_wfs_Workflow_Schemas_"
+msgstr "Schémas de Workflow"
+
+msgid "_Publish_"
+msgstr ""
+
+msgid "_cal_You can download_"
+msgstr "Vous pouvez télécharger"
+
+msgid "_cal_no_attendee_of_type_events_show_"
+msgstr "Pas d'agenda d'événements sélectionné"
+
+msgid "_workgroup_Member_"
+msgstr "Membre"
+
+msgid "_Create_a_Hierarchy_"
+msgstr "Créer une Rubrique"
+
+msgid "_Before_"
+msgstr "Avant le"
+
+msgid "_fd_File_"
+msgstr "Fichier"
+
+msgid "_cal_Printable_view_"
+msgstr "Version imprimable"
+
+msgid "_header_mail_size_1.78 KB"
+msgstr ""
+
+msgid "_column_Version"
+msgstr "Version"
+
+msgid "_cal_Month10"
+msgstr "Octobre"
+
+msgid "_cal_Month11"
+msgstr "Novembre"
+
+msgid "_All_"
+msgstr "Tous"
+
+msgid "_Move_to:_"
+msgstr ""
+
+msgid "_If you check <<Keep my login in a cookie>>, your login will be automatically filled at the next log in_"
+msgstr "Si vous sélectionnez "Gardez mon login dans un cookie", votre login sera automatiquement rempli à la prochaine connexion."
+
+msgid "_In_message_body_"
+msgstr "Dans le corps du message"
+
+msgid "_wfs_Signature_Condition_"
+msgstr "Condition de Signature"
+
+msgid "_Only_one_entry_matches_your_request_(single)_"
+msgstr "Une seule entrée répond à votre demande."
+
+msgid "_prop_description_"
+msgstr "Description"
+
+msgid "_of_"
+msgstr "sur"
+
+msgid "_contact_ou_"
+msgstr "Service"
+
+msgid "_box_prop_style_"
+msgstr "Style"
+
+msgid "_action_check_in_"
+msgstr "Valider le brouillon"
+
+msgid "_action_month_view_"
+msgstr "Vue mensuelle"
+
+msgid "_cal_no_attendee_of_type_member_"
+msgstr "Pas de membre sélectionné"
+
+msgid "_Sent_element_folder_"
+msgstr "Eléments envoyés"
+
+msgid "_pub_transition_depublish_"
+msgstr "Dépublier de"
+
+msgid "_versionstate_locked"
+msgstr "verrouillé"
+
+msgid "_Current_boxes_"
+msgstr "Boîtes actuelles"
+
+msgid "_mail_size_header_4.44 KB"
+msgstr ""
+
+msgid "_dir_prop_Roles_"
+msgstr "Rôles"
+
+msgid "_To_date_is_incorrect_"
+msgstr "La date de fin est incorrecte."
+
+msgid "_wfs_mail_event_description_"
+msgstr "Cet événement envoie un mail aux personnes spécifiés dans un objet Mailing-List avec l'identifiant correspondant. Le sujet ainsi que le corps du messagepeuvent contenir du code DTML qui sera exécuté dans le contexte du document."
+
+msgid "_cal_date_From_"
+msgstr "Du"
+
+msgid "_cal_Calendar_of_%s_"
+msgstr "Agenda de %s"
+
+msgid "_cpsdocuments_Your_email_is_unknown_"
+msgstr "Votre E-mail est inconnu"
+
+msgid "_Specific_date_"
+msgstr ""
+
+msgid "_mail_size_header_3.50 KB"
+msgstr ""
+
+msgid "_Votre courrier : ${nb_messages} message(s) dans ${folder/getReadableName}"
+msgstr ""
+
+msgid "_forum_Next_message_"
+msgstr "Message suivant"
+
+msgid "_portal_type_News Document"
+msgstr "Nouvelle"
+
+msgid "_standard_notfound_message_"
+msgstr "<p>Le document (ou l'adresse URL) que vous avez demandé n'existe pas ou n'existe plus.</p><p>Ce document a peut-être été effacé.</p>"
+
+msgid "_If you need help, please contact_"
+msgstr "Si vous avez besoin d'aide, contactez"
+
+msgid "_header_mail_size_0.74 KB"
+msgstr ""
+
+msgid "_cal_eventstatus_unconfirmed_"
+msgstr "Non-confirmé"
+
+msgid "_One line by link, URL and description separated by one space_"
+msgstr "Une ligne par lien, l'URL et la description séparés par un espace"
+
+msgid "_Create_a_Flexible_Document_base_note_de_service"
+msgstr "Créer une note de service"
+
+msgid "_prop_customerwebsite_"
+msgstr "Site Web"
+
+msgid "_Manage_Access_rights_on_"
+msgstr "Gestion des droits sur"
+
+msgid "_You have to notify other attendees of recent changes to this event_"
+msgstr "Vous devez informer les autres participants des récentes modifications de cet événement."
+
+msgid "_(Add a user whose ...)_is:"
+msgstr "contient :"
+
+msgid "_Day_"
+msgstr "Le"
+
+msgid "_forum_replies"
+msgstr "Réponses"
+
+msgid "_mail(s)_in_"
+msgstr "messages(s) dans le dossier "
+
+msgid "_Documents_"
+msgstr "Documents"
+
+msgid "_Modify_the_boxes_"
+msgstr "Modifier les boîtes globales"
+
+msgid "_box_style_classic_"
+msgstr "Classique"
+
+msgid "_Select at least one document_"
+msgstr "Sélectionnez au moins un document."
+
+msgid "_str_Comments:"
+msgstr "Commentaires :"
+
+msgid "_mailing_No_subject_"
+msgstr "Pas d'objet"
+
+msgid "_cal_hour_From_"
+msgstr "De"
+
+msgid "_portal_type_URL"
+msgstr "URL"
+
+msgid "_wfs_button_addstate_"
+msgstr "Ajouter un État"
+
+msgid "_This type of box is used to display hierarchies for navigation_"
+msgstr "Ce type de boîte est utilisé pour afficher des rubriques pour la navigation."
+
+msgid "_cal_Member_"
+msgstr "Membre"
+
+msgid "_button_paste_"
+msgstr "Coller"
+
+msgid "_skinner_Template_"
+msgstr "Modèle"
+
+msgid "_privateareas_"
+msgstr "Privé"
+
+msgid "_prop_box_visible_if_empty_"
+msgstr "Visible si vide"
+
+msgid "_password_mail_Hello,"
+msgstr "Bonjour,"
+
+msgid "_Send_"
+msgstr "Envoyer"
+
+msgid "_button_post_message_"
+msgstr "Poster le message"
+
+msgid "_column_Published"
+msgstr "Publié"
+
+msgid "_str_Comments_"
+msgstr "Commentaires"
+
+msgid "_cal_the iCalendar version of this calendar."
+msgstr "cet agenda au format iCalendar."
+
+msgid "_Message_list_"
+msgstr ""
+
+msgid "_portal_type_Workgroup"
+msgstr "Espace de travail"
+
+msgid "_filedocument_(You_can_also_get)_a_preview_"
+msgstr "un aperçu"
+
+msgid "_password_mail_Your_subscription_to_portal:"
+msgstr "Votre inscription au portail :"
+
+msgid "_directories_"
+msgstr "annuaires"
+
+msgid "_action_preview_"
+msgstr "Aperçu"
+
+msgid "_lower_left_slot_"
+msgstr "emplacement bas gauche"
+
+msgid "_Portal_Members_"
+msgstr "Membres"
+
+msgid "_New_IMAP_Folder_creation_"
+msgstr "Création d'un nouveau dossier IMAP"
+
+msgid "_return_to_document_"
+msgstr "Retourner au document"
+
+msgid "_Create_a_Contact_"
+msgstr "Créer un Contact"
+
+msgid "_faq_Detailed_Question_"
+msgstr "Question détaillée"
+
+msgid "_cal_Sender:"
+msgstr "Expéditeur :"
+
+msgid "_column_Document"
+msgstr "Document"
+
+msgid "_cal_Attendees_for_event_"
+msgstr "Participants pour l'événement"
+
+msgid "_parent_comment_"
+msgstr "Commentaire parent"
+
+msgid "_value_Reviewer_"
+msgstr "Responsable"
+
+msgid "_Back_to_message_list"
+msgstr ""
+
+msgid "_pub_title_depublish_"
+msgstr "Dépublier"
+
+msgid "_portal_type_Forum"
+msgstr "Forum"
+
+msgid "_Transparent events mean that you-re not busy during this event_"
+msgstr "Les événements transparents sont les événements durant lesquels vous n'êtes pas considéré comme occupé."
+
+msgid "_Since_"
+msgstr "Depuis le"
+
+msgid "_role_Manager_"
+msgstr "Administrateur"
+
+msgid "_mail_size_header_2.83 KB"
+msgstr ""
+
+msgid "_Send/Continue_a_mail_"
+msgstr "Envoyer/Continuer un message"
+
+msgid "_portal_type_WGNav Box"
+msgstr "Boîte d'Espaces de travail"
+
+msgid "_wfs_prop_allow_publication_"
+msgstr "Autoriser la Publication"
+
+msgid "_prop_title_"
+msgstr "Titre"
+
+msgid "_Subject_"
+msgstr "Sujet"
+
+msgid "_test_-2_"
+msgstr ""
+
+msgid "_reviewstate_pending"
+msgstr "en attente"
+
+msgid "_portal_type_ThreadSnapShot"
+msgstr "Fil de discussion extrait"
+
+msgid "_cal_no_attendee_of_type_ressource_"
+msgstr "Pas de ressource sélectionnée"
+
+msgid "_Don't forget to logout when you're finished_"
+msgstr "N'oubliez pas de vous déconnecter une fois la session terminée."
+
+msgid "_No_document_matches_your_request_"
+msgstr "Aucun document ne correspond à votre demande."
+
+msgid "_pub_transition_publish_"
+msgstr "Publier directement dans"
+
+msgid "_IMAP_Access_Error_Message_Title"
+msgstr "Impossible de se connecter à votre boîte-aux-lettres"
+
+msgid "_action_export_"
+msgstr "Exporter..."
+
+msgid "_action_publish_"
+msgstr "Publier..."
+
+msgid "_Jully_"
+msgstr "Julliet"
+
+msgid "_dir_prop_Users_"
+msgstr "Utilisateurs"
+
+msgid "_Entry_modified_"
+msgstr "Entrée modifiée"
+
+msgid "_button_move_down_"
+msgstr "Descendre"
+
+msgid "_adress_book_"
+msgstr ""
+
+msgid "_cal_Room_"
+msgstr "Salle"
+
+msgid "_contact_o_"
+msgstr "Organisation"
+
+msgid "_Applyied rights_"
+msgstr "Droits affectés"
+
+msgid "_box_prop_column_"
+msgstr "Colonne"
+
+msgid "_prop_base_hierarchy_"
+msgstr "Base de navigation"
+
+msgid "_workgroup_Actual_view:"
+msgstr "Vue actuelle :"
+
+msgid "_fd_block_code_"
+msgstr "Code"
+
+msgid "_Advanced_search_"
+msgstr ""
+
+msgid "_portal_type_Hierarchy"
+msgstr "Rubrique"
+
+msgid "_prop_box_types_"
+msgstr "Types de document"
+
+msgid "_weekly_"
+msgstr "Hebdomadaire"
+
+msgid "_Back_to_message_list_"
+msgstr "Retour à la liste des messages"
+
+msgid "_cal_Mo7"
+msgstr "Juil"
+
+msgid "_cal_Mo6"
+msgstr "Jui"
+
+msgid "_cal_Mo5"
+msgstr "Mai"
+
+msgid "_cal_Mo4"
+msgstr "Avr"
+
+msgid "_cal_Mo3"
+msgstr "Mar"
+
+msgid "_cal_Mo2"
+msgstr "Fev"
+
+msgid "_No such entry in this directory_"
+msgstr "Entrée inexistante dans cet annuaire."
+
+msgid "_Currently:"
+msgstr "Actuellement :"
+
+msgid "_cal_task_prop_description_"
+msgstr ""
+
+msgid "_forum_prop_image_"
+msgstr "Image"
+
+msgid "_%s_entries_match_your_request_(plural)_"
+msgstr "%s entrées répondent à votre demande."
+
+msgid "_cal_Mo9"
+msgstr "Sep"
+
+msgid "_cal_Mo8"
+msgstr "Aou"
+
+msgid "_forum_tab_title_"
+msgstr "Titre et Description"
+
+msgid "_cal_pending_confirmed_"
+msgstr "Confirmer"
+
+msgid "_cal_Rooms_"
+msgstr "Salles"
+
+msgid "_prop_vignette_"
+msgstr "Vignette"
+
+msgid "_wfs_prop_mailinglist_id_"
+msgstr "Identifiant de la Mailing-List"
+
+msgid "_pub_history_accepted_in_"
+msgstr "Acceptation dans"
+
+msgid "_customer_client_"
+msgstr ""
+
+msgid "_cal_prop_organizer_"
+msgstr "Organisateur"
+
+msgid "_str_Error_"
+msgstr "Erreur"
+
+msgid "_fd_block_hr_"
+msgstr "Ligne horizontale"
+
+msgid "_attachment_export_notice_"
+msgstr "Les documents exportés seront placés dans l'espace privé de l'utilisateur en cours"
+
+msgid "_mailing_Send_to_managers_"
+msgstr "Envoyer aux responsables"
+
+msgid "_Reply_all_"
+msgstr "Répondre à tous"
+
+msgid "_mailing_Send_to_visitors_"
+msgstr "Envoyer aux visiteurs/lecteurs"
+
+msgid "_(Search)_in_this_directory_or_consult_"
+msgstr "dans cet annuaire ou consulter"
+
+msgid "_Selected_messages_"
+msgstr "Les messages sélectionnés"
+
+msgid "_help_"
+msgstr "aide"
+
+msgid "_Date:_"
+msgstr "Date : "
+
+msgid "_Sent"
+msgstr ""
+
+msgid "_October_"
+msgstr "Octobre"
+
+msgid "_September_"
+msgstr "Septembre"
+
+msgid "_wfs_Publication_Event_"
+msgstr "Événement Publication"
+
+msgid "_You have to notify attendees that you will delete this events_"
+msgstr "Vous devez notifier les participants que vous allez détruire ces événements."
+
+msgid "_document_%(title)s_was_submitted_in_hierarchy_%(hiertitle)s_"
+msgstr "Le document « %(title)s » a été soumis dans « %(hiertitle)s »"
+
+msgid "_(follow)_log out of the ZMI?"
+msgstr "déconnecter de la ZMI ?"
+
+msgid "_reviewstate_published"
+msgstr "publié"
+
+msgid "_Back_to_messages_list__"
+msgstr ""
+
+msgid "_hierarchy_Reviewers_"
+msgstr "Responsables éditoriaux"
+
+msgid "_button_modify_"
+msgstr "Changer"
+
+msgid "_lang_English"
+msgstr "English"
+
+msgid "_Transmitter_"
+msgstr "Destinataire(s): "
+
+msgid "_Fig._%s:"
+msgstr ""
+
+msgid "_portal_type_Contact"
+msgstr "Contact"
+
+msgid "_Click here to create a new main hierachy_"
+msgstr "Cliquez ici pour créer une nouvelle rubrique principale"
+
+msgid "_prop_box_sortdesc_"
+msgstr "Tri inversé"
+
+msgid "_fd_Fig._%s:"
+msgstr "Fig. %s :"
+
+msgid "_(single)_document_found_for_"
+msgstr "document trouvé pour"
+
+msgid "_fd_block_text_"
+msgstr "Texte"
+
+msgid "_This form is used to set the portal configuration options._"
+msgstr "Vous pouvez modifier les options de configuration de ce Portail."
+
+msgid "_cal_%d/%m/%Y at %Hh%M_"
+msgstr "%m/%d/%Y at %H:%M"
+
+msgid "_prop_skinner_"
+msgstr "Habillage"
+
+msgid "_folder_rename_"
+msgstr "Renommer..."
+
+msgid "_(plural)_documents_found_for_"
+msgstr "documents trouvés pour"
+
+msgid "_password_mail_Your_password:"
+msgstr "Votre mot de passe :"
+
+msgid "_filedocument_file_type:"
+msgstr "type :"
+
+msgid "_Create the meeting here_"
+msgstr "Créer le rendez-vous ici"
+
+msgid "_Include this calendar_"
+msgstr "Inclure cet agenda"
+
+msgid "_cal_New_event_"
+msgstr "Nouvel événement"
+
+msgid "_cal_pending_decline_"
+msgstr "Décliner"
+
+msgid "_None_"
+msgstr "Aucun"
+
+msgid "_previous_%s_"
+msgstr "%s précédents"
+
+msgid "_The end hour you specified was earlier than the start hour. Do you want to extend the event to the next day?_"
+msgstr "L'heure de fin que vous avez spécifiée est plus tôt que celle de départ. Voulez-vous étendre l'événement au jour suivant ?"
+
+msgid "_From_"
+msgstr "De"
+
+msgid "_button_lock_thread_"
+msgstr "Verrouiller le fil"
+
+msgid "_search_prop_pubstate"
+msgstr "État de Publication"
+
+msgid "_Seach_"
+msgstr ""
+
+msgid "_Pending_documents_"
+msgstr "Documents à valider"
+
+msgid "_November_"
+msgstr "Novembre"
+
+msgid "_dir_Users_"
+msgstr "Utilisateurs"
+
+msgid "_dir_prop_fullName_"
+msgstr "Nom complet"
+
+msgid "_forum_Previous_message_"
+msgstr "Message précédent"
+
+msgid "_Customer_"
+msgstr "Clients"
+
+msgid "_mail_size_header_3.85 KB"
+msgstr ""
+
+msgid "_box_prop_minimized_"
+msgstr "Minimisée"
+
+msgid "_button_rename_"
+msgstr "Renommer"
+
+msgid "_box_Minimal_display_"
+msgstr "Minimal"
+
+msgid "_Modify status for this event:"
+msgstr "Modifier le statut pour cet événement :"
+
+msgid "_urldocument_URL_"
+msgstr "URL"
+
+msgid "_workgroup_Created_"
+msgstr "Espace de travail créé."
+
+msgid "_Folder_name:_"
+msgstr "Nom du dossier :"
+
+msgid "_action_logout_"
+msgstr "Déconnexion"
+
+msgid "_From:_"
+msgstr "De : "
+
+msgid "_portal_type__portal_type_URL"
+msgstr ""
+
+msgid "_fd_Fig_%s"
+msgstr ""
+
+msgid "_str_Directories_"
+msgstr "Annuaires"
+
+msgid "_portal_type__portal_type_News Document"
+msgstr ""
+
+msgid "_Change_folder_to"
+msgstr "Changer de dossier pour"
+
+msgid "_button_Remove events you declined_"
+msgstr "Supprimer les événements dont vous avez décliné l'invitation"
+
+msgid "_prop_box_wg_depth_"
+msgstr "Profondeur"
+
+msgid "_search_pubstate_pending_"
+msgstr "Documents en attente"
+
+msgid "_Add_"
+msgstr "Ajouter"
+
+msgid "_customer_"
+msgstr "Clients"
+
+msgid "_button_back_"
+msgstr "Revenir"
+
+msgid "_Compose"
+msgstr "Composer"
+
+msgid "_All_in_field_"
+msgstr "Tous les éléments du champs"
+
+msgid "_Create_a_Flexible_Document_base_textoff"
+msgstr "Créer un texte officiel"
+
+msgid "_action_view_"
+msgstr "Voir"
+
+msgid "_Search_"
+msgstr "Rechercher"
+
+msgid "_January_"
+msgstr "Janvier"
+
+msgid "_wfs_Event_added_"
+msgstr "Événement ajouté"
+
+msgid "_button_extract_thread_"
+msgstr "Extraire le fil"
+
+msgid "_versionstate_stable"
+msgstr "stable"
+
+msgid "_cal_%m/%d/%Y_"
+msgstr "%d/%m/%Y"
+
+msgid "_Create a not all day_"
+msgstr "Créer un événement de journée"
+
+msgid "_August_"
+msgstr "Aoùt"
+
+msgid "_forum_tab_properties_"
+msgstr "Propriétés"
+
+msgid "_portal_type_File Document"
+msgstr "Fichier"
+
+msgid "_action_day_view_"
+msgstr "Vue journalière"
+
+msgid "_archived_versions_of_"
+msgstr "Versions archivées de"
+
+msgid "_contact_facsimileTelephoneNumber_"
+msgstr "Fax"
+
+msgid "_portal_type_FAQ"
+msgstr "FAQ"
+
+msgid "_mail_size_header_4.47 KB"
+msgstr ""
+
+msgid "_Id_"
+msgstr "Id"
+
+msgid "_cal_task_priority_1_"
+msgstr ""
+
+msgid "_Create_a_Flexible_Document_base_letter"
+msgstr "Créer une lettre"
+
+msgid "_Select the attendees you want for your meeting:"
+msgstr "Choisissez les participants :"
+
+msgid "_header_date_mailview_on_%m/%d/%Y at %H:%M"
+msgstr "%d/%m/%Y à %H:%M"
+
+msgid "_wfs_Schema_"
+msgstr "Schéma"
+
+msgid "_fd_block_text_image_"
+msgstr "Deux colonnes - image à droite"
+
+msgid "_Yes_"
+msgstr "Oui"
+
+msgid "_cal_task_priority_cancelled_"
+msgstr ""
+
+msgid "_search_pubstate_reviewable_"
+msgstr "Documents à valider"
+
+msgid "_Date"
+msgstr ""
+
+msgid "_fd_Base_Template_"
+msgstr "Modèle de base"
+
+msgid "_cal_eventstatus_confirmed_"
+msgstr "Confirmé"
+
+msgid "_Select/Unselect_"
+msgstr ""
+
+msgid "_import_from_MSOutlook_address_book_"
+msgstr "Importer à partir d'un carnet d'adresses MSOutlook"
+
+msgid "_cal_Calendar_of_"
+msgstr "Agenda de"
+
+msgid "_button_clone_"
+msgstr "Cloner"
+
+msgid "_read_messages_"
+msgstr ""
+
+msgid "_Compose_your_mail_"
+msgstr "Composer votre message"
+
+msgid "_action_current_state_"
+msgstr "État courant"
+
+msgid "_action_calendars_"
+msgstr "Tous les Agendas"
+
+msgid "_To:_"
+msgstr "A : "
+
+msgid "_Adress_book_"
+msgstr ""
+
+msgid "_fd_block_subsection_"
+msgstr "Sous-section"
+
+msgid "_wfs_Delete_this_State_"
+msgstr "Supprimer cet État"
+
+msgid "_Servcechief:_"
+msgstr "Chef de service : "
+
+msgid "_action_forum_post_"
+msgstr "Nouveau fil"
+
+msgid "_cal_Private_"
+msgstr "Privé"
+
+msgid "_All_fields_"
+msgstr ""
+
+msgid "_cal_Today_"
+msgstr "Aujourd'hui"
+
+msgid "_Item(s) copied_"
+msgstr "Document(s) copié(s)"
+
+msgid "_wfs_conditions_"
+msgstr "Conditions"
+
+msgid "_prop_box_display_type_"
+msgstr "Type d'affichage"
+
+msgid "_action_globalboxes_"
+msgstr "Boites globales"
+
+msgid "_str_Anonymous_"
+msgstr "Anonyme"
+
+msgid "_button_delete_"
+msgstr "Supprimer"
+
+msgid "_Select the desired duration of your meeting:"
+msgstr "Choisissez la durée désirée pour votre rendez-vous :"
+
+msgid "_Date_"
+msgstr "Date"
+
+msgid "_To_"
+msgstr ""
+
+msgid "_header_mail_size_4.44 KB"
+msgstr ""
+
+msgid "_fd_twocols_links_"
+msgstr "Deux colonnes et Liens connexes"
+
+msgid "_faq_Answer_"
+msgstr "Réponse"
+
+msgid "_button_send_"
+msgstr "Envoyer"
+
+msgid ""
+msgstr "Project-Id-Version: \n"

@@ -3,7 +3,7 @@
   metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="header"
-  tal:content="python:mcat('_Create_a_new_Event_')">
+  tal:content="python:str('_Create_a_new_Event_')">
   Create a new event
 </metal:block>
 
@@ -22,7 +22,7 @@
     }">
   <p
     tal:content="
-    python:mcat('_The end hour you specified was earlier than the start hour. Do you want to extend the event to the next day?_')">
+    python:str('_The end hour you specified was earlier than the start hour. Do you want to extend the event to the next day?_')">
     The end hour you specified was earlier than the start hour. Do you want
     to extend the event to the next day?
   </p>
@@ -41,9 +41,9 @@
       The event
     </metal:block>
     <input type="submit"
-      tal:attributes="value python:mcat('_button_validate_')" />
+      tal:attributes="value python:str('_button_validate_')" />
     <input type="button" onClick="history.back()"
-      tal:attributes="value python:mcat('_button_cancel_')" />
+      tal:attributes="value python:str('_button_cancel_')" />
   </form>
 </metal:block>
 

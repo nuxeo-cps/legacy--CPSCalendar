@@ -1,12 +1,13 @@
-<tal:block define="
-  disp_infos python:here.calendar_getDispInformations(request);
-  current_action disp_infos/current_action;
-  calendar_disp disp_infos/disp;
-  selected_day disp_infos/selected_day;
-  viewed_day disp_infos/viewed_day;
-  start_time disp_infos/start_time;
-  end_time disp_infos/end_time;
-  events_desc python:here.getEventsDesc(start_time, end_time, calendar_disp)
+<tal:block define="here_url python:'/'+here.absolute_url(relative=1);
+                   portal_url here/portal_url;
+                   disp_infos python:here.calendar_getDispInformations(request);
+                   current_action disp_infos/current_action;
+                   calendar_disp disp_infos/disp;
+                   selected_day disp_infos/selected_day;
+                   viewed_day disp_infos/viewed_day;
+                   start_time disp_infos/start_time;
+                   end_time disp_infos/end_time;
+                   events_desc python:here.getEventsDesc(start_time, end_time, calendar_disp);
   ">
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
@@ -15,10 +16,8 @@
   <link rel="stylesheet" type="text/css"
     tal:attributes="href string:${portal_url}/calendar_stylesheet.css" />
 </metal:block>
-<body>
-
-
 <metal:block fill-slot="header_plus"></metal:block>
+<body>
 
 <metal:block fill-slot="main"
   tal:define="can_add_evts python:mtool.checkPermission('Add portal content', here)">
@@ -31,7 +30,7 @@
           tal:repeat="id cancelled"
           tal:attributes="value id" />
         <input type="submit"
-          tal:attributes="value python:mcat('_button_Remove cancelled events_')" />
+          tal:attributes="value string:_button_Remove cancelled events_" />
       </form>
       <form action="calendar_delevents" method="POST"
         tal:define="declined ev_dict/declined"
@@ -40,7 +39,7 @@
           tal:repeat="id declined"
           tal:attributes="value id" />
         <input type="submit"
-          tal:attributes="value python:mcat('_button_Remove events you declined_')" />
+          tal:attributes="value string:_button_Remove events you declined_" />
       </form>
     </tal:block>
     <tal:block define="pendings_count here/getPendingEventsCount"
@@ -49,13 +48,13 @@
         <a href="calendar_pending_events"
           tal:condition="python:pendings_count > 1"
           tal:content="
-            python:mcat('_You have %s pending requests_') % (pendings_count, )">
+            string:_You have ${pending_count} pending requests_">
           You have 2 pending requests.
         </a>
         <a href="calendar_pending_events"
           tal:condition="python:pendings_count == 1"
           tal:content="
-            python:mcat('_You have one pending request_')">
+            string:_You have one pending request_">
           You have one pending request.
         </a>
       </h3>
@@ -63,7 +62,6 @@
   </tal:block>
   <metal:block use-macro="here/calendar_view_macros/macros/?calendar_disp" />
 </metal:block>
-
 
 </body>
 </html>

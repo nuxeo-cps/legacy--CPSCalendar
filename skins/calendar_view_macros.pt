@@ -5,7 +5,7 @@
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
       target="_new"
-      tal:content="python:mcat('_cal_Printable_view_')">
+      tal:content="python:str('_cal_Printable_view_')">
       Printable view
     </a>]
   </tal:block>
@@ -29,7 +29,7 @@
                   today python:int(DateTime());"
                 tal:attributes="
                   href string:${here_url}?viewed_day=${today}"
-                tal:content="python:mcat('_cal_Today_')">
+                tal:content="python:str('_cal_Today_')">
                 Today
               </a>
             </td>
@@ -68,10 +68,10 @@
                   </td>
                   <th
                     tal:define="
-                      dow python:mcat('_cal_Day_long%s' % date.dow());
+                      dow python:str('_cal_Day_long%s' % date.dow());
                       dom date/day;
                       year date/year;
-                      month python:mcat('_cal_Month%s' % date.month());"
+                      month python:str('_cal_Month%s' % date.month());"
                     tal:content="string:${dow} ${dom} ${month} ${year}" />
                 </tr>
                 <tr tal:repeat="day_event day_events">
@@ -238,7 +238,7 @@
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
       target="_new"
-      tal:content="python:mcat('_cal_Printable_view_')">
+      tal:content="python:str('_cal_Printable_view_')">
       Printable view
     </a>]
   </tal:block>
@@ -249,10 +249,8 @@
           <tr>
             <td width="30" class="cal_left_tab">
               <a class="cal_event"
-                tal:define="
-                prev_week python:int(viewed_day-7);"
-                tal:attributes="
-                href string:${here_url}?viewed_day=${prev_week}">
+                 tal:define="prev_week python:int(viewed_day-7);"
+                 tal:attributes="href string:${here_url}?viewed_day=${prev_week}">
                 &lt;&lt;
               </a>
             </td>
@@ -262,7 +260,7 @@
                   today python:int(DateTime());"
                 tal:attributes="
                   href string:${here_url}?viewed_day=${today}"
-                tal:content="python:mcat('_cal_Today_')">
+                tal:content="python:str('_cal_Today_')">
                 Today
               </a>
             </td>
@@ -306,10 +304,10 @@
                   <th width="59" tal:repeat="i python:range(0,7)">
                     <a
                       tal:define="
-                        dow python:mcat('_cal_Day%s' % i);
+                        dow python:str('_cal_Day%s' % i);
                         date python:slots[i][0];
                         dom date/day;
-                        month python:mcat('_cal_Mo%s' % date.month());
+                        month python:str('_cal_Mo%s' % date.month());
                         go_day python:int(date);
                       "
                       tal:attributes="
@@ -486,14 +484,14 @@
                      global my_id here/id;" />
   <h2
     tal:define="
-      month python:mcat('_cal_Month%s' % (viewed_day.month(), ));
+      month python:str('_cal_Month%s' % (viewed_day.month(), ));
       year viewed_day/year"
     tal:content="string:${month} ${year}" />
   <tal:block
     condition="show_nav|python:1">
     [<a href="calendar_printable_view"
       target="_new"
-      tal:content="python:mcat('_cal_Printable_view_')">
+      tal:content="python:str('_cal_Printable_view_')">
       Printable view
     </a>]
   </tal:block>
@@ -517,7 +515,7 @@
                   today python:int(DateTime());"
                 tal:attributes="
                 href string:${here_url}?viewed_day=${today}"
-                tal:content="python:mcat('_cal_Today_')">
+                tal:content="python:str('_cal_Today_')">
                 Today
               </a>
             </td>
@@ -548,7 +546,7 @@
                 <tr>
                   <th
                     tal:repeat="i python:[1,2,3,4,5,6,0]"
-                    tal:content="python:mcat('_cal_Day_long%s' % (i, ))">
+                    tal:content="python:str('_cal_Day_long%s' % (i, ))">
                     Mon
                   </th>
                 </tr>

@@ -4,7 +4,6 @@ here = context.this()
 
 all_calendars = here.objectIds('Calendar')
 mtool = context.portal_membership
-mcat = context.portal_messages
 
 calendars = { 'private': [], 'others': [], 'rooms': [], 'ressources': [],
     'events_shows': [] }
@@ -40,10 +39,16 @@ for calid in all_calendars:
         type = 'ressources'
     calendars[type].append({
         'id': calid,
-        'title': mcat(cal.title_or_id()),
+        'title': cal.title_or_id(),
         'url': cal.absolute_url(),
         'pending': ok_pend and cal.getPendingEventsCount(),
     })
+##    calendars[type].append({
+##        'id': calid,
+##        'title': str(cal.title_or_id()),
+##        'url': cal.absolute_url(),
+##        'pending': ok_pend and cal.getPendingEventsCount(),
+##    })
 
 if not has_private and not isAnon:
     calendars['private'].append({

@@ -17,9 +17,21 @@ from Acquisition import aq_inner, aq_parent
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.CMFCorePermissions import \
-     View, ManageProperties
+     setDefaultRoles, View, ManageProperties
 
-from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
+from Products.CPSCore.CPSBase import CPSBaseFolder#, CPSBase_adder
+#from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
+
+ManageWorkgroups = 'Manage Workgroups'
+setDefaultRoles(ManageWorkgroups, ('Manager',))
+
+
+WorkgroupManager = 'WorkgroupManager'
+WorkgroupMember = 'WorkgroupMember'
+WorkgroupVisitor = 'WorkgroupVisitor'
+WorkgroupManagerRoles = (WorkgroupManager, WorkgroupMember, WorkgroupVisitor,)
+WorkgroupMemberRoles = (WorkgroupMember, WorkgroupVisitor,)
+WorkgroupVisitorRoles = (WorkgroupVisitor,)
 
 def cmp_ev(a, b):
     return a['start'].__cmp__(b['start'])
@@ -28,7 +40,7 @@ factory_type_information = (
     {'id': 'Calendar',
      'title': 'Calendar',
      'icon': 'calendar_icon.gif',
-     'product': 'NuxGroupCalendar',
+     'product': 'CPSCalendar',
      'meta_type': 'Calendar',
      'factory': 'addCalendar',
      'immediate_view': 'calendar_view',
@@ -87,7 +99,7 @@ factory_type_information = (
                   },
                  {'id': 'localroles',
                   'name': '_action_access_rights_',
-                  'action': 'workgroup_localrole_form',
+                  'action': 'folder_localrole_form',
                   'permissions': (ManageWorkgroups,),
                   'category': 'object'
                   },
@@ -101,7 +113,7 @@ factory_type_information = (
     )
 
 
-class Calendar(Workgroup):
+class Calendar(CPSBaseFolder):
     """
     """
     meta_type = 'Calendar'
@@ -128,7 +140,8 @@ class Calendar(Workgroup):
     _additional_cals = ()
 
     def __init__(self, id, title='', description='', usertype='member'):
-        Workgroup.__init__(self, id, title, description)
+        #CPSBaseFolder.__init__(self, id, title, description)
+        CPSBaseFolder.__init__(self, id)
         self.usertype = usertype
 
     security.declareProtected('Add portal content', 'getPendingEventsCount')
@@ -171,7 +184,7 @@ class Calendar(Workgroup):
                 event_dict['change'] = this_event['change'] + event_dict['change']
         events.append(event_dict)
         self._pending_events = tuple(events)
-        self._notifyMembers(base_dict)
+        self.notifyMembers(base_dict)
 
     security.declareProtected('Add portal content', 'confirmPendingEvent')
     def confirmPendingEvent(self, event_id, REQUEST=None, **kw):
@@ -557,16 +570,18 @@ class Calendar(Workgroup):
                 last_ev = conflict_stop
 
         return hour_block_cols
-
-    def _get_email_for(self, member, dir):
+    
+    security.declarePrivate('getEmail')
+    def getEmail(self, member, mdtool):
         """
         """
-        member_prop = dir.getEntry(member)
-        if member_prop is None:
-            return None
-        return member_prop.get('email')
+        member_id = mdtool.getMemberId(member)
+        entry = mdtool.searchMemberDataContents('id', member_id )
+        raise str(entry)
+        return entry['email']
 
-    def _notifyMembers(self, event_dict):
+    security.declarePrivate('notifyMembers')
+    def notifyMembers(self, event_dict):
         """Notify members when a pending event arrives
         """
         
@@ -577,10 +592,10 @@ class Calendar(Workgroup):
             return
 
         # get current user email
-        mtool = self.portal_membership
-        dir = self.portal_metadirectories.members
+        mtool = getToolByName(self, 'portal_membership')
+        mdtool = getToolByName(self, 'portal_memberdata')
         member = mtool.getAuthenticatedMember().getUserName()
-        mail_from = self._get_email_for(member, dir)
+        mail_from = self.getEmail(member, mdtool)
         if mail_from is None:
             LOG('NGCal', INFO, "Can't get email address for %s" % (mail_from, ))
             return
@@ -647,7 +662,7 @@ class Calendar(Workgroup):
         mails = {}
         for id in member_ids:
             if not done.has_key(id):
-                email = self._get_email_for(id, dir)
+                email = self.getEmail(id, mdtool)
                 if email is not None:
                     mails[email] = None
                 done[id] = None
@@ -727,7 +742,7 @@ class Calendar(Workgroup):
         self._pending_events = tuple([ev for ev in self._pending_events if ev['id'] not in ids])
         declined = [id for id in self._declined if id not in ids]
         cancelled = [id for id in self._cancelled if id not in ids]
-        Workgroup.manage_delObjects(self, ids, *args, **kw)
+        CPSBaseFolder.manage_delObjects(self, ids, *args, **kw)
         self._declined = tuple(declined)
         self._cancelled = tuple(cancelled)
 
@@ -765,6 +780,7 @@ def addCalendar(dispatcher, id,
     if REQUEST is not None:
         url = dispatcher.DestinationURL()
         REQUEST.RESPONSE.redirect('%s/manage_main' % url)
+    #return CPSBase_adder(container, ob, REQUEST=REQUEST)
 
 
 # This program is free software; you can redistribute it and/or modify

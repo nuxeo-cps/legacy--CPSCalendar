@@ -5,14 +5,15 @@
 <metal:block fill-slot="header_plus" />
 
 <metal:block fill-slot="main"
-  tal:define="total_url here/absolute_url">
+  tal:define="here_url python:'/'+here.absolute_url(relative=1);
+              total_url here/absolute_url;">
   <p>
-    <tal:block replace="python:mcat('_cal_You can download_')">
+    <tal:block replace="python:str('_cal_You can download_')">
       You can download
     </tal:block>
     <a
       tal:attributes="href string:${here_url}/calendar.ics"
-      tal:content="python:mcat('_cal_the iCalendar version of this calendar.')">
+      tal:content="python:str('_cal_the iCalendar version of this calendar.')">
       the iCalendar version of this calendar.
     </a>
   </p>
@@ -21,12 +22,12 @@
       webcal_url python:total_url.startswith('http:') and 'webcal%s/calendar.ics' % (total_url[4:])"
     tal:condition="webcal_url">
     <tal:block replace="
-      python:mcat('_cal_If you have a calendar application that supports it, you can also_')">
+      python:str('_cal_If you have a calendar application that supports it, you can also_')">
       If you have a calendar application that supports it, you can also
     </tal:block>
     <a
       tal:attributes="href webcal_url"
-      tal:content="python:mcat('_cal_subscribe to this calendar.')">
+      tal:content="python:str('_cal_subscribe to this calendar.')">
       subscribe to this calendar.
     </a>
   </p>

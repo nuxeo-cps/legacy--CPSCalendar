@@ -8,8 +8,7 @@
 </metal:block>
 <body>
 
-
-<metal:block fill-slot="header_plus"></metal:block>
+<metal:block fill-slot="header_plus" />
 
 <metal:block fill-slot="main">
 
@@ -22,7 +21,7 @@
     )">
     <tal:block define="id type/id; cals calendars/?id"
       condition="cals">
-      <h2 tal:content="python:mcat(type['title'])">Rooms</h2>
+      <h2 tal:content="python:type['title']">Rooms</h2>
       <ul>
         <li tal:repeat="cal cals">
           <a tal:attributes="href cal/url" tal:content="cal/title">Calendar</a>
@@ -39,7 +38,7 @@
   </tal:block>
   <tal:block condition="python:mtool.checkPermission('Add portal content', here)">
     <a href="calendar_create_form"
-      tal:content="python:mcat('_Create_a_calendar_')">
+      tal:content="string:_Create_a_calendar_">
       Create a calendar
     </a>
   </tal:block>

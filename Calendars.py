@@ -17,20 +17,31 @@ from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass
 
 from Products.CMFCore.CMFCorePermissions import \
-     View, ManageProperties
+     setDefaultRoles, View, ManageProperties
 from Products.CMFCore.utils import getToolByName
 
+from Products.CPSCore.CPSBase import CPSBaseFolder, CPSBase_adder
+#from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
 
-from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
+ManageWorkgroups = 'Manage Workgroups'
+setDefaultRoles(ManageWorkgroups, ('Manager',))
+
+
+WorkgroupManager = 'WorkgroupManager'
+WorkgroupMember = 'WorkgroupMember'
+WorkgroupVisitor = 'WorkgroupVisitor'
+WorkgroupManagerRoles = (WorkgroupManager, WorkgroupMember, WorkgroupVisitor,)
+WorkgroupMemberRoles = (WorkgroupMember, WorkgroupVisitor,)
+WorkgroupVisitorRoles = (WorkgroupVisitor,)
 
 factory_type_information = (
     {'id': 'Calendars',
      'title': 'Calendars',
      'icon': 'calendars_icon.gif',
-     'product': 'NuxGroupCalendar',
+     'product': 'CPSCalendar',
      'meta_type': 'Calendars',
      'factory': 'addCalendars',
-     'immediate_view': 'workgroup_edit_form',
+     'immediate_view': 'folder_edit_form',
      'filter_content_types': 1,
      'allowed_content_types': (
                                'Calendar',
@@ -43,7 +54,7 @@ factory_type_information = (
                   },
                  {'id': 'localroles',
                   'name': '_action_access_rights_',
-                  'action': 'workgroup_localrole_form',
+                  'action': 'folder_localrole_form',
                   'permissions': (ManageWorkgroups,),
                   'category': 'object'
                   },
@@ -52,6 +63,11 @@ factory_type_information = (
                   'action': 'calendars_create_form',
                   'visible': 0,
                   'permissions': ()},
+                 {'id': 'isproxytype',
+                  'name': 'isproxytype',
+                  'action': 'folder',
+                  'permissions': ('',),
+                  'visible': 0},
                  ),
      },
     )
@@ -132,7 +148,7 @@ def slot_union(cal_slot, with_free=0):
 
     return result
 
-class Calendars(Workgroup):
+class Calendars(CPSBaseFolder):
     """
     """
     meta_type = 'Calendars'
@@ -315,7 +331,7 @@ class Calendars(Workgroup):
                 })
         return calendars_dict
 
-    security.declareProtected(View, 'getAttendeeInfo')
+    security.declarePublic(View, 'getAttendeeInfo')
     def getAttendeeInfo(self, id, status=0):
         if id in self.objectIds('Calendar'):
             calendar = getattr(self, id)
@@ -381,13 +397,14 @@ def addCalendars(dispatcher, id,
                  description='',
                  REQUEST=None):
     """Adds a Calendars container."""
-    ob = Calendars(id, title, description)
+    ob = Calendars(id)#, title, description)
     container = dispatcher.Destination()
-    container._setObject(id, ob)
+    #container._setObject(id, ob)
     #ob = container._getOb(id)
     if REQUEST is not None:
         url = dispatcher.DestinationURL()
         REQUEST.RESPONSE.redirect('%s/manage_main' % url)
+    return CPSBase_adder(container, ob, REQUEST=REQUEST)
 
 
 # This program is free software; you can redistribute it and/or modify

@@ -7,7 +7,6 @@
     dirtool here/portal_metadirectories;
     dtool dirtool/members;
     gdtool dirtool/groups;
-    mcat nocall:here/portal_messages;
     portal_object utool/getPortalObject;
     portal_title portal_object/Title;
     object_title here/Title;
@@ -43,7 +42,7 @@
 </head>
 
 <body bgcolor="white" onLoad="initAll()"
-  tal:define="button_value python:mcat('_button_cancel_');">
+  tal:define="button_value python:str('_button_cancel_');">
   <table cellspacing="0" border="1" cellpadding="5" width="100%">
     <tr>
       <td>
@@ -54,7 +53,7 @@
     </tr>
   </table>
   <input type="button" onClick="validateSelector()"
-    tal:attributes="value python:mcat('_button_validate_')"
+    tal:attributes="value python:str('_button_validate_')"
     tal:condition="should_validate|nothing" />
   <input type="button" onClick="window.close()"
     tal:attributes="value button_value" />

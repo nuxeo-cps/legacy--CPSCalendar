@@ -2,7 +2,7 @@
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="header"
-  tal:content="python:mcat('_Meeting creation helper_')">
+  tal:content="python:str('_Meeting creation helper_')">
   Meeting creation helper
 </metal:block>
 
@@ -10,17 +10,17 @@
 
 <metal:block fill-slot="main">
   <h2
-    tal:content="python:mcat('_Your request for a meeting has errors:')">
+    tal:content="python:str('_Your request for a meeting has errors:')">
     Your request for a meeting has errors:
   </h2>
   <ul>
     <li tal:repeat="error options/errors"
-      tal:content="python:mcat(error)">
+      tal:content="python:str(error)">
       Error
     </li>
   </ul>
   <input type="button" onClick="history.back()"
-    tal:attributes="value python:mcat('_button_back_')" />
+    tal:attributes="value python:str('_button_back_')" />
 </metal:block>
 
 </html>

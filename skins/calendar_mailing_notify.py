@@ -1,11 +1,10 @@
 ##parameters=event_dict, calendar_url, calendar_title, event_title, mail_from, reply_to, mails, new_event
 
-mcat = context.portal_messages
 request = event_dict['request']
 confirm_url = '%s/calendar_pending_events?event_id=%s' % (calendar_url, event_dict['id'])
 
-calendar_title = mcat(calendar_title)
-event_title = mcat(event_title)
+calendar_title = str(calendar_title)
+event_title = str(event_title)
 
 header = """\
 From: %s

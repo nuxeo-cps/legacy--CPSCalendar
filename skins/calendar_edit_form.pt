@@ -11,11 +11,11 @@
 
 <metal:block fill-slot="header">
   <tal:block condition="create"
-      tal:replace="python:mcat('_Create_a_Calendar_')">
+      tal:replace="python:str('_Create_a_Calendar_')">
     Create a Calendar 
   </tal:block>
   <tal:block condition="not:create">
-    <tal:block replace="python:mcat('_Modify_(object name)_')">
+    <tal:block replace="python:str('_Modify_(object name)_')">
       Modify
     </tal:block>
     «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
@@ -24,30 +24,30 @@
 
 
 <metal:block fill-slot="main"
-     tal:define="title python:create and mcat('_(document)_Untitled_') or here.Title();
+     tal:define="title python:create and str('_(document)_Untitled_') or here.Title();
                  description python:(create and [''] or [here.Description()])[0];
                  usertype python:create and 'ressources' or here.usertype;
-                 submitvalue python:create and mcat('_button_create_') or mcat('_button_modify_');
+                 submitvalue python:create and str('_button_create_') or str('_button_modify_');
                  action python:create and 'calendar_create' or 'folder_edit';
                 ">
 
   <form action="." method="post" enctype="multipart/form-data"
         tal:attributes="action action">
 
-  <metal:block use-macro="here/main_widgets/macros/form">
+  <metal:block use-macro="here/generic_lib/macros/form">
     <metal:block fill-slot="content">
-      <metal:block tal:condition="create" use-macro="here/main_widgets/macros/form_property">
+      <metal:block tal:condition="create" use-macro="here/generic_lib/macros/form_property">
         <metal:block fill-slot="title"
-          tal:content="python:mcat('_prop_title_')">
+          tal:content="python:str('_prop_title_')">
           Title
         </metal:block>
         <metal:block fill-slot="content">
           <input type="text" name="title" value="" />
         </metal:block>
       </metal:block>
-      <metal:block use-macro="here/main_widgets/macros/form_property">
+      <metal:block use-macro="here/generic_lib/macros/form_property">
         <metal:block fill-slot="title"
-          tal:content="python:mcat('_prop_description_')">
+          tal:content="python:str('_prop_description_')">
           Description
         </metal:block>
         <metal:block fill-slot="content">
@@ -56,9 +56,9 @@
         </metal:block>
       </metal:block>
       <tal:block condition="python:usertype != 'member'">
-        <metal:block use-macro="here/main_widgets/macros/form_property">
+        <metal:block use-macro="here/generic_lib/macros/form_property">
           <metal:block fill-slot="title"
-            tal:content="python:mcat('_prop_cal_usertype_')">
+            tal:content="python:str('_prop_cal_usertype_')">
             Calendar type
           </metal:block>
           <metal:block fill-slot="content">
@@ -70,7 +70,7 @@
                   tal:attributes="
                   value type/id;
                   selected python:type['id'] == usertype"
-                  tal:content="python:mcat(type['title'])" />
+                  tal:content="python:str(type['title'])" />
               </tal:block>
             </select>
           </metal:block>
