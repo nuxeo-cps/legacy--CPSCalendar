@@ -8,7 +8,10 @@ Bug fixes:
 ~~~~~~~~~~
 - It was impossible to change the event type after creation.
 - The montly display for was incorrect if the viewed day was in the end
-  of march. 
+  of march.
+- February could be skippad completely when navigating in monthly view,
+  in really unlucky cases. Rewrote that part, with a new skin method,
+  calendar_getPrevNextPage.py.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
