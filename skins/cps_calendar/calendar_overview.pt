@@ -9,7 +9,7 @@
                          ">
 
   <h1 i18n:domain="Default"
-      i18n:translate="action_overview">Calendar overview</h1>
+      i18n:translate="action_calendar_overview">Calendar overview</h1>
   <p>
     <span i18n:translate="cpscalendar_message_editable_calendars"
           tal:condition="editcals">
