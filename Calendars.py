@@ -40,7 +40,7 @@ WorkgroupVisitorRoles = (WorkgroupVisitor,)
 
 factory_type_information = (
     {'id': 'Calendars',
-     'title': 'Calendars',
+     'title': 'portal_type_Calendars',
      'icon': 'calendars_icon.gif',
      'product': 'CPSCalendar',
      'meta_type': 'Calendars',

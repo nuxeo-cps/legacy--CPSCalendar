@@ -38,7 +38,7 @@ def cmpEv(a, b):
 
 factory_type_information = (
     {'id': 'Calendar',
-     'title': 'Calendar',
+     'title': 'portal_type_Calendar',
      'icon': 'calendar_icon.gif',
      'product': 'CPSCalendar',
      'meta_type': 'Calendar',
@@ -87,7 +87,7 @@ factory_type_information = (
                  {'id': 'meeting',
                   'name': 'action_addmeeting',
                   'action': 'string:${object_url}/calendar_meeting_form',
-                  'condition': '',
+                  'condition': "python:hasattr(object, 'getFreeBusy'",
                   'permissions': ("Add portal content",),
                   'category': 'object',
                   },
