@@ -16,6 +16,8 @@ Bug fixes:
 - Edit access now depends on the Modify Portal Content permission.
 - The id of attendees is now the user name.
 - Mail notifications are working now.
+- The "Other" category is now not included by default, and "work" is the
+  default category for new events.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
