@@ -102,8 +102,7 @@ factory_type_information = (
                  {'id': 'calendar_event_viewer',
                   'name': 'action_calendar_event_viewer',
                   'action': 'string:${object_url}/calendar_event_viewer?disp=week',
-                  'condition': "python:getattr(portal.portal_cpscalendar, \
-                                       'member_can_create_home_calendar', 1)",
+                  'condition': "",
                   'permissions': (View,),
                   'category': 'object',
                   },
