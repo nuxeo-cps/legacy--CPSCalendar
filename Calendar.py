@@ -43,6 +43,12 @@ factory_type_information = (
                   'category': 'object',
                   'visible': 0,
                   },
+                 {'id': 'export',
+                  'name': '_action_export_',
+                  'action': 'calendar_export',
+                  'permissions': (View,),
+                  'category': 'object'
+                  },
                  {'id': 'localroles',
                   'name': '_action_access_rights_',
                   'action': 'workgroup_localrole_form',
