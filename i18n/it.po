@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2004-06-17 11:04default\n"
+"POT-Creation-Date: 2004-07-23 10:35default\n"
 "PO-Revision-Date: 2004-05-10 15:04+0100\n"
 "Last-Translator: Paolo Dina <paolo@php3.it>\n"
 "Language-Team: \n"
@@ -350,10 +350,13 @@ msgstr "Conferma eliminazione eventi"
 #.   <h1>
 #.       Meeting creation helper
 #.     </h1>
+#.   <h1>
+#.       Meeting creation helper
+#.   </h1>
+#.   <span />
 #.   <block fill-slot="head_slot">
 #.     Meeting creation helper
 #.   </block>
-#.   <span />
 #: from ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
 #: ../skins/cps_calendar/calendar_meeting_error.pt
@@ -484,6 +487,17 @@ msgstr "Partecipanti"
 msgid "cpscalendar_label_between"
 msgstr "Tra"
 
+#    <span>
+#            Between
+#          </span>
+#.   <a class=".button" onclick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')">
+#.                      Browse
+#.                 </a>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#, fuzzy
+msgid "cpscalendar_label_browse"
+msgstr "Tra"
+
 #    <td>
 #                  Busy time
 #                </td>
@@ -604,6 +618,27 @@ msgstr "Data"
 #: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_description"
 msgstr "Descrizione"
+
+#    <block fill-slot="title">
+#                Comment
+#              </block>
+#    <metal:block fill-slot="title">
+#                  Comment
+#                </metal:block>
+#    <metal:block fill-slot="title">
+#            Comment
+#              </metal:block>
+#.   <block fill-slot="title">
+#.               Document link
+#.             </block>
+#.   <metal:block fill-slot="title">
+#.           Document link
+#.         </metal:block>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+#, fuzzy
+msgid "cpscalendar_label_document_link"
+msgstr "Commento"
 
 #    <span>Duration</span>
 #.   <span>Duration</span>
@@ -1244,6 +1279,18 @@ msgstr "Stato"
 msgid "week day"
 msgstr ""
 
+msgid "portal_type_Calendar_title"
+msgstr "Ordine del giorno"
+
+msgid "portal_type_Calendar_description"
+msgstr ""
+
+msgid "portal_type_Calendar_Event_title"
+msgstr "Evento"
+
+msgid "portal_type_Calendar_Event_description"
+msgstr "Un evento"
+
 msgid "cpscalendar_user_calendar_name_beg"
 msgstr "Calendario di"
 
@@ -1559,3 +1606,16 @@ msgstr "Eventi della settimana"
 
 msgid "cpscalendar_event_viewer_month"
 msgstr "Eventi del mese"
+
+#    <block fill-slot="title">
+#              Description
+#            </block>
+#    <block fill-slot="title">
+#                Description
+#              </block>
+#    <metal:block fill-slot="title">
+#            Description
+#          </metal:block>
+#, fuzzy
+#~ msgid "portal_type_Event_description"
+#~ msgstr "Descrizione"

@@ -63,7 +63,8 @@ def cmpEv(a, b):
 
 factory_type_information = (
     {'id': 'Calendar',
-     'title': 'portal_type_Calendar',
+     'title': 'portal_type_Calendar_title',
+     'description': 'portal_type_Calendar_description',
      'icon': 'calendar_icon.gif',
      'product': 'CPSCalendar',
      'meta_type': 'Calendar',

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2004-07-02 14:21default\n"
+"POT-Creation-Date: 2004-07-23 10:35default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -261,10 +261,13 @@ msgstr ""
 #.   <h1>
 #.       Meeting creation helper
 #.     </h1>
+#.   <h1>
+#.       Meeting creation helper
+#.   </h1>
+#.   <span />
 #.   <block fill-slot="head_slot">
 #.     Meeting creation helper
 #.   </block>
-#.   <span />
 #: from ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
 #: ../skins/cps_calendar/calendar_meeting_error.pt
@@ -909,6 +912,18 @@ msgstr ""
 #.   <span content="string:cpscalendar_label_day_long${i}">week day</span>
 #: from ../skins/cps_calendar/calendar_view_macros.pt
 msgid "week day"
+msgstr ""
+
+msgid "portal_type_Calendar_title"
+msgstr ""
+
+msgid "portal_type_Calendar_description"
+msgstr ""
+
+msgid "portal_type_Calendar_Event_title"
+msgstr ""
+
+msgid "portal_type_Calendar_Event_description"
 msgstr ""
 
 msgid "cpscalendar_user_calendar_name_beg"

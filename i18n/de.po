@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2004-06-17 11:04default\n"
+"POT-Creation-Date: 2004-07-23 10:35default\n"
 "PO-Revision-Date: 2004-07-12 18:37+0200\n"
 "Last-Translator: Georg Hennemann <georg.hennemann@dhl.com>\n"
 "Language-Team: German <reinland@dzug.org>\n"
@@ -253,10 +253,13 @@ msgstr "Event Löschen Bestätigen"
 #.   <h1>
 #.       Meeting creation helper
 #.     </h1>
+#.   <h1>
+#.       Meeting creation helper
+#.   </h1>
+#.   <span />
 #.   <block fill-slot="head_slot">
 #.     Meeting creation helper
 #.   </block>
-#.   <span />
 #: from ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
 #: ../skins/cps_calendar/calendar_meeting_error.pt
@@ -352,6 +355,14 @@ msgstr "Teilnehmer"
 msgid "cpscalendar_label_between"
 msgstr "Zwischen"
 
+#.   <a class=".button" onclick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')">
+#.                      Browse
+#.                 </a>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#, fuzzy
+msgid "cpscalendar_label_browse"
+msgstr "Zwischen"
+
 #.   <td>
 #.                 Busy time
 #.               </td>
@@ -430,6 +441,18 @@ msgstr "Datum"
 #: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_description"
 msgstr "Beschreibung"
+
+#.   <block fill-slot="title">
+#.               Document link
+#.             </block>
+#.   <metal:block fill-slot="title">
+#.           Document link
+#.         </metal:block>
+#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: ../skins/cps_calendar/calendar_macros.pt
+#, fuzzy
+msgid "cpscalendar_label_document_link"
+msgstr "Kommentar"
 
 #.   <span>Duration</span>
 #: from ../skins/cps_calendar/create_meeting_form.pt
@@ -649,7 +672,9 @@ msgstr "Transparent"
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_legend_transparent"
-msgstr "(Transparent bedeutet das die Teilnehmer während des Events nicht blockiert sind.)"
+msgstr ""
+"(Transparent bedeutet das die Teilnehmer während des Events nicht blockiert "
+"sind.)"
 
 #.   <a target="_blank" attributes="href string:calendar_printable_view?viewed_day=${viewed_day_int}">
 #.         Printable view
@@ -678,7 +703,6 @@ msgstr "Kommentar für die Teilnehmer"
 msgid "cpscalendar_message_comment_for_organizer"
 msgstr "Kommentar für den Organisator"
 
-
 #.   <span>
 #.         If you have an application that supports it, you can also
 #.       </span>
@@ -705,7 +729,8 @@ msgstr "Sorry, kein User da der zu Ihrer Anfrage passt."
 #.         </strong>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_message_notify_attendees"
-msgstr "Sie müssen auch die anderen Teilnehmer von Ihren Änderungen benachrichtigen."
+msgstr ""
+"Sie müssen auch die anderen Teilnehmer von Ihren Änderungen benachrichtigen."
 
 #.   <strong condition="python:notify == 'cancel'">
 #.       You have to notify attendees that you will delete this event.
@@ -726,7 +751,9 @@ msgstr "Sie müssen die Teilnehmer von der Löschung der Events benachrichtigen."
 #.     </strong>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_message_notify_organizer_you_will_delete_event"
-msgstr "Sie müssen den Event Organisator darüber informieren das Sie dieses Event löschen."
+msgstr ""
+"Sie müssen den Event Organisator darüber informieren das Sie dieses Event "
+"löschen."
 
 #.   <span class="calTitle">
 #.       Select at least one attendee.
@@ -763,7 +790,6 @@ msgstr "Wählen Sie die gewünschte Zeitdauer für das Treffen"
 msgid "cpscalendar_message_subscribe_to_this_calendar"
 msgstr "diesen Kalender abbonieren"
 
-
 #.   <a attributes="href string:${here_url}/calendar.ics">
 #.         the iCalendar version of this calendar.
 #.       </a>
@@ -778,15 +804,16 @@ msgstr " iCalendar Version dieses Kalenders."
 #: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
 msgid "cpscalendar_message_too_early_specified_hour"
 msgstr ""
-"Der Endzeitpunkt liegt vor dem Startzeitpunkt. Wollen sie  "
-"tauschen? Klicken Sie OK wenn Sie Startzeitpunkt und Endzeitpunkt vertauschen wollen."
+"Der Endzeitpunkt liegt vor dem Startzeitpunkt. Wollen sie  tauschen? Klicken "
+"Sie OK wenn Sie Startzeitpunkt und Endzeitpunkt vertauschen wollen."
 
 #.   <p>
 #.       Unselect events you don't want to notify attendees.
 #.     </p>
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
 msgid "cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees"
-msgstr "Abwählen der Events wo keine Benachrichigung der Teilnehmer gewünscht ist"
+msgstr ""
+"Abwählen der Events wo keine Benachrichigung der Teilnehmer gewünscht ist"
 
 #.   <span>
 #.         You can download
@@ -890,6 +917,18 @@ msgstr "Status"
 #: from ../skins/cps_calendar/calendar_view_macros.pt
 msgid "week day"
 msgstr "Wochen Tag"
+
+msgid "portal_type_Calendar_title"
+msgstr "Kalender"
+
+msgid "portal_type_Calendar_description"
+msgstr ""
+
+msgid "portal_type_Calendar_Event_title"
+msgstr "Event"
+
+msgid "portal_type_Calendar_Event_description"
+msgstr "... Ereignisse portalweit ankündigen"
 
 msgid "cpscalendar_user_calendar_name_beg"
 msgstr "Kalender von "

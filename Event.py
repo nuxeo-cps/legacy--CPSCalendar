@@ -39,7 +39,8 @@ from Products.CPSCore.CPSBase import CPSBaseDocument
 
 factory_type_information = (
     {'id': 'Event',
-     'title': 'Event',
+     'title': 'portal_type_Calendar_Event_title',
+     'description': 'portal_type_Calendar_Event_description',
      'content_icon': 'event_icon.gif',
      'product': 'CPSCalendar',
      'factory': 'addEvent',
