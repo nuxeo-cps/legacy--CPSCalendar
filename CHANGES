@@ -24,6 +24,7 @@ Bug fixes:
 - Adding attendees now automatically sends a notification.
 - Modifying the event now automatically sends a notification.
 - The confirmation options are now radio buttons instead of a select list.
+- You can now only modify and delete events via the organizers calendar.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
