@@ -21,6 +21,8 @@ Bug fixes:
   searching for free times in the meeting creation helper.
 - Events shorter than an hour could cause later events the same day to be
   displayed slightly incorrectly.
+- When creating an event, any meeting data stored in the session is cleared
+  first, to prevent this data bleeding into the event creation.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Add getHomeCalendarObject and getHomeCalendarUrl method in CalendarTool
