@@ -15,13 +15,16 @@
                                   {'id':'events_shows', 'title':'_cal_Events_shows_'},
                                   {'id':'rooms', 'title':'_cal_Rooms_'},
                                   {'id':'ressources', 'title':'_cal_Ressources_'},)">
-    <tal:block define="id type/id; cals calendars/?id"
+    <tal:block define="id type/id;
+                       cals calendars/?id"
                condition="cals">
-      <span class="calTitle" tal:content="python:type['title']"
-          i18n:translate="">Rooms</span>
+      <span class="calTitle"
+            tal:content="python:type['title']"
+            i18n:translate="">Rooms</span>
       <ul>
         <li tal:repeat="cal cals">
-          <a tal:attributes="href cal/url" tal:content="cal/title">Calendar</a>
+          <a tal:attributes="href cal/url"
+             tal:content="cal/title">Calendar</a>
           <strong tal:condition="cal/pending">
             <a tal:attributes="href string:${cal/url}/calendar_pending_events"
                tal:content="string:[${cal/pending}]"
