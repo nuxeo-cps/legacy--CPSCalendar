@@ -27,7 +27,7 @@ from copy import deepcopy
 
 from zLOG import LOG, DEBUG, INFO
 from DateTime import DateTime
-from Acquisition import aq_parent, aq_inner
+from Acquisition import aq_parent, aq_inner, aq_base
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 
@@ -60,7 +60,7 @@ factory_type_information = (
                   'permissions': (ModifyPortalContent,)},
                  {'id': 'delete',
                   'name': '_action_delete_',
-                  'action': 'calendar_delevent_form',
+                  'action': 'calendar_delevent',
                   'permissions': (ModifyPortalContent,)},
                  {'id': 'create',
                   'name': '_action_create_',
@@ -228,8 +228,25 @@ class Event(BaseDocument):
         """
         return self.getCalendarUser() == self.organizer['id']
 
+    security.declareProtected('Add portal content', 'setEventStatus')
+    def setEventStatus(self, status):
+        """
+        """
+        old_status = self.event_status
+        if status != old_status:
+            if status == 'canceled':
+                calendar = self.getCalendar()
+                calendar.addCanceledEvent(self)
+            if old_status == 'canceled':
+                calendar = self.getCalendar()
+                calendar.removeCanceledEvent(self)
+            self.isdirty = 1
+        self.event_status = status
+
     security.declareProtected('Add portal content', 'setAttendees')
     def setAttendees(self, attendees):
+        """
+        """
         self.attendees = deepcopy(attendees)
         self.isdirty = 1
 
@@ -245,6 +262,13 @@ class Event(BaseDocument):
         if change:
             self.isdirty = 1
             self._p_changed = 1
+
+    security.declareProtected('View', 'getMyStatus')
+    def getMyStatus(self):
+        my_id = self.getCalendarUser()
+        for attendee in self.attendees:
+            if attendee['id'] == my_id:
+                return attendee['status']
 
     security.declareProtected('Add portal content', 'setMyStatus')
     def setMyStatus(self, status, comment='', REQUEST=None):
@@ -307,14 +331,6 @@ class Event(BaseDocument):
         if REQUEST is not None:
             REQUEST.RESPONSE.redirect(self.absolute_url())
 
-    security.declareProtected(ModifyPortalContent, 'deleteEvent')
-    def deleteEvent(self, comment=''):
-        """
-        """
-        parent = self.getCalendar()
-        if parent is not None:
-            parent.manage_delObjects([self.id])
-
     security.declarePrivate('getEventInSlots')
     def getEventInSlots(self, start_time, end_time, slots):
         """
@@ -351,6 +367,15 @@ class Event(BaseDocument):
         member = mtool.getAuthenticatedMember().getUserName()
         dtstamp = DateTime()
         return (member, dtstamp)
+
+    def manage_afterAdd(self, item, container):
+        """
+        """
+        BaseDocument.manage_afterAdd(self, item, container)
+        if aq_base(item) is aq_base(self):
+            if self.event_status == 'canceled':
+                calendar = self.getCalendar()
+                calendar.addCanceledEvent(self)
 
 InitializeClass(Event)
 
