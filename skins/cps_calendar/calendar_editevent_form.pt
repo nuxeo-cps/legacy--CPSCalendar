@@ -58,21 +58,28 @@
   <tal:block condition="not:editevent" define="event nocall:here">
     <metal:block use-macro="here/calendar_macros/macros/event_view" />
   </tal:block>
+
   <tal:block condition="editevent">
+
     <form action="calendar_addevent_form" tal:condition="create">
       <input type="hidden" name="all_day:int"
-        tal:attributes="value not:all_day" />
+             tal:attributes="value not:all_day" />
       <input type="submit"
-        tal:attributes="value python:all_day and str('_Create a not all day_') or str('_Create an all day_')"
-        i18n:attributes="value">
+             tal:attributes="value python:
+	                     all_day and str('_Create an all day_') 
+                             or str('_Create a not all day_')"
+             i18n:attributes="value">
     </form>
     <form action="calendar_changeeventtype" tal:condition="not:create">
       <input type="hidden" name="all_day:int"
-        tal:attributes="value not:all_day" />
+             tal:attributes="value not:all_day" />
       <input type="submit"
-        tal:attributes="value python:all_day and str('_Change event to not all day_') or str('_Change event to all day_')"
-        i18n:attributes="value">
+             tal:attributes="value python:
+                             all_day and str('_Change event to not all day_') 
+                             or str('_Change event to all day_')"
+             i18n:attributes="value">
     </form>
+
     <form tal:attributes="action action" method="POST">
       <metal:block use-macro="here/calendar_macros/macros/form">
         <metal:block fill-slot="content">
