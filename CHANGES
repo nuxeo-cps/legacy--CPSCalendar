@@ -4,11 +4,11 @@ ZODB Requires:
 
 New features:
 ~~~~~~~~~~~~~
-- Calendar objects can be use outside Calendars object (#249)
-- Use new javascript calendar to edit event and meeting
+-
+
 Bug fixes:
 ~~~~~~~~~~
-- CPS3 tabs integration
+-
 
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
