@@ -415,10 +415,10 @@ class Calendar(Workgroup):
                         # so resolve conflict
                         if len(conflict) == 1:
                             # just a simple event
-                            blocks.append([{
+                            blocks.append([[{
                               'event': conflict[0]['ev']['event'],
                               'height': conflict[0]['stop_min'] - conflict[0]['start_min'],
-                            }])
+                            }]])
                         else:
                             block_cols = []
                             block_stops = []
@@ -466,10 +466,10 @@ class Calendar(Workgroup):
                         conflict_stop = max(stop_min, conflict_stop)
                 if not conflict:
                     if last_ev != start_min:
-                        blocks.append([{
+                        blocks.append([[{
                             'event':None,
                             'height':start_min - last_ev,
-                        }])
+                        }]])
                     conflict_start = start_min
                     conflict_stop = stop_min
                     conflict.append({
@@ -479,10 +479,10 @@ class Calendar(Workgroup):
                     })
             if conflict:
                 if len(conflict) == 1:
-                    blocks.append([{
+                    blocks.append([[{
                       'event': conflict[0]['ev']['event'],
                       'height': conflict[0]['stop_min'] - conflict[0]['start_min'],
-                    }])
+                    }]])
                 else:
                     block_cols = []
                     block_stops = []
@@ -519,10 +519,10 @@ class Calendar(Workgroup):
                 last_ev = conflict_stop
 
             if last_ev < 1439:
-                blocks.append([{
+                blocks.append([[{
                     'event': None,
                         'height': 1439 - last_ev
-                    }])
+                    }]])
 
         return hour_block_cols
 
