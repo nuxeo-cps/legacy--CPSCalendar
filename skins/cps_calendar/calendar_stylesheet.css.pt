@@ -1,5 +1,6 @@
-<tal:block define="global portal_url python:here.portal_url(relative=1)" />
-
+<tal:block define="global portal_url python:here.portal_url(relative=1);
+                   dummy python:request.response.setHeader('Content-Type', 'text/css')
+  "/>
 td.eventHeader {
   background-color: black;
   text-align: left;
@@ -11,30 +12,32 @@ td.eventHeader a {
   white-space: nowrap;
 }
 
-.calMaigre {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 75%; color: #000000; text-decoration: none}
+.calMaigre {
+  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 75%; color: #000000; text-decoration: none
+}
 
 small.calEvent {
-  color: white
+  color: white;
 }
 
 a.calEvent {
-  color: white
+  color: white;
 }
 
 a.calEvent:link {
-  color: white
+  color: white;
 }
 
 a.calEvent:visited {
-  color: white
+  color: white;
 }
 
 a.calEvent:active {
-  color: #DDDDDD
+  color: #dddddd;
 }
 
 a.calEvent:hover {
-  color: white
+  color: white;
 }
 
 th.dayEvent {
@@ -43,25 +46,25 @@ th.dayEvent {
 }
 
 img.dayIcon {
-  vertical-align:middle
+  vertical-align: middle;
 }
 
 td.calLeftTab {
-  vertical-align:middle;
+  vertical-align: middle;
   color: white;
   text-align: center;
   background-image: url(<tal:block replace="portal_url" />/cal_left_tab.png);
 }
 
 td.calCenterTab {
-  vertical-align:middle;
+  vertical-align: middle;
   color: white;
   text-align: center;
   background-image: url(<tal:block replace="portal_url" />/cal_center_tab.png);
 }
 
 td.calRightTab {
-  vertical-align:middle;
+  vertical-align: middle;
   color: white;
   text-align: center;
   background-image: url(<tal:block replace="portal_url" />/cal_right_tab.png);
