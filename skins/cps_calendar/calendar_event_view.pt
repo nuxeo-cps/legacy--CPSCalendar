@@ -18,7 +18,9 @@
 	    member_id member/getMemberId;
 	    local_event1 python:authenticated_user_id == event.getCalendarUser();
 	    local_event2 python:member.getMemberId() == event.getCalendarUser();
+	    all_day here/all_day;
 	    ">
+	    <hr/>
 	    <p>
 	      calendar_id <tal:block tal:replace="calendar_id"/><br/>
 	      authenticated_user <tal:block tal:replace="authenticated_user"/><br/>
@@ -26,8 +28,10 @@
 	      member_id <tal:block tal:replace="member_id"/><br/>
 	      event_user_id <tal:block tal:replace="event_user_id"/><br/>
 	      local_event1 ? <tal:block tal:replace="local_event1"/><br/>
-	      local_event2 ? <tal:block tal:replace="local_event2"/>
+	      local_event2 ? <tal:block tal:replace="local_event2"/><br/>
+	      all_day <tal:block tal:replace="all_day"/><br/>
 	    </p>
+	    <hr/>
 	  </tal:block>
 	</tal:block>
 

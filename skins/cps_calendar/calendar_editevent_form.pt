@@ -60,8 +60,10 @@
       <tal:block tal:condition="nothing">
 	<!-- Debug block that doesn't appear in the output -->
 	<hr/>
+        <p>
 	here/all_day = <tal:block tal:condition="exists:here/all_day" tal:replace="here/all_day"/><br/>
 	form.get('all_day') = <tal:block tal:replace="python:request.form.get('all_day')"/><br/>
+        </p>
 	<hr/>
       </tal:block>
 
