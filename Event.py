@@ -91,9 +91,6 @@ class Event(CPSBaseDocument):
     display_type = 'standard_event'
 
     _properties = CPSBaseDocument._properties + (
-        # FIXME: organizer is now a dictionary, so it doesn't make
-        # sense to make it editable in a text field.
-        {'id': 'organizer', 'type': 'text', 'mode': 'w', 'label': 'Organizer'},
         {'id': 'transparent', 'type': 'boolean', 'mode': 'w',
          'label': 'Transparent Event'},
         {'id': 'location', 'type': 'text', 'mode': 'w', 'label': 'Location'},
