@@ -40,6 +40,21 @@ msgstr ""
 msgid "cpscalendar_option_status_cancelled"
 msgstr ""
 
+msgid "cpscalendar_pending_confirmed"
+msgstr ""
+
+msgid "cpscalendar_pending_tentative"
+msgstr ""
+
+msgid "cpscalendar_pending_decline"
+msgstr ""
+
+msgid "cpscalendar_pending_decline_and_delete"
+msgstr ""
+
+msgid "cpscalendar_pending_ignore"
+msgstr ""
+
 msgid "cpscalendar_category_private"
 msgstr ""
 

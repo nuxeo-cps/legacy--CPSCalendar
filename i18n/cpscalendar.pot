@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-12-08 13:17default\n"
+"POT-Creation-Date: 2003-12-08 14:28default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -34,7 +34,7 @@ msgid "Category"
 msgstr ""
 
 #.   <option repeat="status statuses" attributes="value status;
-#.   					selected python:status == selected" content="python:str('cpscalendar_pending_%s_' % (status, ))">
+#.   					selected python:status == selected" content="python:str('cpscalendar_pending_%s' % (status, ))">
 #.   		  Confirm
 #.   		</option>
 #: from ../skins/cps_calendar/calendar_macros.pt
@@ -928,6 +928,21 @@ msgid "cpscalendar_option_status_unconfirmed"
 msgstr ""
 
 msgid "cpscalendar_option_status_cancelled"
+msgstr ""
+
+msgid "cpscalendar_pending_confirmed"
+msgstr ""
+
+msgid "cpscalendar_pending_tentative"
+msgstr ""
+
+msgid "cpscalendar_pending_decline"
+msgstr ""
+
+msgid "cpscalendar_pending_decline_and_delete"
+msgstr ""
+
+msgid "cpscalendar_pending_ignore"
 msgstr ""
 
 msgid "cpscalendar_category_private"
