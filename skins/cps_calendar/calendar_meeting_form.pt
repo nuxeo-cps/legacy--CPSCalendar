@@ -172,7 +172,7 @@ range       : [2000, 2049]
     <p tal:repeat="cal cal_ids">
         <input type="checkbox" name="cal_ids:list" checked
           tal:attributes="value cal" />
-        <span tal:define="calob python:caltool.getCalendarForPath(cal);
+        <span tal:define="calob python:caltool.getCalendarForPath(cal, unrestricted=1);
           userid calob/getCalendarUser;
           user python:dtool.getEntry(userid);
           "
