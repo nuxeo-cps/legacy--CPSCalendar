@@ -470,6 +470,21 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 'Event from %s to %s; Mask from %s to %s' % \
                 (event.from_date, event.to_date, mask.from_date, mask.to_date))
 
+        def makevirtual(event, to_date, from_date):
+            # Makes a virtual event out of recurring events.
+            # Ordinary events are just passed through.
+            if event.event_type != 'event_recurring':
+                return event
+            event_start, event_stop = event.from_date, event.to_date
+            repeats = 0
+            while to_date.greaterThan(event_stop):
+                event_start, event_stop = event.getRecurrance(repeats)
+                repeats += 1
+
+                if event_stop > to_date and event_start < from_date:
+                    return VirtualEvent(event_start, event_stop)
+                        
+            
         # normalize
         slot_start = DateTime(from_date.year(), from_date.month(),
                               from_date.day())
@@ -507,7 +522,6 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         events_desc = []
         MIN_HEIGHT = 50 # The minimum display height of an event.
 
-
         while slot_start.lessThan(end_time):
             slot_end = slot_start+1
             slots.append((slot_start, slot_end))
@@ -529,7 +543,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 for event in events:
                     newfreetimes = []
                     for freetime in freetimes:
-                        newfreetimes.extend(eventMask(freetime, event))
+                        newfreetimes.extend(eventMask(freetime,
+                           makevirtual(event, slot_start, slot_end)))
                     freetimes = newfreetimes
 
             # Generate the event structure for display.
