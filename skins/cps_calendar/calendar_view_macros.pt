@@ -5,7 +5,7 @@
   <table cellspacing="0" cellpadding="0" border="0" tal:define="page_size python:1;">
      <metal:block use-macro="here/calendar_view_macros/macros/navigation_tabs" />
      <tr>
-      <td>;
+      <td>
         <table cellspacing="0" cellpadding="0" border="1"
                tal:define="cat_info here/calendar_categories;
                            categories cat_info/categories;
@@ -501,6 +501,8 @@
          tal:define="
            local_event python:member_id == event.getCalendarUser();
            event_title event/title_or_id;
+           short_title python:event_title[:(width/10)-2];
+           short_title python:short_title + ((short_title != event_title) and '...' or '');
            category event/category;
            bgcolor categories/?category/color|def_color;"
          tal:attributes="width width;">
@@ -515,7 +517,7 @@
                tal:define="status python:info['isdirty'] and 'dirty' or 'attendees'"
                tal:attributes="
                   src string:${portal_url}/cal_event_${status}.png;" />
-          <tal:block replace="event_title" />
+          <tal:block replace="short_title" />
         </a>
     </td></tr>
     <tr tal:condition="python:height>14">
