@@ -8,9 +8,9 @@
 
 <metal:block fill-slot="header"
              i18n:domain="cpscalendar">
-  <span i18n:translate="cpscalendar_description_create_a_new_event">
+  <h1 i18n:translate="cpscalendar_description_create_a_new_event">
     Create a new event
-  </span>
+  </h1>
 </metal:block>
 
 <metal:block fill-slot="main" i18n:domain="cpscalendar"

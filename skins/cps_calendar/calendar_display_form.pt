@@ -4,6 +4,10 @@
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="cals here/portal_cpscalendar/listVisibleCalendars;
                          additionals here/getAdditionalCalendars;">
+
+  <h1 i18n:domain="Default"
+      i18n:translate="action_display">Calendars supersposing</h1>
+    
   <p>
     <span i18n:translate="cpscalendar_message_select_calendars_to_display_with_this_calendar">
       Select the calendars you want to display along with this calendar

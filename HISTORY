@@ -16,6 +16,8 @@ New internal features:
   rather than id. So many method calls and datastructures use now 'rpath'
   argument or field instead of 'id'.
 
+- 'cancelled' event attribute has been renamed 'canceled'.
+
 - new API:
 
   For calendar tool:

@@ -4,6 +4,9 @@
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="here_url python:'/'+here.absolute_url(relative=1);
                          total_url here/absolute_url;">
+
+  <h1 i18n:domain="Default" i18n:translate="action_export">Export</h1>
+
   <p>
     <span i18n:translate="cpscalendar_message_you_can_download">
       You can download

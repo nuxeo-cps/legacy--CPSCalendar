@@ -39,10 +39,11 @@
                                               and here.getCalendarsDict(exclude=my_id)
                                               or {};">
 
-  <span i18n:domain="cpscalendar"
-        i18n:translate="cpscalendar_heading_meeting_creation_helper">
+  <h1 i18n:domain="cpscalendar"
+      i18n:translate="cpscalendar_heading_meeting_creation_helper">
     Meeting creation helper
-  </span>
+  </h1>
+
   <form action="calendar_begin_meeting" method="POST">
     <p>
     <span clss="calTitle" i18n:translate="cpscalendar_message_select_the_attendees_you_want_for_your_meeting">
