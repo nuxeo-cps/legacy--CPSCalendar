@@ -232,7 +232,7 @@
 	    </metal:block>
 	    <input type="submit" name="confirmPendingEvent:method"
 	      tal:condition="nocall:real_event"
-	      tal:attributes="value python:str('button_validate')" />
+	      tal:attributes="value python:str('cpscalendar_button_validate')" />
 	    <tal:block condition="not:nocall:real_event">
 	      <metal:block use-macro="here/calendar_macros/macros/form">
 		<metal:block fill-slot="content">
@@ -263,7 +263,7 @@
 		</option>
 	      </select>
 	      <input type="submit" name="calendar_confirmPendingEvent:method"
-		     tal:attributes="value python:str('button_validate')" />
+		     tal:attributes="value python:str('cpscalendar_button_validate')" />
 	    </tal:block>
 	  </tal:block>
 	</tal:block>
