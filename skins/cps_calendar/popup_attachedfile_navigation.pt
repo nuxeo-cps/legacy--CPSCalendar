@@ -1,0 +1,35 @@
+<tal:block define="emptybody python:1">
+<metal:block use-macro="here/main_template/macros/master">
+<metal:block fill-slot="body"
+  tal:define="root_uid string:workspaces;
+              res python:here.getCalendarNavigation(finder='cps',
+                root_uid=root_uid, current_uid=here.document, REQUEST=request);
+              type string:folder;">
+
+  <metal:block use-macro="here/navigation_lib/macros/select_navigation">
+    <metal:block fill-slot="action">
+
+ <script type="text/javascript"
+  tal:content='structure string:
+  <!--
+function updateParent() {
+  form = document.getElementById("navigation_form");
+  uid = form.elements.uid;
+  for (i=0; i<uid.length; i++) {
+    if (uid[i].checked) {
+      parentinput = opener.document.getElementById("document_field");
+      parentinput.value = uid[i].value;
+      self.close();
+      break;
+    }
+  }
+}
+  -->' />
+
+   <input type="submit" class="standalone" value="button_update"
+    onclick="updateParent();" i18n:attributes="value">
+    </metal:block>
+  </metal:block>
+</metal:block>
+</metal:block>
+</tal:block>

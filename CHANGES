@@ -10,6 +10,7 @@ Bug fixes:
   DateTime internal integer format (#1376).
 - The search form now uses the first field in the "fields" property
   of the widget, and not the widget id as the search field (#1378).
+- The new file 'popup_attachedfile_navigation.pt' was missing (#1313).
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
