@@ -3,7 +3,8 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- Private events are no shown only as black/gray space with no links for
+  other users.
 Bug fixes:
 ~~~~~~~~~~
 - Permission problems when validating fixed by using unrestrictedtraverse.
