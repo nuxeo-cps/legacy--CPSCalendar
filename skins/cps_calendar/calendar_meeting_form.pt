@@ -86,7 +86,6 @@
     </span>
     <input type="submit" name="calendar_meeting_form:method"
       i18n:attributes="value" value="cpscalendar_button_validate"/>
-  </form>
     <hr/>
     <p class="calTitle" i18n:translate="cpscalendar_search_for_free_time">
       Search for free time:
@@ -194,5 +193,6 @@ range       : [2000, 2049]
            value="cpscalendar_button_cancel"
            i18n:attributes="value" />
 
+  </form>
 </metal:block>
 </html>
