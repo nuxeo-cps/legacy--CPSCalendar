@@ -17,27 +17,15 @@ if not cal_ids:
     return context.calendar_meeting_empty()
 
 from_date_string = kw.get('from_date','')
-
-if locale in ('en', 'hu', ):
-    from_date_month, from_date_day, from_date_year = from_date_string.split('/')
-else:
-    from_date_day, from_date_month, from_date_year = from_date_string.split('/')
-
-from_date_day = int(from_date_day)
-from_date_month = int(from_date_month)
-from_date_year = int(from_date_year)
-from_date = DateTime(from_date_year, from_date_month, from_date_day)
-
+from_date = ctool.stringToDateTime(from_date_string, locale)
+from_date_day = from_date.day()
+from_date_month = from_date.month()
+from_date_year = from_date.year()
 to_date_string = kw.get('to_date','')
-if locale in ('en', 'hu', ):
-    to_date_month, to_date_day, to_date_year = to_date_string.split('/')
-else:
-    to_date_day, to_date_month, to_date_year = to_date_string.split('/')
-
-to_date_day = int(to_date_day)
-to_date_month = int(to_date_month)
-to_date_year = int(to_date_year)
-to_date = DateTime(to_date_year, to_date_month, to_date_day)
+to_date = ctool.stringToDateTime(to_date_string, locale)
+to_date_day = to_date.day()
+to_date_month = to_date.month()
+to_date_year = to_date.year()
 
 if not errors:
     days = from_date - to_date
@@ -46,12 +34,6 @@ if not errors:
 
 if errors:
     return context.calendar_meeting_error(errors=errors)
-
-from_date_hour = int(kw['from_date_hour'])
-from_date_minute = int(kw['from_date_minute'])
-to_date_hour = int(kw['to_date_hour'])
-to_date_minute = int(kw['to_date_minute'])
-
 
 meeting = caltool.getFreeBusy(cal_ids, from_date, to_date, from_date_hour, from_date_minute,
     to_date_hour, to_date_minute)
