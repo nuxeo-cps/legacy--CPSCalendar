@@ -1,13 +1,10 @@
 <tal:block define="global current_action string:addevent" />
 <html metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="head_sot"
-             i18n:translate="cpscalendar_description_create_a_new_event">
-  Create a new event
-</metal:block>
-
 <metal:block fill-slot="main"
+             i18n:domain="cpscalendar"
              tal:define="event python:{'title': options['title'],
+                                       'description': options['description'],
                                        'from_date': options['from_date'],
                                        'to_date': options['to_date'],
                                        'all_day': 0,
@@ -18,11 +15,19 @@
     The end hour you specified was earlier than the start hour. Do you want
     to extend the event to the next day?
   </p>
-  <form action="calendar_confirmaddevent">
-    <input type="hidden" name="from_date:int"
-           tal:attributes="value python:int(options['from_date'])" />
-    <input type="hidden" name="to_date:int"
-           tal:attributes="value python:int(options['to_date'])" />
+  <form action="calendar_addevent">
+    <input type="hidden" name="from_date"
+           tal:attributes="value python:here.getDateStr(options['from_date'], fmt='short')" />
+    <input type="hidden" name="from_date_hour"
+           tal:attributes="value options/from_date_hour" />
+    <input type="hidden" name="from_date_minute"
+           tal:attributes="value options/from_date_minute" />
+    <input type="hidden" name="to_date"
+           tal:attributes="value python:here.getDateStr(options['to_date'], fmt='short')" />
+    <input type="hidden" name="to_date_hour"
+           tal:attributes="value options/to_date_hour" />
+    <input type="hidden" name="to_date_minute"
+           tal:attributes="value options/to_date_minute" />
     <input type="hidden" name="title"
            tal:attributes="value options/title" />
     <input type="hidden" name="location"
@@ -34,10 +39,10 @@
     </metal:block>
     <input type="submit"
            value="cpscalendar_button_validate"
-           i18n:translate="" />
+           i18n:attributes="value" />
     <input type="button" onClick="history.back()"
            value="cpscalendar_button_cancel"
-           i18n:translate="" />
+           i18n:attributes="value" />
   </form>
 </metal:block>
 
