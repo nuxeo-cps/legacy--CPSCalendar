@@ -22,7 +22,7 @@ from_date_hour = int(kw.get('from_date_hour'))
 from_date_minute = int(kw.get('from_date_minute'))
 
 from_date = DateTime(from_date_year, from_date_month, from_date_day,
-  from_date_hour, from_date_minute)
+                     from_date_hour, from_date_minute)
 kw['from_date'] = from_date
 del kw['from_date_hour']
 del kw['from_date_minute']
@@ -58,15 +58,14 @@ to_date_minute = int(kw.get('to_date_minute'))
 ##         to_date_month = from_date_month
 ##         to_date_year = from_date_year
 
-if not all_day and (to_date_hour < from_date_hour or \
-    (to_date_hour == from_date_hour and to_date_minute <= from_date_minute)):
+if not all_day and (from_date > to_date):
     to_date = DateTime(from_date_year, from_date_month, from_date_day) + 1
     to_date_day = to_date.day()
     to_date_month = to_date.month()
     to_date_year = to_date.year()
 
 to_date = DateTime(to_date_year, to_date_month, to_date_day,
-  to_date_hour, to_date_minute)
+                   to_date_hour, to_date_minute)
 kw['to_date'] = to_date
 del kw['to_date_hour']
 del kw['to_date_minute']

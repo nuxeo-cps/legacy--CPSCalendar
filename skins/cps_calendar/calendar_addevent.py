@@ -25,7 +25,7 @@ from_date_year = int(from_date_year)
 from_date_hour = int(kw.get('from_date_hour'))
 from_date_minute = int(kw.get('from_date_minute'))
 from_date = DateTime(from_date_year, from_date_month, from_date_day,
-    from_date_hour, from_date_minute)
+                     from_date_hour, from_date_minute)
 kw['from_date'] = from_date
 
 to_date_string = kw.get('to_date','')
@@ -49,15 +49,14 @@ if not all_day and to_date_hour and to_date_minute:
     to_date_day = to_date.day()
     
 to_date = DateTime(to_date_year, to_date_month, to_date_day,
-    to_date_hour, to_date_minute)
+                   to_date_hour, to_date_minute)
 kw['to_date'] = to_date
 
 # if we are called by a form request, we have to be sure that
 # from_date < to_date. For an all_day event, from_date and to_date
 # will be switched
-ok = REQUEST is None or all_day or from_date <= to_date
 
-if ok:
+if all_day or from_date <= to_date:
     # TODO: add repeated event add manage
     here.invokeFactory('Event', id, **kw)
 
