@@ -129,7 +129,6 @@ class TestCalendar(CPSCalendarTestCase):
         self.calendar = member_home.calendar
         assert self.calendar
 
-
     def beforeTearDown(self):
         # portal_memberdata caches entries in a volatile variable that's
         # cleaned up upon request completion
@@ -177,6 +176,7 @@ class TestCalendar(CPSCalendarTestCase):
 
         desc = calendar.getEventsDesc(
             start_time=start_time, end_time=end_time, disp='day')
+        
         self.assertEquals(desc,
             {'hour_blocks': 
                 [[[{'height': 720, 'event': None}]], 
@@ -321,7 +321,18 @@ class TestCalendar(CPSCalendarTestCase):
         event.updateAttendeesCalendars()
 
         # TODO: add some real attendees
-        event.setAttendees([{'rpath': 'workspaces/members/toto'}])
+        mtool = self.portal.portal_membership
+        mtool.createMemberArea('test_user_1')
+        mdir = self.portal.portal_directories.members
+        mdir.createEntry({'id': 'test_user_1', 
+                          'email':'test_user_1@here.cps'})
+        event.setAttendees([
+            {'rpath': 'workspaces/members/test_user_1/calendar',
+             'status': 'unconfirmed',
+             'cn': 'test_user_1'}])
+        event.updateAttendeesCalendars()
+        # Try and decline it to see if notifications happen
+        self.calendar.declineEvent(event)
         event.updateAttendeesCalendars()
 
     def testGetHourBlockCols(self):
@@ -399,7 +410,7 @@ class TestCalendar(CPSCalendarTestCase):
 
         self.calendar.manage_delObjects(['event'])
         self.assert_(not hasattr(self.calendar, 'event'))
-
+       
 
 def test_suite():
     suite = unittest.TestSuite()
