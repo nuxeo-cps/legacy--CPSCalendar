@@ -21,7 +21,7 @@ Bug fixes:
 - With Zope 2.7.1 and later selected attendees was lost when creating meetings.
   (#1483)
 - You can no longer remove the organizer from the attendees list.
-- New events are not set to dirty.
+- New events do not need to have confirmations sent.
 - A KeyError 'id' when running the installer was fixed.
 - The document link was lost when editing the document.
 - The confirmation options are now radio buttons instead of a select list.

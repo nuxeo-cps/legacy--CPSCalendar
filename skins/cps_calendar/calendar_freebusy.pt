@@ -75,13 +75,13 @@
     You can unselect some calendars if you want.
   </p>
   <form action="calendar_begin_meeting" method="POST">
-    <input type="hidden" name="from_date"
+    <input type="hidden" name="from_date_string"
         tal:attributes="value meeting/args/from_date_string">
     <input type="hidden" name="from_date_hour:int"
         tal:attributes="value meeting/args/from_date_hour">
     <input type="hidden" name="from_date_minute:int"
         tal:attributes="value meeting/args/from_date_minute">
-    <input type="hidden" name="to_date"
+    <input type="hidden" name="to_date_string"
         tal:attributes="value meeting/args/to_date_string">
     <input type="hidden" name="to_date_hour:int"
         tal:attributes="value meeting/args/to_date_hour">
