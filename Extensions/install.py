@@ -84,7 +84,7 @@ def oldUpdate(self):
             id='my_calendar',
             name='My calendar',
             action='string:${portal/portal_membership/getHomeUrl}/calendar',
-            condition='member',
+            condition='python:portal.portal_membership.getHomeUrl()',
             permission=('View',),
             category='user',
             visible=1)
