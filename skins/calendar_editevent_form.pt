@@ -3,7 +3,7 @@
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="javascript_head_slot"
-  tal:content="structure here/day_selector_popup.js">
+             tal:content="structure here/day_selector_popup.js">
   Day selector popup script
 </metal:block>
 
@@ -23,39 +23,37 @@
 <metal:block fill-slot="header_plus" />
 
 <metal:block fill-slot="main"
-  tal:define="
-    portal_url here/portal_url;
-    disp_infos python:here.calendar_getDispInformations(request);
-    action python:create and 'calendar_addevent' or 'calendar_editevent';
-    submit_value python:create and str('_button_create_') or str('_button_modify_');
-    editevent python:create or here.canEditThisEvent();
-    title python:create and str('_(document)_Untitled_') or here.title;
-    location python:(not create) and here.location or '';
-    event_status python:create and 'unconfirmed' or here.event_status;
-    all_day python:(create and [request.form.get('all_day')] or [here.all_day])[0];
-    from_date python:create and disp_infos['selected_day'] or here.from_date;
-    from_date_day from_date/day;
-    from_date_month from_date/month;
-    from_date_year from_date/year;
-    from_date_hour from_date/hour;
-    from_date_minute python:int(from_date.minute()/15)*15;
-    to_date python:create and from_date or here.to_date;
-    to_date_day to_date/day;
-    to_date_month to_date/month;
-    to_date_year to_date/year;
-    to_date_hour to_date/hour;
-    to_date_hour python:(create and not all_day and to_date_hour+2) or to_date_hour;
-    trim_hour python:create and not all_day and to_date_hour > 23;
-    to_date_minute python:int(to_date.minute()/15)*15;
-    to_date_hour python:not trim_hour and to_date_hour or 0;
-    to_date_minute python:not trim_hour and to_date_minute or 0;
-    attendees python:(not create) and here.attendees or [];
-    transparent python:not create and not not here.transparent or 0;
-    cat_info here/calendar_categories;
-    categories cat_info/categories;
-    cat_default cat_info/default;
-    category python:create and cat_default or here.category;
-  ">
+             tal:define="portal_url here/portal_url;
+                         disp_infos python:here.calendar_getDispInformations(request);
+                         action python:create and 'calendar_addevent' or 'calendar_editevent';
+                         submit_value python:create and str('_button_create_') or str('_button_modify_');
+                         editevent python:create or here.canEditThisEvent();
+                         title python:create and str('_(document)_Untitled_') or here.title;
+                         location python:(not create) and here.location or '';
+                         event_status python:create and 'unconfirmed' or here.event_status;
+                         all_day python:(create and [request.form.get('all_day')] or [here.all_day])[0];
+                         from_date python:create and disp_infos['selected_day'] or here.from_date;
+                         from_date_day from_date/day;
+                         from_date_month from_date/month;
+                         from_date_year from_date/year;
+                         from_date_hour from_date/hour;
+                         from_date_minute python:int(from_date.minute()/15)*15;
+                         to_date python:create and from_date or here.to_date;
+                         to_date_day to_date/day;
+                         to_date_month to_date/month;
+                         to_date_year to_date/year;
+                         to_date_hour to_date/hour;
+                         to_date_hour python:(create and not all_day and to_date_hour+2) or to_date_hour;
+                         trim_hour python:create and not all_day and to_date_hour > 23;
+                         to_date_minute python:int(to_date.minute()/15)*15;
+                         to_date_hour python:not trim_hour and to_date_hour or 0;
+                         to_date_minute python:not trim_hour and to_date_minute or 0;
+                         attendees python:(not create) and here.attendees or [];
+                         transparent python:not create and not not here.transparent or 0;
+                         cat_info here/calendar_categories;
+                         categories cat_info/categories;
+                         cat_default cat_info/default;
+                         category python:create and cat_default or here.category;">
 
   <tal:block condition="not:editevent" define="event nocall:here">
     <metal:block use-macro="here/calendar_macros/macros/event_view" />
@@ -90,7 +88,7 @@
           </metal:block>
           <metal:block use-macro="here/generic_lib/macros/form_property">
             <metal:block fill-slot="title"
-              tal:content="python:str('_cal_prop_date_')" i18n:translate="">
+                         i18n:translate="_cal_prop_date_">
               Date
             </metal:block>
             <metal:block fill-slot="content">

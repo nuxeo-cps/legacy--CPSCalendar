@@ -2,43 +2,41 @@
 <html metal:use-macro="here/main_template/macros/master">
 
 <metal:block fill-slot="header">
-  <tal:block
-    replace="python:str('_cal_Attendees_for_event_')">
+  <span i18n:translate="_cal_Attendees_for_event_">
     Attendees for event
-  </tal:block>
+  </span>
   «&nbsp;<span tal:replace="here/title_or_id">Title</span>&nbsp;»
 </metal:block>
 
 <metal:block fill-slot="header_plus" />
 
 <metal:block fill-slot="main"
-  tal:define="
-    this_user here/getCalendarUser;
-    user_types here/getUserTypes;
-    attendees_dict here/getAttendeesDict; 
-    dtool here/portal_metadirectories/members;
-    decline_attendees python:[att for att in here.attendees if att['status'] == 'decline'];
-    all_attendees here/getCalendarsDict;
-    can_edit python:here.canEditThisEvent();
-  ">
+             tal:define="this_user here/getCalendarUser;
+                         user_types here/getUserTypes;
+                         attendees_dict here/getAttendeesDict; 
+                         dtool here/portal_metadirectories/members;
+                         decline_attendees python:[att for att in here.attendees if att['status'] == 'decline'];
+                         all_attendees here/getCalendarsDict;
+                         can_edit python:here.canEditThisEvent();">
   <tal:block condition="python:decline_attendees and can_edit">
     <form action="calendar_removeattendee" method="POST">
       <input type="hidden" name="ids:list"
         tal:repeat="att decline_attendees"
         tal:attributes="value att/id" />
       <input type="submit"
-        tal:attributes="
-          value python:str('_button_Remove all attendees that declined this event_')" />
+             tal:attributes="value python:str('_button_Remove all attendees that declined this event_')"
+             i18n:attributes="value" />
     </form>
   </tal:block>
   <metal:block use-macro="here/calendar_macros/macros/notifyattendees" />
   <tal:block repeat="user_type user_types">
-    <h2 tal:content="python:str(user_type['plural_title'])">Ressources</h2>
-    <tal:block define="
-      type user_type/id;
-      attendees attendees_dict/?type|python:[]">
+    <h2 tal:content="python:str(user_type['plural_title'])"
+        i18n:translate="">Ressources</h2>
+    <tal:block define="type user_type/id;
+                       attendees attendees_dict/?type|python:[]">
       <p tal:condition="not:attendees"
-        tal:content="python:str('_cal_no_attendee_of_type_%s_' % type)">
+         tal:content="python:str('_cal_no_attendee_of_type_%s_' % type)"
+         i18n:translate="">
         No ressources selected
       </p>
       <tal:block condition="python:can_edit and attendees">
@@ -48,62 +46,64 @@
               <input type="checkbox" name="ids:list"
                 tal:attributes="value string:${attendee/id}" />
               <tal:block replace="attendee/cn|attendee/id" />
-              (<tal:block replace="python:str('_cal_status_%s_' % (attendee['status'], ))">Confirmed</tal:block>)
+              (<tal:block content="python:str('_cal_status_%s_' % (attendee['status'], ))"
+                          i18n:translate="">Confirmed</tal:block>)
             </li>
           </ul>
           <input type="submit"
-            tal:attributes="value python:str('_button_delete_')" />
+                 tal:attributes="value python:str('_button_delete_')" 
+                 i18n:attributes="value" />
         </form>
       </tal:block>
       <tal:block condition="python:(not can_edit) and attendees">
         <ul>
           <li tal:repeat="attendee attendees">
             <tal:block replace="attendee/cn|attendee/id" />
-            (<tal:block replace="python:str('_cal_status_%s_' % (attendee['status'], ))">Confirmed</tal:block>)
+            (<tal:block content="python:str('_cal_status_%s_' % (attendee['status'], ))"
+                        i18n:translate="">Confirmed</tal:block>)
           </li>
         </ul>
       </tal:block>
       <tal:block condition="can_edit">
         <tal:block condition="python:type =='member'">
 
-          <tal:block define="
-            searching python: request.get('role_submit', None);
-            searchable_keys dtool/getSearchableSchemaKeys;
-            schema_dict dtool/getSchemaDict;
-            searchable_keys python:[key for key in searchable_keys if schema_dict[key].type == 'string'];
-            ">
+          <tal:block define="searching python: request.get('role_submit', None);
+                             searchable_keys dtool/getSearchableSchemaKeys;
+                             schema_dict dtool/getSchemaDict;
+                             searchable_keys python:[key for key in searchable_keys if schema_dict[key].type == 'string'];">
             <tal:block condition="python: not searching">
               <form method="post" action="calendar_attendees_form">
                 <p>
-                  <tal:block replace="python:str('_Add a user whose_')">
+                  <span i18n:translate="_Add a user whose_">
                     Add a user whose
-                  </tal:block>
+                  </span>
                   <select name="search_param">
-                   <option
-                     tal:repeat="propid searchable_keys"
-                     tal:attributes="value propid"
-                     tal:content="python:str(schema_dict[propid].title)">option1</option>
+                   <option tal:repeat="propid searchable_keys"
+                           tal:attributes="value propid"
+                           tal:content="python:str(schema_dict[propid].title)"
+                           i18n:translate="">option1</option>
                   </select>
-                  <tal:block replace="python:str('_(Add a user whose ...)_is:')">
+                  <span i18n:translate="_(Add a user whose ...)_is:">
                     is:
-                  </tal:block>
+                  </span>
                   <input type="text" name="search_term" size="10">
                   <input class="mainbutton" type="submit" name="role_submit"
-                    tal:attributes="value python:str('_button_search_')">
+                         tal:attributes="value python:str('_button_search_')"
+                         i18n:attributes="value">
                 </p>
               </form>
             </tal:block>
             <tal:block condition="searching">
               <tal:block define="search_param python: request.get('search_param', '');
-                search_term  python: request.get('search_term', '');
-                found python:search_param and dtool.searchEntry(**{search_param: search_term});
-                found python:[member for member in found if member[dtool.entry_prop] != this_user]">
+                                 search_term  python: request.get('search_term', '');
+                                 found python:search_param and dtool.searchEntry(**{search_param: search_term});
+                                 found python:[member for member in found if member[dtool.entry_prop] != this_user]">
                 <tal:block condition="found">
                   <form method="post" action="calendar_addattendee">
                     <p>
-                      <tal:block replace="python:str('_cal_Add_attendee:')">
+                      <span i18n:translate="_cal_Add_attendee:">
                         Add
-                      </tal:block>
+                      </span>
                       <br>
                       <select name="ids:list" size="5" multiple>
                         <option value="."
@@ -114,12 +114,14 @@
                         </option>
                       </select>
                       <br>
-                      <input class="mainbutton" type="submit" tal:attributes="value python:str('_button_add_')">
+                      <input class="mainbutton" type="submit"
+                             tal:attributes="value python:str('_button_add_')"
+                             i18n:attributes="value">
                     </p>
                   </form>
                 </tal:block>
                 <p tal:condition="python: not found"
-                  tal:content="python:str('_Sorry, no user match your query_')">
+                   i18n:translate="_Sorry, no user match your query_">
                     Sorry, no user match your query
                 </p>
               </tal:block>
@@ -127,22 +129,22 @@
           </tal:block>
         </tal:block>
         <tal:block condition="python:type != 'member'">
-          <tal:block define="
-            addable_attendees all_attendees/?type|python:[];
-            attendees_ids python:[att['id'] for att in attendees];
-            addable_attendees python:[att for att in addable_attendees if (att['id'] not in attendees_ids) and att['id'] != this_user]">
+          <tal:block define="addable_attendees all_attendees/?type|python:[];
+                             attendees_ids python:[att['id'] for att in attendees];
+                             addable_attendees python:[att for att in addable_attendees if (att['id'] not in attendees_ids) and att['id'] != this_user]">
             <form action="calendar_addattendee"
               tal:condition="addable_attendees">
-              <tal:block replace="python:str('_cal_Add_attendee:')">
+              <span i18n:translate="_cal_Add_attendee:">
                 Add
-              </tal:block>
+              </span>
               <select name="id">
                 <option tal:repeat="attendee addable_attendees"
                   tal:attributes="value attendee/id"
                   tal:content="attendee/cn">Ressource</option>
               </select>
               <input type="submit"
-                tal:attributes="value python:str('_button_add_')" />
+                     tal:attributes="value python:str('_button_add_')"
+                     i18n:attributes="value" />
             </form>
           </tal:block>
         </tal:block>

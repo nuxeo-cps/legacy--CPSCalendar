@@ -1,22 +1,22 @@
 <tal:block define="global current_action string:meeting" />
 <html metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="header"
-  tal:content="python:str('_Meeting creation helper_')">
+<metal:block fill-slot="head_slot"
+             i18n:translate="_Meeting creation helper_">
   Meeting creation helper
 </metal:block>
 
 <metal:block fill-slot="header_plus" />
 
 <metal:block fill-slot="main">
-  <h2
-    tal:content="python:str('_Your request has expired_')">
+  <h2 i18n:translate="_Your request has expired_">
     Your request has expired.
   </h2>
   <form method="POST"
     tal:attributes="action here/absolute_url">
     <input type="submit"
-      tal:attributes="value python:str('_button_back_')" />
+           tal:attributes="value python:str('_button_back_')"
+           i18n:attributes="value" />
   </form>
 </metal:block>
 

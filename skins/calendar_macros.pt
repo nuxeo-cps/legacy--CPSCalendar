@@ -1,32 +1,27 @@
 <metal:block define-macro="event_view">
-  <tal:block
-    define="
-      organizer event/organizer|nothing;
-      title event/title;
-      id event/id|nothing;
-      title python:title or id;
-      from_date event/from_date;
-      to_date event/to_date;
-      all_day event/all_day;
-      location event/location;
-      event_status event/event_status;
-      date_fmt python:all_day and str('_cal_%m/%d/%Y_')
-        or str('_cal_%m/%d/%Y at %H:%M_');
-      attendees event/attendees;
-      transparent event/transparent|nothing;
-      transparent python:not not transparent;
-      cat_infos here/calendar_categories;
-      categories cat_infos/categories;
-      cat_default cat_infos/default;
-      cat_def_title categories/?cat_default/title;
-      category event/category|nothing;
-    ">
+  <tal:block define="organizer event/organizer|nothing;
+                     title event/title;
+                     id event/id|nothing;
+                     title python:title or id;
+                     from_date event/from_date;
+                     to_date event/to_date;
+                     all_day event/all_day;
+                     location event/location;
+                     event_status event/event_status;
+                     attendees event/attendees;
+                     transparent event/transparent|nothing;
+                     transparent python:not not transparent;
+                     cat_infos here/calendar_categories;
+                     categories cat_infos/categories;
+                     cat_default cat_infos/default;
+                     cat_def_title categories/?cat_default/title;
+                     category event/category|nothing;">
     <metal:block use-macro="here/generic_lib/macros/form">
       <metal:block fill-slot="content">
         <tal:block condition="organizer">
           <metal:block use-macro="here/generic_lib/macros/form_property">
             <metal:block fill-slot="title"
-              tal:content="python:str('_cal_prop_organizer_')">
+                         i18n:translate="_cal_prop_organizer_">
               Organizer
             </metal:block>
             <metal:block fill-slot="content"
@@ -37,7 +32,7 @@
         </tal:block>
         <metal:block use-macro="here/generic_lib/macros/form_property">
           <metal:block fill-slot="title"
-            tal:content="python:str('_cal_prop_summary_')">
+                       i18n:translate="_cal_prop_summary_">
             Summary
           </metal:block>
           <metal:block fill-slot="content"
@@ -47,34 +42,39 @@
         </metal:block>
         <metal:block use-macro="here/generic_lib/macros/form_property">
           <metal:block fill-slot="title"
-            tal:content="python:str('_cal_prop_date_')">
+                       i18n:translate="_cal_prop_date_">
             Date
           </metal:block>
           <metal:block fill-slot="content"
-            tal:define="
-              from_date_str python:from_date.strftime(date_fmt);
-              to_date_str python:to_date.strftime(date_fmt);
-              one_date python:from_date_str == to_date_str">
+                       tal:define="one_date python:from_date == to_date;">
             <tal:block condition="one_date"
-              tal:content="from_date_str">
+                       tal:content="from_date_str">
             </tal:block>
             <tal:block condition="not:one_date">
-              <tal:block replace="python:str('_cal_date_From_')">
+              <span i18n:translate="_cal_date_From_">
                 From
+              </span>
+              <tal:block replace="python:from_date.strftime('%m/%d/%Y ');" />
+              <tal:block condition="not:all_day">
+                <span i18n:translate="_cal_hour_To_" />
+                <tal:block replace="python:from_date.strftime(' %H:%M');" />
               </tal:block>
-              <tal:block replace="from_date_str" />
               <br>
-              <tal:block replace="python:str('_cal_date_To_')">
+              <span i18n:translate="_cal_date_To_">
                 To
+              </span>
+              <tal:block replace="python:to_date.strftime('%m/%d/%Y ');" />
+              <tal:block condition="not:all_day">
+                <span i18n:translate="_cal_hour_To_" />
+                <tal:block replace="python:to_date.strftime(' %H:%M');" />
               </tal:block>
-              <tal:block replace="to_date_str" />
             </tal:block>
           </metal:block>
         </metal:block>
         <tal:block condition="location">
           <metal:block use-macro="here/generic_lib/macros/form_property">
             <metal:block fill-slot="title"
-              tal:content="python:str('_cal_prop_location_')">
+                         i18n:translate="_cal_prop_location_">
               Location
             </metal:block>
             <metal:block fill-slot="content"
@@ -84,24 +84,26 @@
         </tal:block>
         <metal:block use-macro="here/generic_lib/macros/form_property">
           <metal:block fill-slot="title"
-            tal:content="python:str('_cal_prop_eventstatus_')">
+                       i18n:translate="_cal_prop_eventstatus_">
             Event status
           </metal:block>
           <metal:block fill-slot="content"
-            tal:content="python:str('_cal_eventstatus_%s_' % (event_status, ))">
+                       tal:content="python:str('_cal_eventstatus_%s_' % (event_status, ))"
+                       i18n:translate="">
           </metal:block>
         </metal:block>
         <tal:block condition="attendees">
           <metal:block use-macro="here/generic_lib/macros/form_property">
             <metal:block fill-slot="title"
-              tal:content="python:str('_cal_prop_attendees_')">
+                         i18n:translate="_cal_prop_attendees_">
               Attendees
             </metal:block>
             <metal:block fill-slot="content">
               <ul tal:condition="attendees">
                 <li tal:repeat="att attendees">
                   <strong tal:content="att/cn|att/id">attendee</strong>
-                  (<tal:block replace="python:str('_cal_status_%s_' % (att['status'], ))">
+                  (<tal:block content="python:str('_cal_status_%s_' % (att['status'], ))"
+                              i18n:translate="">
                     Confirmed
                   </tal:block>)
                 </li>
@@ -112,30 +114,27 @@
         <tal:block condition="category">
           <metal:block use-macro="here/generic_lib/macros/form_property">
             <metal:block fill-slot="title"
-              tal:content="python:str('_cal_prop_category_')">
+                         i18n:translate="_cal_prop_category_">
               Category
             </metal:block>
             <metal:block fill-slot="content"
-              tal:define="
-              cat_title categories/?category/title|cat_def_title"
-              tal:content="python:str(cat_title)">
+                         tal:define="cat_title categories/?category/title|cat_def_title"
+                         tal:content="python:str(cat_title)"
+                         i18n:translate="">
               Category
             </metal:block>
           </metal:block>
         </tal:block>
         <metal:block use-macro="here/generic_lib/macros/form_property">
           <metal:block fill-slot="title"
-            tal:content="python:str('_cal_prop_transparent_')">
+                       i18n:translate="_cal_prop_transparent_">
             Transparent
           </metal:block>
           <metal:block fill-slot="content">
-            <p
-              tal:content="python:transparent and str('_Yes_') or str('_No_')">
-              Yes
-            </p>
+            <p tal:condition="transparent" i18n:translate="_Yes_">Yes</p>
+            <p tal:condition="not:transparent" i18n:translate="_No_">No</p>
             <p>
-              <small
-                tal:content="python:str('_Transparent events mean that you-re not busy during this event_')">
+              <small i18n:translate="_Transparent events mean that you-re not busy during this event_">
                 Transparent events mean that you're not busy during this event.
               </small>
           </metal:block>
@@ -160,12 +159,12 @@
             in_event python:here.meta_type == 'Event';
             real_event python:(in_event and here) or (id in ids and getattr(here, id)) or nothing">
             <tal:block condition="nocall:real_event">
-              <h3 tal:content="python:str('_cal_Event_update_')">
+              <h3 i18n:translate="_cal_Event_update_">
                 Event update
               </h3>
             </tal:block>
             <tal:block condition="not:nocall:real_event">
-              <h3 tal:content="python:str('_cal_New_event_')">
+              <h3 i18n:translate="_cal_New_event_">
                 New event
               </h3>
             </tal:block>
@@ -176,7 +175,7 @@
               <em tal:content="event/comment">comment</em>
             </p>
             <p tal:condition="not:event/comment|nothing">
-              <strong tal:content="python:str('_cal_Sender:')">
+              <strong i18n:translate="_cal_Sender:">
                 Sender:
               </strong>
               <tal:block replace="event/sender_cn|event/sender|nothing">
@@ -194,7 +193,7 @@
                   <metal:block
                     use-macro="here/generic_lib/macros/form_property">
                     <metal:block fill-slot="title"
-                      tal:content="python:str('_prop_comment_')">
+                                 i18n:translate="_prop_comment_">
                       Comment
                     </metal:block>
                     <metal:block fill-slot="content">
@@ -210,9 +209,9 @@
                   selected python:event['event_status'] == 'cancelled'
                     and 'ignore' or 'confirmed'">
                 <option tal:repeat="status statuses"
-                  tal:attributes="
-                    value status; selected python:status == selected"
-                  tal:content="python:str('_cal_pending_%s_' % (status, ))">
+                        tal:attributes="value status; selected python:status == selected"
+                        tal:content="python:str('_cal_pending_%s_' % (status, ))"
+                        i18n:translate="">
                   Confirm
                 </option>
               </select>
@@ -222,13 +221,14 @@
           </tal:block>
         </tal:block>
         <tal:block condition="python:request == 'status'">
-          <h3 tal:content="python:str('_cal_Status_update_')">
+          <h3 i18n:translate="_cal_Status_update_">
             Status update
           </h3>
           <ul>
             <li tal:repeat="attendee pending/change">
               <strong tal:content="attendee/cn|attendee/id">Attendee</strong>
-              (<tal:block replace="python:str('_cal_status_%s_' % (attendee['status'], ))" />)
+              (<tal:block content="python:str('_cal_status_%s_' % (attendee['status'], ))"
+                          i18n:translate="" />)
               <p tal:condition="attendee/comment|nothing">
                 <strong tal:content="attendee/sender_cn|attendee/sender|nothing">
                   sender
@@ -236,7 +236,7 @@
                 <em tal:content="attendee/comment">comment</em>
               </p>
               <p tal:condition="not:attendee/comment|nothing">
-                <strong tal:content="python:str('_cal_Sender:')">
+                <strong i18n:translate="_cal_Sender:">
                   Sender:
                 </strong>
                 <tal:block replace="attendee/sender_cn|attendee/sender|nothing">
@@ -246,7 +246,8 @@
             </li>
           </ul>
           <input type="submit" name="confirmPendingEvent:method"
-            tal:attributes="value python:str('_button_validate_')" />
+                 tal:attributes="value python:str('_button_validate_')"
+                 i18n:attributes="value" />
         </tal:block>
       </tal:block>
     </form>
@@ -261,8 +262,7 @@
       <metal:block use-macro="here/calendar_macros/macros/pendings_view" />
     </tal:block>
     <tal:block condition="python:here.canEditThisEvent() and here.attendees and here.isdirty">
-      <h3
-        tal:content="python:str('_You have to notify other attendees of recent changes to this event_')">
+      <h3 i18n:translate="_You have to notify other attendees of recent changes to this event_">
         You have to notify other attendees of recent changes to this event.
       </h3>
       <form action="updateAttendeesCalendars"
@@ -279,7 +279,7 @@
           <metal:block fill-slot="content">
             <metal:block use-macro="here/generic_lib/macros/form_property">
               <metal:block fill-slot="title"
-                tal:content="python:str('_prop_comment_')">
+                           i18n:translate="_prop_comment_">
                 Comment
               </metal:block>
               <metal:block fill-slot="content">
@@ -289,7 +289,8 @@
           </metal:block>
         </metal:block>
         <input type="submit"
-          tal:attributes="value python:str('_button_validate_')" />
+               tal:attributes="value python:str('_button_validate_')"
+               i18n:attributes="value" />
       </form>
     </tal:block>
   </tal:block>

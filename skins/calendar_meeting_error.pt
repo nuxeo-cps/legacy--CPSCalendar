@@ -1,26 +1,24 @@
 <tal:block define="global current_action string:meeting" />
 <html metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="header"
+<metal:block fill-slot="head_slot"
   tal:content="python:str('_Meeting creation helper_')">
   Meeting creation helper
 </metal:block>
 
-<metal:block fill-slot="header_plus" />
-
 <metal:block fill-slot="main">
-  <h2
-    tal:content="python:str('_Your request for a meeting has errors:')">
+  <h2 i18n:translate="_Your request for a meeting has errors:">
     Your request for a meeting has errors:
   </h2>
   <ul>
     <li tal:repeat="error options/errors"
-      tal:content="python:str(error)">
+        tal:content="python:str(error)">
       Error
     </li>
   </ul>
   <input type="button" onClick="history.back()"
-    tal:attributes="value python:str('_button_back_')" />
+         tal:attributes="value python:str('_button_back_')"
+         i18n:attributes="value" />
 </metal:block>
 
 </html>
