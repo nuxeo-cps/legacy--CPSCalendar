@@ -13,7 +13,7 @@
 
   <h1>
     <span tal:replace="here/title_or_id">Title</span>:
-    <span i18n:translate="cpscalendar_attendees_management">Attendees 
+    <span i18n:translate="cpscalendar_attendees_management">Attendees
       management</span>
   </h1>
 
@@ -69,7 +69,7 @@
         <tal:block condition="python:type =='member'">
           <tal:block define="
             searching python:request.get('role_submit', None);
-            searchable_keys python:here.portal_schemas.members.objectIds(['CPS String Field'])">
+            widgets python:here.portal_layouts.members.objectValues()">
             <tal:block condition="python: not searching">
               <form method="POST" action="calendar_attendees_form">
                 <p>
@@ -77,10 +77,16 @@
                     Add a user whose
                   </span>
                   <select name="search_param">
-                   <option tal:repeat="propid searchable_keys"
-                           tal:attributes="value propid"
-                           tal:content="python:str(here.portal_schemas.members[propid].title)"
-                           i18n:translate="">cpscalendar_option</option>
+                    <tal:span repeat="widget widgets">
+                      <option tal:condition="python:'search' not in widget.hidden_layout_modes"
+                              tal:attributes="value python:widget.getId()">
+                        <span  tal:condition="widget/is_i18n"
+                               i18n:domain="switch_to_default" i18n:translate=""
+                               tal:content="widget/label">label</span
+                        ><span tal:condition="not:widget/is_i18n"
+                               tal:content="widget/label">label</span
+                      ></option>
+                    </tal:span>
                   </select>
                   <span i18n:translate="cpscalendar_label_add_a_user_whose_is">
                     is
