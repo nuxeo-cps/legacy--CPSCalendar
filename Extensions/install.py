@@ -39,7 +39,8 @@ class CPSInstaller(BaseInstaller):
         except:
             pass
         ct.addIndex('uid', 'FieldIndex')
-        ct.manage_reindexIndex(ids=['uid'])
+        # reindexing will be done by cpsdefault installer
+        # ct.manage_reindexIndex(ids=['uid'])
 
 
 def update(self):
@@ -216,8 +217,9 @@ def oldUpdate(self):
             pass
         pr("   cpscalendar domain set to Localizer/cpscalendar")
 
-        pr(" Reindexing catalog")
-        portal.portal_catalog.refreshCatalog(clear=1)
+        # refreshing is done by cpsdefault installer
+        #pr(" Reindexing catalog")
+        #portal.portal_catalog.refreshCatalog(clear=1)
     else:
         raise 'Dependance Error', 'translation_service'
 
