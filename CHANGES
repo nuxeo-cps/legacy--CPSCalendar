@@ -4,7 +4,7 @@ ZODB Requires:
 
 New features:
 ~~~~~~~~~~~~~
--
+- Calendar objects can be use outside Calendars object (#249)
 
 Bug fixes:
 ~~~~~~~~~~
