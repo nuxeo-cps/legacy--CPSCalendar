@@ -100,10 +100,10 @@ class TestCalendarTool(CPSCalendarTestCase):
         self.assertEquals(event.to_date, DateTime('2004/01/15 19:00:00'))
 
         freebusy_info = self.caltool.getFreeBusy(
-            ['/portal/workspaces/members/root/calendar'],
+            ['workspaces/members/root/calendar'],
             DateTime('2004/01/15'), DateTime('2004/01/15'), 8, 0, 19, 0)
         self.assertEquals(freebusy_info['cal_users'],
-            {'/portal/workspaces/members/root/calendar': 'root'})
+            {'workspaces/members/root/calendar': 'root'})
         self.assertEquals(freebusy_info['slots'],
             [(DateTime('2004/01/15'), DateTime('2004/01/16'))])
         eventinfo = freebusy_info['hour_block_cols'][0][0][0][0]
@@ -305,6 +305,7 @@ class TestCalendar(CPSCalendarTestCase):
         assert calendar.calendar_export()
         assert getattr(calendar, 'calendar.ics')().count("xxyyzz")
 
+        self.portal.REQUEST['URL1'] = 'theurl'
         assert event.calendar_event_view()
         assert event.calendar_editevent_form()
         assert event.calendar_attendees_form()
