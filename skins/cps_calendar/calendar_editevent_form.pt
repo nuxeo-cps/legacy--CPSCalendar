@@ -331,7 +331,6 @@ range       : [2000, 2049]
           </metal:block>
        </metal:block>
 
-       <tal:block condition="nothing" content="string:removed until it works">
        <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
                i18n:translate="cpscalendar_label_document_link">
@@ -349,7 +348,6 @@ range       : [2000, 2049]
             </p>
           </metal:block>
         </metal:block>
-        </tal:block>
        
        <metal:block use-macro="here/calendar_macros/macros/form_property">
           <metal:block fill-slot="title"
