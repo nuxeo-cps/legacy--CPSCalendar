@@ -139,7 +139,7 @@ class TestCalendar(CPSCalendarTestCase):
         # XXX: the title should actually be more explicit than that.
         self.assertEquals(self.calendar.Title(), 
                           "cpscalendar_user_calendar_name_beg"
-                          + self.user_id
+                          + " " + self.user_id + " "
                           + "cpscalendar_user_calendar_name_end")
         # XXX: there should be a description there.
         self.assertEquals(self.calendar.Description(), "")

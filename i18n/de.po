@@ -929,10 +929,10 @@ msgid "week day"
 msgstr "Wochen Tag"
 
 msgid "cpscalendar_user_calendar_name_beg"
-msgstr "Kalender von "
+msgstr "Kalender von"
 
 msgid "cpscalendar_user_calendar_name_end"
-msgstr " "
+msgstr " "
 
 msgid "cpscalendar_create_all_day_event"
 msgstr "Erstellen eines Events über mehrere Tage"

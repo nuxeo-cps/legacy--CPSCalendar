@@ -1290,7 +1290,7 @@ msgid "cpscalendar_user_calendar_name_beg"
 msgstr "Calendario di"
 
 msgid "cpscalendar_user_calendar_name_end"
-msgstr " "
+msgstr " "
 
 msgid "cpscalendar_create_all_day_event"
 msgstr "Crea un evento di più giorni"

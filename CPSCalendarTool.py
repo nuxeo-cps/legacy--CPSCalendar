@@ -829,9 +829,10 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
         title = mcat('cpscalendar_user_calendar_name_beg').encode(
                      'ISO-8859-15', 'ignore')\
-              + fullname\
+              + " " + fullname + " "\
               + mcat('cpscalendar_user_calendar_name_end').encode(
                      'ISO-8859-15', 'ignore')
+        title = title.strip()
         wtool = getToolByName(self, 'portal_workflow')
         wtool.invokeFactoryFor(context, 'Calendar', CALENDAR_ID,
                                title=title,
