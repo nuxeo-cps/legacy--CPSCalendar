@@ -172,7 +172,8 @@
                     </tal:block>
                   </td>
                 </tr>
-                <tr tal:condition="can_add_evts">
+                <tr tal:define="showbutton show_addbuttons|python:1"
+                    tal:condition="python:can_add_evts and showbutton">
                   <td>
                   </td>
                   <td>
@@ -353,7 +354,8 @@
                     </td>
                   </tal:block>
                 </tr>
-                <tr tal:condition="can_add_evts">
+                <tr tal:define="showbutton show_addbuttons|python:1"
+                    tal:condition="python:can_add_evts and showbutton">
                   <td>
                   </td>
                   <td tal:repeat="slot slots">

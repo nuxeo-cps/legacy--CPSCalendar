@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- The add event buttons now do not show up in the print view.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
