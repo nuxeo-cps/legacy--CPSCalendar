@@ -15,7 +15,7 @@
   </p>
   <p tal:define="webcal_url python:total_url.startswith('http:') and 'webcal%s/calendar.ics' % (total_url[4:])"
      tal:condition="webcal_url">
-    <span i18n="cpscalendar_message_if_you_have_an_application_that_supports_it_you_can">
+    <span i18n:translate="cpscalendar_message_if_you_have_an_application_that_supports_it_you_can">
       If you have an application that supports it, you can also
     </span>
     <a tal:attributes="href webcal_url"

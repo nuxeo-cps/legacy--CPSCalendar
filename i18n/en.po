@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2003-10-15 10:38default\n"
-"PO-Revision-Date: 2003-10-15 10:46+0200\n"
+"POT-Creation-Date: 2003-10-15 11:20default\n"
+"PO-Revision-Date: 2003-10-15 11:22+0200\n"
 "Last-Translator: DARCHE <madarche@nuxeio.com>\n"
 "Language-Team: Francais <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -728,6 +728,13 @@ msgstr "Comment for attendees"
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_message_comment_for_organizer"
 msgstr "Comment for the organizer"
+
+#.   <span>
+#.         If you have an application that supports it, you can also
+#.       </span>
+#: from ../skins/cps_calendar/calendar_export.pt
+msgid "cpscalendar_message_if_you_have_an_application_that_supports_it_you_can"
+msgstr "If you have an application that supports it, you can"
 
 #.   <span>
 #.         No shared calendar found

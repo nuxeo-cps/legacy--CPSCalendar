@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-10-15 10:38default\n"
+"POT-Creation-Date: 2003-10-15 11:20default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -726,6 +726,13 @@ msgstr ""
 #.               </small>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_message_comment_for_organizer"
+msgstr ""
+
+#.   <span>
+#.         If you have an application that supports it, you can also
+#.       </span>
+#: from ../skins/cps_calendar/calendar_export.pt
+msgid "cpscalendar_message_if_you_have_an_application_that_supports_it_you_can"
 msgstr ""
 
 #.   <span>
