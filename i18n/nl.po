@@ -912,8 +912,8 @@ msgstr "Decline"
 msgid "cpscalendar_option_status_unconfirmed"
 msgstr "Unconfirmed"
 
-msgid "cpscalendar_option_status_cancelled"
-msgstr "Cancelled"
+msgid "cpscalendar_option_status_canceled"
+msgstr "Canceled"
 
 msgid "cpscalendar_pending_confirmed"
 msgstr "Confirm"
@@ -1128,8 +1128,8 @@ msgstr "No resource"
 msgid "cpscalendar_no_attendee_of_type_events_show"
 msgstr "No events"
 
-msgid "cpscalendar_button_remove_cancelled_events"
-msgstr "Remove cancelled events"
+msgid "cpscalendar_button_remove_canceled_events"
+msgstr "Remove canceled events"
 
 msgid "cpscalendar_button_remove_events_you_declined"
 msgstr "Remove events you declined"

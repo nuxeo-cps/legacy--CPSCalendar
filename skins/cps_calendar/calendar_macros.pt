@@ -248,7 +248,7 @@
           <select name="status"
         tal:define="
           statuses python:['confirmed', 'tentative', 'decline', 'decline_and_delete', 'ignore'];
-          selected python:event['event_status'] == 'cancelled'
+          selected python:event['event_status'] == 'canceled'
                    and 'ignore' or 'confirmed'">
         <option tal:repeat="status statuses"
             tal:attributes="value status;

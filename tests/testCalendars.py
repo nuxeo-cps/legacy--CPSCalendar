@@ -134,11 +134,11 @@ class TestCalendar(CPSCalendarTestCase):
 
         # Play with status
         # XXX: move this to a ne test later
-        event.setEventStatus('cancelled')
-        self.assertEquals(event.event_status, 'cancelled')
+        event.setEventStatus('canceled')
+        self.assertEquals(event.event_status, 'canceled')
         self.assert_(event.isdirty)
-        self.assertEquals(self.calendar.getDeclinedCancelledEvents(),
-                          {'cancelled': ('event',), 'declined': ()})
+        self.assertEquals(self.calendar.getDeclinedCanceledEvents(),
+                          {'canceled': ('event',), 'declined': ()})
 
     def testView(self):
         self.portal.REQUEST.SESSION = {}

@@ -145,12 +145,12 @@ class Event(CPSBaseDocument):
         CPSBaseDocument.edit(self, **kw)
         new_status = self.event_status
         if new_status != old_status:
-            if new_status == 'cancelled':
+            if new_status == 'canceled':
                 calendar = self.getCalendar()
-                calendar.cancellEvent(self)
-            if old_status == 'cancelled':
+                calendar.cancelEvent(self)
+            if old_status == 'canceled':
                 calendar = self.getCalendar()
-                calendar.unCancellEvent(self)
+                calendar.unCancelEvent(self)
             setdirty = 1
 
         if all_day is not None and (not self.all_day) != (not all_day):
@@ -283,16 +283,16 @@ class Event(CPSBaseDocument):
         """ 
         """
 
-        # Only called with status = 'cancelled', it seems -> refactor later
-        assert status == 'cancelled'
+        # Only called with status = 'canceled', it seems -> refactor later
+        assert status == 'canceled'
         old_status = self.event_status
         if status != old_status:
-            if status == 'cancelled':
+            if status == 'canceled':
                 calendar = self.getCalendar()
-                calendar.cancellEvent(self)
-            if old_status == 'cancelled':
+                calendar.cancelEvent(self)
+            if old_status == 'canceled':
                 calendar = self.getCalendar()
-                calendar.unCancellEvent(self)
+                calendar.unCancelEvent(self)
             self.notified_attendees = ()
             self.isdirty = 1
         self.event_status = status
@@ -453,13 +453,13 @@ class Event(CPSBaseDocument):
         return (member, member_cn, dtstamp)
 
     def manage_afterAdd(self, item, container):
-        """Check if the event is cancelled, then register it as
-        cancelled event."""
+        """Check if the event is canceled, then register it as
+        canceled event."""
         CPSBaseDocument.manage_afterAdd(self, item, container)
         if aq_base(item) is aq_base(self):
-            if self.event_status == 'cancelled':
+            if self.event_status == 'canceled':
                 calendar = self.getCalendar()
-                calendar.cancellEvent(self)
+                calendar.cancelEvent(self)
 
 InitializeClass(Event)
 

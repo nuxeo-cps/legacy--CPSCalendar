@@ -22,15 +22,15 @@
              tal:define="can_add_evts python:mtool.checkPermission('Add portal content', here)"
              i18n:domain="cpscalendar">
   <tal:block condition="can_add_evts">
-    <tal:block define="ev_dict here/getDeclinedCancelledEvents">
+    <tal:block define="ev_dict here/getDeclinedCanceledEvents">
       <form action="calendar_delevents" method="POST"
-        tal:define="cancelled ev_dict/cancelled"
-        tal:condition="cancelled">
+        tal:define="canceled ev_dict/canceled"
+        tal:condition="canceled">
         <input type="hidden" name="ids:list"
-          tal:repeat="id cancelled"
+          tal:repeat="id canceled"
           tal:attributes="value id" />
         <input type="submit"
-               tal:attributes="value string:cpscalendar_button_remove_cancelled_events"
+               tal:attributes="value string:cpscalendar_button_remove_canceled_events"
                i18n:attributes="value"/>
       </form>
       <form action="calendar_delevents" method="POST"

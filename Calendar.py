@@ -159,7 +159,7 @@ class Calendar(CPSBaseFolder):
 
     _pending_events = ()
     _declined = ()
-    _cancelled = ()
+    _canceled = ()
 
     _additional_cals = ()
 
@@ -741,12 +741,12 @@ class Calendar(CPSBaseFolder):
         if event_id not in self._declined:
             self._declined = self._declined + (event_id, )
 
-    security.declarePrivate('cancellEvent')
-    def cancellEvent(self, event):
-        """Add the event id in the self._cancelled list"""
+    security.declarePrivate('cancelEvent')
+    def cancelEvent(self, event):
+        """Add the event id in the self._canceled list"""
         event_id = event.id
-        if event_id not in self._cancelled:
-            self._cancelled = self._cancelled + (event_id, )
+        if event_id not in self._canceled:
+            self._canceled = self._canceled + (event_id, )
 
     security.declarePrivate('removeDeclinedEvent')
     def removeDeclinedEvent(self, event):
@@ -756,20 +756,20 @@ class Calendar(CPSBaseFolder):
             self._declined = tuple(
                 [id for id in self._declined if id != event_id])
 
-    security.declarePrivate('unCancellEvent')
-    def unCancellEvent(self, event):
-        """Remove event from cancelled events lists"""
+    security.declarePrivate('unCancelEvent')
+    def unCancelEvent(self, event):
+        """Remove event from canceled events lists"""
         event_id = event.id
-        if event_id in self._cancelled:
-            self._cancelled = tuple(
-                [id for id in self._cancelled if id != event_id])
+        if event_id in self._canceled:
+            self._canceled = tuple(
+                [id for id in self._canceled if id != event_id])
 
-    security.declareProtected('Add portal content', 'getDeclinedCancelledEvents')
-    def getDeclinedCancelledEvents(self):
-        """Return a dictionary with cancelled events ids and declined 
+    security.declareProtected('Add portal content', 'getDeclinedCanceledEvents')
+    def getDeclinedCanceledEvents(self):
+        """Return a dictionary with canceled events ids and declined 
         events ids"""
         return {
-            'cancelled': self._cancelled,
+            'canceled': self._canceled,
             'declined': self._declined,
         }
 
@@ -792,10 +792,10 @@ class Calendar(CPSBaseFolder):
         self._pending_events = tuple(
             [ev for ev in self._pending_events if ev['id'] not in ids])
         declined = [id for id in self._declined if id not in ids]
-        cancelled = [id for id in self._cancelled if id not in ids]
+        canceled = [id for id in self._canceled if id not in ids]
         CPSBaseFolder.manage_delObjects(self, ids, *args, **kw)
         self._declined = tuple(declined)
-        self._cancelled = tuple(cancelled)
+        self._canceled = tuple(canceled)
 
 InitializeClass(Calendar)
 
