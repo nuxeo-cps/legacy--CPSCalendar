@@ -24,7 +24,7 @@ from Products.CPSCore.CPSBase import CPSBaseFolder, CPSBase_adder
 #from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
 
 ManageWorkgroups = 'Manage Workspaces'
-setDefaultRoles(ManageWorkspaces, ('Manager',))
+setDefaultRoles(ManageWorkgroups, ('Manager',))
 
 
 WorkgroupManager = 'WorkspaceManager'
