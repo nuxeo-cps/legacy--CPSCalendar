@@ -493,18 +493,15 @@ class Event(CPSBaseDocument):
         rstart, rstop = self.getRecurrance(0)
         repeats = 1
         while start_time.greaterThan(rstop):
-            print self.title_or_id(), 1, start_time, rstop
             rstart, rstop = self.getRecurrance(repeats)
             repeats += 1
 
         if rstop.greaterThan(self.to_date):
             return []
         
-        print self.title_or_id(), 2, rstop, self.to_date
         result = self._standardMatch(start_time, end_time, slots, rstart, rstop)
         while end_time.greaterThanEqualTo(rstart):
             rstart, rstop = self.getRecurrance(repeats)
-            print self.title_or_id(), 2, rstop, self.to_date
             if rstop.greaterThan(self.to_date):
                 break
             repeats += 1

@@ -290,7 +290,6 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         layout = self.getSearchLayout()
         widgets = [w for w in layout.objectValues()
                    if w.getWidgetId() in self.search_fields]
-        print widgets
         return widgets
 
     security.declareProtected('View', 'listCalendars')
