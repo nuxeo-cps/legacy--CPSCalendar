@@ -1,4 +1,30 @@
 *******************************************
+** CPSCalendar V1.7.0 [R1 build 2004/07/02-16:37 by anahide]
+
+Requires:
+~~~~~~~~~
+- Now requires CPSNavigation.
+New features:
+~~~~~~~~~~~~~
+- Private events are now shown only as black/gray space with no links for
+  other users.
+- There is now a setting on the portal_cpscalendar to select if events 
+  should have fulltext indexing or not.
+- Events now have a link to select a document related to the event.
+Bug fixes:
+~~~~~~~~~~
+- Permission problems when validating fixed by using unrestrictedtraverse.
+- iCalendar export did not support recurring events
+- iCalendar export used TZID to specify timezope, without specifying a VTIMEZONE
+  part. This is false according to the RFC2445 which states "An individual
+  'VTIMEZONE' calendar component MUST be specified for each unique 'TZID'
+  parameter value specified in the iCalendar object." 
+  Dates are now always specified in UTC instead.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.6.4 [R1 build 2004/06/17-09:27 by epietrig]
 
 Requires:
