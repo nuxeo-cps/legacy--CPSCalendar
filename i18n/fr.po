@@ -946,118 +946,124 @@ msgid "option_yes"
 msgstr "Oui"
 
 msgid "label_day0"
-msgstr "Lu"
+msgstr "Di"
 
 msgid "label_day1"
-msgstr "Ma"
+msgstr "Lu"
 
 msgid "label_day2"
-msgstr "Me"
+msgstr "Ma"
 
 msgid "label_day3"
-msgstr "Je"
+msgstr "Me"
 
 msgid "label_day4"
-msgstr "Ve"
+msgstr "Je"
 
 msgid "label_day5"
-msgstr "Sa"
+msgstr "Ve"
 
 msgid "label_day6"
+msgstr "Sa"
+
+msgid "label_day7"
 msgstr "Di"
 
 msgid "label_day_long0"
-msgstr "Lun"
-
-msgid "label_day_long1"
-msgstr "Mar"
-
-msgid "label_day_long2"
-msgstr "Mer"
-
-msgid "label_day_long3"
-msgstr "Jeu"
-
-msgid "label_day_long4"
-msgstr "Ven"
-
-msgid "label_day_long5"
-msgstr "Sam"
-
-msgid "label_day_long6"
 msgstr "Dim"
 
-msgid "label_month0"
-msgstr "Jan"
+msgid "label_day_long1"
+msgstr "Lun"
 
-msgid "label_month1"
-msgstr "Fev"
-
-msgid "label_month2"
+msgid "label_day_long2"
 msgstr "Mar"
 
+msgid "label_day_long3"
+msgstr "Mer"
+
+msgid "label_day_long4"
+msgstr "Jeu"
+
+msgid "label_day_long5"
+msgstr "Ven"
+
+msgid "label_day_long6"
+msgstr "Sam"
+
+msgid "label_day_long7"
+msgstr "Dim"
+
+msgid "label_month1"
+msgstr "Jan"
+
+msgid "label_month2"
+msgstr "Fev"
+
 msgid "label_month3"
-msgstr "Avr"
+msgstr "Mar"
 
 msgid "label_month4"
-msgstr "Mai"
+msgstr "Avr"
 
 msgid "label_month5"
-msgstr "Jui"
+msgstr "Mai"
 
 msgid "label_month6"
-msgstr "Juil"
+msgstr "Jui"
 
 msgid "label_month7"
-msgstr "Aou"
+msgstr "Juil"
 
 msgid "label_month8"
-msgstr "Sep"
+msgstr "Aou"
 
 msgid "label_month9"
-msgstr "Oct"
+msgstr "Sep"
 
 msgid "label_month10"
-msgstr "Nov"
+msgstr "Oct"
 
 msgid "label_month11"
+msgstr "Nov"
+
+msgid "label_month12"
 msgstr "Dec"
 
-msgid "label_month_long0"
+msgid "label_month_long1"
 msgstr "Janvier"
 
-msgid "label_month_long1"
+msgid "label_month_long2"
 msgstr "Février"
 
-msgid "label_month_long2"
+msgid "label_month_long3"
 msgstr "Mars"
 
-msgid "label_month_long3"
+msgid "label_month_long4"
 msgstr "Avril"
 
 #, fuzzy
-msgid "label_month_long4"
+msgid "label_month_long5"
 msgstr "Mai"
 
-msgid "label_month_long5"
+msgid "label_month_long6"
 msgstr "Juin"
 
-msgid "label_month_long6"
+msgid "label_month_long7"
 msgstr "Juillet"
 
-msgid "label_month_long7"
+msgid "label_month_long8"
 msgstr "Août"
 
-msgid "label_month_long8"
+msgid "label_month_long9"
 msgstr "Septembre"
 
-msgid "label_month_long9"
+msgid "label_month_long10"
 msgstr "Octobre"
 
-msgid "label_month_long10"
+msgid "label_month_long11"
 msgstr "Novembre"
 
-msgid "label_month_long11"
+msgid "label_month_long12"
 msgstr "Décembre"
 
 msgid "cpscalendar_member"

@@ -1,15 +1,17 @@
+# translation of en.po to
 # translation of en.po to Francais
 # Gettext Message File for default.
 # Encolpe DEGOUTE <ed@nuxeo.com>, 2003.
 # DARCHE <madarche@nuxeo.com>, 2003.
 # DARCHE <madarche@nuxeio.com>, 2003.
+# Lennart Regebro <rgebro@nuxeo.com>, 2003.
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
 "POT-Creation-Date: 2003-10-15 14:15default\n"
-"PO-Revision-Date: 2003-10-15 14:15+0200\n"
-"Last-Translator: DARCHE <madarche@nuxeio.com>\n"
-"Language-Team: Francais <fr@li.org>\n"
+"PO-Revision-Date: 2003-11-18 17:49+0100\n"
+"Last-Translator: Lennart Regebro <rgebro@nuxeo.com>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -934,117 +936,123 @@ msgid "option_yes"
 msgstr "Yes"
 
 msgid "label_day0"
-msgstr "Mo"
+msgstr "Su"
 
 msgid "label_day1"
-msgstr "Tu"
+msgstr "Mo"
 
 msgid "label_day2"
-msgstr "We"
+msgstr "Tu"
 
 msgid "label_day3"
-msgstr "Th"
+msgstr "We"
 
 msgid "label_day4"
-msgstr "Fr"
+msgstr "Th"
 
 msgid "label_day5"
-msgstr "Sa"
+msgstr "Fr"
 
 msgid "label_day6"
+msgstr "Sa"
+
+msgid "label_day7"
 msgstr "Su"
 
 msgid "label_day_long0"
-msgstr "Mon"
-
-msgid "label_day_long1"
-msgstr "Tue"
-
-msgid "label_day_long2"
-msgstr "Wed"
-
-msgid "label_day_long3"
-msgstr "Thu"
-
-msgid "label_day_long4"
-msgstr "Fri"
-
-msgid "label_day_long5"
-msgstr "Sat"
-
-msgid "label_day_long6"
 msgstr "Sun"
 
-msgid "label_month0"
-msgstr "Jan"
+msgid "label_day_long1"
+msgstr "Mon"
+
+msgid "label_day_long2"
+msgstr "Tue"
+
+msgid "label_day_long3"
+msgstr "Wed"
+
+msgid "label_day_long4"
+msgstr "Thu"
+
+msgid "label_day_long5"
+msgstr "Fri"
+
+msgid "label_day_long6"
+msgstr "Sat"
+
+msgid "label_day_long7"
+msgstr "Sun"
 
 msgid "label_month1"
-msgstr "Feb"
+msgstr "Jan"
 
 msgid "label_month2"
-msgstr "Mar"
+msgstr "Feb"
 
 msgid "label_month3"
-msgstr "Apr"
+msgstr "Mar"
 
 msgid "label_month4"
-msgstr "May"
+msgstr "Apr"
 
 msgid "label_month5"
-msgstr "Jun"
-
-msgid "label_month6"
-msgstr "Jul"
-
-msgid "label_month7"
-msgstr "Aug"
-
-msgid "label_month8"
-msgstr "Sep"
-
-msgid "label_month9"
-msgstr "Oct"
-
-msgid "label_month10"
-msgstr "Nov"
-
-msgid "label_month11"
-msgstr "Dec"
-
-msgid "label_month_long0"
-msgstr "January"
-
-msgid "label_month_long1"
-msgstr "February"
-
-msgid "label_month_long2"
-msgstr "March"
-
-msgid "label_month_long3"
-msgstr "April"
-
-msgid "label_month_long4"
 msgstr "May"
 
+msgid "label_month6"
+msgstr "Jun"
+
+msgid "label_month7"
+msgstr "Jul"
+
+msgid "label_month8"
+msgstr "Aug"
+
+msgid "label_month9"
+msgstr "Sep"
+
+msgid "label_month10"
+msgstr "Oct"
+
+msgid "label_month11"
+msgstr "Nov"
+
+msgid "label_month12"
+msgstr "Dec"
+
+msgid "label_month_long1"
+msgstr "January"
+
+msgid "label_month_long2"
+msgstr "February"
+
+msgid "label_month_long3"
+msgstr "March"
+
+msgid "label_month_long4"
+msgstr "April"
+
 msgid "label_month_long5"
-msgstr "June"
+msgstr "May"
 
 msgid "label_month_long6"
-msgstr "July"
+msgstr "June"
 
 msgid "label_month_long7"
-msgstr "August"
+msgstr "July"
 
 msgid "label_month_long8"
-msgstr "September"
+msgstr "August"
 
 msgid "label_month_long9"
-msgstr "October"
+msgstr "September"
 
 msgid "label_month_long10"
-msgstr "November"
+msgstr "October"
 
 msgid "label_month_long11"
+msgstr "November"
+
+msgid "label_month_long12"
 msgstr "December"
 
 msgid "cpscalendar_member"
@@ -1105,3 +1113,4 @@ msgstr "No events"
 
 #~ msgid "Calendar"
 #~ msgstr "Calendar"
+

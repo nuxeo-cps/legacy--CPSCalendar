@@ -307,7 +307,7 @@
                         go_day python:int(date);"
                       tal:attributes="
                         href string:${here_url}?disp=day&viewed_day=${go_day}">
-                        <span tal:content="python:str('label_day%s' % i)"
+                        <span tal:content="python:str('label_day%s' % str(i+1))"
                               i18n:translate="" />
                         <span tal:replace="string:${date/day}"/> 
                         <span tal:content="python:str('label_month%s' % date.month())"
@@ -544,8 +544,8 @@
               <table width="445" cellspacing="2" cellpadding="0" border="0">
                 <tr>
                   <th
-                    tal:repeat="i python:[1,2,3,4,5,6,0]">
-                    <span tal:content="python:str('label_day_long%s' % (i, ))"
+                    tal:repeat="i python:[1,2,3,4,5,6,7]">
+                    <span tal:content="python:str('label_day_long%s' % str(i))"
                           i18n:translate="">week day</span>
                   </th>
                 </tr>
