@@ -788,8 +788,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         portalurl = getToolByName(self, 'portal_url').getPortalPath()
         return self.restrictedTraverse(portalurl + '/' + path)
 
-    def stringToDateTime(self, string, locale=None, format=None):
-        return stringToDateTime(string, locale, format)
+    def stringToDateTime(self, string, locale=None):
+        return stringToDateTime(string, locale)
 
 
 InitializeClass(CPSCalendarTool)
