@@ -149,22 +149,24 @@ class TestCalendar(CPSCalendarTestCase):
         self.assertEquals(self.calendar.getAdditionalCalendars(), ('test',))
 
     def testGetEvents(self):
+        calendar = self.calendar
+        calendar.first_hour, calendar.last_hour = 0, 24
         start_time = DateTime(2003, 1, 1, 10, 0)
         end_time = DateTime(2003, 1, 1, 16, 0)
 
-        events = self.calendar.getEvents(start_time, end_time)
+        events = calendar.getEvents(start_time, end_time)
         self.assertEquals(events, [])
 
         from_date = DateTime(2003, 1, 1, 12, 0)
         to_date = DateTime(2003, 1, 1, 14, 0)
-        self.calendar.invokeFactory(
+        calendar.invokeFactory(
             'Event', 'event', from_date=from_date, to_date=to_date)
         event = self.calendar.event
 
-        events = self.calendar.getEvents(start_time, end_time)
+        events = calendar.getEvents(start_time, end_time)
         self.assertEquals(events, [event])
 
-        desc = self.calendar.getEventsDesc(
+        desc = calendar.getEventsDesc(
             start_time=start_time, end_time=end_time, disp='day')
         self.assertEquals(desc,
             {'hour_blocks': 
@@ -173,12 +175,12 @@ class TestCalendar(CPSCalendarTestCase):
              'slots': [(start_time, end_time)], 
              'day_events': []})
 
-        desc = self.calendar.getEventsDesc(
+        desc = calendar.getEventsDesc(
             start_time=DateTime(2003, 1, 1, 10, 0),
             end_time=DateTime(2003, 1, 1, 16, 0), disp='week')
         # XXX: add some test for desc here
 
-        desc = self.calendar.getEventsDesc(
+        desc = calendar.getEventsDesc(
             start_time=DateTime(2003, 1, 1, 10, 0),
             end_time=DateTime(2003, 1, 1, 16, 0), disp='month')
         # XXX: add some test for desc here
@@ -307,7 +309,61 @@ class TestCalendar(CPSCalendarTestCase):
 
         # TODO: add some real attendees
 
-        
+    def testGetHourBlockCols(self):
+        class DummyEvent:
+            def isDirty(self):
+                return 0
+        calendar = self.calendar
+        event = DummyEvent()
+
+        hour_cols = [[]]
+        hour_block_cols = calendar._getHourBlockCols(hour_cols, 1)
+        self.assertEquals(hour_block_cols, [[]])
+
+        hour_cols = [[
+            {'event': event,
+             'start': DateTime('2004/01/18 10:00:00'), 
+             'stop': DateTime('2004/01/18 12:00:00')}]]
+        hour_block_cols = calendar._getHourBlockCols(hour_cols, 1)
+        self.assertEquals(len(hour_block_cols[0]), 2)
+        empty_block = hour_block_cols[0][0][0][0]
+        event_block = hour_block_cols[0][1][0][0]
+        self.assertEquals(empty_block['height'], 2 * 60)
+        self.assertEquals(event_block['height'], 2 * 60)
+
+        hour_cols = [[
+            {'event': event,
+             'start': DateTime('2004/01/18 02:00:00'), 
+             'stop': DateTime('2004/01/18 10:00:00')}]]
+        hour_block_cols = calendar._getHourBlockCols(hour_cols, 1)
+        self.assertEquals(len(hour_block_cols[0]), 1)
+        event_block = hour_block_cols[0][0][0][0]
+        self.assertEquals(event_block['height'], 2 * 60)
+
+        hour_cols = [[
+            {'event': event,
+             'start': DateTime('2004/01/18 20:00:00'), 
+             'stop': DateTime('2004/01/18 22:00:00')}]]
+        hour_block_cols = calendar._getHourBlockCols(hour_cols, 1)
+        self.assertEquals(hour_block_cols, [[]])
+
+        hour_cols = [[
+            {'event': event,
+             'start': DateTime('2004/01/18 21:00:00'), 
+             'stop': DateTime('2004/01/18 22:00:00')}]]
+        hour_block_cols = calendar._getHourBlockCols(hour_cols, 1)
+        self.assertEquals(hour_block_cols, [[]])
+
+        hour_cols = [[
+            {'event': event,
+             'start': DateTime('2004/01/18 00:00:00'), 
+             'stop': DateTime('2004/01/18 23:59:00')}]]
+        hour_block_cols = calendar._getHourBlockCols(hour_cols, 1)
+        self.assertEquals(len(hour_block_cols[0]), 1)
+        event_block = hour_block_cols[0][0][0][0]
+        self.assertEquals(event_block['height'], 
+            (calendar.last_hour - calendar.first_hour) * 60)
+
 
 def test_suite():
     suite = unittest.TestSuite()

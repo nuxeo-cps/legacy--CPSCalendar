@@ -5,18 +5,33 @@
 > Création d'un événement sur plusieurs jours : les heures de l'événement ne
 > sont pas prise en compte et l'évenement sur plusieurs jours ne s'affiche pas
 > dans les créneaux horaires.
-> 
+
+WORKSFORME
+
 > Création d'événement : de 12 à 17heures et il se termine le lendemain.
-> 
+
+WORKSFORME
+
 > Ajouter dans la boite de config du portail un lien vers tous les agendas.
-> 
+
+???
+
 > Ajouter dans la gestion de réunion quelle est l'indisponibilité qui fait que
 > la prise est impossible.
-> 
+
+???
+
 > Supprimer le bouton historique de l'agenda
-> 
+
+DONE
+
+> Supprimer les lients 'créer une version' et 'soumettre'
+
+TODO
+
 > Problème de javascript pour la version 6 d'Internet Explorer. Notamment avec
 > l'applet de sélection des dates (proposition comme date du jour Juin 2015)
 > avec décalage d'un jour pour le mois en cours.
 
+A tester sous Windows.
 

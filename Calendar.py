@@ -19,7 +19,7 @@
 # $Id$
 
 """
-  Events container
+  A Calendar is an Events container
 """
 
 from zLOG import LOG, DEBUG, INFO
@@ -156,6 +156,14 @@ class Calendar(CPSBaseFolder):
     _canceled = ()
 
     _additional_cals = ()
+
+    # XXX: make this editable properties.
+    # XXX: these are "view" properties. This should go to a "view" class.
+    first_hour = 8
+    last_hour = 20
+    # XXX: there are still many places where this value is hardcoded in the
+    # skins
+    cell_height = 20
 
     def __init__(self, id, title='', description='', usertype='member'):
         # XXX: title and description not used. Why ?
@@ -482,12 +490,26 @@ class Calendar(CPSBaseFolder):
             conflict = []
             conflict_start = 0
             conflict_stop = 0
-            last_ev = 0
+            last_ev = self.first_hour * 60
             for ev in col:
                 start = ev['start']
+                # If event starts before our visualisation window, we
+                # make it start at the start of our visualisation window.
+                if start.hour() < self.first_hour:
+                    start_min = self.first_hour * 60
+                else:
+                    start_min = start.hour() * 60 + start.minute()
                 stop = ev['stop']
-                start_min = start.hour() * 60 + start.minute()
-                stop_min = stop.hour() * 60 + stop.minute()
+                # Same for end of event.
+                if stop.hour() > self.last_hour:
+                    stop_min = self.last_hour * 60
+                else:
+                    stop_min = stop.hour() * 60 + stop.minute()
+
+                # We're off the window.
+                if stop_min <= start_min:
+                    continue
+
                 if stop_min == 0:
                     stop_min = 1440
                 if conflict:
