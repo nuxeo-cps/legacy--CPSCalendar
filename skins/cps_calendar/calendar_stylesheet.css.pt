@@ -4,7 +4,6 @@ td.eventHeader {
   background-color: black;
   text-align: left;
   font-size: 10px;
-  color: white;
 }
 
 td.eventHeader a {

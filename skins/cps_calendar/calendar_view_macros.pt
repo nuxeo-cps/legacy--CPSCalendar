@@ -497,7 +497,7 @@
 
 
 <metal:block define-macro="standard_event">
-  <table cellspacing="0" cellpadding="0" border="0"
+  <table cellspacing="0" cellpadding="0"
          tal:define="
            local_event python:member_id == event.getCalendarUser();
            event_title event/title_or_id;
@@ -521,7 +521,7 @@
         </a>
     </td></tr>
     <tr tal:condition="python:height>14">
-      <td tal:attributes="bgcolor python:local_event and bgcolor or non_local;">
+      <td class="eventBody" tal:attributes="bgcolor python:local_event and bgcolor or non_local;">
          <img border="0"
             tal:attributes="
               height python:height-14;
