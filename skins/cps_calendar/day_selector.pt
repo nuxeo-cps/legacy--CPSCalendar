@@ -16,8 +16,8 @@
                                var date_disp_id = %s \n
                                var other_input = %s ' %
                                (input_id,date_disp_id,other_input))"/>
-
-<script language="JavaScript" type="text/javascript"><!--
+<script language="JavaScript" type="text/javascript">
+<!--
 function initAll() {
   return true
 }
