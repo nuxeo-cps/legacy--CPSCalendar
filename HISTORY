@@ -1,4 +1,23 @@
 *******************************************
+** CPSCalendar V1.5.1 [R1 build 2004/04/09-13:22 by ben]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- The default for search fields now include groups.
+- The default day was always today, even if you clicked on a specific day.
+- A validation button in the meeting form had the wrong label.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Added a test for the mail notification.
+- The mail notification now skips out early if possible.
+
+*******************************************
 ** CPSCalendar V1.5.0 [R1 build 2004/04/01-20:41 by regebro]
 
 Requires:
