@@ -7,6 +7,7 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - The user search no longer displays users that have no calendar.
+  This solves Mantis bug #804. 
 - Searching when creating members no longer clear the attendee list.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
