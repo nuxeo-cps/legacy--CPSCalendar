@@ -1,22 +1,29 @@
-- move hour events interface
+P1:
+- move hour events interface (18/12/2003)
 
+- add a searching interface more improved for rendez-vous interface.
+
+P2: 
+- Suppress Calendars class and create portal_calendars tool (10/12/2003)
+
+- recurring events (10/12/2003)
+
+
+P3:
 - smarter notifications
-
-- add global actions (in NuxCPS.cpsinstall) for "My calendar" and "Calendars"
 
 - show today with a different color
 
 - add an interface to filter what canceled and declined events we really
   want to delete
 
-- recurring events
-
 - add history to events (even to deleted events...)
-
-- i18n of mail notifications messages (and more descriptive mails...)
 
 - add an interface to send freeform mails to attendees and/or organizer
 
-- add interface for import
+- add interface and code for import
 
 - add WebDav interface for global import
+
+- add 
+
