@@ -1,7 +1,21 @@
 # Copyright (c) 2002-2003 Nuxeo SARL <http://nuxeo.com>
 # Copyright (c) 2002 Préfecture du Bas-Rhin, France
 # Author: Florent Guillaume <mailto:fg@nuxeo.com>
-# See license info at the end of this file.
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2 as published
+# by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+
 # $Id$
 
 """
@@ -175,7 +189,7 @@ class Calendar(CPSBaseFolder):
 
     security.declarePublic('addPendingEvent')
     def addPendingEvent(self, event_dict):
-        """Add an event request
+        """ Add an event request
         """
         if event_dict['request'] == 'status' and \
                 event_dict['id'] not in self.objectIds('Event'):
@@ -204,7 +218,7 @@ class Calendar(CPSBaseFolder):
     def confirmPendingEvent(self, event_id, REQUEST=None, **kw):
         """
         """
-        if REQUEST:
+        if REQUEST is not None:
             kw.update(REQUEST.form)
         pending = None
         for event in self._pending_events:
@@ -234,7 +248,7 @@ class Calendar(CPSBaseFolder):
         events = [event for event in self._pending_events
                         if event['id'] != event_id]
         self._pending_events = tuple(events)
-        if REQUEST:
+        if REQUEST is not None:
             if request == 'status':
                 REQUEST.RESPONSE.redirect("%s/%s/calendar_attendees_form"
                     % (self.absolute_url(), event_id))
@@ -251,7 +265,7 @@ class Calendar(CPSBaseFolder):
         else:
             self._pending_events = tuple(
                 [ev for ev in self._pending_events if ev['id'] != id])
-        if REQUEST:
+        if REQUEST is not None:
             REQUEST.RESPONSE.redirect(self.absolute_url())
 
     security.declareProtected('View', 'getEventsDesc')
@@ -387,6 +401,8 @@ class Calendar(CPSBaseFolder):
             }
 
     def _getDayLines(self, day_events_list, len_slots):
+        """
+        """
         day_lines = []
         day_ids = []
         day_dict = {}
@@ -451,6 +467,8 @@ class Calendar(CPSBaseFolder):
         return day_lines
 
     def _getHourBlockCols(self, hour_cols, show):
+        """
+        """
         hour_block_cols = []
         for col in hour_cols:
             blocks = []
@@ -594,7 +612,7 @@ class Calendar(CPSBaseFolder):
 
     security.declarePrivate('getEmail')
     def getEmail(self, member, dir):
-        """
+        """ Get email from member's properties in dir
         """
         member_prop = dir.getEntry(member)
         if member_prop is None:
@@ -603,7 +621,7 @@ class Calendar(CPSBaseFolder):
 
     security.declarePrivate('notifyMembers')
     def notifyMembers(self, event_dict):
-        """Notify members when a pending event arrives
+        """ Notify members when a pending event arrives
         """
 
         # get mailhost object
@@ -714,23 +732,32 @@ class Calendar(CPSBaseFolder):
 
     security.declareProtected('View', 'getEvents')
     def getEvents(self, from_date, to_date):
-        # XXX: Docstring ? What does this do ?
-        return ()
+        """ Return an all events with from_date and to_date in the interval
+        """
+        events = self.objectValues('Event')
+        return [event for event in events if event.from_date >= from_date and \
+                                             event.to_date <= to_date]
 
     security.declarePrivate('addDeclinedEvent')
     def addDeclinedEvent(self, event):
+        """ Add the event id in the self._declined list
+        """
         event_id = event.id
         if event_id not in self._declined:
             self._declined = self._declined + (event_id, )
 
     security.declarePrivate('addCancelledEvent')
     def addCancelledEvent(self, event):
+        """ Add the event id in the self._cancelled list
+        """
         event_id = event.id
         if event_id not in self._cancelled:
             self._cancelled = self._cancelled + (event_id, )
 
     security.declarePrivate('removeDeclinedEvent')
     def removeDeclinedEvent(self, event):
+        """ Remove event from self._declined
+        """
         event_id = event.id
         if event_id in self._declined:
             self._declined = tuple(
@@ -738,6 +765,8 @@ class Calendar(CPSBaseFolder):
 
     security.declarePrivate('removeCancelledEvent')
     def removeCancelledEvent(self, event):
+        """ Remove event from self._cancelled
+        """
         event_id = event.id
         if event_id in self._cancelled:
             self._cancelled = tuple(
@@ -745,7 +774,7 @@ class Calendar(CPSBaseFolder):
 
     security.declareProtected('Add portal content', 'getDeclinedCancelledEvents')
     def getDeclinedCancelledEvents(self):
-        """
+        """ Return a dictionnry with cancelled events'id and declined events'id
         """
         return {
             'cancelled': self._cancelled,
@@ -754,10 +783,14 @@ class Calendar(CPSBaseFolder):
 
     security.declareProtected('Add portal content', 'setAdditionalCalendars')
     def setAdditionalCalendars(self, cals):
+        """
+        """
         self._additional_cals = tuple(cals)
 
     security.declareProtected('Add portal content', 'getAdditionalCalendars')
     def getAdditionalCalendars(self):
+        """
+        """
         return self._additional_cals
 
     security.declareProtected('Delete objects', 'manage_delObjects')
@@ -805,22 +838,6 @@ def addCalendar(dispatcher, id,
         roles=['Manager', 'WorkspaceManager', 'WorkspaceMember'],
         acquire=0)
 
-    if REQUEST:
+    if REQUEST is not None:
         url = dispatcher.DestinationURL()
         REQUEST.RESPONSE.redirect('%s/manage_main' % url)
-    #return CPSBase_adder(container, ob, REQUEST=REQUEST)
-
-
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License version 2 as published
-# by the Free Software Foundation.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
-# 02111-1307, USA.
