@@ -19,7 +19,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.CMFCorePermissions import \
      setDefaultRoles, View, ManageProperties
 
-from Products.CPSCore.CPSBase import CPSBaseFolder, CPSBase_adder
+from Products.CPSCore.CPSBase import CPSBaseFolder#, CPSBase_adder
 #from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
 
 ManageWorkgroups = 'Manage Workspaces'
