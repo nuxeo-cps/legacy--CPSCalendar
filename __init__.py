@@ -41,6 +41,7 @@ contentConstructors = (
     Calendars.addCalendars,
     Calendar.addCalendar,
     Event.addEvent,
+    CPSCalendarTool.addCPSCalendarTool,
 )
 
 fti = (

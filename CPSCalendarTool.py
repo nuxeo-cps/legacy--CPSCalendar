@@ -18,6 +18,7 @@
 # $Id$
 
 
+from Globals import InitializeClass
 from Products.CMFCore.PortalFolder import PortalFolder
 
 from Products.CMFCore.CMFCorePermissions import setDefaultRoles
@@ -130,9 +131,9 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     and process meeting or superpose calendars.
     """
 
-    id = 'portal_adv_calendar'
+    id = 'portal_cpscalendar'
     meta_type = 'CPS Advanced Calendar Tool'
-    title = 'Advanced Calendar Tool'
+    title = 'CPS Advanced Calendar Tool'
 
     security = ClassSecurityInfo()
 
@@ -420,3 +421,13 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             if mtool.checkPermission('List folder contents', cal):
                 cals.append(cal)
         return cals
+
+InitializeClass(CPSCalendarTool)
+
+def addCPSCalendarTool(container, REQUEST=None):
+    """Add a CPS Calendar Tool."""
+    ob = CPSCalendarTool()
+    id = ob.getId()
+    container._setObject(id, ob)
+    if REQUEST is not None:
+        REQUEST.RESPONSE.redirect(container.absolute_url()+'/manage_main')
