@@ -79,7 +79,7 @@ factory_type_information = (
                   },
                  {'id': 'addevent',
                   'name': '_action_addevent_',
-                  'action': 'string:${object_url}/calendar_addevent_form?all_day=1',
+                  'action': 'string:${object_url}/calendar_addevent_form',
                   'condition': '',
                   'permissions': ("Add portal content",),
                   'category': 'object'
