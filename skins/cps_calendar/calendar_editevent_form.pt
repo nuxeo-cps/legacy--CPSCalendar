@@ -377,13 +377,14 @@ range       : [2000, 2049]
 
       </metal:block>
     </metal:block>
-    <tal:block condition="meeting"
-       define="cal_users meeting/cal_users">
+    <tal:block condition="meeting">
+      <tal:block define="cal_users meeting/cal_users">
       <p tal:repeat="user cal_users/items">
         <input type="checkbox" name="cal_ids:list" checked
                tal:attributes="value python:user[0]" />
         <tal:block replace="python:user[1]" />
       </p>
+      </tal:block>
     </tal:block>
       <input type="submit"
              tal:attributes="name python:action + ':method';
