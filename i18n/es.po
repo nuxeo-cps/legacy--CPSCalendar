@@ -227,8 +227,8 @@ msgstr ""
 msgid "cpscalendar_heading_calendar_selection"
 msgstr ""
 
-#.   <block fill-slot="head_slot">
-#.   </block>
+#.   <h1>
+#.   </h1>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_heading_event_deletion_confirmation"
 msgstr ""
@@ -240,8 +240,8 @@ msgstr ""
 msgid "cpscalendar_heading_event_update"
 msgstr ""
 
-#.   <block fill-slot="head_slot">
-#.   </block>
+#.   <h1>
+#.     </h1>
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
 msgid "cpscalendar_heading_events_deletion_confirmation"
 msgstr ""
@@ -253,9 +253,9 @@ msgstr ""
 #.       Meeting creation helper
 #.   </h1>
 #.   <span />
-#.   <block fill-slot="head_slot">
+#.   <h1>
 #.     Meeting creation helper
-#.   </block>
+#.   </h1>
 #: from ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
 #: ../skins/cps_calendar/calendar_meeting_error.pt
@@ -1167,6 +1167,9 @@ msgid "cpscalendar_no_attendee_of_type_resource"
 msgstr ""
 
 msgid "cpscalendar_no_attendee_of_type_events_show"
+msgstr ""
+
+msgid "cpscalendar_no_attendee_of_type_workspace"
 msgstr ""
 
 msgid "cpscalendar_button_remove_canceled_events"

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2004-08-19 18:29default\n"
+"POT-Creation-Date: 2004-08-20 15:21default\n"
 "PO-Revision-Date: 2004-07-12 18:37+0200\n"
 "Last-Translator: Georg Hennemann <georg.hennemann@dhl.com>\n"
 "Language-Team: German <reinland@dzug.org>\n"
@@ -241,8 +241,8 @@ msgstr "Modifizieren eines Events"
 msgid "cpscalendar_heading_calendar_selection"
 msgstr "Kalender Auswählen"
 
-#.   <block fill-slot="head_slot">
-#.   </block>
+#.   <h1>
+#.   </h1>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_heading_event_deletion_confirmation"
 msgstr "Event Löschen Bestätigen"
@@ -254,8 +254,8 @@ msgstr "Event Löschen Bestätigen"
 msgid "cpscalendar_heading_event_update"
 msgstr "Event Update"
 
-#.   <block fill-slot="head_slot">
-#.   </block>
+#.   <h1>
+#.     </h1>
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
 msgid "cpscalendar_heading_events_deletion_confirmation"
 msgstr "Event Löschen Bestätigen"
@@ -267,9 +267,9 @@ msgstr "Event Löschen Bestätigen"
 #.       Meeting creation helper
 #.   </h1>
 #.   <span />
-#.   <block fill-slot="head_slot">
+#.   <h1>
 #.     Meeting creation helper
-#.   </block>
+#.   </h1>
 #: from ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
 #: ../skins/cps_calendar/calendar_meeting_error.pt
@@ -1197,6 +1197,10 @@ msgstr "Keine Ressourcen"
 
 msgid "cpscalendar_no_attendee_of_type_events_show"
 msgstr "Keine Events"
+
+#, fuzzy
+msgid "cpscalendar_no_attendee_of_type_workspace"
+msgstr "Keine Ressourcen"
 
 msgid "cpscalendar_button_remove_canceled_events"
 msgstr "Entfernen der gecancelten Events"

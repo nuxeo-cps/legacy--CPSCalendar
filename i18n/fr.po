@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2004-08-19 18:29default\n"
+"POT-Creation-Date: 2004-08-20 15:21default\n"
 "PO-Revision-Date: 2004-08-19 16:04+0200\n"
 "Last-Translator: Lennart Regebro <rgebro@nuxeo.com>\n"
 "Language-Team: \n"
@@ -257,8 +257,8 @@ msgstr "Modifier l'événement"
 msgid "cpscalendar_heading_calendar_selection"
 msgstr "Sélection d'agendas"
 
-#.   <block fill-slot="head_slot">
-#.   </block>
+#.   <h1>
+#.   </h1>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_heading_event_deletion_confirmation"
 msgstr "Confirmation de suppression d'un événement"
@@ -270,8 +270,8 @@ msgstr "Confirmation de suppression d'un événement"
 msgid "cpscalendar_heading_event_update"
 msgstr "Modification d'un événement"
 
-#.   <block fill-slot="head_slot">
-#.   </block>
+#.   <h1>
+#.     </h1>
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
 msgid "cpscalendar_heading_events_deletion_confirmation"
 msgstr "Confirmation de la suppression des événements"
@@ -283,9 +283,9 @@ msgstr "Confirmation de la suppression des événements"
 #.       Meeting creation helper
 #.   </h1>
 #.   <span />
-#.   <block fill-slot="head_slot">
+#.   <h1>
 #.     Meeting creation helper
-#.   </block>
+#.   </h1>
 #: from ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
 #: ../skins/cps_calendar/calendar_meeting_error.pt
@@ -1213,6 +1213,10 @@ msgstr "Aucune ressource"
 
 msgid "cpscalendar_no_attendee_of_type_events_show"
 msgstr "Aucun participant"
+
+#, fuzzy
+msgid "cpscalendar_no_attendee_of_type_workspace"
+msgstr "Aucune agenda de l'espace de travail"
 
 msgid "cpscalendar_button_remove_canceled_events"
 msgstr "Supprimer les événements annulés"

@@ -286,6 +286,9 @@ msgstr ""
 msgid "cpscalendar_no_attendee_of_type_events_show"
 msgstr ""
 
+msgid "cpscalendar_no_attendee_of_type_workspace"
+msgstr ""
+
 msgid "cpscalendar_button_remove_canceled_events"
 msgstr ""
 

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pt-BR\n"
-"POT-Creation-Date: 2004-08-19 18:29default\n"
+"POT-Creation-Date: 2004-08-20 15:21default\n"
 "PO-Revision-Date: 2004-06-07 20:02-0300\n"
 "Last-Translator: Mario Olimpio de Menezes <mario@curiango.ipen.br>\n"
 "Language-Team: Português do Brasil <pt@li.org>\n"
@@ -252,8 +252,8 @@ msgstr "Modificar o evento"
 msgid "cpscalendar_heading_calendar_selection"
 msgstr "Seleção de agenda"
 
-#.   <block fill-slot="head_slot">
-#.   </block>
+#.   <h1>
+#.   </h1>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_heading_event_deletion_confirmation"
 msgstr "Confirmação de remoção de evento"
@@ -265,8 +265,8 @@ msgstr "Confirmação de remoção de evento"
 msgid "cpscalendar_heading_event_update"
 msgstr "Atualizar evento"
 
-#.   <block fill-slot="head_slot">
-#.   </block>
+#.   <h1>
+#.     </h1>
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
 msgid "cpscalendar_heading_events_deletion_confirmation"
 msgstr "Confirmação de remoção de eventos"
@@ -278,9 +278,9 @@ msgstr "Confirmação de remoção de eventos"
 #.       Meeting creation helper
 #.   </h1>
 #.   <span />
-#.   <block fill-slot="head_slot">
+#.   <h1>
 #.     Meeting creation helper
-#.   </block>
+#.   </h1>
 #: from ../skins/cps_calendar/calendar_freebusy.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
 #: ../skins/cps_calendar/calendar_meeting_error.pt
@@ -1246,6 +1246,10 @@ msgstr "Nenhum participante de recurso tipo"
 
 msgid "cpscalendar_no_attendee_of_type_events_show"
 msgstr "Nenhum participante de tipo mostra evento"
+
+#, fuzzy
+msgid "cpscalendar_no_attendee_of_type_workspace"
+msgstr "Nenhum participante de recurso tipo"
 
 msgid "cpscalendar_button_remove_canceled_events"
 msgstr "Remover eventos cancelados"
