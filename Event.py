@@ -127,6 +127,10 @@ class Event(CPSBaseDocument):
         self.from_date = from_date
         self.to_date = to_date
         self._normalize()
+        self.location = kw.get('location')
+        self.event_status = kw.get('event_status')
+        self.category = kw.get('category')
+        self.transparent = kw.get('transparent')
 
     security.declareProtected('Modify portal content', 'edit')
     def edit(self, attendees=None, from_date=None, to_date=None, 
