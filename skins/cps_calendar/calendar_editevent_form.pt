@@ -125,7 +125,7 @@
       <metal:block use-macro="here/calendar_macros/macros/form_property">
         <metal:block fill-slot="title">&nbsp;</metal:block>
         <metal:block fill-slot="content">
-          <input type="submit" value="cpscalendar_label_change_type"
+          <input type="submit" i18n:attributes="value" value="cpscalendar_label_change_type"
             name="calendar_editevent_form:method">
         </metal:block>
       </metal:block>
