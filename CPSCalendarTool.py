@@ -23,6 +23,7 @@ from Products.CMFCore.PortalFolder import PortalFolder
 
 from Products.CMFCore.CMFCorePermissions import setDefaultRoles
 from Products.CMFCore.CMFCorePermissions import View
+from Products.CMFCore.CMFCorePermissions import ManagePortal
 from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
 
@@ -128,8 +129,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     """
 
     id = 'portal_cpscalendar'
-    meta_type = 'CPS Advanced Calendar Tool'
-    title = 'CPS Advanced Calendar Tool'
+    meta_type = 'CPS Calendar Tool'
+    title = 'CPS Calendar Tool'
 
     security = ClassSecurityInfo()
 
@@ -146,8 +147,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     def __init__(self):
         PortalFolder.__init__(self, self.id)
 
-    security.declareProtected('View', 'getCalendarObjects')
-    def getCalendarObjects(self):
+    security.declareProtected('View', 'listCalendars')
+    def listCalendars(self):
         """ return all available Calendar objects in a list
         """
         brains = self.portal_catalog.searchResults(meta_type='Calendar')
@@ -158,9 +159,9 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             result.append(brain.getObject())
         return result
 
-    security.declareProtected('View', 'getCalendarIds')
-    def getCalendarIds(self):
-        """ return all available Calendar ids in a list
+    security.declareProtected('View', 'listCalendarPaths')
+    def listCalendarPaths(self):
+        """ return all available Calendars' path in a list
         """
         brains = self.portal_catalog.searchResults(meta_type='Calendar')
         result = []
@@ -170,29 +171,32 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             result.append(brain.getId())
         return result
 
-    security.declareProtected(View, 'getCalendarsDict')
-    def getCalendarsDict(self, exclude=None):
+    security.declareProtected(View, 'listCalendarsDict')
+    def listCalendarsDict(self, exclude=None):
         """ Return a short summary of all calendars
             It's used in meeting preparation to have all possibles attendees
+
+            exclude: one calendar rpath to remove of the list
         """
         calendars_dict = {}
-        for ob in self.getCalendarObjects():
+        for ob in self.listCalendars():
             entry = calendars_dict.setdefault(ob.usertype, [])
-            if exclude is None or exclude != ob.id:
+            rpath = ob.absolute_url(relative=1)
+            if exclude is None or exclude != rpath:
                 entry.append({
                   'id': ob.id,
                   'cn': ob.title_or_id(),
                   'usertype': ob.usertype,
-                  'path': ob.absolute_url(relative=1),
-                  'url': ob.absolute_url(),
+                  'rpath': rpath,
+                  'path': ob.absolute_url(),
                 })
         return calendars_dict
 
-    security.declareProtected('View', 'getCalendarIds')
+    security.declareProtected('View', 'getCalendarForId')
     def getCalendarForId(self, id):
         """ return all available Calendar ids in a list
         """
-        return None
+        raise "Deprecated", "Bug to fix"
 
     # XXX use a special permission here
     security.declareProtected('View', 'unionCals')
@@ -312,18 +316,19 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             'slots': slots,
         }
 
-    security.declareProtected('ModifyPortalContent', 'createUserCalendar')
-    def createUserCalendar(self, context, id):
-        """Create an user calendar"""
-        dirtool = getToolByName(self, 'portal_metadirectories')
+    security.declareProtected(ManagePortal, 'createMemberCalendar')
+    def createMemberCalendar(self, member_id):
+        """Create an calendar in the home folder of a member
+
+        member_id: member's id for which we create this calendar
+        """
         mtool = getToolByName(self, 'portal_membership')
         ttool = getToolByName(self, 'portal_types')
         mcat = self.Localizer.cpscalendar
-
-        members = dirtool.members
+        context = mtool.getHomeFolder()
 
         aclu = self.acl_users
-        user = aclu.getUser(id)
+        user = aclu.getUser(member_id)
         if user is not None:
             user = user.__of__(aclu)
 
@@ -351,7 +356,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         except AttributeError:
             pass  # Zope 2.1.x compatibility
 
-        ob.manage_setLocalRoles(id, ['Owner', 'WorkspaceManager'])
+        ob.manage_setLocalRoles(member_id, ['Owner', 'WorkspaceManager'])
 
         # Rebuild the tree with corrected local roles.
         # This needs a user that can View the object.
@@ -397,13 +402,13 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             info['status'] = 'unconfirmed'
         return info
 
-    security.declareProtected('View', 'getVisibleCalendars')
-    def getVisibleCalendars(self):
+    security.declareProtected('View', 'listVisibleCalendars')
+    def listVisibleCalendars(self):
         """ return the list of all Calendar objects visible by the user
         """
         mtool = getToolByName(self, 'portal_membership')
         cals = []
-        for cal in self.getCalendarObjects():
+        for cal in self.listCalendars():
             if mtool.checkPermission('List folder contents', cal):
                 cals.append(cal)
         return cals
