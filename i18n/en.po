@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: en\n"
-"POT-Creation-Date: 2003-12-17 14:41default\n"
+"POT-Creation-Date: 2003-12-17 15:29default\n"
 "PO-Revision-Date: 2003-12-08 14:31+0100\n"
 "Last-Translator: Encolpe DEGOUTE <ed@nuxeo.com>\n"
 "Language-Team: French <cantact@nuxeo.com>\n"
@@ -51,6 +51,13 @@ msgstr "Confirm"
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "Confirmed"
 msgstr "Confirmed"
+
+#.   <li repeat="error options/errors" content="python:str(error)">
+#.         Error
+#.       </li>
+#: from ../skins/cps_calendar/calendar_meeting_error.pt
+msgid "Error"
+msgstr ""
 
 #.   <h3 content="cal_infos/base_disp">January 2003</h3>
 #: from ../skins/cps_calendar/day_selector.pt
@@ -269,6 +276,7 @@ msgstr "Events deletion confirmation"
 #.   <block fill-slot="head_slot">
 #.     Meeting creation helper
 #.   </block>
+#.   <span />
 #.   <span>
 #.       Meeting creation helper
 #.     </span>
@@ -1160,3 +1168,6 @@ msgstr "to dat invalid"
 
 msgid "cpscalendar_interval_invalid_date"
 msgstr "you cannot select a time interval larger than a month"
+
+msgid "cpscalendar_create_the_meeting_here"
+msgstr "Create the meeting here"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-12-17 14:41default\n"
+"POT-Creation-Date: 2003-12-17 15:29default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -46,6 +46,13 @@ msgstr ""
 #.   		  </block>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "Confirmed"
+msgstr ""
+
+#.   <li repeat="error options/errors" content="python:str(error)">
+#.         Error
+#.       </li>
+#: from ../skins/cps_calendar/calendar_meeting_error.pt
+msgid "Error"
 msgstr ""
 
 #.   <h3 content="cal_infos/base_disp">January 2003</h3>
@@ -265,6 +272,7 @@ msgstr ""
 #.   <block fill-slot="head_slot">
 #.     Meeting creation helper
 #.   </block>
+#.   <span />
 #.   <span>
 #.       Meeting creation helper
 #.     </span>
@@ -1153,4 +1161,7 @@ msgid "cpscalendar_to_incorrect_date"
 msgstr ""
 
 msgid "cpscalendar_interval_invalid_date"
+msgstr ""
+
+msgid "cpscalendar_create_the_meeting_here"
 msgstr ""

@@ -7,13 +7,8 @@
         tal:attributes="href string:${portal_url}/calendar_stylesheet.css" />
 </metal:block>
 
-<metal:block fill-slot="head_slot"
+<metal:block fill-slot="main"
              i18n:domain="cpscalendar"
-             i18n:translate="cpscalendar_heading_meeting_creation_helper">
-    Meeting creation helper
-</metal:block>
-
-<metal:block fill-slot="main" i18n:domain="cpscalendar"
              tal:define="meeting request/SESSION/meeting;
                          freebusy_infos meeting/freebusy_infos;
                          slots freebusy_infos/slots;
@@ -33,36 +28,26 @@
                          back_td1 string:${portal_url}/cal_line1.png;
                          back_td2 string:${portal_url}/cal_line2.png;
                          empty_src string:${portal_url}/cal_empty.gif;">
-  <table cellspacing="0" cellpadding="0" border="0" width="100%">
+
+  <span i18n:translate="cpscalendar_heading_meeting_creation_helper">
+    Meeting creation helper
+  </span>
+  <table cellspacing="0" cellpadding="0" border="0">
     <tr>
-      <td>
-        <table height="15" align="right"
-          cellspacing="0" cellpadding="0" border="0">
-          <tr>
-            <td width="30" class="calLeftTab">
-              <tal:block condition="python:disp_start > 0">
-                <a class="calEvent"
-                  tal:define="
-                    prev python:disp_start - 7;
-                  "
+      <td align="right">
+        <div class="contentTabs">
+            <span class="opentab">&nbsp;</span><a class="calEvent"
+                  tal:condition="python:disp_start > 0"
+                  tal:define="prev python:disp_start - 7;"
                   tal:attributes="href string:calendar_go_freebusy?start=${prev}">
-                  <<
-                </a>
-              </tal:block>
-            </td>
-            <td width="30" class="calRightTab">
-              <tal:block condition="python:disp_end < len_slots">
-                <a class="calEvent"
-                  tal:define="
-                    next python:disp_start + 7;
-                  "
+                  &lt;&lt;
+                </a><a class="calEvent"
+                   tal:condition="python:disp_end < len_slots"
+                  tal:define="next python:disp_start + 7;"
                   tal:attributes="href string:calendar_go_freebusy?start=${next}">
-                  >>
-                </a>
-              </tal:block>
-            </td>
-          </tr>
-        </table>
+                  &gt;&gt;
+                </a><span class="closetab">&nbsp;</span>
+        </div>
       </td>
     </tr>
     <tr>
@@ -124,7 +109,7 @@
                                               bgcolor python:(busy and '#AAAAAA') or (ok and '#00FF00') or nothing">
                             <tal:block condition="ok">
                               <a tal:define="time python:int(block['start']);"
-                                 tal:attributes="title python:str('_Create the meeting here_');
+                                 tal:attributes="title string:cpscalendar_create_the_meeting_here;
                                                  href string:create_meeting_form?time=${time}&window=${height}"
                                  i18n:attributes="title">
                                 <img width="59" border="0"

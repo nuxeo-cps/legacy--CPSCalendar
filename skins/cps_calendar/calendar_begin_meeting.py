@@ -14,10 +14,11 @@ meeting = {}
 meeting['args'] = kw
 
 try:
-    from_date_year = int(kw['from_date_year'])
-    from_date_month = int(kw['from_date_month'])
-    from_date_day = int(kw['from_date_day'])
-except (ValueError, KeyError,):
+    from_date_string = str(kw.get('from_date','')).split('/')
+    from_date_year = int(from_date_string[2])
+    from_date_month = int(from_date_string[1])
+    from_date_day = int(from_date_string[0])
+except (ValueError, IndexError):
     pr('cpscalendar_from_incorrect_date')
 ok = 0
 if not errors:
@@ -29,10 +30,11 @@ if not errors:
             from_date_day -= 1
 
 try:
-    to_date_year = int(kw['to_date_year'])
-    to_date_month = int(kw['to_date_month'])
-    to_date_day = int(kw['to_date_day'])
-except (ValueError, KeyError,):
+    to_date_string = str(kw.get('to_date','')).split('/')
+    to_date_year = int(to_date_string[2])
+    to_date_month = int(to_date_string[1])
+    to_date_day = int(to_date_string[0])
+except (ValueError, IndexError,):
     pr('cpscalendar_to_incorrect_date')
 
 ok = 0

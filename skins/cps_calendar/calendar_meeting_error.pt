@@ -2,12 +2,8 @@
 <html metal:use-macro="here/main_template/macros/master"
       i18n:domain="cpscalendar">
 
-<metal:block fill-slot="head_slot"
-             i18n:translate="cpscalendar_heading_meeting_creation_helper">
-  Meeting creation helper
-</metal:block>
-
 <metal:block fill-slot="main">
+<span i18n:translate="cpscalendar_heading_meeting_creation_helper" /><br/>
   <span class="calTitle"
         i18n:translate="cpscalendar_message_your_meeting_request_has_errors">
     Your request for a meeting has errors

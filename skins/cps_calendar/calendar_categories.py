@@ -11,7 +11,7 @@ return {
             'color': '#770000',
         },
         'other': {
-            'title': 'cpscalendar_category_other',
+            'title': 'cpscalendar_category_others',
             'color': '#007700',
         },
     },

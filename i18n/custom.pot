@@ -271,3 +271,6 @@ msgstr ""
 msgid "cpscalendar_interval_invalid_date"
 msgstr ""
 
+msgid "cpscalendar_create_the_meeting_here"
+msgstr ""
+
