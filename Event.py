@@ -456,19 +456,24 @@ class Event(CPSBaseDocument):
         all_attendees = []
         event_dict = self.getEventDict(comment=comment)
         caltool = getToolByName(self, 'portal_cpscalendar')
+        this_rpath = self.getRpath()
         for attendee in self.attendees:
             attendee_rpath = attendee['rpath']
             all_attendees.append(attendee_rpath)
             if attendees is not None and attendee_rpath not in attendees:
                 continue
-            # XXX: what's the visibility rule for invitations ?
-            attendee_calendar = caltool.getCalendarForPath(
-                attendee_rpath, unrestricted=1)
-            if attendee_calendar is None:
-                LOG('CPSCalendar', INFO, "Can't get calendar for %s" 
-                    % (attendee_rpath, ))
-                continue
-            attendee_calendar.addPendingEvent(event_dict)
+
+            # Notify the relevant attendees except us.
+            if attendee_rpath != this_rpath:
+                # XXX: what's the visibility rule for invitations ?
+                attendee_calendar = caltool.getCalendarForPath(
+                    attendee_rpath, unrestricted=1)
+                if attendee_calendar is None:
+                    LOG('CPSCalendar', INFO, "Can't get calendar for %s" 
+                        % (attendee_rpath, ))
+                    continue
+                attendee_calendar.addPendingEvent(event_dict)
+
             notified_attendees.append(attendee_rpath)
 
         calendar = self.getCalendar()
@@ -655,6 +660,11 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
         pass # Reached when responding to an invitation
     ob = Event(id, organizer=organizer, attendees=attendees, **kw)
     calendar._setObject(id, ob)
+    ob = calendar._getOb(id)
+
+    # Automatically notify all attendees at creation time
+    ob.updateAttendeesCalendars(comment='')
+
     if REQUEST is not None:
         url = dispatcher.DestinationURL()
         REQUEST.RESPONSE.redirect('%s/manage_main' % (url, ))
