@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2003-10-14 11:59default\n"
+"POT-Creation-Date: 2003-10-14 13:46default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -60,13 +60,6 @@ msgstr ""
 #.         </p>
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 msgid "No ressources selected"
-msgstr ""
-
-#.   <title content="here/expanded_title">
-#.   	 Printing version of your calendar
-#.     </title>
-#: from ../skins/cps_calendar/printing_template.pt
-msgid "Printing version of your calendar"
 msgstr ""
 
 #.   <span content="python:str(user_type['plural_title'])" class="calTitle">Ressources</span>
@@ -138,13 +131,6 @@ msgstr ""
 #.     </span>
 #: from ../skins/cps_calendar/calendar_pending_events.pt
 msgid "_cal_Pending_events_for_"
-msgstr ""
-
-#.   <block fill-slot="title">
-#.             Title
-#.           </block>
-#: from ../skins/cps_calendar/calendar_edit_form.pt
-msgid "_prop_title_"
 msgstr ""
 
 #.   <input value="button_add" class="mainbutton" type="submit">
@@ -637,6 +623,9 @@ msgid "cpscalendar_label_status"
 msgstr ""
 
 #.   <block fill-slot="title">
+#.             Title
+#.           </block>
+#.   <block fill-slot="title">
 #.   		      Title
 #.   	    </block>
 #.   <metal:block fill-slot="title">
@@ -645,7 +634,8 @@ msgstr ""
 #.   <block fill-slot="title">
 #.                 Title
 #.               </block>
-#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: from ../skins/cps_calendar/calendar_edit_form.pt
+#: ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 #: ../skins/cps_calendar/create_meeting_form.pt
 msgid "cpscalendar_label_title"
@@ -866,6 +856,13 @@ msgstr ""
 #.     </span>
 #: from ../skins/cps_calendar/calendar_meeting_expired.pt
 msgid "cpscalendar_message_your_request_has_expired"
+msgstr ""
+
+#.   <title>
+#.   	 Printing version of your calendar
+#.     </title>
+#: from ../skins/cps_calendar/printing_template.pt
+msgid "cpscalendar_printable_view"
 msgstr ""
 
 #.   <option repeat="propid searchable_keys" attributes="value propid" content="python:str(schema_dict[propid].title)">option1</option>

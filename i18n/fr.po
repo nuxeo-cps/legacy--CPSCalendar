@@ -1,3 +1,4 @@
+# translation of fr.po to 
 # translation of fr.po to Francais
 # Gettext Message File for default.
 # Your Name <your@email>, Year
@@ -5,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2003-10-14 11:59default\n"
-"PO-Revision-Date: 2003-10-14 11:35+0200\n"
-"Last-Translator: DARCHE <madarche@nuxeio.com>\n"
-"Language-Team: Francais <fr@li.org>\n"
+"POT-Creation-Date: 2003-10-14 13:46default\n"
+"PO-Revision-Date: 2003-10-14 13:45+0200\n"
+"Last-Translator: \n"
+"Language-Team:  <C@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -63,22 +64,15 @@ msgstr ""
 msgid "No ressources selected"
 msgstr ""
 
-#.   <title content="here/expanded_title">
-#.   	 Printing version of your calendar
-#.     </title>
-#: from ../skins/cps_calendar/printing_template.pt
-msgid "Printing version of your calendar"
-msgstr ""
-
 #.   <span content="python:str(user_type['plural_title'])" class="calTitle">Ressources</span>
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 msgid "Ressources"
-msgstr ""
+msgstr "Ressources"
 
 #.   <span content="python:type['title']" class="calTitle">Rooms</span>
 #: from ../skins/cps_calendar/calendars_contents.pt
 msgid "Rooms"
-msgstr ""
+msgstr "Lieux"
 
 #.   <option repeat="status python:['confirmed', 'tentative', 'decline']" attributes="value status;
 #.   				      selected python:status == mystatus" content="python:str('_cal_pending_%s_' % (status,))">
@@ -86,7 +80,7 @@ msgstr ""
 #.   	       </option>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 #.   <h3 condition="event_id">
 #.             There is no pending request for this event.</h3>
@@ -139,13 +133,6 @@ msgstr ""
 #.     </span>
 #: from ../skins/cps_calendar/calendar_pending_events.pt
 msgid "_cal_Pending_events_for_"
-msgstr ""
-
-#.   <block fill-slot="title">
-#.             Title
-#.           </block>
-#: from ../skins/cps_calendar/calendar_edit_form.pt
-msgid "_prop_title_"
 msgstr ""
 
 #.   <input value="button_add" class="mainbutton" type="submit">
@@ -639,6 +626,9 @@ msgid "cpscalendar_label_status"
 msgstr "Statut"
 
 #.   <block fill-slot="title">
+#.             Title
+#.           </block>
+#.   <block fill-slot="title">
 #.   		      Title
 #.   	    </block>
 #.   <metal:block fill-slot="title">
@@ -647,7 +637,8 @@ msgstr "Statut"
 #.   <block fill-slot="title">
 #.                 Title
 #.               </block>
-#: from ../skins/cps_calendar/calendar_editevent_form.pt
+#: from ../skins/cps_calendar/calendar_edit_form.pt
+#: ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 #: ../skins/cps_calendar/create_meeting_form.pt
 msgid "cpscalendar_label_title"
@@ -700,7 +691,7 @@ msgstr "Transparent"
 #: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_legend_transparent"
 msgstr ""
-"Un événement transparent est un événement pendant lequel vous êtes disponible"
+"Un événement transparent est un événement durant lequel vous êtes disponible"
 
 #.   <a href="calendar_printable_view">
 #.         Printable view
@@ -881,6 +872,14 @@ msgstr "Votre requête pour une réunion a des erreurs"
 msgid "cpscalendar_message_your_request_has_expired"
 msgstr "Votre requête a expiré"
 
+#.   <title>
+#.   	 Printing version of your calendar
+#.     </title>
+#: from ../skins/cps_calendar/printing_template.pt
+#, fuzzy
+msgid "cpscalendar_printable_view"
+msgstr "Version imprimable"
+
 #.   <option repeat="propid searchable_keys" attributes="value propid" content="python:str(schema_dict[propid].title)">option1</option>
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 msgid "option1"
@@ -890,7 +889,7 @@ msgstr ""
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/create_meeting_form.pt
 msgid "status"
-msgstr ""
+msgstr "Statut"
 
 #.   <span content="python:str('label_day_long%s' % (i, ))">week day</span>
 #: from ../skins/cps_calendar/calendar_view_macros.pt
@@ -1082,10 +1081,6 @@ msgstr "Invitation"
 #, fuzzy
 msgid "cpscalendar_status_unconfirmed"
 msgstr "Non confirmé"
-
-#, fuzzy
-#~ msgid "cpscalendar_printable_view"
-#~ msgstr "Version imprimable"
 
 #~ msgid "button_close_this_window"
 #~ msgstr "Fermer cette fenêtre"
