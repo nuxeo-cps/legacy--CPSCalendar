@@ -1,4 +1,22 @@
 *******************************************
+** CPSCalendar V1.6.4 [R1 build 2004/06/17-09:27 by epietrig]
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- many translations were lost
+- HTML validity/IE layout bug in event view macro
+
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.6.3 [R1 build 2004/06/14-09:09 by ben]
 
 Requires:

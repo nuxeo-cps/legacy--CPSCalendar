@@ -6,9 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
-- many translations were lost
-- HTML validity/IE layout bug in event view macro
-
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
