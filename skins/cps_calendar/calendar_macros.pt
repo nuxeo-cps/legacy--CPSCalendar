@@ -278,7 +278,7 @@
           <tal:block repeat="status statuses">
             <input type="radio" name="status"
               tal:attributes="value status;
-                              selected python:status == selected">
+                              checked python:status == selected">
             <tal:block i18n:translate="" 
                content="python:str('cpscalendar_pending_%s' % (status, ))"
             /><br />
