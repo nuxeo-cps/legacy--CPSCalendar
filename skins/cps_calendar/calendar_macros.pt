@@ -395,7 +395,8 @@
       <tal:block define="search_param python: request.get('search_param', '');
                          search_term  python: request.get('search_term', '');
                          found python:search_param and dtool.searchEntries(**{search_param: search_term});
-                         found python:[member for member in found if member]">
+                         found python:[member for member in found if member];
+                         calendars caltool/listCalendarPaths;">
         <tal:block condition="found">
             <p>
               <span i18n:translate="cpscalendar_label_add_attendee">
@@ -404,12 +405,14 @@
               <br>
             <form method="POST" tal:attributes="action here/REQUEST/URL1">
               <tal:block repeat="user_id found">
-                <tal:block define="props python:dtool.getEntry(user_id)">
+                <tal:block define="props python:dtool.getEntry(user_id);
+                                   calpath python:caltool.getCalendarPathForUser(user_id);"
+                           condition="python:calpath in calendars">
                   <input type="checkbox" name="ids:list"
-                   tal:attributes="value python:caltool.getCalendarPathForUser(user_id)" />
+                   tal:attributes="value calpath" />
                   <tal:block replace="python:props['fullname']" />
+                  <br>
                 </tal:block>
-                <br>
               </tal:block>
               <input class="mainbutton" type="submit"
                      value="cpscalendar_button_add"

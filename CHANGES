@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- The user search no longer displays users that have no calendar.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
