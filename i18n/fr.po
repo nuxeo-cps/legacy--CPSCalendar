@@ -992,10 +992,10 @@ msgid "cpscalendar_pending_confirmed"
 msgstr "Vous assisterez à cette réunion"
 
 msgid "cpscalendar_pending_tentative"
-msgstr "ous pensez pouvoir assister à cette réunion"
+msgstr "Vous pensez pouvoir assister à cette réunion"
 
 msgid "cpscalendar_pending_decline"
-msgstr "ous n'assisterez pas à cette réunion"
+msgstr "Vous n'assisterez pas à cette réunion"
 
 msgid "cpscalendar_pending_decline_and_delete"
 msgstr ""
