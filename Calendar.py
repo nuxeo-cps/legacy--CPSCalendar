@@ -786,20 +786,15 @@ class Calendar(CPSBaseFolder):
             if not done.has_key(id):
                 email = self.getEmail(id, mdir)
                 if email is not None:
-                    mails[email] = None
+                    mails[id] = email
                 done[id] = None
 
         for attendee in event_dict['event']['attendees']:
             if attendee['status'] == 'unconfirmed':
                 email = self.getEmail(attendee['id'], mdir)
                 if email:
-                    mails[email] = None
+                    mails[attendee['id']] = email
 
-        mails = mails.keys()
-
-        # usefull vars
-        calendar_title = self.title_or_id()
-        calendar_url = self.absolute_url()
         event = getattr(self, event_dict['id'], None)
         if event is None:
             new_event = 1
@@ -808,11 +803,16 @@ class Calendar(CPSBaseFolder):
             new_event = 0
             event_title = event.title_or_id()
 
-        mailing = self.calendar_mailing_notify(event_dict, calendar_url,
-            calendar_title, event_title, new_event=new_event)
-        if mails:
+        caltool = getToolByName(self, 'portal_cpscalendar')
+        calendar_title = self.title_or_id()
+        
+        for id, mail in mails.items():
+            calendar = caltool.getCalendarForUser(id)
+            calendar_url = calendar.absolute_url()
+            mailing = self.calendar_mailing_notify(event_dict, calendar_url,
+                calendar_title, event_title, new_event=new_event)
             try:
-                mailhost.send(mailing, mto=mails, mfrom=mail_from,
+                mailhost.send(mailing, mto=mail, mfrom=mail_from,
                         subject="[CAL] %s" % event_title, encode='8bit')
             except:
                 import sys
