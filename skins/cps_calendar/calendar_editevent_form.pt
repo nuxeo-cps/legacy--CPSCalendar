@@ -306,8 +306,9 @@ range       : [2000, 2049]
             <table width="100%" cellspacing="2" cellpadding="0" border="0">
               <tr tal:repeat="cat categories/items">
                 <td width="30" valign="middle">
-                  <input type="radio" name="category" id="category"
-                         tal:attributes="value python:cat[0];
+                  <input type="radio" name="category"
+                         tal:attributes="id python:cat[0];
+                                         value python:cat[0];
                                          checked python:cat[0] == category;" />
                 </td>
                 <td width="30" valign="middle">
@@ -320,10 +321,12 @@ range       : [2000, 2049]
                     </tr>
                   </table>
                 </td>
-                <td valign="middle"
+                <td valign="middle">
+                  <label tal:attributes="for python:cat[0]"
                     tal:content="python:str(cat[1]['title'])"
                     i18n:translate="">
-                  category
+                    category
+                  </label>
                 </td>
               </tr>
             </table>
