@@ -138,7 +138,7 @@ range       : [2000, 2049]
       <span i18n:translate="cpscalendar_hour_sep">:</span>
       <select name="from_date_minute:int">
         <option tal:repeat="minute python:range(0,60,5)"
-                tal:content="minute"
+                tal:content="python:'%02d' % minute"
                 tal:attributes="value minute;
                                 selected python:minute == from_date_minute;" />
       </select>
@@ -152,7 +152,7 @@ range       : [2000, 2049]
       <span i18n:translate="cpscalendar_hour_sep">:</span>
       <select name="to_date_minute:int">
         <option tal:repeat="minute python:range(0,60,5)"
-                tal:content="minute"
+                tal:content="python:'%02d' % minute"
                 tal:attributes="value minute;
                                 selected python:minute == to_date_minute;" />
       </select>
@@ -172,7 +172,8 @@ range       : [2000, 2049]
       <span i18n:translate="cpscalendar_hour_sep">:</span>
       <select name="duration_minute:int">
         <option tal:repeat="minute python:range(0,60,15)"
-          tal:content="minute" tal:attributes="value minute;
+          tal:content="python:'%02d' % minute"
+          tal:attributes="value minute;
             selected python:minute == 0 or nothing" />
       </select>
     </p>
