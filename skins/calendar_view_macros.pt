@@ -29,6 +29,7 @@
             empty_src string:${portal_url}/cal_empty.gif;
             event_src string:${portal_url}/cal_event;
             slots events_desc/slots;
+            date python:slots[0][0];
             day_events events_desc/day_events;
             hour_blocks events_desc/hour_blocks">
           <tr>
@@ -36,7 +37,6 @@
             </td>
             <th
               tal:define="
-                date python:slots[0][0];
                 dow python:mcat('_cal_Day_long%s' % date.dow());
                 dom date/day;
                 year date/year;
@@ -148,6 +148,20 @@
                   </tal:block>
                 </tal:block>
               </tal:block>
+            </td>
+          </tr>
+          <tr tal:condition="can_add_evts">
+            <td>
+            </td>
+            <td>
+              <a
+                tal:define="intdate python:int(date)"
+                tal:attributes="
+                  href string:${here_url}/calendar_addevent_form?selected_day=${intdate}">
+                <img border="0"
+                  tal:attributes="
+                  src string:${portal_url}/img_box_addbox.png" />
+              </a>
             </td>
           </tr>
         </table>

@@ -13,6 +13,7 @@
 
 <metal:block fill-slot="main"
   tal:define="
+    this_user here/getCalendarUser;
     user_types here/getUserTypes;
     attendees_dict here/getAttendeesDict;
     decline_attendees python:[att for att in here.attendees if att['status'] == 'decline'];
@@ -60,11 +61,73 @@
         </ul>
       </tal:block>
       <tal:block condition="can_edit">
+        <tal:block condition="python:type =='member'">
+
+          <tal:block define="
+            searching python: request.get('role_submit', None);
+            searchable_keys dtool/getSearchableSchemaKeys;
+            schema_dict dtool/getSchemaDict;
+            searchable_keys python:[key for key in searchable_keys if schema_dict[key].type == 'string'];
+            ">
+            <tal:block condition="python: not searching">
+              <form method="post" action="calendar_attendees_form">
+                <p>
+                  <tal:block replace="python:mcat('_Add a user whose_')">
+                    Add a user whose
+                  </tal:block>
+                  <select name="search_param">
+                   <option
+                     tal:repeat="propid searchable_keys"
+                     tal:attributes="value propid"
+                     tal:content="python:mcat(schema_dict[propid].title)">option1</option>
+                  </select>
+                  <tal:block replace="python:mcat('_(Add a user whose ...)_is:')">
+                    is:
+                  </tal:block>
+                  <input type="text" name="search_term" size="10">
+                  <input class="mainbutton" type="submit" name="role_submit"
+                    tal:attributes="value python:mcat('_button_search_')">
+                </p>
+              </form>
+            </tal:block>
+            <tal:block condition="searching">
+              <tal:block define="search_param python: request.get('search_param', '');
+                search_term  python: request.get('search_term', '');
+                found python:search_param and dtool.searchEntry(**{search_param: search_term});
+                found python:[member for member in found if member[dtool.entry_prop] != this_user]">
+                <tal:block condition="found">
+                  <form method="post" action="calendar_addattendee">
+                    <p>
+                      <tal:block replace="python:mcat('_cal_Add_attendee:')">
+                        Add
+                      </tal:block>
+                      <br>
+                      <select name="ids:list" size="5" multiple>
+                        <option value="."
+                          tal:repeat="props found"
+                          tal:attributes="value python:props[dtool.entry_prop]"
+                          tal:content="python:props[dtool.display_prop]">
+                          Username
+                        </option>
+                      </select>
+                      <br>
+                      <input class="mainbutton" type="submit" tal:attributes="value python:mcat('_button_add_')">
+                    </p>
+                  </form>
+                </tal:block>
+                <p tal:condition="python: not found"
+                  tal:content="python:mcat('_Sorry, no user match your query_')">
+                    Sorry, no user match your query
+                </p>
+              </tal:block>
+            </tal:block>
+          </tal:block>
+        </tal:block>
         <tal:block condition="python:type != 'member'">
           <tal:block define="
             addable_attendees all_attendees/?type|python:[];
             attendees_ids python:[att['id'] for att in attendees];
-            addable_attendees python:[att for att in addable_attendees if att['id'] not in attendees_ids]">
+            addable_attendees python:[att for att in addable_attendees if (att['id'] not in attendees_ids) and att['id'] != this_user]">
             <form action="calendar_addattendee"
               tal:condition="addable_attendees">
               <tal:block replace="python:mcat('_cal_Add_attendee:')">

@@ -175,15 +175,18 @@
               Event status
             </metal:block>
             <metal:block fill-slot="content">
-              <select name="event_status">
-                <option tal:repeat="status python:(
-                  {'id':'unconfirmed', 'title':'Unconfirmed'},
-                  {'id':'confirmed', 'title':'Confirmed'},
-                  {'id':'canceled', 'title':'Canceled'},
-                  )"
+              <select name="event_status"
+                tal:define="
+                  statuses python:(
+                    {'id':'unconfirmed', 'title':'Unconfirmed'},
+                    {'id':'confirmed', 'title':'Confirmed'},
+                    {'id':'canceled', 'title':'Canceled'},
+                    );
+                  statuses python:create and [status for status in statuses if status['id'] != 'canceled'] or statuses">
+                <option tal:repeat="status statuses"
                   tal:attributes="
-                  value status/id;
-                  selected python:status['id'] == event_status;
+                    value status/id;
+                    selected python:status['id'] == event_status;
                   "
                   tal:content="status/title">status</option>
               </select>
