@@ -75,8 +75,7 @@ def update(self):
         
     pr("Setup workflow shemas")
     wftool = portal.portal_workflow
-    trtool = portal.portal_trees
-
+    
     # Verification of the action and addinf if neccesarly 
     action_found = 0
     for action in portal['portal_actions'].listActions():
@@ -149,17 +148,17 @@ def update(self):
     wftool.setDefaultChain('')
 
     # check site and workspaces
-    workspace_id = 'workspaces'
+    workspaces_id = 'workspaces'
     calendars_id = 'calendars'
-    pr("Verifying roots: %s and %s" % (calendars_id, workspace_id))
+    pr("Verifying roots: %s and %s" % (calendars_id, workspaces_id))
 
     
     # check site and calendars proxies
-    if calendars_id not in portal[workspace_id].objectIds():
-        portal[workspace_id].portal_workflow.invokeFactoryFor(portal[workspace_id].this(), 'Calendars',
+    if calendars_id not in portal[workspaces_id].objectIds():
+        portal[workspaces_id].portal_workflow.invokeFactoryFor(portal[workspaces_id].this(), 'Calendars',
                                                 calendars_id)
-        portal[workspace_id].calendars.getContent().setTitle('Calendars Areas') # XXX L10N
-        portal[workspace_id].calendars.reindexObject()
+        portal[workspaces_id].calendars.getContent().setTitle('Calendars Areas') # XXX L10N
+        portal[workspaces_id].calendars.reindexObject()
         pr("  Adding %s Folder" % calendars_id)
         
     pr("Verifying permissions")
@@ -175,9 +174,27 @@ def update(self):
         }
     pr("Calendars")
     for perm, roles in calendars_perm.items():
-        portal[workspace_id].calendars.manage_permission(perm, roles, 0)
+        portal[workspaces_id].calendars.manage_permission(perm, roles, 0)
         pr("  Permission %s" % perm)
-    portal[workspace_id].calendars.reindexObjectSecurity()
+    portal[workspaces_id].calendars.reindexObjectSecurity()
+
+    pr("=> Update portal_trees cache")
+    trtool = portal.portal_trees
+    pr(repr(trtool[workspaces_id].type_names))
+    pr(repr(trtool[workspaces_id].meta_types))
+    WTN = list(trtool[workspaces_id].type_names)
+    for type_name in ('Calendars', 'Calendar'):
+        if type_name not in WTN:
+            WTN.append(type_name)
+    trtool[workspaces_id].type_names = WTN
+    
+    WMT = list(trtool[workspaces_id].meta_types)
+    for type_name in ('Calendars', 'Calendar'):
+        if type_name not in WMT:
+            WMT.append(type_name)
+    trtool[workspaces_id].meta_types = WMT
+    
+    trtool[workspaces_id].manage_rebuild()
 
     # i18n
     pr(" Adding i18n support")
