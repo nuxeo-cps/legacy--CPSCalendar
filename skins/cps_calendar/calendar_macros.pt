@@ -313,9 +313,9 @@
       <metal:block use-macro="here/calendar_macros/macros/pendings_view" />
     </tal:block>
     <tal:block condition="python:here.canEditThisEvent() and here.attendees and here.isdirty">
-      <stong i18n:translate="cpscalendar_message_notify_attendees">
+      <strong i18n:translate="cpscalendar_message_notify_attendees">
     You have to notify other attendees of recent changes to this event.
-      </stong>
+      </strong>
       <form action="updateAttendeesCalendars"
         tal:attributes="action string:${context_url}/updateAttendeesCalendars"
         tal:define="notified_attendees here/notified_attendees">
