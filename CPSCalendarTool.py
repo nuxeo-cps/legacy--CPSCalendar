@@ -134,7 +134,7 @@ def stringToDateTime(string, locale=None, format=None):
         if parts[p_year[0]] < 1000: # Using two year dates
             strpstr = strpstr.replace('Y','y')
     if rest: # Using a time too.
-        strpstr += ' %H%M'
+        strpstr += ' %H:%M'
 
     return DateTime(mktime(strptime(string, strpstr)))
 
@@ -746,7 +746,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     def stringToDateTime(self, string, locale=None, format=None):
         return stringToDateTime(string, locale, format)
 
-        
+
 InitializeClass(CPSCalendarTool)
 
 def addCPSCalendarTool(container, REQUEST=None):
