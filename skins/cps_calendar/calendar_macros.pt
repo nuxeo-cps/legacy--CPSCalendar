@@ -402,27 +402,21 @@
                 Add
               </span>
               <br>
-              <form method="POST" tal:attributes="action here/REQUEST/URL1">
-              <select name="ids:list" size="5" multiple>
-                <tal:block repeat="user_id found">
-                  <tal:block define="props python:dtool.getEntry(user_id)">
-                    <option
-                      tal:define="path python:caltool.getCalendarPathForUser(user_id)"
-                      tal:condition="python:this_user != user_id and path and path not in current_list"
-                      tal:attributes="value path"
-                      tal:content="python:props['fullname']">
-                        Username
-                    </option>
-                  </tal:block>
+            </p>
+            <form method="POST" tal:attributes="action here/REQUEST/URL1">
+              <p tal:repeat="user_id found">
+                <tal:block define="props python:dtool.getEntry(user_id)">
+                  <input type="checkbox" name="ids:list"
+                   tal:attributes="value user_id" />
+                  <tal:block replace="python:props['fullname']" />
                 </tal:block>
-              </select>
+              </p>
               <br>
               <input class="mainbutton" type="submit"
                      value="cpscalendar_button_add"
                      i18n:attributes="value"
                      tal:attributes="name python:addaction+':method'">
               </form>
-            </p>
         </tal:block>
         <tal:block condition="python:not found">
           <p i18n:translate="cpscalendar_message_no_user_matching">
