@@ -330,16 +330,19 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
     security.declareProtected(ManagePortal, 'createMemberCalendar')
     def createMemberCalendar(self, member_id):
+        # XXX: is member_id really necessary here ?
         """Create a calendar in the home folder of a member
 
         member_id: member's id for which we create this calendar
 
         Precondition: member_id must be a valid user id
         """
-        # XXX: is member_id really necessary here ?
         mtool = getToolByName(self, 'portal_membership')
         ttool = getToolByName(self, 'portal_types')
-        mcat = self.Localizer.cpscalendar
+
+        # XXX: use TranslationServices here
+        mcat = self.Localizer.cpscalendar or (lambda x: unicode(x))
+
         context = mtool.getHomeFolder(member_id)
 
         aclu = self.acl_users
@@ -366,11 +369,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
  
         # XXX: is this necessay ?
         # Grant ownership to Member
-        try:
-            ob.changeOwnership(user)
-            # XXX this method is defined in a testcase and just does a pass
-        except AttributeError:
-            pass  # Zope 2.1.x compatibility
+        ob.changeOwnership(user)
 
         ob.manage_setLocalRoles(member_id, ['Owner', 'WorkspaceManager'])
 
@@ -405,7 +404,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 else:
                     info['cn'] = entry.get(members.display_prop, id)
         else:
-            # maybe a member with no created calendar
+            # Maybe a member with no created calendar
             dirtool = getToolByName(self, 'portal_metadirectories')
             members = dirtool.members
             entry = members.getEntry(id)
@@ -424,8 +423,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
     security.declareProtected('View', 'listVisibleCalendars')
     def listVisibleCalendars(self):
-        """Return the list of all Calendar objects visible by the user
-        """
+        """Return the list of all Calendar objects visible by the user"""
         mtool = getToolByName(self, 'portal_membership')
         cals = []
         for cal in self.listCalendars():
