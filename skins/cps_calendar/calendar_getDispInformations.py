@@ -44,23 +44,20 @@ else:
     selected_day = viewed_day
     LOG('CPSCAL', DEBUG, "selected_day defaulting to viewed_day = %s" % selected_day)
 
-time_since_daystart = viewed_day.hour()*3600+viewed_day.minute()*60+viewed_day.second()
-timeTime = viewed_day.timeTime()
-# XXX debug
+year = viewed_day.year()
+month = viewed_day.month()
+day = viewed_day.day()
 
 if disp == 'day':
-    start_time = DateTime(timeTime - time_since_daystart)
+    start_time = DateTime(year, month, day)
     end_time = start_time + 1
 if disp == 'week':
     day_offset = viewed_day.dow() - 1
     if day_offset == -1: day_offset = 6
-    start_time = DateTime(timeTime - time_since_daystart - day_offset*86400)
+    start_time = DateTime(year, month, day) - day_offset
     end_time = start_time + 7
 elif disp == 'month':
-    day_offset = viewed_day.day() - 1
-    start_time = DateTime(timeTime - time_since_daystart - day_offset*86400)
-    year = start_time.year()
-    month = start_time.month()
+    start_time = DateTime(year, month, 1)
     if month < 12:
         month += 1
     else:
