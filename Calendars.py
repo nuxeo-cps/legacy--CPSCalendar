@@ -11,6 +11,7 @@
 from zLOG import LOG, DEBUG
 
 from Acquisition import aq_parent, aq_inner, aq_base
+from DateTime import DateTime
 
 from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass
@@ -56,6 +57,41 @@ factory_type_information = (
     )
 
 
+def slot_union(base, new_slot):
+    start_new = new_slot['start']
+    stop_new = new_slot['stop']
+    start_pos = -1
+    stop_pos = -1
+    next_to = 0
+    prev_to = -1
+    i = 0
+    for start, stop in base:
+        if stop.lessThan(start_new):
+            next_to = i
+        elif stop.lessThanEqualTo(stop_new):
+            start_pos = i
+        elif start.lessThanEqualTo(stop_new):
+            prev_to = i+1
+            stop_pos = i
+            break
+        else:
+            prev_to = i
+            break
+        i += 1
+    part1 = base[:next_to]
+    if prev_to == -1: prev_to = i
+    part2 = base[prev_to:]
+    center = (start_new, stop_new)
+    if start_pos > -1:
+        start_new = min(start_new, base[start_pos][0])
+        center = (start_new, stop_new)
+    if stop_pos > -1:
+        base_slot = base[stop_pos]
+        start_new = min(center[0], base_slot[0])
+        center = (start_new, base_slot[1])
+    return part1 + [center] + part2
+
+
 class Calendars(Workgroup):
     """
     """
@@ -71,6 +107,41 @@ class Calendars(Workgroup):
 
     isDocumentContainer = 0
 
+    security.declareProtected('Get FreeBusy', 'getFreeBusy')
+    def getFreeBusy(self, attendees, from_date, to_date):
+        """Gets free/busy informations on attendees calendars"""
+        # normalize
+        start_time = DateTime(from_date.year(), from_date.month, from_date.day())
+        end_time = DateTime(to_date.year(), to_date.month, to_date.day())
+        slot_start = start_time
+        slots = []
+        while slot_start.lessThan(end_time):
+            slots.append((slot_start, slot_start+1))
+            slot_start += 1
+            slot_start = DateTime(slot_start.year(), slot_start.month(), slot_start.day())
+
+        ids = self.objectIds('Calendar')
+        ids = [id for id in attendees if id not in ids]
+        allcal_slots = [[]] * len(slots)
+        for id in ids:
+            calendar = self.getCalendarForId(id)
+            calendar_slots = [[]] * len(slots)
+            for event in calendar.objectValues('Event'):
+                if event.transparent:
+                    continue
+                event_slots = event.getEventInSlots(
+                    start_time, end_time, slots
+                )
+                i = 0
+                for event_slot in event_slots:
+                    if event_slot != None:
+                        calendar_slot = calendar_slots[i]
+                        allcal_slots = all_cal_slots[i]
+
+                        calendar_slot[i] = slot_union(calendar_slot, event_slot)
+                        allcal_slot[i] = slot_union(allcal_slot, event_slot)
+
+                    i += 1
 
     security.declareProtected(View, 'getCalendarForId')
     def getCalendarForId(self, id):
@@ -171,7 +242,7 @@ class Calendars(Workgroup):
 
     def __getitem__(self, name):
         try:
-            ob = Workgroup.__getitem__(self, name)
+            ob = Workgroup[name]
             return ob
         except KeyError:
             ob = self.getCalendarForId(name)

@@ -84,6 +84,7 @@ class Event(BaseDocument):
     _properties = BaseDocument._properties + (
         {'id':'organizer', 'type':'text', 'mode':'w', 'label':'Organizer'},
         {'id':'all_day', 'type':'boolean', 'mode':'w', 'label':'All Day Event'},
+        {'id':'transparent', 'type':'boolean', 'mode':'w', 'label':'Transparent Event'},
         {'id':'location', 'type':'text', 'mode':'w', 'label':'Location'},
         {'id':'event_status', 'type':'text', 'mode':'w', 'label':'Event Status'},
         )
@@ -99,6 +100,7 @@ class Event(BaseDocument):
     all_day = 0
     location = ''
     event_status = 'unconfirmed'
+    transparent = 0
 
     isdirty = 1
 
@@ -111,7 +113,7 @@ class Event(BaseDocument):
         self._normalize()
 
     security.declareProtected('Modify portal content', 'edit')
-    def edit(self, attendees=None, from_date=None, to_date=None, all_day=None, **kw):
+    def edit(self, attendees=None, from_date=None, to_date=None, all_day=None, transparent=None, **kw):
         old_status = self.event_status
         BaseDocument.edit(self, **kw)
         new_status = self.event_status
@@ -125,6 +127,9 @@ class Event(BaseDocument):
 
         if all_day is not None:
             self.all_day = all_day
+
+        if transparent is not None:
+            self.transparent = transparent
 
         if attendees is not None:
             self.attendees = deepcopy(attendees)
