@@ -171,7 +171,7 @@
                        tal:attributes="value to_date_month" />
                 <input type="hidden" id="to_date_year" name="to_date_year"
                        tal:attributes="value to_date_year" />
-                <h3>
+
                   <span id="date_string">
                     <tal:block content="python:str('_cal_Day_long%s' % (from_date.dow(), ))"
                                i18n:translate="" />
@@ -185,8 +185,7 @@
                     <img border="0"
                          tal:attributes="src string:${portal_url}/day_selector_icon.png" />
                   </a>
-                </h3>
-
+		    <br/>
                 <input type="hidden" name="from_date_hour" id="from_date_hour"
                        tal:attributes="value from_date_hour" />
                 <input type="hidden" name="from_date_minute" id="from_date_minute"
@@ -196,7 +195,6 @@
                 <input type="hidden" name="to_date_minute" id="to_date_minute"
                        tal:attributes="value to_date_minute" />
 
-                <h3>
                   <span i18n:translate="_cal_hour_From_">
                     From
                   </span>
@@ -227,7 +225,6 @@
                     <tal:block replace="to_date_year" />)
                   </tal:block>
 
-                </h3>
               </tal:block>
             </metal:block>
           </metal:block>
