@@ -228,6 +228,10 @@
         sender
           </tal:block>
         </p>
+        <tal:block condition="show_event_details|not:nothing">
+          <metal:block use-macro="here/calendar_macros/macros/event_view">
+          </metal:block>
+        </tal:block>
         <input type="submit" name="confirmPendingEvent:method"
           tal:condition="nocall:real_event"
           tal:attributes="value python:str('cpscalendar_button_validate')"
@@ -305,7 +309,8 @@
 <metal:block define-macro="notifyattendees"
          i18n:domain="cpscalendar">
   <tal:block condition="python:mtool.checkPermission('Add portal content', here)">
-    <tal:block define="pendings here/getPendingEvents"
+    <tal:block define="pendings here/getPendingEvents;
+                       show_event_details nothing;"
       condition="pendings">
       You have pending requests for this event:
       <metal:block use-macro="here/calendar_macros/macros/pendings_view" />
