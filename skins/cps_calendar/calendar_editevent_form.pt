@@ -342,7 +342,7 @@ range       : [2000, 2049]
               <p>
               <input type="text" id="document_field" size=42 name="document"
                 tal:attributes="value document_link" >
-              <a class=".button"
+              <a style="text-decoration:none;border:1px solid black;padding:0.2em 0.3em;"
                  onClick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')"
                  i18n:translate="cpscalendar_label_browse">
                    Browse
