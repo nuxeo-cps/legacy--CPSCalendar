@@ -36,11 +36,14 @@
                          to_date_hour python:(edit and [int(args['to_date_hour'])] or [19])[0];
                          to_date_minute python:(edit and [int(args['to_date_minute'])] or [0])[0];
                          my_id here/getRpath;
-                         cal_ids here/REQUEST/cal_ids|python:[my_id];
+                         cal_ids request/cal_ids|request/SESSION/meeting/cal_ids|python:[my_id];
                          new_cal_ids here/REQUEST/ids|python:[];
-                         cal_ids python:cal_ids + new_cal_ids;
+                         cal_ids python:cal_ids + [id for id in new_cal_ids if not id in cal_ids];
                          del_cal_ids here/REQUEST/del_cal_ids|python:[];
                          cal_ids python:[c for c in cal_ids if not c in del_cal_ids];
+                         session request/SESSION;
+                         sm session/meeting|python:session.update({'meeting': {}});
+                         foo python:session['meeting'].update({'cal_ids': cal_ids});
                          current_list cal_ids;
                          user_types here/getUserTypes;
                          all_calendars here/portal_cpscalendar/getCalendarsDict;
