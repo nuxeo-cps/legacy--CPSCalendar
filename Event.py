@@ -41,7 +41,7 @@ factory_type_information = (
     {'id': 'Event',
      'title': 'portal_type_Calendar_Event_title',
      'description': 'portal_type_Calendar_Event_description',
-     'content_icon': 'event_icon.gif',
+     'content_icon': 'event_icon.png',
      'product': 'CPSCalendar',
      'factory': 'addEvent',
      'meta_type': 'Event',

@@ -65,7 +65,7 @@ factory_type_information = (
     {'id': 'Calendar',
      'title': 'portal_type_Calendar_title',
      'description': 'portal_type_Calendar_description',
-     'icon': 'calendar_icon.gif',
+     'icon': 'calendar_icon.png',
      'product': 'CPSCalendar',
      'meta_type': 'Calendar',
      'factory': 'addCalendar',

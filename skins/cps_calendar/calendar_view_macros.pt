@@ -14,7 +14,7 @@
           <tr>
             <td>
               <table width="445" cellspacing="2" cellpadding="0" border="0"
-                     tal:define="empty_src string:${portal_url}/cal_empty.gif;
+                     tal:define="empty_src string:${portal_url}/cal_empty.png;
                                  slots events_desc/slots;
                                  date python:slots[0][0];
                                  day_events events_desc/day_events;
@@ -149,7 +149,7 @@
             <td>
               <table cellspacing="2" cellpadding="0" border="0"
                 tal:define="
-                  empty_src string:${portal_url}/cal_empty.gif;
+                  empty_src string:${portal_url}/cal_empty.png;
                   back_td1 string:${portal_url}/cal_line1.png;
                   back_td2 string:${portal_url}/cal_line2.png;
                   add_src string:${portal_url}/img_box_addbox.png;

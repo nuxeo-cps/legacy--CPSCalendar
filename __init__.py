@@ -63,7 +63,7 @@ def initialize(registrar):
         'CPS Calendar Tool',
         tools = tools,
         product_name = 'CPSCalendar',
-        icon = 'tool.gif',
+        icon = 'tool.png',
     ).initialize(registrar)
 
     utils.initializeBasesPhase2(z_bases, registrar)
@@ -77,6 +77,6 @@ def initialize(registrar):
     ).initialize(registrar)
 
     # icon
-    #utils.registerIcon(Calendars.Calendars, 'calendars_icon.gif', globals())
-    utils.registerIcon(Calendar.Calendar, 'calendar_icon.gif', globals())
-    utils.registerIcon(Event.Event, 'event_icon.gif', globals())
+    #utils.registerIcon(Calendars.Calendars, 'calendars_icon.png', globals())
+    utils.registerIcon(Calendar.Calendar, 'calendar_icon.png', globals())
+    utils.registerIcon(Event.Event, 'event_icon.png', globals())

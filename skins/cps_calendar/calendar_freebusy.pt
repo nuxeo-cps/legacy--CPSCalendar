@@ -23,7 +23,7 @@
                          disp_end python:disp_start+7;
                          back_td1 string:${portal_url}/cal_line1.png;
                          back_td2 string:${portal_url}/cal_line2.png;
-                         empty_src string:${portal_url}/cal_empty.gif;
+                         empty_src string:${portal_url}/cal_empty.png;
                          disp_infos python:here.calendar_getDispInformations(request);
                          current_action disp_infos/current_action;
                          calendar_disp disp_infos/disp;
