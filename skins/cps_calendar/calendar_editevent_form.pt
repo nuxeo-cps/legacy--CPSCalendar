@@ -16,46 +16,47 @@
 </metal:block>
 
 <metal:block fill-slot="main" i18n:domain="cpscalendar"
-         tal:define="portal_url here/portal_url;
-             disp_infos python:here.calendar_getDispInformations(request);
-             action python:create and 'calendar_addevent' or 'calendar_editevent';
-             submit_value python:create and str('cpscalendar_button_create') or str('cpscalendar_button_modify');
-             editevent python:create or here.canEditThisEvent();
-             title python:create and request.form.get('title',
-                                                      'cpscalendar_untitled_(document)')
-                                 or here.title;
-             description python:create and str('') or here.description;
-             location python:(not create) and here.location or '';
-             event_status python:create and 'unconfirmed' or here.event_status;
-             here_all_day here/all_day|python:0;
-             all_day python:test(create, request.form.get('all_day', 0), here_all_day);
-             from_date here/from_date|python:disp_infos['selected_day'];
-             from_date_day from_date/day;
-             from_date_month from_date/month;
-             from_date_year from_date/year;
-             from_date_hour from_date/hour;
-             from_date_string python:here.getDateStr(from_date, fmt='short');
-             from_date_hour python:create and not all_day and (from_date_hour + 14) or from_date_hour;
-             from_date_minute python:int(from_date.minute()/15)*15;
-             to_date python:create and from_date or here.to_date;
-             to_date_day to_date/day;
-             to_date_month to_date/month;
-             to_date_year to_date/year;
-             to_date_hour to_date/hour;
-             to_date_string python:here.getDateStr(to_date, fmt='short');
-             to_date_hour python:(create and not all_day and (from_date_hour + 2)) or to_date_hour;
-             trim_hour python:create and not all_day and to_date_hour > 23;
-             to_date_minute python:int(to_date.minute()/15)*15;
-             to_date_hour python:not trim_hour and to_date_hour or 0;
-             to_date_minute python:not trim_hour and to_date_minute or 0;
-             attendees python:(not create) and here.attendees or [];
-             transparent python:not create and not not here.transparent or 0;
-             cat_info here/calendar_categories;
-             categories cat_info/categories;
-             cat_default cat_info/default;
-             category python:create and cat_default or here.category;">
+  tal:define="
+    portal_url here/portal_url;
+    disp_infos python:here.calendar_getDispInformations(request);
+    action python:create and 'calendar_addevent' or 'calendar_editevent';
+    submit_value python:create and str('cpscalendar_button_create') or str('cpscalendar_button_modify');
+    editevent python:create or here.canEditThisEvent();
+    title python:create and request.form.get('title',
+                                             'cpscalendar_untitled_(document)')
+                        or here.title;
+    description python:create and str('') or here.description;
+    location python:(not create) and here.location or '';
+    event_status python:create and 'unconfirmed' or here.event_status;
+    here_all_day here/all_day|python:0;
+    all_day python:test(create, request.form.get('all_day', 0), here_all_day);
+    from_date here/from_date|python:disp_infos['selected_day'];
+    from_date_day from_date/day;
+    from_date_month from_date/month;
+    from_date_year from_date/year;
+    from_date_hour from_date/hour;
+    from_date_string python:here.getDateStr(from_date, fmt='short');
+    from_date_hour python:create and not all_day and (from_date_hour + 14) or from_date_hour;
+    from_date_minute python:int(from_date.minute()/15)*15;
+    to_date python:create and from_date or here.to_date;
+    to_date_day to_date/day;
+    to_date_month to_date/month;
+    to_date_year to_date/year;
+    to_date_hour to_date/hour;
+    to_date_string python:here.getDateStr(to_date, fmt='short');
+    to_date_hour python:(create and not all_day and (from_date_hour + 2)) or to_date_hour;
+    trim_hour python:create and not all_day and to_date_hour > 23;
+    to_date_minute python:int(to_date.minute()/15)*15;
+    to_date_hour python:not trim_hour and to_date_hour or 0;
+    to_date_minute python:not trim_hour and to_date_minute or 0;
+    attendees python:(not create) and here.attendees or [];
+    transparent python:not create and not not here.transparent or 0;
+    cat_info here/calendar_categories;
+    categories cat_info/categories;
+    cat_default cat_info/default;
+    category python:create and cat_default or here.category;">
 
-      <tal:block tal:condition="nothing">
+  <tal:block tal:condition="nothing">
     <!-- Debug block that doesn't appear in the output -->
     <hr>
     <p>
@@ -86,7 +87,6 @@
   </tal:block>
 
   <tal:block condition="editevent">
-
     <form action="calendar_addevent_form" id="eventTypeForm"
       tal:condition="create">
       <p>
