@@ -1,15 +1,11 @@
-ZODB Requires:
-~~~~~~~~~~~~~~
--
-
 New features:
 ~~~~~~~~~~~~~
 - Better interface
 
 Bug fixes:
 ~~~~~~~~~~
--
+- spelling
 
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- personal calendar id is now a pseudo-constant
