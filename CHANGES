@@ -5,6 +5,10 @@ New features:
 ~~~~~~~~~~~~~
 - The mail notification now also sends mail to unconfirmed attendees.
 - The notify mail is now translatable.
+- There is now a new function stringToDateTime() that parses date string
+  intelligently, both according to what is possible, and with regards to
+  the locale you have (i.e, selected language). The utilisation of this
+  solves Mantis bug #652.
 Bug fixes:
 ~~~~~~~~~~
 - It was impossible to change the event type after creation.
