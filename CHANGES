@@ -28,6 +28,7 @@ Bug fixes:
 - searchCalendars now only returns users if they have a calendar.
 - The meeting creation form no longer loses the to and from times when
   you search for users.
+- Some formatting errors in the pending events view was fixed.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
