@@ -165,9 +165,11 @@ class CalendarInstaller(CPSInstaller):
             res = ob.upgradePendingEvents()
             if res:
                 self.log(res)
-            res = wf._changeStateOf(ob, tdef, {})
-            if res:
-                self.log(res)
+            wfstate = wf._getStatusOf(ob)
+            if wfstate['review_state'] != 'work':
+                res = wf._changeStateOf(ob, tdef, {})
+                if res:
+                    self.log(res)
         self.log("  Done.")
 
 
