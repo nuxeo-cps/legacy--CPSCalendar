@@ -1,4 +1,4 @@
-##parameters=event_dict, calendar_url, calendar_title, event_title, mail_from, mails, new_event
+##parameters=event_dict, calendar_url, calendar_title, event_title, mail_from, reply_to, mails, new_event
 
 mcat = context.portal_messages
 request = event_dict['request']
@@ -10,10 +10,12 @@ event_title = mcat(event_title)
 header = """\
 From: %s
 To: %s
+Reply-To: %s
 Subject: [CAL] %s
 Content-Type: text/plain; charset=ISO-8859-15
+
 Mime-Version: 1.0
-""" % (mail_from, ', '.join(mails), event_title)
+""" % (mail_from, reply_to, ', '.join(mails), event_title)
 
 if request == 'request':
     if new_event:

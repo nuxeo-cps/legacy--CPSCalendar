@@ -584,6 +584,10 @@ class Calendar(Workgroup):
         if mail_from is None:
             LOG('NGCal', INFO, "Can't get email address for %s" % (mail_from, ))
             return
+        reply_to = mail_from
+        m = getattr(self, 'get_apparent_mail_from', None)
+        if m is not None:
+            mail_from = m()
 
         # get local roles for members
         merged = {}
@@ -661,7 +665,7 @@ class Calendar(Workgroup):
             new_event = 0
             event_title = event.title_or_id()
 
-        mailing = self.calendar_mailing_notify(event_dict, calendar_url, calendar_title, event_title, mail_from, mails, new_event=new_event)
+        mailing = self.calendar_mailing_notify(event_dict, calendar_url, calendar_title, event_title, mail_from, reply_to, mails, new_event=new_event)
         try:
             mailhost.send(mailing,
                 mto=mails,
