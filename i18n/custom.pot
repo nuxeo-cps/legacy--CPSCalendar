@@ -321,3 +321,13 @@ msgstr ""
 
 msgid "cpscalendar_mailnotify_comment"
 msgstr ""
+
+msgid "cpscalendar_event_viewer_day"
+msgstr ""
+
+msgid "cpscalendar_event_viewer_week"
+msgstr ""
+
+msgid "cpscalendar_event_viewer_month"
+msgstr ""
+
