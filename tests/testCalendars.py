@@ -9,7 +9,7 @@ from CPSCalendarTestCase import CPSCalendarTestCase
 from DateTime.DateTime import DateTime
 
 
-class TestCalendars(CPSCalendarTestCase):
+class TestCalendarTool(CPSCalendarTestCase):
 
     def afterSetUp(self):
         self.login('root')
@@ -18,9 +18,13 @@ class TestCalendars(CPSCalendarTestCase):
         self.logout()
 
     def testCalendars(self):
-        calendars = self.portal.workspaces.calendars
-        # XXX
-        self.assert_(calendars)
+        caltool = self.portal.portal_cpscalendar
+        assert(caltool)
+
+        calendars_home = self.portal.workspaces.calendars
+        assert(calendars_home)
+
+        #XXX
 
 
 class TestCalendar(CPSCalendarTestCase):
@@ -89,7 +93,7 @@ class TestCalendar(CPSCalendarTestCase):
 
 def test_suite():
     suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(TestCalendars))
+    suite.addTest(unittest.makeSuite(TestCalendarTool))
     suite.addTest(unittest.makeSuite(TestCalendar))
     return suite
 
