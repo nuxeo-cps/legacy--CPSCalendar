@@ -65,7 +65,7 @@
         </span>
     </p>
     <input type="submit" name="calendar_meeting_form:method"
-      i18n:attributes="value" value="label_validate"/>
+      i18n:attributes="value" value="cpscalendar_button_validate"/>
     <p>
     <span clss="calTitle" i18n:translate="cpscalendar_message_select_the_attendees_you_want_for_your_meeting">
       Select the attendees you want for your meeting
