@@ -389,7 +389,7 @@
       <tal:block define="search_param python: request.get('search_param', '');
                          search_term  python: request.get('search_term', '');
                          found python:search_param and dtool.searchEntries(**{search_param: search_term});
-                         found python:[member for member in found if member != this_user]">
+                         found python:[member for member in found if member not in current_list]">
         <tal:block condition="found">
           <form method="POST" tal:attributes="action addaction">
             <p>
