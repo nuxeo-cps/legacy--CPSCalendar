@@ -217,7 +217,7 @@ class Event(CPSBaseDocument):
         """Return the id of the calendar instead of the user"""
         # XXX: we assume that calendar are directly stored on the
         # user's workspace
-        return aq_parent(self.getCalendar())._owner[1]
+        return aq_parent(self.getCalendar()).getOwner(1)[1]
 
     security.declareProtected(View, 'getOrganizerCalendar')
     def getOrganizerCalendar(self):
