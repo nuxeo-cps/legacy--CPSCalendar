@@ -48,7 +48,7 @@
           </metal:block>
           <metal:block fill-slot="content"
                        tal:define="one_date python:from_date == to_date;">
-            <tal:block condition="one_date"
+            <tal:block condition="python:one_date and here.get('from_date_str', 0)"
                        tal:content="from_date_str">
             </tal:block>
             <tal:block condition="not:one_date">

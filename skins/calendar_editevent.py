@@ -5,7 +5,7 @@ if REQUEST is not None:
 
 here = context.this()
 
-all_day = kw.get('all_day')
+all_day = kw.get('all_day', 0)
 
 from_date_day = int(kw.get('from_date_day'))
 from_date_month = int(kw.get('from_date_month'))
@@ -26,6 +26,16 @@ if all_day:
     to_date_month = int(kw.get('to_date_month'))
     to_date_year = int(kw.get('to_date_year'))
 else:
+    if (from_date_day == int(kw.get('to_date_day'))
+        and from_date_month == int(kw.get('to_date_month'))
+        and from_date_year == int(kw.get('to_date_year'))):
+
+        to_date_day = int(kw.get('to_date_day'))
+        to_date_month = int(kw.get('to_date_month'))
+        to_date_year = int(kw.get('to_date_year'))
+        all_day =1
+        kw['all_day'] = all_day
+
     to_date_day = from_date_day
     to_date_month = from_date_month
     to_date_year = from_date_year
