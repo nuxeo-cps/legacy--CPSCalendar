@@ -88,6 +88,8 @@ def stringToDateTime(string, locale=None):
         parts.append(date[0:4])
         parts.append(date[4:6])
         parts.append(date[6:8])
+    elif len(date) == 10: #internal integer format passed as string
+        return DateTime(int(date))
     else:
         raise ValueError('Could not parse datetime %s: No separator' % string)
 
