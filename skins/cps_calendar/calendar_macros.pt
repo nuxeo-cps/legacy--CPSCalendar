@@ -380,7 +380,7 @@
     caltool here/portal_cpscalendar;
     this_user here/getCalendarUser;
     ">
-      <tal:block condition="python: not searching">
+      <tal:block condition="python:1">
         <p>
           <span i18n:translate="cpscalendar_label_add_a_user_whose">
             Add a user whose

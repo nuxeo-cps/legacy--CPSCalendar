@@ -335,7 +335,7 @@ msgstr "Recherchez les utilisateurs qui participeront à la réunion dont"
 #.             </span>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_add_a_user_whose_is"
-msgstr "est"
+msgstr "contient"
 
 #.   <span>
 #.                   Add
