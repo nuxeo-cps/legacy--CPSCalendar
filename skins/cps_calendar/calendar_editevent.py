@@ -11,8 +11,6 @@ here = context.this()
 
 event_type = kw.get('event_type')
 
-#raise str(kw)
-
 from_date_string = kw['from_date_string']
 from_date_hour = kw['from_date_hour']
 from_date_minute = kw['from_date_minute']

@@ -6,11 +6,6 @@
 #
 # Also makes sure everything is of the correct type
 
-from zLOG import LOG, DEBUG
-
-# determine current calendar view
-# first from REQUEST.form then from SESSION then default to week view
-
 if REQUEST.has_key('from_date_string'):
     #OK, we have a REQUEST that comes from a form
     #Build valid dates from this form
