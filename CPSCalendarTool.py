@@ -18,6 +18,7 @@
 # $Id$
 
 from zLOG import LOG, DEBUG
+from time import strptime, mktime
 from Globals import InitializeClass
 from DateTime import DateTime
 from Products.CMFCore.PortalFolder import PortalFolder
@@ -45,6 +46,98 @@ WorkspaceVisitorRoles = (WorkspaceVisitor,)
 
 # id for default personal calendars
 CALENDAR_ID = 'calendar'
+
+def stringToDateTime(string, locale=None, format=None):
+    """This method converts a string to a date
+
+    It tries to be clever about it, which can be dangerous.
+    """
+    if format:
+        return DateTime(mktime(strptime(string, format)))
+
+    if string.find(' ') != -1:
+        date, rest = string.split(' ',1)
+    else:
+        date, rest = string, None
+
+    if date.find('/') != -1:
+        splitchar = '/'
+    elif date.find('.') != -1:
+        splitchar = '.'
+    elif date.find('-') != -1:
+        splitchar = '-'
+    else:
+        raise ValueError('Could not parse datetime %s: No separator' % string)
+    parts = date.split(splitchar)
+
+    # Which parts that are possible months and days
+    p_month = [0,1]
+    p_day = [0,1,2]
+    p_year = [1,2,3]
+    for index in [0,1,2]:
+        parts[index] = int(parts[index])
+        if parts[index] > 31:
+            # This MUST be a year
+            if len(p_year) == 1:
+                # But we have already found the year!
+                raise ValueError('Could not parse datetime %s: '
+                                 'To many years' % string)
+            if index == 1:
+                raise ValueError('Could not parse datetime %s: '
+                                 'Not a valid date' % string)
+            p_year = [index]
+            if index in p_day:
+                p_day.remove(index)
+            if index in p_month:
+                p_month.remove(index)
+        elif parts[index] > 12:
+            if index in p_month:
+                p_month.remove(index)
+
+    # possible formats:
+    all_formats = {'dmy': { #European
+                     'format': (2, 1, 0), # Positions: (year, month, day)
+                     'strpstr': '%d-%m-%Y',
+                     'locales': ('fr', 'be', 'nl'),
+                    },
+                   'mdy': { # US
+                     'format': (2, 0, 1),
+                     'strpstr': '%m-%d-%Y',
+                     'locales': ('en', 'us'),
+                    },
+                   'ymd': { # International
+                     'format': (0, 1, 2),
+                     'strpstr': '%Y-%m-%d',
+                     'locales': ('is', 'se'),
+                    },
+                  }
+    # The preferred order of format selection when ambigous
+    format_order = ['mdy','dmy','ymd']
+
+    p_formats = []
+    for name in format_order:
+        format = all_formats[name]
+        ypos, mpos, dpos = format['format']
+        if ypos in p_year and mpos in p_month and dpos in p_day:
+            # This could be the format
+            if locale in format['locales']:#It's a match!
+                p_formats = [name]
+                break # Go with this format
+            p_formats.append(name)
+
+    if not p_formats:
+        raise ValueError('Could not parse datetime %s: No match' % string)
+    # We have matching formats, use the first one.
+    strpstr = all_formats[p_formats[0]]['strpstr']
+    strpstr = strpstr.replace('-', splitchar)
+    if p_year:
+        if parts[p_year[0]] < 1000: # Using two year dates
+            strpstr = strpstr.replace('Y','y')
+    if rest: # Using a time too.
+        strpstr += ' %H%M'
+
+    return DateTime(mktime(strptime(string, strpstr)))
+
 
 def _cmpEv(a, b):
     """Compare cal_slot by start date"""
