@@ -72,7 +72,7 @@
         Select the attendees you want for your meeting
       </span>:
     </p>
-    <p tal:repeat="cal cal_ids">
+    <span tal:repeat="cal cal_ids">
         <input type="checkbox" name="cal_ids:list" checked
           tal:attributes="value cal" />
         <span tal:define="calob python:caltool.getCalendarForPath(cal, unrestricted=1);
@@ -82,11 +82,15 @@
           tal:replace="user/?title_field">
           calendarid
         </span>
-    </p>
+      <br />  
+    </span>
     <input type="submit" name="calendar_meeting_form:method"
       i18n:attributes="value" value="cpscalendar_button_validate"/>
   </form>
     <hr/>
+    <p class="calTitle" i18n:translate="cpscalendar_search_for_free_time">
+      Search for free time:
+    </p>
     <p>
       <strong>
       <span i18n:translate="cpscalendar_label_from_day">
