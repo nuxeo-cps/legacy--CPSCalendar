@@ -128,6 +128,13 @@ factory_type_information = (
                   'permissions': ("Add portal content",),
                   'category': 'object',
                   },
+                 {'id': 'edit',
+                  'name': 'action_modify',
+                  'action': 'string:${object_url}/calendar_edit_form',
+                  'condition': '',
+                  'permissions': (View,),
+                  'category': 'object',
+                  },
                  {'id': 'export',
                   'name': 'action_export',
                   'action': 'string:${object_url}/calendar_export',
@@ -813,6 +820,8 @@ class Calendar(CPSBaseFolder):
         
         for id, mail in mails.items():
             calendar = caltool.getCalendarForUser(id)
+            if calendar is None:
+                continue
             calendar_url = calendar.absolute_url()
             mailing = self.calendar_mailing_notify(event_dict, calendar_url,
                 calendar_title, event_title, new_event=new_event)

@@ -68,15 +68,17 @@
       <tal:block condition="can_edit"
                  define="addaction string:calendar_addattendee;
                          searchaction string:calendar_attendees_form;">
-        <metal:block use-macro="here/calendar_macros/macros/searchform"
-          tal:condition="python:type =='member'">
-          the searchform
-        </metal:block>
+        <tal:block condition="python:type == 'member'">
+          <metal:block use-macro="here/calendar_macros/macros/searchform">
+            the searchform
+          </metal:block>
+        </tal:block>
 
         <tal:block condition="python:type != 'member'">
-          <tal:block define="addable_attendees all_attendees/?type|python:[];
-                             attendees_ids python:[att['rpath'] for att in attendees];
-                             addable_attendees python:[att for att in addable_attendees if (att['rpath'] not in attendees_ids) and att['rpath'] != this_user]">
+          <tal:block 
+            define="addable_attendees all_attendees/?type|python:[];
+                    attendees_ids python:[att['rpath'] for att in attendees];
+                    addable_attendees python:[att for att in addable_attendees if (att['rpath'] not in attendees_ids) and att['rpath'] != this_user]">
             <form action="calendar_addattendee"
               tal:condition="addable_attendees">
               <span i18n:translate="cpscalendar_label_add_attendee">

@@ -863,6 +863,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 'usertype': calendar.usertype,
             }
             if calendar.usertype != 'member':
+                info['id'] = calendar.getId()
                 info['cn'] = calendar.title_or_id()
             else:
                 id = calendar.getOwnerId()
