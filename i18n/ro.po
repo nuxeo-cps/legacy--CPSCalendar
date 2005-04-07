@@ -617,14 +617,14 @@ msgstr ":"
 #.             </span>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_add_a_user_whose"
-msgstr "Adauga un utilizator care"
+msgstr "Adauga un utilizator a/al/ale carui"
 
 #.   <span>
 #.               is
 #.             </span>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_add_a_user_whose_is"
-msgstr "este"
+msgstr "este/sunt"
 
 #.   <span>
 #.                   Add
@@ -1035,7 +1035,7 @@ msgstr "Acestea sunt calendarele in care poti crea evenimente:"
 #.       </span>
 #: from ../skins/cps_calendar/calendar_export.pt
 msgid "cpscalendar_message_if_you_have_an_application_that_supports_it_you_can"
-msgstr "Daca ai o aplicatie care o suporta, poti"
+msgstr "Daca ai o aplicatie care suporta, te poti"
 
 #.   <span>
 #.         No shared calendar found
@@ -1119,7 +1119,7 @@ msgstr "Selecteaza durata  dorita pentru sedinta ta."
 #.       </a>
 #: from ../skins/cps_calendar/calendar_export.pt
 msgid "cpscalendar_message_subscribe_to_this_calendar"
-msgstr "inscrie-te in acest calendar"
+msgstr "inscrie in acest calendar"
 
 #.   <a attributes="href string:${here_url}/calendar.ics">
 #.         the iCalendar version of this calendar.
