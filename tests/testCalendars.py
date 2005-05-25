@@ -8,8 +8,6 @@ from CPSCalendarTestCase import CPSCalendarTestCase
 
 from DateTime.DateTime import DateTime
 
-MANAGER_FULLNAME="Manager CPS" #The default fullname for a CPS manager
-
 class TestCalendarTool(CPSCalendarTestCase):
 
     def afterSetUp(self):
@@ -23,7 +21,8 @@ class TestCalendarTool(CPSCalendarTestCase):
 
         # If there is no entry for user, getCalendarForPath will return None
         dtool = self.portal.portal_directories
-        self.member = dtool.members.getEntry(self.user_id)
+        members = dtool.members
+        self.member = members.getEntry(self.user_id)
         assert self.member
         mtool.createMemberArea(self.user_id)
         self.user_home = mtool.getHomeFolder(self.user_id)
@@ -33,6 +32,8 @@ class TestCalendarTool(CPSCalendarTestCase):
         self.user_home_url = mtool.getHomeUrl(self.user_id)
         self.assertEquals(self.user_home_url,
             "http://nohost/portal/workspaces/members/%s" % self.user_id)
+        # get user title
+        self.user_title = self.member.get(members.title_field)
 
         self.caltool = self.portal.portal_cpscalendar
         assert self.caltool
@@ -104,7 +105,7 @@ class TestCalendarTool(CPSCalendarTestCase):
             ['workspaces/members/%s/calendar' % self.user_id],
             DateTime('2004/01/15'), DateTime('2004/01/15'), 8, 0, 19, 0)
         self.assertEquals(freebusy_info['cal_users'],
-            {'workspaces/members/%s/calendar' % self.user_id: MANAGER_FULLNAME})
+            {'workspaces/members/%s/calendar' % self.user_id: self.user_title})
         self.assertEquals(freebusy_info['slots'],
             [(DateTime('2004/01/15'), DateTime('2004/01/16'))])
         eventinfo = freebusy_info['hour_block_cols'][0][0][0][0]
@@ -129,6 +130,11 @@ class TestCalendar(CPSCalendarTestCase):
         self.calendar = member_home.calendar
         assert self.calendar
 
+        # get user title
+        members = self.portal.portal_directories.members
+        member_entry = members.getEntry(self.user_id, default={})
+        self.user_title = member_entry.get(members.title_field)
+
     def beforeTearDown(self):
         # portal_memberdata caches entries in a volatile variable that's
         # cleaned up upon request completion
@@ -138,7 +144,7 @@ class TestCalendar(CPSCalendarTestCase):
     def testDC(self):
         self.assertEquals(self.calendar.Title(), 
                           "cpscalendar_user_calendar_name_beg "
-                          + MANAGER_FULLNAME +
+                          + self.user_title +
                           " cpscalendar_user_calendar_name_end")
         self.assertEquals(self.calendar.Description(), "")
 
@@ -218,7 +224,7 @@ class TestCalendar(CPSCalendarTestCase):
                  'usertype': 'member',
                  'rpath': 'workspaces/members/%s/calendar' % self.user_id, 
                  'id': self.user_id, 
-                 'cn': MANAGER_FULLNAME}]})
+                 'cn': self.user_title}]})
 
     def testViews(self):
         self._addEvent()
