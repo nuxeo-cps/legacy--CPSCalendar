@@ -8,6 +8,7 @@ from CPSCalendarTestCase import CPSCalendarTestCase
 
 from DateTime.DateTime import DateTime
 
+MANAGER_FULLNAME="Manager CPS" #The default fullname for a CPS manager
 
 class TestCalendarTool(CPSCalendarTestCase):
 
@@ -103,7 +104,7 @@ class TestCalendarTool(CPSCalendarTestCase):
             ['workspaces/members/%s/calendar' % self.user_id],
             DateTime('2004/01/15'), DateTime('2004/01/15'), 8, 0, 19, 0)
         self.assertEquals(freebusy_info['cal_users'],
-            {'workspaces/members/%s/calendar' % self.user_id: self.user_id})
+            {'workspaces/members/%s/calendar' % self.user_id: MANAGER_FULLNAME})
         self.assertEquals(freebusy_info['slots'],
             [(DateTime('2004/01/15'), DateTime('2004/01/16'))])
         eventinfo = freebusy_info['hour_block_cols'][0][0][0][0]
@@ -135,12 +136,10 @@ class TestCalendar(CPSCalendarTestCase):
         del mdtool._v_temps
 
     def testDC(self):
-        # XXX: the title should actually be more explicit than that.
         self.assertEquals(self.calendar.Title(), 
-                          "cpscalendar_user_calendar_name_beg"
-                          + " " + self.user_id + " "
-                          + "cpscalendar_user_calendar_name_end")
-        # XXX: there should be a description there.
+                          "cpscalendar_user_calendar_name_beg "
+                          + MANAGER_FULLNAME +
+                          " cpscalendar_user_calendar_name_end")
         self.assertEquals(self.calendar.Description(), "")
 
     def testGetOwnerId(self):
@@ -219,7 +218,7 @@ class TestCalendar(CPSCalendarTestCase):
                  'usertype': 'member',
                  'rpath': 'workspaces/members/%s/calendar' % self.user_id, 
                  'id': self.user_id, 
-                 'cn': self.user_id}]})
+                 'cn': MANAGER_FULLNAME}]})
 
     def testViews(self):
         self._addEvent()
