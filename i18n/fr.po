@@ -1,11 +1,3 @@
-# translation of fr.po to 
-# translation of fr.po to
-# translation of fr.po to
-# translation of fr.po to
-# translation of fr.po to
-# translation of fr.po to
-# translation of fr.po to ben
-# translation of fr.po to French
 # Gettext Message File for default.
 # Your Name <ed@nuxeo.com>, 2003.
 # Encolpe DEGOUTE <ed@nuxeo.com>, 2003, 2004.
@@ -22,11 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language-code: fr\n"
-"Language-name: french\n"
 "Preferred-encodings: latin9 latin1 utf-8\n"
-"Domain: cpscalendar\n"
 "X-Generator: KBabel 1.3.1\n"
+"Language-Code: fr\n"
+"Language-Name: French\n"
+"Domain: default\n"
 
 #.   <h2 content="string:cpscalendar_event_viewer_${calendar_disp}">
 #.     Calendar of the <span replace="calendar_disp" />

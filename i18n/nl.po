@@ -1,7 +1,3 @@
-# translation of nl.po to French
-# translation of en.po to French
-# translation of en.po to
-# translation of en.po to Francais
 # Gettext Message File for default.
 # Encolpe DEGOUTE <ed@nuxeo.com>, 2003, 2004.
 # DARCHE <madarche@nuxeo.com>, 2003.
@@ -17,11 +13,11 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language-code: LL\n"
-"Language-name: Language\n"
 "Preferred-encodings: utf-8 latin1\n"
-"Domain: default\n"
 "X-Generator: KBabel 1.0.2\n"
+"Language-Code: nl\n"
+"Language-Name: Nederlands\n"
+"Domain: default\n"
 
 #.   <h2 content="string:cpscalendar_event_viewer_${calendar_disp}">
 #.     Calendar of the <span replace="calendar_disp" />
