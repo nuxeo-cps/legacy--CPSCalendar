@@ -1,4 +1,22 @@
 *******************************************
+** CPSCalendar V1.14.4 [R1 build 2005/06/02-11:43 by fguillaume]
+** SVN URL: https://svn.nuxeo.org/pub/CPSCalendar/trunk Revision: 22102
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Updated translations.
+- Updated to work with CPSWorkflow.
+- Better use of title in unit tests.
+
+*******************************************
 ** CPSCalendar V1.14.3 [R1 build 2005/03/07-16:06 by madarche]
 
 Requires:

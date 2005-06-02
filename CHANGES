@@ -9,6 +9,4 @@ Bug fixes:
 -
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
-- Updated translations.
-- Updated to work with CPSWorkflow.
-- Better use of title in unit tests.
+-
