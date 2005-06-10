@@ -1,6 +1,9 @@
 ##parameters=date=None,input_id=None,date_disp_id=None,other_input=None
 
-mcat = context.Localizer.cpscalendar
+#mcat = context.Localizer.cpscalendar
+def mcat(s):
+    return context.translation_service.translate('cpscalendar', s)
+
 base_url = 'day_selector?input_id=%s&date_disp_id=%s&other_input=%s&date:int='\
     % (input_id, date_disp_id, other_input)
 

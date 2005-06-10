@@ -1,7 +1,7 @@
 ##parameters=REQUEST=None, **kw
 # $Id$
 
-locale = context.Localizer.default.get_selected_language()
+locale = context.translation_service.getSelectedLanguage()
 ctool = context.portal_cpscalendar
 
 if REQUEST:

@@ -6,7 +6,7 @@ from zLOG import LOG
 
 caltool = context.portal_cpscalendar
 errors = []
-locale = context.Localizer.default.get_selected_language()
+locale = context.translation_service.getSelectedLanguage()
 
 pr = errors.append
 

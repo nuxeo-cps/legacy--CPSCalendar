@@ -1,6 +1,9 @@
 ##parameters=redirect=0, REQUEST=None
 
-mcat = context.Localizer.cpscalendar
+#mcat = context.Localizer.cpscalendar
+def mcat(s):
+    return context.translation_service.translate('cpscalendar', s)
+
 if not int(redirect):
     if REQUEST:
         REQUEST = context.REQUEST

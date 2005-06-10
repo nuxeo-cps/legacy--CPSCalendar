@@ -35,7 +35,7 @@ else:
 from_date = REQUEST.form.get('from_date')
 selected_day = REQUEST.form.get('selected_day')
 if from_date is not None:
-    locale = context.Localizer.default.get_selected_language()
+    locale = context.translation_service.getSelectedLanguage()
     selected_day = context.portal_cpscalendar.stringToDateTime(from_date,locale)
     LOG('CPSCAL', DEBUG, "selected_day from from_date = %s" % selected_day)
 elif selected_day is not None:

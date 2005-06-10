@@ -8,7 +8,7 @@
     tal:attributes="src string:${base_url}calendar.js"></script>
 
   <script type="text/javascript" src="lang/calendar-en.js"
-    tal:define="locale cpsmcat/get_selected_language|string:en"
+    tal:define="locale cpsmcat/getSelectedLanguage|string:en"
     tal:attributes="src string:${base_url}lang/calendar-${locale}.js"></script>
   <script type="text/javascript" src="calendar-setup.js"
     tal:attributes="src string:${base_url}calendar-setup.js"></script>
@@ -55,7 +55,7 @@
                          user_types here/getUserTypes;
                          all_calendars here/portal_cpscalendar/getCalendarsDict;
                          addaction string:calendar_meeting_form;
-                         searchaction string:calendar_meeting_form; 
+                         searchaction string:calendar_meeting_form;
                          ">
 
   <h1 i18n:domain="cpscalendar"
@@ -82,7 +82,7 @@
           tal:replace="user/?title_field">
           calendarid
         </span>
-      <br />  
+      <br />
     </span>
     <input type="submit" name="calendar_meeting_form:method"
       i18n:attributes="value" value="cpscalendar_button_validate"/>
@@ -99,7 +99,7 @@
     id="from_date" tal:attributes="value from_date_string" />
   <button id="trigger"
     tal:attributes="id string:trigger_from_date">...</button>
-  <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
+  <tal:block define="fmt python:here.translation_service('jscalendar_date_fmt');"
     replace="structure string:<script type='text/javascript'>
 Calendar.setup(
 {
@@ -118,7 +118,7 @@ range       : [2000, 2049]
     id="to_date"  tal:attributes="value to_date_string" />
   <button id="trigger"
     tal:attributes="id string:trigger_to_date">...</button>
-  <tal:block define="fmt python:here.Localizer.default('jscalendar_date_fmt');"
+  <tal:block define="fmt python:here.translation_service('jscalendar_date_fmt');"
     replace="structure string:<script type='text/javascript'>
 Calendar.setup(
 {
@@ -187,7 +187,7 @@ range       : [2000, 2049]
     </p>
     <input type="submit"
            value="cpscalendar_button_search"
-           i18n:attributes="value" 
+           i18n:attributes="value"
            tal:attributes="name string:calendar_begin_meeting:method" />
     <input type="button" onClick="history.back()"
            value="cpscalendar_button_cancel"

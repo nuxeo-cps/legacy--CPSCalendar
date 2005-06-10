@@ -1,6 +1,9 @@
 ##parameters=event_dict, calendar_url, calendar_title, event_title, new_event
 
-mcat = context.Localizer.cpscalendar
+#mcat = context.Localizer.cpscalendar
+def mcat(s):
+    return context.translation_service.translate('cpscalendar', s)
+
 request = event_dict['request']
 confirm_url = '%s/calendar_pending_events?event_id=%s' % (calendar_url, event_dict['id'])
 

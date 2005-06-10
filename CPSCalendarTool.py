@@ -837,7 +837,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                     raise ValueError("Member %s does not exist" % member_id)
             else:
                 raise 'Unauthorized', ManageUsers
-                
+
         mtool = getToolByName(self, 'portal_membership')
         ttool = getToolByName(self, 'portal_types')
 
