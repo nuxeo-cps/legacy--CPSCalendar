@@ -1,4 +1,7 @@
 # translation of pt-BR.po to Português do Brasil
+# ##########################################################
+# ################# DON'T EDIT THIS FILE! ##################
+# ##########################################################
 # Gettext Message File for default.
 # Your Name <your@email>, Year
 # Mario Olimpio de Menezes <mario@curiango.ipen.br>, 2004.
@@ -6,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt-BR\n"
 "POT-Creation-Date: 2004-09-24 19:40default\n"
-"PO-Revision-Date: 2004-09-01 11:46-0300\n"
-"Last-Translator: Mario Olimpio de Menezes <mario@curiango.ipen.br>\n"
+"PO-Revision-Date: 2005-06-15 14:06-0300\n"
+"Last-Translator: Mario Olimpio de Menezes <mario@ipen.br>\n"
 "Language-Team: Portugues do Brasil <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
@@ -83,6 +86,11 @@ msgstr "Você tem ${pendings_count} pedidos pendentes."
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "You have pending requests for this event:"
 msgstr "Você tem pedidos pendentes para este evento:"
+
+#.   <h1>Calendar overview</h1>
+#: from ../skins/cps_calendar/calendar_overview.pt
+msgid "action_calendar_overview"
+msgstr "Visualização do Dia"
 
 #.   <h1>Calendars supersposing</h1>
 #: from ../skins/cps_calendar/calendar_display_form.pt
@@ -334,6 +342,13 @@ msgid "cpscalendar_label_and"
 msgstr "e"
 
 #.   <span>
+#.           to
+#.         </span>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_label_and_day"
+msgstr "No dia"
+
+#.   <span>
 #.                     At
 #.                   </span>
 #: from ../skins/cps_calendar/create_meeting_form.pt
@@ -367,6 +382,13 @@ msgstr "Participantes"
 #.         </span>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_label_between"
+msgstr "Entre"
+
+#.   <span>
+#.           From
+#.         </span>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_label_between_day"
 msgstr "Entre"
 
 #.   <a style="text-decoration:none;border:1px solid black;padding:0.2em 0.3em;" onclick="window.open('popup_attachedfile_navigation', 'DirectoryMultiEntryFinder', 'toolbar=0, scrollbars=1, location=0, statusbar=0, menubar=0, resizable=1, dependent=1, width=500, height=480')">
@@ -705,6 +727,13 @@ msgstr "Comentário para participantes"
 msgid "cpscalendar_message_comment_for_organizer"
 msgstr "Comentário para o organizador"
 
+#.   <span condition="editcals">
+#.         These are the calendars where you can create events:
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+msgid "cpscalendar_message_editable_calendars"
+msgstr "Criar uma agenda"
+
 #.   <span>
 #.         If you have an application that supports it, you can also
 #.       </span>
@@ -725,6 +754,13 @@ msgstr "Nenhuma agenda compartilhada encontrada"
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_message_no_user_matching"
 msgstr "Desculpe, não há usuários que coincidam com sua consulta."
+
+#.   <span>
+#.         You can not view any calendars
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+msgid "cpscalendar_message_no_visible_calendars"
+msgstr "Nenhuma agenda compartilhada encontrada"
 
 #.   <strong>
 #.       You have to notify other attendees of recent changes to this event.
@@ -818,6 +854,13 @@ msgstr ""
 msgid "cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees"
 msgstr "Deselecione os eventos que você não quer notificar os participantes."
 
+#.   <span condition="vcals">
+#.         These are the calendars you can only view:
+#.       </span>
+#: from ../skins/cps_calendar/calendar_overview.pt
+msgid "cpscalendar_message_visible_calendars"
+msgstr "Inscrever-se nesta agenda."
+
 #.   <span>
 #.         You can download
 #.       </span>
@@ -897,6 +940,13 @@ msgstr "Versão para impressão da sua agenda"
 #: from ../skins/cps_calendar/calendar_attendees_form.pt
 msgid "cpscalendar_ressources"
 msgstr "Recursos"
+
+#.   <p class="calTitle">
+#.         Search for free time:
+#.       </p>
+#: from ../skins/cps_calendar/calendar_meeting_form.pt
+msgid "cpscalendar_search_for_free_time"
+msgstr "Número de vezes"
 
 #.   <span content="string:cpscalendar_option_${type}">cpscalendar_status</span>
 #.   <span content="string:cpscalendar_option_status_${status}">cpscalendar_status</span>
@@ -1162,7 +1212,7 @@ msgid "cpscalendar_events_show"
 msgstr "Mostra evento"
 
 msgid "cpscalendar_events_shows"
-msgstr "Mostra Eventos"
+msgstr "Mostra eventos"
 
 msgid "cpscalendar_status_confirmed"
 msgstr "Confirmado"
