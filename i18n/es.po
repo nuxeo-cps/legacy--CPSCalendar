@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCalendar\n"
-"POT-Creation-Date: 2004-09-24 19:40default\n"
+"POT-Creation-Date: 2005-06-23 17:33default\n"
 "PO-Revision-Date: 2005-05-25 10:36+0100\n"
 "Last-Translator: Jesús <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -118,15 +118,15 @@ msgstr "Exportar"
 msgid "button_cpscalendar_remove_all_attendees_who_declined"
 msgstr "Eliminar a todos los participantes que hayan declinado la reunión"
 
-#.   <input type="submit" class="standalone" value="button_update" onclick="updateParent();">
+#.   <input onclick="updateParent();" type="submit" class="standalone" value="button_update">
 #.       </input>
 #: from ../skins/cps_calendar/popup_attachedfile_navigation.pt
 msgid "button_update"
 msgstr "Actualizar"
 
-#.   <td valign="middle" content="python:str(cat[1]['title'])">
-#.                     category
-#.                   </td>
+#.   <label content="python:str(cat[1]['title'])" attributes="for python:cat[0]">
+#.                       category
+#.                     </label>
 #.   <metal:block content="python:str(cat_title)" define="cat_title categories/?category/title|cat_def_title" fill-slot="content">
 #.             category
 #.           </metal:block>
@@ -150,7 +150,7 @@ msgid "cpscalendar_button_add"
 msgstr "Añadir"
 
 #.   <input type="button" onclick="history.back()" value="cpscalendar_button_back" />
-#.   <input type="submit" name="javascript:history.go(-1)" value="cpscalendar_button_back" onclick="javascript:history.go(-1)" />
+#.   <input name="javascript:history.go(-1)" onclick="javascript:history.go(-1)" type="submit" value="cpscalendar_button_back" />
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 #: ../skins/cps_calendar/calendar_meeting_empty.pt
@@ -250,9 +250,9 @@ msgstr "Crear una agenda"
 msgid "cpscalendar_description_create_a_new_event"
 msgstr "Crear un evento"
 
-#.   <span>
+#.   <block>
 #.           Modify the event
-#.         </span>
+#.         </block>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_description_modify_event"
 msgstr "Modificar un evento"
@@ -315,6 +315,7 @@ msgstr "Nuevo evento"
 msgid "cpscalendar_heading_status_update"
 msgstr "Puesta al día del estatus"
 
+#.   <block>:</block>
 #.   <span>:</span>
 #.   <span />
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
@@ -366,9 +367,9 @@ msgstr "y el"
 msgid "cpscalendar_label_at"
 msgstr "en"
 
-#.   <span condition="python:event_type == 'event_tofrom'">
+#.   <label for="from_date_string" condition="python:event_type == 'event_tofrom'">
 #.                   At the
-#.                 </span>
+#.                 </label>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_at_day"
 msgstr "el"
@@ -416,16 +417,16 @@ msgstr "Buscar"
 msgid "cpscalendar_label_busy_time"
 msgstr "Periodo ocupado"
 
-#.   <block fill-slot="title">
-#.               Calendar type
-#.             </block>
+#.   <label for="usertype">
+#.                 Calendar type
+#.               </label>
 #: from ../skins/cps_calendar/calendar_edit_form.pt
 msgid "cpscalendar_label_calendar_type"
 msgstr "Tipo de agenda"
 
-#.   <block fill-slot="title">
-#.               Category
-#.             </block>
+#.   <block>
+#.                 Category
+#.               </block>
 #.   <metal:block fill-slot="title">
 #.             Category
 #.           </metal:block>
@@ -445,12 +446,12 @@ msgstr "Cambiar el tipo"
 #.   <block fill-slot="title">
 #.               Comment
 #.             </block>
-#.   <metal:block fill-slot="title">
+#.   <label for="comment">
 #.                 Comment
-#.               </metal:block>
-#.   <metal:block fill-slot="title">
-#.           Comment
-#.             </metal:block>
+#.               </label>
+#.   <label for="comment">
+#.                   Comment
+#.                 </label>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 #: ../skins/cps_calendar/calendar_confirmdelevents.pt
 #: ../skins/cps_calendar/calendar_editevent_form.pt
@@ -458,9 +459,9 @@ msgstr "Cambiar el tipo"
 msgid "cpscalendar_label_comment"
 msgstr "Comentario"
 
-#.   <block fill-slot="title">
-#.               Date
-#.             </block>
+#.   <label for="from_date_string">
+#.                 Date
+#.               </label>
 #.   <metal:block fill-slot="title">
 #.           Date
 #.         </metal:block>
@@ -473,12 +474,12 @@ msgstr "Comentario"
 msgid "cpscalendar_label_date"
 msgstr "Fecha"
 
-#.   <block fill-slot="title">
-#.             Description
-#.           </block>
-#.   <block fill-slot="title">
+#.   <label for="description:text">
 #.               Description
-#.             </block>
+#.             </label>
+#.   <label for="description">
+#.                 Description
+#.              </label>
 #.   <metal:block fill-slot="title">
 #.           Description
 #.         </metal:block>
@@ -488,9 +489,9 @@ msgstr "Fecha"
 msgid "cpscalendar_label_description"
 msgstr "Descripción"
 
-#.   <block fill-slot="title">
-#.               Document link
-#.             </block>
+#.   <label for="document_field">
+#.                 Document link
+#.               </label>
 #.   <metal:block fill-slot="title">
 #.           Document link
 #.         </metal:block>
@@ -504,9 +505,9 @@ msgstr "Hacia el documento"
 msgid "cpscalendar_label_duration"
 msgstr "Duración"
 
-#.   <block fill-slot="title">
-#.               Event status
-#.             </block>
+#.   <label for="event_status">
+#.                 Event status
+#.               </label>
 #.   <th>Status</th>
 #.   <metal:block fill-slot="title">
 #.           Event status
@@ -521,9 +522,9 @@ msgstr "Duración"
 msgid "cpscalendar_label_eventstatus"
 msgstr "Estatus"
 
-#.   <block fill-slot="title">
-#.                 Event Type
-#.               </block>
+#.   <label for="event_type">
+#.                   Event Type
+#.                 </label>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_eventtype"
 msgstr "Tipo de evento"
@@ -541,14 +542,16 @@ msgstr "Periodo de disponibilidad"
 msgid "cpscalendar_label_from_(day)"
 msgstr "Del"
 
-#.   <span condition="python:event_type in ('event_recurring', 'event_allday')">
+#.   <label for="from_date_string" condition="python:event_type in ('event_recurring', 'event_allday')">
 #.                   From the
-#.                 </span>
+#.                 </label>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_from_day"
 msgstr "Del"
 
-#.   <span>From</span>
+#.   <label for="from_date_hour">
+#.                     From
+#.                   </label>
 #.   <span>from</span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
@@ -565,9 +568,9 @@ msgstr "h"
 msgid "cpscalendar_label_hour"
 msgstr "Hora"
 
-#.   <block fill-slot="title">
-#.               Location
-#.             </block>
+#.   <label for="location">
+#.                 Location
+#.               </label>
 #.   <th>Location</th>
 #.   <metal:block fill-slot="title">
 #.             Location
@@ -601,39 +604,39 @@ msgstr "Modificar el estatus de este evento"
 msgid "cpscalendar_label_organizer"
 msgstr "Organizador"
 
-#.   <span>Daily</span>
+#.   <block>Daily</block>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_repeat_daily"
 msgstr "Organizador diario"
 
-#.   <span>Every</span>
+#.   <block>Every</block>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_repeat_every_X_days_begin"
 msgstr "Todos los"
 
-#.   <span>days</span>
+#.   <block>days</block>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_repeat_every_X_days_end"
 msgstr "días"
 
-#.   <span>Monthly</span>
+#.   <block>Monthly</block>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_repeat_monthly"
 msgstr "meses"
 
-#.   <span>Number of times</span>
+#.   <block>Number of times</block>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_repeat_times"
 msgstr "veces"
 
-#.   <block fill-slot="title">
-#.                 Repeat
-#.               </block>
+#.   <label id="repeat:bool" for="repeat:bool">
+#.                   Repeat
+#.                 </label>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_repeat_title"
 msgstr "Repetir"
 
-#.   <span>Weekly</span>
+#.   <block>Weekly</block>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_repeat_weekly"
 msgstr "de manera semanal"
@@ -648,20 +651,23 @@ msgstr "de manera semanal"
 msgid "cpscalendar_label_sender"
 msgstr "Remitente"
 
-#.   <block fill-slot="title">
-#.               Status
-#.             </block>
+#.   <label for="status">
+#.                 Status
+#.               </label>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_status"
 msgstr "Estado"
 
-#.   <block fill-slot="title">
-#.             Title
-#.           </block>
+#.   <label for="title">
+#.               Title
+#.             </label>
+#.   <label for="title">
+#.                   Title
+#.                 </label>
+#.   <th>Title</th>
 #.   <block fill-slot="title">
 #.                 Title
 #.               </block>
-#.   <th>Title</th>
 #: from ../skins/cps_calendar/calendar_edit_form.pt
 #: ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_event_viewer.pt
@@ -674,22 +680,23 @@ msgstr "Titulado"
 msgid "cpscalendar_label_to_(day)"
 msgstr "al"
 
-#.   <span>
+#.   <label for="to_date_string">
 #.                     to
-#.                   </span>
+#.                   </label>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_label_to_day"
 msgstr "Al"
 
+#.   <block>to</block>
 #.   <span>to</span>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_to_hour"
 msgstr "a"
 
-#.   <block fill-slot="title">
-#.               Transparent
-#.             </block>
+#.   <label for="transparent:int">
+#.                 Transparent
+#.               </label>
 #.   <metal:block fill-slot="title">
 #.           Transparent
 #.         </metal:block>
@@ -707,7 +714,9 @@ msgstr "Transparente"
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 #: ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_legend_transparent"
-msgstr "(Un acontecimiento transparente es aquel durante el cual usted está disponible)"
+msgstr ""
+"(Un acontecimiento transparente es aquel durante el cual usted está "
+"disponible)"
 
 #.   <a target="_blank" attributes="href string:calendar_printable_view?viewed_day=${viewed_day_int}">
 #.         Printable view
@@ -776,21 +785,25 @@ msgstr "No puede consultar ningún calendario"
 #.         </strong>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_message_notify_attendees"
-msgstr "Debe avisar a los participantes sobre las modificaciones que surjan en este acontecimiento"
+msgstr ""
+"Debe avisar a los participantes sobre las modificaciones que surjan en este "
+"acontecimiento"
 
 #.   <strong condition="python:notify == 'cancel'">
 #.       You have to notify attendees that you will delete this event.
 #.     </strong>
 #: from ../skins/cps_calendar/calendar_confirmdelevent.pt
 msgid "cpscalendar_message_notify_attendees_you_will_delete_event"
-msgstr "Debe avisar a los participantes de que va a suprimir este acontecimiento"
+msgstr ""
+"Debe avisar a los participantes de que va a suprimir este acontecimiento"
 
 #.   <strong>
 #.       You have to notify attendees that you will delete those events.
 #.     </strong>
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
 msgid "cpscalendar_message_notify_attendees_you_will_delete_events"
-msgstr "Debe avisar a los participantes de que va a suprimir estos acontecimientos"
+msgstr ""
+"Debe avisar a los participantes de que va a suprimir estos acontecimientos"
 
 #.   <strong condition="python:notify == 'decline'">
 #.         You have to notify event's organizer that you will delete this event.
@@ -847,14 +860,18 @@ msgstr "la versión iCalendar de esta agenda"
 #.     </p>
 #: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
 msgid "cpscalendar_message_too_early_specified_hour"
-msgstr "La hora de finalización que ha especificado es anterior a la fecha de comienzo"
+msgstr ""
+"La hora de finalización que ha especificado es anterior a la fecha de "
+"comienzo"
 
 #.   <p>
 #.       Unselect events you don't want to notify attendees.
 #.     </p>
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
 msgid "cpscalendar_message_unselect_events_you_dont_want_to_notify_attendees"
-msgstr "Deseleccionar los acontecimientos para los que no quiere que los participantes sean avisados"
+msgstr ""
+"Deseleccionar los acontecimientos para los que no quiere que los "
+"participantes sean avisados"
 
 #.   <span condition="vcals">
 #.         These are the calendars you can only view:
@@ -948,10 +965,12 @@ msgstr "Recursos"
 #.       </p>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_search_for_free_time"
-msgstr "Búsqueda de una franja horaria libre para todos los participantes en la reunión"
+msgstr ""
+"Búsqueda de una franja horaria libre para todos los participantes en la "
+"reunión"
 
-#.   <span content="string:cpscalendar_option_${type}">cpscalendar_status</span>
-#.   <span content="string:cpscalendar_option_status_${status}">cpscalendar_status</span>
+#.   <block content="string:cpscalendar_option_${type}">cpscalendar_status</block>
+#.   <block content="string:cpscalendar_option_status_${status}">cpscalendar_status</block>
 #: from ../skins/cps_calendar/calendar_editevent_form.pt
 msgid "cpscalendar_status"
 msgstr "Estado"
@@ -1296,4 +1315,3 @@ msgstr "Eventos de la semana"
 
 msgid "cpscalendar_event_viewer_month"
 msgstr "Eventos del mes"
-

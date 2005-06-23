@@ -47,8 +47,9 @@ msgstr "Fehler"
 
 #.   <h3 content="cal_infos/base_disp">January 2003</h3>
 #: from ../skins/cps_calendar/day_selector.pt
-msgid "January 2005"
-msgstr "Januar 2005"
+#, fuzzy
+msgid "January 2003"
+msgstr "January 2003"
 
 #.   <option content="python:str('cpscalendar_pending_%s' % (status,))" attributes="value status;
 #.                           selected python:status == mystatus" repeat="status python:['confirmed', 'tentative', 'decline']">
@@ -776,7 +777,8 @@ msgstr "Sie müssen die Teilnehmer benachrichten das das Treffen abgesagt ist."
 #.     </strong>
 #: from ../skins/cps_calendar/calendar_confirmdelevents.pt
 msgid "cpscalendar_message_notify_attendees_you_will_delete_events"
-msgstr "Sie müssen die Teilnehmer benachrichtigen das die Treffen abgesagt sind."
+msgstr ""
+"Sie müssen die Teilnehmer benachrichtigen das die Treffen abgesagt sind."
 
 #.   <strong condition="python:notify == 'decline'">
 #.         You have to notify event's organizer that you will delete this event.
@@ -836,8 +838,8 @@ msgstr " iCalendar Version dieses Kalenders."
 #: from ../skins/cps_calendar/calendar_confirmaddevent_form.pt
 msgid "cpscalendar_message_too_early_specified_hour"
 msgstr ""
-"Der Endzeitpunkt liegt vor dem Startzeitpunkt. Wollen sie das wirklich? Klicken "
-"Sie OK wenn Sie Startzeitpunkt und Endzeitpunkt vertauschen wollen."
+"Der Endzeitpunkt liegt vor dem Startzeitpunkt. Wollen sie das wirklich? "
+"Klicken Sie OK wenn Sie Startzeitpunkt und Endzeitpunkt vertauschen wollen."
 
 #.   <p>
 #.       Unselect events you don't want to notify attendees.
@@ -1265,7 +1267,8 @@ msgid "cpscalendar_label_period_yearly"
 msgstr "Jährlich"
 
 msgid "cpscalendar_mailnotify_request"
-msgstr "%(calendar_title)s erhielt eine Anfrage für das Treffen %(event_title)s."
+msgstr ""
+"%(calendar_title)s erhielt eine Anfrage für das Treffen %(event_title)s."
 
 msgid "cpscalendar_mailnotify_update"
 msgstr "%(calendar_title)s erhielt ein Update für das Treffen %(event_title)s."
@@ -1289,4 +1292,3 @@ msgstr "Events in dieser Woche"
 
 msgid "cpscalendar_event_viewer_month"
 msgstr "Events für diesen Monat"
-
