@@ -62,7 +62,6 @@ def initialize(registrar):
     utils.ToolInit(
         'CPS Calendar Tool',
         tools = tools,
-        product_name = 'CPSCalendar',
         icon = 'tool.png',
     ).initialize(registrar)
 
