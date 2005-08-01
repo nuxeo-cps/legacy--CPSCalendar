@@ -79,15 +79,18 @@ class CalendarInstaller(CPSInstaller):
             if hasattr(ttool, type):
                 ttool.manage_delObjects([type])
 
-        ptypes = {'Calendar':{'allowed_content_types':('Event',),
-                              'typeinfo_name':'CPSCalendar: Calendar',
-                              'add_meta_type':'Factory-based Type Information',
-                             },
-                  'Event':   {'allowed_content_types':(),
-                              'typeinfo_name':'CPSCalendar: Event',
-                              'add_meta_type':'Factory-based Type Information',
-                             },
-                 }
+        ptypes = {
+            'Calendar': {
+                'typeinfo_name': 'CPSCalendar: Calendar (Calendar)',
+                'add_meta_type': 'Factory-based Type Information',
+                'allowed_content_types': ('Event',),
+                },
+            'Event': {
+                'typeinfo_name': 'CPSCalendar: Event (Event)',
+                'add_meta_type': 'Factory-based Type Information',
+                'allowed_content_types': (),
+                },
+            }
         self.verifyContentTypes(ptypes)
         self.allowContentTypes('Calendar', 'Workspace')
 
