@@ -1,4 +1,23 @@
 *******************************************
+** CPSCalendar V1.14.5 [R1 build 2005/08/05-15:36 by fguillaume]
+** SVN URL: https://svn.nuxeo.org/pub/CPSCalendar/trunk Revision: 25538
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Taking advantage of the new centralized CPSI18n.tests.translations module.
+- Fixed translation files through the CPSI18n/bin/fix_pos script.
+- Renamed "nuxeo_print_css.css" into "default_print.css". This fixes the last
+  point of #473 (Reorganizing /skins/cps_styles/).
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.14.4 [R1 build 2005/06/02-11:43 by fguillaume]
 ** SVN URL: https://svn.nuxeo.org/pub/CPSCalendar/trunk Revision: 22102
 Requires:
