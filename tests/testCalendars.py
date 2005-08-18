@@ -61,14 +61,14 @@ class TestCalendarTool(CPSCalendarTestCase):
         l.sort()
         self.assertEquals(l, [
              'workspaces/members/%s/calendar' % self.user_id,
-             'workspaces/members/test_user_1/calendar'])
+             'workspaces/members/test-user-1/calendar'])
 
         l = caltool.listCalendars()
         l = [calendar.getRpath() for calendar in l]
         l.sort()
         self.assertEquals(l, [
              'workspaces/members/%s/calendar' % self.user_id,
-             'workspaces/members/test_user_1/calendar'])
+             'workspaces/members/test-user-1/calendar'])
 
         # XXX: test these later
         caltool.getCalendarsDict()
@@ -337,7 +337,7 @@ class TestCalendar(CPSCalendarTestCase):
         mdir.createEntry({'id': 'test_user_1', 
                           'email':'test_user_1@here.cps'})
         event.setAttendees([
-            {'rpath': 'workspaces/members/test_user_1/calendar',
+            {'rpath': 'workspaces/members/test-user-1/calendar',
              'status': 'unconfirmed',
              'cn': 'test_user_1'}])
         event.updateAttendeesCalendars()
