@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- Some problems with the iCalendar format fixed (necessary for upgrade to
+  CPSSharedCalendar).
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
