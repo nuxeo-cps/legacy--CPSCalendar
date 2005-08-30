@@ -25,7 +25,7 @@ You are not authorized to access this ressource
 </html>""")
         return
 
-ical_conv = '%Y%m%dT%H%M%SZ'
+ical_conv = '%Y%m%dT%H%M%S'
 ical_date_conv = '%Y%m%d'
 
 def icalvalue(s):
@@ -68,7 +68,7 @@ for event in events:
     message += """\
 SUMMARY:%s
 UID:%s
-""" % (icalvalue(mcat(event.title_or_id())), event.absolute_url())
+""" % (icalvalue(mcat(event.title_or_id())), event.getId())
 
     if event.location:
         message += """\
