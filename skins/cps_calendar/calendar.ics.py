@@ -65,28 +65,26 @@ for event in events:
     
     message += event_header
 
-    message += """\
-SUMMARY:%s
-UID:%s
-""" % (icalvalue(mcat(event.title_or_id())), event.getId())
+    message += 'SUMMARY:%s\n' % icalvalue(mcat(event.title_or_id()))
+    message += 'UID:%s\n' % event.getId()
+    message += 'DESCRIPTION:%s\n' % event.description
+    # The missspelling 'canceled' is used for cancelled status...
+    message += 'STATUS:%s\n' % ('canceled' and 'CANCELLED' or status.upper())
+    # This defaults to OPAQUE, so we only include it when not:
+    if event.transparent:
+        message += 'TRANSP:TRANSPARENT\n'
 
     if event.location:
-        message += """\
-LOCATION:%s
-""" % (icalvalue(event.location), )
+        message += 'LOCATION:%s\n'% icalvalue(event.location)
 
     if event.event_type == 'event_allday':
-        message += """\
-DTSTART;VALUE=DATE:%s
-DTEND;VALUE=DATE:%s
-""" % (event.from_date.strftime(ical_date_conv),
-        (event.to_date+1).strftime(ical_date_conv))
+        message += 'DTSTART;VALUE=DATE:%s\n' % event.from_date.strftime(ical_date_conv)
+        message += 'DTEND;VALUE=DATE:%s\n' % (event.to_date+1).strftime(ical_date_conv)
     else:
-        message += """\
-DTSTART:%s
-DTEND:%s
-""" % (eventfrom, eventto)
-    if event.event_type == "event_recurring":
+        message += 'DTSTART:%s\n' % eventfrom
+        message += 'DTEND:%s\n' % eventto
+        
+    if event.event_type == 'event_recurring':
         message += 'RRULE:FREQ='
         if event.recurrence_period == 'period_daily':
             message += 'DAILY'
@@ -99,7 +97,7 @@ DTEND:%s
         elif event.recurrence_period == 'period_yearly':
             message += 'YEARLY'
         else:
-            raise "Unknown recurrance period", event.recurrence_period
+            raise 'Unknown recurrance period', event.recurrence_period
         message += '\n'
     message += event_footer
 
