@@ -81,28 +81,26 @@ DTSTART;VALUE=DATE:%s
 DTEND;VALUE=DATE:%s
 """ % (event.from_date.strftime(ical_date_conv),
         (event.to_date+1).strftime(ical_date_conv))
-    elif event.event_type == 'event_tofrom':
+    else:
         message += """\
 DTSTART:%s
 DTEND:%s
 """ % (eventfrom, eventto)
-    elif event.event_type == "event_recurring":
-        message += 'DTSTART:%s\nRRULE:FREQ=' % eventfrom
+    if event.event_type == "event_recurring":
+        message += 'RRULE:FREQ='
         if event.recurrence_period == 'period_daily':
-            message += 'DAILY;'
+            message += 'DAILY'
         elif event.recurrence_period == 'period_weekly':
-            message += 'WEEKLY;'
+            message += 'WEEKLY'
         elif event.recurrence_period == 'period_monthly':
-            message += 'MONTHLY;'
+            message += 'MONTHLY'
         elif event.recurrence_period == 'period_quarterly':
-            message += 'MONTLY;PERIOD=3;'
+            message += 'MONTHLY;INTERVAL=3'
         elif event.recurrence_period == 'period_yearly':
-            message += 'YEARLY;'
+            message += 'YEARLY'
         else:
             raise "Unknown recurrance period", event.recurrence_period
-        message += 'UNTIL=%s\n' % (eventto)
-            
-
+        message += '\n'
     message += event_footer
 
 message += footer
