@@ -77,6 +77,9 @@ for event in events:
     if event.location:
         message += 'LOCATION:%s\n'% icalvalue(event.location)
 
+    if event.category == 'private':
+        message += 'CLASS:PRIVATE\n'
+        
     if event.event_type == 'event_allday':
         message += 'DTSTART;VALUE=DATE:%s\n' % event.from_date.strftime(ical_date_conv)
         message += 'DTEND;VALUE=DATE:%s\n' % (event.to_date+1).strftime(ical_date_conv)
