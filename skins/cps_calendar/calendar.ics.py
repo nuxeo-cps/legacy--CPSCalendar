@@ -68,15 +68,16 @@ for event in events:
     message += 'SUMMARY:%s\n' % icalvalue(mcat(event.title_or_id()))
     message += 'UID:%s\n' % event.getId()
     message += 'DESCRIPTION:%s\n' % event.description
+    if event.location:
+        message += 'LOCATION:%s\n'% icalvalue(event.location)
+    if event.document:
+        message += 'ATTACH:%s\n'% icalvalue(event.document)
     # The missspelling 'canceled' is used for cancelled status...
     message += 'STATUS:%s\n' % ('canceled' and 'CANCELLED' or status.upper())
     # This defaults to OPAQUE, so we only include it when not:
     if event.transparent:
         message += 'TRANSP:TRANSPARENT\n'
-
-    if event.location:
-        message += 'LOCATION:%s\n'% icalvalue(event.location)
-
+    # This defaults to PUBLIC
     if event.category == 'private':
         message += 'CLASS:PRIVATE\n'
         
