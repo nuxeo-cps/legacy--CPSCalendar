@@ -704,14 +704,8 @@ class Calendar(CPSBaseFolder):
     security.declarePrivate('getEmail')
     def getEmail(self, member, directory):
         """Get email from member's properties in directory"""
-        try:
-            memberob = directory.getEntry(member)
-            if not memberob:
-                return None
-            return memberob.get('email')
-        except KeyError:
-            # The user has an member data entry, but is not a member.
-            return None
+        mtool = getToolByName(self, 'portal_membership')
+        return mtool.getEmailFromUsername(member)
 
     security.declarePrivate('notifyMembers')
     def notifyMembers(self, event_dict):

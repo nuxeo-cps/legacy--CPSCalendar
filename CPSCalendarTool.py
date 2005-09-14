@@ -859,9 +859,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         user = user.__of__(aclu)
 
         # create this calendar for this member
-        directory=context.portal_directories.members
-        entry = directory.getEntry(member_id)
-        fullname = entry.get(directory.title_field, id)
+        fullname = mtool.getFullnameFromId(member_id)
 
         title = mcat('cpscalendar_user_calendar_name_beg').encode(
                      'ISO-8859-15', 'ignore')\
@@ -899,6 +897,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         Return a dictionary with cn, rpath, id, usertype and status.
         """       
         calendar = self.getCalendarForPath(rpath, unrestricted=1)
+        mtool = getToolByName(self, 'portal_membership')
         if calendar:
             id = rpath.split('/')[-1]
             info = {
@@ -911,13 +910,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             else:
                 id = calendar.getOwnerId()
                 info['id'] = id
-                dtool = getToolByName(self, 'portal_directories')
-                mdir = dtool.members
-                entry = mdir.getEntry(id)
-                if entry is None:
-                    info['cn'] = id
-                else:
-                    info['cn'] = entry.get(mdir.title_field, id)
+                info['cn'] = mtool.getFullnameFromId(id)
         else:
             # The given rpath does not point to a calendar
             # This may be a user with no calandar, or a deleted user

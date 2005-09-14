@@ -436,11 +436,11 @@
               </span>
               <br>
               <tal:block repeat="user_id users">
-                <tal:block define="props python:dtool.getEntry(user_id);
+                <tal:block define="fullname python:mtool.getFullnameFromId(user_id);
                                    calpath calendars/?user_id;">
                   <input type="checkbox" name="ids:list"
                    tal:attributes="value calpath" />
-                  <tal:block replace="python:props['fullname']" />
+                  <tal:block replace="fullname" />
                   <br>
                 </tal:block>
               </tal:block>

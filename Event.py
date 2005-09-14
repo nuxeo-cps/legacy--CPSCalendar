@@ -694,12 +694,7 @@ class Event(CPSBaseDocument):
         mtool = getToolByName(self, 'portal_membership')
         member = mtool.getAuthenticatedMember().getUserName()
         dtool = getToolByName(self, 'portal_directories')
-        mdir = dtool.members
-        entry = mdir.getEntry(member)
-        if entry is not None:
-            member_cn = entry.get(mdir.title_field, member)
-        else:
-            member_cn = member
+        member_cn = mtool.getFullnameFromId(member)
         dtstamp = DateTime()
         return (member, member_cn, dtstamp)
 
@@ -726,12 +721,7 @@ def addEvent(dispatcher, id, organizer=None, attendees=(), REQUEST=None, **kw):
             mtool = getToolByName(calendar, 'portal_membership')
             dtool = getToolByName(calendar, 'portal_directories')
             uid = mtool.getAuthenticatedMember().getId()
-            display_prop = mtool.members.title_field
-            entry = dtool.members.getEntry(uid)
-            if entry and entry.has_key(display_prop):
-                ucn = entry[display_prop]
-            else:
-                ucn = uid
+            ucn = mtool.getFullnameFromId(uid)
             organizer = {
                 'id': mtool.getAuthenticatedMember().getId(),
                 'rpath': calendar.getRpath(),

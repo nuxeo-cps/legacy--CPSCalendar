@@ -77,9 +77,9 @@
           tal:attributes="value cal" />
         <span tal:define="calob python:caltool.getCalendarForPath(cal, unrestricted=1);
           userid calob/getCalendarUser;
-          user python:dtool.getEntry(userid);
+	  fullname python:mtool.getFullnameFromId(userid);
           "
-          tal:replace="user/?title_field">
+          tal:replace="fullname">
           calendarid
         </span>
       <br />

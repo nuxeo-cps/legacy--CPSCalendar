@@ -28,6 +28,7 @@ class TestCalendarTool(CPSCalendarTestCase):
         self.user_home = mtool.getHomeFolder(self.user_id)
         user_workspace = getattr(self.portal.workspaces.members, self.user_id)
         self.assertEquals(self.user_home, user_workspace)
+
         assert self.user_home.calendar
         self.user_home_url = mtool.getHomeUrl(self.user_id)
         self.assertEquals(self.user_home_url,

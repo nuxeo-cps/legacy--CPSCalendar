@@ -9,7 +9,7 @@ New features:
   calendaring product for CPS.
 Bug fixes:
 ~~~~~~~~~~
--
+- #925 : Some folderish local roles don't work
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
