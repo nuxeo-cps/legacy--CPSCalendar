@@ -31,6 +31,45 @@ ical_date_conv = '%Y%m%d'
 def icalvalue(s):
     return unicode('\\,'.join(s.split(',')), 'latin1').encode('UTF-8')
 
+def attendee2ical(attendee):
+    if same_type(attendee, 'lkj'):
+        raise "lhlj", str(attendee)
+
+    cutype = attendee.get('usertype', 'member').upper()
+    if  cutype == 'MEMBER': 
+        cid = attendee['id']
+        mail = event.getMemberEmail(cid)
+        message = '' # People is the default CUTYPE (INDIVIDUAL).
+    else:
+        if cutype not in ('GROUP', 'RESOURCE', 'ROOM'):
+            # Mostly to handle the special "Workspace" type.
+            cutype = 'X-' + cutype
+        message = 'CUTYPE=%s;' % cutype
+        cid = attendee['rpath']
+        mail = 'nomail@nohost.no'
+
+    status = attendee.get('status')
+    if status == 'unconfirmed':
+        status = 'NEEDS-ACTION'
+    elif status == 'confirmed':
+        status = 'ACCEPTED'
+    elif status == 'tentative':
+        status = 'TENTATIVE'
+    elif status == 'decline':
+        status = 'DECLINED'
+    else:
+        status = None
+    if status is not None:
+        message += 'PARTSTAT=%s;' % status
+        
+    # iCalendar identifies calendars by email adress, which is nonsensical.
+    # We therefore add X-CID (Calendar ID) which contains the id, so that
+    # we at least understand what we are talking about.
+    message += 'X-CID=%s:MAILTO:%s\n' % (cid, mail)
+    
+    return message
+
+
 header = """BEGIN:VCALENDAR
 CALSCALE:GREGORIAN
 X-WR-TIMEZONE;VALUE=TEXT:Europe/Paris
@@ -87,7 +126,14 @@ for event in events:
     else:
         message += 'DTSTART:%s\n' % eventfrom
         message += 'DTEND:%s\n' % eventto
-        
+
+    # Organizer (Yes, it should be a semicolon):
+    if event.organizer:
+        message += 'ORGANIZER;' + attendee2ical(event.organizer)
+    
+    for each in event.attendees:
+        message += 'ATTENDEE;' + attendee2ical(each)
+
     if event.event_type == 'event_recurring':
         message += 'RRULE:FREQ='
         if event.recurrence_period == 'period_daily':

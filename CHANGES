@@ -3,11 +3,11 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- The iCalendar export is fixed and substantially enhanced. For example,
+  meeting information will now be exported.
 Bug fixes:
 ~~~~~~~~~~
-- Some problems with the iCalendar format fixed (necessary for upgrade to
-  CPSSharedCalendar).
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
