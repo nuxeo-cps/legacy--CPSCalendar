@@ -262,7 +262,7 @@ msgstr "Confirmarea stergerii evenimentului"
 #.             </h3>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_heading_event_update"
-msgstr "Update eveniment"
+msgstr "Actualizare eveniment"
 
 #.   <h1>
 #.     </h1>
@@ -318,7 +318,7 @@ msgstr ":"
 #.             </span>
 #: from ../skins/cps_calendar/calendar_macros.pt
 msgid "cpscalendar_label_add_a_user_whose"
-msgstr "Adauga un utilizator a/al/ale carui"
+msgstr "Adauga un utilizator a/al/ale/ai carui"
 
 #.   <span>
 #.               is
@@ -774,7 +774,7 @@ msgstr "Nu poti vizualiza nici un calendar."
 msgid "cpscalendar_message_notify_attendees"
 msgstr ""
 "Trebuie sa-i anunti pe ceilalti pariticipanti asupra schimbarilor efectuate "
-"asupra acestui eveniment."
+"la acest eveniment."
 
 #.   <strong condition="python:notify == 'cancel'">
 #.       You have to notify attendees that you will delete this event.
@@ -819,7 +819,7 @@ msgstr ""
 #.         </span>
 #: from ../skins/cps_calendar/calendar_meeting_form.pt
 msgid "cpscalendar_message_select_the_attendees_you_want_for_your_meeting"
-msgstr "Selecteaza participantii pe care ii vrei pentru sedinta ta"
+msgstr "Selecteaza participantii pentru sedinta ta"
 
 #.   <span class="calTitle">
 #.         Select the desired duration for your meeting
@@ -850,7 +850,7 @@ msgstr "versiunea iCalendar a acestui Calendar"
 msgid "cpscalendar_message_too_early_specified_hour"
 msgstr ""
 "Ora de sfarsit pe care ai specificat-o este mai mica decat ora de start. "
-"Vrei sa le schimbam intre ele? Apasa OK daca vrei sa schimbam sfarsitul si "
+"Vrei sa le schimbi intre ele? Apasa OK daca vrei sa schimbi sfarsitul si "
 "inceputul timpilor."
 
 #.   <p>
@@ -1147,7 +1147,7 @@ msgid "cpscalendar_label_month10"
 msgstr "Oct"
 
 msgid "cpscalendar_label_month11"
-msgstr "Noi"
+msgstr "Nov"
 
 msgid "cpscalendar_label_month12"
 msgstr "Dec"
@@ -1286,7 +1286,7 @@ msgid "cpscalendar_mailnotify_update"
 msgstr "Modificarea unui eveniment"
 
 msgid "cpscalendar_mailnotify_status_update"
-msgstr "Aducerea la zi a starii"
+msgstr "Actualizarea starii"
 
 msgid "cpscalendar_mailnotify_confirm_here"
 msgstr "Te rog confirma folosind acest URL:"
