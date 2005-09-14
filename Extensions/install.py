@@ -24,6 +24,8 @@ class CalendarInstaller(CPSInstaller):
 
     def install(self):
         self.log("Starting CPSCalendar install")
+        self.log("""Please note that the CPSCalendar product is deprecated.
+The recommended calendar for CPS 3.3 and later  is CPSSharedCalendar.""")
         self.verifySkins(SKINS)
         self.installTool()
         self.verifyAction(

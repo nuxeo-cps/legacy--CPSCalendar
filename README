@@ -6,12 +6,26 @@ $Id$
 
 Summary:
 
+- Deprecation warning
 - Introduction
 - History & Bug fixes
 - Installation & upgrade
 - Features
 - Roles and permissions
 - Code overview
+
+--------------------------------------------------
+Deprecation warning
+--------------------------------------------------
+
+CPSCalendar is now a deprecated. It will be shipped with CPS 3.4 and it will
+still be available separately as well, but we now recommend that you use
+CPSSharedCalendar instead. This is also default with CPS 3.3.6 and later.
+
+CPSSharedCalendar is a redesign from the ground up, to not only solve some
+of the problems that are hard or impossible to fix with CPSCalendar, but also
+provide easier transitions to tomorrows Zope 3 based solution. 
+
 
 --------------------------------------------------
 Introduction

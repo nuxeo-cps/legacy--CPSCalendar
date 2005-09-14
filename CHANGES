@@ -5,6 +5,8 @@ New features:
 ~~~~~~~~~~~~~
 - The iCalendar export is fixed and substantially enhanced. For example,
   meeting information will now be exported.
+- CPSCalendar is now deprecated. We recommend CPSSharedCalendar as a 
+  calendaring product for CPS.
 Bug fixes:
 ~~~~~~~~~~
 -
