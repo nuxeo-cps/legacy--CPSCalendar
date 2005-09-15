@@ -10,6 +10,7 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - #925 : Some folderish local roles don't work
+- If there is no request, the language negotiator now fails gracefully.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

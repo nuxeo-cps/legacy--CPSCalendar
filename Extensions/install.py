@@ -63,9 +63,8 @@ The recommended calendar for CPS 3.3 and later  is CPSSharedCalendar.""")
     def installTool(self):
         # Install CPSCalendar Tool
         self.log("Verifying CPS Advanced Calendar tool")
-        if not self.portalHas('portal_cpscalendar'):
-            self.log(" Creating CPS Advanced Calendar tool")
-            self.portal.manage_addProduct['CPSCalendar'].addCPSCalendarTool()
+        self.verifyTool('portal_calendar', 'CMFCalendar', 'CMF Calendar Tool')
+        self.verifyTool('portal_cpscalendar', 'CPSCalendar', 'CPS Calendar Tool')
 
     def installPortalTypes(self):
         # Remove the old Event type, if it's a CMFCalendar event
