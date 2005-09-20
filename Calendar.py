@@ -795,7 +795,7 @@ class Calendar(CPSBaseFolder):
                 done[id] = None
 
         for attendee in event_dict['event']['attendees']:
-            if attendee['usertype'] != 'member':
+            if attendee.get('usertype') != 'member':
                 continue
             id = attendee.get('id')
             if id is None:
@@ -968,22 +968,24 @@ def addCalendar(dispatcher, id,
     container._setObject(id, ob)
     ob = container._getOb(id)
     # sets correct permissions on ob
-    ob.manage_permission(
-        permission_to_manage='Access contents information',
-        roles=ACCESS_CONTENTS_INFO_ROLES,
-        acquire=0)
-    ob.manage_permission(
-        permission_to_manage='View',
-        roles=VIEW_ROLES,
-        acquire=0)
-    ob.manage_permission(
-        permission_to_manage='Add portal content',
-        roles=ADD_PORTAL_CONTENT_ROLES,
-        acquire=0)
-    ob.manage_permission(
-        permission_to_manage='Modify portal content',
-        roles=MODIFY_PORTAL_CONTENT_ROLES,
-        acquire=0)
+    # These seem to not be needed any more, and having them here causes a lot
+    # of indexing warnings on the TopicIndexes. Why, I don't know. /lennart
+    #ob.manage_permission(
+        #permission_to_manage='Access contents information',
+        #roles=ACCESS_CONTENTS_INFO_ROLES,
+        #acquire=0)
+    #ob.manage_permission(
+        #permission_to_manage='View',
+        #roles=VIEW_ROLES,
+        #acquire=0)
+    #ob.manage_permission(
+        #permission_to_manage='Add portal content',
+        #roles=ADD_PORTAL_CONTENT_ROLES,
+        #acquire=0)
+    #ob.manage_permission(
+        #permission_to_manage='Modify portal content',
+        #roles=MODIFY_PORTAL_CONTENT_ROLES,
+        #acquire=0)
 
     if REQUEST is not None:
         url = dispatcher.DestinationURL()
