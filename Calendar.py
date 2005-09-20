@@ -795,6 +795,8 @@ class Calendar(CPSBaseFolder):
                 done[id] = None
 
         for attendee in event_dict['event']['attendees']:
+            if attendee['usertype'] != 'member':
+                continue
             id = attendee.get('id')
             if id is None:
                 continue

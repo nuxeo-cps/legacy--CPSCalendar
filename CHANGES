@@ -10,6 +10,7 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - #925 : Some folderish local roles don't work
+- Sometimes it would try to notify non-users by mail.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
