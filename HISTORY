@@ -1,4 +1,24 @@
 *******************************************
+** CPSCalendar V1.15.0 [R1 build 2005/09/21-14:53 by fguillaume]
+** SVN URL: https://svn.nuxeo.org/pub/CPSCalendar/trunk Revision: 27306
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- The iCalendar export is fixed and substantially enhanced. For example,
+  meeting information will now be exported.
+- CPSCalendar is now deprecated. We recommend CPSSharedCalendar as a 
+  calendaring product for CPS.
+Bug fixes:
+~~~~~~~~~~
+- #925 : Some folderish local roles don't work
+- Sometimes it would try to notify non-users by mail.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.14.5 [R1 build 2005/08/05-15:36 by fguillaume]
 ** SVN URL: https://svn.nuxeo.org/pub/CPSCalendar/trunk Revision: 25538
 Requires:

@@ -3,14 +3,10 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
-- The iCalendar export is fixed and substantially enhanced. For example,
-  meeting information will now be exported.
-- CPSCalendar is now deprecated. We recommend CPSSharedCalendar as a 
-  calendaring product for CPS.
+-
 Bug fixes:
 ~~~~~~~~~~
-- #925 : Some folderish local roles don't work
-- Sometimes it would try to notify non-users by mail.
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
