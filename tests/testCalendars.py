@@ -62,14 +62,14 @@ class TestCalendarTool(CPSCalendarTestCase):
         l.sort()
         self.assertEquals(l, [
              'workspaces/members/%s/calendar' % self.user_id,
-             'workspaces/members/test-user-1/calendar'])
+             'workspaces/members/test_user_1_/calendar'])
 
         l = caltool.listCalendars()
         l = [calendar.getRpath() for calendar in l]
         l.sort()
         self.assertEquals(l, [
              'workspaces/members/%s/calendar' % self.user_id,
-             'workspaces/members/test-user-1/calendar'])
+             'workspaces/members/test_user_1_/calendar'])
 
         # XXX: test these later
         caltool.getCalendarsDict()
@@ -333,14 +333,12 @@ class TestCalendar(CPSCalendarTestCase):
 
         # TODO: add some real attendees
         mtool = self.portal.portal_membership
-        mtool.createMemberArea('test_user_1')
+        mtool.createMemberArea('test_user_1_')
         mdir = self.portal.portal_directories.members
-        mdir.createEntry({'id': 'test_user_1', 
-                          'email':'test_user_1@here.cps'})
         event.setAttendees([
-            {'rpath': 'workspaces/members/test-user-1/calendar',
+            {'rpath': 'workspaces/members/test_user_1_/calendar',
              'status': 'unconfirmed',
-             'cn': 'test_user_1'}])
+             'cn': 'test_user_1_'}])
         event.updateAttendeesCalendars()
         # Try and decline it to see if notifications happen
         self.calendar.declineEvent(event)
