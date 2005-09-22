@@ -333,6 +333,7 @@ class TestCalendar(CPSCalendarTestCase):
 
         # TODO: add some real attendees
         mtool = self.portal.portal_membership
+        # 'test_user_1_' comes from ZopeTestCase
         mtool.createMemberArea('test_user_1_')
         mdir = self.portal.portal_directories.members
         event.setAttendees([
