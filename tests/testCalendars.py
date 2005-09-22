@@ -77,12 +77,12 @@ class TestCalendarTool(CPSCalendarTestCase):
     def testListFreeSlots(self):
         self.assertEquals(self.caltool.listFreeSlots([]), [])
         free_slots = self.caltool.listFreeSlots([[[
-            {'start': DateTime('2004/01/15'), 
-             'stop': DateTime('2004/01/15')}, 
-            {'start': DateTime('2004/01/15'), 
+            {'start': DateTime('2004/01/15'),
+             'stop': DateTime('2004/01/15')},
+            {'start': DateTime('2004/01/15'),
              'stop': DateTime('2004/01/16')}]]])
-        self.assertEquals(free_slots, 
-            [[{'start': DateTime('2004/01/15'), 
+        self.assertEquals(free_slots,
+            [[{'start': DateTime('2004/01/15'),
               'stop': DateTime('2004/01/16')}]])
 
 
@@ -90,7 +90,7 @@ class TestCalendarTool(CPSCalendarTestCase):
         assert self.caltool.getCalendarForPath(
             'workspaces/members/%s/calendar' % self.user_id)
 
-        freebusy_info = self.caltool.getFreeBusy([], 
+        freebusy_info = self.caltool.getFreeBusy([],
             DateTime('2004/01/15'), DateTime('2004/01/15'), 8, 0, 19, 0)
         self.assertEquals(freebusy_info['cal_users'], {})
         self.assertEquals(freebusy_info['slots'],
@@ -143,7 +143,7 @@ class TestCalendar(CPSCalendarTestCase):
         del mdtool._v_temps
 
     def testDC(self):
-        self.assertEquals(self.calendar.Title(), 
+        self.assertEquals(self.calendar.Title(),
                           "cpscalendar_user_calendar_name_beg "
                           + self.user_title +
                           " cpscalendar_user_calendar_name_end")
@@ -181,12 +181,12 @@ class TestCalendar(CPSCalendarTestCase):
 
         desc = calendar.getEventsDesc(
             start_time=start_time, end_time=end_time, disp='day')
-        
+
         self.assertEquals(desc,
-            {'hour_blocks': 
-                [[[{'height': 720, 'event': None}]], 
+            {'hour_blocks':
+                [[[{'height': 720, 'event': None}]],
                     [[{'height': 120, 'event': event, 'isdirty': 0}]]],
-             'slots': [(start_time, end_time)], 
+             'slots': [(start_time, end_time)],
              'day_events': []})
 
         desc = calendar.getEventsDesc(
@@ -207,7 +207,7 @@ class TestCalendar(CPSCalendarTestCase):
         from_date = DateTime(year, month, day, 12, 0)
         to_date = DateTime(year, month, day, 14, 0)
         self.calendar.invokeFactory(
-            'Event', 'event', title="xxyyzz", 
+            'Event', 'event', title="xxyyzz",
             from_date=from_date, to_date=to_date)
 
     def testAccessors(self):
@@ -219,12 +219,12 @@ class TestCalendar(CPSCalendarTestCase):
         self.assertEquals(event.getCalendarUser(), self.user_id)
 
         assert event.getEventDict() # Too complex to test
-        self.assertEquals(event.getAttendeesDict(), 
+        self.assertEquals(event.getAttendeesDict(),
             {'member': [
-                {'status': 'confirmed', 
+                {'status': 'confirmed',
                  'usertype': 'member',
-                 'rpath': 'workspaces/members/%s/calendar' % self.user_id, 
-                 'id': self.user_id, 
+                 'rpath': 'workspaces/members/%s/calendar' % self.user_id,
+                 'id': self.user_id,
                  'cn': self.user_title}]})
 
     def testViews(self):
@@ -357,7 +357,7 @@ class TestCalendar(CPSCalendarTestCase):
 
         hour_cols = [[
             {'event': event,
-             'start': DateTime('2004/01/18 10:00:00'), 
+             'start': DateTime('2004/01/18 10:00:00'),
              'stop': DateTime('2004/01/18 12:00:00')}]]
         hour_block_cols = calendar._getHourBlockCols(hour_cols, 1)
         self.assertEquals(len(hour_block_cols[0]), 2)
@@ -368,7 +368,7 @@ class TestCalendar(CPSCalendarTestCase):
 
         hour_cols = [[
             {'event': event,
-             'start': DateTime('2004/01/18 02:00:00'), 
+             'start': DateTime('2004/01/18 02:00:00'),
              'stop': DateTime('2004/01/18 10:00:00')}]]
         hour_block_cols = calendar._getHourBlockCols(hour_cols, 1)
         self.assertEquals(len(hour_block_cols[0]), 1)
@@ -377,40 +377,40 @@ class TestCalendar(CPSCalendarTestCase):
 
         hour_cols = [[
             {'event': event,
-             'start': DateTime('2004/01/18 20:00:00'), 
+             'start': DateTime('2004/01/18 20:00:00'),
              'stop': DateTime('2004/01/18 22:00:00')}]]
         hour_block_cols = calendar._getHourBlockCols(hour_cols, 1)
         self.assertEquals(hour_block_cols, [[]])
 
         hour_cols = [[
             {'event': event,
-             'start': DateTime('2004/01/18 21:00:00'), 
+             'start': DateTime('2004/01/18 21:00:00'),
              'stop': DateTime('2004/01/18 22:00:00')}]]
         hour_block_cols = calendar._getHourBlockCols(hour_cols, 1)
         self.assertEquals(hour_block_cols, [[]])
 
         hour_cols = [[
             {'event': event,
-             'start': DateTime('2004/01/18 00:00:00'), 
+             'start': DateTime('2004/01/18 00:00:00'),
              'stop': DateTime('2004/01/18 23:59:00')}]]
         hour_block_cols = calendar._getHourBlockCols(hour_cols, 1)
         self.assertEquals(len(hour_block_cols[0]), 1)
         event_block = hour_block_cols[0][0][0][0]
-        self.assertEquals(event_block['height'], 
+        self.assertEquals(event_block['height'],
             (calendar.last_hour - calendar.first_hour) * 60)
 
         hour_cols = [
             [{'event': event,
-              'start': DateTime('2004/01/18 10:00:00'), 
+              'start': DateTime('2004/01/18 10:00:00'),
               'stop': DateTime('2004/01/18 14:00:00')}],
             [{'event': event,
-              'start': DateTime('2004/01/18 9:00:00'), 
+              'start': DateTime('2004/01/18 9:00:00'),
               'stop': DateTime('2004/01/18 12:00:00')}]]
         hour_block_cols = calendar._getHourBlockCols(hour_cols, 1)
         self.assertEquals(hour_block_cols,
-            [[[[{'height': 120, 'event': None}]], 
-              [[{'height': 240, 'event': event, 'isdirty': 0}]]], 
-             [[[{'height': 60, 'event': None}]], 
+            [[[[{'height': 120, 'event': None}]],
+              [[{'height': 240, 'event': event, 'isdirty': 0}]]],
+             [[[{'height': 60, 'event': None}]],
               [[{'height': 180, 'event': event, 'isdirty': 0}]]]])
 
     def testEventDeletion(self):
@@ -419,7 +419,7 @@ class TestCalendar(CPSCalendarTestCase):
 
         self.calendar.manage_delObjects(['event'])
         self.assert_(not hasattr(self.calendar, 'event'))
-       
+
 
 def test_suite():
     suite = unittest.TestSuite()
