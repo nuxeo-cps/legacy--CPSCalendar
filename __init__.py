@@ -20,7 +20,8 @@ import sys
 
 from Products.CMFCore import utils
 from Products.CMFCore.DirectoryView import registerDirectory
-from Products.CMFCore.permissions import AddPortalContent
+# Please let this backwards compatibility stay until CPS 3.4.0
+from Products.CMFCore.CMFCorePermissions import AddPortalContent
 
 #import Calendars
 import Calendar

@@ -9,7 +9,8 @@ from Products.CPSWorkflow.transitions import TRANSITION_ALLOWSUB_CREATE
 from Products.CPSWorkflow.transitions import TRANSITION_ALLOWSUB_DELETE
 from Products.CPSWorkflow.transitions import TRANSITION_ALLOWSUB_MOVE
 from Products.CPSWorkflow.transitions import TRANSITION_ALLOWSUB_COPY
-from Products.CMFCore.permissions import View, ModifyPortalContent
+# Please let this backwards compatibility stay until CPS 3.4.0
+from Products.CMFCore.CMFCorePermissions import View, ModifyPortalContent
 
 WebDavLockItem = 'WebDAV Lock items'
 WebDavUnlockItem = 'WebDAV Unlock items'

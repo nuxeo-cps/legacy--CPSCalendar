@@ -9,4 +9,5 @@ Bug fixes:
 -
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
-- Removed deprecation warnings.
+- Changed getOwner(1) (Zope 2.6) to getOwnerTuple() (Zope 2.7 and later).
+- Reverted some imports for compatibility with CMF 1.4.

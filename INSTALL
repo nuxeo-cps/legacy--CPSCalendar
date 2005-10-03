@@ -11,13 +11,15 @@ Requirements
 CPSCalendar requires:
 - CPS3 (3.0 or higher)
 - product CPSInstaller (not included in CPS-3.0, but included in CPS-3.1)
-- product CPSNavigation > 0.8.0 (not included in CPS 3)
+- product CPSNavigation > 0.8.0
 
 It's been tested with Zope 2.6 and Zope 2.7.
 
 --------------------------------------------------
 Installation notes
 --------------------------------------------------
+- Most likely, you would like to use CPSSharedCalendar instead. It's
+  better.
 
 - Unpack the distribution into the Products folder of your Zope installation
   and change its name 'CPSCalendar-X.X.X-X' to 'CPSCalendar'

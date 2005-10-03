@@ -31,7 +31,8 @@ from Acquisition import aq_parent, aq_inner, aq_base
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 
-from Products.CMFCore.permissions import View, ModifyPortalContent
+# Please let this backwards compatibility stay until CPS 3.4.0
+from Products.CMFCore.CMFCorePermissions import View, ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
 
 from Products.CPSCore.CPSBase import CPSBaseDocument
