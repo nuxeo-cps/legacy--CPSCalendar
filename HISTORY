@@ -1,4 +1,21 @@
 *******************************************
+** CPSCalendar V1.15.1 [R1 build 2005/10/03-17:16 by regebro]
+** SVN URL: https://svn.nuxeo.org/pub/CPSCalendar/trunk Revision: 27884
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Changed getOwner(1) (Zope 2.6) to getOwnerTuple() (Zope 2.7 and later).
+- Reverted some imports for compatibility with CMF 1.4.
+
+*******************************************
 ** CPSCalendar V1.15.0 [R1 build 2005/09/21-14:53 by fguillaume]
 ** SVN URL: https://svn.nuxeo.org/pub/CPSCalendar/trunk Revision: 27306
 Requires:
