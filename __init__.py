@@ -61,8 +61,9 @@ registerDirectory('skins', globals())
 
 def initialize(registrar):
     utils.ToolInit(
-        'CPS Calendar Tool',
+        meta_type='CPS Calendar Tool',
         tools = tools,
+        product_name='CPSCalendar',
         icon = 'tool.png',
     ).initialize(registrar)
 
