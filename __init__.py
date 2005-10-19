@@ -59,6 +59,7 @@ z_bases = utils.initializeBasesPhase1(bases, this_module)
 
 registerDirectory('skins', globals())
 
+# BBB, please let this stay in the old CMF way until just before CPS 3.4:
 def initialize(registrar):
     utils.ToolInit(
         meta_type='CPS Calendar Tool',
