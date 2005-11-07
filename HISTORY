@@ -1,4 +1,20 @@
 *******************************************
+** CPSCalendar V1.15.2 [R1 build 2005/11/07-15:37 by fguillaume]
+** SVN URL: https://svn.nuxeo.org/pub/CPSCalendar/trunk Revision: 29152
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Provide backward compat with old CMF for a while more.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.15.1 [R1 build 2005/10/03-17:16 by regebro]
 ** SVN URL: https://svn.nuxeo.org/pub/CPSCalendar/trunk Revision: 27884
 Requires:
