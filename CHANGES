@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- Provide backward compat with old CMF for a while more.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
