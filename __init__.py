@@ -26,7 +26,6 @@ except ImportError:
     # BBB until CPS 3.4.0 where we don't care about CMF 1.4 anymore
     from Products.CMFCore.CMFCorePermissions import AddPortalContent
 
-#import Calendars
 import Calendar
 import Event
 import CPSCalendarTool
@@ -36,42 +35,39 @@ tools = (
 )
 
 contentClasses = (
-    #Calendars.Calendars,
     Calendar.Calendar,
     Event.Event,
 )
 
 contentConstructors = (
-    #Calendars.addCalendars,
     Calendar.addCalendar,
     Event.addEvent,
     CPSCalendarTool.addCPSCalendarTool,
 )
 
 fti = (
-    #Calendars.factory_type_information +
     Calendar.factory_type_information +
     Event.factory_type_information +
     ()
 )
 
-bases = contentClasses
-
-this_module = sys.modules[__name__]
-z_bases = utils.initializeBasesPhase1(bases, this_module)
-
 registerDirectory('skins', globals())
 
-# BBB, please let this stay in the old CMF way until just before CPS 3.4:
 def initialize(registrar):
-    utils.ToolInit(
-        meta_type='CPS Calendar Tool',
-        tools = tools,
-        product_name='CPSCalendar', # BBB, see above
-        icon = 'tool.png',
-    ).initialize(registrar)
-
-    utils.initializeBasesPhase2(z_bases, registrar)
+    try:
+        utils.ToolInit(
+            meta_type='CPS Calendar Tool',
+            tools = tools,
+            icon = 'tool.png',
+        ).initialize(registrar)
+    except TypeError:
+        # BBB: CMF 1.4.x
+        utils.ToolInit(
+            meta_type='CPS Calendar Tool',
+            tools = tools,
+            product_name='CPSCalendar', # BBB
+            icon = 'tool.png',
+        ).initialize(registrar)
 
     utils.ContentInit(
         'Calendars',
@@ -82,6 +78,5 @@ def initialize(registrar):
     ).initialize(registrar)
 
     # icon
-    #utils.registerIcon(Calendars.Calendars, 'calendars_icon.png', globals())
     utils.registerIcon(Calendar.Calendar, 'calendar_icon.png', globals())
     utils.registerIcon(Event.Event, 'event_icon.png', globals())
