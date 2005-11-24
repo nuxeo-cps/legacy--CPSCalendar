@@ -20,8 +20,11 @@ import sys
 
 from Products.CMFCore import utils
 from Products.CMFCore.DirectoryView import registerDirectory
-# Please let this backwards compatibility stay until CPS 3.4.0
-from Products.CMFCore.CMFCorePermissions import AddPortalContent
+try:
+    from Products.CMFCore.permissions import AddPortalContent
+except ImportError:
+    # BBB until CPS 3.4.0 where we don't care about CMF 1.4 anymore
+    from Products.CMFCore.CMFCorePermissions import AddPortalContent
 
 #import Calendars
 import Calendar
@@ -64,7 +67,7 @@ def initialize(registrar):
     utils.ToolInit(
         meta_type='CPS Calendar Tool',
         tools = tools,
-        product_name='CPSCalendar',
+        product_name='CPSCalendar', # BBB, see above
         icon = 'tool.png',
     ).initialize(registrar)
 
