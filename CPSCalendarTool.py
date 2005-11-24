@@ -25,9 +25,13 @@ from AccessControl import ClassSecurityInfo
 from AccessControl.Permissions import manage_users as ManageUsers
 from AccessControl.PermissionRole import rolesForPermissionOn
 # Please let this backwards compatibility stay until CPS 3.4.0
-from Products.CMFCore.CMFCorePermissions import setDefaultRoles
-from Products.CMFCore.CMFCorePermissions import View
-from Products.CMFCore.CMFCorePermissions import AddPortalContent
+try:
+    from Products.CMFCore.permissions import setDefaultRoles
+    from Products.CMFCore.permissions import View, AddPortalContent
+except ImportError:
+    # BBB for CMF 1.4, remove this in CPS 3.4.0
+    from Products.CMFCore.CMFCorePermissions import setDefaultRoles
+    from Products.CMFCore.CMFCorePermissions import View, AddPortalContent
 from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.utils import _getAuthenticatedUser, _checkPermission
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
