@@ -32,9 +32,13 @@ from Globals import InitializeClass
 from Acquisition import aq_inner, aq_parent
 
 from Products.CMFCore.utils import getToolByName
-# Please let this backwards compatibility stay until CPS 3.4.0
-from Products.CMFCore.CMFCorePermissions import setDefaultRoles, View
-from Products.CMFCore.CMFCorePermissions import ChangePermissions
+try:
+    from Products.CMFCore.permissions import setDefaultRoles, View
+    from Products.CMFCore.permissions import ChangePermissions
+except ImportError:
+    # BBB until CPS 3.4.0 where we don't care about CMF 1.4 anymore
+    from Products.CMFCore.CMFCorePermissions import setDefaultRoles, View
+    from Products.CMFCore.CMFCorePermissions import ChangePermissions
 
 from Products.CPSCore.CPSBase import CPSBaseFolder#, CPSBase_adder
 #from Products.NuxWorkgroup.Workgroup import Workgroup, ManageWorkgroups
