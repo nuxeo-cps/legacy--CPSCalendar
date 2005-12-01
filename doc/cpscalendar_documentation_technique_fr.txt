@@ -1,61 +1,69 @@
-###########################################
-#  CPSCalendar - Documentation technique  #
-###########################################
+=====================================
+CPSCalendar - Documentation technique
+=====================================
 
-#########################
-# Utilisation du module #
-#########################
+:Revision: $Id$
 
-CPSCalendar permet d'afficher et de gérer des événements.
-Chaque utilisateur dispose d'un agenda personnel, et un agenda peut-être
+.. sectnum::    :depth: 4
+.. contents::   :depth: 4
+
+
+Utilisation du module
+=====================
+
+CPSCalendar permet d'afficher et de gérer des événements. Chaque
+utilisateur dispose d'un agenda personnel, et un agenda peut-être
 également créé dans d'autres espaces de travail.
 
-Le fichier README contenu dans le produit présente une description succinte
-des fonctionnalités, ainsi que le mode d'utilisation du module.
+Le fichier README contenu dans le produit présente une description
+succinte des fonctionnalités, ainsi que le mode d'utilisation du
+module.
 
-########################
-# Historique du module #
-########################
+Historique du module
+====================
 
-CPSCalendar a été remanié, et ne fonctionne maintenant qu'avec CPS3.
-Les agendas ou événements créés avec une version du produit antérieure à la
-version 1.2.0 ne sont plus compatibles avec les versions suivantes.
-En ce qui concerne les versions ultérieures, le script d'installation permet
-de mettre à jour les anciennes instances.
+CPSCalendar a été remanié, et ne fonctionne maintenant qu'avec
+CPS3. Les agendas ou événements créés avec une version du produit
+antérieure à la version 1.2.0 ne sont plus compatibles avec les
+versions suivantes. En ce qui concerne les versions ultérieures,
+le script d'installation permet de mettre à jour les anciennes
+instances.
 
-#######################################
-# Prérequis à l'utilisation du module #
-#######################################
+Prérequis à l'utilisation du module
+===================================
 
 CPSCalendar requiert :
+
 - CPS3 (3.0 ou plus)
-- le produit CPSInstaller (non inclus dans CPS-3.0, mais inclus dans CPS-3.1)
-- le produit CPSNavigation > 0.8.0 (non inclus dans CPS3). Celui-ci est
-  requis après la version 1.6.4 de CPSCalendar.
+
+- le produit CPSInstaller (non inclus dans CPS-3.0, mais inclus
+  dans CPS-3.1)
+
+- le produit CPSNavigation > 0.8.0 (non inclus dans CPS3).
+  Celui-ci est requis après la version 1.6.4 de CPSCalendar.
 
 Il a été testé avec Zope 2.6 et Zope 2.7.
 
-################
-# Installation #
-################
+Installation
+============
 
-Décompresser l'archive contenant le module dans le répertoire Products.
-Renommer "CPSCalendar" le dossier obtenu.
-Redémarrer Zope.
-Le fichier INSTALL contenu dans le produit contient les informations
-d'installation dans une instance de CPS. Il donne également des informations
-concernant la mise à jour, lorsqu'une version antérieure de CPSCalendar a
-déjà été installée dans un instance de CPS.
+Décompresser l'archive contenant le module dans le répertoire
+Products. Renommer "CPSCalendar" le dossier obtenu. Redémarrer
+Zope. Le fichier INSTALL contenu dans le produit contient les
+informations d'installation dans une instance de CPS. Il donne
+également des informations concernant la mise à jour, lorsqu'une
+version antérieure de CPSCalendar a déjà été installée dans un
+instance de CPS.
 
-#############################
-# Fonctionnalités du module #
-#############################
+Fonctionnalités du module
+=========================
 
-Le fichier README contenu dans le produit présente une description succinte
-des fonctionnalités, ainsi que le mode d'utilisation du module.
+Le fichier README contenu dans le produit présente une description
+succinte des fonctionnalités, ainsi que le mode d'utilisation du
+module.
 
-############################
-# Fonctionnement du module #
-############################
+Fonctionnement du module
+========================
 
+[être ajouté plus tard]
 
