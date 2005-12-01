@@ -1,0 +1,137 @@
+==============================================
+Implementation of the Capabilities of Calendar
+==============================================
+
+:Revision: $Id: $
+
+.. sectnum::    :depth: 4
+.. contents::   :depth: 4
+
+The principle difficulties are the following:
+
+- Implementation of recurring events.
+
+- Implementation of optimizations and cache in order to increase
+  execution speed.
+
+
+Recurring Events
+================
+
+It is **imperative** to read the iCalendar specification (rfc
+2445, available at http://www.imc.org/ietf-calendar/index.html) in
+order to understand the breadth of possible capabilities, and the
+technical decisions made in the specification so as to have a
+common functional model, in order to be able to interoperate with
+other calender implementations, and also simply in order to take
+advantage of the experience of those who wrote the specification.
+
+Also, the best implementation of iCalendar is Apple iCal, and
+it is advisable to use it in order to understand how recurrent
+events function.
+
+Finally, it is important to note that the main difficulty for
+implementing recurring events comes from the fact that one can
+authorize that an instance of a recurring event be changed
+(modification of date/time, or even changes in one or more
+fields).  These instances are called "detached" instances.
+
+The implementation of recurring events operates as follows:
+
+- An event has a UID, which identifies, at the time that the event
+  is defined, the occurence of all recurrences of that event
+  (called the recurrence set).
+
+- The rule of recurrence (RRULE, see specification section
+  4.8.5.4) defines which are all the recurrences, and the eventual
+  end date.  It is necessary to begin by implementing the simple
+  rules while preparing for possible evolution.
+
+- The specification also has an EXRULE (specification section
+  4.8.5.2) which specifies an exception rule for the recurrence
+  set, but it is not implemented, and also the multiple RRULE is
+  not implemented.
+
+- A particular instance of recurrence is identified by its
+  RECURRENCE-ID (see specification section 4.8.4.4), which is the
+  start date of the event (the date and time if the
+  event is not an all-day event).
+
+- If an instance of a recurring event is detached (for example, if
+  the hour has been changed), it continues to be identified by
+  its original RECURRENCE-ID, in return its start date is
+  changed (specification section 4.8.4.4).
+
+- A recurring event has an RDATE and an EXDATE.  An RDATE is the
+  supplementary date at which a recurring event is added again
+  (this concept is not immediately understandable, however, see
+  spec 4.8.5.3).  EXDATEs are the dates when a recurring event
+  ought not to take place (spec 4.8.5.1).
+
+- When an instance of a recurring event is deleted, its
+  RECURRENCE-ID is re-added to the EXDATE of the base event.
+
+- Displacement of an instance: If the user asks to move an
+  instance of a recurring event, it is necessary to ask the user
+  if s/he means:
+
+  - Move that occurence only, in which case it should be detached
+    from the instance.
+
+  - Move that instance and all the subsequent events, in which
+    case it is necesary to split the recurring event into two
+    recurring events, the first of which ends before the chosen
+    instance, and the second starts at the new version of the
+    chosen instance.
+
+- Modification of an instance: If the user requests the
+  modification of a field in an instance of a recurring event, it
+  is necessary to ask the user if s/he wants:
+
+  - To modify the occurance only, in which case it is necessary to
+    detach the instance.
+
+  - To modify that instance and all the subsequent events, in
+    which case the event must be split.
+
+
+Various notes with respect to iCalendar
+=======================================
+
+- It does not deal with time zones, and it stores all dates as
+  UTC.
+
+- The RFC is not explicit on many points.  Apple iCal is still the
+  best reference and the best implementation according to the
+  consensus on the mailing-lists for iCalendar.
+
+
+Optimizations and Cache
+=======================
+
+It is out of the question to instantiate a recurring event each
+time that the recurrence needs to be displayed, because of
+performance problems and because of the size of storage required.
+The events are not, therefore, first class objects that one views
+directly.  The Calendar object should have a method
+``getEvent(...)`` that returns a non-persistent event object,
+which itself has methods for displaying itself.
+
+A basic algorithm to implement is that which calculates the
+recurrence set as a function of RRULE and of EXDATE.
+
+It is necessary to be able to quickly retrieve the events
+instantiated within a given time limit (most likely using a local
+catalog of the calendar for that, with at least indexed by UID,
+DTSTART, DTEND, RECURRENCE-ID).
+
+The calendar ought to have, for each UID, a cache for certain
+periods (a month seems to be a good basic granularity) of the
+recurrence set valid for that period (with inclusion of detached
+events).  The cache ought to be invalidated as soon as one event
+with that UID has one of its dates modified.
+
+It will be necessary to implement effective algorithms for
+intersection of multiple periods of time.
+
+

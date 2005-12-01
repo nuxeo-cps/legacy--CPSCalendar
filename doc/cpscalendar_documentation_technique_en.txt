@@ -1,0 +1,77 @@
+=====================================
+CPSCalendar - Technical Documentation
+=====================================
+
+:Revision: $Id: $
+
+.. sectnum::    :depth: 4
+.. contents::   :depth: 4
+
+
+
+Using the Module
+================
+
+CPSCalendar supports posting and managing events.  Each user has a
+personal calendar, and a calendar can also be created in other
+workspaces.
+
+The README file in the product gives a concise description of the
+capabilities, as well as explaining how to use the module.
+
+
+History of the Module
+=====================
+
+CPSCalendar has been re-implemented, and now only runs with CPS3.
+The calendars and events created with a version of the product
+earlier than version 1.2.0 are not compatible with versions 1.2.0
+and later.  In subsequent versions, the installation script
+supports data migration from older instances.
+
+
+Prerequisites for the Use of the Module
+=======================================
+
+CPSCalendar requires:
+
+- CPS3 (3.0 or later)
+
+- CPSInstaller (which is included with CPS-3.1 and later)
+
+- CPSNavigation 0.8.0 or later, which is also included with more
+  recent versions of CPS.  It is required after version 1.6.4 of
+  CPSCalendar.  It is also available at http://svn.nuxeo.org/.
+
+CPSCalendar has been tested with Zope 2.6 and Zope 2.7.
+
+
+Installation
+============
+
+If CPSCalendar was not included in your version of CPS, place the
+CPSCalendar product in the Products directory of your Zope
+instance.  Either down-load it and uncompress it, *or* down-load
+it with Subversion (see: http://svn.nuxeo.org/).
+
+The INSTALL file in the CPSCalendar product contains instructions
+on how to install CPSCalendar in an instance of CPS.  It also
+gives information on how to bring your site up-to-date if an
+earlier version of CPSCalendar, requiring data migration, had been
+installed in your CPS site.
+
+
+Capabilities of the Module
+==========================
+
+The README file in the CPSCalendar product gives a succinct
+description of the capabilities, as well as how to use the module.
+
+
+Operation of the Module
+=======================
+
+[to be added later]
+
+
+
