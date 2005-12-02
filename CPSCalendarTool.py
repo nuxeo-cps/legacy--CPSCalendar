@@ -36,6 +36,7 @@ from Products.CMFCore.utils import UniqueObject, getToolByName
 from Products.CMFCore.utils import _getAuthenticatedUser, _checkPermission
 from Products.CMFCore.ActionProviderBase import ActionProviderBase
 from Products.CMFCore.utils import UniqueObject, getToolByName, mergedLocalRoles
+from Products.CPSCore.EventServiceTool import getEventService
 from Products.CPSCore.utils import getAllowedRolesAndUsersOfObject
 from Products.ZCatalog.ZCatalog import ZCatalog
 
@@ -891,8 +892,8 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
         # Rebuild the tree with corrected local roles.
         # This needs a user that can View the object.
-        portal_eventservice = getToolByName(self, 'portal_eventservice')
-        portal_eventservice.notify('sys_modify_security', ob, {})
+        evtool = getEventService(self)
+        evtool.notify('sys_modify_security', ob, {})
 
     security.declareProtected(View, 'getAttendeeInfo')
     def getAttendeeInfo(self, rpath, status=0):
