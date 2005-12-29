@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCalendar\n"
-"POT-Creation-Date: 2005-06-23 17:33default\n"
+"POT-Creation-Date: 2005-12-29 16:03default\n"
 "PO-Revision-Date: 2005-05-25 10:36+0100\n"
 "Last-Translator: Jesús <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
