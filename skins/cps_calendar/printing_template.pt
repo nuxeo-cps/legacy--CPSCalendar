@@ -15,7 +15,7 @@
   </metal:block>
   <link rel="stylesheet" type="text/css"
         tal:attributes="href string:${portal_url}/main_stylesheet.css" />
-  <metal:block define-slot="css_slot" tal:replace="nothing">
+  <metal:block define-slot="style_slot" tal:replace="nothing">
     <!-- additional styles -->
   </metal:block>
   <metal:block define-slot="javascript_head_plus" tal:replace="nothing">

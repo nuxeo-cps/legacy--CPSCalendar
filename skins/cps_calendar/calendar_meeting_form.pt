@@ -1,7 +1,7 @@
 <tal:block define="global current_action string:meeting" />
 <html metal:use-macro="here/main_template/macros/master">
 
-<metal:block fill-slot="css_slot">
+<metal:block fill-slot="style_slot">
   <style type="text/css"
     tal:content="string:@import url(${base_url}calendar-win2k-1.css);"></style>
   <script type="text/javascript" src="calendar.js"

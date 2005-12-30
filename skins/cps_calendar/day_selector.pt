@@ -5,7 +5,7 @@
            i18n:domain="cpscalendar">
 <html metal:use-macro="here/selector_template/macros/master">
 
-<metal:block fill-slot="css_slot">
+<metal:block fill-slot="style_slot">
   <link rel="stylesheet" type="text/css"
         tal:attributes="href string:${portal_url}/calendar_stylesheet.css" />
 </metal:block>
