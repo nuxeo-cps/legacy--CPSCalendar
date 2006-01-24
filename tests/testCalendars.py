@@ -148,9 +148,7 @@ class TestCalendar(CPSCalendarTestCase):
 
     def testDC(self):
         self.assertEquals(self.calendar.Title(),
-                          "cpscalendar_user_calendar_name_beg "
-                          + self.user_title +
-                          " cpscalendar_user_calendar_name_end")
+                          "Calendar of " + self.user_title)
         self.assertEquals(self.calendar.Description(), "")
 
     def testGetOwnerId(self):
