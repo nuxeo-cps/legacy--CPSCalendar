@@ -3,7 +3,6 @@ if __name__ == '__main__':
     execfile(os.path.join(sys.path[0], 'framework.py'))
 
 import unittest
-from Testing import ZopeTestCase
 from CPSCalendarTestCase import CPSCalendarTestCase
 
 from DateTime.DateTime import DateTime
@@ -11,6 +10,7 @@ from DateTime.DateTime import DateTime
 class TestCalendarTool(CPSCalendarTestCase):
 
     def afterSetUp(self):
+        CPSCalendarTestCase.afterSetUp(self)
         self.login(self.user_id)
 
         # This actually creates an entry for root in portal_memberdata
@@ -26,13 +26,13 @@ class TestCalendarTool(CPSCalendarTestCase):
         assert self.member
         mtool.createMemberArea(self.user_id)
         self.user_home = mtool.getHomeFolder(self.user_id)
-        user_workspace = getattr(self.portal.workspaces.members, self.user_id)
+        user_workspace = getattr(self.portal.members, self.user_id)
         self.assertEquals(self.user_home, user_workspace)
 
         assert self.user_home.calendar
         self.user_home_url = mtool.getHomeUrl(self.user_id)
         self.assertEquals(self.user_home_url,
-            "http://nohost/portal/workspaces/members/%s" % self.user_id)
+            "http://nohost/portal/members/%s" % self.user_id)
         # get user title
         self.user_title = self.member.get(members.title_field)
 
@@ -40,8 +40,9 @@ class TestCalendarTool(CPSCalendarTestCase):
         assert self.caltool
 
     def beforeTearDown(self):
-        mdtool = self.portal.portal_memberdata
-        del mdtool._v_temps
+        # XXX AT: seems that variable does not exist anymore
+        #mdtool = self.portal.portal_memberdata
+        #del mdtool._v_temps
         self.logout()
 
     def testCalendarTool(self):
@@ -49,7 +50,7 @@ class TestCalendarTool(CPSCalendarTestCase):
 
         self.assertEquals(caltool.getCalendarForPath('xxx'), None)
 
-        rpath = 'workspaces/members/%s/calendar' % self.user_id
+        rpath = 'members/%s/calendar' % self.user_id
         self.assertEquals(caltool.getCalendarPathForUser(self.user_id), rpath)
 
         calendar = caltool.getCalendarForPath(rpath)
@@ -61,15 +62,15 @@ class TestCalendarTool(CPSCalendarTestCase):
         l = caltool.listCalendarPaths()
         l.sort()
         self.assertEquals(l, [
-             'workspaces/members/%s/calendar' % self.user_id,
-             'workspaces/members/test_user_1_/calendar'])
+             'members/%s/calendar' % self.user_id,
+             ])
 
         l = caltool.listCalendars()
         l = [calendar.getRpath() for calendar in l]
         l.sort()
         self.assertEquals(l, [
-             'workspaces/members/%s/calendar' % self.user_id,
-             'workspaces/members/test_user_1_/calendar'])
+             'members/%s/calendar' % self.user_id,
+             ])
 
         # XXX: test these later
         caltool.getCalendarsDict()
@@ -88,7 +89,7 @@ class TestCalendarTool(CPSCalendarTestCase):
 
     def testFreeBusy(self):
         assert self.caltool.getCalendarForPath(
-            'workspaces/members/%s/calendar' % self.user_id)
+            'members/%s/calendar' % self.user_id)
 
         freebusy_info = self.caltool.getFreeBusy([],
             DateTime('2004/01/15'), DateTime('2004/01/15'), 8, 0, 19, 0)
@@ -103,10 +104,10 @@ class TestCalendarTool(CPSCalendarTestCase):
         self.assertEquals(event.to_date, DateTime('2004/01/15 19:00:00'))
 
         freebusy_info = self.caltool.getFreeBusy(
-            ['workspaces/members/%s/calendar' % self.user_id],
+            ['members/%s/calendar' % self.user_id],
             DateTime('2004/01/15'), DateTime('2004/01/15'), 8, 0, 19, 0)
         self.assertEquals(freebusy_info['cal_users'],
-            {'workspaces/members/%s/calendar' % self.user_id: self.user_title})
+            {'members/%s/calendar' % self.user_id: self.user_title})
         self.assertEquals(freebusy_info['slots'],
             [(DateTime('2004/01/15'), DateTime('2004/01/16'))])
         eventinfo = freebusy_info['hour_block_cols'][0][0][0][0]
@@ -120,6 +121,7 @@ class TestCalendarTool(CPSCalendarTestCase):
 class TestCalendar(CPSCalendarTestCase):
 
     def afterSetUp(self):
+        CPSCalendarTestCase.afterSetUp(self)
         self.login(self.user_id)
 
         # This actually creates an entry for root in portal_memberdata
@@ -139,8 +141,10 @@ class TestCalendar(CPSCalendarTestCase):
     def beforeTearDown(self):
         # portal_memberdata caches entries in a volatile variable that's
         # cleaned up upon request completion
-        mdtool = self.portal.portal_memberdata
-        del mdtool._v_temps
+        # XXX AT: seems that variable does not exist anymore
+        #mdtool = self.portal.portal_memberdata
+        #del mdtool._v_temps
+        self.logout()
 
     def testDC(self):
         self.assertEquals(self.calendar.Title(),
@@ -223,7 +227,7 @@ class TestCalendar(CPSCalendarTestCase):
             {'member': [
                 {'status': 'confirmed',
                  'usertype': 'member',
-                 'rpath': 'workspaces/members/%s/calendar' % self.user_id,
+                 'rpath': 'members/%s/calendar' % self.user_id,
                  'id': self.user_id,
                  'cn': self.user_title}]})
 
@@ -322,7 +326,7 @@ class TestCalendar(CPSCalendarTestCase):
         assert event.calendar_attendees_form()
         html = event.calendar_attendees_form(search_param='id_')
         #assert html.count(
-        #    'value="workspaces/members/root/calendar">root</option>')
+        #    'value="members/root/calendar">root</option>')
 
     def testMeeting(self):
         self._addEvent()
@@ -334,10 +338,13 @@ class TestCalendar(CPSCalendarTestCase):
         # TODO: add some real attendees
         mtool = self.portal.portal_membership
         # 'test_user_1_' comes from ZopeTestCase
+        # XXX AT: not anymore, CPS layer does the job, so create it
+        self.portal.portal_directories.members.createEntry(
+            {'id': 'test_user_1_'})
         mtool.createMemberArea('test_user_1_')
         mdir = self.portal.portal_directories.members
         event.setAttendees([
-            {'rpath': 'workspaces/members/test_user_1_/calendar',
+            {'rpath': 'members/test_user_1_/calendar',
              'status': 'unconfirmed',
              'cn': 'test_user_1_'}])
         event.updateAttendeesCalendars()

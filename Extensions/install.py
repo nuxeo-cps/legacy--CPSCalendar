@@ -148,6 +148,7 @@ The recommended calendar for CPS 3.3 and later  is CPSSharedCalendar.""")
             'Event': 'null_wf',
         }
         self.verifyLocalWorkflowChains(self.portal['workspaces'], wfs)
+        self.verifyLocalWorkflowChains(self.portal['members'], wfs)
 
     def upgradeEvents(self):
         # Get the events from the catalog:
