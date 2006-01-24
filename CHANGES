@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- now use getEmailFromUsername instead of the old getMemberEmail method.
+- Fixed an error that could be raised if the ical support got unicode strings.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

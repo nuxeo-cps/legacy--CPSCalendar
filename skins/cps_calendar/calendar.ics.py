@@ -1,6 +1,7 @@
 ##parameters=redirect=0, REQUEST=None
 
-#mcat = context.Localizer.cpscalendar
+mtool = context.portal_membership
+
 def mcat(s):
     return context.translation_service.translate('cpscalendar', s)
 
@@ -29,16 +30,19 @@ ical_conv = '%Y%m%dT%H%M%S'
 ical_date_conv = '%Y%m%d'
 
 def icalvalue(s):
-    return unicode('\\,'.join(s.split(',')), 'latin1').encode('UTF-8')
+    s = '\\,'.join(s.split(','))
+    if not isinstance(s, unicode):
+        s = unicode(s, 'latin1')
+    return s.encode('UTF-8')
 
 def attendee2ical(attendee):
     if same_type(attendee, 'lkj'):
-        raise "lhlj", str(attendee)
+        raise "Attendee is string", str(attendee)
 
     cutype = attendee.get('usertype', 'member').upper()
     if  cutype == 'MEMBER': 
         cid = attendee['id']
-        mail = event.getMemberEmail(cid)
+        mail = mtool.getEmailFromUsername(cid)
         message = '' # People is the default CUTYPE (INDIVIDUAL).
     else:
         if cutype not in ('GROUP', 'RESOURCE', 'ROOM'):
