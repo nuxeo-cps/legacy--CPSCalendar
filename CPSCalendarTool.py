@@ -67,7 +67,7 @@ def stringToDateTime(string, locale=None):
     If you have four character year and no separator, only ymd is supported.
     """
 
-    if string.find(' ') != -1: 
+    if string.find(' ') != -1:
         # Hour and minute is included.
         date, rest = string.split(' ',1)
         hour, minute = rest.split(':')
@@ -77,15 +77,15 @@ def stringToDateTime(string, locale=None):
         date = string
         hour = 0
         minute = 0
-        
-    splitchar = None    
+
+    splitchar = None
     if date.find('/') != -1:
         splitchar = '/'
     elif date.find('.') != -1:
         splitchar = '.'
     elif date.find('-') != -1:
         splitchar = '-'
-    
+
     if splitchar:
         parts = date.split(splitchar)
     elif len(date) == 6:
@@ -164,7 +164,7 @@ def stringToDateTime(string, locale=None):
 
     if not p_formats:
         raise ValueError('Could not parse datetime %s: No match' % string)
-    
+
     format = p_formats[0]
     ypos, mpos, dpos = all_formats[format]['format']
     year = parts[ypos]
@@ -279,7 +279,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                    {'id':'description', 'type':'text'},
                    {'id':'search_fields', 'type':'multiple selection',
                     'mode': 'w', 'select_variable':'getSearchFields'},
-                   {'id':'restricted_user_search', 'type':'boolean', 'mode': 'w', 
+                   {'id':'restricted_user_search', 'type':'boolean', 'mode': 'w',
                     'label': "Restricted calendar listing" },
                    {'id':'create_member_calendar', 'type':'boolean', 'mode': 'w',
                     'label': "Create a calendar when creating the user's home folder"},
@@ -294,7 +294,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
     create_member_calendar = 1
     member_can_create_home_calendar = 1
     event_fulltext_index = 1
-    
+
     def __init__(self):
         PortalFolder.__init__(self, self.id)
 
@@ -354,7 +354,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         """Searches for user calendars"""
         if not search_param:
             return {}
-        
+
         homecal = self.getHomeCalendarObject()
         if calendar is None:
             restrict_search = 0
@@ -366,7 +366,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             restrict_search = 1
         else:
             restrict_search = 0
-        
+
         idfield = directory.id_field
         if restrict_search and search_param != idfield:
             # Filter out users with view permission:
@@ -380,7 +380,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                                                idfield: local_users})
         else:
             users = directory.searchEntries(**{search_param: search_term})
-                    
+
         res = {}
         for user in users:
             if user:
@@ -388,9 +388,9 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
                 cal = self.getCalendarForPath(path, unrestricted=1)
                 if cal is not None:
                     res[user] = path
-            
+
         return res
-        
+
     security.declareProtected('View', 'listCalendars')
     def listCalendars(self):
         """Return all available Calendar objects in a list"""
@@ -401,7 +401,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             calendars = [brain.aq_parent.unrestrictedTraverse(brain.getPath())
                          for brain in brains]
             # Filter any empty entries.
-            return [each for each in calendars if each] 
+            return [each for each in calendars if each]
         else:
             return []
 
@@ -434,32 +434,32 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         It's used in meeting preparation to have all possible attendees
 
         exclude: one calendar rpath to remove of the list
-        
-        filter_type: 
+
+        filter_type:
             None: No filter.
-            'permission': includes only those calendars where the current user 
-                          has a permission. 
+            'permission': includes only those calendars where the current user
+                          has a permission.
             'local_permission': means the user must have the permission
                                 assigned directly on that object (via a role).
-            'default': means None unless restricted_user_search is set, in 
+            'default': means None unless restricted_user_search is set, in
                        which case it means 'local_permission' with the
                        filter 'View'
-                    
-        filer: Specifies the filter parameter, that is, a permission, or a 
+
+        filer: Specifies the filter parameter, that is, a permission, or a
                set or roles, depending on the filter_type.
         """
         user = _getAuthenticatedUser(self)
         if filter_type == 'default' and self.restricted_user_search:
             filter_type = 'local_permission'
             filter = 'View'
-        
+
         calendars_dict = {}
         for calendar in self.listCalendars():
             entry = calendars_dict.setdefault(calendar.usertype, [])
             rpath = calendar.getRpath()
             if exclude == rpath:
                 continue
-            if (filter_type == 'permission' and 
+            if (filter_type == 'permission' and
                 not user.has_permission(filter, calendar)):
                 continue
             if filter_type == 'local_permission':
@@ -587,9 +587,9 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
             if event_stop < to_date and event_start > from_date:
                 return VirtualEvent(event_start, event_stop)
-                
-            return None      
-            
+
+            return None
+
         # normalize
         slot_start = DateTime(from_date.year(), from_date.month(),
                               from_date.day())
@@ -883,7 +883,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
 
         ob = context._getOb(CALENDAR_ID)
         calendar_type_info._finishConstruction(ob)
- 
+
         # XXX: is this necessay ?
         # Grant ownership to Member
         ob.changeOwnership(user)
@@ -901,7 +901,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
         attendees are other calendars.
 
         Return a dictionary with cn, rpath, id, usertype and status.
-        """       
+        """
         calendar = self.getCalendarForPath(rpath, unrestricted=1)
         mtool = getToolByName(self, 'portal_membership')
         if calendar:
@@ -935,7 +935,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             if mtool.checkPermission('List folder contents', cal):
                 cals.append(cal)
         return cals
-           
+
     security.declareProtected('View', 'listVisibleCalendars')
     def listEditableCalendars(self):
         """Return the list of all Calendar objects where use can add events"""
@@ -945,7 +945,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             if mtool.checkPermission('Add portal content', cal):
                 cals.append(cal)
         return cals
-    
+
     def getCalendarFromPath(self, path):
         portalurl = getToolByName(self, 'portal_url').getPortalPath()
         return self.unrestrictedTraverse(portalurl + '/' + path)
