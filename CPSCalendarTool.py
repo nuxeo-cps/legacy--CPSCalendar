@@ -504,7 +504,7 @@ class CPSCalendarTool(UniqueObject, PortalFolder):
             if calendar.meta_type != 'Calendar':
                 raise KeyError
             return calendar
-        except KeyError:
+        except (KeyError, AttributeError):
             return None
 
     # XXX use a special permission here
