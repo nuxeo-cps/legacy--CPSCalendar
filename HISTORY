@@ -1,4 +1,20 @@
 *******************************************
+** CPSCalendar V1.16.2 [R1 build 2006/03/02-14:57 by fermigier]
+** SVN URL: https://svn.nuxeo.org/pub/CPSCalendar/trunk Revision: 33729
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- es.po translation
+
+*******************************************
 ** CPSCalendar V1.16.1 [R1 build 2006/02/17-20:12 by fermigier]
 ** SVN URL: https://svn.nuxeo.org/pub/CPSCalendar/trunk Revision: 32986
 Requires:
