@@ -286,7 +286,7 @@ class Event(CPSBaseDocument):
     def SearchableText(self):
         """Used by the catalog for basic full text indexing."""
         ctool = getToolByName(self, 'portal_cpscalendar')
-        if ctool.event_fulltext_index:
+        if getattr(ctool, 'event_fulltext_index', False):
             return '%s %s' % (self.title, self.description)
         return ''
 
