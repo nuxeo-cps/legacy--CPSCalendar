@@ -1,4 +1,20 @@
 *******************************************
+** CPSCalendar V1.16.3 [R1 build 2006/08/08-12:32 by gracinet]
+** SVN URL: https://svn.nuxeo.org/pub/CPS3/legacy/CPSCalendar/trunk Revision: 48163
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Fixed a non-important error during migration.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCalendar V1.16.2 [R1 build 2006/03/02-14:57 by fermigier]
 ** SVN URL: https://svn.nuxeo.org/pub/CPSCalendar/trunk Revision: 33729
 Requires:
