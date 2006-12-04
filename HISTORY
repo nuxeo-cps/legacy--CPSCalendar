@@ -1,3 +1,23 @@
+===========================================================
+Package: CPSCalendar 1.17.0
+===========================================================
+First release built by: madarche at: 2006-12-04T15:52:42
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/legacy/CPSCalendar/tags/1.17.0
+Build from: https://svn.nuxeo.org/pub/CPS3/legacy/CPSCalendar/trunk@50470
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Managed by bundleman.
+
 *******************************************
 ** CPSCalendar V1.16.3 [R1 build 2006/08/08-12:32 by gracinet]
 ** SVN URL: https://svn.nuxeo.org/pub/CPS3/legacy/CPSCalendar/trunk Revision: 48163
